@@ -10,6 +10,8 @@ import { OrderComponent } from './control-panel/orders/order.component';
 import { OrderListComponent } from './control-panel/orders/order-list.component';
 import { ProductComponent } from './control-panel/products/product.component';
 import { ProductListComponent } from './control-panel/products/product-list.component';
+import { ShopComponent } from './control-panel/shops/shop.component';
+import { ShopListComponent } from './control-panel/shops/shop-list.component';
 
 const routes: Routes = [
   { path: '', component: IndexComponent },
@@ -20,8 +22,9 @@ const routes: Routes = [
   { path: 'control-panel/orders', component: OrderListComponent },
   { path: 'control-panel/orders/:orderId', component: OrderComponent },
   { path: 'control-panel/products', component: ProductListComponent },
-  { path: 'control-panel/products/:productId', component: ProductComponent }
-
+  { path: 'control-panel/products/:productId', component: ProductComponent },
+  { path: 'control-panel/shops', component: ShopListComponent },
+  { path: 'control-panel/shops/:shopId', component: ShopComponent },
 ];
 
 @NgModule({
