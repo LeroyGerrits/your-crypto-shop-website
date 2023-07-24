@@ -1,17 +1,17 @@
-import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
-import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { AppRoutingModule } from './app-routing.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { ProductListComponent } from './control-panel/products/product-list.component';
-import { ProductComponent } from './control-panel/products/product.component';
+import { BrowserModule } from '@angular/platform-browser';
+import { IndexComponent } from './index/index.component';
 import { MatBadgeModule } from '@angular/material/badge'
 import { MatButtonModule } from '@angular/material/button'
+import { MatIconModule } from '@angular/material/icon'
 import { MatMenuModule } from '@angular/material/menu'
 import { MatSlideToggleModule } from '@angular/material/slide-toggle'
 import { MatToolbarModule } from '@angular/material/toolbar'
-import { MatIconModule } from '@angular/material/icon'
-import { IndexComponent } from './index/index.component';
+import { NgModule } from '@angular/core';
+import { ProductComponent } from './control-panel/products/product.component';
+import { ProductListComponent } from './control-panel/products/product-list.component';
 
 @NgModule({
   declarations: [
