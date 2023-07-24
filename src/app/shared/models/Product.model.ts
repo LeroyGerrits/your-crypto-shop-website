@@ -4,7 +4,7 @@ import { Shop } from "./Shop.model";
 export class Product {
     Id!: string;
     Shop!: Shop;
-    Name: string = 'new product name';
+    Name!: string;
     Description?: string;
     Price!: number;
     Categories?: Category[];
