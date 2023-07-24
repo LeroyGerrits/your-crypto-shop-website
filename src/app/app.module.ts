@@ -5,6 +5,7 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ProductListComponent } from './control-panel/products/product-list.component';
 import { ProductComponent } from './control-panel/products/product.component';
+import { MatBadgeModule } from '@angular/material/badge'
 import { MatButtonModule } from '@angular/material/button'
 import { MatMenuModule } from '@angular/material/menu'
 import { MatSlideToggleModule } from '@angular/material/slide-toggle'
@@ -23,6 +24,7 @@ import { IndexComponent } from './index/index.component';
     AppRoutingModule,
     BrowserAnimationsModule,
     BrowserModule,
+    MatBadgeModule,
     MatButtonModule,
     MatIconModule,
     MatMenuModule,

@@ -1,11 +1,20 @@
 <mat-toolbar color="primary">
+
   <button mat-button [routerLink]="['/']">Home</button>
   <button mat-button *ngIf="this.isMerchant" [matMenuTriggerFor]="ControlPanel">Control Panel</button>
+  <button mat-button [matMenuTriggerFor]="Merchant">Logged in as <strong>Merchant</strong></button>
+
+
   <mat-menu #ControlPanel="matMenu">
     <button mat-menu-item [routerLink]="['/control-panel/categories']">Categories</button>
     <button mat-menu-item [routerLink]="['/control-panel/delivery-methods']">Delivery methods</button>
     <button mat-menu-item [routerLink]="['/control-panel/orders']">Orders</button>
     <button mat-menu-item [routerLink]="['/control-panel/products']">Products</button>
+  </mat-menu>
+
+  <mat-menu #Merchant="matMenu">
+    <button mat-menu-item [routerLink]="['/account/settings']">Settings</button>    
+    <button mat-menu-item>Log out</button>
   </mat-menu>
 </mat-toolbar>
 
