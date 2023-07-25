@@ -1,4 +1,5 @@
 import { Category } from "./Category.model";
+import { ProductPhoto } from "./ProductPhoto";
 import { Shop } from "./Shop.model";
 
 export class Product {
@@ -8,4 +9,5 @@ export class Product {
     Description?: string;
     Price!: number;
     Categories?: Category[];
+    Photos?: ProductPhoto[];
 }
