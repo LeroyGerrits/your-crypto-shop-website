@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { Order } from '../../shared/models/Order.model'
 
 @Component({
-  selector: 'control-panel-product',
+  selector: 'control-panel-order',
   templateUrl: './order.component.html',
   styleUrls: ['./order.component.scss']
 })

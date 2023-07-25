@@ -1,19 +1,50 @@
 @use '@angular/material' as mat;
-
 @include mat.core();
+
+@font-face {
+  font-family: 'open_sansregular';
+  src: url('assets/fonts/opensans-regular-webfont.eot');
+  src: url('assets/fonts/opensans-regular-webfont.eot?#iefix') format('embedded-opentype'),
+    url('assets/fonts/opensans-regular-webfont.woff') format('woff'),
+    url('assets/fonts/opensans-regular-webfont.ttf') format('truetype'),
+    url('assets/fonts/opensans-regular-webfont.svg#open_sansregular') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'open_sans_condensedbold';
+  src: url('assets/fonts/opensans-condbold-webfont.eot');
+  src: url('assets/fonts/opensans-condbold-webfont.eot?#iefix') format('embedded-opentype'),
+    url('assets/fonts/opensans-condbold-webfont.woff') format('woff'),
+    url('assets/fonts/opensans-condbold-webfont.ttf') format('truetype'),
+    url('assets/fonts/opensans-condbold-webfont.svg#open_sans_condensedbold') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
 
 $my-primary: mat.define-palette(mat.$indigo-palette, 500);
 $my-accent: mat.define-palette(mat.$pink-palette, A200, A100, A400);
 
-$my-theme: mat.define-light-theme((
- color: (
-   primary: $my-primary,
-   accent: $my-accent,
- ),
- typography: mat.define-typography-config(),
- density: 0,
-));
+$my-theme: mat.define-light-theme((color: (primary: $my-primary,
+        accent: $my-accent,
+      ),
+      typography: mat.define-typography-config(),
+      density: 0,
+    ));
 
 @include mat.all-component-themes($my-theme);
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  background-color: #f00;
+  color: #222;
+  font-family: 'open_sansregular', Helvetica, Tahoma;
+  font-size: 10pt;
+  margin: 0;
+
+}
