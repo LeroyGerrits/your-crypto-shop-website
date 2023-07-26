@@ -1,10 +1,9 @@
 import { Component } from '@angular/core';
-import { DeliveryMethod } from '../../shared/models/DeliveryMethod.model'
+import { DeliveryMethod } from '../../../shared/models/DeliveryMethod.model'
 
 @Component({
   selector: 'control-panel-delivery-method',
-  templateUrl: './delivery-method.component.html',
-  styleUrls: ['./delivery-method.component.scss']
+  templateUrl: './delivery-method.component.html'
 })
 
 export class DeliveryMethodComponent {

@@ -1,10 +1,9 @@
-import { Category } from '../../shared/models/Category.model'
+import { Category } from '../../../shared/models/Category.model'
 import { Component } from '@angular/core';
 
 @Component({
   selector: 'control-panel-category',
-  templateUrl: './category.component.html',
-  styleUrls: ['./category.component.scss']
+  templateUrl: './category.component.html'
 })
 
 export class CategoryComponent {

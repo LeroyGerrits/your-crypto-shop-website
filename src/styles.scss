@@ -41,10 +41,155 @@ body {
 }
 
 body {
-  background-color: #f00;
-  color: #222;
+  background-color: #222;
+  color: #fff;
   font-family: 'open_sansregular', Helvetica, Tahoma;
-  font-size: 10pt;
   margin: 0;
+}
 
+#TopBar {
+  background-color: #2080e0;
+}
+
+#TopBar .mat-toolbar {
+  background-color: transparent;
+}
+
+#TopBar .mat-toolbar-row,
+#TopBar .mat-toolbar-single-row {
+  display: inline;
+  padding: 0;
+}
+
+#TopBar .mdc-button__label {
+  color: #fff;
+}
+
+#TopBar .RightMenu {
+  float: right;
+}
+
+div.CenteredContainer {
+  /*background-color: #0f0;*/
+  width: 1260px;
+  margin: 0 auto;
+}
+
+div.ColumnOneFifth {
+  float: left;
+  width: 252px;
+}
+
+div.ColumnOneFourth {
+  float: left;
+  width: 315px;
+}
+
+div.ColumnOneThird {
+  float: left;
+  width: 420px;
+}
+
+div.ColumnOneHalf {
+  float: left;
+  width: 630px;
+}
+
+div.ColumnTwoThird {
+  float: left;
+  width: 840px;
+}
+
+div.ColumnThreeFourth {
+  float: left;
+  width: 945px;
+}
+
+@media all and (max-width: 700px) {
+  div.CenteredContainer {
+    padding: 0 20px;
+    width: auto;
+  }
+
+  div.ColumnOneFifth,
+  div.ColumnOneFourth,
+  div.ColumnOneThird,
+  div.ColumnOneHalf,
+  div.ColumnTwoThird,
+  div.ColumnThreeFourth {
+    float: none;
+    width: auto;
+  }
+}
+
+@media all and (min-width: 700px) and (max-width: 1000px) {
+  div.CenteredContainer {
+    width: 960px;
+  }
+
+  div.ColumnOneFifth {
+    float: left;
+    width: 192px;
+  }
+
+  div.ColumnOneFourth {
+    float: left;
+    width: 240px;
+  }
+
+  div.ColumnOneThird {
+    float: left;
+    width: 320px;
+  }
+
+  div.ColumnOneHalf {
+    float: left;
+    width: 480px;
+  }
+
+  div.ColumnTwoThird {
+    float: left;
+    width: 640px;
+  }
+
+  div.ColumnThreeFourth {
+    float: left;
+    width: 720px;
+  }
+}
+
+@media all and (min-width: 1000px) and (max-width: 1300px) {
+  div.CenteredContainer {
+    width: 1260px;
+  }
+
+  div.ColumnOneFifth {
+    float: left;
+    width: 192px;
+  }
+
+  div.ColumnOneFourth {
+    float: left;
+    width: 240px;
+  }
+
+  div.ColumnOneThird {
+    float: left;
+    width: 320px;
+  }
+
+  div.ColumnOneHalf {
+    float: left;
+    width: 480px;
+  }
+
+  div.ColumnTwoThird {
+    float: left;
+    width: 640px;
+  }
+
+  div.ColumnThreeFourth {
+    float: left;
+    width: 720px;
+  }
 }

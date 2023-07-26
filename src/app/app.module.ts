@@ -10,8 +10,8 @@ import { MatMenuModule } from '@angular/material/menu'
 import { MatSlideToggleModule } from '@angular/material/slide-toggle'
 import { MatToolbarModule } from '@angular/material/toolbar'
 import { NgModule } from '@angular/core';
-import { ProductComponent } from './control-panel/products/product.component';
-import { ProductListComponent } from './control-panel/products/product-list.component';
+import { ProductComponent } from './control-panel/catalog/products/product.component';
+import { ProductListComponent } from './control-panel/catalog/products/product-list.component';
 
 @NgModule({
   declarations: [

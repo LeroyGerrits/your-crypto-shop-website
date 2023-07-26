@@ -2,8 +2,7 @@ import { Component } from '@angular/core';
 
 @Component({
   selector: 'control-panel-delivery=method-list',
-  templateUrl: './delivery-method-list.component.html',
-  styleUrls: ['./delivery-method-list.component.scss']
+  templateUrl: './delivery-method-list.component.html'
 })
 
 export class DeliveryMethodListComponent {

@@ -3,8 +3,7 @@ import { Order } from '../../shared/models/Order.model'
 
 @Component({
   selector: 'control-panel-order',
-  templateUrl: './order.component.html',
-  styleUrls: ['./order.component.scss']
+  templateUrl: './order.component.html'
 })
 
 export class OrderComponent {

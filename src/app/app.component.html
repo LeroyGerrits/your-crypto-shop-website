@@ -1,26 +1,53 @@
-<mat-toolbar color="primary">
+<div id="TopBar">
+  <div class="CenteredContainer">
 
-  <button mat-button [routerLink]="['/']">Home</button>
-  <button mat-button *ngIf="this.isMerchant" [matMenuTriggerFor]="ControlPanel">Control Panel</button>
-  <button mat-button [matMenuTriggerFor]="Merchant">Logged in as <strong>Merchant</strong></button>
+    <div class="RightMenu">
+      <mat-toolbar *ngIf="this.isMerchant">
+        <button *ngIf="this.isMerchant" mat-button [matMenuTriggerFor]="Merchant">
+          Logged in as <strong>Merchant</strong>
+        </button>
+        <button *ngIf="!this.isMerchant" mat-button [routerLink]="['/account/login']">Merchant login</button>
 
+        <mat-menu #Merchant="matMenu">
+          <button mat-menu-item [routerLink]="['/account/settings']">Settings</button>
+          <button mat-menu-item [routerLink]="['/account/change-password']">Change password</button>
+          <button mat-menu-item [routerLink]="['/account/logout']">Log out</button>
+        </mat-menu>
+      </mat-toolbar>
+    </div>
 
-  <mat-menu #ControlPanel="matMenu">
-    <button mat-menu-item [routerLink]="['/control-panel/categories']">Categories</button>
-    <button mat-menu-item [routerLink]="['/control-panel/delivery-methods']">Delivery methods</button>
-    <button mat-menu-item [routerLink]="['/control-panel/orders']">Orders</button>
-    <button mat-menu-item [routerLink]="['/control-panel/products']">Products</button>
-    <button mat-menu-item [routerLink]="['/control-panel/shops']">Shops</button>
-  </mat-menu>
+    <mat-toolbar *ngIf="this.isMerchant">
+      <button mat-button [routerLink]="['/control-panel']">Dashboard</button>
+      <button mat-button [matMenuTriggerFor]="ControlPanelConfiguration">Configuration</button>
+      <button mat-button [matMenuTriggerFor]="ControlPanelCatalog">Catalog</button>
+      <button mat-button [routerLink]="['/control-panel/customers']">Customers</button>
+      <button mat-button [routerLink]="['/control-panel/orders']">Orders</button>
 
-  <mat-menu #Merchant="matMenu">
-    <button mat-menu-item [routerLink]="['/account/settings']">Settings</button>    
-    <button mat-menu-item>Log out</button>
-  </mat-menu>
-</mat-toolbar>
+      <mat-menu #ControlPanelConfiguration="matMenu">
+        <button mat-menu-item [routerLink]="['/control-panel/configuration/delivery-methods']">Delivery methods</button>
+        <button mat-menu-item [routerLink]="['/control-panel/configuration/shops']">Shops</button>
+      </mat-menu>
 
-<p>TEMPLATE START</p>
+      <mat-menu #ControlPanelCatalog="matMenu">
+        <button mat-menu-item [routerLink]="['/control-panel/catalog/categories']">Categories</button>
+        <button mat-menu-item [routerLink]="['/control-panel/catalog/products']">Products</button>
+      </mat-menu>
 
-<router-outlet></router-outlet>
+      <mat-menu #Merchant="matMenu">
 
-<p>TEMPLATE END</p>
+      </mat-menu>
+    </mat-toolbar>
+  </div>
+</div>
+<div id="Header">
+  <div class="CenteredContainer">
+
+  </div>
+</div>
+<div id="Body">
+  <div class="CenteredContainer">
+    <p>TEMPLATE START</p>
+    <router-outlet></router-outlet>
+    <p>TEMPLATE END</p>
+  </div>
+</div>

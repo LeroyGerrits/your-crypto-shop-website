@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Shop } from '../../shared/models/Shop.model'
+import { Shop } from '../../../shared/models/Shop.model'
 
 @Component({
   selector: 'control-panel-shop',
