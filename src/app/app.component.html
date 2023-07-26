@@ -17,6 +17,7 @@
     </div>
 
     <mat-toolbar *ngIf="this.isMerchant">
+      <button mat-button [routerLink]="['/']">Website</button>
       <button mat-button [routerLink]="['/control-panel']">Dashboard</button>
       <button mat-button [matMenuTriggerFor]="ControlPanelConfiguration">Configuration</button>
       <button mat-button [matMenuTriggerFor]="ControlPanelCatalog">Catalog</button>
@@ -39,15 +40,11 @@
     </mat-toolbar>
   </div>
 </div>
-<div id="Header">
-  <div class="CenteredContainer">
-
-  </div>
-</div>
 <div id="Body">
   <div class="CenteredContainer">
-    <p>TEMPLATE START</p>
     <router-outlet></router-outlet>
-    <p>TEMPLATE END</p>
   </div>
+</div>
+<div id="Footer">
+  
 </div>

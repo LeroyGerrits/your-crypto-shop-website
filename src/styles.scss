@@ -23,8 +23,29 @@
   font-style: normal;
 }
 
+@font-face {
+  font-family: 'robotoitalic';
+  src: url('assets/fonts/roboto-italic-webfont.woff2') format('woff2'),
+    url('assets/fonts/roboto-italic-webfont.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'robotoblack_italic';
+  src: url('assets/fonts/roboto-blackitalic-webfont.woff2') format('woff2'),
+    url('assets/fonts/roboto-blackitalic-webfont.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+
+}
+
 $my-primary: mat.define-palette(mat.$indigo-palette, 500);
 $my-accent: mat.define-palette(mat.$pink-palette, A200, A100, A400);
+$dark-blue-color: #002352;
+$light-blue-color: #2080e0;
+$lighter-blue-color: #3090f0;
+$lightest-blue-color: #3f9fff;
 
 $my-theme: mat.define-light-theme((color: (primary: $my-primary,
         accent: $my-accent,
@@ -48,7 +69,7 @@ body {
 }
 
 #TopBar {
-  background-color: #2080e0;
+  background-color: $dark-blue-color;
 }
 
 #TopBar .mat-toolbar {
@@ -67,6 +88,64 @@ body {
 
 #TopBar .RightMenu {
   float: right;
+}
+
+#Header {
+  padding: 40px 0;
+}
+
+#Header #Logo img {
+  border: none;
+  vertical-align: middle;
+}
+
+#Header #Logo span {
+  color: #fff;
+  display: inline-block;
+  font-family: 'robotoblack_italic';
+  font-size: 2em;
+  line-height: 64px;
+  margin-left: 20px;
+  text-decoration: none;
+  text-shadow: 1px 1px 0 #222;
+}
+
+#Header ul {
+  display: block;
+  float: right;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+#Header ul li {
+  display: inline;
+  line-height: 64px;
+  margin: 0 0 0 40px;
+  padding: 0;
+}
+
+#Header ul li a {
+  color: rgba(255, 255, 255, 0.7);
+  font-family: 'open_sans_condensedbold', Helvetica, Tahoma;
+  font-size: 1.5em;
+  text-decoration: none;
+  text-shadow: 1px 1px 0 #222;
+  transition: all .3s ease-in-out;
+}
+
+#Header ul li a:hover {
+  color: rgba(255, 255, 255, 1);
+}
+
+#Body {
+  background-image: url('assets/images/BodyBackground.jpg');
+  background-position: top center;
+  background-size: cover;
+}
+
+#Footer {
+  background-color: $dark-blue-color;
 }
 
 div.CenteredContainer {
@@ -105,6 +184,14 @@ div.ColumnThreeFourth {
   width: 945px;
 }
 
+div.WrapperPadding10 {
+  padding: 10px;
+}
+
+div.WrapperPadding20 {
+  padding: 10px;
+}
+
 @media all and (max-width: 700px) {
   div.CenteredContainer {
     padding: 0 20px;
@@ -124,7 +211,8 @@ div.ColumnThreeFourth {
 
 @media all and (min-width: 700px) and (max-width: 1000px) {
   div.CenteredContainer {
-    width: 960px;
+    padding: 0 20px;
+    width: auto;
   }
 
   div.ColumnOneFifth {
@@ -160,7 +248,7 @@ div.ColumnThreeFourth {
 
 @media all and (min-width: 1000px) and (max-width: 1300px) {
   div.CenteredContainer {
-    width: 1260px;
+    width: 960px;
   }
 
   div.ColumnOneFifth {
