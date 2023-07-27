@@ -1,15 +1,21 @@
 <div id="Header">
     <div class="CenteredContainer">
         <ul>
-            <li><a [routerLink]="['/']">Home</a></li>
-            <li><a [routerLink]="['/pricing']">Pricing</a></li>
-            <li><a [routerLink]="['/faq']">FAQ</a></li>
-            <li><a [routerLink]="['/about']">About</a></li>
+            <li><a [routerLink]="['/']" [routerLinkActive]="['Active']"
+                    [routerLinkActiveOptions]="{exact: true}">Home</a></li>
+            <li><a [routerLink]="['/news']" [routerLinkActive]="['Active']">News</a></li>
+            <li><a [routerLink]="['/pricing']" [routerLinkActive]="['Active']">Pricing</a></li>
+            <li><a [routerLink]="['/faq']" [routerLinkActive]="['Active']">FAQ</a></li>
+            <li><a [routerLink]="['/about']" [routerLinkActive]="['Active']">About</a></li>
         </ul>
-        <a id="Logo" routerLink="['/']">
+        <a id="Logo" [routerLink]="['/']">
             <img src="assets/images/Header Logo.png" width="46" height="64" alt="DGB Commerce" />
             <span>DGB Commerce</span>
         </a>
     </div>
 </div>
-<router-outlet></router-outlet>
+<div id="Body">
+    <div class="CenteredContainer">
+        <router-outlet></router-outlet>
+    </div>
+</div>

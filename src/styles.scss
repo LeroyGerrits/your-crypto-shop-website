@@ -61,11 +61,31 @@ body {
   height: 100%;
 }
 
+a {
+  color: #bbf;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
 body {
-  background-color: #222;
+  background-color: $dark-blue-color;
   color: #fff;
-  font-family: 'open_sansregular', Helvetica, Tahoma;
+  font-family: 'open_sansregular', Helvetica, Tahoma !important;
   margin: 0;
+}
+
+h1,
+h2,
+h3 {
+  margin: 0 !important;
+}
+
+p {
+  text-align: justify;
+  line-height: 1.8em;
 }
 
 #TopBar {
@@ -91,7 +111,14 @@ body {
 }
 
 #Header {
+  background-image: url('assets/images/BodyBackground.jpg');
+  background-position: top center;
+  background-size: cover;
   padding: 40px 0;
+}
+
+#Header #Logo {
+  margin-left: 8px;
 }
 
 #Header #Logo img {
@@ -114,7 +141,7 @@ body {
   display: block;
   float: right;
   list-style-type: none;
-  margin: 0;
+  margin: 0 8px 0 0;
   padding: 0;
 }
 
@@ -134,18 +161,73 @@ body {
   transition: all .3s ease-in-out;
 }
 
-#Header ul li a:hover {
+#Header ul li a:hover,
+#Header ul li a.Active {
   color: rgba(255, 255, 255, 1);
 }
 
 #Body {
-  background-image: url('assets/images/BodyBackground.jpg');
-  background-position: top center;
-  background-size: cover;
+  background-color: #222;
+  padding: 20px 0;
 }
 
 #Footer {
   background-color: $dark-blue-color;
+  color: #bbb;
+}
+
+#Footer ul {
+  float: right;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+#Footer ul li {
+  background-image: url('assets/images/Sprites.png');
+  background-repeat: no-repeat;
+  display: block;
+  float: left;
+  margin: 0 0 0 10px;
+  padding: 0;
+}
+
+#Footer ul li.Telegram {
+  background-position: 0 0;
+}
+
+#Footer ul li.Telegram:hover {
+  background-position: -40px 0;
+}
+
+#Footer ul li.X {
+  background-position: 0 -40px;
+}
+
+#Footer ul li.X:hover {
+  background-position: -40px -40px;
+}
+
+#Footer ul li.GitHub {
+  background-position: 0 -80px;
+}
+
+#Footer ul li.GitHub:hover {
+  background-position: -40px -80px;
+}
+
+#Footer ul li a {
+  display: block;
+  height: 40px;
+  width: 40px;
+}
+
+#Footer ul li a span {
+  display: none;
+}
+
+#Footer span.Copyright {
+  line-height: 40px;
 }
 
 div.CenteredContainer {
@@ -188,8 +270,72 @@ div.WrapperPadding10 {
   padding: 10px;
 }
 
+div.WrapperPadding10-8-10-10 {
+  padding: 10px 8px 10px 10px;
+}
+
 div.WrapperPadding20 {
-  padding: 10px;
+  padding: 20px;
+}
+
+div.WrapperPadding20-20-0-8 {
+  padding: 20px 20px 0 8px;
+}
+
+div.WrapperPadding20-20-20-8 {
+  padding: 20px 20px 20px 8px;
+}
+
+div.WrapperPadding20-10-20-10 {
+  padding: 20px 10px 20px 10px;
+}
+
+div.WrapperPadding20-10-20-10 {
+  padding: 20px 10px 20px 10px;
+}
+
+div.WrapperPadding20-10-20-8 {
+  padding: 20px 10px 20px 8px;
+}
+
+div.WrapperPadding20-8 {
+  padding: 20px 8px;
+}
+
+div.WrapperPadding20-8-0-20 {
+  padding: 20px 8px 0 20px;
+}
+
+div.WrapperPadding20-8-0-8 {
+  padding: 20px 8px 0 8px;
+}
+
+div.WrapperPadding20-8-20-10 {
+  padding: 20px 8px 20px 10px;
+}
+
+div.WrapperPadding20-8-20-20 {
+  padding: 20px 8px 20px 20px;
+}
+
+div.WrapperPadding8 {
+  padding: 8px;
+}
+
+.Clear {
+  clear: both;
+}
+
+.ClearLeft {
+  clear: left;
+}
+
+.ClearRight {
+  clear: right;
+}
+
+.TextAlignCenter {
+  text-align: center;
 }
 
 @media all and (max-width: 700px) {

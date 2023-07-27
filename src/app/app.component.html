@@ -1,13 +1,11 @@
 <div id="TopBar">
   <div class="CenteredContainer">
-
     <div class="RightMenu">
       <mat-toolbar *ngIf="this.isMerchant">
         <button *ngIf="this.isMerchant" mat-button [matMenuTriggerFor]="Merchant">
           Logged in as <strong>Merchant</strong>
         </button>
         <button *ngIf="!this.isMerchant" mat-button [routerLink]="['/account/login']">Merchant login</button>
-
         <mat-menu #Merchant="matMenu">
           <button mat-menu-item [routerLink]="['/account/settings']">Settings</button>
           <button mat-menu-item [routerLink]="['/account/change-password']">Change password</button>
@@ -40,11 +38,17 @@
     </mat-toolbar>
   </div>
 </div>
-<div id="Body">
-  <div class="CenteredContainer">
-    <router-outlet></router-outlet>
-  </div>
-</div>
+<router-outlet></router-outlet>
 <div id="Footer">
-  
+  <div class="CenteredContainer">
+    <div class="WrapperPadding20-8">
+      <ul>
+        <li class="Telegram"><a href="https://t.me/DGBCommerceAnnouncements" target="_blank"><span>Telegram</span></a></li>
+        <li class="X"><a href="https://www.x.com/DGBCommerce" target="_blank"><span>X</span></a></li>
+        <li class="GitHub"><a href="https://github.com/LeroyGerrits" target="_blank"><span>GitHub</span></a></li>
+      </ul>
+      <span class="Copyright">&copy; DGB Commerce {{this.currentYear}}</span>
+      <div class="ClearRight"></div>
+    </div>
+  </div>
 </div>

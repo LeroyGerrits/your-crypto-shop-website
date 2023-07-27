@@ -1,4 +1,3 @@
-import { AppRoutingModule } from '../app-routing.module';
 import { Component } from '@angular/core';
 
 @Component({

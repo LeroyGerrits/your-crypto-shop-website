@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'control-panel-order',
@@ -6,5 +6,7 @@ import { Component } from '@angular/core';
 })
 
 export class ControlPanelComponent {
-  
+  constructor(){
+    
+  }
 }

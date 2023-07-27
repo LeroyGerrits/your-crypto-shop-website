@@ -3,8 +3,7 @@ import { Shop } from '../../../shared/models/Shop.model'
 
 @Component({
   selector: 'control-panel-shop',
-  templateUrl: './shop.component.html',
-  styleUrls: ['./shop.component.scss']
+  templateUrl: './shop.component.html'
 })
 
 export class ShopComponent {

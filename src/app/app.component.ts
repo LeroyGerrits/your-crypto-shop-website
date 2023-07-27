@@ -6,5 +6,6 @@ import { Component } from '@angular/core';
 })
 
 export class AppComponent {
+  public currentYear: number = new Date().getFullYear();
   public isMerchant: boolean = true;
 }

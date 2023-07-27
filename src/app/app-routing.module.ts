@@ -10,7 +10,10 @@ import { DeliveryMethodComponent } from './control-panel/configuration/delivery-
 import { DeliveryMethodListComponent } from './control-panel/configuration/delivery-methods/delivery-method-list.component';
 import { FaqComponent } from './public-website/faq/faq.component';
 import { IndexComponent } from './public-website/index/index.component';
+import { NewsComponent } from './public-website/news/news.component';
+import { NewsListListComponent } from './public-website/news/news-list.component';
 import { NgModule } from '@angular/core';
+import { NotFoundComponent } from './not-found.component';
 import { OrderComponent } from './control-panel/orders/order.component';
 import { OrderListComponent } from './control-panel/orders/order-list.component';
 import { PricingComponent } from './public-website/pricing/pricing.component';
@@ -22,26 +25,7 @@ import { ShopListComponent } from './control-panel/configuration/shops/shop-list
 
 const titlePrefix: string = 'DGB Commerce - ';
 const routes: Routes = [
-  {
-    path: '', component: PublicWebsiteComponent, title: titlePrefix, children: [
-      {
-        path: '',
-        component: IndexComponent
-      },
-      {
-        path: 'pricing',
-        component: PricingComponent
-      },
-      {
-        path: 'faq',
-        component: FaqComponent
-      },
-      {
-        path: 'about',
-        component: AboutComponent
-      }
-    ]
-  },
+
   { path: 'control-panel', component: ControlPanelComponent, title: titlePrefix + 'Control panel' },
   { path: 'control-panel/catalog/categories', component: CategoryListComponent, title: titlePrefix + 'Categories' },
   { path: 'control-panel/catalog/categories/:categoryId', component: CategoryComponent, title: titlePrefix + 'Categories' },
@@ -55,7 +39,17 @@ const routes: Routes = [
   { path: 'control-panel/customers/:orderId', component: CustomerComponent, title: titlePrefix + 'Customers' },
   { path: 'control-panel/orders', component: OrderListComponent, title: titlePrefix + 'Orders' },
   { path: 'control-panel/orders/:orderId', component: OrderComponent, title: titlePrefix + 'Orders' },
-
+  {
+    path: '', component: PublicWebsiteComponent, title: titlePrefix, children: [
+      { path: '', component: IndexComponent },
+      { path: 'news', component: NewsListListComponent, title: titlePrefix + 'News' },
+      { path: 'news/:newsMessageId', component: NewsComponent, title: titlePrefix + 'News' },
+      { path: 'pricing', component: PricingComponent, title: titlePrefix + 'Pricing' },
+      { path: 'faq', component: FaqComponent, title: titlePrefix + 'FAQ' },
+      { path: 'about', component: AboutComponent, title: titlePrefix + 'About' },
+      { path: '**', pathMatch: 'full', component: NotFoundComponent, title: titlePrefix + 'Not found' }
+    ]
+  },
 
 ];
 
