@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Order } from '../../shared/models/Order.model'
+import { Order } from '../../../shared/models/Order.model'
 
 @Component({
   selector: 'control-panel-order',

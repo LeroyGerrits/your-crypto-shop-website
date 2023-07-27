@@ -14,8 +14,8 @@ import { NewsComponent } from './public-website/news/news.component';
 import { NewsListListComponent } from './public-website/news/news-list.component';
 import { NgModule } from '@angular/core';
 import { NotFoundComponent } from './not-found.component';
-import { OrderComponent } from './control-panel/orders/order.component';
-import { OrderListComponent } from './control-panel/orders/order-list.component';
+import { OrderComponent } from './control-panel/sales/orders/order.component';
+import { OrderListComponent } from './control-panel/sales/orders/order-list.component';
 import { PricingComponent } from './public-website/pricing/pricing.component';
 import { ProductComponent } from './control-panel/catalog/products/product.component';
 import { ProductListComponent } from './control-panel/catalog/products/product-list.component';
@@ -25,7 +25,6 @@ import { ShopListComponent } from './control-panel/configuration/shops/shop-list
 
 const titlePrefix: string = 'DGB Commerce - ';
 const routes: Routes = [
-
   { path: 'control-panel', component: ControlPanelComponent, title: titlePrefix + 'Control panel' },
   { path: 'control-panel/catalog/categories', component: CategoryListComponent, title: titlePrefix + 'Categories' },
   { path: 'control-panel/catalog/categories/:categoryId', component: CategoryComponent, title: titlePrefix + 'Categories' },
@@ -37,8 +36,10 @@ const routes: Routes = [
   { path: 'control-panel/configuration/shops/:shopId', component: ShopComponent, title: titlePrefix + 'Shops' },
   { path: 'control-panel/customers', component: CustomerListComponent, title: titlePrefix + 'Customers' },
   { path: 'control-panel/customers/:orderId', component: CustomerComponent, title: titlePrefix + 'Customers' },
-  { path: 'control-panel/orders', component: OrderListComponent, title: titlePrefix + 'Orders' },
-  { path: 'control-panel/orders/:orderId', component: OrderComponent, title: titlePrefix + 'Orders' },
+  { path: 'control-panel/sales/orders', component: OrderListComponent, title: titlePrefix + 'Orders' },
+  { path: 'control-panel/sales/orders/:orderId', component: OrderComponent, title: titlePrefix + 'Orders' },
+  { path: 'control-panel/sales/transactions', component: OrderListComponent, title: titlePrefix + 'Transactions' },
+  { path: 'control-panel/sales/transactions/:transactionId', component: OrderComponent, title: titlePrefix + 'Transactions' },
   {
     path: '', component: PublicWebsiteComponent, title: titlePrefix, children: [
       { path: '', component: IndexComponent },

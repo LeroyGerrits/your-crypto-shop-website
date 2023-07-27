@@ -20,7 +20,7 @@
       <button mat-button [matMenuTriggerFor]="ControlPanelConfiguration">Configuration</button>
       <button mat-button [matMenuTriggerFor]="ControlPanelCatalog">Catalog</button>
       <button mat-button [routerLink]="['/control-panel/customers']">Customers</button>
-      <button mat-button [routerLink]="['/control-panel/orders']">Orders</button>
+      <button mat-button [matMenuTriggerFor]="ControlPanelSales">Orders</button>
 
       <mat-menu #ControlPanelConfiguration="matMenu">
         <button mat-menu-item [routerLink]="['/control-panel/configuration/delivery-methods']">Delivery methods</button>
@@ -30,6 +30,11 @@
       <mat-menu #ControlPanelCatalog="matMenu">
         <button mat-menu-item [routerLink]="['/control-panel/catalog/categories']">Categories</button>
         <button mat-menu-item [routerLink]="['/control-panel/catalog/products']">Products</button>
+      </mat-menu>
+
+      <mat-menu #ControlPanelSales="matMenu">
+        <button mat-menu-item [routerLink]="['/control-panel/sales/orders']">Orders</button>
+        <button mat-menu-item [routerLink]="['/control-panel/sales/transactions']">Transactions</button>
       </mat-menu>
 
       <mat-menu #Merchant="matMenu">
