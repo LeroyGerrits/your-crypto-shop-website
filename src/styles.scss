@@ -218,6 +218,22 @@ p {
   background-position: -40px -80px;
 }
 
+#Footer ul li.Facebook {
+  background-position: 0 -120px;
+}
+
+#Footer ul li.Facebook:hover {
+  background-position: -40px -120px;
+}
+
+#Footer ul li.LinkedIn {
+  background-position: 0 -160px;
+}
+
+#Footer ul li.LinkedIn:hover {
+  background-position: -40px -160px;
+}
+
 #Footer ul li a {
   display: block;
   height: 40px;
