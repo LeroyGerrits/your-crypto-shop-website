@@ -6,6 +6,7 @@ import { CategoryListComponent } from './control-panel/catalog/categories/catego
 import { ControlPanelComponent } from './control-panel/control-panel.component';
 import { CustomerComponent } from './control-panel/customers/customer.component';
 import { CustomerListComponent } from './control-panel/customers/customer-list.component';
+import { DashboardComponent } from './control-panel/dashboard/dashboard.component';
 import { DeliveryMethodComponent } from './control-panel/configuration/delivery-methods/delivery-method.component';
 import { DeliveryMethodListComponent } from './control-panel/configuration/delivery-methods/delivery-method-list.component';
 import { FaqComponent } from './public-website/faq/faq.component';
@@ -25,21 +26,24 @@ import { ShopListComponent } from './control-panel/configuration/shops/shop-list
 
 const titlePrefix: string = 'DGB Commerce - ';
 const routes: Routes = [
-  { path: 'control-panel', component: ControlPanelComponent, title: titlePrefix + 'Control panel' },
-  { path: 'control-panel/catalog/categories', component: CategoryListComponent, title: titlePrefix + 'Categories' },
-  { path: 'control-panel/catalog/categories/:categoryId', component: CategoryComponent, title: titlePrefix + 'Categories' },
-  { path: 'control-panel/catalog/products', component: ProductListComponent, title: titlePrefix + 'Products' },
-  { path: 'control-panel/catalog/products/:productId', component: ProductComponent, title: titlePrefix + 'Products' },
-  { path: 'control-panel/configuration/delivery-methods', component: DeliveryMethodListComponent, title: titlePrefix + 'Delivery methods' },
-  { path: 'control-panel/configuration/delivery-methods/:deliveryMethodId', component: DeliveryMethodComponent, title: titlePrefix + 'Delivery methods' },
-  { path: 'control-panel/configuration/shops', component: ShopListComponent, title: titlePrefix + 'Shops' },
-  { path: 'control-panel/configuration/shops/:shopId', component: ShopComponent, title: titlePrefix + 'Shops' },
-  { path: 'control-panel/customers', component: CustomerListComponent, title: titlePrefix + 'Customers' },
-  { path: 'control-panel/customers/:orderId', component: CustomerComponent, title: titlePrefix + 'Customers' },
-  { path: 'control-panel/sales/orders', component: OrderListComponent, title: titlePrefix + 'Orders' },
-  { path: 'control-panel/sales/orders/:orderId', component: OrderComponent, title: titlePrefix + 'Orders' },
-  { path: 'control-panel/sales/transactions', component: OrderListComponent, title: titlePrefix + 'Transactions' },
-  { path: 'control-panel/sales/transactions/:transactionId', component: OrderComponent, title: titlePrefix + 'Transactions' },
+  {
+    path: 'control-panel', component: ControlPanelComponent, title: titlePrefix + 'Control panel', children: [
+      { path: '', component: DashboardComponent, title: titlePrefix + 'Dashboard' },
+      { path: 'catalog/categories', component: CategoryListComponent, title: titlePrefix + 'Categories' },
+      { path: 'catalog/categories/:categoryId', component: CategoryComponent, title: titlePrefix + 'Categories' },
+      { path: 'catalog/products', component: ProductListComponent, title: titlePrefix + 'Products' },
+      { path: 'catalog/products/:productId', component: ProductComponent, title: titlePrefix + 'Products' },
+      { path: 'configuration/delivery-methods', component: DeliveryMethodListComponent, title: titlePrefix + 'Delivery methods' },
+      { path: 'configuration/delivery-methods/:deliveryMethodId', component: DeliveryMethodComponent, title: titlePrefix + 'Delivery methods' },
+      { path: 'configuration/shops', component: ShopListComponent, title: titlePrefix + 'Shops' },
+      { path: 'configuration/shops/:shopId', component: ShopComponent, title: titlePrefix + 'Shops' },
+      { path: 'customers', component: CustomerListComponent, title: titlePrefix + 'Customers' },
+      { path: 'customers/:orderId', component: CustomerComponent, title: titlePrefix + 'Customers' },
+      { path: 'sales/orders', component: OrderListComponent, title: titlePrefix + 'Orders' },
+      { path: 'sales/orders/:orderId', component: OrderComponent, title: titlePrefix + 'Orders' },
+      { path: 'sales/transactions', component: OrderListComponent, title: titlePrefix + 'Transactions' },
+      { path: 'sales/transactions/:transactionId', component: OrderComponent, title: titlePrefix + 'Transactions' }]
+  },
   {
     path: '', component: PublicWebsiteComponent, title: titlePrefix, children: [
       { path: '', component: IndexComponent },

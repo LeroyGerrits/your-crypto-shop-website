@@ -47,7 +47,7 @@ $light-blue-color: #2080e0;
 $lighter-blue-color: #3090f0;
 $lightest-blue-color: #3f9fff;
 
-$my-theme: mat.define-light-theme((color: (primary: $my-primary,
+$my-theme: mat.define-dark-theme((color: (primary: $my-primary,
         accent: $my-accent,
       ),
       typography: mat.define-typography-config(),
@@ -249,7 +249,6 @@ p {
 }
 
 div.CenteredContainer {
-  /*background-color: #0f0;*/
   width: 1260px;
   margin: 0 auto;
 }
@@ -284,16 +283,15 @@ div.ColumnThreeFourth {
   width: 945px;
 }
 
-img.PublicWebsiteImage
-{
-    display:block;
-    margin:20px auto;
+img.PublicWebsiteImage {
+  display: block;
+  margin: 20px auto;
 }
-img.PublicWebsiteImageStretch
-{
-    display:block;
-    height:auto;
-    width:100%;
+
+img.PublicWebsiteImageStretch {
+  display: block;
+  height: auto;
+  width: 100%;
 }
 
 div.WrapperPadding10 {
@@ -367,6 +365,23 @@ div.WrapperPadding8 {
 .TextAlignCenter {
   text-align: center;
 }
+
+/* Angular Material overrides */
+
+.mat-mdc-option.mdc-list-item--selected:not(.mdc-list-item--disabled) .mdc-list-item__primary-text {
+  color: $lightest-blue-color !important;
+}
+
+.mat-mdc-icon-button.mat-primary {
+  color: $lightest-blue-color !important;
+}
+
+tr.mat-mdc-header-row,
+.mat-mdc-paginator {
+  background-color: $light-blue-color !important;
+}
+
+/* Responsiveness */
 
 @media all and (max-width: 700px) {
   div.CenteredContainer {
