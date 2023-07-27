@@ -1,3 +1,4 @@
+import { AboutComponent } from './public-website/about/about.component';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -16,6 +17,7 @@ import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [
+    AboutComponent,
     AppComponent,
     PublicWebsiteComponent,
     ProductListComponent,
