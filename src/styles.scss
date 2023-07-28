@@ -26,7 +26,7 @@
 @font-face {
   font-family: 'robotoblack';
   src: url('assets/fonts/roboto-black-webfont.woff2') format('woff2'),
-       url('assets/fonts/roboto-black-webfont.woff') format('woff');
+    url('assets/fonts/roboto-black-webfont.woff') format('woff');
   font-weight: normal;
   font-style: normal;
 
@@ -71,6 +71,7 @@ $my-theme: mat.define-dark-theme((color: (primary: $my-primary,
   --mat-stepper-container-text-font: $font-main;
   --mat-stepper-header-label-text-font: $font-main;
   --mat-toolbar-title-text-font: $font-main;
+
   --mdc-typography-button-font-family: $font-main;
   --mdc-typography-button-letter-spacing: 0;
   --mdc-typography-font-family: $font-main;
@@ -392,6 +393,10 @@ div.WrapperPadding8 {
   text-align: center;
 }
 
+.TextDecorationLineThrough {
+  text-decoration: line-through;
+}
+
 .TextDecorationUnderline {
   text-decoration: underline;
 }
@@ -406,9 +411,17 @@ div.WrapperPadding8 {
   color: $lightest-blue-color !important;
 }
 
-tr.mat-mdc-header-row,
+table.mat-mdc-table tr.mat-mdc-header-row,
 .mat-mdc-paginator {
-  background-color: $light-blue-color !important;
+  background-color: #303030 !important;
+}
+
+table.mat-mdc-table tbody tr:nth-child(even) {
+  background-color: #383838;
+}
+
+table.mat-mdc-table tbody tr:nth-child(odd) {
+  background-color: #404040;
 }
 
 mat-form-field {
