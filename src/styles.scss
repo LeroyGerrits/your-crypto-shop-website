@@ -306,6 +306,10 @@ div.WrapperPadding20 {
   padding: 20px;
 }
 
+div.WrapperPadding20-20-0-20 {
+  padding: 20px 20px 0 20px;
+}
+
 div.WrapperPadding20-20-0-8 {
   padding: 20px 20px 0 8px;
 }
@@ -366,6 +370,10 @@ div.WrapperPadding8 {
   text-align: center;
 }
 
+.TextDecorationUnderline {
+  text-decoration: underline;
+}
+
 /* Angular Material overrides */
 
 .mat-mdc-option.mdc-list-item--selected:not(.mdc-list-item--disabled) .mdc-list-item__primary-text {
@@ -379,6 +387,10 @@ div.WrapperPadding8 {
 tr.mat-mdc-header-row,
 .mat-mdc-paginator {
   background-color: $light-blue-color !important;
+}
+
+mat-form-field {
+  width: 100%;
 }
 
 /* Responsiveness */

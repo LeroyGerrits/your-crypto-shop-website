@@ -1,11 +1,12 @@
 import { AfterViewInit, Component, ViewChild } from '@angular/core';
 import { MatSort, Sort } from '@angular/material/sort';
 
+import { Constants } from 'src/app/shared/constants';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { Shop } from 'src/app/shared/models/Shop.model';
-import { TestDataShops } from 'src/assets/test-data/shops';
+import { TestDataShops } from 'src/assets/test-data/Shops';
 
 @Component({
   selector: 'control-panel-shop-list',
@@ -17,9 +18,10 @@ export class ShopListComponent implements AfterViewInit {
   @ViewChild(MatSort, { static: false }) sort!: MatSort;
   @ViewChild(MatPaginator, { static: false }) paginator!: MatPaginator;
 
+  constants = Constants;
   dataSource = new MatTableDataSource(TestDataShops);
   displayedColumns: string[] = ['Name', 'SubDomain', 'buttons'];
-
+  
   constructor(private router: Router) { }
 
   ngAfterViewInit() {

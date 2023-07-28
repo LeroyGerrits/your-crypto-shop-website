@@ -22,6 +22,7 @@ export const TestDataShops: Shop[] = [
             Password: '*****',
             Gender: Gender.Female,
             LastName: 'Test'
-        }
+        },
+        SubDomain: 'exampleshop'
     }
 ];
