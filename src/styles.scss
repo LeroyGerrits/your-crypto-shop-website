@@ -24,11 +24,12 @@
 }
 
 @font-face {
-  font-family: 'robotoitalic';
-  src: url('assets/fonts/roboto-italic-webfont.woff2') format('woff2'),
-    url('assets/fonts/roboto-italic-webfont.woff') format('woff');
+  font-family: 'robotoblack';
+  src: url('assets/fonts/roboto-black-webfont.woff2') format('woff2'),
+       url('assets/fonts/roboto-black-webfont.woff') format('woff');
   font-weight: normal;
   font-style: normal;
+
 }
 
 @font-face {
@@ -40,6 +41,7 @@
 
 }
 
+$font-main: 'open_sansregular', Helvetica, Tahoma !important;
 $my-primary: mat.define-palette(mat.$indigo-palette, 500);
 $my-accent: mat.define-palette(mat.$pink-palette, A200, A100, A400);
 $dark-blue-color: #002352;
@@ -55,6 +57,24 @@ $my-theme: mat.define-dark-theme((color: (primary: $my-primary,
     ));
 
 @include mat.all-component-themes($my-theme);
+
+:root {
+  --mat-bottom-sheet-container-text-font: $font-main;
+  --mat-expansion-container-text-font: $font-main;
+  --mat-expansion-header-text-font: $font-main;
+  --mat-legacy-button-toggle-text-font: $font-main;
+  --mat-menu-item-label-text-font: $font-main;
+  --mat-option-label-text-font: $font-main;
+  --mat-paginator-container-text-font: $font-main;
+  --mat-select-trigger-text-font: $font-main;
+  --mat-standard-button-toggle-text-font: $font-main;
+  --mat-stepper-container-text-font: $font-main;
+  --mat-stepper-header-label-text-font: $font-main;
+  --mat-toolbar-title-text-font: $font-main;
+  --mdc-typography-button-font-family: $font-main;
+  --mdc-typography-button-letter-spacing: 0;
+  --mdc-typography-font-family: $font-main;
+}
 
 html,
 body {
@@ -80,6 +100,8 @@ body {
 h1,
 h2,
 h3 {
+  font-family: 'robotoblack', Helvetica, Tahoma !important;
+  font-weight: normal !important;
   margin: 0 !important;
 }
 
