@@ -1,7 +1,7 @@
 export class FaqCategory {
     Id!: string;
     Parent?: FaqCategory;
-    Name!: string;
-    SortOrder?: number;
+    Name!: string;    
     Children?: FaqCategory[];
+    SortOrder?: number;
 }

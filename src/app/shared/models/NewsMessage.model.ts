@@ -3,4 +3,6 @@ export class NewsMessage {
     Title!: string;
     Date!: Date;
     ThumbnailUrl!: string;
+    Intro!: string;
+    Content?: string;
 }

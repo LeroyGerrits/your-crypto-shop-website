@@ -2,8 +2,9 @@ import { FaqCategory } from "./FaqCategory.model";
 
 export class Faq {
     Id!: string;
-    Category?: FaqCategory;
+    Category!: FaqCategory;
     Title!: string;
-    Description?: string;
+    Keywords?: string;
+    Content?: string;
     SortOrder?: number;
 }
