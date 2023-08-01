@@ -5,6 +5,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BrowserModule } from '@angular/platform-browser';
 import { ControlPanelComponent } from './control-panel/control-panel.component';
 import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 import { MatBadgeModule } from '@angular/material/badge'
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -25,6 +26,7 @@ import { PublicWebsiteComponent } from './public-website/public-website.componen
 import { RouterModule } from '@angular/router';
 import { ShopComponent } from './control-panel/configuration/shops/shop.component';
 import { ShopListComponent } from './control-panel/configuration/shops/shop-list.component';
+import { ShopService } from './shared/services/shop.service';
 
 @NgModule({
   declarations: [
@@ -41,21 +43,24 @@ import { ShopListComponent } from './control-panel/configuration/shops/shop-list
     AppRoutingModule,
     BrowserAnimationsModule,
     BrowserModule,
+    HttpClientModule,
     MatBadgeModule,
     MatButtonModule,
+    MatFormFieldModule,
     MatIconModule,
+    MatInputModule,
     MatListModule,
     MatMenuModule,
+    MatPaginatorModule,
     MatSelectModule,
     MatSlideToggleModule,
+    MatSortModule,
     MatTableModule,
     MatToolbarModule,
     RouterModule,
-
-    FormsModule, MatButtonModule, MatFormFieldModule, MatIconModule, MatInputModule, MatPaginatorModule, MatTableModule, MatSortModule
-
+    FormsModule
   ],
-  providers: [],
+  providers: [ShopService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

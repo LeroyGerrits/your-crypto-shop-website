@@ -1,0 +1,32 @@
+import { Environment } from "src/app/shared/environments/Environment";
+import { HttpClient } from "@angular/common/http";
+import { Injectable } from "@angular/core";
+import { Observable } from "rxjs";
+import { Shop } from "../models/Shop.model";
+
+@Injectable()
+export class ShopService {
+    constructor(protected http: HttpClient) { }
+
+    private apiUrl = `${Environment.API_URL}/Shop`;
+
+    getList(): Observable<Shop[]> {
+        return this.http.get<Shop[]>(this.apiUrl);
+    }
+
+    getById(id: number): Observable<Shop> {
+        return this.http.get<Shop>(`${this.apiUrl}/${id}`);
+    }
+
+    create(shop: Shop): Observable<Shop> {
+        return this.http.post<Shop>(this.apiUrl, shop);
+    }
+
+    update(shop: Shop): Observable<Shop> {
+        return this.http.put<Shop>(`${this.apiUrl}/${shop.Id}`, shop)
+    }
+    
+    delete(jaar: number): Observable<Shop> {
+        return this.http.delete<Shop>(`${this.apiUrl}/${jaar}`);
+    }
+}
