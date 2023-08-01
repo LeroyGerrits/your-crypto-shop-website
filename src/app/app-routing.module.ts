@@ -12,7 +12,7 @@ import { DeliveryMethodListComponent } from './control-panel/configuration/deliv
 import { FaqComponent } from './public-website/faq/faq.component';
 import { IndexComponent } from './public-website/index/index.component';
 import { NewsComponent } from './public-website/news/news.component';
-import { NewsListListComponent } from './public-website/news/news-list.component';
+import { NewsListComponent } from './public-website/news/news-list.component';
 import { NgModule } from '@angular/core';
 import { NotFoundComponent } from './not-found.component';
 import { OrderComponent } from './control-panel/sales/orders/order.component';
@@ -47,7 +47,7 @@ const routes: Routes = [
   {
     path: '', component: PublicWebsiteComponent, title: titlePrefix, children: [
       { path: '', component: IndexComponent },
-      { path: 'news', component: NewsListListComponent, title: titlePrefix + 'News' },
+      { path: 'news', component: NewsListComponent, title: titlePrefix + 'News' },
       { path: 'news/:newsMessageId', component: NewsComponent, title: titlePrefix + 'News' },
       { path: 'pricing', component: PricingComponent, title: titlePrefix + 'Pricing' },
       { path: 'faq', component: FaqComponent, title: titlePrefix + 'FAQ' },

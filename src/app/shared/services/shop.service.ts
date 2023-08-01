@@ -6,9 +6,9 @@ import { Shop } from "../models/Shop.model";
 
 @Injectable()
 export class ShopService {
-    constructor(protected http: HttpClient) { }
-
     private apiUrl = `${Environment.API_URL}/Shop`;
+
+    constructor(protected http: HttpClient) { }
 
     getList(): Observable<Shop[]> {
         return this.http.get<Shop[]>(this.apiUrl);

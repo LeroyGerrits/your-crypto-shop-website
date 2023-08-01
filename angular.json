@@ -51,8 +51,8 @@
               ],
               "fileReplacements": [
                 {
-                  "replace": "src/app/shared/environment/environment.ts",
-                  "with": "src/app/shared/environment/environment.prod.ts"
+                  "replace": "src/app/shared/environments/Environment.ts",
+                  "with": "src/app/shared/environments/Environment.prod.ts"
                 }
               ],
               "outputHashing": "all"

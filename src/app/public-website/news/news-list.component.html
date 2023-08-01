@@ -1,1 +1,7 @@
 <h1>News</h1>
+
+<div *ngFor="let newsMessage of this.dataSource.data">
+    {{newsMessage.Title}} 
+    <span class="Date">{{newsMessage.Date}}</span>
+    <p>{{newsMessage.Intro}} </p>
+</div>
