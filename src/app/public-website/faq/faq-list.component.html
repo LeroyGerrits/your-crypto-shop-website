@@ -1,0 +1,22 @@
+<div class="WrapperPadding20-8-0-8">
+    <h1>FAQ</h1>
+</div>
+<div class="WrapperPadding20-8-0-8">
+    <mat-form-field>
+        <mat-label>Search</mat-label>
+        <input matInput placeholder="What can we help you with?" [formControl]="controlFilter" />
+    </mat-form-field>
+</div>
+
+<div *ngFor="let faqCategory of this.faqCategoriesFiltered">
+    <div class="WrapperPadding20-8-0-8" *ngIf="this.faqsByCategoryId[faqCategory.Id]">
+        <h3>{{faqCategory.Name}}</h3>
+        <ul>
+            <li *ngFor="let faq of this.faqsByCategoryId[faqCategory.Id]">
+                <a [routerLink]="['/faq/' + faq.Id + '/' + faq.SearchEngineFriendlyTitle]">
+                    {{faq.Title}}
+                </a>
+            </li>
+        </ul>
+    </div>
+</div>

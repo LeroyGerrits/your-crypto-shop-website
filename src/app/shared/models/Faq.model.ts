@@ -7,4 +7,6 @@ export class Faq {
     Keywords?: string;
     Content?: string;
     SortOrder?: number;
+
+    SearchEngineFriendlyTitle: string = this.Title != null ? this.Title.trim().replace(/\W+/g, '-').toLowerCase() : '';
 }

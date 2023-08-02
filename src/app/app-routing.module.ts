@@ -10,6 +10,7 @@ import { DashboardComponent } from './control-panel/dashboard/dashboard.componen
 import { DeliveryMethodComponent } from './control-panel/configuration/delivery-methods/delivery-method.component';
 import { DeliveryMethodListComponent } from './control-panel/configuration/delivery-methods/delivery-method-list.component';
 import { FaqComponent } from './public-website/faq/faq.component';
+import { FaqListComponent } from './public-website/faq/faq-list.component';
 import { IndexComponent } from './public-website/index/index.component';
 import { NewsComponent } from './public-website/news/news.component';
 import { NewsListComponent } from './public-website/news/news-list.component';
@@ -51,7 +52,9 @@ const routes: Routes = [
       { path: 'news/:newsMessageId', component: NewsComponent, title: titlePrefix + 'News' },
       { path: 'news/:newsMessageId/:newsMessageTitle', component: NewsComponent, title: titlePrefix + 'News' },
       { path: 'pricing', component: PricingComponent, title: titlePrefix + 'Pricing' },
-      { path: 'faq', component: FaqComponent, title: titlePrefix + 'FAQ' },
+      { path: 'faq', component: FaqListComponent, title: titlePrefix + 'FAQ' },
+      { path: 'faq/:faqId', component: FaqComponent, title: titlePrefix + 'FAQ' },
+      { path: 'faq/:faqId/:faqTitle', component: FaqComponent, title: titlePrefix + 'FAQ' },
       { path: 'about', component: AboutComponent, title: titlePrefix + 'About' },
       { path: '**', pathMatch: 'full', component: NotFoundComponent, title: titlePrefix + 'Not found' }
     ]

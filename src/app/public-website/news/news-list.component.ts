@@ -14,12 +14,13 @@ export class NewsListComponent implements OnInit {
 
   dataSource = new MatTableDataSource<NewsMessage>;
   columns: number = 3;
+
   constructor(
     private newsMessageService: NewsMessageService
   ) { }
 
   ngOnInit(): void {
-    this.columns = (window.innerWidth <= 750) ? 1 : 3; 
+    this.columns = (window.innerWidth <= 750) ? 1 : 3;
 
     this.newsMessageService.getList().subscribe(shops => {
       this.dataSource = new MatTableDataSource(shops);
@@ -27,7 +28,7 @@ export class NewsListComponent implements OnInit {
     });
   }
 
-  handleResize() {     
-    this.columns = (window.innerWidth <= 750) ? 1 : 3; 
+  handleResize() {
+    this.columns = (window.innerWidth <= 750) ? 1 : 3;
   }
 }

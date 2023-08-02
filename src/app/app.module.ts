@@ -1,3 +1,5 @@
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
 import { AboutComponent } from './public-website/about/about.component';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
@@ -6,8 +8,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { ControlPanelComponent } from './control-panel/control-panel.component';
 import { DeliveryMethodService } from './shared/services/DeliveryMethod.service';
 import { FaqCategoryService } from './shared/services/FaqCategory.service';
+import { FaqListComponent } from './public-website/faq/faq-list.component';
 import { FaqService } from './shared/services/Faq.service';
-import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { MatBadgeModule } from '@angular/material/badge';
 import { MatButtonModule } from '@angular/material/button';
@@ -40,6 +42,7 @@ import { ShopService } from './shared/services/Shop.service';
     AboutComponent,
     AppComponent,
     ControlPanelComponent,
+    FaqListComponent,
     NewsListComponent,
     PublicWebsiteComponent,
     ProductListComponent,
@@ -67,6 +70,7 @@ import { ShopService } from './shared/services/Shop.service';
     MatSortModule,
     MatTableModule,
     MatToolbarModule,
+    ReactiveFormsModule,
     RouterModule,
     FormsModule
   ],
