@@ -33,7 +33,7 @@
         <ng-container matColumnDef="SubDomain">
             <th mat-header-cell mat-sort-header *matHeaderCellDef>Subdomain</th>
             <td mat-cell *matCellDef="let element">
-                <span *ngIf="element.SubDomain"><a href="https://{{element.SubDomain}}.{{constants.WEBSITE_URL}}" target="_blank">https://<strong class="TextDecorationUnderline">{{element.SubDomain}}</strong>.{{constants.WEBSITE_URL}}</a></span>
+                <span *ngIf="element.SubDomain"><a href="https://{{element.SubDomain}}.{{environment.WEBSITE_DOMAIN}}" target="_blank">https://<strong class="TextDecorationUnderline">{{element.SubDomain}}</strong>.{{environment.WEBSITE_DOMAIN}}</a></span>
             </td>
         </ng-container>
 

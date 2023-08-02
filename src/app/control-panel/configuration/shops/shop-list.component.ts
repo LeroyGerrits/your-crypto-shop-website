@@ -3,7 +3,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort, Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
-import { Constants } from 'src/app/shared/Constants';
+import { Environment } from 'src/app/shared/environments/Environment';
 import { Shop } from 'src/app/shared/models/Shop.model';
 import { ShopService } from 'src/app/shared/services/Shop.service';
 
@@ -17,7 +17,7 @@ export class ShopListComponent implements OnInit {
   @ViewChild(MatPaginator, { static: false }) paginator!: MatPaginator;
   @ViewChild(MatSort, { static: false }) sort!: MatSort;
 
-  constants = Constants;
+  environment = Environment;
   dataSource = new MatTableDataSource<Shop>;
   displayedColumns: string[] = ['Name', 'SubDomain', 'buttons'];
 

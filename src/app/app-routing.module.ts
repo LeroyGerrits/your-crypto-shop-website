@@ -49,6 +49,7 @@ const routes: Routes = [
       { path: '', component: IndexComponent },
       { path: 'news', component: NewsListComponent, title: titlePrefix + 'News' },
       { path: 'news/:newsMessageId', component: NewsComponent, title: titlePrefix + 'News' },
+      { path: 'news/:newsMessageId/:newsMessageTitle', component: NewsComponent, title: titlePrefix + 'News' },
       { path: 'pricing', component: PricingComponent, title: titlePrefix + 'Pricing' },
       { path: 'faq', component: FaqComponent, title: titlePrefix + 'FAQ' },
       { path: 'about', component: AboutComponent, title: titlePrefix + 'About' },

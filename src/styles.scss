@@ -317,6 +317,10 @@ img.PublicWebsiteImageStretch {
   width: 100%;
 }
 
+div.WrapperPadding0-8 {
+  padding: 0 8px;
+}
+
 div.WrapperPadding10 {
   padding: 10px;
 }
@@ -403,6 +407,11 @@ div.WrapperPadding8 {
 
 /* Angular Material overrides */
 
+.mdc-card__actions
+{
+  padding:16px !important;
+}
+
 .mat-mdc-option.mdc-list-item--selected:not(.mdc-list-item--disabled) .mdc-list-item__primary-text {
   color: $lightest-blue-color !important;
 }
@@ -427,6 +436,8 @@ table.mat-mdc-table tbody tr:nth-child(odd) {
 mat-form-field {
   width: 100%;
 }
+
+
 
 /* Responsiveness */
 

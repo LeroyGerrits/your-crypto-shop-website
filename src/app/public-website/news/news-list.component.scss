@@ -1,0 +1,16 @@
+mat-card {
+    height: 100%;
+    
+    width: 100%;
+}
+
+mat-card img{
+    object-fit: cover;
+    width:auto;
+    max-height:200px;
+  }
+
+.example-header-image {
+    background-image: url('/assets/images/Header Logo.png');
+    background-size: cover;
+  }
