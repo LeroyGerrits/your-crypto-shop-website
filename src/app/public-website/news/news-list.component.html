@@ -4,7 +4,7 @@
                 <mat-card>
                     <mat-card-header>
                         <div mat-card-avatar class="example-header-image"></div>
-                        <mat-card-title><a [routerLink]="['/news/' + newsMessage.Id + '/' + newsMessage.SearchEngineFriendlyTitle]">{{newsMessage.Title}}</a></mat-card-title>
+                        <mat-card-title><a [routerLink]="['/news', newsMessage.Id, newsMessage.Title | searchEngineFriendlyString]">{{newsMessage.Title}}</a></mat-card-title>
                         <mat-card-subtitle>{{newsMessage.Date | date: 'd MMM yyyy HH:mm'}}</mat-card-subtitle>
                     </mat-card-header>
                     <img mat-card-image *ngIf="newsMessage.ThumbnailUrl" [src]="newsMessage.ThumbnailUrl" width="400" height="200" />
@@ -12,7 +12,7 @@
                         <p>{{newsMessage.Intro}}</p>
                     </mat-card-content>
                     <mat-card-actions align="end">
-                        <button mat-raised-button color="primary" [routerLink]="['/news/' + newsMessage.Id + '/' + newsMessage.SearchEngineFriendlyTitle]">Read more</button>
+                        <button mat-raised-button color="primary" [routerLink]="['/news', newsMessage.Id, newsMessage.Title | searchEngineFriendlyString]">Read more</button>
                     </mat-card-actions>
                 </mat-card>
         </mat-grid-tile>

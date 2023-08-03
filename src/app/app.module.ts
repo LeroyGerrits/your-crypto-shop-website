@@ -35,6 +35,7 @@ import { ProductComponent } from './control-panel/catalog/products/product.compo
 import { ProductListComponent } from './control-panel/catalog/products/product-list.component';
 import { PublicWebsiteComponent } from './public-website/public-website.component';
 import { RouterModule } from '@angular/router';
+import { SearchEngineFriendlyStringPipe } from './shared/pipes/searchEngineFriendlyString.pipe';
 import { ShopComponent } from './control-panel/configuration/shops/shop.component';
 import { ShopListComponent } from './control-panel/configuration/shops/shop-list.component';
 import { ShopService } from './shared/services/Shop.service';
@@ -50,6 +51,7 @@ import { ShopService } from './shared/services/Shop.service';
     PublicWebsiteComponent,
     ProductListComponent,
     ProductComponent,
+    SearchEngineFriendlyStringPipe,
     ShopListComponent,
     ShopComponent
   ],
