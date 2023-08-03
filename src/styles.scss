@@ -102,6 +102,7 @@ body {
 h1,
 h2,
 h3 {
+  display: inline;
   font-family: 'robotoblack', Helvetica, Tahoma !important;
   font-weight: normal !important;
   margin: 0 !important;
@@ -408,9 +409,8 @@ div.WrapperPadding8 {
 
 /* Angular Material overrides */
 
-.mdc-card__actions
-{
-  padding:16px !important;
+.mdc-card__actions {
+  padding: 16px !important;
 }
 
 .mat-mdc-icon-button.mat-primary {

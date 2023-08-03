@@ -1,5 +1,5 @@
 <div class="WrapperPadding20-8-0-8">
-    <h1>FAQ {{this.faq?.Title}}</h1>
+    <h2><a [routerLink]="['/faq']">FAQ</a> - {{this.faq?.Title}}</h2>
 </div>
 <div class="WrapperPadding20-8-0-8">
     <div [innerHTML]="this.faq?.Content"></div>
