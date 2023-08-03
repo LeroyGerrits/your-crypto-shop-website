@@ -22,7 +22,7 @@ export class FaqListComponent implements OnInit, OnDestroy {
   faqs: Faq[] | undefined;
   faqsFiltered: Faq[] | undefined;
   faqsByCategoryId: { [key: string]: Faq[] } = {};
-  
+
   constructor(
     private faqCategoryService: FaqCategoryService,
     private faqService: FaqService
@@ -37,7 +37,10 @@ export class FaqListComponent implements OnInit, OnDestroy {
 
   filterFaqs(value: string | null): void {
     if (value && value.length) {
-      this.faqsFiltered = this.faqs?.filter(f => f.Title.toLowerCase().includes(value.toString().toLowerCase()) || f.Keywords?.toLowerCase().includes(value.toString().toLowerCase()));
+      this.faqsFiltered = this.faqs?.filter(faq =>
+        faq.Title.toLowerCase().includes(value.toString().toLowerCase()) ||
+        faq.Keywords?.filter(keyword => keyword.toLowerCase().includes(value.toString().toLowerCase())).length
+      );
     }
     else {
       this.faqsFiltered = this.faqs;

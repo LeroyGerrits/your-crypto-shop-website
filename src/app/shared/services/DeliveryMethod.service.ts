@@ -14,7 +14,7 @@ export class DeliveryMethodService {
         return this.http.get<DeliveryMethod[]>(this.apiUrl);
     }
 
-    getById(id: number): Observable<DeliveryMethod> {
+    getById(id: string): Observable<DeliveryMethod> {
         return this.http.get<DeliveryMethod>(`${this.apiUrl}/${id}`);
     }
 
@@ -26,7 +26,7 @@ export class DeliveryMethodService {
         return this.http.put<DeliveryMethod>(`${this.apiUrl}/${shop.Id}`, shop)
     }
     
-    delete(jaar: number): Observable<DeliveryMethod> {
-        return this.http.delete<DeliveryMethod>(`${this.apiUrl}/${jaar}`);
+    delete(id: string): Observable<DeliveryMethod> {
+        return this.http.delete<DeliveryMethod>(`${this.apiUrl}/${id}`);
     }
 }

@@ -72,6 +72,7 @@ $my-theme: mat.define-dark-theme((color: (primary: $my-primary,
   --mat-stepper-header-label-text-font: $font-main;
   --mat-toolbar-title-text-font: $font-main;
 
+  --mdc-chip-label-text-font: $font-main !important;
   --mdc-typography-button-font-family: $font-main;
   --mdc-typography-button-letter-spacing: 0;
   --mdc-typography-font-family: $font-main;
@@ -412,12 +413,16 @@ div.WrapperPadding8 {
   padding:16px !important;
 }
 
+.mat-mdc-icon-button.mat-primary {
+  color: $lightest-blue-color !important;
+}
+
 .mat-mdc-option.mdc-list-item--selected:not(.mdc-list-item--disabled) .mdc-list-item__primary-text {
   color: $lightest-blue-color !important;
 }
 
-.mat-mdc-icon-button.mat-primary {
-  color: $lightest-blue-color !important;
+.mat-mdc-standard-chip {
+  --mdc-chip-label-text-font: $font-main;
 }
 
 table.mat-mdc-table tr.mat-mdc-header-row,

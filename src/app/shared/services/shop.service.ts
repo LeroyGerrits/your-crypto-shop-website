@@ -14,7 +14,7 @@ export class ShopService {
         return this.http.get<Shop[]>(this.apiUrl);
     }
 
-    getById(id: number): Observable<Shop> {
+    getById(id: string): Observable<Shop> {
         return this.http.get<Shop>(`${this.apiUrl}/${id}`);
     }
 
@@ -26,7 +26,7 @@ export class ShopService {
         return this.http.put<Shop>(`${this.apiUrl}/${shop.Id}`, shop)
     }
     
-    delete(jaar: number): Observable<Shop> {
-        return this.http.delete<Shop>(`${this.apiUrl}/${jaar}`);
+    delete(id: string): Observable<Shop> {
+        return this.http.delete<Shop>(`${this.apiUrl}/${id}`);
     }
 }

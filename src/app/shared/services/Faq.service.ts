@@ -14,7 +14,7 @@ export class FaqService {
         return this.http.get<Faq[]>(this.apiUrl);
     }
 
-    getById(id: number): Observable<Faq> {
+    getById(id: string): Observable<Faq> {
         return this.http.get<Faq>(`${this.apiUrl}/${id}`);
     }
 
@@ -26,7 +26,7 @@ export class FaqService {
         return this.http.put<Faq>(`${this.apiUrl}/${shop.Id}`, shop)
     }
     
-    delete(jaar: number): Observable<Faq> {
-        return this.http.delete<Faq>(`${this.apiUrl}/${jaar}`);
+    delete(id: string): Observable<Faq> {
+        return this.http.delete<Faq>(`${this.apiUrl}/${id}`);
     }
 }

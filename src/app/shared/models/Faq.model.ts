@@ -4,7 +4,7 @@ export class Faq {
     Id!: string;
     Category!: FaqCategory;
     Title!: string;
-    Keywords?: string;
+    Keywords?: string[];
     Content?: string;
     SortOrder?: number;
 

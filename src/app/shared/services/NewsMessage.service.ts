@@ -14,7 +14,7 @@ export class NewsMessageService {
         return this.http.get<NewsMessage[]>(this.apiUrl);
     }
 
-    getById(id: number): Observable<NewsMessage> {
+    getById(id: string): Observable<NewsMessage> {
         return this.http.get<NewsMessage>(`${this.apiUrl}/${id}`);
     }
 
@@ -26,7 +26,7 @@ export class NewsMessageService {
         return this.http.put<NewsMessage>(`${this.apiUrl}/${shop.Id}`, shop)
     }
     
-    delete(jaar: number): Observable<NewsMessage> {
-        return this.http.delete<NewsMessage>(`${this.apiUrl}/${jaar}`);
+    delete(id: string): Observable<NewsMessage> {
+        return this.http.delete<NewsMessage>(`${this.apiUrl}/${id}`);
     }
 }

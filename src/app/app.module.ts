@@ -8,12 +8,14 @@ import { BrowserModule } from '@angular/platform-browser';
 import { ControlPanelComponent } from './control-panel/control-panel.component';
 import { DeliveryMethodService } from './shared/services/DeliveryMethod.service';
 import { FaqCategoryService } from './shared/services/FaqCategory.service';
+import { FaqComponent } from './public-website/faq/faq.component';
 import { FaqListComponent } from './public-website/faq/faq-list.component';
 import { FaqService } from './shared/services/Faq.service';
 import { HttpClientModule } from '@angular/common/http';
 import { MatBadgeModule } from '@angular/material/badge';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
+import { MatChipsModule } from '@angular/material/chips';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatIconModule } from '@angular/material/icon';
@@ -43,6 +45,7 @@ import { ShopService } from './shared/services/Shop.service';
     AppComponent,
     ControlPanelComponent,
     FaqListComponent,
+    FaqComponent,
     NewsListComponent,
     PublicWebsiteComponent,
     ProductListComponent,
@@ -57,6 +60,7 @@ import { ShopService } from './shared/services/Shop.service';
     HttpClientModule,
     MatBadgeModule,
     MatCardModule,
+    MatChipsModule,
     MatButtonModule,
     MatFormFieldModule,
     MatGridListModule,
