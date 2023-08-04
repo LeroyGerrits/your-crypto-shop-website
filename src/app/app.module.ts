@@ -1,17 +1,21 @@
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 
 import { AboutComponent } from './public-website/about/about.component';
+import { AccountComponent } from './account/account.component';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BrowserModule } from '@angular/platform-browser';
 import { ControlPanelComponent } from './control-panel/control-panel.component';
 import { DeliveryMethodService } from './shared/services/DeliveryMethod.service';
+import { ErrorInterceptor } from './shared/interceptors/error.interceptor';
 import { FaqCategoryService } from './shared/services/FaqCategory.service';
 import { FaqComponent } from './public-website/faq/faq.component';
 import { FaqListComponent } from './public-website/faq/faq-list.component';
 import { FaqService } from './shared/services/Faq.service';
-import { HttpClientModule } from '@angular/common/http';
+import { JwtInterceptor } from './shared/interceptors/jwt.interceptor';
+import { LoginComponent } from './account/login/login.component';
 import { MatBadgeModule } from '@angular/material/badge';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
@@ -43,10 +47,12 @@ import { ShopService } from './shared/services/Shop.service';
 @NgModule({
   declarations: [
     AboutComponent,
+    AccountComponent,
     AppComponent,
     ControlPanelComponent,
     FaqListComponent,
     FaqComponent,
+    LoginComponent,
     NewsListComponent,
     PublicWebsiteComponent,
     ProductListComponent,
@@ -81,6 +87,8 @@ import { ShopService } from './shared/services/Shop.service';
     FormsModule
   ],
   providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
     DeliveryMethodService,
     FaqService,
     FaqCategoryService,

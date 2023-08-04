@@ -1,5 +1,5 @@
-export abstract class Environment {
-    static readonly API_URL: string = 'https://api.dgbcommerce.com';
-    static readonly WEBSITE_DOMAIN: string = 'dgbcommerce.com';
-    static readonly WEBSITE_URL: string = 'https://www.dgbcommerce.com';
+export const Environment = {
+    API_URL: 'https://api.dgbcommerce.com',
+    WEBSITE_DOMAIN: 'dgbcommerce.com',
+    WEBSITE_URL: 'https://www.dgbcommerce.com',
 }

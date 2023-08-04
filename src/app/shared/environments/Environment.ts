@@ -1,5 +1,5 @@
-export abstract class Environment {
-    static readonly API_URL: string = 'https://localhost:7170';
-    static readonly WEBSITE_DOMAIN: string = 'localhost';
-    static readonly WEBSITE_URL: string = 'http://localhost:4200';
+export const Environment = {
+    API_URL: 'https://localhost:7170',
+    WEBSITE_DOMAIN: 'localhost',
+    WEBSITE_URL: 'http://localhost:4200',
 }

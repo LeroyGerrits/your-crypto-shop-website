@@ -1,6 +1,7 @@
 import { RouterModule, Routes } from '@angular/router';
 
 import { AboutComponent } from './public-website/about/about.component';
+import { AccountComponent } from './account/account.component';
 import { CategoryComponent } from './control-panel/catalog/categories/category.component';
 import { CategoryListComponent } from './control-panel/catalog/categories/category-list.component';
 import { ControlPanelComponent } from './control-panel/control-panel.component';
@@ -12,6 +13,7 @@ import { DeliveryMethodListComponent } from './control-panel/configuration/deliv
 import { FaqComponent } from './public-website/faq/faq.component';
 import { FaqListComponent } from './public-website/faq/faq-list.component';
 import { IndexComponent } from './public-website/index/index.component';
+import { LoginComponent } from './account/login/login.component';
 import { NewsComponent } from './public-website/news/news.component';
 import { NewsListComponent } from './public-website/news/news-list.component';
 import { NgModule } from '@angular/core';
@@ -27,6 +29,12 @@ import { ShopListComponent } from './control-panel/configuration/shops/shop-list
 
 const titlePrefix: string = 'DGB Commerce - ';
 const routes: Routes = [
+  {
+    path: 'account', component: AccountComponent, title: titlePrefix + 'Account', children: [
+      //{ path: '', component: DashboardComponent, title: titlePrefix + 'Account' },
+      { path: 'login', component: LoginComponent, title: titlePrefix + 'Login' }
+    ]
+  },
   {
     path: 'control-panel', component: ControlPanelComponent, title: titlePrefix + 'Control panel', children: [
       { path: '', component: DashboardComponent, title: titlePrefix + 'Dashboard' },

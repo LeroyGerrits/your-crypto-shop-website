@@ -7,4 +7,5 @@ export class Merchant {
     Gender!: Gender;
     FirstName?: string;
     LastName!: string;
+    Token?: string;
 }

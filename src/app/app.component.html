@@ -1,20 +1,21 @@
 <div id="TopBar">
   <div class="CenteredContainer">
     <div class="RightMenu">
-      <mat-toolbar *ngIf="this.isMerchant">
-        <button *ngIf="this.isMerchant" mat-button [matMenuTriggerFor]="Merchant">
-          Logged in as <strong>Merchant</strong>
+      <mat-toolbar>
+        <button *ngIf="this.activeMerchant" mat-button [matMenuTriggerFor]="Merchant">
+          Logged in as <strong>{{this.activeMerchant.EmailAddress}}</strong>
         </button>
-        <button *ngIf="!this.isMerchant" mat-button [routerLink]="['/account/login']">Merchant login</button>
+        <button *ngIf="!this.activeMerchant" mat-button [routerLink]="['/account/login']">Merchant login</button>
+
         <mat-menu #Merchant="matMenu">
           <button mat-menu-item [routerLink]="['/account/settings']">Settings</button>
           <button mat-menu-item [routerLink]="['/account/change-password']">Change password</button>
           <button mat-menu-item [routerLink]="['/account/logout']">Log out</button>
         </mat-menu>
-      </mat-toolbar>
+      </mat-toolbar>      
     </div>
 
-    <mat-toolbar *ngIf="this.isMerchant">
+    <mat-toolbar *ngIf="this.activeMerchant">
       <button mat-button [routerLink]="['/']">Website</button>
       <button mat-button [routerLink]="['/control-panel']">Dashboard</button>
       <button mat-button [matMenuTriggerFor]="ControlPanelConfiguration">Configuration</button>
@@ -40,7 +41,9 @@
       <mat-menu #Merchant="matMenu">
 
       </mat-menu>
+
     </mat-toolbar>
+    <div class="ClearRight"></div>
   </div>
 </div>
 <router-outlet></router-outlet>

@@ -1,4 +1,6 @@
+import { AuthenticationService } from './shared/services/Authentication.service';
 import { Component } from '@angular/core';
+import { Merchant } from './shared/models/Merchant.model';
 
 @Component({
   selector: 'app-root',
@@ -6,6 +8,14 @@ import { Component } from '@angular/core';
 })
 
 export class AppComponent {
+  public activeMerchant?: Merchant | null;
   public currentYear: number = new Date().getFullYear();
-  public isMerchant: boolean = true;
+
+  constructor(private authenticationService: AuthenticationService) {
+    this.authenticationService.merchant.subscribe(x => this.activeMerchant = x);
+  }
+
+  logout() {
+    this.authenticationService.logout();
+  }
 }
