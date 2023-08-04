@@ -12,7 +12,7 @@ export class AppComponent {
   public currentYear: number = new Date().getFullYear();
 
   constructor(private authenticationService: AuthenticationService) {
-    this.authenticationService.merchant.subscribe(x => this.activeMerchant = x);
+    this.authenticationService.merchant.subscribe(x => this.activeMerchant = x?.Merchant);
   }
 
   logout() {
