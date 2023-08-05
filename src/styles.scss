@@ -73,6 +73,7 @@ $my-theme: mat.define-dark-theme((color: (primary: $my-primary,
   --mat-toolbar-title-text-font: $font-main;
 
   --mdc-chip-label-text-font: $font-main !important;
+  --mdc-dialog-supporting-text-font: $font-main;
   --mdc-typography-button-font-family: $font-main;
   --mdc-typography-button-letter-spacing: 0;
   --mdc-typography-font-family: $font-main;
@@ -411,6 +412,11 @@ div.WrapperPadding8 {
 
 .mdc-card__actions {
   padding: 16px !important;
+}
+
+.mat-mdc-dialog-content{
+  --mdc-dialog-supporting-text-font: $font-main;
+  --mdc-dialog-supporting-text-size: 1em;
 }
 
 .mat-mdc-icon-button.mat-primary {
