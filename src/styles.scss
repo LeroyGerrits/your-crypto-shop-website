@@ -48,6 +48,7 @@ $dark-blue-color: #002352;
 $light-blue-color: #2080e0;
 $lighter-blue-color: #3090f0;
 $lightest-blue-color: #3f9fff;
+$error-color: #dc3545;
 
 $my-theme: mat.define-dark-theme((color: (primary: $my-primary,
         accent: $my-accent,
@@ -309,6 +310,12 @@ div.ColumnThreeFourth {
   width: 945px;
 }
 
+div.InvalidFeedback {
+  margin-top: 0.25rem;
+  font-size: .875em;
+  color: $error-color;
+}
+
 img.PublicWebsiteImage {
   display: block;
   margin: 20px auto;
@@ -396,6 +403,10 @@ div.WrapperPadding8 {
   clear: right;
 }
 
+.FloatRight {
+  float: right;
+}
+
 .TextAlignCenter {
   text-align: center;
 }
@@ -414,12 +425,12 @@ div.WrapperPadding8 {
   padding: 16px !important;
 }
 
-.mat-mdc-dialog-content{
+.mat-mdc-dialog-content {
   --mdc-dialog-supporting-text-font: $font-main;
   --mdc-dialog-supporting-text-size: 1em;
 }
 
-.mat-mdc-form-field, 
+.mat-mdc-form-field,
 .mat-mdc-floating-label {
   --mdc-typography-body1-font-family: $font-main;
   --mdc-typography-body1-font-size: 1em;
@@ -438,6 +449,10 @@ div.WrapperPadding8 {
   --mdc-chip-label-text-font: $font-main;
 }
 
+.mdc-tooltip {
+  --mdc-plain-tooltip-supporting-text-font: $font-main;
+}
+
 table.mat-mdc-table tr.mat-mdc-header-row,
 .mat-mdc-paginator {
   background-color: #303030 !important;
@@ -451,16 +466,13 @@ table.mat-mdc-table tbody tr:nth-child(odd) {
   background-color: #404040;
 }
 
-.mdc-text-field--focused:not(.mdc-text-field--disabled) .mdc-floating-label
-{
-  color:$lightest-blue-color !important;
+.mdc-text-field--focused:not(.mdc-text-field--disabled) .mdc-floating-label {
+  color: $lightest-blue-color !important;
 }
 
 mat-form-field {
   width: 100%;
 }
-
-
 
 /* Responsiveness */
 

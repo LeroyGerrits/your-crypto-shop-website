@@ -1,4 +1,4 @@
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 
 import { AuthenticationService } from 'src/app/shared/services/Authentication.service';
 import { Component } from '@angular/core';
@@ -11,38 +11,38 @@ import { first } from 'rxjs/operators';
     templateUrl: 'dialog.login.component.html'
 })
 export class DialogLoginComponent {
-    loginForm!: FormGroup;
+    controlUsername = new FormControl('', Validators.required);
+    controlPassword = new FormControl('', Validators.required)
+
+    form!: FormGroup;
     loading = false;
     submitted = false;
     error = '';
 
     constructor(
-        private formBuilder: FormBuilder,
         private router: Router,
         private authenticationService: AuthenticationService,
         private dialogRefComponent: MatDialogRef<any>
     ) { }
 
     ngOnInit() {
-        this.loginForm = this.formBuilder.group({
-            username: ['', Validators.required],
-            password: ['', Validators.required]
-        });
+        this.form = new FormGroup([
+            this.controlUsername,
+            this.controlPassword
+        ]);
     }
-
-    public get f() { return this.loginForm.controls; }
 
     onSubmit() {
         this.submitted = true;
 
-        if (this.loginForm.invalid) {
+        if (this.form.invalid) {
             return;
         }
 
         this.error = '';
         this.loading = true;
 
-        this.authenticationService.login(this.f['username'].value, this.f['password'].value)
+        this.authenticationService.login(this.controlUsername.value!, this.controlPassword.value!)
             .pipe(first())
             .subscribe({
                 next: () => {

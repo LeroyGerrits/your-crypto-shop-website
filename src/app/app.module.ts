@@ -31,11 +31,13 @@ import { MatInputModule } from '@angular/material/input';
 import { MatListModule } from '@angular/material/list';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSelectModule } from '@angular/material/select';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatSortModule } from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatTooltipModule } from '@angular/material/tooltip';
 import { NewsComponent } from './public-website/news/news.component';
 import { NewsListComponent } from './public-website/news/news-list.component';
 import { NewsMessageService } from './shared/services/NewsMessage.service';
@@ -86,11 +88,13 @@ import { ShopService } from './shared/services/Shop.service';
     MatListModule,
     MatMenuModule,
     MatPaginatorModule,
+    MatProgressSpinnerModule,
     MatSelectModule,
-    MatSlideToggleModule,
+    MatSlideToggleModule,    
     MatSortModule,
     MatTableModule,
     MatToolbarModule,
+    MatTooltipModule,
     ReactiveFormsModule,
     RouterModule,
     FormsModule

@@ -1,4 +1,5 @@
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Subscription, debounceTime, distinctUntilChanged } from 'rxjs';
 
 import { ActivatedRoute } from '@angular/router';
 import { Component } from '@angular/core';
@@ -7,26 +8,29 @@ import { ShopService } from 'src/app/shared/services/Shop.service';
 
 @Component({
   selector: 'control-panel-configuration-shop',
-  templateUrl: './shop.component.html'
+  templateUrl: './shop.component.html',
+  styleUrls: ['./shop.component.scss']
 })
 
 export class ShopComponent {
+  controlName = new FormControl('', Validators.required);
+  controlSubDomain = new FormControl('', [Validators.minLength(3), Validators.pattern(/^[a-zA-Z0-9-]*$/)])
+  subscriptionSubDomain: Subscription | undefined;
+
   public error = '';
   public form!: FormGroup;
   public loading = false;
   public pageTitle = 'Create new shop'
   public shop: Shop = new Shop();
   public submitted = false;
+  public subDomainAvailable = true;
 
   constructor(
     private route: ActivatedRoute,
-    private formBuilder: FormBuilder,
     private shopService: ShopService
   ) {
-    this.form = this.formBuilder.group({
-      Name: ['', Validators.required],
-      SubDomain: ['']
-    });
+    this.form = new FormGroup([this.controlName, this.controlSubDomain]);
+    this.subscriptionSubDomain = this.controlSubDomain.valueChanges.pipe(debounceTime(1000), distinctUntilChanged()).subscribe(value => this.checkSubDomainAvailability(value));
   }
 
   ngOnInit(): void {
@@ -38,13 +42,17 @@ export class ShopComponent {
     }
   }
 
-  public get f() { return this.form.controls; }
-
   onRetrieveData(shop: Shop) {
     this.shop = shop;
     this.pageTitle = shop.Name;
-    this.f['Name'].setValue(shop.Name);
-    this.f['SubDomain'].setValue(shop.SubDomain);
+    this.controlName.setValue(shop.Name);
+
+    if (shop.SubDomain)
+      this.controlSubDomain.setValue(shop.SubDomain);
+  }
+
+  checkSubDomainAvailability(subdomain: string | null) {
+    this.subDomainAvailable = subdomain != 'www';
   }
 
   onSubmit() {
@@ -58,11 +66,8 @@ export class ShopComponent {
     this.loading = true;
 
     const shopToUpdate: Shop = Object.assign({}, this.shop);
-    shopToUpdate.Name = this.f['Name'].value;
-    shopToUpdate.SubDomain = this.f['SubDomain'].value
-
-    console.log(this.shop);
-    console.log(shopToUpdate);
+    shopToUpdate.Name = this.controlName.value!;
+    shopToUpdate.SubDomain = this.controlSubDomain.value!;
 
     /*
     this.shopService.create(shopToUpdate)

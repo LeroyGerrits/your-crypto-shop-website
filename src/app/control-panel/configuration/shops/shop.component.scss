@@ -1,0 +1,15 @@
+@import 'src/styles.scss';
+
+mat-icon.SubDomainAvailabilityIcon {
+    position: absolute;
+    top: 10px;
+    right: 0;
+}
+
+mat-icon.SubDomainAvailabilityIconColorGreen {
+    color: #0f0;
+}
+
+mat-icon.SubDomainAvailabilityIconColorRed {
+    color: $error-color;
+}

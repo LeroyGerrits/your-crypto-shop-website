@@ -1,29 +1,45 @@
-<h2><a [routerLink]="['/control-panel/configuration/shops']">Shops</a> - {{this.pageTitle}}</h2>
+<div class="WrapperPadding20-8-0-8">
+    <h2><a [routerLink]="['/control-panel/configuration/shops']">Shops</a> - {{this.pageTitle}}</h2>
+</div>
+<div class="WrapperPadding20-8">
+    <form (ngSubmit)="onSubmit()">
+        <mat-dialog-content>
+            <mat-form-field>
+                <mat-label>Name</mat-label>
+                <input matInput [formControl]="controlName" maxlength="255"
+                    [ngClass]="{ 'is-invalid': submitted && controlName.errors }" />
+                <div *ngIf="submitted && controlName.errors" class="invalid-feedback">
+                    <div *ngIf="controlName.errors['required']">Name is required</div>
+                </div>
+            </mat-form-field>
+            <mat-form-field>
+                <mat-icon *ngIf="controlSubDomain.value && !controlSubDomain.errors" [ngClass]="{
+                        'SubDomainAvailabilityIcon':true, 
+                        'SubDomainAvailabilityIconColorGreen':this.subDomainAvailable, 
+                        'SubDomainAvailabilityIconColorRed':!this.subDomainAvailable
+                    }"
+                    [matTooltip]="this.subDomainAvailable ? 'Subdomain is available' : 'Subdomain is unavailable'">{{this.subDomainAvailable
+                    ? 'check_circle' : 'cancel'}}</mat-icon>
+                <mat-label>Subdomain</mat-label>
+                <input matInput [formControl]="controlSubDomain" maxlength="100"
+                    [ngClass]="{ 'is-invalid': controlSubDomain.errors }" />
+                <div *ngIf="submitted && controlSubDomain.errors" class="invalid-feedback">
+                    <div *ngIf="controlSubDomain.errors['pattern']">Only alphanumerical characters are allowed</div>
+                    <div *ngIf="controlSubDomain.errors['minlength']">SubDomain needs to be at least 3 characters long</div>
+                </div>
+            </mat-form-field>
+            <div *ngIf="error" class="alert alert-danger mt-3 mb-0">{{error}}</div>
+        </mat-dialog-content>
 
-<form [formGroup]="form" (ngSubmit)="onSubmit()">
-    <mat-dialog-content>
-        <mat-form-field>
-            <mat-label>Name</mat-label>
-            <input matInput formControlName="Name" maxlength="255"
-                [ngClass]="{ 'is-invalid': submitted && f['Name'].errors }" />
-            <div *ngIf="submitted && f['Name'].errors" class="invalid-feedback">
-                <div *ngIf="f['Name'].errors['required']">Name is required</div>
-            </div>
-        </mat-form-field>
-        <mat-form-field>
-            <mat-label>Subdomain</mat-label>
-            <input matInput formControlName="SubDomain" maxlength="100"
-                [ngClass]="{ 'is-invalid': submitted && f['SubDomain'].errors }" />
-            <div *ngIf="submitted && f['SubDomain'].errors" class="invalid-feedback">
-                <div *ngIf="f['SubDomain'].errors['required']">Password is required</div>
-            </div>
-        </mat-form-field>
-        <div *ngIf="error" class="alert alert-danger mt-3 mb-0">{{error}}</div>
-    </mat-dialog-content>
-
-    <button mat-raised-button color="disabled" [routerLink]="['/control-panel/configuration/shops']">Cancel</button>
-    <button mat-raised-button color="primary" [disabled]="loading">
-        <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
-        Save
-    </button>
-</form>
+        <div class="TextAlignCenter">
+            <button mat-raised-button type="button" color="disabled"
+                [routerLink]="['/control-panel/configuration/shops']">Cancel</button>
+            <button mat-raised-button type="submit" color="primary" [disabled]="loading">
+                <mat-icon *ngIf="loading">
+                    <mat-spinner diameter="18" />
+                </mat-icon>
+                Save
+            </button>
+        </div>
+    </form>
+</div>
