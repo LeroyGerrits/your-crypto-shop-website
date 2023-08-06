@@ -5,7 +5,7 @@
         <button *ngIf="this.activeMerchant" mat-button [matMenuTriggerFor]="Merchant">
           Logged in as <strong>{{this.activeMerchant.EmailAddress}}</strong>
         </button>
-        <button *ngIf="!this.activeMerchant" mat-button [routerLink]="['/account/login']">Merchant login</button>
+        <button *ngIf="!this.activeMerchant" mat-button (click)="login()">Merchant login</button>
 
         <mat-menu #Merchant="matMenu">
           <button mat-menu-item [routerLink]="['/account/settings']">Settings</button>

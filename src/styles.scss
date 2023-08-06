@@ -419,6 +419,13 @@ div.WrapperPadding8 {
   --mdc-dialog-supporting-text-size: 1em;
 }
 
+.mat-mdc-form-field, 
+.mat-mdc-floating-label {
+  --mdc-typography-body1-font-family: $font-main;
+  --mdc-typography-body1-font-size: 1em;
+  --mdc-typography-font-family: $font-main;
+}
+
 .mat-mdc-icon-button.mat-primary {
   color: $lightest-blue-color !important;
 }
@@ -442,6 +449,11 @@ table.mat-mdc-table tbody tr:nth-child(even) {
 
 table.mat-mdc-table tbody tr:nth-child(odd) {
   background-color: #404040;
+}
+
+.mdc-text-field--focused:not(.mdc-text-field--disabled) .mdc-floating-label
+{
+  color:$lightest-blue-color !important;
 }
 
 mat-form-field {

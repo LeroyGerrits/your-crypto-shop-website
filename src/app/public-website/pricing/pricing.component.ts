@@ -4,6 +4,4 @@ import { Component } from '@angular/core';
   selector: 'public-website-pricing',
   templateUrl: './pricing.component.html'
 })
-export class PricingComponent {
-
-}
+export class PricingComponent { }

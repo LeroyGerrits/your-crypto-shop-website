@@ -3,19 +3,21 @@ import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 
 import { AboutComponent } from './public-website/about/about.component';
 import { AccountComponent } from './account/account.component';
+import { AccountSettingsComponent } from './account/settings/settings.component';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
+import { AuthenticationService } from './shared/services/Authentication.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BrowserModule } from '@angular/platform-browser';
 import { ControlPanelComponent } from './control-panel/control-panel.component';
 import { DeliveryMethodService } from './shared/services/DeliveryMethod.service';
+import { DialogLoginComponent } from './dialogs/login/dialog.login.component';
 import { ErrorInterceptor } from './shared/interceptors/error.interceptor';
 import { FaqCategoryService } from './shared/services/FaqCategory.service';
 import { FaqComponent } from './public-website/faq/faq.component';
 import { FaqListComponent } from './public-website/faq/faq-list.component';
 import { FaqService } from './shared/services/Faq.service';
 import { JwtInterceptor } from './shared/interceptors/jwt.interceptor';
-import { LoginComponent } from './account/login/login.component';
 import { MatBadgeModule } from '@angular/material/badge';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
@@ -33,6 +35,7 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatSortModule } from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import { NewsComponent } from './public-website/news/news.component';
 import { NewsListComponent } from './public-website/news/news-list.component';
 import { NewsMessageService } from './shared/services/NewsMessage.service';
 import { NgModule } from '@angular/core';
@@ -46,18 +49,20 @@ import { ShopListComponent } from './control-panel/configuration/shops/shop-list
 import { ShopService } from './shared/services/Shop.service';
 
 @NgModule({
-  declarations: [
+  declarations: [    
     AboutComponent,
     AccountComponent,
+    AccountSettingsComponent,
     AppComponent,
     ControlPanelComponent,
-    FaqListComponent,
+    DialogLoginComponent,
     FaqComponent,
-    LoginComponent,
-    NewsListComponent,
-    PublicWebsiteComponent,
+    FaqListComponent, 
+    NewsComponent,   
+    NewsListComponent,    
     ProductListComponent,
     ProductComponent,
+    PublicWebsiteComponent,
     SearchEngineFriendlyStringPipe,
     ShopListComponent,
     ShopComponent
@@ -91,6 +96,7 @@ import { ShopService } from './shared/services/Shop.service';
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+    AuthenticationService,
     DeliveryMethodService,
     FaqService,
     FaqCategoryService,

@@ -4,6 +4,4 @@ import { Component } from '@angular/core';
   selector: 'public-website-about',
   templateUrl: './about.component.html'
 })
-export class AboutComponent {
-
-}
+export class AboutComponent { }

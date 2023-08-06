@@ -8,7 +8,7 @@ import { Shop } from 'src/app/shared/models/Shop.model';
 import { ShopService } from 'src/app/shared/services/Shop.service';
 
 @Component({
-  selector: 'control-panel-shop-list',
+  selector: 'control-panel-configuration-shop-list',
   templateUrl: './shop-list.component.html',
   styleUrls: ['./shop-list.component.scss'],
 })

@@ -5,7 +5,7 @@ import { Faq } from 'src/app/shared/models/Faq.model';
 import { FaqService } from 'src/app/shared/services/Faq.service';
 
 @Component({
-  selector: 'public-website-news',
+  selector: 'public-website-faq',
   templateUrl: './faq.component.html'
 })
 export class FaqComponent implements OnInit {

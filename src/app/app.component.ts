@@ -1,8 +1,8 @@
-import { MatDialog, MatDialogModule } from '@angular/material/dialog';
-
 import { AuthenticationService } from './shared/services/Authentication.service';
 import { Component } from '@angular/core';
-import { MatButtonModule } from '@angular/material/button';
+import { DialogLoginComponent } from './dialogs/login/dialog.login.component';
+import { DialogLogoutComponent } from './dialogs/logout/dialog.logout.component';
+import { MatDialog } from '@angular/material/dialog';
 import { Merchant } from './shared/models/Merchant.model';
 
 @Component({
@@ -11,6 +11,8 @@ import { Merchant } from './shared/models/Merchant.model';
 })
 
 export class AppComponent {
+  
+
   public activeMerchant?: Merchant | null;
   public currentYear: number = new Date().getFullYear();
 
@@ -18,21 +20,25 @@ export class AppComponent {
     this.authenticationService.merchant.subscribe(x => this.activeMerchant = x?.Merchant);
   }
 
-  logout() {
-    const dialogRef = this.dialog.open(DialogLogout);
+  login() {
+    const dialogLogin = this.dialog.open(DialogLoginComponent, {
+      data: this, // parent dialog sent as data to child dialog component
+    });
 
-    dialogRef.afterClosed().subscribe(result => {
-      if(result){
+    dialogLogin.afterClosed().subscribe(result => {
+      if (result) {
+        dialogLogin.close();
+      }
+    });
+  }
+
+  logout() {
+    const dialogLogout = this.dialog.open(DialogLogoutComponent);
+
+    dialogLogout.afterClosed().subscribe(result => {
+      if (result) {
         this.authenticationService.logout();
       }
     });
   }
 }
-
-@Component({
-  selector: 'dialog-logout',
-  templateUrl: 'dialog.logout.html',
-  standalone: true,
-  imports: [MatDialogModule, MatButtonModule],
-})
-export class DialogLogout { }

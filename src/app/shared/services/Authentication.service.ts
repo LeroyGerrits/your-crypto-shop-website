@@ -37,6 +37,6 @@ export class AuthenticationService {
     logout() {
         localStorage.removeItem('merchant');
         this.authenticatedMerchantSubject.next(null);
-        this.router.navigate(['/account/login']);
+        this.router.navigate(['/']);
     }
 }

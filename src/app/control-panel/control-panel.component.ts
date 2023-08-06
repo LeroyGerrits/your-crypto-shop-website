@@ -1,12 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
-@Component({
+@Component({ 
   selector: 'control-panel',
   templateUrl: './control-panel.component.html'
-})
+ })
 
-export class ControlPanelComponent {
-  constructor(){
-    
-  }
-}
+export class ControlPanelComponent { }

@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { Shop } from '../../../shared/models/Shop.model'
 
 @Component({
-  selector: 'control-panel-shop',
+  selector: 'control-panel-configuration-shop',
   templateUrl: './shop.component.html'
 })
 
