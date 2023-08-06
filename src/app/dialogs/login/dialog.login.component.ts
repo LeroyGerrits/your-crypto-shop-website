@@ -46,7 +46,7 @@ export class DialogLoginComponent {
             .pipe(first())
             .subscribe({
                 next: () => {
-                    this.router.navigate(['/account/dashboard']);
+                    this.router.navigate(['/account']);
 
                     if (this.dialogRefComponent)
                         this.dialogRefComponent.close();

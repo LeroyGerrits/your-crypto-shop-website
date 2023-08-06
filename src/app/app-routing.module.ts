@@ -1,6 +1,7 @@
 import { RouterModule, Routes } from '@angular/router';
 
 import { AboutComponent } from './public-website/about/about.component';
+import { AccountChangePasswordComponent } from './account/change-password/change-password.component';
 import { AccountComponent } from './account/account.component';
 import { AccountDashboardComponent } from './account/dashboard/dashboard.component';
 import { AccountSettingsComponent } from './account/settings/settings.component';
@@ -32,13 +33,14 @@ const titlePrefix: string = 'DGB Commerce - ';
 const routes: Routes = [
   {
     path: 'account', component: AccountComponent, title: titlePrefix + 'Account', children: [
-      { path: '', component: AccountDashboardComponent, title: titlePrefix + 'Account' },
-      { path: 'settings', component: AccountSettingsComponent, title: titlePrefix + 'Login' }
+      { path: '', component: AccountDashboardComponent, title: titlePrefix + 'Account dashboard' },
+      { path: 'settings', component: AccountSettingsComponent, title: titlePrefix + 'Settings' },
+      { path: 'change-password', component: AccountChangePasswordComponent, title: titlePrefix + 'Change password' }
     ]
   },
   {
     path: 'control-panel', component: ControlPanelComponent, title: titlePrefix + 'Control panel', children: [
-      { path: '', component: ControlPanelDashboardComponent, title: titlePrefix + 'Dashboard' },
+      { path: '', component: ControlPanelDashboardComponent, title: titlePrefix + 'Control panel Dashboard' },
       { path: 'catalog/categories', component: CategoryListComponent, title: titlePrefix + 'Categories' },
       { path: 'catalog/categories/:categoryId', component: CategoryComponent, title: titlePrefix + 'Categories' },
       { path: 'catalog/products', component: ProductListComponent, title: titlePrefix + 'Products' },

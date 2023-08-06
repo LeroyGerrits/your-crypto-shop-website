@@ -2,6 +2,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 
 import { AboutComponent } from './public-website/about/about.component';
+import { AccountChangePasswordComponent } from './account/change-password/change-password.component';
 import { AccountComponent } from './account/account.component';
 import { AccountSettingsComponent } from './account/settings/settings.component';
 import { AppComponent } from './app.component';
@@ -52,6 +53,7 @@ import { ShopService } from './shared/services/Shop.service';
   declarations: [    
     AboutComponent,
     AccountComponent,
+    AccountChangePasswordComponent,
     AccountSettingsComponent,
     AppComponent,
     ControlPanelComponent,

@@ -1,1 +1,29 @@
-<h1>Shop {{this.shop.Name}} ({{this.shop.Id}})</h1>
+<h2><a [routerLink]="['/control-panel/configuration/shops']">Shops</a> - {{this.pageTitle}}</h2>
+
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <mat-dialog-content>
+        <mat-form-field>
+            <mat-label>Name</mat-label>
+            <input matInput formControlName="Name" maxlength="255"
+                [ngClass]="{ 'is-invalid': submitted && f['Name'].errors }" />
+            <div *ngIf="submitted && f['Name'].errors" class="invalid-feedback">
+                <div *ngIf="f['Name'].errors['required']">Name is required</div>
+            </div>
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>Subdomain</mat-label>
+            <input matInput formControlName="SubDomain" maxlength="100"
+                [ngClass]="{ 'is-invalid': submitted && f['SubDomain'].errors }" />
+            <div *ngIf="submitted && f['SubDomain'].errors" class="invalid-feedback">
+                <div *ngIf="f['SubDomain'].errors['required']">Password is required</div>
+            </div>
+        </mat-form-field>
+        <div *ngIf="error" class="alert alert-danger mt-3 mb-0">{{error}}</div>
+    </mat-dialog-content>
+
+    <button mat-raised-button color="disabled" [routerLink]="['/control-panel/configuration/shops']">Cancel</button>
+    <button mat-raised-button color="primary" [disabled]="loading">
+        <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+        Save
+    </button>
+</form>
