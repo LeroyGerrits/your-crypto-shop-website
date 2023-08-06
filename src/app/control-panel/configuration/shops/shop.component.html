@@ -31,8 +31,8 @@
             <div *ngIf="error" class="alert alert-danger mt-3 mb-0">{{error}}</div>
         </mat-dialog-content>
 
-        <div class="TextAlignCenter">
-            <button mat-raised-button type="button" color="disabled"
+        <div class="CenteredFormButtons">
+            <button mat-raised-button type="button"
                 [routerLink]="['/control-panel/configuration/shops']">Cancel</button>
             <button mat-raised-button type="submit" color="primary" [disabled]="loading">
                 <mat-icon *ngIf="loading">

@@ -280,6 +280,14 @@ div.CenteredContainer {
   margin: 0 auto;
 }
 
+div.CenteredFormButtons
+{
+  text-align:center;
+}
+div.CenteredFormButtons button{
+  margin:0 10px;
+}
+
 div.ColumnOneFifth {
   float: left;
   width: 252px;

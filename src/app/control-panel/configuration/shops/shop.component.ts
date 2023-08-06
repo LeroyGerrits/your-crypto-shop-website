@@ -3,6 +3,7 @@ import { Subscription, debounceTime, distinctUntilChanged } from 'rxjs';
 
 import { ActivatedRoute } from '@angular/router';
 import { Component } from '@angular/core';
+import { Constants } from 'src/app/shared/Constants';
 import { Shop } from '../../../shared/models/Shop.model';
 import { ShopService } from 'src/app/shared/services/Shop.service';
 
@@ -51,8 +52,9 @@ export class ShopComponent {
       this.controlSubDomain.setValue(shop.SubDomain);
   }
 
-  checkSubDomainAvailability(subdomain: string | null) {
-    this.subDomainAvailable = subdomain != 'www';
+  checkSubDomainAvailability(subdomain: string | null) {    
+    // TO-DO: API call for availability
+    this.subDomainAvailable = !Constants.RESERVED_SUBDOMAINS.includes(subdomain!);
   }
 
   onSubmit() {
