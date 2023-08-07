@@ -9,17 +9,16 @@ import { ShopService } from 'src/app/shared/services/Shop.service';
 
 @Component({
   selector: 'control-panel-configuration-shop-list',
-  templateUrl: './shop-list.component.html',
-  styleUrls: ['./shop-list.component.scss'],
+  templateUrl: './shop-list.component.html'
 })
 
-export class ShopListComponent implements OnInit {
+export class ControlPanelConfigurationShopListComponent implements OnInit {
   @ViewChild(MatPaginator, { static: false }) paginator!: MatPaginator;
   @ViewChild(MatSort, { static: false }) sort!: MatSort;
 
   environment = Environment;
   dataSource = new MatTableDataSource<Shop>;
-  displayedColumns: string[] = ['Name', 'SubDomain', 'buttons'];
+  displayedColumns: string[] = ['Name', 'SubDomain', 'ActionButtons'];
 
   constructor(
     private router: Router,
@@ -34,7 +33,7 @@ export class ShopListComponent implements OnInit {
     });
   }
 
-  announceSortChange(sortState: Sort) {
+  onSortChange(sortState: Sort) {
     if (sortState.direction) {
       console.log(`Sorted ${sortState.direction}`);
     } else {

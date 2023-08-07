@@ -1,16 +1,16 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { DeliveryMethodListComponent } from './delivery-method-list.component';
+import { ControlPanelConfigurationDeliveryMethodListComponent } from './delivery-method-list.component';
 
-describe('DeliveryMethodListComponent', () => {
-  let component: DeliveryMethodListComponent;
-  let fixture: ComponentFixture<DeliveryMethodListComponent>;
+describe('ControlPanelConfigurationDeliveryMethodListComponent', () => {
+  let component: ControlPanelConfigurationDeliveryMethodListComponent;
+  let fixture: ComponentFixture<ControlPanelConfigurationDeliveryMethodListComponent>;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [DeliveryMethodListComponent]
+      declarations: [ControlPanelConfigurationDeliveryMethodListComponent]
     });
-    fixture = TestBed.createComponent(DeliveryMethodListComponent);
+    fixture = TestBed.createComponent(ControlPanelConfigurationDeliveryMethodListComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

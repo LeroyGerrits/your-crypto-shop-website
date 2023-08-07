@@ -1,10 +1,54 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort, Sort } from '@angular/material/sort';
+import { MatTableDataSource } from '@angular/material/table';
+import { Router } from '@angular/router';
+import { Environment } from 'src/app/shared/environments/Environment';
+import { DeliveryMethod } from 'src/app/shared/models/DeliveryMethod.model';
+import { DeliveryMethodService } from 'src/app/shared/services/DeliveryMethod.service';
 
 @Component({
-  selector: 'control-panel-confoguration-delivery-method-list',
+  selector: 'control-panel-configuration-delivery-method-list',
   templateUrl: './delivery-method-list.component.html'
 })
 
-export class DeliveryMethodListComponent {
+export class ControlPanelConfigurationDeliveryMethodListComponent implements OnInit {
+  @ViewChild(MatPaginator, { static: false }) paginator!: MatPaginator;
+  @ViewChild(MatSort, { static: false }) sort!: MatSort;
 
+  environment = Environment;
+  dataSource = new MatTableDataSource<DeliveryMethod>;
+  displayedColumns: string[] = ['Name', 'Shop', 'ActionButtons'];
+
+  constructor(
+    private router: Router,
+    private deliveryMethodService: DeliveryMethodService
+  ) { }
+
+  ngOnInit(): void {
+    this.deliveryMethodService.getList().subscribe(deliveryMethods => {
+      this.dataSource = new MatTableDataSource(deliveryMethods);
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
+    });
+  }
+
+  onSortChange(sortState: Sort) {
+    if (sortState.direction) {
+      console.log(`Sorted ${sortState.direction}`);
+    } else {
+      console.log('Sorting cleared');
+    }
+  }
+
+  editElement(element: DeliveryMethod) {
+    this.router.navigate([`/control-panel/configuration/delivery-methods/${element.Id}`]);
+  }
+
+  deleteElement(element: DeliveryMethod) {
+    if (confirm('Are you sure you want to delete this record?')) {
+      console.log(element);
+      alert('boom!');
+    }
+  }
 }

@@ -280,12 +280,12 @@ div.CenteredContainer {
   margin: 0 auto;
 }
 
-div.CenteredFormButtons
-{
-  text-align:center;
+div.CenteredFormButtons {
+  text-align: center;
 }
-div.CenteredFormButtons button{
-  margin:0 10px;
+
+div.CenteredFormButtons button {
+  margin: 0 10px;
 }
 
 div.ColumnOneFifth {
@@ -427,10 +427,19 @@ div.WrapperPadding8 {
   text-decoration: underline;
 }
 
+.TextError {
+  color: $error-color;
+  font-size: 12px;
+}
+
 /* Angular Material overrides */
 
 .mdc-card__actions {
   padding: 16px !important;
+}
+
+.mat-column-ActionButtons {
+  text-align: right !important;
 }
 
 .mat-mdc-dialog-content {

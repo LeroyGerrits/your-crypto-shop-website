@@ -26,7 +26,7 @@
 </div>
 
 <div class="WrapperPadding20-8 ClearLeft">
-    <table mat-table matSort [dataSource]="this.dataSource" (matSortChange)="announceSortChange($event)">
+    <table mat-table matSort [dataSource]="this.dataSource" (matSortChange)="onSortChange($event)">
         <ng-container matColumnDef="Name">
             <th mat-header-cell mat-sort-header *matHeaderCellDef>Name</th>
             <td mat-cell *matCellDef="let element">{{element.Name}}</td>
@@ -41,7 +41,7 @@
             </td>
         </ng-container>
 
-        <ng-container matColumnDef="buttons">
+        <ng-container matColumnDef="ActionButtons">
             <th mat-header-cell *matHeaderCellDef></th>
             <td mat-cell *matCellDef="let element">
                 <button mat-icon-button color="primary" (click)="editElement(element)">

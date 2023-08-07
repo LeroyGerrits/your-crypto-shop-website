@@ -11,6 +11,10 @@ import { AuthenticationService } from './shared/services/Authentication.service'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BrowserModule } from '@angular/platform-browser';
 import { ControlPanelComponent } from './control-panel/control-panel.component';
+import { ControlPanelConfigurationDeliveryMethodComponent } from './control-panel/configuration/delivery-methods/delivery-method.component';
+import { ControlPanelConfigurationDeliveryMethodListComponent } from './control-panel/configuration/delivery-methods/delivery-method-list.component';
+import { ControlPanelConfigurationShopComponent } from './control-panel/configuration/shops/shop.component';
+import { ControlPanelConfigurationShopListComponent } from './control-panel/configuration/shops/shop-list.component';
 import { DeliveryMethodService } from './shared/services/DeliveryMethod.service';
 import { DialogLoginComponent } from './dialogs/login/dialog.login.component';
 import { ErrorInterceptor } from './shared/interceptors/error.interceptor';
@@ -47,29 +51,29 @@ import { ProductListComponent } from './control-panel/catalog/products/product-l
 import { PublicWebsiteComponent } from './public-website/public-website.component';
 import { RouterModule } from '@angular/router';
 import { SearchEngineFriendlyStringPipe } from './shared/pipes/searchEngineFriendlyString.pipe';
-import { ShopComponent } from './control-panel/configuration/shops/shop.component';
-import { ShopListComponent } from './control-panel/configuration/shops/shop-list.component';
 import { ShopService } from './shared/services/Shop.service';
 
 @NgModule({
-  declarations: [    
+  declarations: [
     AboutComponent,
     AccountComponent,
     AccountChangePasswordComponent,
     AccountSettingsComponent,
     AppComponent,
     ControlPanelComponent,
+    ControlPanelConfigurationDeliveryMethodListComponent,
+    ControlPanelConfigurationDeliveryMethodComponent,
+    ControlPanelConfigurationShopListComponent,
+    ControlPanelConfigurationShopComponent,
     DialogLoginComponent,
     FaqComponent,
-    FaqListComponent, 
-    NewsComponent,   
-    NewsListComponent,    
+    FaqListComponent,
+    NewsComponent,
+    NewsListComponent,
     ProductListComponent,
     ProductComponent,
     PublicWebsiteComponent,
-    SearchEngineFriendlyStringPipe,
-    ShopListComponent,
-    ShopComponent
+    SearchEngineFriendlyStringPipe
   ],
   imports: [
     AppRoutingModule,
@@ -90,7 +94,7 @@ import { ShopService } from './shared/services/Shop.service';
     MatPaginatorModule,
     MatProgressSpinnerModule,
     MatSelectModule,
-    MatSlideToggleModule,    
+    MatSlideToggleModule,
     MatSortModule,
     MatTableModule,
     MatToolbarModule,

@@ -4,6 +4,7 @@ import { Subscription, debounceTime, distinctUntilChanged } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 import { Component } from '@angular/core';
 import { Constants } from 'src/app/shared/Constants';
+import { Environment } from 'src/app/shared/environments/Environment';
 import { Shop } from '../../../shared/models/Shop.model';
 import { ShopService } from 'src/app/shared/services/Shop.service';
 
@@ -13,11 +14,12 @@ import { ShopService } from 'src/app/shared/services/Shop.service';
   styleUrls: ['./shop.component.scss']
 })
 
-export class ShopComponent {
+export class ControlPanelConfigurationShopComponent {
   controlName = new FormControl('', Validators.required);
   controlSubDomain = new FormControl('', [Validators.minLength(3), Validators.pattern(/^[a-zA-Z0-9-]*$/)])
   subscriptionSubDomain: Subscription | undefined;
 
+  public environment = Environment;
   public error = '';
   public form!: FormGroup;
   public loading = false;
@@ -30,7 +32,10 @@ export class ShopComponent {
     private route: ActivatedRoute,
     private shopService: ShopService
   ) {
-    this.form = new FormGroup([this.controlName, this.controlSubDomain]);
+    this.form = new FormGroup([
+      this.controlName,
+      this.controlSubDomain
+    ]);
     this.subscriptionSubDomain = this.controlSubDomain.valueChanges.pipe(debounceTime(1000), distinctUntilChanged()).subscribe(value => this.checkSubDomainAvailability(value));
   }
 
@@ -48,13 +53,20 @@ export class ShopComponent {
     this.pageTitle = shop.Name;
     this.controlName.setValue(shop.Name);
 
-    if (shop.SubDomain)
+    if (shop.SubDomain) {
       this.controlSubDomain.setValue(shop.SubDomain);
+      this.checkSubDomainAvailability(shop.SubDomain);
+    }
   }
 
-  checkSubDomainAvailability(subdomain: string | null) {    
-    // TO-DO: API call for availability
-    this.subDomainAvailable = !Constants.RESERVED_SUBDOMAINS.includes(subdomain!);
+  checkSubDomainAvailability(subdomain: string | null) {
+    if (!Constants.RESERVED_SUBDOMAINS.includes(subdomain!)) {
+      // TO-DO: API call for availability
+      this.subDomainAvailable = true;
+    } else {
+      this.subDomainAvailable = false;
+    }
+
   }
 
   onSubmit() {

@@ -8,11 +8,13 @@ import { AccountSettingsComponent } from './account/settings/settings.component'
 import { CategoryComponent } from './control-panel/catalog/categories/category.component';
 import { CategoryListComponent } from './control-panel/catalog/categories/category-list.component';
 import { ControlPanelComponent } from './control-panel/control-panel.component';
+import { ControlPanelConfigurationDeliveryMethodComponent } from './control-panel/configuration/delivery-methods/delivery-method.component';
+import { ControlPanelConfigurationDeliveryMethodListComponent } from './control-panel/configuration/delivery-methods/delivery-method-list.component';
+import { ControlPanelConfigurationShopComponent } from './control-panel/configuration/shops/shop.component';
+import { ControlPanelConfigurationShopListComponent } from './control-panel/configuration/shops/shop-list.component';
 import { ControlPanelDashboardComponent } from './control-panel/dashboard/dashboard.component';
 import { CustomerComponent } from './control-panel/customers/customer.component';
 import { CustomerListComponent } from './control-panel/customers/customer-list.component';
-import { DeliveryMethodComponent } from './control-panel/configuration/delivery-methods/delivery-method.component';
-import { DeliveryMethodListComponent } from './control-panel/configuration/delivery-methods/delivery-method-list.component';
 import { FaqComponent } from './public-website/faq/faq.component';
 import { FaqListComponent } from './public-website/faq/faq-list.component';
 import { IndexComponent } from './public-website/index/index.component';
@@ -26,8 +28,6 @@ import { PricingComponent } from './public-website/pricing/pricing.component';
 import { ProductComponent } from './control-panel/catalog/products/product.component';
 import { ProductListComponent } from './control-panel/catalog/products/product-list.component';
 import { PublicWebsiteComponent } from './public-website/public-website.component';
-import { ShopComponent } from './control-panel/configuration/shops/shop.component';
-import { ShopListComponent } from './control-panel/configuration/shops/shop-list.component';
 
 const titlePrefix: string = 'DGB Commerce - ';
 const routes: Routes = [
@@ -45,10 +45,10 @@ const routes: Routes = [
       { path: 'catalog/categories/:categoryId', component: CategoryComponent, title: titlePrefix + 'Categories' },
       { path: 'catalog/products', component: ProductListComponent, title: titlePrefix + 'Products' },
       { path: 'catalog/products/:productId', component: ProductComponent, title: titlePrefix + 'Products' },
-      { path: 'configuration/delivery-methods', component: DeliveryMethodListComponent, title: titlePrefix + 'Delivery methods' },
-      { path: 'configuration/delivery-methods/:deliveryMethodId', component: DeliveryMethodComponent, title: titlePrefix + 'Delivery methods' },
-      { path: 'configuration/shops', component: ShopListComponent, title: titlePrefix + 'Shops' },
-      { path: 'configuration/shops/:shopId', component: ShopComponent, title: titlePrefix + 'Shops' },
+      { path: 'configuration/delivery-methods', component: ControlPanelConfigurationDeliveryMethodListComponent, title: titlePrefix + 'Delivery methods' },
+      { path: 'configuration/delivery-methods/:deliveryMethodId', component: ControlPanelConfigurationDeliveryMethodComponent, title: titlePrefix + 'Delivery methods' },
+      { path: 'configuration/shops', component: ControlPanelConfigurationShopListComponent, title: titlePrefix + 'Shops' },
+      { path: 'configuration/shops/:shopId', component: ControlPanelConfigurationShopComponent, title: titlePrefix + 'Shops' },
       { path: 'customers', component: CustomerListComponent, title: titlePrefix + 'Customers' },
       { path: 'customers/:orderId', component: CustomerComponent, title: titlePrefix + 'Customers' },
       { path: 'sales/orders', component: OrderListComponent, title: titlePrefix + 'Orders' },
