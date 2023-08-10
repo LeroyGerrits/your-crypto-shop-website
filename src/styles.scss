@@ -449,9 +449,14 @@ div.WrapperPadding8 {
 
 .mat-mdc-form-field,
 .mat-mdc-floating-label {
+  --mat-form-field-container-text-font: $font-main;
   --mdc-typography-body1-font-family: $font-main;
   --mdc-typography-body1-font-size: 1em;
-  --mdc-typography-font-family: $font-main;
+  --mdc-typography-font-family: $font-main;  
+}
+
+.mat-mdc-header-row{
+  --mat-table-header-headline-font: $font-main;
 }
 
 .mat-mdc-icon-button.mat-primary {
@@ -464,6 +469,11 @@ div.WrapperPadding8 {
 
 .mat-mdc-standard-chip {
   --mdc-chip-label-text-font: $font-main;
+}
+
+.mdc-text-field--filled .mdc-floating-label
+{
+  --mdc-filled-text-field-label-text-font: $font-main !important;
 }
 
 .mdc-tooltip {
