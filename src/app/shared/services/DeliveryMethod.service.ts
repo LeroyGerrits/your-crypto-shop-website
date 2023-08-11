@@ -18,12 +18,12 @@ export class DeliveryMethodService {
         return this.http.get<DeliveryMethod>(`${this.apiUrl}/${id}`);
     }
 
-    create(shop: DeliveryMethod): Observable<DeliveryMethod> {
-        return this.http.post<DeliveryMethod>(this.apiUrl, shop);
+    create(deliveryMethod: DeliveryMethod): Observable<DeliveryMethod> {
+        return this.http.post<DeliveryMethod>(this.apiUrl, deliveryMethod);
     }
 
-    update(shop: DeliveryMethod): Observable<DeliveryMethod> {
-        return this.http.put<DeliveryMethod>(`${this.apiUrl}/${shop.Id}`, shop)
+    update(deliveryMethod: DeliveryMethod): Observable<DeliveryMethod> {
+        return this.http.put<DeliveryMethod>(`${this.apiUrl}/${deliveryMethod.Id}`, deliveryMethod)
     }
     
     delete(id: string): Observable<DeliveryMethod> {

@@ -467,6 +467,11 @@ div.WrapperPadding8 {
   color: $lightest-blue-color !important;
 }
 
+.mat-mdc-row, .mdc-data-table__content
+{
+  --mat-table-row-item-label-text-font: $font-main;
+}
+
 .mat-mdc-standard-chip {
   --mdc-chip-label-text-font: $font-main;
 }

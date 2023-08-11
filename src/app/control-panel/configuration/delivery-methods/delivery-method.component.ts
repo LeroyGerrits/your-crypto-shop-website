@@ -1,6 +1,6 @@
+import { ActivatedRoute, Router } from '@angular/router';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
-import { ActivatedRoute } from '@angular/router';
 import { Component } from '@angular/core';
 import { DeliveryMethod } from '../../../shared/models/DeliveryMethod.model';
 import { DeliveryMethodService } from 'src/app/shared/services/DeliveryMethod.service';
@@ -29,6 +29,7 @@ export class ControlPanelConfigurationDeliveryMethodComponent {
 
   constructor(
     private route: ActivatedRoute,
+    private router: Router,
     private deliveryMethodService: DeliveryMethodService,
     private shopService: ShopService
   ) {
@@ -71,18 +72,25 @@ export class ControlPanelConfigurationDeliveryMethodComponent {
 
     const deliveryMethodToUpdate: DeliveryMethod = Object.assign({}, this.deliveryMethod);
     deliveryMethodToUpdate.Name = this.controlName.value!;
-    //deliveryMethodToUpdate.Shop = Shop{  };
 
-    /*
-    this.shopService.create(shopToUpdate)
+    var selectedShop = this.shops?.find(x => x.Id == this.controlShop.value);
+    if (selectedShop)
+      deliveryMethodToUpdate.Shop = selectedShop;
+
+    if (this.controlCosts.value)
+      deliveryMethodToUpdate.Costs = parseFloat(this.controlCosts.value);
+
+    this.deliveryMethodService.create(deliveryMethodToUpdate)
       .subscribe({
         next: () => {
-          // wprls
+          console.log('joepie');
+          this.router.navigate(['/control-panel/configuration/delivery-methods']);
         },
         error: error => {
+          console.log(error);
           this.error = error;
           this.loading = false;
         }
-      });*/
+      });
   }
 }
