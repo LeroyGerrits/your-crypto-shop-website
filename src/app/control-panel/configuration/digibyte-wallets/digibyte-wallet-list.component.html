@@ -2,7 +2,7 @@
     <div style="float:right;">
         <button mat-raised-button color="primary" [routerLink]="['/control-panel/configuration/digibyte-wallets/new']">
             <mat-icon>add</mat-icon>
-            Create new DigiByte wallet
+            Assign new DigiByte wallet
         </button>
     </div>
     <h2>DigiByte wallets</h2>
@@ -33,7 +33,7 @@
         </ng-container>
 
         <ng-container matColumnDef="Address">
-            <th mat-header-cell mat-sort-header *matHeaderCellDef>Shop</th>
+            <th mat-header-cell mat-sort-header *matHeaderCellDef>Address</th>
             <td mat-cell *matCellDef="let element">{{element.Address}}</td>
         </ng-container>
 

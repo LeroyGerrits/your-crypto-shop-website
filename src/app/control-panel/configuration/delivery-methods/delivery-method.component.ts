@@ -117,5 +117,6 @@ export class ControlPanelConfigurationDeliveryMethodComponent implements OnInit,
 
   handleError(error: string) {
     this.snackBarRef = this.snackBar.open(error, 'Close', { panelClass: ['error-snackbar'] });
+    this.formLoading = false;
   }
 }

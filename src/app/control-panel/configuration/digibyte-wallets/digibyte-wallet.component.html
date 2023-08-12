@@ -15,10 +15,10 @@
             </mat-form-field>
             <mat-form-field>
                 <mat-label>Address</mat-label>
-                <input matInput [formControl]="controlName" maxlength="255"
+                <input matInput [formControl]="controlAddress" maxlength="255"
                     [ngClass]="{ 'is-invalid': formSubmitted && controlAddress.errors }" />
                 <div *ngIf="formSubmitted && controlAddress.errors" class="TextError">
-                    <div *ngIf="controlAddress.errors['required']">Shop is required</div>
+                    <div *ngIf="controlAddress.errors['required']">Address is required</div>
                 </div>
             </mat-form-field>
         </mat-dialog-content>

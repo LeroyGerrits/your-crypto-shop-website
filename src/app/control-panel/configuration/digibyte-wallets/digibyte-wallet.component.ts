@@ -3,12 +3,11 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar, MatSnackBarRef, TextOnlySnackBar } from '@angular/material/snack-bar';
 
+import { AuthenticationService } from 'src/app/shared/services/Authentication.service';
 import { DigiByteWallet } from 'src/app/shared/models/DigiByteWallet.model';
 import { DigiByteWalletService } from 'src/app/shared/services/DigiByteWallet.service';
 import { Environment } from 'src/app/shared/environments/Environment';
 import { MutationResult } from 'src/app/shared/models/MutationResult';
-import { Shop } from 'src/app/shared/models/Shop.model';
-import { ShopService } from 'src/app/shared/services/Shop.service';
 
 @Component({
   selector: 'control-panel-configuration-digibyte-wallet',
@@ -26,16 +25,15 @@ export class ControlPanelConfigurationDigiByteWalletComponent implements OnInit,
   public controlName = new FormControl('', Validators.required);
   public controlAddress = new FormControl('', Validators.required);
 
-  public pageTitle = 'Create new digibyte wallet'
+  public pageTitle = 'Assign new DigiByte wallet'
   public digibyteWallet: DigiByteWallet = new DigiByteWallet();
-  public shops: Shop[] | undefined;
 
   constructor(
     private route: ActivatedRoute,
     private router: Router,
     private snackBar: MatSnackBar,
     private digibyteWalletService: DigiByteWalletService,
-    private shopService: ShopService
+    private authenticationService: AuthenticationService
   ) {
     this.form = new FormGroup([
       this.controlName,
@@ -50,8 +48,6 @@ export class ControlPanelConfigurationDigiByteWalletComponent implements OnInit,
     if (this.queryStringDigiByteWalletId && this.queryStringDigiByteWalletId != 'new') {
       this.digibyteWalletService.getById(this.queryStringDigiByteWalletId).subscribe(x => { this.onRetrieveData(x); });
     }
-
-    this.shopService.getList().subscribe(shops => this.shops = shops);
   }
 
   ngOnDestroy(): void {
@@ -75,6 +71,7 @@ export class ControlPanelConfigurationDigiByteWalletComponent implements OnInit,
     this.formLoading = true;
 
     const digibyteWalletToUpdate: DigiByteWallet = Object.assign({}, this.digibyteWallet);
+    digibyteWalletToUpdate.Merchant = this.authenticationService.authenticatedMerchant?.Merchant!;
     digibyteWalletToUpdate.Name = this.controlName.value!;
     digibyteWalletToUpdate.Address = this.controlAddress.value!;
 
@@ -109,5 +106,6 @@ export class ControlPanelConfigurationDigiByteWalletComponent implements OnInit,
 
   handleError(error: string) {
     this.snackBarRef = this.snackBar.open(error, 'Close', { panelClass: ['error-snackbar'] });
+    this.formLoading = false;
   }
 }
