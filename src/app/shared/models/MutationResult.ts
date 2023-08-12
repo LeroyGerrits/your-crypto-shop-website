@@ -1,5 +1,5 @@
 export class MutationResult {
-    Error!: number;
+    ErrorCode!: number;
     Identity!: string;
     Message!: string;
     Constraint?: string;
