@@ -1,6 +1,6 @@
 import { Merchant } from "./Merchant.model";
 
-export class DigibyteWallet {
+export class DigiByteWallet {
     Id!: string;
     Merchant!: Merchant;
     Name!: string;

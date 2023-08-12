@@ -1,9 +1,9 @@
-import { DigibyteWallet } from "./DigibyteWallet.model";
+import { DigiByteWallet } from "./DigiByteWallet.model";
 
 export class Transaction {
     Id!: string;
-    SenderWallet!: DigibyteWallet;
-    RecipientWallet!: DigibyteWallet;
+    SenderWallet!: DigiByteWallet;
+    RecipientWallet!: DigiByteWallet;
     Amount!: number;
     Fee!: number;
     Date!: Date;

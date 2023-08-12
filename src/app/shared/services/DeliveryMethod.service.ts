@@ -7,7 +7,7 @@ import { Observable } from "rxjs";
 
 @Injectable()
 export class DeliveryMethodService {
-    private apiUrl = `${Environment.API_URL}/DeliveryMethod`;
+    private apiUrl = Environment.API_URL + '/DeliveryMethod';
 
     constructor(protected http: HttpClient) { }
 

@@ -13,10 +13,13 @@ import { BrowserModule } from '@angular/platform-browser';
 import { ControlPanelComponent } from './control-panel/control-panel.component';
 import { ControlPanelConfigurationDeliveryMethodComponent } from './control-panel/configuration/delivery-methods/delivery-method.component';
 import { ControlPanelConfigurationDeliveryMethodListComponent } from './control-panel/configuration/delivery-methods/delivery-method-list.component';
+import { ControlPanelConfigurationDigiByteWalletComponent } from './control-panel/configuration/digibyte-wallets/digibyte-wallet.component';
+import { ControlPanelConfigurationDigiByteWalletListComponent } from './control-panel/configuration/digibyte-wallets/digibyte-wallet-list.component';
 import { ControlPanelConfigurationShopComponent } from './control-panel/configuration/shops/shop.component';
 import { ControlPanelConfigurationShopListComponent } from './control-panel/configuration/shops/shop-list.component';
 import { DeliveryMethodService } from './shared/services/DeliveryMethod.service';
 import { DialogLoginComponent } from './dialogs/login/dialog.login.component';
+import { DigiByteWalletService } from './shared/services/DigiByteWallet.service';
 import { ErrorInterceptor } from './shared/interceptors/error.interceptor';
 import { FaqCategoryService } from './shared/services/FaqCategory.service';
 import { FaqComponent } from './public-website/faq/faq.component';
@@ -64,6 +67,8 @@ import { ShopService } from './shared/services/Shop.service';
     ControlPanelComponent,
     ControlPanelConfigurationDeliveryMethodListComponent,
     ControlPanelConfigurationDeliveryMethodComponent,
+    ControlPanelConfigurationDigiByteWalletListComponent,
+    ControlPanelConfigurationDigiByteWalletComponent,
     ControlPanelConfigurationShopListComponent,
     ControlPanelConfigurationShopComponent,
     DialogLoginComponent,
@@ -110,6 +115,7 @@ import { ShopService } from './shared/services/Shop.service';
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
     AuthenticationService,
     DeliveryMethodService,
+    DigiByteWalletService,
     FaqService,
     FaqCategoryService,
     NewsMessageService,

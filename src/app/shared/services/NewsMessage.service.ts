@@ -6,7 +6,7 @@ import { Observable } from "rxjs";
 
 @Injectable()
 export class NewsMessageService {
-    private apiUrl = `${Environment.API_URL}/NewsMessage`;
+    private apiUrl = Environment.API_URL + '/NewsMessage';
 
     constructor(protected http: HttpClient) { }
 
@@ -16,17 +16,5 @@ export class NewsMessageService {
 
     getById(id: string): Observable<NewsMessage> {
         return this.http.get<NewsMessage>(`${this.apiUrl}/${id}`);
-    }
-
-    create(shop: NewsMessage): Observable<NewsMessage> {
-        return this.http.post<NewsMessage>(this.apiUrl, shop);
-    }
-
-    update(shop: NewsMessage): Observable<NewsMessage> {
-        return this.http.put<NewsMessage>(`${this.apiUrl}/${shop.Id}`, shop)
-    }
-    
-    delete(id: string): Observable<NewsMessage> {
-        return this.http.delete<NewsMessage>(`${this.apiUrl}/${id}`);
     }
 }

@@ -6,7 +6,7 @@ import { Observable } from "rxjs";
 
 @Injectable()
 export class FaqCategoryService {
-    private apiUrl = `${Environment.API_URL}/FaqCategory`;
+    private apiUrl = Environment.API_URL + '/FaqCategory';
 
     constructor(protected http: HttpClient) { }
 
@@ -16,17 +16,5 @@ export class FaqCategoryService {
 
     getById(id: string): Observable<FaqCategory> {
         return this.http.get<FaqCategory>(`${this.apiUrl}/${id}`);
-    }
-
-    create(shop: FaqCategory): Observable<FaqCategory> {
-        return this.http.post<FaqCategory>(this.apiUrl, shop);
-    }
-
-    update(shop: FaqCategory): Observable<FaqCategory> {
-        return this.http.put<FaqCategory>(`${this.apiUrl}/${shop.Id}`, shop)
-    }
-    
-    delete(id: string): Observable<FaqCategory> {
-        return this.http.delete<FaqCategory>(`${this.apiUrl}/${id}`);
     }
 }

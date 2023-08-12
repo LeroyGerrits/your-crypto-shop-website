@@ -4,7 +4,6 @@ import { AuthenticatedMerchant } from '../models/AuthenticatedMerchant';
 import { Environment } from "src/app/shared/environments/Environment";
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Merchant } from '../models/Merchant.model';
 import { Router } from '@angular/router';
 import { map } from 'rxjs/operators';
 

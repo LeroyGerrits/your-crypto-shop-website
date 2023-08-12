@@ -10,6 +10,8 @@ import { CategoryListComponent } from './control-panel/catalog/categories/catego
 import { ControlPanelComponent } from './control-panel/control-panel.component';
 import { ControlPanelConfigurationDeliveryMethodComponent } from './control-panel/configuration/delivery-methods/delivery-method.component';
 import { ControlPanelConfigurationDeliveryMethodListComponent } from './control-panel/configuration/delivery-methods/delivery-method-list.component';
+import { ControlPanelConfigurationDigiByteWalletComponent } from './control-panel/configuration/digibyte-wallets/digibyte-wallet.component';
+import { ControlPanelConfigurationDigiByteWalletListComponent } from './control-panel/configuration/digibyte-wallets/digibyte-wallet-list.component';
 import { ControlPanelConfigurationShopComponent } from './control-panel/configuration/shops/shop.component';
 import { ControlPanelConfigurationShopListComponent } from './control-panel/configuration/shops/shop-list.component';
 import { ControlPanelDashboardComponent } from './control-panel/dashboard/dashboard.component';
@@ -47,6 +49,8 @@ const routes: Routes = [
       { path: 'catalog/products/:productId', component: ProductComponent, title: titlePrefix + 'Products' },
       { path: 'configuration/delivery-methods', component: ControlPanelConfigurationDeliveryMethodListComponent, title: titlePrefix + 'Delivery methods' },
       { path: 'configuration/delivery-methods/:deliveryMethodId', component: ControlPanelConfigurationDeliveryMethodComponent, title: titlePrefix + 'Delivery methods' },
+      { path: 'configuration/digibyte-wallets', component: ControlPanelConfigurationDigiByteWalletListComponent, title: titlePrefix + 'DigiByte wallets' },
+      { path: 'configuration/digibyte-wallets/:digibytewalletId', component: ControlPanelConfigurationDigiByteWalletComponent, title: titlePrefix + 'DigiByte wallets' },
       { path: 'configuration/shops', component: ControlPanelConfigurationShopListComponent, title: titlePrefix + 'Shops' },
       { path: 'configuration/shops/:shopId', component: ControlPanelConfigurationShopComponent, title: titlePrefix + 'Shops' },
       { path: 'customers', component: CustomerListComponent, title: titlePrefix + 'Customers' },
