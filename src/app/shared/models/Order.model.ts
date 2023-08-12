@@ -1,6 +1,6 @@
-import { Customer } from "./Customer.model";
-import { DeliveryMethod } from "./DeliveryMethod.model";
-import { Shop } from "./Shop.model";
+import { Customer } from './Customer.model';
+import { DeliveryMethod } from './DeliveryMethod.model';
+import { Shop } from './Shop.model';
 
 export class Order {
     Id!: string;

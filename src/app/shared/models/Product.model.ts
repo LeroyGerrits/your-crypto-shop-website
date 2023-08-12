@@ -1,6 +1,6 @@
-import { Category } from "./Category.model";
-import { ProductPhoto } from "./ProductPhoto";
-import { Shop } from "./Shop.model";
+import { Category } from './Category.model';
+import { ProductPhoto } from './ProductPhoto';
+import { Shop } from './Shop.model';
 
 export class Product {
     Id!: string;

@@ -5,7 +5,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Component } from '@angular/core';
 import { Constants } from 'src/app/shared/Constants';
 import { Environment } from 'src/app/shared/environments/Environment';
-import { Shop } from '../../../shared/models/Shop.model';
+import { Shop } from 'src/app/shared/models/Shop.model';
 import { ShopService } from 'src/app/shared/services/Shop.service';
 
 @Component({

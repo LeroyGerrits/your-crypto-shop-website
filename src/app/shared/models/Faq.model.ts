@@ -1,4 +1,4 @@
-import { FaqCategory } from "./FaqCategory.model";
+import { FaqCategory } from './FaqCategory.model';
 
 export class Faq {
     Id!: string;

@@ -1,7 +1,7 @@
 import { ActivatedRouteSnapshot, CanActivateFn, Router, RouterStateSnapshot } from '@angular/router';
 import { Injectable, inject } from '@angular/core';
 
-import { AuthenticationService } from '../services/Authentication.service';
+import { AuthenticationService } from 'src/app/shared/services/Authentication.service';
 
 @Injectable({ providedIn: 'root' })
 class PermissionsService {
@@ -11,7 +11,7 @@ class PermissionsService {
         private authenticationService: AuthenticationService) { }
 
     canActivate(next: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
-        const merchant = this.authenticationService.merchantValue;
+        const merchant = this.authenticationService.authenticatedMerchant;
         if (merchant) {
             return true;
         }

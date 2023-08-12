@@ -1,4 +1,4 @@
-import { Shop } from "./Shop.model";
+import { Shop } from './Shop.model';
 
 export class Category {
     Id!: string;

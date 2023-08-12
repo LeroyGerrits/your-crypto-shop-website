@@ -1,9 +1,9 @@
-import { Category } from "../models/Category.model";
-import { Environment } from "src/app/shared/environments/Environment";
-import { HttpClient } from "@angular/common/http";
-import { Injectable } from "@angular/core";
-import { MutationResult } from "../models/MutationResult";
-import { Observable } from "rxjs";
+import { Category } from 'src/app/shared/models/Category.model';
+import { Environment } from 'src/app/shared/environments/Environment';
+import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { MutationResult } from 'src/app/shared/models/MutationResult';
+import { Observable } from 'rxjs';
 
 @Injectable()
 export class CategoryService {

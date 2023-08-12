@@ -1,5 +1,5 @@
-import { Gender } from "../enums/Gender";
-import { Shop } from "./Shop.model";
+import { Gender } from 'src/app/shared/enums/Gender';
+import { Shop } from './Shop.model';
 
 export class Customer {
     Id!: string;

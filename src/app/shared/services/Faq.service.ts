@@ -1,8 +1,8 @@
-import { Environment } from "src/app/shared/environments/Environment";
-import { Faq } from "../models/Faq.model";
-import { HttpClient } from "@angular/common/http";
-import { Injectable } from "@angular/core";
-import { Observable } from "rxjs";
+import { Environment } from 'src/app/shared/environments/Environment';
+import { Faq } from 'src/app/shared/models/Faq.model';
+import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 
 @Injectable()
 export class FaqService {

@@ -3,7 +3,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar, MatSnackBarRef, TextOnlySnackBar } from '@angular/material/snack-bar';
 
-import { DeliveryMethod } from '../../../shared/models/DeliveryMethod.model';
+import { DeliveryMethod } from 'src/app/shared/models/DeliveryMethod.model';
 import { DeliveryMethodService } from 'src/app/shared/services/DeliveryMethod.service';
 import { Environment } from 'src/app/shared/environments/Environment';
 import { MutationResult } from 'src/app/shared/models/MutationResult';

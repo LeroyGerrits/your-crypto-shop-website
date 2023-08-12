@@ -1,5 +1,5 @@
-import { Gender } from "src/app/shared/enums/Gender";
-import { Shop } from "src/app/shared/models/Shop.model";
+import { Gender } from 'src/app/shared/enums/Gender';
+import { Shop } from 'src/app/shared/models/Shop.model';
 
 export const TestDataShops: Shop[] = [
     {

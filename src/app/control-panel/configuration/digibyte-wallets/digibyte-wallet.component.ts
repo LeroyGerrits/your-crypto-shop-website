@@ -3,7 +3,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar, MatSnackBarRef, TextOnlySnackBar } from '@angular/material/snack-bar';
 
-import { DigiByteWallet } from '../../../shared/models/DigiByteWallet.model';
+import { DigiByteWallet } from 'src/app/shared/models/DigiByteWallet.model';
 import { DigiByteWalletService } from 'src/app/shared/services/DigiByteWallet.service';
 import { Environment } from 'src/app/shared/environments/Environment';
 import { MutationResult } from 'src/app/shared/models/MutationResult';

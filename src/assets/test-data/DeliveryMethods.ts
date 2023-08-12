@@ -1,6 +1,5 @@
-import { DeliveryMethod } from "src/app/shared/models/DeliveryMethod.model";
-import { Gender } from "src/app/shared/enums/Gender";
-import { Shop } from "src/app/shared/models/Shop.model";
+import { DeliveryMethod } from 'src/app/shared/models/DeliveryMethod.model';
+import { Gender } from 'src/app/shared/enums/Gender';
 
 export const TestDataDeliveryMethods: DeliveryMethod[] = [
     {

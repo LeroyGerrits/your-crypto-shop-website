@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Product } from '../../../shared/models/Product.model'
+import { Product } from 'src/app/shared/models/Product.model';
 
 @Component({
   selector: 'control-panel-catalog-product',
@@ -8,6 +8,4 @@ import { Product } from '../../../shared/models/Product.model'
 
 export class ProductComponent {
   public product: Product = new Product();
-
-  
 }

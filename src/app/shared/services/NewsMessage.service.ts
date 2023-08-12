@@ -1,8 +1,8 @@
-import { Environment } from "src/app/shared/environments/Environment";
-import { HttpClient } from "@angular/common/http";
-import { Injectable } from "@angular/core";
-import { NewsMessage } from "../models/NewsMessage.model";
-import { Observable } from "rxjs";
+import { Environment } from 'src/app/shared/environments/Environment';
+import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { NewsMessage } from 'src/app/shared/models/NewsMessage.model';
+import { Observable } from 'rxjs';
 
 @Injectable()
 export class NewsMessageService {

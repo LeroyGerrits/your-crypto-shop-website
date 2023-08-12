@@ -1,4 +1,4 @@
-import { DigiByteWallet } from "./DigiByteWallet.model";
+import { DigiByteWallet } from './DigiByteWallet.model';
 
 export class Transaction {
     Id!: string;

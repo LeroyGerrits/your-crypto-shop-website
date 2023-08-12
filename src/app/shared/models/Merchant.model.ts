@@ -1,4 +1,4 @@
-import { Gender } from "../enums/Gender";
+import { Gender } from 'src/app/shared/enums/Gender';
 
 export class Merchant {
     Id!: string;
