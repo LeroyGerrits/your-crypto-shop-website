@@ -1,16 +1,16 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { PricingComponent } from './pricing.component';
+import { PublicWebsitePricingComponent } from './pricing.component';
 
-describe('PricingComponent', () => {
-  let component: PricingComponent;
-  let fixture: ComponentFixture<PricingComponent>;
+describe('PublicWebsitePricingComponent', () => {
+  let component: PublicWebsitePricingComponent;
+  let fixture: ComponentFixture<PublicWebsitePricingComponent>;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [PricingComponent]
+      declarations: [PublicWebsitePricingComponent]
     });
-    fixture = TestBed.createComponent(PricingComponent);
+    fixture = TestBed.createComponent(PublicWebsitePricingComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

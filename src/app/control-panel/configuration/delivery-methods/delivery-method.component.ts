@@ -90,20 +90,20 @@ export class ControlPanelConfigurationDeliveryMethodComponent implements OnInit,
 
     if (this.queryStringDeliveryMethodId && this.queryStringDeliveryMethodId != 'new') {
       this.deliveryMethodService.update(deliveryMethodToUpdate).subscribe({
-        next: result => this.handleResult(result),
-        error: error => this.handleError(error),
+        next: result => this.handleOnSubmitResult(result),
+        error: error => this.handleOnSubmitError(error),
         complete: () => this.formLoading = false
       });
     } else {
       this.deliveryMethodService.create(deliveryMethodToUpdate).subscribe({
-        next: result => this.handleResult(result),
-        error: error => this.handleError(error),
+        next: result => this.handleOnSubmitResult(result),
+        error: error => this.handleOnSubmitError(error),
         complete: () => this.formLoading = false
       });
     }
   }
 
-  handleResult(result: MutationResult) {
+  handleOnSubmitResult(result: MutationResult) {
     if (result.ErrorCode == 0) {
       this.router.navigate(['/control-panel/configuration/delivery-methods']);
     } else {
@@ -115,7 +115,7 @@ export class ControlPanelConfigurationDeliveryMethodComponent implements OnInit,
     }
   }
 
-  handleError(error: string) {
+  handleOnSubmitError(error: string) {
     this.snackBarRef = this.snackBar.open(error, 'Close', { panelClass: ['error-snackbar'] });
     this.formLoading = false;
   }

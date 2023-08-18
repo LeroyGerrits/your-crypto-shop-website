@@ -9,7 +9,7 @@ import { NewsMessageService } from 'src/app/shared/services/NewsMessage.service'
   templateUrl: './news-list.component.html',
   styleUrls: ['./news-list.component.scss']
 })
-export class NewsListComponent implements OnInit {
+export class PublicWebsiteNewsListComponent implements OnInit {
   @ViewChild(MatPaginator, { static: false }) paginator!: MatPaginator;
 
   dataSource = new MatTableDataSource<NewsMessage>;

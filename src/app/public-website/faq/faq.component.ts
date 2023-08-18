@@ -8,9 +8,9 @@ import { FaqService } from 'src/app/shared/services/Faq.service';
   selector: 'public-website-faq',
   templateUrl: './faq.component.html'
 })
-export class FaqComponent implements OnInit {
+export class PublicWebsiteFaqComponent implements OnInit {
   public faq: Faq | undefined;
-public faqContent: string | undefined;
+  public faqContent: string | undefined;
 
   constructor(
     private route: ActivatedRoute,

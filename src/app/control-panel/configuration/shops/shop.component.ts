@@ -60,7 +60,7 @@ export class ControlPanelConfigurationShopComponent {
   }
 
   checkSubDomainAvailability(subdomain: string | null) {
-    if (!Constants.RESERVED_SUBDOMAINS.includes(subdomain!)) {
+    if (subdomain && !Constants.RESERVED_SUBDOMAINS.includes(subdomain)) {
       // TO-DO: API call for availability
       this.subDomainAvailable = true;
     } else {

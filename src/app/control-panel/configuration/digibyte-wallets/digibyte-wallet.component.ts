@@ -77,20 +77,20 @@ export class ControlPanelConfigurationDigiByteWalletComponent implements OnInit,
 
     if (this.queryStringDigiByteWalletId && this.queryStringDigiByteWalletId != 'new') {
       this.digibyteWalletService.update(digibyteWalletToUpdate).subscribe({
-        next: result => this.handleResult(result),
-        error: error => this.handleError(error),
+        next: result => this.handleOnSubmitResult(result),
+        error: error => this.handleOnSubmitError(error),
         complete: () => this.formLoading = false
       });
     } else {
       this.digibyteWalletService.create(digibyteWalletToUpdate).subscribe({
-        next: result => this.handleResult(result),
-        error: error => this.handleError(error),
+        next: result => this.handleOnSubmitResult(result),
+        error: error => this.handleOnSubmitError(error),
         complete: () => this.formLoading = false
       });
     }
   }
 
-  handleResult(result: MutationResult) {
+  handleOnSubmitResult(result: MutationResult) {
     if (result.ErrorCode == 0) {
       this.router.navigate(['/control-panel/configuration/digibyte-wallets']);
     } else {
@@ -104,7 +104,7 @@ export class ControlPanelConfigurationDigiByteWalletComponent implements OnInit,
     }
   }
 
-  handleError(error: string) {
+  handleOnSubmitError(error: string) {
     this.snackBarRef = this.snackBar.open(error, 'Close', { panelClass: ['error-snackbar'] });
     this.formLoading = false;
   }

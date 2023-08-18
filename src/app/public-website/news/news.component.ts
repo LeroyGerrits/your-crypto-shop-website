@@ -6,6 +6,6 @@ import { NewsMessage } from 'src/app/shared/models/NewsMessage.model';
   templateUrl: './news.component.html'
 })
 
-export class NewsComponent {
+export class PublicWebsiteNewsComponent {
   public newsMessage: NewsMessage = new NewsMessage();
 }

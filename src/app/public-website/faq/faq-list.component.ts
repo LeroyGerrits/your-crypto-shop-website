@@ -11,7 +11,7 @@ import { FormControl } from '@angular/forms';
   selector: 'public-website-faq-list',
   templateUrl: './faq-list.component.html'
 })
-export class FaqListComponent implements OnInit, OnDestroy {
+export class PublicWebsiteFaqListComponent implements OnInit, OnDestroy {
   controlFilter = new FormControl('');
   subscriptionFilter: Subscription | undefined;
 

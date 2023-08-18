@@ -1,7 +1,6 @@
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 
-import { AboutComponent } from './public-website/about/about.component';
 import { AccountChangePasswordComponent } from './account/change-password/change-password.component';
 import { AccountComponent } from './account/account.component';
 import { AccountSettingsComponent } from './account/settings/settings.component';
@@ -22,8 +21,6 @@ import { DialogLoginComponent } from './dialogs/login/dialog.login.component';
 import { DigiByteWalletService } from './shared/services/DigiByteWallet.service';
 import { ErrorInterceptor } from './shared/interceptors/error.interceptor';
 import { FaqCategoryService } from './shared/services/FaqCategory.service';
-import { FaqComponent } from './public-website/faq/faq.component';
-import { FaqListComponent } from './public-website/faq/faq-list.component';
 import { FaqService } from './shared/services/Faq.service';
 import { JwtInterceptor } from './shared/interceptors/jwt.interceptor';
 import { MatBadgeModule } from '@angular/material/badge';
@@ -46,20 +43,22 @@ import { MatSortModule } from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTooltipModule } from '@angular/material/tooltip';
-import { NewsComponent } from './public-website/news/news.component';
-import { NewsListComponent } from './public-website/news/news-list.component';
 import { NewsMessageService } from './shared/services/NewsMessage.service';
 import { NgModule } from '@angular/core';
 import { ProductComponent } from './control-panel/catalog/products/product.component';
 import { ProductListComponent } from './control-panel/catalog/products/product-list.component';
+import { PublicWebsiteAboutComponent } from './public-website/about/about.component';
 import { PublicWebsiteComponent } from './public-website/public-website.component';
+import { PublicWebsiteFaqComponent } from './public-website/faq/faq.component';
+import { PublicWebsiteFaqListComponent } from './public-website/faq/faq-list.component';
+import { PublicWebsiteNewsComponent } from './public-website/news/news.component';
+import { PublicWebsiteNewsListComponent } from './public-website/news/news-list.component';
 import { RouterModule } from '@angular/router';
 import { SearchEngineFriendlyStringPipe } from './shared/pipes/searchEngineFriendlyString.pipe';
 import { ShopService } from './shared/services/Shop.service';
 
 @NgModule({
   declarations: [
-    AboutComponent,
     AccountComponent,
     AccountChangePasswordComponent,
     AccountSettingsComponent,
@@ -72,13 +71,14 @@ import { ShopService } from './shared/services/Shop.service';
     ControlPanelConfigurationShopListComponent,
     ControlPanelConfigurationShopComponent,
     DialogLoginComponent,
-    FaqComponent,
-    FaqListComponent,
-    NewsComponent,
-    NewsListComponent,
     ProductListComponent,
     ProductComponent,
     PublicWebsiteComponent,
+    PublicWebsiteAboutComponent,
+    PublicWebsiteFaqComponent,
+    PublicWebsiteFaqListComponent,
+    PublicWebsiteNewsComponent,
+    PublicWebsiteNewsListComponent,    
     SearchEngineFriendlyStringPipe
   ],
   imports: [

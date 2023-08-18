@@ -1,16 +1,25 @@
+import { ActivatedRoute, RouterLink } from '@angular/router';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AboutComponent } from './about.component';
+import { PublicWebsiteAboutComponent } from './about.component';
 
-describe('AboutComponent', () => {
-  let component: AboutComponent;
-  let fixture: ComponentFixture<AboutComponent>;
+describe('PublicWebsiteAboutComponent', () => {
+  let component: PublicWebsiteAboutComponent;
+  let fixture: ComponentFixture<PublicWebsiteAboutComponent>;
+
+  const fakeActivatedRoute = {
+    snapshot: { data: {} }
+  } as ActivatedRoute;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [AboutComponent]
+      declarations: [PublicWebsiteAboutComponent],
+      imports: [RouterLink],
+      providers: [
+        { provide: ActivatedRoute, useValue: fakeActivatedRoute }
+      ]
     });
-    fixture = TestBed.createComponent(AboutComponent);
+    fixture = TestBed.createComponent(PublicWebsiteAboutComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

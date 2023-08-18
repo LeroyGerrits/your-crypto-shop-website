@@ -11,8 +11,6 @@ import { Merchant } from './shared/models/Merchant.model';
 })
 
 export class AppComponent {
-  
-
   public activeMerchant?: Merchant | null;
   public currentYear: number = new Date().getFullYear();
 
@@ -21,10 +19,7 @@ export class AppComponent {
   }
 
   login() {
-    const dialogLogin = this.dialog.open(DialogLoginComponent, {
-      data: this, // parent dialog sent as data to child dialog component
-    });
-
+    const dialogLogin = this.dialog.open(DialogLoginComponent, { data: this, });
     dialogLogin.afterClosed().subscribe(result => {
       if (result) {
         dialogLogin.close();
@@ -34,7 +29,6 @@ export class AppComponent {
 
   logout() {
     const dialogLogout = this.dialog.open(DialogLogoutComponent);
-
     dialogLogout.afterClosed().subscribe(result => {
       if (result) {
         this.authenticationService.logout();
