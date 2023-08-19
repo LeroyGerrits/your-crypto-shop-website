@@ -1,16 +1,16 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { CategoryComponent } from './category.component';
+import { ControlPanelCatalogCategoryComponent } from './category.component';
 
-describe('CategoryComponent', () => {
-  let component: CategoryComponent;
-  let fixture: ComponentFixture<CategoryComponent>;
+describe('ControlPanelCatalogCategoryComponent', () => {
+  let component: ControlPanelCatalogCategoryComponent;
+  let fixture: ComponentFixture<ControlPanelCatalogCategoryComponent>;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [CategoryComponent]
+      declarations: [ControlPanelCatalogCategoryComponent]
     });
-    fixture = TestBed.createComponent(CategoryComponent);
+    fixture = TestBed.createComponent(ControlPanelCatalogCategoryComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

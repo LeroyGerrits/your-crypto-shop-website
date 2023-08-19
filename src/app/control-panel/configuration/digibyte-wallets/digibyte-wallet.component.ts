@@ -42,8 +42,7 @@ export class ControlPanelConfigurationDigiByteWalletComponent implements OnInit,
   }
 
   ngOnInit(): void {
-    const routeParams = this.route.snapshot.paramMap;
-    this.queryStringDigiByteWalletId = routeParams.get('digibyteWalletId');
+    this.queryStringDigiByteWalletId = this.route.snapshot.paramMap.get('digibyteWalletId');
 
     if (this.queryStringDigiByteWalletId && this.queryStringDigiByteWalletId != 'new') {
       this.digibyteWalletService.getById(this.queryStringDigiByteWalletId).subscribe(x => { this.onRetrieveData(x); });

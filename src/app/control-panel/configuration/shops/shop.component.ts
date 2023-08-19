@@ -40,8 +40,7 @@ export class ControlPanelConfigurationShopComponent {
   }
 
   ngOnInit(): void {
-    const routeParams = this.route.snapshot.paramMap;
-    const queryStringShopId = routeParams.get('shopId');
+    const queryStringShopId = this.route.snapshot.paramMap.get('shopId');
 
     if (queryStringShopId && queryStringShopId != 'new') {
       this.shopService.getById(queryStringShopId).subscribe(x => { this.onRetrieveData(x); });

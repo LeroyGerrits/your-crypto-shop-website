@@ -6,6 +6,6 @@ import { Product } from 'src/app/shared/models/Product.model';
   templateUrl: './product.component.html'
 })
 
-export class ProductComponent {
+export class ControlPanelCatalogProductComponent {
   public product: Product = new Product();
 }

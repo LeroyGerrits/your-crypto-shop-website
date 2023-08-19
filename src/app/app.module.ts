@@ -9,6 +9,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { AuthenticationService } from './shared/services/Authentication.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BrowserModule } from '@angular/platform-browser';
+import { ControlPanelCatalogProductComponent } from './control-panel/catalog/products/product.component';
+import { ControlPanelCatalogProductListComponent } from './control-panel/catalog/products/product-list.component';
 import { ControlPanelComponent } from './control-panel/control-panel.component';
 import { ControlPanelConfigurationDeliveryMethodComponent } from './control-panel/configuration/delivery-methods/delivery-method.component';
 import { ControlPanelConfigurationDeliveryMethodListComponent } from './control-panel/configuration/delivery-methods/delivery-method-list.component';
@@ -45,8 +47,6 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { NewsMessageService } from './shared/services/NewsMessage.service';
 import { NgModule } from '@angular/core';
-import { ProductComponent } from './control-panel/catalog/products/product.component';
-import { ProductListComponent } from './control-panel/catalog/products/product-list.component';
 import { PublicWebsiteAboutComponent } from './public-website/about/about.component';
 import { PublicWebsiteComponent } from './public-website/public-website.component';
 import { PublicWebsiteFaqComponent } from './public-website/faq/faq.component';
@@ -71,8 +71,8 @@ import { ShopService } from './shared/services/Shop.service';
     ControlPanelConfigurationShopListComponent,
     ControlPanelConfigurationShopComponent,
     DialogLoginComponent,
-    ProductListComponent,
-    ProductComponent,
+    ControlPanelCatalogProductComponent,
+    ControlPanelCatalogProductListComponent,    
     PublicWebsiteComponent,
     PublicWebsiteAboutComponent,
     PublicWebsiteFaqComponent,

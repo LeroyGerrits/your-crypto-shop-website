@@ -6,6 +6,6 @@ import { Order } from 'src/app/shared/models/Order.model';
   templateUrl: './order.component.html'
 })
 
-export class OrderComponent {
+export class ControlPanelSalesOrderComponent {
   public order: Order = new Order();
 }

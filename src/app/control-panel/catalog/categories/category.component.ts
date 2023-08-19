@@ -6,6 +6,6 @@ import { Component } from '@angular/core';
   templateUrl: './category.component.html'
 })
 
-export class CategoryComponent {
+export class ControlPanelCatalogCategoryComponent {
   public category: Category = new Category();
 }

@@ -45,8 +45,7 @@ export class ControlPanelConfigurationDeliveryMethodComponent implements OnInit,
   }
 
   ngOnInit(): void {
-    const routeParams = this.route.snapshot.paramMap;
-    this.queryStringDeliveryMethodId = routeParams.get('deliveryMethodId');
+    this.queryStringDeliveryMethodId = this.route.snapshot.paramMap.get('deliveryMethodId');
 
     if (this.queryStringDeliveryMethodId && this.queryStringDeliveryMethodId != 'new') {
       this.deliveryMethodService.getById(this.queryStringDeliveryMethodId).subscribe(x => { this.onRetrieveData(x); });

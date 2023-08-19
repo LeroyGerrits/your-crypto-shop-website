@@ -5,6 +5,6 @@ import { Component } from '@angular/core';
   templateUrl: './order-list.component.html'
 })
 
-export class OrderListComponent {
+export class ControlPanelSalesOrderListComponent {
 
 }
