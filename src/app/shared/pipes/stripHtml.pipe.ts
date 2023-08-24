@@ -10,6 +10,6 @@ export class StripHtmlPipe implements PipeTransform {
             return text;
         }
 
-        return text.replace(/<(?:.|\n)*?>/gm, ' ');
+        return text.replace(/<(?:.|\n)*?>/gm, '').trim();
     }
 }

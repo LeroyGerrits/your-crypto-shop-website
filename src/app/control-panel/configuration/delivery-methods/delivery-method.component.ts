@@ -40,7 +40,8 @@ export class ControlPanelConfigurationDeliveryMethodComponent implements OnInit,
   ) {
     this.form = new FormGroup([
       this.controlName,
-      this.controlShop
+      this.controlShop,
+      this.controlCosts
     ]);
   }
 

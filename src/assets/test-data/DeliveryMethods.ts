@@ -15,7 +15,8 @@ export const TestDataDeliveryMethods: DeliveryMethod[] = [
                 LastName: 'Test'
             }
         },
-        Name: 'Pickup'
+        Name: 'Pickup',
+        Costs: 100
     },
     {
         Id: '00000000-0000-0000-0000-000000000002',
