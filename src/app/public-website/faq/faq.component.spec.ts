@@ -5,7 +5,7 @@ import { HttpClient, HttpHandler } from '@angular/common/http';
 import { FaqService } from 'src/app/shared/services/Faq.service';
 import { MatChipsModule } from '@angular/material/chips';
 import { PublicWebsiteFaqComponent } from './faq.component';
-import { TestDataFaqs } from 'src/assets/test-data/Faq';
+import { TestDataFaqs } from 'src/assets/test-data/Faqs';
 import { of } from 'rxjs';
 
 describe('PublicWebsiteFaqComponent', () => {

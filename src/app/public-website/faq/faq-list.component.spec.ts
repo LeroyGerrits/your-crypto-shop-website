@@ -10,8 +10,8 @@ import { MatInputModule } from '@angular/material/input';
 import { PublicWebsiteFaqListComponent } from './faq-list.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { SearchEngineFriendlyStringPipe } from 'src/app/shared/pipes/searchEngineFriendlyString.pipe';
-import { TestDataFaqCategories } from 'src/assets/test-data/FaqCategory';
-import { TestDataFaqs } from 'src/assets/test-data/Faq';
+import { TestDataFaqCategories } from 'src/assets/test-data/FaqCategories';
+import { TestDataFaqs } from 'src/assets/test-data/Faqs';
 import { of } from 'rxjs';
 
 describe('PublicWebsiteFaqListComponent', () => {

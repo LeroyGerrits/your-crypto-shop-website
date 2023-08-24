@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
 
 @Injectable()
 export class CategoryService {
-    private apiUrl = Environment.API_URL + '/Shop';
+    private apiUrl = Environment.API_URL + '/Category';
 
     constructor(protected http: HttpClient) { }
 
