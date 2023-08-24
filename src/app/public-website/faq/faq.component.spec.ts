@@ -1,50 +1,28 @@
 import { ActivatedRoute, RouterLink, convertToParamMap } from '@angular/router';
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { HttpClient, HttpHandler } from '@angular/common/http';
-import { Observable, of } from 'rxjs';
 
-import { Faq } from 'src/app/shared/models/Faq.model';
-import { FaqCategoryService } from 'src/app/shared/services/FaqCategory.service';
 import { FaqService } from 'src/app/shared/services/Faq.service';
+import { MatChipsModule } from '@angular/material/chips';
 import { PublicWebsiteFaqComponent } from './faq.component';
-
-const mockFaq: Faq = {
-  Id: '00000000-0000-0000-0000-000000000001',
-  Category: {
-    Id: '00000000-0000-0000-0000-000000000011',
-    Name: 'Text Category'
-  },
-  Title: 'Test FAQ'
-}
-const mockFaqs = [mockFaq];
-
-class FaqServiceMock {
-  getById(id: string): Observable<Faq> {
-    return of({
-      Id: '00000000-0000-0000-0000-000000000001',
-      Category: {
-        Id: '00000000-0000-0000-0000-000000000011',
-        Name: 'Text Category'
-      },
-      Title: 'Test FAQ'
-    })
-  }
-}
+import { TestDataFaqs } from 'src/assets/test-data/Faq';
+import { of } from 'rxjs';
 
 describe('PublicWebsiteFaqComponent', () => {
   let component: PublicWebsiteFaqComponent;
   let fixture: ComponentFixture<PublicWebsiteFaqComponent>;
-  let mockFaqService: jasmine.SpyObj<FaqServiceMock>;
+  let faqServiceSpy: jasmine.SpyObj<FaqService>;
 
   beforeEach(() => {
-    mockFaqService = jasmine.createSpyObj('FaqServiceMock', ['getById']);
+    faqServiceSpy = jasmine.createSpyObj('FaqService', ['getById']);
+    faqServiceSpy.getById.and.returnValue(of(TestDataFaqs[0]));
+
     TestBed.configureTestingModule({
       declarations: [PublicWebsiteFaqComponent],
-      imports: [RouterLink],
+      imports: [RouterLink, MatChipsModule],
       providers: [
-        { provide: ActivatedRoute, useValue: { snapshot: { paramMap: convertToParamMap({ faqId: '' }) } } },
-        { provide: FaqService, useValue: mockFaqService },
-        FaqCategoryService,
+        { provide: ActivatedRoute, useValue: { snapshot: { paramMap: convertToParamMap({ faqId: '00000000-0000-0000-0000-000000000001' }) } } },
+        { provide: FaqService, useValue: faqServiceSpy },
         HttpClient,
         HttpHandler
       ]
@@ -59,9 +37,7 @@ describe('PublicWebsiteFaqComponent', () => {
   });
 
   it('should retrieve a FAQ record', () => {
-    const getFaqServiceSpy = of(mockFaqService.getById('00000000-0000-0000-0000-000000000001'));
     component.GetFaq('00000000-0000-0000-0000-000000000001');
-    expect(getFaqServiceSpy).toHaveBeenCalled();
-    //expect(component.faq).toBeObservable(mockFaq);
+    expect(faqServiceSpy.getById).toHaveBeenCalled();
   });
 });

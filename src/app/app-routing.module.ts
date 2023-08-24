@@ -60,7 +60,8 @@ const routes: Routes = [
       { path: 'sales/orders', component: ControlPanelSalesOrderListComponent, title: titlePrefix + 'Orders' },
       { path: 'sales/orders/:orderId', component: ControlPanelSalesOrderComponent, title: titlePrefix + 'Orders' },
       { path: 'sales/transactions', component: ControlPanelSalesTransactionListComponent, title: titlePrefix + 'Transactions' },
-      { path: 'sales/transactions/:transactionId', component: ControlPanelSalesTransactionComponent, title: titlePrefix + 'Transactions' }]
+      { path: 'sales/transactions/:transactionId', component: ControlPanelSalesTransactionComponent, title: titlePrefix + 'Transactions' }
+    ]
   },
   {
     path: '', component: PublicWebsiteComponent, title: titlePrefix, children: [
@@ -75,8 +76,7 @@ const routes: Routes = [
       { path: 'about', component: PublicWebsiteAboutComponent, title: titlePrefix + 'About' },
       { path: '**', pathMatch: 'full', component: NotFoundComponent, title: titlePrefix + 'Not found' }
     ]
-  },
-
+  }
 ];
 
 @NgModule({
