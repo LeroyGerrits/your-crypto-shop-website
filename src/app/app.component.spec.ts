@@ -3,7 +3,6 @@ import { HttpClient, HttpHandler } from '@angular/common/http';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 
 import { AppComponent } from './app.component';
-import { AuthenticationService } from './shared/services/Authentication.service';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { RouterTestingModule } from '@angular/router/testing';
@@ -15,7 +14,6 @@ describe('AppComponent', () => {
 
   let matDialogRefSpy: any;
   let matDialogSpy: jasmine.SpyObj<MatDialog>
-  let authenticationServiceSpy: jasmine.SpyObj<AuthenticationService>;
 
   beforeEach(() => {
     matDialogRefSpy = jasmine.createSpyObj('MatDialogRef', ['close']);
@@ -25,15 +23,11 @@ describe('AppComponent', () => {
     matDialogSpy = jasmine.createSpyObj('MatDialog', ['open']);
     matDialogSpy.open.and.returnValue(matDialogRefSpy);
 
-    authenticationServiceSpy = jasmine.createSpyObj('AuthenticationService', ['logout']);
-    authenticationServiceSpy.logout.and.callThrough();
-
     TestBed.configureTestingModule({
       declarations: [AppComponent],
       imports: [MatDialogModule, MatDialogModule, MatMenuModule, MatToolbarModule, RouterTestingModule],
       providers: [
         { provide: MatDialog, useValue: matDialogSpy },
-        //{ provide: AuthenticationService, useValue: authenticationServiceSpy },
         HttpClient,
         HttpHandler
       ]
