@@ -1,4 +1,4 @@
-import { Category } from 'src/app/shared/models/Category.model';
+import { Category } from 'src/app/shared/models/Category.mode.model';
 import { Environment } from 'src/app/shared/environments/Environment';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';

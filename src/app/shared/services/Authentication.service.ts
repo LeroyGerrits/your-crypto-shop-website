@@ -1,6 +1,6 @@
 import { BehaviorSubject, Observable } from 'rxjs';
 
-import { AuthenticatedMerchant } from 'src/app/shared/models/AuthenticatedMerchant';
+import { AuthenticatedMerchant } from 'src/app/shared/models/AuthenticatedMerchant.model';
 import { Environment } from 'src/app/shared/environments/Environment';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';

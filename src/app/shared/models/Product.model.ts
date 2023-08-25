@@ -1,5 +1,5 @@
-import { Category } from './Category.model';
-import { ProductPhoto } from './ProductPhoto';
+import { Category } from './Category.mode.model';
+import { ProductPhoto } from './ProductPhoto.model';
 import { Shop } from './Shop.model';
 
 export class Product {

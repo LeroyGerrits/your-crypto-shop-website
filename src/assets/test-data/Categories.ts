@@ -1,4 +1,4 @@
-import { Category } from 'src/app/shared/models/Category.model';
+import { Category } from 'src/app/shared/models/Category.mode.model';
 import { Gender } from 'src/app/shared/enums/Gender';
 
 export const TestDataCategories: Category[] = [

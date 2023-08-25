@@ -30,20 +30,12 @@ describe('PublicWebsiteFaqListComponent', () => {
     TestBed.configureTestingModule({
       declarations: [PublicWebsiteFaqListComponent, SearchEngineFriendlyStringPipe],
       imports: [BrowserAnimationsModule, MatFormFieldModule, MatInputModule, ReactiveFormsModule, RouterLink],
-      providers: [  
-        {
-          provide: ActivatedRoute, useValue: {
-            snapshot: {
-              paramMap: {
-                get: () => 0,
-              },
-            },
-          }
-        },
+      providers: [
+        { provide: ActivatedRoute, useValue: { snapshot: { paramMap: { get: () => 0, }, }, } },
         { provide: FaqCategoryService, useValue: faqCategoryServiceSpy },
         { provide: FaqService, useValue: faqServiceSpy },
         HttpClient,
-        HttpHandler        
+        HttpHandler
       ]
     });
     fixture = TestBed.createComponent(PublicWebsiteFaqListComponent);
