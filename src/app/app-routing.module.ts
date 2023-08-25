@@ -52,7 +52,7 @@ const routes: Routes = [
       { path: 'configuration/delivery-methods', component: ControlPanelConfigurationDeliveryMethodListComponent, title: titlePrefix + 'Delivery methods' },
       { path: 'configuration/delivery-methods/:deliveryMethodId', component: ControlPanelConfigurationDeliveryMethodComponent, title: titlePrefix + 'Delivery methods' },
       { path: 'configuration/digibyte-wallets', component: ControlPanelConfigurationDigiByteWalletListComponent, title: titlePrefix + 'DigiByte wallets' },
-      { path: 'configuration/digibyte-wallets/:digibytewalletId', component: ControlPanelConfigurationDigiByteWalletComponent, title: titlePrefix + 'DigiByte wallets' },
+      { path: 'configuration/digibyte-wallets/:digiBytewalletId', component: ControlPanelConfigurationDigiByteWalletComponent, title: titlePrefix + 'DigiByte wallets' },
       { path: 'configuration/shops', component: ControlPanelConfigurationShopListComponent, title: titlePrefix + 'Shops' },
       { path: 'configuration/shops/:shopId', component: ControlPanelConfigurationShopComponent, title: titlePrefix + 'Shops' },
       { path: 'customers', component: CustomerListComponent, title: titlePrefix + 'Customers' },
