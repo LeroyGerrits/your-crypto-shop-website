@@ -19,7 +19,7 @@ export class AppComponent {
   }
 
   login() {
-    const dialogLogin = this.dialog.open(DialogLoginComponent, { data: this, });
+    const dialogLogin = this.dialog.open(DialogLoginComponent);
     dialogLogin.afterClosed().subscribe(result => {
       if (result) {
         dialogLogin.close();

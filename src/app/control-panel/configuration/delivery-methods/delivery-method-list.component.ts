@@ -65,7 +65,7 @@ export class ControlPanelConfigurationDeliveryMethodListComponent implements OnI
   }
 
   deleteElement(element: DeliveryMethod) {
-    const dialogDelete = this.dialog.open(DialogDeleteComponent, { data: this });
+    const dialogDelete = this.dialog.open(DialogDeleteComponent);
     const instance = dialogDelete.componentInstance;
     instance.dialogMessage = `Are you sure you want to delete delivery method '${element.Name}'?`;
 

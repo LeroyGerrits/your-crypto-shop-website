@@ -19,12 +19,12 @@ export class DigiByteWalletService {
         return this.http.get<DigiByteWallet>(`${this.apiUrl}/${id}`);
     }
 
-    create(category: DigiByteWallet): Observable<MutationResult> {
-        return this.http.post<MutationResult>(this.apiUrl, category);
+    create(digiByteWallet: DigiByteWallet): Observable<MutationResult> {
+        return this.http.post<MutationResult>(this.apiUrl, digiByteWallet);
     }
 
-    update(category: DigiByteWallet): Observable<MutationResult> {
-        return this.http.put<MutationResult>(`${this.apiUrl}/${category.Id}`, category)
+    update(digiByteWallet: DigiByteWallet): Observable<MutationResult> {
+        return this.http.put<MutationResult>(`${this.apiUrl}/${digiByteWallet.Id}`, digiByteWallet)
     }
 
     delete(id: string): Observable<MutationResult> {
