@@ -3,12 +3,15 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { HttpClient, HttpHandler } from '@angular/common/http';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { Constants } from 'src/app/shared/Constants';
 import { ControlPanelConfigurationShopComponent } from './shop.component';
 import { ControlPanelConfigurationShopListComponent } from './shop-list.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatTooltipModule } from '@angular/material/tooltip';
 import { MutationResult } from 'src/app/shared/models/MutationResult';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RouterTestingModule } from '@angular/router/testing';
@@ -33,7 +36,7 @@ describe('ControlPanelConfigurationShopComponent', () => {
 
     TestBed.configureTestingModule({
       declarations: [ControlPanelConfigurationShopComponent],
-      imports: [BrowserAnimationsModule, MatDialogModule, MatFormFieldModule, MatInputModule, ReactiveFormsModule, RouterLink, RouterTestingModule.withRoutes(
+      imports: [BrowserAnimationsModule, MatDialogModule, MatFormFieldModule, MatIconModule, MatInputModule, MatTooltipModule, ReactiveFormsModule, RouterLink, RouterTestingModule.withRoutes(
         [{ path: 'control-panel/configuration/shops', component: ControlPanelConfigurationShopListComponent }]
       )],
       providers: [
@@ -107,14 +110,24 @@ describe('ControlPanelConfigurationShopComponent', () => {
     expect(matSnackBarSpy.open).toHaveBeenCalled();
   });
 
-  it('should show a specific error when handling submit result and an error code with constraint \'UNIQUE_Shops_SubDomain\' is applicable', () => {
+  it('should show a specific error when handling submit result and an error code with constraint \'UNIQUE_Shop_SubDomain\' is applicable', () => {
     const mutationResult = {
-      Constraint: 'UNIQUE_Shops_SubDomain',
+      Constraint: 'UNIQUE_Shop_SubDomain',
       ErrorCode: 666,
       Identity: '',
       Message: 'Evil error'
     };
     component.handleOnSubmitResult(mutationResult);
     expect(matSnackBarSpy.open).toHaveBeenCalled();
+  });
+
+  it('should indicate subdomain is available when a valid subdomain was supplied', () => {
+    component.checkSubDomainAvailability('untaken-subdomain');    
+    expect(component.subDomainAvailable).toBe(true);
+  });
+
+  it('should indicate subdomain is not available when a reserved subdomain was supplied', () => {
+    component.checkSubDomainAvailability(Constants.RESERVED_SUBDOMAINS[0]);    
+    expect(component.subDomainAvailable).toBe(false);
   });
 });

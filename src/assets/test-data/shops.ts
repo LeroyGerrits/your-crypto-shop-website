@@ -10,7 +10,8 @@ export const TestDataShops: Shop[] = [
             EmailAddress: 'merchant@dgbcommerce.com',
             Gender: Gender.Male,
             LastName: 'Test'
-        }
+        },
+        SubDomain: 'exampleshop1'
     },
     {
         Id: '00000000-0000-0000-0000-000000000002',
@@ -21,6 +22,6 @@ export const TestDataShops: Shop[] = [
             Gender: Gender.Female,
             LastName: 'Test'
         },
-        SubDomain: 'exampleshop'
+        SubDomain: 'exampleshop2'
     }
 ];

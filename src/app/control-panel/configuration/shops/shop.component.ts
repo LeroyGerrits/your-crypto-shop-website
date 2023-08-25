@@ -54,6 +54,10 @@ export class ControlPanelConfigurationShopComponent {
     }
   }
 
+  ngOnDestroy(): void {
+    this.snackBarRef?.dismiss();
+  }
+
   onRetrieveData(shop: Shop) {
     this.shop = shop;
     this.pageTitle = shop.Name;
