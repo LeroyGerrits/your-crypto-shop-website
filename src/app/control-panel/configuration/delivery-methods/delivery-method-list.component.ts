@@ -1,9 +1,11 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort, Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
+import { DialogDeleteComponent } from 'src/app/dialogs/delete/dialog.delete.component';
 import { Environment } from 'src/app/shared/environments/Environment';
 import { DeliveryMethod } from 'src/app/shared/models/DeliveryMethod.model';
 import { Shop } from 'src/app/shared/models/Shop.model';
@@ -29,10 +31,11 @@ export class ControlPanelConfigurationDeliveryMethodListComponent implements OnI
   public shops: Shop[] | undefined;
 
   constructor(
+    public dialog: MatDialog,
     private router: Router,
     private deliveryMethodService: DeliveryMethodService,
     private shopService: ShopService
-  ) { 
+  ) {
     this.form = new FormGroup([
       this.controlFilterName,
       this.controlFilterShop
@@ -61,9 +64,15 @@ export class ControlPanelConfigurationDeliveryMethodListComponent implements OnI
   }
 
   deleteElement(element: DeliveryMethod) {
-    if (confirm('Are you sure you want to delete this record?')) {
-      console.log(element);
-      alert('boom!');
-    }
+    const dialogDelete = this.dialog.open(DialogDeleteComponent, { data: this });
+    const instance = dialogDelete.componentInstance;
+    instance.dialogMessage = `Are you sure you want to delete delivery method '${element.Name}'?`;
+
+    dialogDelete.afterClosed().subscribe(result => {
+      if (result) {
+        this.deliveryMethodService.delete(element.Id);
+        dialogDelete.close();
+      }
+    });
   }
 }

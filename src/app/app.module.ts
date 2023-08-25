@@ -19,7 +19,9 @@ import { ControlPanelConfigurationDigiByteWalletListComponent } from './control-
 import { ControlPanelConfigurationShopComponent } from './control-panel/configuration/shops/shop.component';
 import { ControlPanelConfigurationShopListComponent } from './control-panel/configuration/shops/shop-list.component';
 import { DeliveryMethodService } from './shared/services/DeliveryMethod.service';
+import { DialogDeleteComponent } from './dialogs/delete/dialog.delete.component';
 import { DialogLoginComponent } from './dialogs/login/dialog.login.component';
+import { DialogLogoutComponent } from './dialogs/logout/dialog.logout.component';
 import { DigiByteWalletService } from './shared/services/DigiByteWallet.service';
 import { ErrorInterceptor } from './shared/interceptors/error.interceptor';
 import { FaqCategoryService } from './shared/services/FaqCategory.service';
@@ -70,7 +72,9 @@ import { ShopService } from './shared/services/Shop.service';
     ControlPanelConfigurationDigiByteWalletComponent,
     ControlPanelConfigurationShopListComponent,
     ControlPanelConfigurationShopComponent,
+    DialogDeleteComponent,
     DialogLoginComponent,
+    DialogLogoutComponent,
     ControlPanelCatalogProductComponent,
     ControlPanelCatalogProductListComponent,    
     PublicWebsiteComponent,
