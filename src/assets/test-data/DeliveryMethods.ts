@@ -5,15 +5,15 @@ export const TestDataDeliveryMethods: DeliveryMethod[] = [
     {
         Id: '00000000-0000-0000-0000-000000000001',
         Shop: {
-            Id: '00000000-0000-0000-0000-000000000011',
-            Name: 'Test shop 1',
+            Id: '00000000-0000-0000-0000-000000000001',
+            Name: 'Example shop 1',
             Merchant: {
-                Id: '00000000-0000-0000-0000-000000000111',
+                Id: '00000000-0000-0000-0000-000000000011',
                 EmailAddress: 'merchant@dgbcommerce.com',
-                Password: '*****',
                 Gender: Gender.Male,
                 LastName: 'Test'
-            }
+            },
+            SubDomain: 'exampleshop1'
         },
         Name: 'Pickup',
         Costs: 100
@@ -21,15 +21,15 @@ export const TestDataDeliveryMethods: DeliveryMethod[] = [
     {
         Id: '00000000-0000-0000-0000-000000000002',
         Shop: {
-            Id: '00000000-0000-0000-0000-000000000012',
-            Name: 'Test shop 1',
+            Id: '00000000-0000-0000-0000-000000000002',
+            Name: 'Example shop 2',
             Merchant: {
-                Id: '00000000-0000-0000-0000-000000000112',
+                Id: '00000000-0000-0000-0000-000000000012',
                 EmailAddress: 'merchant@dgbcommerce.com',
-                Password: '*****',
-                Gender: Gender.Male,
+                Gender: Gender.Female,
                 LastName: 'Test'
-            }
+            },
+            SubDomain: 'exampleshop2'
         },
         Name: 'Package Delivery',
         Costs: 1200

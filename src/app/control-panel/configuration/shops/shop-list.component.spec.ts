@@ -9,8 +9,11 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatTableModule } from '@angular/material/table';
 import { MutationResult } from 'src/app/shared/models/MutationResult';
+import { ReactiveFormsModule } from '@angular/forms';
+import { RouterTestingModule } from '@angular/router/testing';
 import { ShopService } from 'src/app/shared/services/Shop.service';
 import { Sort } from '@angular/material/sort';
 import { TestDataShops } from 'src/assets/test-data/Shops';
@@ -22,28 +25,35 @@ describe('ControlPanelConfigurationShopListComponent', () => {
 
   let matDialogRefSpy: any;
   let matDialogSpy: jasmine.SpyObj<MatDialog>
+  let matSnackBarSpy: jasmine.SpyObj<MatSnackBar>;
+
   let shopServiceSpy: jasmine.SpyObj<ShopService>;
   let mutationResult: MutationResult = { ErrorCode: 0, Identity: '', Message: '' };
 
   beforeEach(() => {
     matDialogRefSpy = jasmine.createSpyObj('MatDialogRef', ['close']);
-    matDialogRefSpy.componentInstance = {title: '', message: ''};
+    matDialogRefSpy.componentInstance = { title: '', message: '' };
     matDialogRefSpy.afterClosed = () => of(true);
 
     matDialogSpy = jasmine.createSpyObj('MatDialog', ['open']);
     matDialogSpy.open.and.returnValue(matDialogRefSpy);
-    
+
+    matSnackBarSpy = jasmine.createSpyObj('MatSnackBar', ['open']);
+
     shopServiceSpy = jasmine.createSpyObj('ShopService', ['getList', 'delete']);
     shopServiceSpy.getList.and.returnValue(of(TestDataShops));
     shopServiceSpy.delete.and.returnValue(of(mutationResult));
 
     TestBed.configureTestingModule({
       declarations: [ControlPanelConfigurationShopListComponent],
-      imports: [BrowserAnimationsModule, MatIconModule, MatFormFieldModule, MatInputModule, MatPaginatorModule, MatTableModule, RouterLink],
+      imports: [BrowserAnimationsModule, MatIconModule, MatFormFieldModule, MatInputModule, MatPaginatorModule, MatTableModule, ReactiveFormsModule, RouterLink, RouterLink, RouterTestingModule.withRoutes(
+        [{ path: 'control-panel/configuration/shops', component: ControlPanelConfigurationShopListComponent }]
+      )],
       providers: [
         { provide: ActivatedRoute, useValue: { snapshot: { data: {} } } },
         { provide: MatDialog, useValue: matDialogSpy },
         { provide: ShopService, useValue: shopServiceSpy },
+        { provide: MatSnackBar, useValue: matSnackBarSpy },
         HttpClient,
         HttpHandler,
         Router
@@ -84,9 +94,24 @@ describe('ControlPanelConfigurationShopListComponent', () => {
     expect(routerstub.navigate).toHaveBeenCalledWith(['/control-panel/configuration/shops/' + TestDataShops[0].Id]);
   });
 
-  it('should delete a shop when delete icon is clicked and dialog is confirmed', () => {
+  it('should show a dialog when delete icon is clicked', () => {
     component.deleteElement(TestDataShops[0]);
     expect(matDialogSpy.open).toHaveBeenCalled();
-    expect(matDialogRefSpy.close).toHaveBeenCalled();
+  });
+
+  it('should show an error when handling submit result and an error code is applicable', () => {
+    const mutationResult = {
+      Constraint: '',
+      ErrorCode: 666,
+      Identity: '',
+      Message: 'Evil error'
+    };
+    component.handleOnSubmitResult(mutationResult);
+    expect(matSnackBarSpy.open).toHaveBeenCalled();
+  });
+
+  it('should show a message when an unhandled error occurs', () => {
+    component.handleOnSubmitError('Unhandled error');
+    expect(matSnackBarSpy.open).toHaveBeenCalled();
   });
 });

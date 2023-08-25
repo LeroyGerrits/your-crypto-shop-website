@@ -2,12 +2,14 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
+import { MatSnackBar, MatSnackBarRef, TextOnlySnackBar } from '@angular/material/snack-bar';
 import { MatSort, Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { DialogDeleteComponent } from 'src/app/dialogs/delete/dialog.delete.component';
 import { Environment } from 'src/app/shared/environments/Environment';
 import { DeliveryMethod } from 'src/app/shared/models/DeliveryMethod.model';
+import { MutationResult } from 'src/app/shared/models/MutationResult';
 import { Shop } from 'src/app/shared/models/Shop.model';
 import { DeliveryMethodService } from 'src/app/shared/services/DeliveryMethod.service';
 import { ShopService } from 'src/app/shared/services/Shop.service';
@@ -21,6 +23,8 @@ export class ControlPanelConfigurationDeliveryMethodListComponent implements OnI
   @ViewChild(MatPaginator, { static: false }) paginator!: MatPaginator;
   @ViewChild(MatSort, { static: false }) sort!: MatSort;
 
+  public snackBarRef: MatSnackBarRef<TextOnlySnackBar> | undefined;
+
   environment = Environment;
   dataSource = new MatTableDataSource<DeliveryMethod>;
   displayedColumns: string[] = ['Name', 'Shop', 'ActionButtons'];
@@ -33,6 +37,7 @@ export class ControlPanelConfigurationDeliveryMethodListComponent implements OnI
 
   constructor(
     public dialog: MatDialog,
+    private snackBar: MatSnackBar,
     private router: Router,
     private deliveryMethodService: DeliveryMethodService,
     private shopService: ShopService
@@ -50,6 +55,10 @@ export class ControlPanelConfigurationDeliveryMethodListComponent implements OnI
       this.dataSource.sort = this.sort;
     });
     this.shopService.getList().subscribe(shops => this.shops = shops);
+  }
+
+  ngOnDestroy(): void {
+    this.snackBarRef?.dismiss();
   }
 
   onSortChange(sortState: Sort) {
@@ -71,9 +80,24 @@ export class ControlPanelConfigurationDeliveryMethodListComponent implements OnI
 
     dialogDelete.afterClosed().subscribe(result => {
       if (result) {
-        this.deliveryMethodService.delete(element.Id);
-        dialogDelete.close();
+        this.deliveryMethodService.delete(element.Id).subscribe({
+          next: result => this.handleOnSubmitResult(result),
+          error: error => this.handleOnSubmitError(error),
+          complete: () => dialogDelete.close()
+        });
       }
     });
+  }
+
+  handleOnSubmitResult(result: MutationResult) {
+    if (result.ErrorCode == 0) {
+      this.router.navigate(['/control-panel/configuration/delivery-methods']);
+    } else {
+      this.snackBarRef = this.snackBar.open(result.Message, 'Close', { panelClass: ['error-snackbar'] });
+    }
+  }
+
+  handleOnSubmitError(error: string) {
+    this.snackBarRef = this.snackBar.open(error, 'Close', { panelClass: ['error-snackbar'] });
   }
 }

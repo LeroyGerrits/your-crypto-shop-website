@@ -1,9 +1,9 @@
 import { CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from '@angular/core';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 
-import { Constants } from '../Constants';
+import { Constants } from 'src/app/shared/Constants';
 import { DeliveryMethodService } from './DeliveryMethod.service';
-import { Environment } from '../environments/Environment';
+import { Environment } from 'src/app/shared/environments/Environment';
 import { TestBed } from '@angular/core/testing';
 import { TestDataDeliveryMethods } from 'src/assets/test-data/DeliveryMethods';
 

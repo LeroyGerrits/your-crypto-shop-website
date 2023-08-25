@@ -4,6 +4,7 @@ import { HttpClient, HttpHandler } from '@angular/common/http';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ControlPanelConfigurationDeliveryMethodComponent } from './delivery-method.component';
+import { ControlPanelConfigurationDeliveryMethodListComponent } from './delivery-method-list.component';
 import { DeliveryMethodService } from 'src/app/shared/services/DeliveryMethod.service';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -12,6 +13,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MutationResult } from 'src/app/shared/models/MutationResult';
 import { ReactiveFormsModule } from '@angular/forms';
+import { RouterTestingModule } from '@angular/router/testing';
 import { ShopService } from 'src/app/shared/services/Shop.service';
 import { TestDataDeliveryMethods } from 'src/assets/test-data/DeliveryMethods';
 import { TestDataShops } from 'src/assets/test-data/Shops';
@@ -37,7 +39,9 @@ describe('ControlPanelConfigurationDeliveryMethodComponent', () => {
 
     TestBed.configureTestingModule({
       declarations: [ControlPanelConfigurationDeliveryMethodComponent],
-      imports: [BrowserAnimationsModule, MatDialogModule, MatFormFieldModule, MatInputModule, MatSelectModule, ReactiveFormsModule, RouterLink],
+      imports: [BrowserAnimationsModule, MatDialogModule, MatFormFieldModule, MatInputModule, MatSelectModule, ReactiveFormsModule, RouterLink, RouterTestingModule.withRoutes(
+        [{ path: 'control-panel/configuration/delivery-methods', component: ControlPanelConfigurationDeliveryMethodListComponent }]
+      )],
       providers: [
         { provide: ActivatedRoute, useValue: { snapshot: { paramMap: convertToParamMap({ deliveryMethodId: TestDataDeliveryMethods[0].Id }) } } },
         { provide: ShopService, useValue: shopServiceSpy },
@@ -99,6 +103,11 @@ describe('ControlPanelConfigurationDeliveryMethodComponent', () => {
     };
     component.handleOnSubmitResult(mutationResult);
     expect(routerstub.navigate).toHaveBeenCalledWith(['/control-panel/configuration/delivery-methods']);
+  });
+
+  it('should show a message when an unhandled error occurs', () => {
+    component.handleOnSubmitError('Unhandled error');
+    expect(matSnackBarSpy.open).toHaveBeenCalled();
   });
 
   it('should show an error when handling submit result and an error code is applicable', () => {

@@ -12,7 +12,7 @@
     <div class="WrapperPadding20-20-0-8">
         <mat-form-field>
             <mat-label>Name</mat-label>
-            <input matInput />
+            <input matInput [formControl]="controlFilterName" />
         </mat-form-field>
     </div>
 </div>
@@ -20,7 +20,7 @@
     <div class="WrapperPadding20-20-0-20">
         <mat-form-field>
             <mat-label>Subdomain</mat-label>
-            <input matInput />
+            <input matInput [formControl]="controlFilterSubDomain" />
         </mat-form-field>
     </div>
 </div>
@@ -57,6 +57,5 @@
         <tr mat-row *matRowDef="let row; columns: this.displayedColumns;"></tr>
     </table>
 
-    <mat-paginator [pageSizeOptions]="[25, 50, 100]" showFirstLastButtons
-        aria-label="Select page of periodic elements" />
+    <mat-paginator [pageSizeOptions]="[25, 50, 100]" showFirstLastButtons />
 </div>

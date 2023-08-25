@@ -99,6 +99,11 @@ describe('ControlPanelConfigurationShopComponent', () => {
     expect(routerstub.navigate).toHaveBeenCalledWith(['/control-panel/configuration/shops']);
   });
 
+  it('should show a message when an unhandled error occurs', () => {
+    component.handleOnSubmitError('Unhandled error');
+    expect(matSnackBarSpy.open).toHaveBeenCalled();
+  });
+
   it('should show an error when handling submit result and an error code is applicable', () => {
     const mutationResult = {
       Constraint: '',

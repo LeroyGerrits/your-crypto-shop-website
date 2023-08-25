@@ -1,11 +1,10 @@
 import { CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from '@angular/core';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 
-import { Constants } from '../Constants';
-import { Environment } from '../environments/Environment';
+import { Constants } from 'src/app/shared/Constants';
+import { Environment } from 'src/app/shared/environments/Environment';
 import { FaqCategoryService } from './FaqCategory.service';
 import { TestBed } from '@angular/core/testing';
-import { TestDataFaqCategories } from 'src/assets/test-data/FaqCategories';
 
 describe('FaqCategoryService', () => {
     let service: FaqCategoryService;

@@ -2,7 +2,7 @@ import { CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from '@angular/core';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 
 import { AuthenticationService } from './Authentication.service';
-import { Environment } from '../environments/Environment';
+import { Environment } from 'src/app/shared/environments/Environment';
 import { TestBed } from '@angular/core/testing';
 
 describe('AuthenticationService', () => {
