@@ -24,6 +24,7 @@ export class ControlPanelConfigurationDeliveryMethodListComponent implements OnI
   environment = Environment;
   dataSource = new MatTableDataSource<DeliveryMethod>;
   displayedColumns: string[] = ['Name', 'Shop', 'ActionButtons'];
+  sortDirection: string | null = 'asc';
 
   public form!: FormGroup;
   public controlFilterName = new FormControl('');
@@ -53,9 +54,9 @@ export class ControlPanelConfigurationDeliveryMethodListComponent implements OnI
 
   onSortChange(sortState: Sort) {
     if (sortState.direction) {
-      console.log(`Sorted ${sortState.direction}`);
+      this.sortDirection = sortState.direction.toString();
     } else {
-      console.log('Sorting cleared');
+      this.sortDirection = null;
     }
   }
 

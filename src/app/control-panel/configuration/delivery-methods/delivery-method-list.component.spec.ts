@@ -72,6 +72,7 @@ describe('ControlPanelConfigurationDeliveryMethodListComponent', () => {
 
     const fakeSortEvent: Sort = { active: 'fakeActive', direction: 'asc' };
     component.onSortChange(fakeSortEvent);
+    expect(component.sortDirection).toBe('asc');
   });
 
   it('should clear the sortState when no sort direction is supplied', () => {
@@ -80,6 +81,7 @@ describe('ControlPanelConfigurationDeliveryMethodListComponent', () => {
 
     const fakeSortEvent: Sort = { active: 'fakeActive', direction: '' };
     component.onSortChange(fakeSortEvent);
+    expect(component.sortDirection).toBeNull();
   });
 
   it('should go to edit page when edit icon is clicked', () => {
