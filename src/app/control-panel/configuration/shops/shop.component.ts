@@ -1,10 +1,12 @@
+import { ActivatedRoute, Router } from '@angular/router';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { MatSnackBar, MatSnackBarRef, TextOnlySnackBar } from '@angular/material/snack-bar';
 import { Subscription, debounceTime, distinctUntilChanged } from 'rxjs';
 
-import { ActivatedRoute } from '@angular/router';
 import { Component } from '@angular/core';
 import { Constants } from 'src/app/shared/Constants';
 import { Environment } from 'src/app/shared/environments/Environment';
+import { MutationResult } from 'src/app/shared/models/MutationResult';
 import { Shop } from 'src/app/shared/models/Shop.model';
 import { ShopService } from 'src/app/shared/services/Shop.service';
 
@@ -15,21 +17,26 @@ import { ShopService } from 'src/app/shared/services/Shop.service';
 })
 
 export class ControlPanelConfigurationShopComponent {
-  controlName = new FormControl('', Validators.required);
-  controlSubDomain = new FormControl('', [Validators.minLength(3), Validators.pattern(/^[a-zA-Z0-9-]*$/)])
+  public environment = Environment;
+  public snackBarRef: MatSnackBarRef<TextOnlySnackBar> | undefined;
+  public queryStringShopId: string | null = '';
+
+  public form!: FormGroup;
+  public formLoading = false;
+  public formSubmitted = false;
+
+  public controlName = new FormControl('', Validators.required);
+  public controlSubDomain = new FormControl('', [Validators.minLength(3), Validators.pattern(/^[a-zA-Z0-9-]*$/)])
   subscriptionSubDomain: Subscription | undefined;
 
-  public environment = Environment;
-  public error = '';
-  public form!: FormGroup;
-  public loading = false;
   public pageTitle = 'Create new shop'
   public shop: Shop = new Shop();
-  public submitted = false;
   public subDomainAvailable = true;
 
   constructor(
     private route: ActivatedRoute,
+    private router: Router,
+    private snackBar: MatSnackBar,
     private shopService: ShopService
   ) {
     this.form = new FormGroup([
@@ -40,10 +47,10 @@ export class ControlPanelConfigurationShopComponent {
   }
 
   ngOnInit(): void {
-    const queryStringShopId = this.route.snapshot.paramMap.get('shopId');
+    this.queryStringShopId = this.route.snapshot.paramMap.get('shopId');
 
-    if (queryStringShopId && queryStringShopId != 'new') {
-      this.shopService.getById(queryStringShopId).subscribe(x => { this.onRetrieveData(x); });
+    if (this.queryStringShopId && this.queryStringShopId != 'new') {
+      this.shopService.getById(this.queryStringShopId).subscribe(x => { this.onRetrieveData(x); });
     }
   }
 
@@ -69,29 +76,47 @@ export class ControlPanelConfigurationShopComponent {
   }
 
   onSubmit() {
-    this.submitted = true;
+    this.formSubmitted = true;
 
     if (this.form.invalid) {
       return;
     }
 
-    this.error = '';
-    this.loading = true;
+    this.formLoading = true;
 
     const shopToUpdate: Shop = Object.assign({}, this.shop);
     shopToUpdate.Name = this.controlName.value!;
     shopToUpdate.SubDomain = this.controlSubDomain.value!;
 
-    /*
-    this.shopService.create(shopToUpdate)
-      .subscribe({
-        next: () => {
-          // wprls
-        },
-        error: error => {
-          this.error = error;
-          this.loading = false;
-        }
-      });*/
+    if (this.queryStringShopId && this.queryStringShopId != 'new') {
+      this.shopService.update(shopToUpdate).subscribe({
+        next: result => this.handleOnSubmitResult(result),
+        error: error => this.handleOnSubmitError(error),
+        complete: () => this.formLoading = false
+      });
+    } else {
+      this.shopService.create(shopToUpdate).subscribe({
+        next: result => this.handleOnSubmitResult(result),
+        error: error => this.handleOnSubmitError(error),
+        complete: () => this.formLoading = false
+      });
+    }
+  }
+
+  handleOnSubmitResult(result: MutationResult) {
+    if (result.ErrorCode == 0) {
+      this.router.navigate(['/control-panel/configuration/shops']);
+    } else {
+      if (result.Constraint == 'UNIQUE_Shop_SubDomain') {
+        this.snackBarRef = this.snackBar.open('This subdomain is already taken.', 'Close', { panelClass: ['error-snackbar'] });
+      } else {
+        this.snackBarRef = this.snackBar.open(result.Message, 'Close', { panelClass: ['error-snackbar'] });
+      }
+    }
+  }
+
+  handleOnSubmitError(error: string) {
+    this.snackBarRef = this.snackBar.open(error, 'Close', { panelClass: ['error-snackbar'] });
+    this.formLoading = false;
   }
 }
