@@ -1,8 +1,10 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort, Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
+import { DialogDeleteComponent } from 'src/app/dialogs/delete/dialog.delete.component';
 import { Environment } from 'src/app/shared/environments/Environment';
 import { DigiByteWallet } from 'src/app/shared/models/DigiByteWallet.model';
 import { DigiByteWalletService } from 'src/app/shared/services/DigiByteWallet.service';
@@ -19,8 +21,10 @@ export class ControlPanelConfigurationDigiByteWalletListComponent implements OnI
   environment = Environment;
   dataSource = new MatTableDataSource<DigiByteWallet>;
   displayedColumns: string[] = ['Name', 'Address', 'ActionButtons'];
+  sortDirection: string | null = 'asc';
 
   constructor(
+    public dialog: MatDialog,
     private router: Router,
     private digibyteWalletService: DigiByteWalletService
   ) { }
@@ -35,20 +39,26 @@ export class ControlPanelConfigurationDigiByteWalletListComponent implements OnI
 
   onSortChange(sortState: Sort) {
     if (sortState.direction) {
-      console.log(`Sorted ${sortState.direction}`);
+      this.sortDirection = sortState.direction.toString();
     } else {
-      console.log('Sorting cleared');
+      this.sortDirection = null;
     }
   }
 
   editElement(element: DigiByteWallet) {
-    this.router.navigate([`/control-panel/configuration/delivery-methods/${element.Id}`]);
+    this.router.navigate([`/control-panel/configuration/digibyte-wallets/${element.Id}`]);
   }
 
   deleteElement(element: DigiByteWallet) {
-    if (confirm('Are you sure you want to delete this record?')) {
-      console.log(element);
-      alert('boom!');
-    }
+    const dialogDelete = this.dialog.open(DialogDeleteComponent, { data: this });
+    const instance = dialogDelete.componentInstance;
+    instance.dialogMessage = `Are you sure you want to delete shop '${element.Name}'?`;
+
+    dialogDelete.afterClosed().subscribe(result => {
+      if (result) {
+        this.digibyteWalletService.delete(element.Id);
+        dialogDelete.close();
+      }
+    });
   }
 }

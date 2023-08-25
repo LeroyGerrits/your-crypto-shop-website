@@ -84,7 +84,7 @@ describe('ControlPanelConfigurationShopListComponent', () => {
     expect(routerstub.navigate).toHaveBeenCalledWith(['/control-panel/configuration/shops/' + TestDataShops[0].Id]);
   });
 
-  it('should delete a delivery method when delete icon is clicked and dialog is confirmed', () => {
+  it('should delete a shop when delete icon is clicked and dialog is confirmed', () => {
     component.deleteElement(TestDataShops[0]);
     expect(matDialogSpy.open).toHaveBeenCalled();
     expect(matDialogRefSpy.close).toHaveBeenCalled();
