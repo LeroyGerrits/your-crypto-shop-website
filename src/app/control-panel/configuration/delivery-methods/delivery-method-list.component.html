@@ -12,7 +12,7 @@
     <div class="WrapperPadding20-20-0-8">
         <mat-form-field>
             <mat-label>Name</mat-label>
-            <input matInput />
+            <input matInput [formControl]="controlFilterName" />
         </mat-form-field>
     </div>
 </div>
@@ -20,7 +20,7 @@
     <div class="WrapperPadding20-20-0-20">
         <mat-form-field>
             <mat-label>Shop</mat-label>
-            <input matInput />
+            <mat-select [formControl]="controlFilterShop" />
         </mat-form-field>
     </div>
 </div>

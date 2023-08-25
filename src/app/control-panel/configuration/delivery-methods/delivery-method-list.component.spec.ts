@@ -9,23 +9,34 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatSelectModule } from '@angular/material/select';
 import { MatTableModule } from '@angular/material/table';
+import { ReactiveFormsModule } from '@angular/forms';
+import { ShopService } from 'src/app/shared/services/Shop.service';
+import { TestDataDeliveryMethods } from 'src/assets/test-data/DeliveryMethods';
+import { TestDataShops } from 'src/assets/test-data/Shops';
+import { of } from 'rxjs';
 
 describe('ControlPanelConfigurationDeliveryMethodListComponent', () => {
   let component: ControlPanelConfigurationDeliveryMethodListComponent;
   let fixture: ComponentFixture<ControlPanelConfigurationDeliveryMethodListComponent>;
 
-  const fakeActivatedRoute = {
-    snapshot: { data: {} }
-  } as ActivatedRoute;
+  let deliveryMethodServiceSpy: jasmine.SpyObj<DeliveryMethodService>;
+  let shopServiceSpy: jasmine.SpyObj<ShopService>;
 
   beforeEach(() => {
+    deliveryMethodServiceSpy = jasmine.createSpyObj('DeliveryMethodService', ['getList']);
+    deliveryMethodServiceSpy.getList.and.returnValue(of(TestDataDeliveryMethods));
+    shopServiceSpy = jasmine.createSpyObj('ShopService', ['getList']);
+    shopServiceSpy.getList.and.returnValue(of(TestDataShops));
+
     TestBed.configureTestingModule({
       declarations: [ControlPanelConfigurationDeliveryMethodListComponent],
-      imports: [BrowserAnimationsModule, MatIconModule, MatFormFieldModule, MatInputModule, MatPaginatorModule, MatTableModule, RouterLink],
+      imports: [BrowserAnimationsModule, MatIconModule, MatFormFieldModule, MatInputModule, MatPaginatorModule, MatSelectModule, MatTableModule, ReactiveFormsModule, RouterLink],
       providers: [
-        { provide: ActivatedRoute, useValue: fakeActivatedRoute },
-        DeliveryMethodService,
+        { provide: ActivatedRoute, useValue: { snapshot: { data: {} } } },
+        { provide: ShopService, useValue: shopServiceSpy },
+        { provide: DeliveryMethodService, useVaue: deliveryMethodServiceSpy },
         HttpClient,
         HttpHandler
       ]
