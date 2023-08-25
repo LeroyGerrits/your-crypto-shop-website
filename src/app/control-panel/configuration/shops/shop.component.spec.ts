@@ -69,7 +69,7 @@ describe('ControlPanelConfigurationShopComponent', () => {
     expect(component.formLoading).toBeFalse();
   });
 
-  it('should send a call to the delivery method service when creating a new delivery method', () => {
+  it('should send a call to the shop service when creating a new shop', () => {
     component.queryStringShopId = '';
     component.controlName.setValue(TestDataShops[0].Name);
     component.controlSubDomain.setValue(TestDataShops[0].SubDomain!);
@@ -77,7 +77,7 @@ describe('ControlPanelConfigurationShopComponent', () => {
     expect(component.formLoading).toBeFalse();
   });
 
-  it('should send a call to the delivery method service when updating an existing delivery method', () => {
+  it('should send a call to the shop service when updating an existing shop', () => {
     component.queryStringShopId = TestDataShops[0].Id;
     component.controlName.setValue(TestDataShops[0].Name);
     component.controlSubDomain.setValue(TestDataShops[0].SubDomain!);
