@@ -6,7 +6,7 @@
       <mat-label>E-mail address</mat-label>
       <input matInput [formControl]="controlUsername"
         [ngClass]="{ 'is-invalid': submitted && controlUsername.errors }" />
-      <div *ngIf="submitted && controlUsername.errors" class="TextError">
+      <div *ngIf="submitted && controlUsername.errors" class="invalid-feedback">
         <div *ngIf="controlUsername.errors['required']">Username is required</div>
       </div>
     </mat-form-field>
@@ -14,11 +14,11 @@
       <mat-label>Password</mat-label>
       <input matInput type="password" [formControl]="controlPassword"
         [ngClass]="{ 'is-invalid': submitted && controlPassword.errors }" />
-      <div *ngIf="submitted && controlPassword.errors" class="TextError">
+      <div *ngIf="submitted && controlPassword.errors" class="invalid-feedback">
         <div *ngIf="controlPassword.errors['required']">Password is required</div>
       </div>
     </mat-form-field>
-    <div *ngIf="error" class="TextError">{{error}}</div>
+    <div *ngIf="error" class="alert alert-danger mt-3 mb-0">{{error}}</div>
   </mat-dialog-content>
   <mat-dialog-actions align="end">
     <button mat-raised-button type="button" color="disabled" mat-dialog-close>Cancel</button>

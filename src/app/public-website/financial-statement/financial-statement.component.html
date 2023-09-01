@@ -1,0 +1,64 @@
+<div class="WrapperPadding20-8-0-8">
+    <h2>Financial Statement</h2>
+    <p>We value transparency. All of our expenses and profits will be documented in this financial statement.</p>
+</div>
+
+<div class="ColumnOneFourth">
+    <div class="WrapperPadding20-20-0-8">
+        <mat-form-field>
+            <mat-label>Description</mat-label>
+            <input matInput [formControl]="controlFilterDescription" />
+        </mat-form-field>
+    </div>
+</div>
+<div class="ColumnOneFourth">
+    <div class="WrapperPadding20-20-0-20">
+        <mat-form-field>
+            <mat-label>Currency</mat-label>
+            <mat-select [formControl]="controlFilterCurrency">
+                <mat-option *ngFor="let currency of this.currencies" [value]="currency.Id">
+                    {{currency.Name}} ({{currency.Symbol}})
+                  </mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+</div>
+
+<div class="WrapperPadding20-8 ClearLeft">
+    <table mat-table matSort [dataSource]="this.dataSource" (matSortChange)="onSortChange($event)">
+        <ng-container matColumnDef="Date">
+            <th mat-header-cell mat-sort-header *matHeaderCellDef>Date</th>
+            <td mat-cell *matCellDef="let element">{{element.Date}}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="Type">
+            <th mat-header-cell mat-sort-header *matHeaderCellDef>Type</th>
+            <td mat-cell *matCellDef="let element">{{element.Type}}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="Amount">
+            <th mat-header-cell mat-sort-header *matHeaderCellDef>Amount</th>
+            <td mat-cell *matCellDef="let element">{{element.Amount}}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="Currency">
+            <th mat-header-cell mat-sort-header *matHeaderCellDef>Currency</th>
+            <td mat-cell *matCellDef="let element">{{element.Currency.Name}}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="Description">
+            <th mat-header-cell mat-sort-header *matHeaderCellDef>Description</th>
+            <td mat-cell *matCellDef="let element">{{element.Description}}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="Recurrance">
+            <th mat-header-cell mat-sort-header *matHeaderCellDef>Recurrance</th>
+            <td mat-cell *matCellDef="let element">{{element.Recurrance}}</td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="this.displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: this.displayedColumns;"></tr>
+    </table>
+
+    <mat-paginator [pageSizeOptions]="[25, 50, 100]" showFirstLastButtons />
+</div>

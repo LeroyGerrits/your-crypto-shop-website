@@ -50,6 +50,7 @@ $font-main: 'open_sansregular', Helvetica, Tahoma !important;
 $my-primary: mat.define-palette(mat.$indigo-palette, 500);
 $my-accent: mat.define-palette(mat.$pink-palette, A200, A100, A400);
 $dark-blue-color: #002352;
+$dark-gray-color: #202020;
 $light-blue-color: #2080e0;
 $lighter-blue-color: #3090f0;
 $lightest-blue-color: #3f9fff;
@@ -59,8 +60,7 @@ $my-theme: mat.define-dark-theme((color: (primary: $my-primary,
         accent: $my-accent,
       ),
       typography: mat.define-typography-config($font-family: 'open_sansregular'),
-      density: 0      
-    ));
+      density: 0));
 
 @include mat.all-component-themes($my-theme);
 
@@ -126,6 +126,9 @@ p {
   background-image: url('assets/images/BodyBackground.jpg');
   background-position: top center;
   background-size: cover;
+}
+
+#Header div.Wrapper {
   padding: 40px 0;
 }
 
@@ -180,23 +183,48 @@ p {
 }
 
 #Body {
-  background-color: #222;
+  background-color: $dark-gray-color;
   padding: 20px 0;
 }
 
 #Footer {
+  background-color: $dark-gray-color;
+}
+
+#Footer div.CenteredContainer {
+  border-top: solid 1px #303030;
+}
+
+#Footer p {
+  color: #b0b0b0;
+  line-height: 1.8em;
+  margin: 10px 0 0 0 !important;
+}
+
+#Footer ul {
+  list-style-type: none;
+  margin: 10px 0 0 0;
+  padding: 0;
+}
+
+#Footer ul li {
+  color: #b0b0b0;
+  line-height: 1.8em;
+}
+
+#BottomBar {
   background-color: $dark-blue-color;
   color: #bbb;
 }
 
-#Footer ul {
+#BottomBar ul {
   float: right;
   list-style-type: none;
   margin: 0;
   padding: 0;
 }
 
-#Footer ul li {
+#BottomBar ul li {
   background-image: url('assets/images/Sprites.png');
   background-repeat: no-repeat;
   display: block;
@@ -205,57 +233,57 @@ p {
   padding: 0;
 }
 
-#Footer ul li.Telegram {
+#BottomBar ul li.Telegram {
   background-position: 0 0;
 }
 
-#Footer ul li.Telegram:hover {
+#BottomBar ul li.Telegram:hover {
   background-position: -40px 0;
 }
 
-#Footer ul li.X {
+#BottomBar ul li.X {
   background-position: 0 -40px;
 }
 
-#Footer ul li.X:hover {
+#BottomBar ul li.X:hover {
   background-position: -40px -40px;
 }
 
-#Footer ul li.GitHub {
+#BottomBar ul li.GitHub {
   background-position: 0 -80px;
 }
 
-#Footer ul li.GitHub:hover {
+#BottomBar ul li.GitHub:hover {
   background-position: -40px -80px;
 }
 
-#Footer ul li.Facebook {
+#BottomBar ul li.Facebook {
   background-position: 0 -120px;
 }
 
-#Footer ul li.Facebook:hover {
+#BottomBar ul li.Facebook:hover {
   background-position: -40px -120px;
 }
 
-#Footer ul li.LinkedIn {
+#BottomBar ul li.LinkedIn {
   background-position: 0 -160px;
 }
 
-#Footer ul li.LinkedIn:hover {
+#BottomBar ul li.LinkedIn:hover {
   background-position: -40px -160px;
 }
 
-#Footer ul li a {
+#BottomBar ul li a {
   display: block;
   height: 40px;
   width: 40px;
 }
 
-#Footer ul li a span {
+#BottomBar ul li a span {
   display: none;
 }
 
-#Footer span.Copyright {
+#BottomBar span.Copyright {
   line-height: 40px;
 }
 
@@ -422,10 +450,10 @@ div.WrapperPadding8 {
   letter-spacing: 0 !important;
 }
 
-.mat-mdc-menu-content, .mat-mdc-menu-content .mat-mdc-menu-item .mat-mdc-menu-item-text
-{
-  font-size:14px;
-  letter-spacing:0 !important;
+.mat-mdc-menu-content,
+.mat-mdc-menu-content .mat-mdc-menu-item .mat-mdc-menu-item-text {
+  font-size: 14px;
+  letter-spacing: 0 !important;
 }
 
 .mdc-card__actions {

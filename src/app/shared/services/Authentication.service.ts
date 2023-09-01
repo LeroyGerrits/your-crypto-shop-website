@@ -25,7 +25,7 @@ export class AuthenticationService {
     }
 
     login(emailAddress: string, password: string) {
-        return this.http.post<any>(Environment.API_URL + '/Merchant/authenticate', { emailAddress, password })
+        return this.http.post<any>(Environment.API_URL + '/Merchant/Authenticate', { emailAddress, password })
             .pipe(map(merchant => {
                 localStorage.setItem('merchant', JSON.stringify(merchant));
                 this.authenticatedMerchantSubject.next(merchant);

@@ -35,4 +35,13 @@ export class AppComponent {
       }
     });
   }
+
+  signup() {
+    const dialogRegister = this.dialog.open(DialogLoginComponent);
+    dialogRegister.afterClosed().subscribe(result => {
+      if (result) {
+        dialogRegister.close();
+      }
+    });
+  }
 }

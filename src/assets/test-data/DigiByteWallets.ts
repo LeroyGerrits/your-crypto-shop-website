@@ -1,5 +1,5 @@
 import { DigiByteWallet } from 'src/app/shared/models/DigiByteWallet.model';
-import { Gender } from 'src/app/shared/enums/Gender';
+import { Gender } from 'src/app/shared/enums/Gender.enum';
 
 export const TestDataDigiByteWallets: DigiByteWallet[] = [
     {

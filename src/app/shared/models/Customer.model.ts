@@ -1,4 +1,4 @@
-import { Gender } from 'src/app/shared/enums/Gender';
+import { Gender } from 'src/app/shared/enums/Gender.enum';
 import { Shop } from './Shop.model';
 
 export class Customer {

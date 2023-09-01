@@ -1,21 +1,49 @@
 <div id="Header">
     <div class="CenteredContainer">
-        <ul>
-            <li><a [routerLink]="['/']" [routerLinkActive]="['Active']"
-                    [routerLinkActiveOptions]="{exact: true}">Home</a></li>
-            <li><a [routerLink]="['/news']" [routerLinkActive]="['Active']">News</a></li>
-            <li><a [routerLink]="['/pricing']" [routerLinkActive]="['Active']">Pricing</a></li>
-            <li><a [routerLink]="['/faq']" [routerLinkActive]="['Active']">FAQ</a></li>
-            <li><a [routerLink]="['/about']" [routerLinkActive]="['Active']">About</a></li>
-        </ul>
-        <a id="Logo" [routerLink]="['/']">
-            <img src="assets/images/Header Logo.png" width="46" height="64" alt="DGB Commerce" />
-            <span>DGB Commerce</span>
-        </a>
+        <div class="Wrapper">
+            <ul>
+                <li><a [routerLink]="['/']" [routerLinkActive]="['Active']"
+                        [routerLinkActiveOptions]="{exact: true}">Home</a></li>
+                <li><a [routerLink]="['/news']" [routerLinkActive]="['Active']">News</a></li>
+                <li><a [routerLink]="['/pricing']" [routerLinkActive]="['Active']">Pricing</a></li>
+                <li><a [routerLink]="['/faq']" [routerLinkActive]="['Active']">FAQ</a></li>
+                <li><a [routerLink]="['/about']" [routerLinkActive]="['Active']">About</a></li>
+            </ul>
+            <a id="Logo" [routerLink]="['/']">
+                <img src="assets/images/Header Logo.png" width="46" height="64" alt="DGB Commerce" />
+                <span>DGB Commerce</span>
+            </a>
+        </div>        
     </div>
 </div>
 <div id="Body">
     <div class="CenteredContainer">
         <router-outlet></router-outlet>
+    </div>
+</div>
+<div id="Footer">
+    <div class="CenteredContainer">
+        <div class="ColumnOneThird">
+            <div class="WrapperPadding20-10-20-8">
+                <h3>About DGB Commerce</h3>
+                <p>DGB Commerce is an <strong>e-commerce</strong> platform by and for DigiByte users. Merchants can
+                    manage shops, categories and products and list/sell them for DigiByte prices.</p>
+            </div>
+        </div>
+        <div class="ColumnOneThird">
+            &nbsp;
+        </div>
+        <div class="ColumnOneFourth">
+            <div class="WrapperPadding20-8-20-10">
+                <h3>Featured shops</h3>
+                <ul>
+                    <li>Your shop here?</li>
+                    <li>Your shop here?</li>
+                    <li>Your shop here?</li>
+                </ul>
+            </div>
+        </div>
+        <div class="ClearLeft"></div>
+
     </div>
 </div>

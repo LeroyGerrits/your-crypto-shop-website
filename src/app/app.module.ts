@@ -18,14 +18,17 @@ import { ControlPanelConfigurationDigiByteWalletComponent } from './control-pane
 import { ControlPanelConfigurationDigiByteWalletListComponent } from './control-panel/configuration/digibyte-wallets/digibyte-wallet-list.component';
 import { ControlPanelConfigurationShopComponent } from './control-panel/configuration/shops/shop.component';
 import { ControlPanelConfigurationShopListComponent } from './control-panel/configuration/shops/shop-list.component';
+import { CurrencyService } from './shared/services/Currency.service';
 import { DeliveryMethodService } from './shared/services/DeliveryMethod.service';
 import { DialogDeleteComponent } from './dialogs/delete/dialog.delete.component';
 import { DialogLoginComponent } from './dialogs/login/dialog.login.component';
 import { DialogLogoutComponent } from './dialogs/logout/dialog.logout.component';
+import { DialogSignUpComponent } from './dialogs/signup/dialog.signup.component';
 import { DigiByteWalletService } from './shared/services/DigiByteWallet.service';
 import { ErrorInterceptor } from './shared/interceptors/error.interceptor';
 import { FaqCategoryService } from './shared/services/FaqCategory.service';
 import { FaqService } from './shared/services/Faq.service';
+import { FinancialStatementTransactionService } from './shared/services/FinancialStatementTransaction.service';
 import { JwtInterceptor } from './shared/interceptors/jwt.interceptor';
 import { MatBadgeModule } from '@angular/material/badge';
 import { MatButtonModule } from '@angular/material/button';
@@ -47,12 +50,14 @@ import { MatSortModule } from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { MerchantPasswordResetLinkService } from './shared/services/MerchantPasswordResetLink.service';
 import { NewsMessageService } from './shared/services/NewsMessage.service';
 import { NgModule } from '@angular/core';
 import { PublicWebsiteAboutComponent } from './public-website/about/about.component';
 import { PublicWebsiteComponent } from './public-website/public-website.component';
 import { PublicWebsiteFaqComponent } from './public-website/faq/faq.component';
 import { PublicWebsiteFaqListComponent } from './public-website/faq/faq-list.component';
+import { PublicWebsiteFinancialStatementComponent } from './public-website/financial-statement/financial-statement.component';
 import { PublicWebsiteNewsComponent } from './public-website/news/news.component';
 import { PublicWebsiteNewsListComponent } from './public-website/news/news-list.component';
 import { RouterModule } from '@angular/router';
@@ -75,12 +80,14 @@ import { ShopService } from './shared/services/Shop.service';
     DialogDeleteComponent,
     DialogLoginComponent,
     DialogLogoutComponent,
+    DialogSignUpComponent,
     ControlPanelCatalogProductComponent,
     ControlPanelCatalogProductListComponent,    
     PublicWebsiteComponent,
     PublicWebsiteAboutComponent,
     PublicWebsiteFaqComponent,
     PublicWebsiteFaqListComponent,
+    PublicWebsiteFinancialStatementComponent,
     PublicWebsiteNewsComponent,
     PublicWebsiteNewsListComponent,    
     SearchEngineFriendlyStringPipe
@@ -118,10 +125,13 @@ import { ShopService } from './shared/services/Shop.service';
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
     AuthenticationService,
+    CurrencyService,
     DeliveryMethodService,
     DigiByteWalletService,
     FaqService,
     FaqCategoryService,
+    FinancialStatementTransactionService,
+    MerchantPasswordResetLinkService,
     NewsMessageService,
     ShopService
   ],
