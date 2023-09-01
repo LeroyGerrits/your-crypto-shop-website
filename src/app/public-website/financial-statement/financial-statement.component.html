@@ -3,22 +3,69 @@
     <p>We value transparency. All of our expenses and profits will be documented in this financial statement.</p>
 </div>
 
-<div class="ColumnOneFourth">
-    <div class="WrapperPadding20-20-0-8">
+<div class="ColumnOneSixth">
+    <div class="WrapperPadding20-10-0-8">
+        <mat-form-field>
+            <mat-label>Date from</mat-label>
+            <input matInput [formControl]="controlFilterDateFrom" [matDatepicker]="pickerDateFrom" />
+            <mat-datepicker-toggle matIconSuffix [for]="pickerDateFrom"></mat-datepicker-toggle>
+            <mat-datepicker #pickerDateFrom></mat-datepicker>
+        </mat-form-field>
+    </div>
+</div>
+<div class="ColumnOneSixth">
+    <div class="WrapperPadding20-10-0-10">
+        <mat-form-field>
+            <mat-label>Date until</mat-label>
+            <input matInput [formControl]="controlFilterDateUntil" [matDatepicker]="pickerDateUntil" />
+            <mat-datepicker-toggle matIconSuffix [for]="pickerDateUntil"></mat-datepicker-toggle>
+            <mat-datepicker #pickerDateUntil></mat-datepicker>
+        </mat-form-field>
+    </div>
+</div>
+<div class="ColumnOneSixth">
+    <div class="WrapperPadding20-10-0-10">
         <mat-form-field>
             <mat-label>Description</mat-label>
             <input matInput [formControl]="controlFilterDescription" />
         </mat-form-field>
     </div>
 </div>
-<div class="ColumnOneFourth">
-    <div class="WrapperPadding20-20-0-20">
+<div class="ColumnOneSixth">
+    <div class="WrapperPadding20-10-0-10">
+        <mat-form-field>
+            <mat-label>Recurrance</mat-label>
+            <mat-select [formControl]="controlFilterRecurrance">
+                <mat-option />
+                <mat-option *ngFor="let type of recurrances | keyvalue;" [value]="type.key">
+                    {{type.value}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+</div>
+<div class="ColumnOneSixth">
+    <div class="WrapperPadding20-10-0-10">
+        <mat-form-field>
+            <mat-label>Type</mat-label>
+            <mat-select [formControl]="controlFilterType">
+                <mat-option />
+                <mat-option *ngFor="let type of financialStatementTransactionTypes | keyvalue;" [value]="type.key">
+                    {{type.value}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+</div>
+<div class="ColumnOneSixth">
+    <div class="WrapperPadding20-8-0-10">
         <mat-form-field>
             <mat-label>Currency</mat-label>
             <mat-select [formControl]="controlFilterCurrency">
+                <mat-option />
                 <mat-option *ngFor="let currency of this.currencies" [value]="currency.Id">
                     {{currency.Name}} ({{currency.Symbol}})
-                  </mat-option>
+                </mat-option>
             </mat-select>
         </mat-form-field>
     </div>
@@ -28,22 +75,7 @@
     <table mat-table matSort [dataSource]="this.dataSource" (matSortChange)="onSortChange($event)">
         <ng-container matColumnDef="Date">
             <th mat-header-cell mat-sort-header *matHeaderCellDef>Date</th>
-            <td mat-cell *matCellDef="let element">{{element.Date}}</td>
-        </ng-container>
-
-        <ng-container matColumnDef="Type">
-            <th mat-header-cell mat-sort-header *matHeaderCellDef>Type</th>
-            <td mat-cell *matCellDef="let element">{{element.Type}}</td>
-        </ng-container>
-
-        <ng-container matColumnDef="Amount">
-            <th mat-header-cell mat-sort-header *matHeaderCellDef>Amount</th>
-            <td mat-cell *matCellDef="let element">{{element.Amount}}</td>
-        </ng-container>
-
-        <ng-container matColumnDef="Currency">
-            <th mat-header-cell mat-sort-header *matHeaderCellDef>Currency</th>
-            <td mat-cell *matCellDef="let element">{{element.Currency.Name}}</td>
+            <td mat-cell *matCellDef="let element">{{element.Date | date:'dd-MM-yyyy'}}</td>
         </ng-container>
 
         <ng-container matColumnDef="Description">
@@ -55,6 +87,25 @@
             <th mat-header-cell mat-sort-header *matHeaderCellDef>Recurrance</th>
             <td mat-cell *matCellDef="let element">{{element.Recurrance}}</td>
         </ng-container>
+
+        <ng-container matColumnDef="Type">
+            <th mat-header-cell mat-sort-header *matHeaderCellDef>Type</th>
+            <td mat-cell *matCellDef="let element"><span
+                    [ngClass]="['Type', element.Type == 'Credit' ? 'TypeCredit' : 'TypeDebit']">{{element.Type}}</span>
+            </td>
+        </ng-container>
+
+        <ng-container matColumnDef="Currency">
+            <th mat-header-cell mat-sort-header *matHeaderCellDef>Currency</th>
+            <td mat-cell *matCellDef="let element">{{element.Currency.Name}}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="Amount">
+            <th mat-header-cell mat-sort-header *matHeaderCellDef>Amount</th>
+            <td mat-cell *matCellDef="let element" class="TextAlignRight">
+                {{element.Currency.Symbol}}&nbsp;{{element.Amount | number:'1.2'}}</td>
+        </ng-container>
+
 
         <tr mat-header-row *matHeaderRowDef="this.displayedColumns"></tr>
         <tr mat-row *matRowDef="let row; columns: this.displayedColumns;"></tr>
