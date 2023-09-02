@@ -1,13 +1,39 @@
-<div class="WrapperPadding20-8-0-8">
-    <h2>Financial Statement</h2>
-    <p>We value transparency. All of our expenses and profits will be documented in this financial statement.</p>
+<div class="ColumnOneHalf">
+    <div class="WrapperPadding20-10-0-8">
+        <h2>Financial Statement</h2>
+        <p>We value transparency. All of our expenses and profits will be documented in this financial statement. DGB
+            Commerce makes use of 2 public DigiByte wallets: a regular wallet which is used to cover expenses and
+            receive donations, and a transactions wallet which is used for all automated transactions that happen when
+            consumers buy products and goods from merchants using our platform.</p>
+        <p>On regular intervals, DGB Commerce will transfer Digibyte from the automated transaction wallet to the
+            regular wallet. In the event of such a transfer or a donation, a <span class="Type TypeDebit">Debit</span>
+            entry will be added to this financial statement.</p>
+    </div>
 </div>
+<div class="ColumnOneFourth">
+    <div class="WrapperPadding20-10-0-10 TextAlignCenter">
+        <h3>Our regular wallet</h3>
+        <div>
 
-<div class="ColumnOneSixth">
+        </div>
+        <span></span>
+    </div>
+</div>
+<div class="ColumnOneFourth">
+    <div class="WrapperPadding20-8-0-10 TextAlignCenter">
+        <h3>Our automated transactions wallet</h3>
+        <div>
+
+        </div>
+        <span>dgb12124335345345435345345345345</span>
+    </div>
+</div>
+<div class="ColumnOneSixth ClearLeft">
     <div class="WrapperPadding20-10-0-8">
         <mat-form-field>
             <mat-label>Date from</mat-label>
-            <input matInput [formControl]="controlFilterDateFrom" [matDatepicker]="pickerDateFrom" (change)="onFilter()" />
+            <input matInput [formControl]="controlFilterDateFrom" [matDatepicker]="pickerDateFrom"
+                (change)="onFilter()" />
             <mat-datepicker-toggle matIconSuffix [for]="pickerDateFrom"></mat-datepicker-toggle>
             <mat-datepicker #pickerDateFrom></mat-datepicker>
         </mat-form-field>
@@ -17,7 +43,8 @@
     <div class="WrapperPadding20-10-0-10">
         <mat-form-field>
             <mat-label>Date until</mat-label>
-            <input matInput [formControl]="controlFilterDateUntil" [matDatepicker]="pickerDateUntil" (change)="onFilter()" />
+            <input matInput [formControl]="controlFilterDateUntil" [matDatepicker]="pickerDateUntil"
+                (change)="onFilter()" />
             <mat-datepicker-toggle matIconSuffix [for]="pickerDateUntil"></mat-datepicker-toggle>
             <mat-datepicker #pickerDateUntil></mat-datepicker>
         </mat-form-field>
