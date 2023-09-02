@@ -59,9 +59,7 @@ export class PublicWebsiteFinancialStatementComponent implements OnInit {
   }
 
   onFilter() {
-    console.log('filter');
     const parameters: GetFinancialStatementTransactionsParameters = {};
-
     if (this.controlFilterDateFrom.value) parameters.DateFrom = new Date(this.controlFilterDateFrom.value);
     if (this.controlFilterDateUntil.value) parameters.DateUntil = new Date(this.controlFilterDateUntil.value);
     if (this.controlFilterDescription.value) parameters.Description = this.controlFilterDescription.value;
