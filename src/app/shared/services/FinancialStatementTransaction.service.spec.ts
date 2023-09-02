@@ -2,6 +2,7 @@ import { CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from '@angular/core';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 
 import { Constants } from 'src/app/shared/Constants';
+import { DatePipe } from '@angular/common';
 import { Environment } from 'src/app/shared/environments/Environment';
 import { FinancialStatementTransactionService } from './FinancialStatementTransaction.service';
 import { TestBed } from '@angular/core/testing';
@@ -14,7 +15,10 @@ describe('FinancialStatementTransactionService', () => {
         TestBed.configureTestingModule({
             schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
             imports: [HttpClientTestingModule],
-            providers: [FinancialStatementTransactionService]
+            providers: [
+                DatePipe,
+                FinancialStatementTransactionService
+            ]
         });
         service = TestBed.inject(FinancialStatementTransactionService);
         httpMock = TestBed.inject(HttpTestingController);

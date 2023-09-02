@@ -4,6 +4,7 @@ import { HttpClient, HttpHandler } from '@angular/common/http';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CurrencyService } from 'src/app/shared/services/Currency.service';
+import { DatePipe } from '@angular/common';
 import { FinancialStatementTransactionService } from 'src/app/shared/services/FinancialStatementTransaction.service';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatInputModule } from '@angular/material/input';
@@ -30,6 +31,7 @@ describe('PublicWebsiteFinancialStatementComponent', () => {
       imports: [BrowserAnimationsModule, MatDatepickerModule, MatInputModule, MatNativeDateModule, MatPaginatorModule, MatSelectModule, MatTableModule, ReactiveFormsModule, RouterTestingModule],
       providers: [
         { provide: ActivatedRoute, useValue: fakeActivatedRoute },
+        DatePipe,
         CurrencyService,        
         FinancialStatementTransactionService,
         HttpClient,
