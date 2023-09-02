@@ -4,9 +4,9 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort, Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
+import { Constants } from 'src/app/shared/Constants';
 import { FinancialStatementTransactionType } from 'src/app/shared/enums/FinancialStatementTransactionType.enum';
 import { Recurrance } from 'src/app/shared/enums/Recurrance.enum';
-import { Environment } from 'src/app/shared/environments/Environment';
 import { Currency } from 'src/app/shared/models/Currency.model';
 import { FinancialStatementTransaction } from 'src/app/shared/models/FinancialStatementTransaction.model';
 import { GetFinancialStatementTransactionsParameters } from 'src/app/shared/models/parameters/GetFinancialStatementTransactionsParameters.model';
@@ -25,7 +25,8 @@ export class PublicWebsiteFinancialStatementComponent implements OnInit {
   financialStatementTransactionTypes = Object.keys(FinancialStatementTransactionType).filter(p => isNaN(p as any));
   recurrances = Object.keys(Recurrance).filter(p => isNaN(p as any));
 
-  environment = Environment;
+  constants = Constants;
+  
   dataSource = new MatTableDataSource<FinancialStatementTransaction>;
   displayedColumns: string[] = ['Date', 'Description', 'Recurrance', 'Type', 'Currency', 'Amount'];
   sortDirection: string | null = 'asc';

@@ -63,6 +63,7 @@ import { PublicWebsiteFaqListComponent } from './public-website/faq/faq-list.com
 import { PublicWebsiteFinancialStatementComponent } from './public-website/financial-statement/financial-statement.component';
 import { PublicWebsiteNewsComponent } from './public-website/news/news.component';
 import { PublicWebsiteNewsListComponent } from './public-website/news/news-list.component';
+import { QRCodeModule } from 'angularx-qrcode';
 import { RouterModule } from '@angular/router';
 import { SearchEngineFriendlyStringPipe } from './shared/pipes/searchEngineFriendlyString.pipe';
 import { ShopService } from './shared/services/Shop.service';
@@ -122,6 +123,7 @@ import { ShopService } from './shared/services/Shop.service';
     MatTableModule,
     MatToolbarModule,
     MatTooltipModule,
+    QRCodeModule,
     ReactiveFormsModule,
     RouterModule,
     FormsModule

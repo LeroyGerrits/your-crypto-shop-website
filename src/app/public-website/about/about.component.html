@@ -39,8 +39,7 @@
         <h2>Transparent</h2>
         <img class="PublicWebsiteImage" src="/assets/images/About Transparent.png" width="150" height="150"
             alt="Transparent" />
-        <p>Our code repositories are public on GitHub, all of the transactions to and from our wallets will be
-            elaborated in public ledgers and we will continuously report on our progress through social media outlets
+        <p>Our code repositories are public on <a href="https://github.com/LeroyGerrits" target="_blank">GitHub</a>, all of our expenses, withdrawals and donations are visible in our <a [routerLink]="['/financial-statement']">Financial statement</a>  and we will continuously report on our progress through social media outlets
             and our <a [routerLink]="['/news']" href="/news">News</a> section.</p>
     </div>
 </div>
@@ -49,6 +48,9 @@
         <h2>Donate</h2>
         <img class="PublicWebsiteImage" src="/assets/images/About Donate.png" width="150" height="150" alt="Donate" />
         <p>Want to support this initiative? A DigiByte donation is most welcome!</p>
+        <qrcode [qrdata]="constants.DIGIBYTE_WALLET_ADDRESS_GENERAL" [width]="constants.QR_CODE_SIZE"
+                [errorCorrectionLevel]="'M'" [colorDark]="constants.QR_CODE_COLOR" [imageSrc]="constants.QR_CODE_LOGO"
+                [imageHeight]="constants.QR_CODE_LOGO_SIZE" [imageWidth]="constants.QR_CODE_LOGO_SIZE"></qrcode>
     </div>
 </div>
 <div class="ClearLeft"></div>
