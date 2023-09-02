@@ -1,5 +1,6 @@
+import { DatePipe } from '@angular/common';
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort, Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
@@ -8,6 +9,7 @@ import { Recurrance } from 'src/app/shared/enums/Recurrance.enum';
 import { Environment } from 'src/app/shared/environments/Environment';
 import { Currency } from 'src/app/shared/models/Currency.model';
 import { FinancialStatementTransaction } from 'src/app/shared/models/FinancialStatementTransaction.model';
+import { GetFinancialStatementTransactionsParameters } from 'src/app/shared/models/parameters/GetFinancialStatementTransactionsParameters.model';
 import { CurrencyService } from 'src/app/shared/services/Currency.service';
 import { FinancialStatementTransactionService } from 'src/app/shared/services/FinancialStatementTransaction.service';
 
@@ -51,13 +53,27 @@ export class PublicWebsiteFinancialStatementComponent implements OnInit {
     ]);
   }
 
-  ngOnInit(): void {
-    this.financialStatementTransactionService.getList().subscribe(financialStatementTransactions => {
+  ngOnInit() {
+    this.onFilter();
+    this.currencyService.getList().subscribe(currencies => this.currencies = currencies);
+  }
+
+  onFilter() {
+    console.log('filter');
+    const parameters: GetFinancialStatementTransactionsParameters = {};
+
+    if (this.controlFilterDateFrom.value) parameters.DateFrom = new Date(this.controlFilterDateFrom.value);
+    if (this.controlFilterDateUntil.value) parameters.DateUntil = new Date(this.controlFilterDateUntil.value);
+    if (this.controlFilterDescription.value) parameters.Description = this.controlFilterDescription.value;
+    if (this.controlFilterRecurrance.value) parameters.Recurrance = parseInt(this.controlFilterRecurrance.value);
+    if (this.controlFilterType.value) parameters.Type = parseInt(this.controlFilterType.value);
+    if (this.controlFilterCurrency.value) parameters.CurrencyId = this.controlFilterCurrency.value;
+
+    this.financialStatementTransactionService.getList(parameters).subscribe(financialStatementTransactions => {
       this.dataSource = new MatTableDataSource(financialStatementTransactions);
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
     });
-    this.currencyService.getList().subscribe(currencies => this.currencies = currencies);
   }
 
   onSortChange(sortState: Sort) {

@@ -5,12 +5,15 @@ import { HttpClient, HttpHandler } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CurrencyService } from 'src/app/shared/services/Currency.service';
 import { FinancialStatementTransactionService } from 'src/app/shared/services/FinancialStatementTransaction.service';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatInputModule } from '@angular/material/input';
+import { MatNativeDateModule } from '@angular/material/core';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSelectModule } from '@angular/material/select';
 import { MatTableModule } from '@angular/material/table';
 import { PublicWebsiteFinancialStatementComponent } from './financial-statement.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { RouterTestingModule } from '@angular/router/testing';
 import { Sort } from '@angular/material/sort';
 
 describe('PublicWebsiteFinancialStatementComponent', () => {
@@ -24,10 +27,10 @@ describe('PublicWebsiteFinancialStatementComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [PublicWebsiteFinancialStatementComponent],
-      imports: [BrowserAnimationsModule, MatInputModule, MatPaginatorModule, MatSelectModule, MatTableModule, ReactiveFormsModule],
+      imports: [BrowserAnimationsModule, MatDatepickerModule, MatInputModule, MatNativeDateModule, MatPaginatorModule, MatSelectModule, MatTableModule, ReactiveFormsModule, RouterTestingModule],
       providers: [
         { provide: ActivatedRoute, useValue: fakeActivatedRoute },
-        CurrencyService,
+        CurrencyService,        
         FinancialStatementTransactionService,
         HttpClient,
         HttpHandler

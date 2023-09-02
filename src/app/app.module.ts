@@ -19,6 +19,7 @@ import { ControlPanelConfigurationDigiByteWalletListComponent } from './control-
 import { ControlPanelConfigurationShopComponent } from './control-panel/configuration/shops/shop.component';
 import { ControlPanelConfigurationShopListComponent } from './control-panel/configuration/shops/shop-list.component';
 import { CurrencyService } from './shared/services/Currency.service';
+import { DatePipe } from '@angular/common';
 import { DeliveryMethodService } from './shared/services/DeliveryMethod.service';
 import { DialogDeleteComponent } from './dialogs/delete/dialog.delete.component';
 import { DialogLoginComponent } from './dialogs/login/dialog.login.component';
@@ -130,6 +131,7 @@ import { ShopService } from './shared/services/Shop.service';
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
     AuthenticationService,
     CurrencyService,
+    DatePipe,
     DeliveryMethodService,
     DigiByteWalletService,
     FaqService,
