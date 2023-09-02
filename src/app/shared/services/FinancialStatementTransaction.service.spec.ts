@@ -29,6 +29,8 @@ describe('FinancialStatementTransactionService', () => {
     });
     
     it('should be able to get a list of financial statement transactions', () => {
+
+        
         service.getList().subscribe();
         const request = httpMock.expectOne(Environment.API_URL + '/FinancialStatementTransaction');
         expect(request.request.method).toBe('GET');
