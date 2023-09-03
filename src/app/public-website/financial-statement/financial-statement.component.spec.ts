@@ -13,6 +13,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSelectModule } from '@angular/material/select';
 import { MatTableModule } from '@angular/material/table';
 import { PublicWebsiteFinancialStatementComponent } from './financial-statement.component';
+import { QRCodeModule } from 'angularx-qrcode';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RouterTestingModule } from '@angular/router/testing';
 import { Sort } from '@angular/material/sort';
@@ -28,7 +29,7 @@ describe('PublicWebsiteFinancialStatementComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [PublicWebsiteFinancialStatementComponent],
-      imports: [BrowserAnimationsModule, MatDatepickerModule, MatInputModule, MatNativeDateModule, MatPaginatorModule, MatSelectModule, MatTableModule, ReactiveFormsModule, RouterTestingModule],
+      imports: [BrowserAnimationsModule, MatDatepickerModule, MatInputModule, MatNativeDateModule, MatPaginatorModule, MatSelectModule, MatTableModule, QRCodeModule, ReactiveFormsModule, RouterTestingModule],
       providers: [
         { provide: ActivatedRoute, useValue: fakeActivatedRoute },
         DatePipe,

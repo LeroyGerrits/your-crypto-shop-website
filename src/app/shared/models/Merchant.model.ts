@@ -10,5 +10,6 @@ export class Merchant {
     LastLogin?: Date;
     LastIpAddress?: string;
     SecondLastLogin?: Date;
-    SecondLastIpAddress?: string;
+    SecondLastIpAddress?: string;    
+    Salutation!: string;
 }

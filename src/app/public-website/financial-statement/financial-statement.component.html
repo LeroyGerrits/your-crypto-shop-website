@@ -3,12 +3,12 @@
         <h2>Financial Statement</h2>
         <p>We value transparency. All of our expenses, withdrawals and donations will be documented in this financial
             statement. DGB
-            Commerce makes use of 2 public DigiByte wallets: a regular wallet which is used for withdrawals (to cover
+            Commerce makes use of 2 public DigiByte wallets: a general wallet which is used for withdrawals (to cover
             expenses) and
             receive donations, and a transactions wallet which is used for all automated transactions that happen when
             consumers buy products and goods from merchants using our platform.</p>
         <p>On regular intervals, DGB Commerce will transfer DigiByte from the automated transaction wallet to the
-            regular wallet to cover expenses. In the event of such a transfer or a donation, a <span
+            general wallet to cover expenses. In the event of such a transfer or a donation, a <span
                 class="Type TypeDebit">Debit</span>
             entry will be added to this financial statement. All other purchases and expenses, including the ones that
             were paid with fiat, are <span class="Type TypeCredit">Credit</span> entries.</p>
@@ -16,13 +16,14 @@
 </div>
 <div class="ColumnOneFourth">
     <div class="WrapperPadding20-10-0-10 TextAlignCenter">
-        <h3>Our regular wallet</h3>
+        <h3>Our general wallet</h3>
         <div>
             <qrcode [qrdata]="constants.DIGIBYTE_WALLET_ADDRESS_GENERAL" [width]="constants.QR_CODE_SIZE"
                 [errorCorrectionLevel]="'M'" [colorDark]="constants.QR_CODE_COLOR" [imageSrc]="constants.QR_CODE_LOGO"
                 [imageHeight]="constants.QR_CODE_LOGO_SIZE" [imageWidth]="constants.QR_CODE_LOGO_SIZE"></qrcode>
         </div>
-        <span class="WordWrapBreakWord"><a href="digibyte:{{constants.DIGIBYTE_WALLET_ADDRESS_GENERAL}}">{{constants.DIGIBYTE_WALLET_ADDRESS_GENERAL}}</a></span>
+        <span class="WordWrapBreakWord"><a
+                href="digibyte:{{constants.DIGIBYTE_WALLET_ADDRESS_GENERAL}}">{{constants.DIGIBYTE_WALLET_ADDRESS_GENERAL}}</a></span>
     </div>
 </div>
 <div class="ColumnOneFourth">
@@ -33,7 +34,8 @@
                 [errorCorrectionLevel]="'M'" [colorDark]="constants.QR_CODE_COLOR" [imageSrc]="constants.QR_CODE_LOGO"
                 [imageHeight]="constants.QR_CODE_LOGO_SIZE" [imageWidth]="constants.QR_CODE_LOGO_SIZE"></qrcode>
         </div>
-        <span class="WordWrapBreakWord"><a href="digibyte:{{constants.DIGIBYTE_WALLET_ADDRESS_TRANSACTIONS}}">{{constants.DIGIBYTE_WALLET_ADDRESS_TRANSACTIONS}}</a></span>
+        <span class="WordWrapBreakWord"><a
+                href="digibyte:{{constants.DIGIBYTE_WALLET_ADDRESS_TRANSACTIONS}}">{{constants.DIGIBYTE_WALLET_ADDRESS_TRANSACTIONS}}</a></span>
     </div>
 </div>
 <div class="ColumnOneSixth ClearLeft">

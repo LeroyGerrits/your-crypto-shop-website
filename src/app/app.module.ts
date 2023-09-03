@@ -18,6 +18,7 @@ import { ControlPanelConfigurationDigiByteWalletComponent } from './control-pane
 import { ControlPanelConfigurationDigiByteWalletListComponent } from './control-panel/configuration/digibyte-wallets/digibyte-wallet-list.component';
 import { ControlPanelConfigurationShopComponent } from './control-panel/configuration/shops/shop.component';
 import { ControlPanelConfigurationShopListComponent } from './control-panel/configuration/shops/shop-list.component';
+import { ControlPanelDashboardComponent } from './control-panel/dashboard/dashboard.component';
 import { CurrencyService } from './shared/services/Currency.service';
 import { DatePipe } from '@angular/common';
 import { DeliveryMethodService } from './shared/services/DeliveryMethod.service';
@@ -81,6 +82,7 @@ import { ShopService } from './shared/services/Shop.service';
     ControlPanelConfigurationDigiByteWalletComponent,
     ControlPanelConfigurationShopListComponent,
     ControlPanelConfigurationShopComponent,
+    ControlPanelDashboardComponent,
     DialogDeleteComponent,
     DialogLoginComponent,
     DialogLogoutComponent,
