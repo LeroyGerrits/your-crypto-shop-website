@@ -1,38 +1,16 @@
 import { DeliveryMethod } from 'src/app/shared/models/DeliveryMethod.model';
-import { Gender } from 'src/app/shared/enums/Gender.enum';
+import { TestDataShops } from './Shops';
 
 export const TestDataDeliveryMethods: DeliveryMethod[] = [
     {
         Id: '00000000-0000-0000-0000-000000000001',
-        Shop: {
-            Id: '00000000-0000-0000-0000-000000000001',
-            Name: 'Example shop 1',
-            Merchant: {
-                Id: '00000000-0000-0000-0000-000000000011',
-                EmailAddress: 'merchant@dgbcommerce.com',
-                Gender: Gender.Male,
-                LastName: 'Test',
-                Salutation:'Mr. Test'
-            },
-            SubDomain: 'exampleshop1'
-        },
+        Shop: TestDataShops[0],
         Name: 'Pickup',
         Costs: 100
     },
     {
         Id: '00000000-0000-0000-0000-000000000002',
-        Shop: {
-            Id: '00000000-0000-0000-0000-000000000002',
-            Name: 'Example shop 2',
-            Merchant: {
-                Id: '00000000-0000-0000-0000-000000000012',
-                EmailAddress: 'merchant@dgbcommerce.com',
-                Gender: Gender.Female,
-                LastName: 'Test',
-                Salutation:'Ms. Test'
-            },
-            SubDomain: 'exampleshop2'
-        },
+        Shop: TestDataShops[0],
         Name: 'Package Delivery',
         Costs: 1200
     }

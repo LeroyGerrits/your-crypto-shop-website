@@ -1,21 +1,16 @@
 import { Faq } from 'src/app/shared/models/Faq.model';
+import { TestDataFaqCategories } from './FaqCategories';
 
 export const TestDataFaqs: Faq[] = [
     {
         Id: '00000000-0000-0000-0000-000000000001',
-        Category: {
-            Id: '00000000-0000-0000-0000-000000000011',
-            Name: 'Test category 1'
-        },
+        Category: TestDataFaqCategories[0],
         Title: 'Test FAQ 1',
         Keywords: ['A', 'B', 'C']
     },
     {
         Id: '00000000-0000-0000-0000-000000000001',
-        Category: {
-            Id: '00000000-0000-0000-0000-000000000011',
-            Name: 'Test category'
-        },
+        Category: TestDataFaqCategories[0],
         Title: 'Test FAQ',
         Keywords: ['A', 'B', 'C']
     }

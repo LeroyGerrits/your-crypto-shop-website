@@ -26,6 +26,7 @@ export class PublicWebsiteFinancialStatementComponent implements OnInit {
 
   constants = Constants;
   
+  financialStatementTransactions: FinancialStatementTransaction[] = [];
   dataSource = new MatTableDataSource<FinancialStatementTransaction>;
   displayedColumns: string[] = ['Date', 'Description', 'Recurrance', 'Type', 'Currency', 'Amount'];
   sortDirection: string | null = 'asc';
@@ -68,6 +69,7 @@ export class PublicWebsiteFinancialStatementComponent implements OnInit {
     if (this.controlFilterCurrency.value) parameters.CurrencyId = this.controlFilterCurrency.value;
 
     this.financialStatementTransactionService.getList(parameters).subscribe(financialStatementTransactions => {
+      this.financialStatementTransactions = financialStatementTransactions;
       this.dataSource = new MatTableDataSource(financialStatementTransactions);
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
