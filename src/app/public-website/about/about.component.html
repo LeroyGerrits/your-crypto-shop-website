@@ -48,9 +48,13 @@
         <h2>Donate</h2>
         <img class="PublicWebsiteImage" src="/assets/images/About Donate.png" width="150" height="150" alt="Donate" />
         <p>Want to support this initiative? A DigiByte donation is most welcome!</p>
-        <qrcode [qrdata]="constants.DIGIBYTE_WALLET_ADDRESS_GENERAL" [width]="constants.QR_CODE_SIZE"
+        <div>
+            <qrcode [qrdata]="constants.DIGIBYTE_WALLET_ADDRESS_GENERAL" [width]="constants.QR_CODE_SIZE"
                 [errorCorrectionLevel]="'M'" [colorDark]="constants.QR_CODE_COLOR" [imageSrc]="constants.QR_CODE_LOGO"
-                [imageHeight]="constants.QR_CODE_LOGO_SIZE" [imageWidth]="constants.QR_CODE_LOGO_SIZE"></qrcode>
+                [imageHeight]="constants.QR_CODE_LOGO_SIZE" [imageWidth]="constants.QR_CODE_LOGO_SIZE" />
+        </div>
+        <span class="FontSize0x8Em WordWrapBreakWord"><a
+                href="digibyte:{{constants.DIGIBYTE_WALLET_ADDRESS_GENERAL}}">{{constants.DIGIBYTE_WALLET_ADDRESS_GENERAL}}</a></span>
     </div>
 </div>
 <div class="ClearLeft"></div>

@@ -12,7 +12,8 @@ export const TestDataShops: Shop[] = [
             LastName: 'Test',
             Salutation:'Mr. Test'
         },
-        SubDomain: 'exampleshop1'
+        SubDomain: 'exampleshop1',
+        Featured: true
     },
     {
         Id: '00000000-0000-0000-0000-000000000002',
@@ -24,6 +25,7 @@ export const TestDataShops: Shop[] = [
             LastName: 'Test',
             Salutation:'Ms. Test'
         },
-        SubDomain: 'exampleshop2'
+        SubDomain: 'exampleshop2',
+        Featured: false
     }
 ];

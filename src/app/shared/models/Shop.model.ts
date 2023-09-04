@@ -5,4 +5,5 @@ export class Shop {
     Merchant!: Merchant;
     Name!: string;
     SubDomain?: string;
+    Featured!: boolean;
 }

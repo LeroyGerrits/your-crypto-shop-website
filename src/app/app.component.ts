@@ -2,6 +2,7 @@ import { AuthenticationService } from './shared/services/Authentication.service'
 import { Component } from '@angular/core';
 import { DialogLoginComponent } from './dialogs/login/dialog.login.component';
 import { DialogLogoutComponent } from './dialogs/logout/dialog.logout.component';
+import { DialogSignUpComponent } from './dialogs/signup/dialog.signup.component';
 import { MatDialog } from '@angular/material/dialog';
 import { Merchant } from './shared/models/Merchant.model';
 
@@ -37,10 +38,10 @@ export class AppComponent {
   }
 
   signup() {
-    const dialogRegister = this.dialog.open(DialogLoginComponent);
-    dialogRegister.afterClosed().subscribe(result => {
+    const dialogSignUp = this.dialog.open(DialogSignUpComponent);
+    dialogSignUp.afterClosed().subscribe(result => {
       if (result) {
-        dialogRegister.close();
+        dialogSignUp.close();
       }
     });
   }

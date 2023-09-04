@@ -3,9 +3,11 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar, MatSnackBarRef, TextOnlySnackBar } from '@angular/material/snack-bar';
 import { Subscription, debounceTime, distinctUntilChanged } from 'rxjs';
 
+import { AuthenticationService } from 'src/app/shared/services/Authentication.service';
 import { Component } from '@angular/core';
 import { Constants } from 'src/app/shared/Constants';
 import { Environment } from 'src/app/shared/environments/Environment';
+import { Merchant } from 'src/app/shared/models/Merchant.model';
 import { MutationResult } from 'src/app/shared/models/MutationResult';
 import { Shop } from 'src/app/shared/models/Shop.model';
 import { ShopService } from 'src/app/shared/services/Shop.service';
@@ -17,6 +19,8 @@ import { ShopService } from 'src/app/shared/services/Shop.service';
 })
 
 export class ControlPanelConfigurationShopComponent {
+  public activeMerchant?: Merchant | null;
+  
   public environment = Environment;
   public snackBarRef: MatSnackBarRef<TextOnlySnackBar> | undefined;
   public queryStringShopId: string | null = '';
@@ -34,11 +38,14 @@ export class ControlPanelConfigurationShopComponent {
   public subDomainAvailable = true;
 
   constructor(
+    private authenticationService: AuthenticationService,
     private route: ActivatedRoute,
     private router: Router,
     private snackBar: MatSnackBar,
     private shopService: ShopService
   ) {
+    this.authenticationService.merchant.subscribe(x => this.activeMerchant = x?.Merchant);
+
     this.form = new FormGroup([
       this.controlName,
       this.controlSubDomain
@@ -91,6 +98,7 @@ export class ControlPanelConfigurationShopComponent {
     const shopToUpdate: Shop = Object.assign({}, this.shop);
     shopToUpdate.Name = this.controlName.value!;
     shopToUpdate.SubDomain = this.controlSubDomain.value!;
+    shopToUpdate.Merchant = this.activeMerchant!;
 
     if (this.queryStringShopId && this.queryStringShopId != 'new') {
       this.shopService.update(shopToUpdate).subscribe({

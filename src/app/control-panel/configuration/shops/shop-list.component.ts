@@ -14,7 +14,8 @@ import { ShopService } from 'src/app/shared/services/Shop.service';
 
 @Component({
   selector: 'control-panel-configuration-shop-list',
-  templateUrl: './shop-list.component.html'
+  templateUrl: './shop-list.component.html',
+  styleUrls: ['./shop-list.component.scss']
 })
 
 export class ControlPanelConfigurationShopListComponent implements OnInit {
@@ -25,7 +26,7 @@ export class ControlPanelConfigurationShopListComponent implements OnInit {
 
   environment = Environment;
   dataSource = new MatTableDataSource<Shop>;
-  displayedColumns: string[] = ['Name', 'SubDomain', 'ActionButtons'];
+  displayedColumns: string[] = ['Featured', 'Name', 'SubDomain', 'ActionButtons'];
   sortDirection: string | null = 'asc';
 
   public form!: FormGroup;
@@ -37,7 +38,7 @@ export class ControlPanelConfigurationShopListComponent implements OnInit {
     private snackBar: MatSnackBar,
     private router: Router,
     private shopService: ShopService
-  ) { 
+  ) {
     this.form = new FormGroup([
       this.controlFilterName,
       this.controlFilterSubDomain

@@ -53,4 +53,10 @@ describe('AppComponent', () => {
     component.logout();
     expect(matDialogSpy.open).toHaveBeenCalled();
   });
+
+  it('should show a sign up dialog', () => {
+    component.signup();
+    expect(matDialogSpy.open).toHaveBeenCalled();
+    expect(matDialogRefSpy.close).toHaveBeenCalled();
+  });
 });
