@@ -37,51 +37,51 @@ import { PublicWebsiteNotFoundComponent } from './public-website/not-found/not-f
 import { PublicWebsitePricingComponent } from './public-website/pricing/pricing.component';
 import { PublicWebsiteResetPasswordComponent } from './public-website/reset-password/reset-password.component';
 
-const titlePrefix: string = 'DGB Commerce - ';
+const titlePrefix: string = 'DGB Commerce';
 const routes: Routes = [
   {
-    path: 'account', component: AccountComponent, canActivate: [MerchantAuthorizedGuard], title: titlePrefix + 'Account', children: [
-      { path: '', component: AccountDashboardComponent, title: titlePrefix + 'Account dashboard' },
-      { path: 'settings', component: AccountSettingsComponent, title: titlePrefix + 'Settings' },
-      { path: 'change-password', component: AccountChangePasswordComponent, title: titlePrefix + 'Change password' }
+    path: 'account', component: AccountComponent, canActivate: [MerchantAuthorizedGuard], title: `${titlePrefix} - Account`, children: [
+      { path: '', component: AccountDashboardComponent, title: `${titlePrefix} - Account dashboard` },
+      { path: 'settings', component: AccountSettingsComponent, title: `${titlePrefix} - Settings` },
+      { path: 'change-password', component: AccountChangePasswordComponent, title: `${titlePrefix} - Change password` }
     ]
   },
   {
-    path: 'control-panel', component: ControlPanelComponent, canActivate: [MerchantAuthorizedGuard], title: titlePrefix + 'Control panel', children: [
-      { path: '', component: ControlPanelDashboardComponent, title: titlePrefix + 'Control panel Dashboard' },
-      { path: 'catalog/categories', component: ControlPanelCatalogCategoryListComponent, title: titlePrefix + 'Categories' },
-      { path: 'catalog/categories/:categoryId', component: ControlPanelCatalogCategoryComponent, title: titlePrefix + 'Categories' },
-      { path: 'catalog/products', component: ControlPanelCatalogProductListComponent, title: titlePrefix + 'Products' },
-      { path: 'catalog/products/:productId', component: ControlPanelCatalogProductComponent, title: titlePrefix + 'Products' },
-      { path: 'configuration/delivery-methods', component: ControlPanelConfigurationDeliveryMethodListComponent, title: titlePrefix + 'Delivery methods' },
-      { path: 'configuration/delivery-methods/:deliveryMethodId', component: ControlPanelConfigurationDeliveryMethodComponent, title: titlePrefix + 'Delivery methods' },
-      { path: 'configuration/digibyte-wallets', component: ControlPanelConfigurationDigiByteWalletListComponent, title: titlePrefix + 'DigiByte wallets' },
-      { path: 'configuration/digibyte-wallets/:digiBytewalletId', component: ControlPanelConfigurationDigiByteWalletComponent, title: titlePrefix + 'DigiByte wallets' },
-      { path: 'configuration/shops', component: ControlPanelConfigurationShopListComponent, title: titlePrefix + 'Shops' },
-      { path: 'configuration/shops/:shopId', component: ControlPanelConfigurationShopComponent, title: titlePrefix + 'Shops' },
-      { path: 'customers', component: CustomerListComponent, title: titlePrefix + 'Customers' },
-      { path: 'customers/:orderId', component: CustomerComponent, title: titlePrefix + 'Customers' },
-      { path: 'sales/orders', component: ControlPanelSalesOrderListComponent, title: titlePrefix + 'Orders' },
-      { path: 'sales/orders/:orderId', component: ControlPanelSalesOrderComponent, title: titlePrefix + 'Orders' },
-      { path: 'sales/transactions', component: ControlPanelSalesTransactionListComponent, title: titlePrefix + 'Transactions' },
-      { path: 'sales/transactions/:transactionId', component: ControlPanelSalesTransactionComponent, title: titlePrefix + 'Transactions' }
+    path: 'control-panel', component: ControlPanelComponent, canActivate: [MerchantAuthorizedGuard], title: `${titlePrefix} - Control panel`, children: [
+      { path: '', component: ControlPanelDashboardComponent, title: `${titlePrefix} - Control panel Dashboard` },
+      { path: 'catalog/categories', component: ControlPanelCatalogCategoryListComponent, title: `${titlePrefix} - Categories` },
+      { path: 'catalog/categories/:categoryId', component: ControlPanelCatalogCategoryComponent, title: `${titlePrefix} - Categories` },
+      { path: 'catalog/products', component: ControlPanelCatalogProductListComponent, title: `${titlePrefix} - Products` },
+      { path: 'catalog/products/:productId', component: ControlPanelCatalogProductComponent, title: `${titlePrefix} - Products` },
+      { path: 'configuration/delivery-methods', component: ControlPanelConfigurationDeliveryMethodListComponent, title: `${titlePrefix} - Delivery methods` },
+      { path: 'configuration/delivery-methods/:deliveryMethodId', component: ControlPanelConfigurationDeliveryMethodComponent, title: `${titlePrefix} - Delivery methods` },
+      { path: 'configuration/digibyte-wallets', component: ControlPanelConfigurationDigiByteWalletListComponent, title: `${titlePrefix} - DigiByte wallets` },
+      { path: 'configuration/digibyte-wallets/:digiBytewalletId', component: ControlPanelConfigurationDigiByteWalletComponent, title: `${titlePrefix} - DigiByte wallets` },
+      { path: 'configuration/shops', component: ControlPanelConfigurationShopListComponent, title: `${titlePrefix} - Shops` },
+      { path: 'configuration/shops/:shopId', component: ControlPanelConfigurationShopComponent, title: `${titlePrefix} - Shops` },
+      { path: 'customers', component: CustomerListComponent, title: `${titlePrefix} - Customers` },
+      { path: 'customers/:orderId', component: CustomerComponent, title: `${titlePrefix} - Customers` },
+      { path: 'sales/orders', component: ControlPanelSalesOrderListComponent, title: `${titlePrefix} - Orders` },
+      { path: 'sales/orders/:orderId', component: ControlPanelSalesOrderComponent, title: `${titlePrefix} - Orders` },
+      { path: 'sales/transactions', component: ControlPanelSalesTransactionListComponent, title: `${titlePrefix} - Transactions` },
+      { path: 'sales/transactions/:transactionId', component: ControlPanelSalesTransactionComponent, title: `${titlePrefix} - Transactions` }
     ]
   },
   {
     path: '', component: PublicWebsiteComponent, title: titlePrefix, children: [
       { path: '', component: PublicWebsiteIndexComponent },
-      { path: 'about', component: PublicWebsiteAboutComponent, title: titlePrefix + 'About' },
-      { path: 'financial-statement', component: PublicWebsiteFinancialStatementComponent, title: titlePrefix + 'Financial statement' },
-      { path: 'news', component: PublicWebsiteNewsListComponent, title: titlePrefix + 'News' },
-      { path: 'news/:newsMessageId', component: PublicWebsiteNewsComponent, title: titlePrefix + 'News' },
-      { path: 'news/:newsMessageId/:newsMessageTitle', component: PublicWebsiteNewsComponent, title: titlePrefix + 'News' },
-      { path: 'not-authorized', component: PublicWebsiteNotAuthorizedComponent, title: titlePrefix + 'Not authorized' },
-      { path: 'pricing', component: PublicWebsitePricingComponent, title: titlePrefix + 'Pricing' },
-      { path: 'faq', component: PublicWebsiteFaqListComponent, title: titlePrefix + 'FAQ' },
-      { path: 'faq/:faqId', component: PublicWebsiteFaqComponent, title: titlePrefix + 'FAQ' },
-      { path: 'faq/:faqId/:faqTitle', component: PublicWebsiteFaqComponent, title: titlePrefix + 'FAQ' },
-      { path: 'reset-password', component: PublicWebsiteResetPasswordComponent, title: titlePrefix + 'Reset password' },
-      { path: '**', pathMatch: 'full', component: PublicWebsiteNotFoundComponent, title: titlePrefix + 'Not found' }
+      { path: 'about', component: PublicWebsiteAboutComponent, title: `${titlePrefix} - About` },
+      { path: 'financial-statement', component: PublicWebsiteFinancialStatementComponent, title: `${titlePrefix} - Financial statement` },
+      { path: 'news', component: PublicWebsiteNewsListComponent, title: `${titlePrefix} - News` },
+      { path: 'news/:newsMessageId', component: PublicWebsiteNewsComponent, title: `${titlePrefix} - News` },
+      { path: 'news/:newsMessageId/:newsMessageTitle', component: PublicWebsiteNewsComponent, title: `${titlePrefix} - News` },
+      { path: 'not-authorized', component: PublicWebsiteNotAuthorizedComponent, title: `${titlePrefix} - Not authorized` },
+      { path: 'pricing', component: PublicWebsitePricingComponent, title: `${titlePrefix} - Pricing` },
+      { path: 'faq', component: PublicWebsiteFaqListComponent, title: `${titlePrefix} - FAQ` },
+      { path: 'faq/:faqId', component: PublicWebsiteFaqComponent, title: `${titlePrefix} - FAQ` },
+      { path: 'faq/:faqId/:faqTitle', component: PublicWebsiteFaqComponent, title: `${titlePrefix} - FAQ` },
+      { path: 'reset-password', component: PublicWebsiteResetPasswordComponent, title: `${titlePrefix} - Reset password` },
+      { path: '**', pathMatch: 'full', component: PublicWebsiteNotFoundComponent, title: `${titlePrefix} - Not found` }
     ]
   }
 ];

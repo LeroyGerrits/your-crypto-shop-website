@@ -11,7 +11,8 @@ export const TestDataDeliveryMethods: DeliveryMethod[] = [
                 Id: '00000000-0000-0000-0000-000000000011',
                 EmailAddress: 'merchant@dgbcommerce.com',
                 Gender: Gender.Male,
-                LastName: 'Test'
+                LastName: 'Test',
+                Salutation:'Mr. Test'
             },
             SubDomain: 'exampleshop1'
         },
@@ -27,7 +28,8 @@ export const TestDataDeliveryMethods: DeliveryMethod[] = [
                 Id: '00000000-0000-0000-0000-000000000012',
                 EmailAddress: 'merchant@dgbcommerce.com',
                 Gender: Gender.Female,
-                LastName: 'Test'
+                LastName: 'Test',
+                Salutation:'Ms. Test'
             },
             SubDomain: 'exampleshop2'
         },

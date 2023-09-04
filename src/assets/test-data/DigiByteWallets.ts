@@ -8,7 +8,8 @@ export const TestDataDigiByteWallets: DigiByteWallet[] = [
             Id: '00000000-0000-0000-0000-000000000011',
             EmailAddress: 'merchant@dgbcommerce.com',
             Gender: Gender.Male,
-            LastName: 'Test'
+            LastName: 'Test',
+            Salutation:'Mr. Test'
         },
         Name: 'Test DigiByte wallet 1',
         Address: 'dgb123'
@@ -19,7 +20,8 @@ export const TestDataDigiByteWallets: DigiByteWallet[] = [
             Id: '00000000-0000-0000-0000-000000000012',
             EmailAddress: 'merchant@dgbcommerce.com',
             Gender: Gender.Male,
-            LastName: 'Test'
+            LastName: 'Test',
+            Salutation:'Mr. Test'
         },
         Name: 'Test DigiByte wallet 2',
         Address: 'dgb123'

@@ -11,7 +11,8 @@ export const TestDataCategories: Category[] = [
                 Id: '00000000-0000-0000-0000-000000000011',
                 EmailAddress: 'merchant@dgbcommerce.com',
                 Gender: Gender.Male,
-                LastName: 'Test'
+                LastName: 'Test',
+                Salutation:'Mr. Test'
             }
         },
         Name: 'Test category 1'
@@ -25,7 +26,8 @@ export const TestDataCategories: Category[] = [
                 Id: '00000000-0000-0000-0000-000000000011',
                 EmailAddress: 'merchant@dgbcommerce.com',
                 Gender: Gender.Male,
-                LastName: 'Test'
+                LastName: 'Test',
+                Salutation:'Mr. Test'
             }
         },
         Name: 'Test category 2'
