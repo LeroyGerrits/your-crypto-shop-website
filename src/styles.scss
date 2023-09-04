@@ -88,7 +88,8 @@ body {
 
 h1,
 h2,
-h3 {
+h3,
+h4 {
   display: inline;
   font-family: 'robotoblack', Helvetica, Tahoma !important;
   font-weight: normal !important;
@@ -367,6 +368,10 @@ div.WrapperPadding10-8-10-10 {
 
 div.WrapperPadding20 {
   padding: 20px;
+}
+
+div.WrapperPadding20-10 {
+  padding: 20px 10px;
 }
 
 div.WrapperPadding20-20-0-20 {
