@@ -40,7 +40,7 @@ describe('FinancialStatementTransactionService', () => {
             Type: 0,
             CurrencyId: Constants.EMPTY_GUID,
             Recurrance: 0,
-            Description: 'test'
+            Description: 'Test'
         };
 
         service.getList(parameters).subscribe();

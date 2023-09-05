@@ -27,7 +27,7 @@ export class ControlPanelConfigurationDeliveryMethodComponent implements OnInit,
   public controlShop = new FormControl('', Validators.required);
   public controlCosts = new FormControl('', Validators.pattern(/^-?\d*[.,]?\d{0,2}$/));
 
-  public pageTitle = 'Create new DigiByte wallet'
+  public pageTitle = 'Create new delivery method'
   public deliveryMethod: DeliveryMethod = new DeliveryMethod();
   public shops: Shop[] | undefined;
 

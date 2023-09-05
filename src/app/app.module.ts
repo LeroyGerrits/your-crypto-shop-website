@@ -9,6 +9,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { AuthenticationService } from './shared/services/Authentication.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BrowserModule } from '@angular/platform-browser';
+import { CategoryService } from './shared/services/Category.service';
+import { ControlPanelCatalogCategoryListComponent } from './control-panel/catalog/categories/category-list.component';
 import { ControlPanelCatalogProductComponent } from './control-panel/catalog/products/product.component';
 import { ControlPanelCatalogProductListComponent } from './control-panel/catalog/products/product-list.component';
 import { ControlPanelComponent } from './control-panel/control-panel.component';
@@ -54,6 +56,7 @@ import { MatSortModule } from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatTreeModule } from '@angular/material/tree';
 import { MerchantPasswordResetLinkService } from './shared/services/MerchantPasswordResetLink.service';
 import { NewsMessageService } from './shared/services/NewsMessage.service';
 import { NgModule } from '@angular/core';
@@ -75,6 +78,7 @@ import { ShopService } from './shared/services/Shop.service';
     AccountChangePasswordComponent,
     AccountSettingsComponent,
     AppComponent,
+    ControlPanelCatalogCategoryListComponent,
     ControlPanelComponent,
     ControlPanelConfigurationDeliveryMethodListComponent,
     ControlPanelConfigurationDeliveryMethodComponent,
@@ -125,6 +129,7 @@ import { ShopService } from './shared/services/Shop.service';
     MatTableModule,
     MatToolbarModule,
     MatTooltipModule,
+    MatTreeModule,
     QRCodeModule,
     ReactiveFormsModule,
     RouterModule,
@@ -134,6 +139,7 @@ import { ShopService } from './shared/services/Shop.service';
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
     AuthenticationService,
+    CategoryService,
     CurrencyService,
     DatePipe,
     DeliveryMethodService,

@@ -1,6 +1,8 @@
+import { HttpClient, HttpParams } from '@angular/common/http';
+
 import { Category } from 'src/app/shared/models/Category.mode.model';
 import { Environment } from 'src/app/shared/environments/Environment';
-import { HttpClient } from '@angular/common/http';
+import { GetCategoriesParameters } from '../models/parameters/GetCategoriesParameters.model';
 import { Injectable } from '@angular/core';
 import { MutationResult } from 'src/app/shared/models/MutationResult';
 import { Observable } from 'rxjs';
@@ -11,8 +13,16 @@ export class CategoryService {
 
     constructor(protected http: HttpClient) { }
 
-    getList(): Observable<Category[]> {
-        return this.http.get<Category[]>(this.apiUrl);
+    getList(parameters?: GetCategoriesParameters): Observable<Category[]> {
+        let httpParams = new HttpParams();
+
+        if (parameters) {
+            if (parameters.ShopId) httpParams = httpParams.append('shopId', parameters.ShopId);
+            if (parameters.ParentId) httpParams = httpParams.append('parentId', parameters.ParentId);
+            if (parameters.Name) httpParams = httpParams.append('name', parameters.Name);
+        }
+
+        return this.http.get<Category[]>(this.apiUrl, { params: httpParams });
     }
 
     getById(id: string): Observable<Category> {

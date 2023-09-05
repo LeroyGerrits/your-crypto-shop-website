@@ -4,6 +4,7 @@ import { HttpClientTestingModule, HttpTestingController } from '@angular/common/
 import { CategoryService } from './Category.service';
 import { Constants } from 'src/app/shared/Constants';
 import { Environment } from 'src/app/shared/environments/Environment';
+import { GetCategoriesParameters } from '../models/parameters/GetCategoriesParameters.model';
 import { TestBed } from '@angular/core/testing';
 import { TestDataCategories } from 'src/assets/test-data/Categories';
 
@@ -30,8 +31,14 @@ describe('CategoryService', () => {
     });
     
     it('should be able to get a list of categories', () => {
-        service.getList().subscribe();
-        const request = httpMock.expectOne(Environment.API_URL + '/Category');
+        const parameters: GetCategoriesParameters = {
+            ShopId: TestDataCategories[0].Shop.Id,
+            ParentId: TestDataCategories[0].Parent?.Id,
+            Name: 'Test'
+        };
+
+        service.getList(parameters).subscribe();
+        const request = httpMock.expectOne(`${Environment.API_URL}/Category?shopId=${parameters.ShopId}&parentId=${parameters.ParentId}&name=${parameters.Name}`);
         expect(request.request.method).toBe('GET');
     });
 

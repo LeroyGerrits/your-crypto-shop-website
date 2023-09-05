@@ -107,13 +107,17 @@ describe('ControlPanelConfigurationDeliveryMethodListComponent', () => {
     expect(matDialogSpy.open).toHaveBeenCalled();
   });
 
+  it('should navigate when handling submit result and no error code is applicable', () => {
+    const mutationResult = { Constraint: '', ErrorCode: 0, Identity: '', Message: '' };
+    const routerstub: Router = TestBed.inject(Router);
+    spyOn(routerstub, 'navigate');
+
+    component.handleOnSubmitResult(mutationResult);
+    expect(routerstub.navigate).toHaveBeenCalledWith(['/control-panel/configuration/delivery-methods']);
+  });
+
   it('should show an error when handling submit result and an error code is applicable', () => {
-    const mutationResult = {
-      Constraint: '',
-      ErrorCode: 666,
-      Identity: '',
-      Message: 'Evil error'
-    };
+    const mutationResult = { Constraint: '', ErrorCode: 666, Identity: '', Message: 'Evil error' };
     component.handleOnSubmitResult(mutationResult);
     expect(matSnackBarSpy.open).toHaveBeenCalled();
   });
