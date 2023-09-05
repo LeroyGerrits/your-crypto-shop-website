@@ -5,6 +5,7 @@ import { Category } from 'src/app/shared/models/Category.mode.model';
 import { CategoryService } from 'src/app/shared/services/Category.service';
 import { Component } from '@angular/core';
 import { DialogDeleteComponent } from 'src/app/dialogs/delete/dialog.delete.component';
+import { GetCategoriesParameters } from 'src/app/shared/models/parameters/GetCategoriesParameters.model';
 import { MatDialog } from '@angular/material/dialog';
 import { MatTreeNestedDataSource } from '@angular/material/tree';
 import { MutationResult } from 'src/app/shared/models/MutationResult';
@@ -47,13 +48,14 @@ export class ControlPanelCatalogCategoryListComponent {
   treeControl = new NestedTreeControl<FoodNode>(node => node.children);
   dataSource = new MatTreeNestedDataSource<FoodNode>();
 
-  public snackBarRef: MatSnackBarRef<TextOnlySnackBar> | undefined;
+  snackBarRef: MatSnackBarRef<TextOnlySnackBar> | undefined;
 
-  public form!: FormGroup;
-  public controlFilterShop = new FormControl('');
-  public categories: Category[] | undefined;
-  public shops: Shop[] | undefined;
-
+  loading: boolean = false;
+  form!: FormGroup;
+  controlFilterShop = new FormControl({value: '', disabled: this.loading});
+  categories: Category[] | undefined;
+  shops: Shop[] | undefined;
+  
   constructor(
     public dialog: MatDialog,
     private snackBar: MatSnackBar,
@@ -79,9 +81,15 @@ export class ControlPanelCatalogCategoryListComponent {
   hasChild = (_: number, node: FoodNode) => !!node.children && node.children.length > 0;
 
   retrieveCategoriesByShopId(shopId: any) {
+    this.loading = true;
 
+    const parameters: GetCategoriesParameters = {};
+    if (shopId) parameters.ShopId = shopId;
 
-    this.categoryService.getList().subscribe(categories => this.categories = categories);
+    this.categoryService.getList(parameters).subscribe(categories => {
+      this.categories = categories;
+      this.loading = false;
+    });
   }
 
   editElement(element: Category) {

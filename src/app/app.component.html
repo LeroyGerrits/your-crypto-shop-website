@@ -1,7 +1,7 @@
 <div id="TopBar">
   <div class="CenteredContainer">
     <div class="RightMenu">
-      <mat-toolbar>        
+      <mat-toolbar>
         <button *ngIf="!this.activeMerchant" mat-button (click)="signup()">Sign up</button>
         <button *ngIf="!this.activeMerchant" mat-button (click)="login()">Merchant login</button>
 
@@ -14,7 +14,7 @@
           <button mat-menu-item [routerLink]="['/account/change-password']">Change password</button>
           <button mat-menu-item (click)="this.logout()">Log out</button>
         </mat-menu>
-      </mat-toolbar>      
+      </mat-toolbar>
     </div>
 
     <mat-toolbar *ngIf="this.activeMerchant">
@@ -49,13 +49,17 @@
   <div class="CenteredContainer">
     <div class="WrapperPadding20-8">
       <ul>
-        <li class="Telegram"><a href="https://t.me/DGBCommerceAnnouncements" target="_blank"><span>Telegram</span></a></li>
+        <li class="Telegram"><a href="https://t.me/DGBCommerceAnnouncements" target="_blank"><span>Telegram</span></a>
+        </li>
         <li class="X"><a href="https://www.x.com/DGBCommerce" target="_blank"><span>X</span></a></li>
-        <li class="Facebook"><a href="https://www.facebook.com/dgbcommerce" target="_blank"><span>Facebook</span></a></li>
-        <li class="LinkedIn"><a href="https://www.linkedin.com/company/dgbcommerce" target="_blank"><span>LinkedIn</span></a></li>
+        <li class="Facebook"><a href="https://www.facebook.com/dgbcommerce" target="_blank"><span>Facebook</span></a>
+        </li>
+        <li class="LinkedIn"><a href="https://www.linkedin.com/company/dgbcommerce"
+            target="_blank"><span>LinkedIn</span></a></li>
         <li class="GitHub"><a href="https://github.com/LeroyGerrits" target="_blank"><span>GitHub</span></a></li>
       </ul>
-      <span class="Copyright">&copy; DGB Commerce {{this.currentYear}} | <a [routerLink]="['financial-statement']">Financial statement</a></span>
+      <span class="Copyright">&copy; DGB Commerce {{this.currentYear}} | <a
+          [routerLink]="['financial-statement']">Financial statement</a></span>
       <div class="ClearRight"></div>
     </div>
   </div>
