@@ -92,22 +92,27 @@ export class ControlPanelCatalogCategoryListComponent {
     });
   }
 
-  editElement(element: Category) {
-    this.router.navigate([`/control-panel/catalog/categories/${element.Id}`]);
+  addElement(node: FoodNode) {
+    console.log(node);
+    this.treeControl.expand(node);
   }
 
-  deleteElement(element: Category) {
+  editElement(element: FoodNode) {
+    //this.router.navigate([`/control-panel/catalog/categories/${element.Id}`]);
+  }
+
+  deleteElement(element: FoodNode) {
     const dialogDelete = this.dialog.open(DialogDeleteComponent);
     const instance = dialogDelete.componentInstance;
-    instance.dialogMessage = `Are you sure you want to delete delivery method '${element.Name}'?`;
+    instance.dialogMessage = `Are you sure you want to delete category '${element.name}'?`;
 
     dialogDelete.afterClosed().subscribe(result => {
       if (result) {
-        this.categoryService.delete(element.Id).subscribe({
+        /*this.categoryService.delete(element.Id).subscribe({
           next: result => this.handleOnSubmitResult(result),
           error: error => this.handleOnSubmitError(error),
           complete: () => dialogDelete.close()
-        });
+        });*/
       }
     });
   }
