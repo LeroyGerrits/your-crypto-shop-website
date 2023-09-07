@@ -1,3 +1,23 @@
-<div class="WrapperPadding20-8">
-    <h2>Category {{this.category.Name}} ({{this.category.Id}})</h2>
-</div>
+<h2 mat-dialog-title>{{this.pageTitle}}</h2>
+<form (ngSubmit)="onSubmit()">
+  <mat-dialog-content class="mat-typography">
+    <mat-form-field>
+      <mat-label>Name</mat-label>
+      <input matInput [formControl]="controlName"
+        [ngClass]="{ 'is-invalid': formSubmitted && controlName.errors }" />
+      <div *ngIf="formSubmitted && controlName.errors" class="TextError">
+        <div *ngIf="controlName.errors['required']">Name is required</div>
+      </div>
+    </mat-form-field>
+    <div *ngIf="formError" class="TextError">{{formError}}</div>
+  </mat-dialog-content>
+  <mat-dialog-actions align="end">
+    <button mat-raised-button type="button" color="disabled" mat-dialog-close>Cancel</button>
+    <button mat-raised-button type="submit" color="primary" [disabled]="formLoading">
+      <mat-icon *ngIf="formLoading">
+        <mat-spinner diameter="18" />
+      </mat-icon>
+      Save
+    </button>
+  </mat-dialog-actions>
+</form>

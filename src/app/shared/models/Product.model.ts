@@ -1,4 +1,4 @@
-import { Category } from './Category.mode.model';
+import { Category } from './Category.model';
 import { ProductPhoto } from './ProductPhoto.model';
 import { Shop } from './Shop.model';
 

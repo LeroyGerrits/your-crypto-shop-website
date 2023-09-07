@@ -1,6 +1,6 @@
 <div class="WrapperPadding20-8-0-8">
     <div class="FloatRight">
-        <button mat-raised-button color="primary" [routerLink]="['/control-panel/catalog/categories/new']">
+        <button mat-raised-button color="primary" (click)="addCategory();">
             <mat-icon>add</mat-icon>
             Create new category
         </button>
@@ -17,42 +17,42 @@
 </div>
 <div class="WrapperPadding20-8">
     <mat-tree [dataSource]="dataSource" [treeControl]="treeControl" class="tree">
-        <mat-tree-node *matTreeNodeDef="let node" matTreeNodeToggle>
-            <mat-icon>arrow_right</mat-icon> {{node.name}}
+        <mat-tree-node *matTreeNodeDef="let category" matTreeNodeToggle>
+            <mat-icon>arrow_right</mat-icon> {{category.Name}}
             <button mat-icon-button [matMenuTriggerFor]="menu" class="MenuButton">
                 <mat-icon color="primary">more_horiz</mat-icon>
             </button>
             <mat-menu #menu="matMenu">
-                <button mat-menu-item (click)="addElement(node)">
+                <button mat-menu-item (click)="addCategory(category)">
                     <mat-icon color="primary">add</mat-icon>
                     <span>Add new sub-category</span>
                 </button>
-                <button mat-menu-item (click)="editElement(node)">
+                <button mat-menu-item (click)="editCategory(category)">
                     <mat-icon color="primary">edit</mat-icon>
                     <span>Edit</span>
                 </button>
-                <button mat-menu-item (click)="deleteElement(node)">
+                <button mat-menu-item (click)="deleteCategory(category)">
                     <mat-icon color="warn">delete</mat-icon>
                     <span>Delete</span>
                 </button>
             </mat-menu>
         </mat-tree-node>
-        <mat-nested-tree-node *matTreeNodeDef="let node; when: hasChild">
+        <mat-nested-tree-node *matTreeNodeDef="let category; when: hasChild">
             <div class="mat-tree-node">
-                <mat-icon>arrow_right</mat-icon> {{node.name}}
+                <mat-icon>arrow_right</mat-icon> {{category.Name}}
                 <button mat-icon-button [matMenuTriggerFor]="menu" class="MenuButton">
                     <mat-icon color="primary">more_horiz</mat-icon>
                 </button>
                 <mat-menu #menu="matMenu">
-                    <button mat-menu-item (click)="addElement(node)">
+                    <button mat-menu-item (click)="addCategory(category)">
                         <mat-icon color="primary">add</mat-icon>
                         <span>Add new sub-category</span>
                     </button>
-                    <button mat-menu-item (click)="editElement(node)">
+                    <button mat-menu-item (click)="editCategory(category)">
                         <mat-icon color="primary">edit</mat-icon>
                         <span>Edit</span>
                     </button>
-                    <button mat-menu-item (click)="deleteElement(node)">
+                    <button mat-menu-item (click)="deleteCategory(category)">
                         <mat-icon color="warn">delete</mat-icon>
                         <span>Delete</span>
                     </button>

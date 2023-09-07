@@ -10,6 +10,7 @@ import { AuthenticationService } from './shared/services/Authentication.service'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BrowserModule } from '@angular/platform-browser';
 import { CategoryService } from './shared/services/Category.service';
+import { ControlPanelCatalogCategoryComponent } from './control-panel/catalog/categories/category.component';
 import { ControlPanelCatalogCategoryListComponent } from './control-panel/catalog/categories/category-list.component';
 import { ControlPanelCatalogProductComponent } from './control-panel/catalog/products/product.component';
 import { ControlPanelCatalogProductListComponent } from './control-panel/catalog/products/product-list.component';
@@ -79,6 +80,7 @@ import { ShopService } from './shared/services/Shop.service';
     AccountSettingsComponent,
     AppComponent,
     ControlPanelCatalogCategoryListComponent,
+    ControlPanelCatalogCategoryComponent,
     ControlPanelComponent,
     ControlPanelConfigurationDeliveryMethodListComponent,
     ControlPanelConfigurationDeliveryMethodComponent,

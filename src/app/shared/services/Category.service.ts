@@ -1,6 +1,6 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 
-import { Category } from 'src/app/shared/models/Category.mode.model';
+import { Category } from 'src/app/shared/models/Category.model';
 import { Environment } from 'src/app/shared/environments/Environment';
 import { GetCategoriesParameters } from '../models/parameters/GetCategoriesParameters.model';
 import { Injectable } from '@angular/core';
