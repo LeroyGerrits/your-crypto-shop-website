@@ -28,7 +28,7 @@ export class ControlPanelCatalogCategoryListComponent {
 
   public formLoading: boolean = false;
   public form!: FormGroup;
-  
+
   public controlFilterShop = new FormControl({ value: '', disabled: this.formLoading });
   public categories: Category[] | undefined;
   public shops: Shop[] | undefined;
@@ -61,7 +61,10 @@ export class ControlPanelCatalogCategoryListComponent {
     this.formLoading = true;
 
     const parameters: GetCategoriesParameters = {};
-    if (shopId) parameters.ShopId = shopId;
+    if (shopId) {
+      parameters.ShopId = shopId;
+      this.selectedShop = this.shops!.filter(shop => shop.Id == shopId)[0];
+    }
 
     this.categoryService.getList(parameters).subscribe(categories => {
       this.categories = categories;
@@ -71,18 +74,22 @@ export class ControlPanelCatalogCategoryListComponent {
   }
 
   addCategory(category?: Category) {
-    console.log(category);
+    const dialogCategory = this.dialog.open(ControlPanelCatalogCategoryComponent, {
+      data: { parentCategory: category, selectedShop: this.selectedShop }
+    });
+
+    dialogCategory.afterClosed().subscribe(_ => {
+      this.retrieveCategoriesByShopId(this.controlFilterShop.value)
+    });
   }
 
   editCategory(category: Category) {
     const dialogCategory = this.dialog.open(ControlPanelCatalogCategoryComponent, {
-      data: { categoryToEdit: category, selectedShopId: this.controlFilterShop.value }
+      data: { categoryToEdit: category, selectedShop: this.selectedShop }
     });
-    
-    dialogCategory.afterClosed().subscribe(result => {
-      if (result) {
-        this.retrieveCategoriesByShopId(this.controlFilterShop.value)
-      }
+
+    dialogCategory.afterClosed().subscribe(_ => {
+      this.retrieveCategoriesByShopId(this.controlFilterShop.value)
     });
   }
 
@@ -103,7 +110,6 @@ export class ControlPanelCatalogCategoryListComponent {
   }
 
   handleOnSubmitResult(result: MutationResult) {
-    console.log(result);
     if (result.ErrorCode == 0) {
       this.retrieveCategoriesByShopId(this.controlFilterShop.value)
     } else {
@@ -112,7 +118,6 @@ export class ControlPanelCatalogCategoryListComponent {
   }
 
   handleOnSubmitError(error: string) {
-    console.log(error);
     this.snackBarRef = this.snackBar.open(error, 'Close', { panelClass: ['error-snackbar'] });
   }
 }

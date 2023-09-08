@@ -6,5 +6,6 @@ export class Category {
     Parent?: Category;
     Name!: string;
     SortOrder?: number;
+    Visible!: boolean;
     Children?: Category[];
 }

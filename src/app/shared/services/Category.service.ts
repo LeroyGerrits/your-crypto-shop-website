@@ -34,8 +34,6 @@ export class CategoryService {
     }
 
     update(category: Category): Observable<MutationResult> {
-        console.log('CategoryService category');
-        console.log(category);
         return this.http.put<MutationResult>(`${this.apiUrl}/${category.Id}`, category)
     }
 

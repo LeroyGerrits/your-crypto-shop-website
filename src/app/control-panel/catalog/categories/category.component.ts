@@ -1,6 +1,6 @@
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
-import { Component, Inject } from '@angular/core';
+import { Component, Inject, ViewEncapsulation } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { Category } from 'src/app/shared/models/Category.model';
 import { MutationResult } from 'src/app/shared/models/MutationResult';
@@ -8,19 +8,21 @@ import { Shop } from 'src/app/shared/models/Shop.model';
 import { CategoryService } from 'src/app/shared/services/Category.service';
 
 export interface DialogData {
-    selectedShopId: string;
+    selectedShop: Shop;
     categoryToEdit: Category;
     parentCategory: Category;
   }
   
 @Component({
     selector: 'control-panel-catalog-category',
-    templateUrl: 'category.component.html'
+    templateUrl: 'category.component.html',
+    encapsulation: ViewEncapsulation.Emulated
 })
 export class ControlPanelCatalogCategoryComponent {
     public queryStringCategoryId: string | null = '';
 
     controlName = new FormControl('', Validators.required)
+    controlVisible = new FormControl(true);
 
     public form!: FormGroup;
     public formLoading = false;
@@ -35,12 +37,11 @@ export class ControlPanelCatalogCategoryComponent {
         private dialogRefComponent: MatDialogRef<any>,
         @Inject(MAT_DIALOG_DATA) public data: DialogData
     ) {
-        console.log(data.categoryToEdit);
-
         if (this.data.categoryToEdit) {
             this.pageTitle = this.data.categoryToEdit.Name;
             this.category = this.data.categoryToEdit;
             this.controlName.setValue(this.category.Name);
+            this.controlVisible.setValue(this.category.Visible);
         } else {
             if (this.data.parentCategory) {
                 this.pageTitle = `Create new sub-category for '${this.data.parentCategory.Name}'`;
@@ -50,7 +51,8 @@ export class ControlPanelCatalogCategoryComponent {
 
     ngOnInit() {
         this.form = new FormGroup([
-            this.controlName
+            this.controlName,
+            this.controlVisible
         ]);
     }
 
@@ -65,9 +67,9 @@ export class ControlPanelCatalogCategoryComponent {
         this.formLoading = true;
 
         const categoryToUpdate: Category = Object.assign({}, this.category)
-        categoryToUpdate.Shop = new Shop();
-        categoryToUpdate.Shop.Id = this.data.selectedShopId;
+        categoryToUpdate.Shop = this.data.selectedShop;
         categoryToUpdate.Name = this.controlName.value!;
+        categoryToUpdate.Visible = this.controlVisible.value!;
 
         if (this.data.parentCategory)
             categoryToUpdate.Parent = this.data.parentCategory;

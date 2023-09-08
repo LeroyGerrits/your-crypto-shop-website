@@ -18,7 +18,8 @@
 <div class="WrapperPadding20-8">
     <mat-tree [dataSource]="dataSource" [treeControl]="treeControl" class="tree">
         <mat-tree-node *matTreeNodeDef="let category" matTreeNodeToggle>
-            <mat-icon>arrow_right</mat-icon> {{category.Name}}
+            <mat-icon>arrow_right</mat-icon> <span
+            [ngClass]="{'TextDecorationLineThrough': !category.Visible }">{{category.Name}}</span>
             <button mat-icon-button [matMenuTriggerFor]="menu" class="MenuButton">
                 <mat-icon color="primary">more_horiz</mat-icon>
             </button>
@@ -39,7 +40,8 @@
         </mat-tree-node>
         <mat-nested-tree-node *matTreeNodeDef="let category; when: hasChild">
             <div class="mat-tree-node">
-                <mat-icon>arrow_right</mat-icon> {{category.Name}}
+                <mat-icon>arrow_right</mat-icon> <span
+                    [ngClass]="{'TextDecorationLineThrough': !category.Visible }">{{category.Name}}</span>
                 <button mat-icon-button [matMenuTriggerFor]="menu" class="MenuButton">
                     <mat-icon color="primary">more_horiz</mat-icon>
                 </button>
