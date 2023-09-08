@@ -11,7 +11,6 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatTreeNestedDataSource } from '@angular/material/tree';
 import { MutationResult } from 'src/app/shared/models/MutationResult';
 import { NestedTreeControl } from '@angular/cdk/tree';
-import { Router } from '@angular/router';
 import { Shop } from 'src/app/shared/models/Shop.model';
 import { ShopService } from 'src/app/shared/services/Shop.service';
 
@@ -37,7 +36,6 @@ export class ControlPanelCatalogCategoryListComponent {
   constructor(
     public dialog: MatDialog,
     private snackBar: MatSnackBar,
-    private router: Router,
     private categoryService: CategoryService,
     private shopService: ShopService
   ) {
