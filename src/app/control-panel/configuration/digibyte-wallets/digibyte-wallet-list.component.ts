@@ -4,7 +4,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort, Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
-import { DialogDeleteComponent } from 'src/app/dialogs/delete/dialog.delete.component';
+import { DialogDeleteComponent } from 'src/app/shared/dialogs/delete/dialog.delete.component';
 import { Environment } from 'src/app/shared/environments/Environment';
 import { DigiByteWallet } from 'src/app/shared/models/DigiByteWallet.model';
 import { DigiByteWalletService } from 'src/app/shared/services/DigiByteWallet.service';

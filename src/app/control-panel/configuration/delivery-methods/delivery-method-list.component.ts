@@ -6,7 +6,7 @@ import { MatSnackBar, MatSnackBarRef, TextOnlySnackBar } from '@angular/material
 import { MatSort, Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
-import { DialogDeleteComponent } from 'src/app/dialogs/delete/dialog.delete.component';
+import { DialogDeleteComponent } from 'src/app/shared/dialogs/delete/dialog.delete.component';
 import { Environment } from 'src/app/shared/environments/Environment';
 import { DeliveryMethod } from 'src/app/shared/models/DeliveryMethod.model';
 import { MutationResult } from 'src/app/shared/models/MutationResult';

@@ -5,7 +5,7 @@ import { Category } from 'src/app/shared/models/Category.model';
 import { CategoryService } from 'src/app/shared/services/Category.service';
 import { Component } from '@angular/core';
 import { ControlPanelCatalogCategoryComponent } from './category.component';
-import { DialogDeleteComponent } from 'src/app/dialogs/delete/dialog.delete.component';
+import { DialogDeleteComponent } from 'src/app/shared/dialogs/delete/dialog.delete.component';
 import { GetCategoriesParameters } from 'src/app/shared/models/parameters/GetCategoriesParameters.model';
 import { MatDialog } from '@angular/material/dialog';
 import { MatTreeNestedDataSource } from '@angular/material/tree';
@@ -21,16 +21,18 @@ import { ShopService } from 'src/app/shared/services/Shop.service';
   styleUrls: ['./category-list.component.scss']
 })
 export class ControlPanelCatalogCategoryListComponent {
-  treeControl = new NestedTreeControl<Category>(category => category.Children);
-  dataSource = new MatTreeNestedDataSource<Category>();
+  public treeControl = new NestedTreeControl<Category>(category => category.Children);
+  public dataSource = new MatTreeNestedDataSource<Category>();
 
-  snackBarRef: MatSnackBarRef<TextOnlySnackBar> | undefined;
+  public snackBarRef: MatSnackBarRef<TextOnlySnackBar> | undefined;
 
-  loading: boolean = false;
-  form!: FormGroup;
-  controlFilterShop = new FormControl({ value: '', disabled: this.loading });
-  categories: Category[] | undefined;
-  shops: Shop[] | undefined;
+  public formLoading: boolean = false;
+  public form!: FormGroup;
+  
+  public controlFilterShop = new FormControl({ value: '', disabled: this.formLoading });
+  public categories: Category[] | undefined;
+  public shops: Shop[] | undefined;
+  public selectedShop: Shop | undefined;
 
   constructor(
     public dialog: MatDialog,
@@ -56,14 +58,14 @@ export class ControlPanelCatalogCategoryListComponent {
   hasChild = (_: number, category: Category) => !!category.Children && category.Children.length > 0;
 
   retrieveCategoriesByShopId(shopId: any) {
-    this.loading = true;
+    this.formLoading = true;
 
     const parameters: GetCategoriesParameters = {};
     if (shopId) parameters.ShopId = shopId;
 
     this.categoryService.getList(parameters).subscribe(categories => {
       this.categories = categories;
-      this.loading = false;
+      this.formLoading = false;
       this.dataSource.data = categories;
     });
   }
@@ -74,7 +76,7 @@ export class ControlPanelCatalogCategoryListComponent {
 
   editCategory(category: Category) {
     const dialogCategory = this.dialog.open(ControlPanelCatalogCategoryComponent, {
-      data: { categoryToEdit: category, selectedShopId: this.controlFilterShop.valid }
+      data: { categoryToEdit: category, selectedShopId: this.controlFilterShop.value }
     });
     
     dialogCategory.afterClosed().subscribe(result => {

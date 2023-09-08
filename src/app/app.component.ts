@@ -1,8 +1,8 @@
 import { AuthenticationService } from './shared/services/Authentication.service';
 import { Component } from '@angular/core';
-import { DialogLoginComponent } from './dialogs/login/dialog.login.component';
-import { DialogLogoutComponent } from './dialogs/logout/dialog.logout.component';
-import { DialogSignUpComponent } from './dialogs/signup/dialog.signup.component';
+import { DialogLoginComponent } from './shared/dialogs/login/dialog.login.component';
+import { DialogLogoutComponent } from './shared/dialogs/logout/dialog.logout.component';
+import { DialogSignUpComponent } from './shared/dialogs/signup/dialog.signup.component';
 import { MatDialog } from '@angular/material/dialog';
 import { Merchant } from './shared/models/Merchant.model';
 
