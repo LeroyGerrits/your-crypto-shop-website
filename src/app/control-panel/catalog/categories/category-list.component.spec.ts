@@ -1,8 +1,10 @@
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CategoryService } from 'src/app/shared/services/Category.service';
 import { ControlPanelCatalogCategoryListComponent } from './category-list.component';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { MatDialog } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
@@ -16,7 +18,6 @@ import { ShopService } from 'src/app/shared/services/Shop.service';
 import { TestDataCategories } from 'src/assets/test-data/Categories';
 import { TestDataShops } from 'src/assets/test-data/Shops';
 import { of } from 'rxjs';
-import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 describe('ControlPanelCatalogCategoryListComponent', () => {
   let component: ControlPanelCatalogCategoryListComponent;
@@ -67,6 +68,11 @@ describe('ControlPanelCatalogCategoryListComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('should show a dialog when add icon is clicked', () => {
+    component.addCategory(TestDataCategories[0].Parent!);
+    expect(matDialogSpy.open).toHaveBeenCalled();
   });
 
   it('should show a dialog when edit icon is clicked', () => {

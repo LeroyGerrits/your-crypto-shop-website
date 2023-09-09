@@ -9,10 +9,10 @@ import { CategoryService } from 'src/app/shared/services/Category.service';
 
 export interface DialogData {
     selectedShop: Shop;
-    categoryToEdit: Category;
-    parentCategory: Category;
-  }
-  
+    categoryToEdit: Category | null;
+    parentCategory: Category | null;
+}
+
 @Component({
     selector: 'control-panel-catalog-category',
     templateUrl: 'category.component.html',
@@ -36,7 +36,14 @@ export class ControlPanelCatalogCategoryComponent {
         private categoryService: CategoryService,
         private dialogRefComponent: MatDialogRef<any>,
         @Inject(MAT_DIALOG_DATA) public data: DialogData
-    ) {
+    ) { 
+        this.form = new FormGroup([
+            this.controlName,
+            this.controlVisible
+        ]);
+    }
+
+    ngOnInit() {
         if (this.data.categoryToEdit) {
             this.pageTitle = this.data.categoryToEdit.Name;
             this.category = this.data.categoryToEdit;
@@ -47,13 +54,6 @@ export class ControlPanelCatalogCategoryComponent {
                 this.pageTitle = `Create new sub-category for '${this.data.parentCategory.Name}'`;
             }
         }
-    }
-
-    ngOnInit() {
-        this.form = new FormGroup([
-            this.controlName,
-            this.controlVisible
-        ]);
     }
 
     onSubmit() {
