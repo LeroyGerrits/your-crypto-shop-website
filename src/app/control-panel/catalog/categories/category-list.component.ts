@@ -27,6 +27,9 @@ export class ControlPanelCatalogCategoryListComponent {
 
   public formLoading: boolean = false;
   public form!: FormGroup;
+  public changingParent: boolean = false;
+  public changingParentCategory: Category | undefined;
+  public changingParentSelection: string | undefined;
 
   public controlFilterShop = new FormControl({ value: '', disabled: this.formLoading });
   public categories: Category[] | undefined;
@@ -89,6 +92,36 @@ export class ControlPanelCatalogCategoryListComponent {
     dialogCategory.afterClosed().subscribe(_ => {
       this.retrieveCategoriesByShopId(this.controlFilterShop.value)
     });
+  }
+
+  moveCategoryUp(category: Category) {
+    this.categoryService.moveUp(category.Id).subscribe({
+      next: result => this.handleOnSubmitResult(result),
+      error: error => this.handleOnSubmitError(error)
+    });
+  }
+
+  moveCategoryDown(category: Category) {
+    this.categoryService.moveDown(category.Id).subscribe({
+      next: result => this.handleOnSubmitResult(result),
+      error: error => this.handleOnSubmitError(error)
+    });
+  }
+
+  changeCategoryParent(category: Category) {
+    this.changingParent = true;
+    this.changingParentCategory = category;
+  }
+
+  changeCategoryParentCancel() {
+    this.changingParent = false;
+    this.changingParentCategory = undefined;
+  }
+
+  changeCategoryParentSave() {
+    console.log(this.changingParentSelection);
+    this.changingParent = false;
+    this.changingParentCategory = undefined;
   }
 
   deleteCategory(category: Category) {

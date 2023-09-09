@@ -37,6 +37,18 @@ export class CategoryService {
         return this.http.put<MutationResult>(`${this.apiUrl}/${category.Id}`, category)
     }
 
+    changeParent(id: string, parentId: string): Observable<MutationResult> {
+        return this.http.put<MutationResult>(`${this.apiUrl}/${id}/ChangeParent/${parentId}`, null)
+    }
+
+    moveDown(id: string): Observable<MutationResult> {
+        return this.http.put<MutationResult>(`${this.apiUrl}/${id}/Down`, null)
+    }
+
+    moveUp(id: string): Observable<MutationResult> {
+        return this.http.put<MutationResult>(`${this.apiUrl}/${id}/Up`, null)
+    }
+    
     delete(id: string): Observable<MutationResult> {
         return this.http.delete<MutationResult>(`${this.apiUrl}/${id}`);
     }
