@@ -13,7 +13,17 @@ button.MenuButton {
   margin-left: 10px;
 }
 
-.HighLight {
+div.ChangeParentCategoryMessage {
+  background-color: var(--mdc-filled-text-field-container-color);
+  padding: 10px;
+  text-align: center;
+}
+
+div.ChangeParentCategoryMessage button {
+  margin: 4px;
+}
+
+span.HighLight {
   background-color: #660;
   border-radius: 5px;
   padding: 8px;

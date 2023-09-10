@@ -111,17 +111,30 @@ export class ControlPanelCatalogCategoryListComponent {
   changeCategoryParent(category: Category) {
     this.changingParent = true;
     this.changingParentCategory = category;
+
+    if (category.Parent)
+      this.changingParentSelection = category.Parent.Id;
   }
 
   changeCategoryParentCancel() {
     this.changingParent = false;
     this.changingParentCategory = undefined;
+    this.changingParentSelection = undefined;
   }
 
   changeCategoryParentSave() {
-    console.log(this.changingParentSelection);
-    this.changingParent = false;
-    this.changingParentCategory = undefined;
+    if (!this.changingParentCategory || !this.changingParentSelection)
+      return;
+
+    this.categoryService.changeParent(this.changingParentCategory?.Id, this.changingParentSelection).subscribe({
+      next: result => this.handleOnSubmitResult(result),
+      error: error => this.handleOnSubmitError(error),
+      complete: () => {
+        this.changingParent = false;
+        this.changingParentCategory = undefined;
+        this.changingParentSelection = undefined;
+      }
+    });
   }
 
   deleteCategory(category: Category) {

@@ -16,10 +16,13 @@
     </mat-form-field>
 </div>
 <div class="WrapperPadding20-8-0-8" *ngIf="this.changingParent">
-    <span>Select the new parent category for <strong>{{this.changingParentCategory!.Name}}</strong></span>
-    <div>
-        <button mat-raised-button type="button" color="disabled" (click)="changeCategoryParentCancel()">Cancel</button>
-        <button mat-raised-button type="submit" color="primary" (click)="changeCategoryParentSave()">Save</button>
+    <div class="ChangeParentCategoryMessage">
+        <span>Select the new parent category for <strong>{{this.changingParentCategory?.Name}}</strong></span>
+        <div>
+            <button mat-raised-button type="button" color="disabled"
+                (click)="changeCategoryParentCancel()">Cancel</button>
+            <button mat-raised-button type="submit" color="primary" (click)="changeCategoryParentSave()">Save</button>
+        </div>
     </div>
 </div>
 <div class="WrapperPadding20-8">
@@ -28,44 +31,12 @@
             <mat-radio-button color="primary" value="" />
             <span>Root (no parent)</span>
         </div>
-        <mat-tree [dataSource]="dataSource" [treeControl]="treeControl" class="tree">
-            <mat-tree-node *matTreeNodeDef="let category">
-                <mat-icon *ngIf="!this.changingParent">arrow_right</mat-icon>
-                <mat-radio-button *ngIf="this.changingParent"
-                    [disabled]="category == this.changingParentCategory || category.Parent?.Id == this.changingParentCategory"
-                    color="primary" value="category.Id" />
-                <span
-                    [ngClass]="{'TextDecorationLineThrough': !category.Visible, 'HighLight': category == this.changingParentCategory }">{{category.Name}}</span>
-                <button *ngIf="!this.changingParent" mat-icon-button [matMenuTriggerFor]="menu" class="MenuButton">
-                    <mat-icon color="primary">more_horiz</mat-icon>
-                </button>
-                <mat-menu #menu="matMenu">
-                    <button mat-menu-item (click)="addCategory(category)">
-                        <mat-icon color="primary">add</mat-icon> <span>Add new sub-category</span>
-                    </button>
-                    <button mat-menu-item (click)="editCategory(category)">
-                        <mat-icon color="primary">edit</mat-icon> <span>Edit</span>
-                    </button>
-                    <button mat-menu-item (click)="moveCategoryUp(category)">
-                        <mat-icon color="primary">move_up</mat-icon> <span>Move up</span>
-                    </button>
-                    <button mat-menu-item (click)="moveCategoryDown(category)">
-                        <mat-icon color="primary">move_down</mat-icon> <span>Mode down</span>
-                    </button>
-                    <button mat-menu-item (click)="changeCategoryParent(category)">
-                        <mat-icon color="primary">radio_button_checked</mat-icon> <span>Change parent</span>
-                    </button>
-                    <button mat-menu-item (click)="deleteCategory(category)">
-                        <mat-icon color="warn">delete</mat-icon> <span>Delete</span>
-                    </button>
-                </mat-menu>
-            </mat-tree-node>
-            <mat-nested-tree-node *matTreeNodeDef="let category; when: hasChild">
-                <div class="mat-tree-node">
+        <div [ngClass]="{'PaddingLeft40': this.changingParent}">
+            <mat-tree [dataSource]="dataSource" [treeControl]="treeControl" class="tree">
+                <mat-tree-node *matTreeNodeDef="let category">
                     <mat-icon *ngIf="!this.changingParent">arrow_right</mat-icon>
-                    <mat-radio-button *ngIf="this.changingParent"
-                        [disabled]="category == this.changingParentCategory || category.Parent?.Id == this.changingParentCategory"
-                        color="primary" value="category.Id" />
+                    <mat-radio-button *ngIf="this.changingParent" [disabled]="category == this.changingParentCategory"
+                        color="primary" [value]="category.Id" />
                     <span
                         [ngClass]="{'TextDecorationLineThrough': !category.Visible, 'HighLight': category == this.changingParentCategory }">{{category.Name}}</span>
                     <button *ngIf="!this.changingParent" mat-icon-button [matMenuTriggerFor]="menu" class="MenuButton">
@@ -82,7 +53,7 @@
                             <mat-icon color="primary">move_up</mat-icon> <span>Move up</span>
                         </button>
                         <button mat-menu-item (click)="moveCategoryDown(category)">
-                            <mat-icon color="primary">move_down</mat-icon> <span>Mode down</span>
+                            <mat-icon color="primary">move_down</mat-icon> <span>Move down</span>
                         </button>
                         <button mat-menu-item (click)="changeCategoryParent(category)">
                             <mat-icon color="primary">radio_button_checked</mat-icon> <span>Change parent</span>
@@ -91,12 +62,45 @@
                             <mat-icon color="warn">delete</mat-icon> <span>Delete</span>
                         </button>
                     </mat-menu>
-                </div>
-                <div role="group">
-                    <ng-container matTreeNodeOutlet></ng-container>
-                </div>
-            </mat-nested-tree-node>
-        </mat-tree>
-
+                </mat-tree-node>
+                <mat-nested-tree-node *matTreeNodeDef="let category; when: hasChild">
+                    <div class="mat-tree-node">
+                        <mat-icon *ngIf="!this.changingParent">arrow_right</mat-icon>
+                        <mat-radio-button *ngIf="this.changingParent"
+                            [disabled]="category == this.changingParentCategory" color="primary"
+                            [value]="category.Id" />
+                        <span
+                            [ngClass]="{'TextDecorationLineThrough': !category.Visible, 'HighLight': category == this.changingParentCategory}">{{category.Name}}</span>
+                        <button *ngIf="!this.changingParent" mat-icon-button [matMenuTriggerFor]="menu"
+                            class="MenuButton">
+                            <mat-icon color="primary">more_horiz</mat-icon>
+                        </button>
+                        <mat-menu #menu="matMenu">
+                            <button mat-menu-item (click)="addCategory(category)">
+                                <mat-icon color="primary">add</mat-icon> <span>Add new sub-category</span>
+                            </button>
+                            <button mat-menu-item (click)="editCategory(category)">
+                                <mat-icon color="primary">edit</mat-icon> <span>Edit</span>
+                            </button>
+                            <button mat-menu-item (click)="moveCategoryUp(category)">
+                                <mat-icon color="primary">move_up</mat-icon> <span>Move up</span>
+                            </button>
+                            <button mat-menu-item (click)="moveCategoryDown(category)">
+                                <mat-icon color="primary">move_down</mat-icon> <span>Move down</span>
+                            </button>
+                            <button mat-menu-item (click)="changeCategoryParent(category)">
+                                <mat-icon color="primary">radio_button_checked</mat-icon> <span>Change parent</span>
+                            </button>
+                            <button mat-menu-item (click)="deleteCategory(category)">
+                                <mat-icon color="warn">delete</mat-icon> <span>Delete</span>
+                            </button>
+                        </mat-menu>
+                    </div>
+                    <div role="group">
+                        <ng-container matTreeNodeOutlet></ng-container>
+                    </div>
+                </mat-nested-tree-node>
+            </mat-tree>
+        </div>
     </mat-radio-group>
 </div>
