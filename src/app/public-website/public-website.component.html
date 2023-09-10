@@ -14,6 +14,9 @@
                 <span>DGB Commerce</span>
             </a>
         </div>
+        <div class="CalltoAction" *ngIf="this.showCallToAction">
+            <button mat-raised-button color="primary" (click)="signUp()">Sign up</button>
+        </div>
     </div>
 </div>
 <div id="Body">
@@ -36,8 +39,9 @@
                 <ul>
                     <li><a target="_blank" href="https://www.digibyte.org">DigiByte website</a></li>
                     <li><a target="_blank" href="https://www.dgbat.org">DigiByte Awareness Team</a></li>
-                    <li><a target="_blank" href="https://www.dgbwiki.com">DigiByte Wiki</a></li>                    
-                    <li><a target="_blank" href="https://chainz.cryptoid.info/dgb">cryptoID (DigiByte blockchain explorer)</a></li>                    
+                    <li><a target="_blank" href="https://www.dgbwiki.com">DigiByte Wiki</a></li>
+                    <li><a target="_blank" href="https://chainz.cryptoid.info/dgb">cryptoID (DigiByte blockchain
+                            explorer)</a></li>
                 </ul>
             </div>
         </div>

@@ -37,7 +37,7 @@ export class AppComponent {
     });
   }
 
-  signup() {
+  signUp() {
     const dialogSignUp = this.dialog.open(DialogSignUpComponent);
     dialogSignUp.afterClosed().subscribe(result => {
       if (result) {

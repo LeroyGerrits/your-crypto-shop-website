@@ -2,7 +2,7 @@
   <div class="CenteredContainer">
     <div class="RightMenu">
       <mat-toolbar>
-        <button *ngIf="!this.activeMerchant" mat-button (click)="signup()">Sign up</button>
+        <button *ngIf="!this.activeMerchant" mat-button (click)="signUp()">Sign up</button>
         <button *ngIf="!this.activeMerchant" mat-button (click)="login()">Merchant login</button>
 
         <button *ngIf="this.activeMerchant" mat-button [matMenuTriggerFor]="Merchant">

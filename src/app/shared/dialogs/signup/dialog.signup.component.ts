@@ -1,18 +1,18 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
-import { AuthenticationService } from 'src/app/shared/services/Authentication.service';
 import { MatDialogRef } from '@angular/material/dialog';
 import { Router } from '@angular/router';
-import { first } from 'rxjs/operators';
 
 @Component({
     selector: 'dialog-signup',
     templateUrl: 'dialog.signup.component.html'
 })
-export class DialogSignUpComponent  implements OnInit {
-    controlUsername = new FormControl('', Validators.required);
-    controlPassword = new FormControl('', Validators.required)
+export class DialogSignUpComponent implements OnInit {
+    controlEmailAddress = new FormControl('', Validators.required);
+    controlGender = new FormControl('0', Validators.required)
+    controlFirstName = new FormControl('');
+    controlLastName = new FormControl('', Validators.required);
 
     form!: FormGroup;
     loading = false;
@@ -21,15 +21,18 @@ export class DialogSignUpComponent  implements OnInit {
 
     constructor(
         private router: Router,
-        private authenticationService: AuthenticationService,
         private dialogRefComponent: MatDialogRef<any>
-    ) { }
+    ) {
+        this.form = new FormGroup([
+            this.controlEmailAddress,
+            this.controlGender,
+            this.controlFirstName,
+            this.controlLastName
+        ]);
+    }
 
     ngOnInit() {
-        this.form = new FormGroup([
-            this.controlUsername,
-            this.controlPassword
-        ]);
+
     }
 
     onSubmit() {
@@ -41,20 +44,5 @@ export class DialogSignUpComponent  implements OnInit {
 
         this.error = '';
         this.loading = true;
-
-        this.authenticationService.login(this.controlUsername.value!, this.controlPassword.value!)
-            .pipe(first())
-            .subscribe({
-                next: () => {
-                    this.router.navigate(['/account']);
-
-                    if (this.dialogRefComponent)
-                        this.dialogRefComponent.close();
-                },
-                error: error => {
-                    this.error = error;
-                    this.loading = false;
-                }
-            });
     }
 }

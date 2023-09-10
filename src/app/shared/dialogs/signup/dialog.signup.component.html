@@ -1,24 +1,39 @@
-<h2 mat-dialog-title>Merchant login</h2>
+<h2 mat-dialog-title>Sign up</h2>
 <form (ngSubmit)="onSubmit()">
   <mat-dialog-content class="mat-typography">
-    <p>Log in with your e-mail address and password.</p>
+    <p>Set up shop in just a few minutes!<br />All we need is some basic information to get you going.</p>
+    
     <mat-form-field>
-      <mat-label>E-mail address</mat-label>
-      <input matInput [formControl]="controlUsername"
-        [ngClass]="{ 'is-invalid': submitted && controlUsername.errors }" />
-      <div *ngIf="submitted && controlUsername.errors" class="invalid-feedback">
-        <div *ngIf="controlUsername.errors['required']">Username is required</div>
+      <mat-label>Your e-mail address</mat-label>
+      <input matInput [formControl]="controlEmailAddress"
+        [ngClass]="{ 'is-invalid': submitted && controlEmailAddress.errors }" />
+      <div *ngIf="submitted && controlEmailAddress.errors" class="TextError">
+        <div *ngIf="controlEmailAddress.errors['required']">E-mail address is required</div>
       </div>
     </mat-form-field>
+
+    <label id="gender">I am a</label>
+    <mat-radio-group aria-labelledby="gender" [formControl]="controlGender">
+      <mat-radio-button value="1" color="primary">Male</mat-radio-button>
+      <mat-radio-button value="2" color="primary">Female</mat-radio-button>
+      <mat-radio-button value="0" color="primary">I don't want to specify</mat-radio-button>
+    </mat-radio-group>
+
     <mat-form-field>
-      <mat-label>Password</mat-label>
-      <input matInput type="password" [formControl]="controlPassword"
-        [ngClass]="{ 'is-invalid': submitted && controlPassword.errors }" />
-      <div *ngIf="submitted && controlPassword.errors" class="invalid-feedback">
-        <div *ngIf="controlPassword.errors['required']">Password is required</div>
+      <mat-label>Your first name</mat-label>
+      <input matInput [formControl]="controlFirstName"
+        [ngClass]="{ 'is-invalid': submitted && controlFirstName.errors }" />
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Your last name</mat-label>
+      <input matInput  [formControl]="controlLastName"
+        [ngClass]="{ 'is-invalid': submitted && controlLastName.errors }" />
+      <div *ngIf="submitted && controlLastName.errors" class="TextError">
+        <div *ngIf="controlLastName.errors['required']">Last name is required</div>
       </div>
     </mat-form-field>
-    <div *ngIf="error" class="alert alert-danger mt-3 mb-0">{{error}}</div>
+    <div *ngIf="error" class="TextError">{{error}}</div>
   </mat-dialog-content>
   <mat-dialog-actions align="end">
     <button mat-raised-button type="button" color="disabled" mat-dialog-close>Cancel</button>
@@ -26,7 +41,7 @@
       <mat-icon *ngIf="loading">
         <mat-spinner diameter="18" />
       </mat-icon>
-      Login
+      Sign up
     </button>
   </mat-dialog-actions>
 </form>
