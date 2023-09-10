@@ -1,6 +1,6 @@
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
-import { Component, Inject, ViewEncapsulation } from '@angular/core';
+import { Component, Inject, OnInit, ViewEncapsulation } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { Category } from 'src/app/shared/models/Category.model';
 import { MutationResult } from 'src/app/shared/models/MutationResult';
@@ -18,7 +18,7 @@ export interface DialogData {
     templateUrl: 'category.component.html',
     encapsulation: ViewEncapsulation.Emulated
 })
-export class ControlPanelCatalogCategoryComponent {
+export class ControlPanelCatalogCategoryComponent implements OnInit {
     public queryStringCategoryId: string | null = '';
 
     controlName = new FormControl('', Validators.required)

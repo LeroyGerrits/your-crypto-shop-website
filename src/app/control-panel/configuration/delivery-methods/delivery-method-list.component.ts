@@ -48,7 +48,7 @@ export class ControlPanelConfigurationDeliveryMethodListComponent implements OnI
     ]);
   }
 
-  ngOnInit(): void {
+  ngOnInit() {
     this.deliveryMethodService.getList().subscribe(deliveryMethods => {
       this.dataSource = new MatTableDataSource(deliveryMethods);
       this.dataSource.paginator = this.paginator;

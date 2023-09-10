@@ -30,7 +30,7 @@ export class PublicWebsiteFaqListComponent implements OnInit, OnDestroy {
     this.subscriptionFilter = this.controlFilter.valueChanges.pipe(debounceTime(1000), distinctUntilChanged()).subscribe(value => this.filterFaqs(value));
   }
 
-  ngOnInit(): void {
+  ngOnInit() {
     this.faqCategoryService.getList().subscribe(faqCategories => { this.faqCategories = faqCategories; this.faqCategoriesFiltered = faqCategories; });
     this.faqService.getList().subscribe(faqs => { this.faqs = faqs; this.faqsFiltered = faqs; this.filterFaqs(null); });
   }

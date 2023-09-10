@@ -29,7 +29,7 @@ export class ControlPanelConfigurationDigiByteWalletListComponent implements OnI
     private digibyteWalletService: DigiByteWalletService
   ) { }
 
-  ngOnInit(): void {
+  ngOnInit() {
     this.digibyteWalletService.getList().subscribe(digibyteWallets => {
       this.dataSource = new MatTableDataSource(digibyteWallets);
       this.dataSource.paginator = this.paginator;

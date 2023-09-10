@@ -45,7 +45,7 @@ export class ControlPanelConfigurationShopListComponent implements OnInit {
     ]);
   }
 
-  ngOnInit(): void {
+  ngOnInit() {
     this.shopService.getList().subscribe(shops => {
       this.dataSource = new MatTableDataSource(shops);
       this.dataSource.paginator = this.paginator;
@@ -53,7 +53,7 @@ export class ControlPanelConfigurationShopListComponent implements OnInit {
     });
   }
 
-  ngOnDestroy(): void {
+  ngOnDestroy() {
     this.snackBarRef?.dismiss();
   }
 

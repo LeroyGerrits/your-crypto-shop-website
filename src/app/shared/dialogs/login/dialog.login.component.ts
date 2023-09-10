@@ -1,7 +1,7 @@
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 import { AuthenticationService } from 'src/app/shared/services/Authentication.service';
-import { Component } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { first } from 'rxjs/operators';
@@ -10,7 +10,7 @@ import { first } from 'rxjs/operators';
     selector: 'dialog-login',
     templateUrl: 'dialog.login.component.html'
 })
-export class DialogLoginComponent {
+export class DialogLoginComponent  implements OnInit {
     controlUsername = new FormControl('', Validators.required);
     controlPassword = new FormControl('', Validators.required)
 

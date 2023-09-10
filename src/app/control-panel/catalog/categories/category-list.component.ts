@@ -1,9 +1,9 @@
+import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { MatSnackBar, MatSnackBarRef, TextOnlySnackBar } from '@angular/material/snack-bar';
 
 import { Category } from 'src/app/shared/models/Category.model';
 import { CategoryService } from 'src/app/shared/services/Category.service';
-import { Component } from '@angular/core';
 import { ControlPanelCatalogCategoryComponent } from './category.component';
 import { DialogDeleteComponent } from 'src/app/shared/dialogs/delete/dialog.delete.component';
 import { GetCategoriesParameters } from 'src/app/shared/models/parameters/GetCategoriesParameters.model';
@@ -19,7 +19,7 @@ import { ShopService } from 'src/app/shared/services/Shop.service';
   templateUrl: './category-list.component.html',
   styleUrls: ['./category-list.component.scss']
 })
-export class ControlPanelCatalogCategoryListComponent {
+export class ControlPanelCatalogCategoryListComponent  implements OnInit {
   public treeControl = new NestedTreeControl<Category>(category => category.Children);
   public dataSource = new MatTreeNestedDataSource<Category>();
 
@@ -45,7 +45,9 @@ export class ControlPanelCatalogCategoryListComponent {
     this.form = new FormGroup([
       this.controlFilterShop
     ]);
+  }
 
+  ngOnInit() {
     this.shopService.getList().subscribe(shops => {
       this.shops = shops;
 

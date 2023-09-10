@@ -41,7 +41,7 @@ export class ControlPanelConfigurationDigiByteWalletComponent implements OnInit,
     ]);
   }
 
-  ngOnInit(): void {
+  ngOnInit() {
     this.queryStringDigiByteWalletId = this.route.snapshot.paramMap.get('digiByteWalletId');
 
     if (this.queryStringDigiByteWalletId && this.queryStringDigiByteWalletId != 'new') {
@@ -49,7 +49,7 @@ export class ControlPanelConfigurationDigiByteWalletComponent implements OnInit,
     }
   }
 
-  ngOnDestroy(): void {
+  ngOnDestroy() {
     this.snackBarRef?.dismiss();
   }
 

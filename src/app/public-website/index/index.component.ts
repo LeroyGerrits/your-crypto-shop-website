@@ -4,4 +4,9 @@ import { Component } from '@angular/core';
   selector: 'public-website-index',
   templateUrl: './index.component.html'
 })
-export class PublicWebsiteIndexComponent { }
+export class PublicWebsiteIndexComponent { 
+  constructor()
+  {
+    
+  }
+}

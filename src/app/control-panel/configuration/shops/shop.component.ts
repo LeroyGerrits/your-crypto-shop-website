@@ -1,10 +1,10 @@
 import { ActivatedRoute, Router } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar, MatSnackBarRef, TextOnlySnackBar } from '@angular/material/snack-bar';
 import { Subscription, debounceTime, distinctUntilChanged } from 'rxjs';
 
 import { AuthenticationService } from 'src/app/shared/services/Authentication.service';
-import { Component } from '@angular/core';
 import { Constants } from 'src/app/shared/Constants';
 import { Environment } from 'src/app/shared/environments/Environment';
 import { Merchant } from 'src/app/shared/models/Merchant.model';
@@ -18,7 +18,7 @@ import { ShopService } from 'src/app/shared/services/Shop.service';
   styleUrls: ['./shop.component.scss']
 })
 
-export class ControlPanelConfigurationShopComponent {
+export class ControlPanelConfigurationShopComponent  implements OnInit {
   public activeMerchant?: Merchant | null;
   
   public environment = Environment;
@@ -53,7 +53,7 @@ export class ControlPanelConfigurationShopComponent {
     this.subscriptionSubDomain = this.controlSubDomain.valueChanges.pipe(debounceTime(1000), distinctUntilChanged()).subscribe(value => this.checkSubDomainAvailability(value));
   }
 
-  ngOnInit(): void {
+  ngOnInit() {
     this.queryStringShopId = this.route.snapshot.paramMap.get('shopId');
 
     if (this.queryStringShopId && this.queryStringShopId != 'new') {
@@ -61,7 +61,7 @@ export class ControlPanelConfigurationShopComponent {
     }
   }
 
-  ngOnDestroy(): void {
+  ngOnDestroy() {
     this.snackBarRef?.dismiss();
   }
 

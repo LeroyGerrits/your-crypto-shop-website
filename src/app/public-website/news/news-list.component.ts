@@ -19,7 +19,7 @@ export class PublicWebsiteNewsListComponent implements OnInit {
     private newsMessageService: NewsMessageService
   ) { }
 
-  ngOnInit(): void {
+  ngOnInit() {
     this.columns = (window.innerWidth <= 750) ? 1 : 3;
 
     this.newsMessageService.getList().subscribe(shops => {

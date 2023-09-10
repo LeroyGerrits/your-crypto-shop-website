@@ -45,7 +45,7 @@ export class ControlPanelConfigurationDeliveryMethodComponent implements OnInit,
     ]);
   }
 
-  ngOnInit(): void {
+  ngOnInit() {
     this.queryStringDeliveryMethodId = this.route.snapshot.paramMap.get('deliveryMethodId');
 
     if (this.queryStringDeliveryMethodId && this.queryStringDeliveryMethodId != 'new') {
@@ -55,7 +55,7 @@ export class ControlPanelConfigurationDeliveryMethodComponent implements OnInit,
     this.shopService.getList().subscribe(shops => this.shops = shops);
   }
 
-  ngOnDestroy(): void {
+  ngOnDestroy() {
     this.snackBarRef?.dismiss();
   }
 
