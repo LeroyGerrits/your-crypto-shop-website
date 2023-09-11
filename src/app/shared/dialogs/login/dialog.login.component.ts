@@ -10,14 +10,14 @@ import { first } from 'rxjs/operators';
     selector: 'dialog-login',
     templateUrl: 'dialog.login.component.html'
 })
-export class DialogLoginComponent  implements OnInit {
+export class DialogLoginComponent implements OnInit {
     controlUsername = new FormControl('', Validators.required);
     controlPassword = new FormControl('', Validators.required)
 
-    form!: FormGroup;
-    loading = false;
-    submitted = false;
-    error = '';
+    public form!: FormGroup;
+    public formLoading = false;
+    public formSubmitted = false;
+    public formError = '';
 
     constructor(
         private router: Router,
@@ -33,14 +33,14 @@ export class DialogLoginComponent  implements OnInit {
     }
 
     onSubmit() {
-        this.submitted = true;
+        this.formSubmitted = true;
 
         if (this.form.invalid) {
             return;
         }
 
-        this.error = '';
-        this.loading = true;
+        this.formError = '';
+        this.formLoading = true;
 
         this.authenticationService.login(this.controlUsername.value!, this.controlPassword.value!)
             .pipe(first())
@@ -52,8 +52,8 @@ export class DialogLoginComponent  implements OnInit {
                         this.dialogRefComponent.close();
                 },
                 error: error => {
-                    this.error = error;
-                    this.loading = false;
+                    this.formError = error;
+                    this.formLoading = false;
                 }
             });
     }

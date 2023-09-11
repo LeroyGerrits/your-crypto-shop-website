@@ -5,25 +5,23 @@ import { MatDialogRef } from '@angular/material/dialog';
 import { Merchant } from '../../models/Merchant.model';
 import { MerchantService } from '../../services/Merchant.service';
 import { MutationResult } from '../../models/MutationResult';
-import { Router } from '@angular/router';
 
 @Component({
     selector: 'dialog-signup',
     templateUrl: 'dialog.signup.component.html'
 })
 export class DialogSignUpComponent implements OnInit {
-    controlEmailAddress = new FormControl('', Validators.required);
-    controlGender = new FormControl('0', Validators.required)
-    controlFirstName = new FormControl('');
-    controlLastName = new FormControl('', Validators.required);
+    public controlEmailAddress = new FormControl('', Validators.required);
+    public controlGender = new FormControl('0', Validators.required)
+    public controlFirstName = new FormControl('');
+    public controlLastName = new FormControl('', Validators.required);
 
-    private form!: FormGroup;
-    private formLoading = false;
-    private formSubmitted = false;
-    private formError = '';
+    public form!: FormGroup;
+    public formLoading = false;
+    public formSubmitted = false;
+    public formError = '';
 
     constructor(
-        private router: Router,
         private dialogRefComponent: MatDialogRef<any>,
         private merchantService: MerchantService
     ) {
