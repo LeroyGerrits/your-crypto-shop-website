@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 import { MatDialogRef } from '@angular/material/dialog';
+import { Merchant } from '../../models/Merchant.model';
+import { MerchantService } from '../../services/Merchant.service';
+import { MutationResult } from '../../models/MutationResult';
 import { Router } from '@angular/router';
 
 @Component({
@@ -14,14 +17,15 @@ export class DialogSignUpComponent implements OnInit {
     controlFirstName = new FormControl('');
     controlLastName = new FormControl('', Validators.required);
 
-    form!: FormGroup;
-    loading = false;
-    submitted = false;
-    error = '';
+    private form!: FormGroup;
+    private formLoading = false;
+    private formSubmitted = false;
+    private formError = '';
 
     constructor(
         private router: Router,
-        private dialogRefComponent: MatDialogRef<any>
+        private dialogRefComponent: MatDialogRef<any>,
+        private merchantService: MerchantService
     ) {
         this.form = new FormGroup([
             this.controlEmailAddress,
@@ -36,13 +40,41 @@ export class DialogSignUpComponent implements OnInit {
     }
 
     onSubmit() {
-        this.submitted = true;
+        this.formSubmitted = true;
 
         if (this.form.invalid) {
             return;
         }
 
-        this.error = '';
-        this.loading = true;
+        const merchantToCreate: Merchant = {
+            Id: '',
+            Salutation: '',
+            EmailAddress: this.controlEmailAddress.value!,
+            FirstName: this.controlFirstName.value!,
+            LastName: this.controlLastName.value!,
+            Gender: parseInt(this.controlGender.value!)
+        };        
+
+        this.merchantService.create(merchantToCreate).subscribe({
+            next: result => this.handleOnSubmitResult(result),
+            error: error => this.handleOnSubmitError(error),
+            complete: () => {
+                this.formLoading = false
+                this.formLoading = true;
+            }
+        });
+    }
+
+    handleOnSubmitResult(result: MutationResult) {
+        if (result.ErrorCode == 0) {
+            this.dialogRefComponent.close();
+        } else {
+            this.formError = result.Message;
+        }
+    }
+
+    handleOnSubmitError(error: string) {
+        this.formError = error;
+        this.formLoading = false;
     }
 }

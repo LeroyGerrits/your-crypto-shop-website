@@ -3,6 +3,7 @@ import { HttpClient, HttpHandler } from '@angular/common/http';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 
 import { AppComponent } from './app.component';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { RouterTestingModule } from '@angular/router/testing';
@@ -25,11 +26,9 @@ describe('AppComponent', () => {
 
     TestBed.configureTestingModule({
       declarations: [AppComponent],
-      imports: [MatDialogModule, MatDialogModule, MatMenuModule, MatToolbarModule, RouterTestingModule],
+      imports: [HttpClientTestingModule, MatDialogModule, MatMenuModule, MatToolbarModule, RouterTestingModule],
       providers: [
-        { provide: MatDialog, useValue: matDialogSpy },
-        HttpClient,
-        HttpHandler
+        { provide: MatDialog, useValue: matDialogSpy }
       ]
     });
     fixture = TestBed.createComponent(AppComponent);
@@ -55,7 +54,7 @@ describe('AppComponent', () => {
   });
 
   it('should show a sign up dialog', () => {
-    component.signup();
+    component.signUp();
     expect(matDialogSpy.open).toHaveBeenCalled();
     expect(matDialogRefSpy.close).toHaveBeenCalled();
   });

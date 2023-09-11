@@ -3,11 +3,13 @@ import { HttpClient, HttpHandler } from '@angular/common/http';
 import { MAT_DIALOG_DATA, MatDialog, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 
 import { AccountComponent } from 'src/app/account/account.component';
-import { AuthenticationService } from 'src/app/shared/services/Authentication.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DialogSignUpComponent } from './dialog.signup.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { MatRadioModule } from '@angular/material/radio';
+import { MerchantService } from '../../services/Merchant.service';
+import { MutationResult } from '../../models/MutationResult';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RouterTestingModule } from '@angular/router/testing';
 import { of } from 'rxjs';
@@ -18,7 +20,8 @@ describe('DialogSignUpComponent', () => {
 
   let matDialogRefSpy: any;
   let matDialogSpy: jasmine.SpyObj<MatDialog>
-  let authenticationServiceSpy: jasmine.SpyObj<AuthenticationService>;
+  let merchantServiceSpy: jasmine.SpyObj<MerchantService>;
+  let mutationResult: MutationResult = { ErrorCode: 0, Identity: '', Message: '' };
 
   beforeEach(() => {
     matDialogRefSpy = jasmine.createSpyObj('MatDialogRef', ['close']);
@@ -29,18 +32,18 @@ describe('DialogSignUpComponent', () => {
     matDialogSpy = jasmine.createSpyObj('MatDialog', ['open']);
     matDialogSpy.open.and.returnValue(matDialogRefSpy);
 
-    authenticationServiceSpy = jasmine.createSpyObj('AuthenticationService', ['login']);
-    authenticationServiceSpy.login.and.returnValue(of(() => { }));
+    merchantServiceSpy = jasmine.createSpyObj('MerchantService', ['create']);
+    merchantServiceSpy.create.and.returnValue(of(mutationResult));
 
     TestBed.configureTestingModule({
       declarations: [DialogSignUpComponent],
-      imports: [BrowserAnimationsModule, MatDialogModule, MatFormFieldModule, MatInputModule, ReactiveFormsModule, RouterTestingModule.withRoutes(
+      imports: [BrowserAnimationsModule, MatDialogModule, MatFormFieldModule, MatInputModule, MatRadioModule, ReactiveFormsModule, RouterTestingModule.withRoutes(
         [{ path: 'account', component: AccountComponent }]
       )],
       providers: [
         { provide: MatDialogRef, useValue: matDialogRefSpy },
         { provide: MAT_DIALOG_DATA, useValue: [] },
-        { provide: AuthenticationService, useValue: authenticationServiceSpy },
+        { provide: MerchantService, useValue: merchantServiceSpy },
         HttpClient,
         HttpHandler
       ]
@@ -54,17 +57,19 @@ describe('DialogSignUpComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should not authenticate nothing when empty credentials get supplied', () => {
-    component.controlUsername.setValue('');
-    component.controlPassword.setValue('');
+  it('should not create a new account when empty fields get supplied', () => {
+    component.controlEmailAddress.setValue('');
+    component.controlLastName.setValue('');
+    component.controlGender.setValue('');
     component.onSubmit();
-    expect(authenticationServiceSpy.login).toHaveBeenCalledTimes(0);
+    expect(merchantServiceSpy.create).toHaveBeenCalledTimes(0);
   });
 
-  it('should authenticate when a username and password are entered', () => {
-    component.controlUsername.setValue('merchant@dgbcommerce.com');
-    component.controlPassword.setValue('********');
+  it('should create a new account when all the required fields are supplied', () => {
+    component.controlEmailAddress.setValue('merchant@dgbcommerce.com');
+    component.controlLastName.setValue('Chant');
+    component.controlGender.setValue('0');
     component.onSubmit();
-    expect(authenticationServiceSpy.login).toHaveBeenCalled();
+    expect(merchantServiceSpy.create).toHaveBeenCalled();
   });
 });
