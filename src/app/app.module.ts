@@ -61,6 +61,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatTreeModule } from '@angular/material/tree';
 import { MerchantPasswordResetLinkService } from './shared/services/MerchantPasswordResetLink.service';
+import { MerchantService } from './shared/services/Merchant.service';
 import { NewsMessageService } from './shared/services/NewsMessage.service';
 import { NgModule } from '@angular/core';
 import { PublicWebsiteAboutComponent } from './public-website/about/about.component';
@@ -68,6 +69,7 @@ import { PublicWebsiteComponent } from './public-website/public-website.componen
 import { PublicWebsiteFaqComponent } from './public-website/faq/faq.component';
 import { PublicWebsiteFaqListComponent } from './public-website/faq/faq-list.component';
 import { PublicWebsiteFinancialStatementComponent } from './public-website/financial-statement/financial-statement.component';
+import { PublicWebsiteIndexComponent } from './public-website/index/index.component';
 import { PublicWebsiteNewsComponent } from './public-website/news/news.component';
 import { PublicWebsiteNewsListComponent } from './public-website/news/news-list.component';
 import { QRCodeModule } from 'angularx-qrcode';
@@ -101,6 +103,7 @@ import { ShopService } from './shared/services/Shop.service';
     PublicWebsiteAboutComponent,
     PublicWebsiteFaqComponent,
     PublicWebsiteFaqListComponent,
+    PublicWebsiteIndexComponent,
     PublicWebsiteFinancialStatementComponent,
     PublicWebsiteNewsComponent,
     PublicWebsiteNewsListComponent,    
@@ -153,6 +156,7 @@ import { ShopService } from './shared/services/Shop.service';
     FaqService,
     FaqCategoryService,
     FinancialStatementTransactionService,
+    MerchantService,
     MerchantPasswordResetLinkService,
     NewsMessageService,
     ShopService

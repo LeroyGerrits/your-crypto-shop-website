@@ -80,36 +80,35 @@ $md-dgbcommercepalette-primary: (
 );
 
 $md-dgbcommercepalette-accent: (
-    50 : #e0e5ea,
-    100 : #b3bdcb,
-    200 : #8091a9,
-    300 : #4d6586,
-    400 : #26446c,
-    500 : #002352,
-    600 : #001f4b,
-    700 : #001a41,
-    800 : #001538,
-    900 : #000c28,
-    A100 : #637bff,
-    A200 : #304fff,
-    A400 : #0027fc,
-    A700 : #0023e2,
-    contrast: (
-        50 : #000000,
-        100 : #000000,
-        200 : #000000,
-        300 : #ffffff,
-        400 : #ffffff,
-        500 : #ffffff,
-        600 : #ffffff,
-        700 : #ffffff,
-        800 : #ffffff,
-        900 : #ffffff,
-        A100 : #000000,
-        A200 : #ffffff,
-        A400 : #ffffff,
-        A700 : #ffffff,
-    )
+  50 : #e0e5ea,
+  100 : #b3bdcb,
+  200 : #8091a9,
+  300 : #4d6586,
+  400 : #26446c,
+  500 : #002352,
+  600 : #001f4b,
+  700 : #001a41,
+  800 : #001538,
+  900 : #000c28,
+  A100 : #637bff,
+  A200 : #304fff,
+  A400 : #0027fc,
+  A700 : #0023e2,
+  contrast: (50 : #000000,
+    100 : #000000,
+    200 : #000000,
+    300 : #ffffff,
+    400 : #ffffff,
+    500 : #ffffff,
+    600 : #ffffff,
+    700 : #ffffff,
+    800 : #ffffff,
+    900 : #ffffff,
+    A100 : #000000,
+    A200 : #ffffff,
+    A400 : #ffffff,
+    A700 : #ffffff,
+  )
 );
 
 $font-main: 'open_sansregular', Helvetica, Tahoma !important;
@@ -195,20 +194,20 @@ p {
   background-size: cover;
 }
 
-#Header div.Wrapper {
+#Header div.LogoAndNavigation {
   padding: 40px 0;
 }
 
-#Header div.Wrapper #Logo {
+#Header div.LogoAndNavigation #Logo {
   margin-left: 8px;
 }
 
-#Header div.Wrapper #Logo img {
+#Header div.LogoAndNavigation #Logo img {
   border: none;
   vertical-align: middle;
 }
 
-#Header div.Wrapper #Logo span {
+#Header div.LogoAndNavigation #Logo span {
   color: #fff;
   display: inline-block;
   font-family: 'robotoblack_italic';
@@ -219,7 +218,7 @@ p {
   text-shadow: 1px 1px 0 #222;
 }
 
-#Header div.Wrapper ul {
+#Header div.LogoAndNavigation ul {
   display: block;
   float: right;
   list-style-type: none;
@@ -227,14 +226,14 @@ p {
   padding: 0;
 }
 
-#Header div.Wrapper ul li {
+#Header div.LogoAndNavigation ul li {
   display: inline;
   line-height: 64px;
   margin: 0 0 0 40px;
   padding: 0;
 }
 
-#Header div.Wrapper ul li a {
+#Header div.LogoAndNavigation ul li a {
   color: rgba(255, 255, 255, 0.7);
   font-family: 'open_sans_condensedbold', Helvetica, Tahoma;
   font-size: 1.4em;
@@ -244,14 +243,47 @@ p {
   transition: all .3s ease-in-out;
 }
 
-#Header div.Wrapper ul li a:hover,
-#Header div.Wrapper ul li a.Active {
+#Header div.LogoAndNavigation ul li a:hover,
+#Header div.LogoAndNavigation ul li a.Active {
   color: rgba(255, 255, 255, 1);
 }
 
 #Header div.CalltoAction {
-  height: 300px;
+  height: 280px;
 }
+
+#Header div.CalltoAction div.Wrapper {
+  margin: 0 auto;
+  width: 630px;
+}
+
+#Header div.CalltoAction div.Wrapper img {
+  display: block;
+  float: right;
+  margin-left: 20px;
+}
+
+#Header div.CalltoAction div.Wrapper strong {
+  display: block;
+  font-family: 'robotoblack';
+  font-size: 1.6em;
+  padding: 60px 0 20px 0;
+  text-shadow: 1px 1px 0 #222;
+}
+
+#Header div.CalltoAction div.Wrapper span.Explanation {
+  color: #e0e0e0;
+  display: block;
+  text-shadow: 1px 1px 0 #222;
+}
+
+#Header div.CalltoAction div.Wrapper div.Buttons {
+  display: table;
+  margin: 0 auto;
+  padding-top: 20px;
+  text-align: center;
+}
+
 
 #Body {
   background-color: $dark-gray-color;

@@ -1,6 +1,6 @@
 <div id="Header">
     <div class="CenteredContainer">
-        <div class="Wrapper">
+        <div class="LogoAndNavigation">
             <ul>
                 <li><a [routerLink]="['/']" [routerLinkActive]="['Active']"
                         [routerLinkActiveOptions]="{exact: true}">Home</a></li>
@@ -15,10 +15,15 @@
             </a>
         </div>
         <div class="CalltoAction" *ngIf="this.showCallToAction">
-            <strong>Sell your products and goods for DigiByte</strong>
-            <span>Set up shop in a matter of minutes! DGB commerce enables </span>
-            <button mat-button [routerLink]="['/about']">About DGB Commerce</button>&nbsp;
-            <button mat-raised-button color="accent" (click)="signUp()">Sign up</button>
+            <div class="Wrapper">
+                <img src="/assets/images/CallToAction.png" width="180" height="280" alt="DigiByte powered payments" />
+                <strong>Set up shop with us!</strong>
+                <span class="Explanation">Give your customers a seamless shopping experience and a peer-to-peer checkout process using the DigiByte blockchain.</span>
+                <div class="Buttons">
+                    <button mat-button [routerLink]="['/about']">About DGB Commerce</button>&nbsp;
+                    <button mat-raised-button color="accent" (click)="signUp()">Sign up</button>
+                </div>
+            </div>
         </div>
     </div>
 </div>

@@ -6,5 +6,5 @@ import { Constants } from 'src/app/shared/Constants';
   templateUrl: './about.component.html'
 })
 export class PublicWebsiteAboutComponent { 
-  constants = Constants;
+  
 }
