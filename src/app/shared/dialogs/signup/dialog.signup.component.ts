@@ -51,7 +51,7 @@ export class DialogSignUpComponent implements OnInit {
             FirstName: this.controlFirstName.value!,
             LastName: this.controlLastName.value!,
             Gender: parseInt(this.controlGender.value!)
-        };        
+        };
 
         this.merchantService.create(merchantToCreate).subscribe({
             next: result => this.handleOnSubmitResult(result),
