@@ -18,9 +18,9 @@ import { ShopService } from 'src/app/shared/services/Shop.service';
   styleUrls: ['./shop.component.scss']
 })
 
-export class ControlPanelConfigurationShopComponent  implements OnInit {
+export class ControlPanelConfigurationShopComponent implements OnInit {
   public activeMerchant?: Merchant | null;
-  
+
   public environment = Environment;
   public snackBarRef: MatSnackBarRef<TextOnlySnackBar> | undefined;
   public queryStringShopId: string | null = '';
@@ -30,7 +30,7 @@ export class ControlPanelConfigurationShopComponent  implements OnInit {
   public formSubmitted = false;
 
   public controlName = new FormControl('', Validators.required);
-  public controlSubDomain = new FormControl('', [Validators.minLength(3), Validators.pattern(/^[a-zA-Z0-9-]*$/)])
+  public controlSubDomain = new FormControl('', [Validators.minLength(3), Validators.pattern(/^[a-zA-Z0-9]*$/)])
   subscriptionSubDomain: Subscription | undefined;
 
   public pageTitle = 'Create new shop'
@@ -98,7 +98,9 @@ export class ControlPanelConfigurationShopComponent  implements OnInit {
     const shopToUpdate: Shop = Object.assign({}, this.shop);
     shopToUpdate.Name = this.controlName.value!;
     shopToUpdate.SubDomain = this.controlSubDomain.value!;
-    shopToUpdate.Merchant = this.activeMerchant!;
+
+    if (this.activeMerchant)
+      shopToUpdate.MerchantId = this.activeMerchant!.Id;
 
     if (this.queryStringShopId && this.queryStringShopId != 'new') {
       this.shopService.update(shopToUpdate).subscribe({

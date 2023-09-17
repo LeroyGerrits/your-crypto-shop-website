@@ -1,8 +1,6 @@
-import { Merchant } from './Merchant.model';
-
 export class Shop {
     Id!: string;    
-    Merchant!: Merchant;
+    MerchantId!: string;
     Name!: string;
     SubDomain?: string;
     Featured!: boolean;

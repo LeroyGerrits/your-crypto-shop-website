@@ -1,10 +1,7 @@
 import { AuthenticationService } from 'src/app/shared/services/Authentication.service';
 import { Component } from '@angular/core';
 import { Constants } from 'src/app/shared/Constants';
-import { DatePipe } from '@angular/common';
 import { Merchant } from 'src/app/shared/models/Merchant.model';
-import { Observable } from 'rxjs';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'control-panel-dashboard',
@@ -16,8 +13,7 @@ export class ControlPanelDashboardComponent {
   constants = Constants;
 
   constructor(
-    private authenticationService: AuthenticationService,
-    private router: Router
+    private authenticationService: AuthenticationService
   ) {
     this.authenticationService.merchant.subscribe(x => this.activeMerchant = x?.Merchant);
   }
