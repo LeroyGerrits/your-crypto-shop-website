@@ -32,8 +32,8 @@ describe('CategoryService', () => {
     
     it('should be able to get a list of categories', () => {
         const parameters: GetCategoriesParameters = {
-            ShopId: TestDataCategories[0].Shop.Id,
-            ParentId: TestDataCategories[0].Parent?.Id,
+            ShopId: TestDataCategories[0].ShopId,
+            ParentId: TestDataCategories[0].ParentId,
             Name: 'Test'
         };
 

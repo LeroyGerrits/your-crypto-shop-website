@@ -1,8 +1,8 @@
-import { Product } from './Product.model';
-
 export class ProductPhoto {
     Id!: string;
-    Product!: Product;
+    ProductId!: string;
+    File!: string;
+    Extension!: string;
     Description?: string;
     ThumbnailUrl!: string;
     PhotoUrl!: string;

@@ -76,9 +76,9 @@ describe('ControlPanelCatalogCategoryComponent', () => {
 
   it('should set a page title mentioning the parent category when creating a new sub-category', () => {
     component.data.categoryToEdit = null;
-    component.data.parentCategory = TestDataCategories[0].Parent!;
+    component.data.parentCategory = TestDataCategories[0];
     component.ngOnInit();
-    expect(component.pageTitle).toBe(`Create new sub-category for '${TestDataCategories[0].Parent!.Name}'`);
+    expect(component.pageTitle).toBe(`Create new sub-category for '${TestDataCategories[0].Name}'`);
   });
 
   it('should not proceed submitting when required form values are not filled in', () => {
@@ -89,9 +89,9 @@ describe('ControlPanelCatalogCategoryComponent', () => {
   });
 
   it('should send a call to the category service when creating a new category', () => {
-    component.data.selectedShop = TestDataCategories[0].Shop;
+    component.data.selectedShop = TestDataShops[0];
     component.data.categoryToEdit = null;
-    component.data.parentCategory = TestDataCategories[0].Parent!;
+    component.data.parentCategory = TestDataCategories[0];
     component.ngOnInit();
     component.controlName.setValue(TestDataCategories[0].Name);
     component.controlVisible.setValue(true);
@@ -100,7 +100,7 @@ describe('ControlPanelCatalogCategoryComponent', () => {
   });
 
   it('should send a call to the category service when updating an existing category', () => {
-    component.data.selectedShop = TestDataCategories[0].Shop;
+    component.data.selectedShop = TestDataShops[0];
     component.data.categoryToEdit = TestDataCategories[0];
     component.data.parentCategory = null;
     component.ngOnInit();

@@ -67,12 +67,12 @@ export class ControlPanelCatalogCategoryComponent implements OnInit {
         this.formLoading = true;
 
         const categoryToUpdate: Category = Object.assign({}, this.category)
-        categoryToUpdate.Shop = this.data.selectedShop;
+        categoryToUpdate.ShopId = this.data.selectedShop.Id;
         categoryToUpdate.Name = this.controlName.value!;
         categoryToUpdate.Visible = this.controlVisible.value!;
 
         if (this.data.parentCategory)
-            categoryToUpdate.Parent = this.data.parentCategory;
+            categoryToUpdate.ParentId = this.data.parentCategory.Id;
 
         if (this.data.categoryToEdit) {
             this.categoryService.update(categoryToUpdate).subscribe({

@@ -114,8 +114,8 @@ export class ControlPanelCatalogCategoryListComponent  implements OnInit {
     this.changingParent = true;
     this.changingParentCategory = category;
 
-    if (category.Parent)
-      this.changingParentSelection = category.Parent.Id;
+    if (category.ParentId)
+      this.changingParentSelection = category.ParentId;
   }
 
   changeCategoryParentCancel() {

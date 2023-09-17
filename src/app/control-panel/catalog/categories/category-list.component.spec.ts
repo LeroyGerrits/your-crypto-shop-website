@@ -73,7 +73,7 @@ describe('ControlPanelCatalogCategoryListComponent', () => {
   });
 
   it('should show a dialog when add icon is clicked', () => {
-    component.addCategory(TestDataCategories[0].Parent!);
+    component.addCategory(TestDataCategories[0]);
     expect(matDialogSpy.open).toHaveBeenCalled();
   });
 

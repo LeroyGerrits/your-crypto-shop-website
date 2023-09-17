@@ -1,13 +1,9 @@
-import { Category } from './Category.model';
-import { ProductPhoto } from './ProductPhoto.model';
-import { Shop } from './Shop.model';
-
 export class Product {
     Id!: string;
-    Shop!: Shop;
+    ShopId!: string;
     Name!: string;
     Description?: string;
+    Stock?: number;
     Price!: number;
-    Categories?: Category[];
-    Photos?: ProductPhoto[];
+    Visible!: boolean;
 }
