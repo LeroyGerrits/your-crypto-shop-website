@@ -1,16 +1,35 @@
-mat-card {
-    height: 100%;
-    
-    width: 100%;
+div.NewsMessage {
+  background-color: #444;
 }
 
-mat-card img{
-    object-fit: cover;
-    width:auto;
-    max-height:200px;
-  }
+div.NewsMessage div.TitleAndDate {
+  padding: 20px;
+}
 
-.example-header-image {
-    background-image: url('/assets/images/Header Logo.png');
-    background-size: cover;
-  }
+div.NewsMessage div.TitleAndDate h3 {
+  display: block;
+  line-height: normal;
+  margin: 0;
+  padding: 0;
+}
+
+div.NewsMessage div.TitleAndDate span {
+  color: #bbb;
+  display: block;
+  font-size: 0.8em;
+}
+
+div.NewsMessage img {
+  border: none;
+  display: block;
+  height: auto;
+  width: 100%;
+}
+
+div.NewsMessage p {
+  display: block;
+  min-height: 4.8em;
+  line-height: 1.6em;
+  margin: 0 !important;
+  padding: 10px 20px;
+}

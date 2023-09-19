@@ -1,23 +1,28 @@
+import { ActivatedRoute, RouterLink, convertToParamMap } from '@angular/router';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ActivatedRoute } from '@angular/router';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { NewsMessageService } from 'src/app/shared/services/NewsMessage.service';
 import { PublicWebsiteNewsComponent } from './news.component';
-import { RouterTestingModule } from '@angular/router/testing';
+import { TestDataNewsMessages } from 'src/assets/test-data/NewsMessages';
+import { of } from 'rxjs';
 
 describe('PublicWebsiteNewsComponent', () => {
   let component: PublicWebsiteNewsComponent;
   let fixture: ComponentFixture<PublicWebsiteNewsComponent>;
 
-  const fakeActivatedRoute = {
-    snapshot: { data: {} }
-  } as ActivatedRoute;
+  let newsMessageServiceSpy: jasmine.SpyObj<NewsMessageService>;
 
   beforeEach(() => {
+    newsMessageServiceSpy = jasmine.createSpyObj('NewsMessageService', ['getById']);
+    newsMessageServiceSpy.getById.and.returnValue(of(TestDataNewsMessages[0]));
+
     TestBed.configureTestingModule({
       declarations: [PublicWebsiteNewsComponent],
-      imports: [RouterTestingModule],
+      imports: [RouterLink, HttpClientTestingModule],
       providers: [
-        { provide: ActivatedRoute, useValue: fakeActivatedRoute }
+        { provide: ActivatedRoute, useValue: { snapshot: { paramMap: convertToParamMap({ newsMessageId: TestDataNewsMessages[0].Id }) } } },
+        { provide: NewsMessageService, useValue: newsMessageServiceSpy }
       ]
     });
     fixture = TestBed.createComponent(PublicWebsiteNewsComponent);
@@ -27,5 +32,10 @@ describe('PublicWebsiteNewsComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('should retrieve a news message', () => {
+    component.GetNewsMessage(TestDataNewsMessages[0].Id);
+    expect(newsMessageServiceSpy.getById).toHaveBeenCalled();
   });
 });

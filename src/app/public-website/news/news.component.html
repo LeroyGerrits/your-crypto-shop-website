@@ -1,1 +1,12 @@
-<h2>News message {{this.newsMessage.Date}}</h2>
+<div class="WrapperPadding20-8-0-8">
+    <h2><a [routerLink]="['/news']">News</a> - {{this.newsMessage?.Title}}</h2>
+</div>
+<div class="WrapperPadding20-8-0-8">
+    <span class="Date">{{this.newsMessage?.Date | date: 'd MMM yyyy HH:mm'}}</span>
+</div>
+<div class="ColumOneHalf">
+    <div class="WrapperPadding20-8-0-8">
+        <p [innerHTML]="this.newsMessage?.Intro"></p>
+    </div>
+</div>
+<div [innerHTML]="this.newsMessage?.Content" class="ClearLeft"></div>

@@ -1,6 +1,5 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatPaginator } from '@angular/material/paginator';
-import { MatTableDataSource } from '@angular/material/table';
+import { Component, OnInit } from '@angular/core';
+
 import { NewsMessage } from 'src/app/shared/models/NewsMessage.model';
 import { NewsMessageService } from 'src/app/shared/services/NewsMessage.service';
 
@@ -10,25 +9,15 @@ import { NewsMessageService } from 'src/app/shared/services/NewsMessage.service'
   styleUrls: ['./news-list.component.scss']
 })
 export class PublicWebsiteNewsListComponent implements OnInit {
-  @ViewChild(MatPaginator, { static: false }) paginator!: MatPaginator;
-
-  dataSource = new MatTableDataSource<NewsMessage>;
-  columns: number = 3;
+  newsMessages: NewsMessage[] | undefined;
 
   constructor(
     private newsMessageService: NewsMessageService
   ) { }
 
   ngOnInit() {
-    this.columns = (window.innerWidth <= 750) ? 1 : 3;
-
-    this.newsMessageService.getList().subscribe(shops => {
-      this.dataSource = new MatTableDataSource(shops);
-      this.dataSource.paginator = this.paginator;
+    this.newsMessageService.getList().subscribe(newsMessages => {
+      this.newsMessages = newsMessages;
     });
-  }
-
-  handleResize() {
-    this.columns = (window.innerWidth <= 750) ? 1 : 3;
   }
 }

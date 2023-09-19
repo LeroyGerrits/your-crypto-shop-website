@@ -1,8 +1,8 @@
 import { ActivatedRoute, RouterLink, convertToParamMap } from '@angular/router';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { HttpClient, HttpHandler } from '@angular/common/http';
 
 import { FaqService } from 'src/app/shared/services/Faq.service';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { MatChipsModule } from '@angular/material/chips';
 import { PublicWebsiteFaqComponent } from './faq.component';
 import { TestDataFaqs } from 'src/assets/test-data/Faqs';
@@ -11,6 +11,7 @@ import { of } from 'rxjs';
 describe('PublicWebsiteFaqComponent', () => {
   let component: PublicWebsiteFaqComponent;
   let fixture: ComponentFixture<PublicWebsiteFaqComponent>;
+  
   let faqServiceSpy: jasmine.SpyObj<FaqService>;
 
   beforeEach(() => {
@@ -19,12 +20,10 @@ describe('PublicWebsiteFaqComponent', () => {
 
     TestBed.configureTestingModule({
       declarations: [PublicWebsiteFaqComponent],
-      imports: [RouterLink, MatChipsModule],
+      imports: [RouterLink, MatChipsModule, HttpClientTestingModule],
       providers: [
-        { provide: ActivatedRoute, useValue: { snapshot: { paramMap: convertToParamMap({ faqId: '00000000-0000-0000-0000-000000000001' }) } } },
-        { provide: FaqService, useValue: faqServiceSpy },
-        HttpClient,
-        HttpHandler
+        { provide: ActivatedRoute, useValue: { snapshot: { paramMap: convertToParamMap({ faqId: TestDataFaqs[0].Id }) } } },
+        { provide: FaqService, useValue: faqServiceSpy }
       ]
     });
     fixture = TestBed.createComponent(PublicWebsiteFaqComponent);
@@ -36,8 +35,8 @@ describe('PublicWebsiteFaqComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should retrieve a FAQ record', () => {
-    component.GetFaq('00000000-0000-0000-0000-000000000001');
+  it('should retrieve a FAQ', () => {
+    component.GetFaq(TestDataFaqs[0].Id);
     expect(faqServiceSpy.getById).toHaveBeenCalled();
   });
 });

@@ -38,16 +38,4 @@ describe('PublicWebsiteNewsListComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
-
-  it('should set the amount of columns displayed to 1 when the window width is resized to 750 pixels or lower', () => {
-    window.innerWidth = 500;
-    component.handleResize();
-    expect(component.columns).toBe(1);
-  });
-
-  it('should set the amount of columns displayed to 3 when the window width is resized to 751 pixels or higher', () => {
-    window.innerWidth = 751;
-    component.handleResize();
-    expect(component.columns).toBe(3);
-  });
 });

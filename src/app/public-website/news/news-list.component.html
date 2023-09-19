@@ -1,20 +1,24 @@
-<div class="WrapperPadding0-8">
-    <mat-grid-list [cols]="this.columns" rowHeight="400px" [gutterSize]="'20px'" (window:resize)="handleResize()">
-        <mat-grid-tile *ngFor="let newsMessage of this.dataSource.data">            
-                <mat-card>
-                    <mat-card-header>
-                        <div mat-card-avatar class="example-header-image"></div>
-                        <mat-card-title><a [routerLink]="['/news', newsMessage.Id, newsMessage.Title | searchEngineFriendlyString]">{{newsMessage.Title}}</a></mat-card-title>
-                        <mat-card-subtitle>{{newsMessage.Date | date: 'd MMM yyyy HH:mm'}}</mat-card-subtitle>
-                    </mat-card-header>
-                    <img mat-card-image *ngIf="newsMessage.ThumbnailUrl" [src]="newsMessage.ThumbnailUrl" width="400" height="200" />
-                    <mat-card-content>
-                        <p>{{newsMessage.Intro}}</p>
-                    </mat-card-content>
-                    <mat-card-actions align="end">
-                        <button mat-raised-button color="primary" [routerLink]="['/news', newsMessage.Id, newsMessage.Title | searchEngineFriendlyString]">Read more</button>
-                    </mat-card-actions>
-                </mat-card>
-        </mat-grid-tile>
-    </mat-grid-list>
+<div class="WrapperPadding20-8-0-8">
+    <h2>News</h2>
 </div>
+
+<div [ngClass]="{ 'ColumnOneThird': true, 'ClearLeft': (i % 3 == 0) }"
+    *ngFor="let newsMessage of this.newsMessages; let i = index">
+    <div
+        [ngClass]="{ 'WrapperPadding20-10-0-8': (i % 3 == 0), 'WrapperPadding20-9-0-9': (i - 1 % 3 == 0), 'WrapperPadding20-8-0-10': (i - 2 % 3 == 0) }">
+        <div class="NewsMessage">
+            <div class="TitleAndDate">
+                <h3><a
+                        [routerLink]="['/news', newsMessage.Id, newsMessage.Title | searchEngineFriendlyString]">{{newsMessage.Title}}</a>
+                </h3>
+                <span>{{newsMessage.Date | date: 'd MMM yyyy HH:mm'}}</span>
+            </div>
+            <a *ngIf="newsMessage.ThumbnailUrl"
+                [routerLink]="['/news', newsMessage.Id, newsMessage.Title | searchEngineFriendlyString]">
+                <img [src]="newsMessage.ThumbnailUrl" width="400" height="200" />
+            </a>
+            <p>{{newsMessage.Intro}}</p>
+        </div>
+    </div>
+</div>
+<div class="ClearLeft"></div>

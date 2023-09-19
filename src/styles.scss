@@ -451,6 +451,11 @@ div.InvalidFeedback {
   color: var(--error-color);
 }
 
+div.LighterBlock {
+  background-color: #444;
+  padding: 20px;
+}
+
 img.PublicWebsiteImage {
   display: block;
   margin: 20px auto;
@@ -536,6 +541,10 @@ div.WrapperPadding20-8-20-10 {
 
 div.WrapperPadding20-8-20-20 {
   padding: 20px 8px 20px 20px;
+}
+
+div.WrapperPadding20-9-0-9 {
+  padding: 20px 9px 0 9px;
 }
 
 div.WrapperPadding8 {
@@ -751,7 +760,8 @@ mat-form-field {
   div.WrapperPadding20-8-0-20,
   div.WrapperPadding20-8-0-8,
   div.WrapperPadding20-8-20-10,
-  div.WrapperPadding20-8-20-20 {
+  div.WrapperPadding20-8-20-20,
+  div.WrapperPadding20-9-0-9 {
     padding: 20px 0 0 0;
   }
 }
