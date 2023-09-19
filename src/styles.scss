@@ -198,16 +198,19 @@ p {
   padding: 40px 0;
 }
 
-#Header div.LogoAndNavigation #Logo {
+#Header div.LogoAndNavigation a#Logo {
+  display: block;
+  float: left;
   margin-left: 8px;
+  white-space: nowrap;
 }
 
-#Header div.LogoAndNavigation #Logo img {
+#Header div.LogoAndNavigation a#Logo img {
   border: none;
   vertical-align: middle;
 }
 
-#Header div.LogoAndNavigation #Logo span {
+#Header div.LogoAndNavigation a#Logo span {
   color: #fff;
   display: inline-block;
   font-family: 'robotoblack_italic';
@@ -283,7 +286,8 @@ p {
   padding-top: 20px;
   text-align: center;
 }
-#Header div.CalltoAction div.Wrapper div.Buttons button {  
+
+#Header div.CalltoAction div.Wrapper div.Buttons button {
   margin: 0 10px;
 }
 
@@ -542,6 +546,10 @@ div.WrapperPadding8 {
   clear: both;
 }
 
+.ClearBoth {
+  clear: both;
+}
+
 .ClearLeft {
   clear: left;
 }
@@ -654,7 +662,61 @@ mat-form-field {
 
 /* Responsiveness */
 
-@media all and (max-width: 700px) {
+@media all and (max-width: 1000px) {
+  #Header div.LogoAndNavigation a#Logo {
+    float: none;
+    margin: 0;
+    text-align: center;
+  }
+
+  #Header div.LogoAndNavigation ul {
+    float: none;
+    list-style-type: none;
+    margin: 0;
+  }
+
+  #Header div.LogoAndNavigation ul li {
+    display: block;
+    line-height: 2em;
+    margin: 0;
+    text-align: center;
+  }
+
+  #Header div.CalltoAction {
+    height: auto;
+  }
+
+  #Header div.CalltoAction div.Wrapper {
+    text-align: center;
+    padding: 20px 0;
+    width: auto;
+  }
+
+  #Header div.CalltoAction div.Wrapper img {
+    display: none;
+  }
+
+  #Header div.CalltoAction div.Wrapper strong {
+    padding: 0 0 10px 0;
+  }
+
+  #Header div.CalltoAction div.Wrapper span.Explanation {
+    color: #e0e0e0;
+    display: block;
+    text-shadow: 1px 1px 0 #222;
+  }
+
+  #Header div.CalltoAction div.Wrapper div.Buttons {
+    display: table;
+    margin: 0 auto;
+    padding-top: 20px;
+    text-align: center;
+  }
+
+  #Header div.CalltoAction div.Wrapper div.Buttons button {
+    margin: 0 10px;
+  }
+
   div.CenteredContainer {
     padding: 0 20px;
     width: auto;
@@ -670,47 +732,27 @@ mat-form-field {
     float: none;
     width: auto;
   }
-}
 
-@media all and (min-width: 700px) and (max-width: 1000px) {
-  div.CenteredContainer {
-    padding: 0 20px;
-    width: auto;
-  }
-
-  div.ColumnOneSixth {
-    float: left;
-    width: 160px;
-  }
-
-  div.ColumnOneFifth {
-    float: left;
-    width: 192px;
-  }
-
-  div.ColumnOneFourth {
-    float: left;
-    width: 240px;
-  }
-
-  div.ColumnOneThird {
-    float: left;
-    width: 320px;
-  }
-
-  div.ColumnOneHalf {
-    float: left;
-    width: 480px;
-  }
-
-  div.ColumnTwoThird {
-    float: left;
-    width: 640px;
-  }
-
-  div.ColumnThreeFourth {
-    float: left;
-    width: 720px;
+  div.WrapperPadding0-8,
+  div.WrapperPadding10,
+  div.WrapperPadding10-8-10-10,
+  div.WrapperPadding20,
+  div.WrapperPadding20-10,
+  div.WrapperPadding20-20-0-20,
+  div.WrapperPadding20-20-0-8,
+  div.WrapperPadding20-20-20-8,
+  div.WrapperPadding20-10-0-8,
+  div.WrapperPadding20-10-0-10,
+  div.WrapperPadding20-10-20-10,
+  div.WrapperPadding20-10-20-10,
+  div.WrapperPadding20-10-20-8,
+  div.WrapperPadding20-8,
+  div.WrapperPadding20-8-0-10,
+  div.WrapperPadding20-8-0-20,
+  div.WrapperPadding20-8-0-8,
+  div.WrapperPadding20-8-20-10,
+  div.WrapperPadding20-8-20-20 {
+    padding: 20px 0 0 0;
   }
 }
 
