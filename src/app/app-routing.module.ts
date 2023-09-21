@@ -36,6 +36,7 @@ import { PublicWebsiteNotAuthorizedComponent } from './public-website/not-author
 import { PublicWebsiteNotFoundComponent } from './public-website/not-found/not-found.component';
 import { PublicWebsitePricingComponent } from './public-website/pricing/pricing.component';
 import { PublicWebsiteResetPasswordComponent } from './public-website/reset-password/reset-password.component';
+import { PublicWebsiteShopListComponent } from './public-website/shops/shop-list.component';
 
 const titlePrefix: string = 'DGB Commerce';
 const routes: Routes = [
@@ -80,6 +81,7 @@ const routes: Routes = [
       { path: 'faq', component: PublicWebsiteFaqListComponent, title: `${titlePrefix} - FAQ` },
       { path: 'faq/:faqId', component: PublicWebsiteFaqComponent, title: `${titlePrefix} - FAQ` },
       { path: 'faq/:faqId/:faqTitle', component: PublicWebsiteFaqComponent, title: `${titlePrefix} - FAQ` },
+      { path: 'shops', component: PublicWebsiteShopListComponent, title: `${titlePrefix} - Shops` },
       { path: 'reset-password', component: PublicWebsiteResetPasswordComponent, title: `${titlePrefix} - Reset password` },
       { path: '**', pathMatch: 'full', component: PublicWebsiteNotFoundComponent, title: `${titlePrefix} - Not found` }
     ]

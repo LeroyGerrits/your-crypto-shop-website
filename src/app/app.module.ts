@@ -72,6 +72,7 @@ import { PublicWebsiteFinancialStatementComponent } from './public-website/finan
 import { PublicWebsiteIndexComponent } from './public-website/index/index.component';
 import { PublicWebsiteNewsComponent } from './public-website/news/news.component';
 import { PublicWebsiteNewsListComponent } from './public-website/news/news-list.component';
+import { PublicWebsiteShopListComponent } from './public-website/shops/shop-list.component';
 import { QRCodeModule } from 'angularx-qrcode';
 import { RouterModule } from '@angular/router';
 import { SearchEngineFriendlyStringPipe } from './shared/pipes/searchEngineFriendlyString.pipe';
@@ -107,6 +108,7 @@ import { ShopService } from './shared/services/Shop.service';
     PublicWebsiteFinancialStatementComponent,
     PublicWebsiteNewsComponent,
     PublicWebsiteNewsListComponent,    
+    PublicWebsiteShopListComponent,
     SearchEngineFriendlyStringPipe
   ],
   imports: [

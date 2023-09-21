@@ -45,6 +45,7 @@
   --error-color: #f55555;
   --green-color: #15a515;
   --mat-menu-item-label-text-size: 14px;
+  --mat-option-label-text-size: 14px;
 }
 
 $md-dgbcommercepalette-primary: (
@@ -630,6 +631,11 @@ div.WrapperPadding8 {
 
 .mat-mdc-icon-button.mat-primary {
   color: $lightest-blue-color !important;
+}
+
+.mat-mdc-option
+{
+
 }
 
 .mat-mdc-option.mdc-list-item--selected:not(.mdc-list-item--disabled) .mdc-list-item__primary-text {

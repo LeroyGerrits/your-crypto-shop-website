@@ -1,0 +1,56 @@
+<div class="WrapperPadding20-8-0-8">
+    <h2>Shops</h2>
+</div>
+
+<div class="ColumnOneFourth">
+    <div class="WrapperPadding20-20-0-8">
+        <mat-form-field>
+            <mat-label>Name</mat-label>
+            <input matInput [formControl]="controlFilterName" />
+        </mat-form-field>
+    </div>
+</div>
+<div class="ColumnOneFourth">
+    <div class="WrapperPadding20-20-0-20">
+        <mat-form-field>
+            <mat-label>Subdomain</mat-label>
+            <input matInput [formControl]="controlFilterSubDomain" />
+        </mat-form-field>
+    </div>
+</div>
+
+<div class="WrapperPadding20-8 ClearLeft">
+    <table mat-table matSort [dataSource]="this.dataSource" (matSortChange)="onSortChange($event)">
+        <ng-container matColumnDef="Featured">
+            <th mat-header-cell *matHeaderCellDef></th>
+            <td mat-cell *matCellDef="let element">
+                <mat-icon *ngIf="element.Featured" class="FeaturedIcon"
+                    matTooltip="This shop is featured">star</mat-icon>
+            </td>
+        </ng-container>
+
+        <ng-container matColumnDef="Name">
+            <th mat-header-cell mat-sort-header *matHeaderCellDef>Name</th>
+            <td mat-cell *matCellDef="let element">{{element.Name}}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="SubDomain">
+            <th mat-header-cell mat-sort-header *matHeaderCellDef>Subdomain</th>
+            <td mat-cell *matCellDef="let element">
+                <span *ngIf="element.SubDomain"><a href="https://{{element.SubDomain}}.{{environment.WEBSITE_DOMAIN}}"
+                        target="_blank">https://<strong
+                            class="TextDecorationUnderline">{{element.SubDomain}}</strong>.{{environment.WEBSITE_DOMAIN}}</a></span>
+            </td>
+        </ng-container>
+
+        <ng-container matColumnDef="Merchant">
+            <th mat-header-cell mat-sort-header *matHeaderCellDef>Merchant</th>
+            <td mat-cell *matCellDef="let element">{{element.MerchantId}}</td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="this.displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: this.displayedColumns;"></tr>
+    </table>
+
+    <mat-paginator [pageSizeOptions]="[25, 50, 100]" showFirstLastButtons />
+</div>
