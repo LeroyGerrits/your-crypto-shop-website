@@ -1,4 +1,4 @@
-import { SearchEngineFriendlyStringPipe } from "./searchEngineFriendlyString.pipe";
+import { SearchEngineFriendlyStringPipe } from "./SearchEngineFriendlyString.pipe";
 
 describe('SearchEngineFriendlyStringPipe', () => {
     const pipe = new SearchEngineFriendlyStringPipe();

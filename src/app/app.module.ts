@@ -75,8 +75,9 @@ import { PublicWebsiteNewsListComponent } from './public-website/news/news-list.
 import { PublicWebsiteShopListComponent } from './public-website/shops/shop-list.component';
 import { QRCodeModule } from 'angularx-qrcode';
 import { RouterModule } from '@angular/router';
-import { SearchEngineFriendlyStringPipe } from './shared/pipes/searchEngineFriendlyString.pipe';
+import { SearchEngineFriendlyStringPipe } from './shared/pipes/SearchEngineFriendlyString.pipe';
 import { ShopService } from './shared/services/Shop.service';
+import { MerchantLinkComponent } from './shared/components/merchant-link/merchant-link.component';
 
 @NgModule({
   declarations: [
@@ -109,7 +110,8 @@ import { ShopService } from './shared/services/Shop.service';
     PublicWebsiteNewsComponent,
     PublicWebsiteNewsListComponent,    
     PublicWebsiteShopListComponent,
-    SearchEngineFriendlyStringPipe
+    SearchEngineFriendlyStringPipe,
+    MerchantLinkComponent
   ],
   imports: [
     AppRoutingModule,

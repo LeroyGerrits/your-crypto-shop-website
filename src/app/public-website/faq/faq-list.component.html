@@ -13,7 +13,7 @@
         <h3>{{faqCategory.Name}}</h3>
         <ul>
             <li *ngFor="let faq of this.faqsByCategoryId[faqCategory.Id]">
-                <a [routerLink]="['/faq', faq.Id, faq.Title | searchEngineFriendlyString]">
+                <a [routerLink]="['/faq', faq.Id, faq.Title | SearchEngineFriendlyString]">
                     {{faq.Title}}
                 </a>
             </li>

@@ -1,8 +1,11 @@
+import { HttpClient, HttpParams } from '@angular/common/http';
+
 import { Environment } from 'src/app/shared/environments/Environment';
-import { HttpClient } from '@angular/common/http';
+import { GetShopsParameters } from '../models/parameters/GetShopsParameters.model';
 import { Injectable } from '@angular/core';
 import { MutationResult } from 'src/app/shared/models/MutationResult';
 import { Observable } from 'rxjs';
+import { PublicShop } from '../models/viewmodels/PublicShop.model';
 import { Shop } from 'src/app/shared/models/Shop.model';
 
 @Injectable()
@@ -11,8 +14,26 @@ export class ShopService {
 
     constructor(protected http: HttpClient) { }
 
-    getList(): Observable<Shop[]> {
-        return this.http.get<Shop[]>(this.apiUrl);
+    getList(parameters?: GetShopsParameters): Observable<Shop[]> {
+        let httpParams = new HttpParams();
+
+        if (parameters) {
+            if (parameters.Name) httpParams = httpParams.append('name', parameters.Name);
+            if (parameters.SubDomain) httpParams = httpParams.append('subdomain', parameters.SubDomain);            
+        }
+
+        return this.http.get<Shop[]>(this.apiUrl, { params: httpParams });
+    }
+
+    getPublicList(parameters?: GetShopsParameters): Observable<PublicShop[]> {
+        let httpParams = new HttpParams();
+
+        if (parameters) {
+            if (parameters.Name) httpParams = httpParams.append('name', parameters.Name);
+            if (parameters.SubDomain) httpParams = httpParams.append('subdomain', parameters.SubDomain);            
+        }
+
+        return this.http.get<PublicShop[]>(this.apiUrl + '/public', { params: httpParams });
     }
 
     getById(id: string): Observable<Shop> {

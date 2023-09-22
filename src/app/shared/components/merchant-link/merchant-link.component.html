@@ -1,0 +1,8 @@
+<a [routerLink]="['/merchant/' + this.merchantId]">{{this.merchantSalutation}}
+    <span *ngIf="this.merchantScore" class="DisplayInlineBlock">
+        <mat-icon *ngFor="let _ of [].constructor(this.merchantScoreRound)" inline="true" class="ColorGold VerticalAlignMiddle">star</mat-icon>
+        <mat-icon *ngIf="this.merchantScoreHalf" inline="true" class="ColorGold VerticalAlignMiddle">star_half</mat-icon>
+        <mat-icon *ngFor="let _ of [].constructor(this.merchantScoreRemainder)" inline="true" class="ColorGold VerticalAlignMiddle">star_outline</mat-icon>
+    </span>
+    
+</a>

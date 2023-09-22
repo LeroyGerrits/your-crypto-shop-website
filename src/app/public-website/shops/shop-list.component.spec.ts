@@ -13,7 +13,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { RouterTestingModule } from '@angular/router/testing';
 import { ShopService } from 'src/app/shared/services/Shop.service';
 import { Sort } from '@angular/material/sort';
-import { TestDataShops } from 'src/assets/test-data/Shops';
+import { TestDataPublicShops } from 'src/assets/test-data/PublicShops';
 import { of } from 'rxjs';
 
 describe('PublicWebsiteShopListComponent', () => {
@@ -23,8 +23,8 @@ describe('PublicWebsiteShopListComponent', () => {
   let shopServiceSpy: jasmine.SpyObj<ShopService>;
 
   beforeEach(() => {
-    shopServiceSpy = jasmine.createSpyObj('ShopService', ['getList']);
-    shopServiceSpy.getList.and.returnValue(of(TestDataShops));
+    shopServiceSpy = jasmine.createSpyObj('ShopService', ['getPublicList']);
+    shopServiceSpy.getPublicList.and.returnValue(of(TestDataPublicShops));
 
     TestBed.configureTestingModule({
       declarations: [PublicWebsiteShopListComponent],

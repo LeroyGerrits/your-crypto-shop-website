@@ -12,4 +12,5 @@ export class Merchant {
     SecondLastLogin?: Date;
     SecondLastIpAddress?: string;    
     Salutation!: string;
+    Score?: number;
 }

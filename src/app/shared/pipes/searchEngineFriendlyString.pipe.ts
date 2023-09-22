@@ -1,6 +1,6 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
-@Pipe({ name: 'searchEngineFriendlyString' })
+@Pipe({ name: 'SearchEngineFriendlyString' })
 export class SearchEngineFriendlyStringPipe implements PipeTransform {
 
     constructor() { }

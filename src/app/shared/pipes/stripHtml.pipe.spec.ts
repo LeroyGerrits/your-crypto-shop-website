@@ -1,4 +1,4 @@
-import { StripHtmlPipe } from "./stripHtml.pipe";
+import { StripHtmlPipe } from "./StripHtml.pipe";
 
 describe('StripHtmlPipe', () => {
     const pipe = new StripHtmlPipe();

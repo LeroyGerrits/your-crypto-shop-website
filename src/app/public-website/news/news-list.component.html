@@ -9,12 +9,12 @@
         <div class="NewsMessage">
             <div class="TitleAndDate">
                 <h3><a
-                        [routerLink]="['/news', newsMessage.Id, newsMessage.Title | searchEngineFriendlyString]">{{newsMessage.Title}}</a>
+                        [routerLink]="['/news', newsMessage.Id, newsMessage.Title | SearchEngineFriendlyString]">{{newsMessage.Title}}</a>
                 </h3>
                 <span>{{newsMessage.Date | date: 'd MMM yyyy HH:mm'}}</span>
             </div>
             <a *ngIf="newsMessage.ThumbnailUrl"
-                [routerLink]="['/news', newsMessage.Id, newsMessage.Title | searchEngineFriendlyString]">
+                [routerLink]="['/news', newsMessage.Id, newsMessage.Title | SearchEngineFriendlyString]">
                 <img [src]="newsMessage.ThumbnailUrl" width="400" height="200" />
             </a>
             <p>{{newsMessage.Intro}}</p>

@@ -3,6 +3,7 @@ import { HttpClientTestingModule, HttpTestingController } from '@angular/common/
 
 import { Constants } from 'src/app/shared/Constants';
 import { Environment } from 'src/app/shared/environments/Environment';
+import { GetShopsParameters } from '../models/parameters/GetShopsParameters.model';
 import { ShopService } from './Shop.service';
 import { TestBed } from '@angular/core/testing';
 import { TestDataShops } from 'src/assets/test-data/Shops';
@@ -27,6 +28,28 @@ describe('ShopService', () => {
     
     it('should be created', () => {
         expect(service).toBeTruthy();
+    });
+
+    it('should be able to get a list of shops', () => {
+        const parameters: GetShopsParameters = {
+            Name: 'Test',
+            SubDomain: 'Test'
+        };
+
+        service.getList(parameters).subscribe();
+        const request = httpMock.expectOne(`${Environment.API_URL}/Shop?name=${parameters.Name}&subdomain=${parameters.SubDomain}`);
+        expect(request.request.method).toBe('GET');
+    });
+
+    it('should be able to get a list of public shops', () => {
+        const parameters: GetShopsParameters = {
+            Name: 'Test',
+            SubDomain: 'Test'
+        };
+
+        service.getPublicList(parameters).subscribe();
+        const request = httpMock.expectOne(`${Environment.API_URL}/Shop/public?name=${parameters.Name}&subdomain=${parameters.SubDomain}`);
+        expect(request.request.method).toBe('GET');
     });
     
     it('should be able to get a list of shops', () => {

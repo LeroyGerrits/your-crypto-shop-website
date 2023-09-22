@@ -4,7 +4,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort, Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Environment } from 'src/app/shared/environments/Environment';
-import { Shop } from 'src/app/shared/models/Shop.model';
+import { PublicShop } from 'src/app/shared/models/viewmodels/PublicShop.model';
 import { ShopService } from 'src/app/shared/services/Shop.service';
 
 @Component({
@@ -18,7 +18,7 @@ export class PublicWebsiteShopListComponent implements OnInit {
   @ViewChild(MatSort, { static: false }) sort!: MatSort;
 
   environment = Environment;
-  dataSource = new MatTableDataSource<Shop>;
+  dataSource = new MatTableDataSource<PublicShop>;
   displayedColumns: string[] = ['Featured', 'Name', 'SubDomain', 'Merchant'];
   sortDirection: string | null = 'asc';
 
@@ -36,7 +36,7 @@ export class PublicWebsiteShopListComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.shopService.getList().subscribe(shops => {
+    this.shopService.getPublicList().subscribe(shops => {
       this.dataSource = new MatTableDataSource(shops);
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;

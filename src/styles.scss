@@ -564,12 +564,20 @@ div.WrapperPadding8 {
   clear: left;
 }
 
+.ColorGold {
+  color: #ffaa00;
+}
+
 .ClearRight {
   clear: right;
 }
 
 .DisplayBlock {
   display: block;
+}
+
+.DisplayInlineBlock {
+  display: inline-block;
 }
 
 .FloatRight {
@@ -605,6 +613,10 @@ div.WrapperPadding8 {
   font-size: 12px;
 }
 
+.VerticalAlignMiddle {
+  vertical-align: middle;
+}
+
 .WordWrapBreakWord {
   word-wrap: break-word;
 }
@@ -633,10 +645,7 @@ div.WrapperPadding8 {
   color: $lightest-blue-color !important;
 }
 
-.mat-mdc-option
-{
-
-}
+.mat-mdc-option {}
 
 .mat-mdc-option.mdc-list-item--selected:not(.mdc-list-item--disabled) .mdc-list-item__primary-text {
   color: $lightest-blue-color !important;
