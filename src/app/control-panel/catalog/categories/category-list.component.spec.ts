@@ -43,9 +43,12 @@ describe('ControlPanelCatalogCategoryListComponent', () => {
 
     matSnackBarSpy = jasmine.createSpyObj('MatSnackBar', ['open']);
 
-    categoryServiceSpy = jasmine.createSpyObj('CategoryService', ['getList', 'delete']);
+    categoryServiceSpy = jasmine.createSpyObj('CategoryService', ['changeParent', 'getList', 'delete', 'moveDown', 'moveUp']);
+    categoryServiceSpy.changeParent.and.returnValue(of(mutationResult));
     categoryServiceSpy.getList.and.returnValue(of(TestDataCategories));
     categoryServiceSpy.delete.and.returnValue(of(mutationResult));
+    categoryServiceSpy.moveDown.and.returnValue(of(mutationResult));
+    categoryServiceSpy.moveUp.and.returnValue(of(mutationResult));
 
     shopServiceSpy = jasmine.createSpyObj('ShopService', ['getList']);
     shopServiceSpy.getList.and.returnValue(of(TestDataShops));
@@ -59,7 +62,7 @@ describe('ControlPanelCatalogCategoryListComponent', () => {
         { provide: ActivatedRoute, useValue: { snapshot: { data: {} } } },
         { provide: MatDialog, useValue: matDialogSpy },
         { provide: ShopService, useValue: shopServiceSpy },
-        { provide: CategoryService, useVaue: categoryServiceSpy },
+        { provide: CategoryService, useValue: categoryServiceSpy },
         { provide: MatSnackBar, useValue: matSnackBarSpy }
       ]
     });
@@ -85,6 +88,34 @@ describe('ControlPanelCatalogCategoryListComponent', () => {
   it('should show a dialog when delete icon is clicked', () => {
     component.deleteCategory(TestDataCategories[0]);
     expect(matDialogSpy.open).toHaveBeenCalled();
+  });
+
+  it('should make a call to the category service when a category is moved down', () => {
+    component.moveCategoryDown(TestDataCategories[0]);
+    expect(categoryServiceSpy.moveDown).toHaveBeenCalled();
+  });
+
+  it('should make a call to the category service when a category is moved up', () => {
+    component.moveCategoryUp(TestDataCategories[0]);
+    expect(categoryServiceSpy.moveUp).toHaveBeenCalled();
+  });
+
+  it('should set a changing parent selection when a category gets marked for parent changing', () => {
+    component.changeCategoryParent(TestDataCategories[0]);
+    expect(component.changingParent).toBeTrue();
+    expect(component.changingParentCategory).toBe(TestDataCategories[0]);
+  });
+
+  it('should clear changing parent selection when a category gets marked for parent changing and then the cancel buttons gets clicked', () => {
+    component.changeCategoryParentCancel();
+    expect(component.changingParent).toBeFalse();
+    expect(component.changingParentCategory).toBe(undefined);
+  });
+
+  it('should save new parent category selection when a category gets marked for parent changing and then the save buttons gets clicked', () => {
+    component.changeCategoryParent(TestDataCategories[0]);
+    component.changeCategoryParentSave();
+    expect(categoryServiceSpy.changeParent).toHaveBeenCalled();
   });
 
   it('should refresh when handling submit result and no error code is applicable', () => {
