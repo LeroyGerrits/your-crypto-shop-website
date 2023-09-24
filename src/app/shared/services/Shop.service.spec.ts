@@ -47,8 +47,14 @@ describe('ShopService', () => {
             SubDomain: 'Test'
         };
 
-        service.getPublicList(parameters).subscribe();
+        service.getListPublic(parameters).subscribe();
         const request = httpMock.expectOne(`${Environment.API_URL}/Shop/public?name=${parameters.Name}&subdomain=${parameters.SubDomain}`);
+        expect(request.request.method).toBe('GET');
+    });
+
+    it('should be able to get a list of public shops', () => {
+        service.getListFeaturedPublic().subscribe();
+        const request = httpMock.expectOne(`${Environment.API_URL}/Shop/public/featured`);
         expect(request.request.method).toBe('GET');
     });
     

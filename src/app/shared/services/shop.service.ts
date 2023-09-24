@@ -25,7 +25,7 @@ export class ShopService {
         return this.http.get<Shop[]>(this.apiUrl, { params: httpParams });
     }
 
-    getPublicList(parameters?: GetShopsParameters): Observable<PublicShop[]> {
+    getListPublic(parameters?: GetShopsParameters): Observable<PublicShop[]> {
         let httpParams = new HttpParams();
 
         if (parameters) {
@@ -34,6 +34,10 @@ export class ShopService {
         }
 
         return this.http.get<PublicShop[]>(this.apiUrl + '/public', { params: httpParams });
+    }
+
+    getListFeaturedPublic(parameters?: GetShopsParameters): Observable<PublicShop[]> {
+        return this.http.get<PublicShop[]>(this.apiUrl + '/public/featured');
     }
 
     getById(id: string): Observable<Shop> {

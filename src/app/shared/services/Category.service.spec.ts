@@ -44,25 +44,43 @@ describe('CategoryService', () => {
 
     it('should be able to get a single category', () => {
         service.getById(Constants.EMPTY_GUID).subscribe();
-        const request = httpMock.expectOne(Environment.API_URL + '/Category/' + Constants.EMPTY_GUID);
+        const request = httpMock.expectOne(`${Environment.API_URL}/Category/${Constants.EMPTY_GUID}`);
         expect(request.request.method).toBe('GET');
     });
     
     it('should be able to create a category', () => {
         service.create(TestDataCategories[0]).subscribe();
-        const request = httpMock.expectOne(Environment.API_URL + '/Category');
+        const request = httpMock.expectOne(`${Environment.API_URL}/Category`);
         expect(request.request.method).toBe('POST');
     });
 
     it('should be able to update a category', () => {
         service.update(TestDataCategories[0]).subscribe();
-        const request = httpMock.expectOne(Environment.API_URL + '/Category/' + TestDataCategories[0].Id);
+        const request = httpMock.expectOne(`${Environment.API_URL}/Category/${TestDataCategories[0].Id}`);
+        expect(request.request.method).toBe('PUT');
+    });
+
+    it('should be able to change a category\'s parent', () => {
+        service.changeParent(TestDataCategories[0].Id, TestDataCategories[0].ParentId!).subscribe();
+        const request = httpMock.expectOne(`${Environment.API_URL}/Category/${TestDataCategories[0].Id}/ChangeParent/${TestDataCategories[0].ParentId}`);
+        expect(request.request.method).toBe('PUT');
+    });
+
+    it('should be able to move a category down', () => {
+        service.moveDown(TestDataCategories[0].Id).subscribe();
+        const request = httpMock.expectOne(`${Environment.API_URL}/Category/${TestDataCategories[0].Id}/Down`);
+        expect(request.request.method).toBe('PUT');
+    });
+
+    it('should be able to move a category up', () => {
+        service.moveUp(TestDataCategories[0].Id).subscribe();
+        const request = httpMock.expectOne(`${Environment.API_URL}/Category/${TestDataCategories[0].Id}/Up`);
         expect(request.request.method).toBe('PUT');
     });
 
     it('should be able to delete a category', () => {
         service.delete(TestDataCategories[0].Id).subscribe();
-        const request = httpMock.expectOne(Environment.API_URL + '/Category/' + TestDataCategories[0].Id);
+        const request = httpMock.expectOne(`${Environment.API_URL}/Category/${TestDataCategories[0].Id}`);
         expect(request.request.method).toBe('DELETE');
     });
 });

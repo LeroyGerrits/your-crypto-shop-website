@@ -36,7 +36,7 @@ export class PublicWebsiteShopListComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.shopService.getPublicList().subscribe(shops => {
+    this.shopService.getListPublic().subscribe(shops => {
       this.dataSource = new MatTableDataSource(shops);
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;

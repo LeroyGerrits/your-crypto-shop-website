@@ -23,8 +23,8 @@ describe('PublicWebsiteShopListComponent', () => {
   let shopServiceSpy: jasmine.SpyObj<ShopService>;
 
   beforeEach(() => {
-    shopServiceSpy = jasmine.createSpyObj('ShopService', ['getPublicList']);
-    shopServiceSpy.getPublicList.and.returnValue(of(TestDataPublicShops));
+    shopServiceSpy = jasmine.createSpyObj('ShopService', ['getListPublic']);
+    shopServiceSpy.getListPublic.and.returnValue(of(TestDataPublicShops));
 
     TestBed.configureTestingModule({
       declarations: [PublicWebsiteShopListComponent],
