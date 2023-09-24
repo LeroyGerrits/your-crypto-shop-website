@@ -60,8 +60,7 @@
             <div class="WrapperPadding20-8-20-10">
                 <h3>Featured shops</h3>
                 <ul>
-                    <li>Your shop here?</li>
-                    <li>Your shop here?</li>
+                    <li *ngFor="let shop of this.featuredShops"><a target="_blank">{{shop.Name}}</a></li>
                     <li>Your shop here?</li>
                 </ul>
             </div>

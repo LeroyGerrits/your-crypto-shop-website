@@ -4,7 +4,8 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MatDialog } from '@angular/material/dialog';
 import { NavigationEnd } from '@angular/router';
 import { PublicWebsiteComponent } from './public-website.component';
-import { RouterTestingModule } from '@angular/router/testing';
+import { ShopService } from '../shared/services/Shop.service';
+import { TestDataPublicShops } from 'src/assets/test-data/PublicShops';
 import { of } from 'rxjs';
 
 describe('PublicWebsiteComponent', () => {
@@ -13,6 +14,8 @@ describe('PublicWebsiteComponent', () => {
 
   let matDialogRefSpy: any;
   let matDialogSpy: jasmine.SpyObj<MatDialog>
+
+  let shopServiceSpy: jasmine.SpyObj<ShopService>;
 
   const fakeActivatedRoute = {
     snapshot: { data: {} }
@@ -26,12 +29,16 @@ describe('PublicWebsiteComponent', () => {
     matDialogSpy = jasmine.createSpyObj('MatDialog', ['open']);
     matDialogSpy.open.and.returnValue(matDialogRefSpy);
 
+    shopServiceSpy = jasmine.createSpyObj('ShopService', ['getListFeaturedPublic']);
+    shopServiceSpy.getListFeaturedPublic.and.returnValue(of(TestDataPublicShops));
+
     TestBed.configureTestingModule({
       declarations: [PublicWebsiteComponent],
       imports: [RouterLink, RouterLinkActive, RouterOutlet],
       providers: [
         { provide: ActivatedRoute, useValue: fakeActivatedRoute },
-        { provide: MatDialog, useValue: matDialogSpy }
+        { provide: MatDialog, useValue: matDialogSpy },
+        { provide: ShopService, useValue: shopServiceSpy }
       ]
     });
     fixture = TestBed.createComponent(PublicWebsiteComponent);
