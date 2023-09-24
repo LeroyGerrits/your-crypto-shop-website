@@ -1,3 +1,11 @@
+<div class="WrapperPadding20-8-0-8">
+    <h2>Account</h2>
+</div>
 <div class="WrapperPadding20-8">
-    <h2>Account Dashboard</h2>
+    <p>Hi {{this.activeMerchant?.Salutation}}
+        <span *ngIf="this.activeMerchant?.SecondLastLogin" class="DisplayBlock">Your last login was
+            {{this.activeMerchant?.SecondLastLogin | date:constants.DATE_TIME_FORMAT}} from IP address
+            {{this.activeMerchant?.SecondLastIpAddress}}.
+        </span>
+    </p>
 </div>

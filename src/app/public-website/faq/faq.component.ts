@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Meta, Title } from '@angular/platform-browser';
 
 import { ActivatedRoute } from '@angular/router';
 import { Faq } from 'src/app/shared/models/Faq.model';
@@ -13,7 +14,9 @@ export class PublicWebsiteFaqComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private faqService: FaqService
+    private faqService: FaqService,
+    private titleService: Title,
+    private metaService: Meta
   ) { }
 
   ngOnInit() {
@@ -25,6 +28,12 @@ export class PublicWebsiteFaqComponent implements OnInit {
   }
 
   GetFaq(id: string) {
-    this.faqService.getById(id.toString()).subscribe(faq => { this.faq = faq; });
+    this.faqService.getById(id.toString()).subscribe(faq => {
+      this.faq = faq;
+      this.titleService.setTitle(faq.Title);
+
+      if (faq.Keywords)
+        this.metaService.addTag({ name: 'keywords', content: faq.Keywords.toString() });
+    });
   }
 }

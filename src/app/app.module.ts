@@ -3,6 +3,7 @@ import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 
 import { AccountChangePasswordComponent } from './account/change-password/change-password.component';
 import { AccountComponent } from './account/account.component';
+import { AccountDashboardComponent } from './account/dashboard/dashboard.component';
 import { AccountSettingsComponent } from './account/settings/settings.component';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
@@ -60,6 +61,7 @@ import { MatTableModule } from '@angular/material/table';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatTreeModule } from '@angular/material/tree';
+import { MerchantLinkComponent } from './shared/components/merchant-link/merchant-link.component';
 import { MerchantPasswordResetLinkService } from './shared/services/MerchantPasswordResetLink.service';
 import { MerchantService } from './shared/services/Merchant.service';
 import { NewsMessageService } from './shared/services/NewsMessage.service';
@@ -77,11 +79,11 @@ import { QRCodeModule } from 'angularx-qrcode';
 import { RouterModule } from '@angular/router';
 import { SearchEngineFriendlyStringPipe } from './shared/pipes/SearchEngineFriendlyString.pipe';
 import { ShopService } from './shared/services/Shop.service';
-import { MerchantLinkComponent } from './shared/components/merchant-link/merchant-link.component';
 
 @NgModule({
   declarations: [
     AccountComponent,
+    AccountDashboardComponent,
     AccountChangePasswordComponent,
     AccountSettingsComponent,
     AppComponent,
