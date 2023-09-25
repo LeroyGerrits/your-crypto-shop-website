@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 
 import { ActivatedRoute } from '@angular/router';
+import { Constants } from 'src/app/shared/Constants';
 import { NewsMessage } from 'src/app/shared/models/NewsMessage.model';
 import { NewsMessageService } from 'src/app/shared/services/NewsMessage.service';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'public-website-news',
@@ -15,7 +17,8 @@ export class PublicWebsiteNewsComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private newsMessageService: NewsMessageService
+    private newsMessageService: NewsMessageService,
+    private titleService: Title
   ) { }
 
   ngOnInit() {
@@ -27,6 +30,9 @@ export class PublicWebsiteNewsComponent implements OnInit {
   }
 
   GetNewsMessage(id: string) {
-    this.newsMessageService.getById(id.toString()).subscribe(newsMessage => this.newsMessage = newsMessage );
+    this.newsMessageService.getById(id.toString()).subscribe(newsMessage => {
+      this.newsMessage = newsMessage;
+      this.titleService.setTitle(`${Constants.TITLE_PREFIX} - ${newsMessage.Title}`);
+    });
   }
 }

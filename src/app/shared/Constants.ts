@@ -12,4 +12,5 @@ export abstract class Constants {
     static readonly RESERVED_SUBDOMAINS = ['admin', 'api', 'mail', 'shop', 'smtp', 'www'];
     static readonly REGEX_PATTERN_DECIMAL = /^-?\d*[.,]?\d{0,2}$/;
     static readonly REGEX_PATTERN_DIGIBYTE_ADDRESS = /^-?\d*[.,]?\d{0,2}$/;
+    static readonly TITLE_PREFIX = 'DGB Commerce';
 }

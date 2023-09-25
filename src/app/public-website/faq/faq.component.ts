@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Meta, Title } from '@angular/platform-browser';
 
 import { ActivatedRoute } from '@angular/router';
+import { Constants } from 'src/app/shared/Constants';
 import { Faq } from 'src/app/shared/models/Faq.model';
 import { FaqService } from 'src/app/shared/services/Faq.service';
 
@@ -30,7 +31,7 @@ export class PublicWebsiteFaqComponent implements OnInit {
   GetFaq(id: string) {
     this.faqService.getById(id.toString()).subscribe(faq => {
       this.faq = faq;
-      this.titleService.setTitle(faq.Title);
+      this.titleService.setTitle(`${Constants.TITLE_PREFIX} - ${faq.Title}`);
 
       if (faq.Keywords)
         this.metaService.addTag({ name: 'keywords', content: faq.Keywords.toString() });
