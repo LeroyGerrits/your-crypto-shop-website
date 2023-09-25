@@ -15,7 +15,7 @@ describe('PublicWebsiteMerchantComponent', () => {
   let merchantServiceSpy: jasmine.SpyObj<MerchantService>;
 
   beforeEach(() => {
-    merchantServiceSpy = jasmine.createSpyObj('MerchantService', ['getById']);
+    merchantServiceSpy = jasmine.createSpyObj('MerchantService', ['getByIdPublic']);
     merchantServiceSpy.getByIdPublic.and.returnValue(of(TestDataPublicMerchants[0]));
 
     TestBed.configureTestingModule({
