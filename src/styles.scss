@@ -2,43 +2,45 @@
 @include mat.core();
 
 @font-face {
+  font-display: swap;
   font-family: 'open_sansregular';
+  font-style: normal;
+  font-weight: normal;
   src: url('assets/fonts/opensans-regular-webfont.eot');
   src: url('assets/fonts/opensans-regular-webfont.eot?#iefix') format('embedded-opentype'),
     url('assets/fonts/opensans-regular-webfont.woff') format('woff'),
     url('assets/fonts/opensans-regular-webfont.ttf') format('truetype'),
     url('assets/fonts/opensans-regular-webfont.svg#open_sansregular') format('svg');
-  font-weight: normal;
-  font-style: normal;
 }
 
 @font-face {
+  font-display: swap;
   font-family: 'open_sans_condensedbold';
+  font-style: normal;
+  font-weight: normal;
   src: url('assets/fonts/opensans-condbold-webfont.eot');
   src: url('assets/fonts/opensans-condbold-webfont.eot?#iefix') format('embedded-opentype'),
     url('assets/fonts/opensans-condbold-webfont.woff') format('woff'),
     url('assets/fonts/opensans-condbold-webfont.ttf') format('truetype'),
     url('assets/fonts/opensans-condbold-webfont.svg#open_sans_condensedbold') format('svg');
-  font-weight: normal;
-  font-style: normal;
 }
 
 @font-face {
+  font-display: swap;
   font-family: 'robotoblack';
+  font-style: normal;
+  font-weight: normal;
   src: url('assets/fonts/roboto-black-webfont.woff2') format('woff2'),
     url('assets/fonts/roboto-black-webfont.woff') format('woff');
-  font-weight: normal;
-  font-style: normal;
-
 }
 
 @font-face {
+  font-display: swap;
   font-family: 'robotoblack_italic';
+  font-style: normal;
+  font-weight: normal;
   src: url('assets/fonts/roboto-blackitalic-webfont.woff2') format('woff2'),
     url('assets/fonts/roboto-blackitalic-webfont.woff') format('woff');
-  font-weight: normal;
-  font-style: normal;
-
 }
 
 :root {

@@ -3,7 +3,9 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort, Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
+import { debounceTime, distinctUntilChanged } from 'rxjs';
 import { Environment } from 'src/app/shared/environments/Environment';
+import { GetShopsParameters } from 'src/app/shared/models/parameters/GetShopsParameters.model';
 import { PublicShop } from 'src/app/shared/models/viewmodels/PublicShop.model';
 import { ShopService } from 'src/app/shared/services/Shop.service';
 
@@ -33,10 +35,22 @@ export class PublicWebsiteShopListComponent implements OnInit {
       this.controlFilterName,
       this.controlFilterSubDomain
     ]);
+
+    this.controlFilterName.valueChanges.pipe(debounceTime(1000), distinctUntilChanged()).subscribe(_ => this.filterShops());
+    this.controlFilterSubDomain.valueChanges.pipe(debounceTime(1000), distinctUntilChanged()).subscribe(_ => this.filterShops());
   }
 
   ngOnInit() {
-    this.shopService.getListPublic().subscribe(shops => {
+    this.filterShops();
+  }
+
+  filterShops(){
+    const parameters: GetShopsParameters = {
+      Name: this.controlFilterName.value!,
+      SubDomain: this.controlFilterSubDomain.value!
+  };
+
+    this.shopService.getListPublic(parameters).subscribe(shops => {
       this.dataSource = new MatTableDataSource(shops);
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
