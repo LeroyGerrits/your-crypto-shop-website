@@ -1,5 +1,5 @@
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, fakeAsync, tick } from '@angular/core/testing';
 import { HttpClient, HttpHandler } from '@angular/common/http';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -36,6 +36,7 @@ describe('PublicWebsiteShopListComponent', () => {
         { provide: ShopService, useValue: shopServiceSpy },
         HttpClient,
         HttpHandler,
+        PublicWebsiteShopListComponent,
         Router
       ]
     });
@@ -47,6 +48,22 @@ describe('PublicWebsiteShopListComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should filter shops list when name filter gets used', fakeAsync(() => {
+    const componentStub: PublicWebsiteShopListComponent = TestBed.inject(PublicWebsiteShopListComponent);
+    spyOn(componentStub, 'filterShops');
+    componentStub.controlFilterName.setValue('test');
+    tick(1000);
+    expect(componentStub.filterShops).toHaveBeenCalled();
+  }));
+
+  it('should filter shops list when subdomain filter gets used', fakeAsync(() => {
+    const componentStub: PublicWebsiteShopListComponent = TestBed.inject(PublicWebsiteShopListComponent);
+    spyOn(componentStub, 'filterShops');
+    componentStub.controlFilterSubDomain.setValue('test');
+    tick(1000);
+    expect(componentStub.filterShops).toHaveBeenCalled();
+  }));
 
   it('should edit the sortState when a sort direction is supplied', () => {
     const routerstub: Router = TestBed.inject(Router);

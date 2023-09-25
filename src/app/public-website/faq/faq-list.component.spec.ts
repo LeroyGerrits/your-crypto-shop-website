@@ -1,5 +1,5 @@
 import { ActivatedRoute, RouterLink } from '@angular/router';
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, fakeAsync, tick } from '@angular/core/testing';
 import { HttpClient, HttpHandler } from '@angular/common/http';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -35,7 +35,8 @@ describe('PublicWebsiteFaqListComponent', () => {
         { provide: FaqCategoryService, useValue: faqCategoryServiceSpy },
         { provide: FaqService, useValue: faqServiceSpy },
         HttpClient,
-        HttpHandler
+        HttpHandler,
+        PublicWebsiteFaqListComponent
       ]
     });
     fixture = TestBed.createComponent(PublicWebsiteFaqListComponent);
@@ -47,7 +48,15 @@ describe('PublicWebsiteFaqListComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should filter FAQs and categories when text is entered in the search bar', () => {
+  it('should filter FAQs and categories when text filter gets used', fakeAsync(() => {
+    const componentStub: PublicWebsiteFaqListComponent = TestBed.inject(PublicWebsiteFaqListComponent);
+    spyOn(componentStub, 'filterFaqs');
+    componentStub.controlFilter.setValue('test');
+    tick(1000);
+    expect(componentStub.filterFaqs).toHaveBeenCalled();
+  }));
+
+  it('should filter FAQs and categories and display nothing when text with an unexisting value is entered in the search bar', () => {
     component.filterFaqs('Test with unexisting value');
     expect(component.faqsFiltered?.length).toBe(0);
   });
