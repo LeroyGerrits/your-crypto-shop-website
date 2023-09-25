@@ -1,6 +1,7 @@
 import { CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from '@angular/core';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 
+import { Constants } from '../Constants';
 import { Environment } from 'src/app/shared/environments/Environment';
 import { MerchantService } from './Merchant.service';
 import { TestBed } from '@angular/core/testing';
@@ -28,6 +29,12 @@ describe('MerchantService', () => {
         expect(service).toBeTruthy();
     });
         
+    it('should be able to get a single public merchant ', () => {
+        service.getByIdPublic(Constants.EMPTY_GUID).subscribe();
+        const request = httpMock.expectOne(Environment.API_URL + '/Merchant/public/' + Constants.EMPTY_GUID);
+        expect(request.request.method).toBe('GET');
+    });
+
     it('should be able to create a merchant', () => {
         service.create(TestDataMerchants[0]).subscribe();
         const request = httpMock.expectOne(Environment.API_URL + '/Merchant');

@@ -36,7 +36,7 @@ export class ShopService {
         return this.http.get<PublicShop[]>(this.apiUrl + '/public', { params: httpParams });
     }
 
-    getListFeaturedPublic(parameters?: GetShopsParameters): Observable<PublicShop[]> {
+    getListFeaturedPublic(): Observable<PublicShop[]> {
         return this.http.get<PublicShop[]>(this.apiUrl + '/public/featured');
     }
 

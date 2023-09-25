@@ -31,6 +31,7 @@ import { PublicWebsiteFaqComponent } from './public-website/faq/faq.component';
 import { PublicWebsiteFaqListComponent } from './public-website/faq/faq-list.component';
 import { PublicWebsiteFinancialStatementComponent } from './public-website/financial-statement/financial-statement.component';
 import { PublicWebsiteIndexComponent } from './public-website/index/index.component';
+import { PublicWebsiteMerchantComponent } from './public-website/merchant/merchant.component';
 import { PublicWebsiteNewsComponent } from './public-website/news/news.component';
 import { PublicWebsiteNewsListComponent } from './public-website/news/news-list.component';
 import { PublicWebsiteNotAuthorizedComponent } from './public-website/not-authorized/not-authorized.component';
@@ -81,6 +82,7 @@ const routes: Routes = [
       { path: 'faq', component: PublicWebsiteFaqListComponent, title: `${Constants.TITLE_PREFIX} - FAQ` },
       { path: 'faq/:faqId', component: PublicWebsiteFaqComponent, title: `${Constants.TITLE_PREFIX} - FAQ` },
       { path: 'faq/:faqId/:faqTitle', component: PublicWebsiteFaqComponent, title: `${Constants.TITLE_PREFIX} - FAQ` },
+      { path: 'merchant/:merchantId', component: PublicWebsiteMerchantComponent, title: `${Constants.TITLE_PREFIX} - Merchants` },
       { path: 'shops', component: PublicWebsiteShopListComponent, title: `${Constants.TITLE_PREFIX} - Shops` },
       { path: 'reset-password', component: PublicWebsiteResetPasswordComponent, title: `${Constants.TITLE_PREFIX} - Reset password` },
       { path: '**', pathMatch: 'full', component: PublicWebsiteNotFoundComponent, title: `${Constants.TITLE_PREFIX} - Not found` }
