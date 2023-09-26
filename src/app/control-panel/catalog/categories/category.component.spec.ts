@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { HttpClient, HttpHandler } from '@angular/common/http';
 import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
+import { of, throwError } from 'rxjs';
 
 import { AccountComponent } from 'src/app/account/account.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -16,7 +17,6 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { Shop } from 'src/app/shared/models/Shop.model';
 import { TestDataCategories } from 'src/assets/test-data/Categories';
 import { TestDataShops } from 'src/assets/test-data/Shops';
-import { of } from 'rxjs';
 
 export interface DialogData {
   selectedShop: Shop;
@@ -138,5 +138,63 @@ describe('ControlPanelCatalogCategoryComponent', () => {
     };
     component.handleOnSubmitResult(mutationResult);
     expect(component.formError).toBe(error);
+  });
+});
+
+describe('ControlPanelCatalogCategoryComponentWithErrors', () => {
+  let component: ControlPanelCatalogCategoryComponent;
+  let fixture: ComponentFixture<ControlPanelCatalogCategoryComponent>;
+
+  let matDialogRefSpy: any;
+  let categoryServiceSpy: jasmine.SpyObj<CategoryService>;
+  let mutationResult: MutationResult = { ErrorCode: 0, Identity: '', Message: '' };
+
+  let mockDialogData: DialogData = {
+    selectedShop: TestDataShops[0],
+    categoryToEdit: TestDataCategories[0],
+    parentCategory: null
+  };
+
+  beforeEach(() => {
+    matDialogRefSpy = jasmine.createSpyObj('MatDialogRef', ['close']);
+    matDialogRefSpy.close = () => of(true);
+
+    categoryServiceSpy = jasmine.createSpyObj('CategoryService', ['create', 'update']);
+    categoryServiceSpy.create.and.returnValue(throwError(() => new Error('ERROR')));
+    categoryServiceSpy.update.and.returnValue(throwError(() => new Error('ERROR')));
+
+    TestBed.configureTestingModule({
+      declarations: [ControlPanelCatalogCategoryComponent],
+      imports: [BrowserAnimationsModule, MatCheckboxModule, MatDialogModule, MatFormFieldModule, MatInputModule, ReactiveFormsModule, RouterTestingModule.withRoutes(
+        [{ path: 'account', component: AccountComponent }]
+      )],
+      providers: [
+        { provide: MatDialogRef, useValue: matDialogRefSpy },
+        { provide: MAT_DIALOG_DATA, useValue: mockDialogData },
+        { provide: CategoryService, useValue: categoryServiceSpy },
+        HttpClient,
+        HttpHandler
+      ]
+    });
+    fixture = TestBed.createComponent(ControlPanelCatalogCategoryComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+  });
+
+  it('should trigger error handling when sending a call to the category service when creating a new category and the request fails', () => {
+    component.queryStringCategoryId = '';
+    component.data.categoryToEdit = null;
+    component.data.selectedShop = TestDataShops[0];
+    component.controlName.setValue(TestDataCategories[0].Name);
+    component.onSubmit();
+    expect(component.formLoading).toBeFalse();
+  });
+
+  it('should trigger error handling when sending a call to the category service when updating an existing category and the request fails', () => {
+    component.queryStringCategoryId = TestDataCategories[0].Id;
+    component.data.categoryToEdit = TestDataCategories[0];
+    component.controlName.setValue(TestDataCategories[0].Name);
+    component.onSubmit();
+    expect(component.formLoading).toBeFalse();
   });
 });
