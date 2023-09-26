@@ -48,9 +48,7 @@ describe('PublicWebsiteFinancialStatementComponent', () => {
         { provide: ActivatedRoute, useValue: fakeActivatedRoute },
         { provide: CurrencyService, useValue: currencyServiceSpy },
         { provide: FinancialStatementTransactionService, useValue: financialStatementTransactionServiceSpy },
-        DatePipe,
-        CurrencyService,
-        FinancialStatementTransactionService
+        DatePipe
       ]
     });
     fixture = TestBed.createComponent(PublicWebsiteFinancialStatementComponent);

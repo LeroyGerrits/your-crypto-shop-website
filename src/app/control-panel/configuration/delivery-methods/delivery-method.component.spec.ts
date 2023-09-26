@@ -45,7 +45,7 @@ describe('ControlPanelConfigurationDeliveryMethodComponent', () => {
       providers: [
         { provide: ActivatedRoute, useValue: { snapshot: { paramMap: convertToParamMap({ deliveryMethodId: TestDataDeliveryMethods[0].Id }) } } },
         { provide: ShopService, useValue: shopServiceSpy },
-        { provide: DeliveryMethodService, useVaue: deliveryMethodServiceSpy },
+        { provide: DeliveryMethodService, useValue: deliveryMethodServiceSpy },
         { provide: MatSnackBar, useValue: matSnackBarSpy },
         HttpClient,
         HttpHandler,

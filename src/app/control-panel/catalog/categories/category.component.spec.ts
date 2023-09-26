@@ -54,7 +54,7 @@ describe('ControlPanelCatalogCategoryComponent', () => {
       providers: [
         { provide: MatDialogRef, useValue: matDialogRefSpy },
         { provide: MAT_DIALOG_DATA, useValue: mockDialogData },
-        { provide: CategoryService, useVaue: categoryServiceSpy },
+        { provide: CategoryService, useValue: categoryServiceSpy },
         HttpClient,
         HttpHandler
       ]

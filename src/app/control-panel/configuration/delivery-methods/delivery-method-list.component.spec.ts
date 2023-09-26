@@ -60,7 +60,7 @@ describe('ControlPanelConfigurationDeliveryMethodListComponent', () => {
         { provide: ActivatedRoute, useValue: { snapshot: { data: {} } } },
         { provide: MatDialog, useValue: matDialogSpy },
         { provide: ShopService, useValue: shopServiceSpy },
-        { provide: DeliveryMethodService, useVaue: deliveryMethodServiceSpy },
+        { provide: DeliveryMethodService, useValue: deliveryMethodServiceSpy },
         { provide: MatSnackBar, useValue: matSnackBarSpy },
         HttpClient,
         HttpHandler,

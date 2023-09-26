@@ -1,6 +1,7 @@
 import { ActivatedRoute, Router, RouterLink, convertToParamMap } from '@angular/router';
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, fakeAsync, tick } from '@angular/core/testing';
 import { HttpClient, HttpHandler } from '@angular/common/http';
+import { of, throwError } from 'rxjs';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { Constants } from 'src/app/shared/Constants';
@@ -16,8 +17,8 @@ import { MutationResult } from 'src/app/shared/models/MutationResult';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RouterTestingModule } from '@angular/router/testing';
 import { ShopService } from 'src/app/shared/services/Shop.service';
+import { TestDataMerchants } from 'src/assets/test-data/Merchants';
 import { TestDataShops } from 'src/assets/test-data/Shops';
-import { of } from 'rxjs';
 
 describe('ControlPanelConfigurationShopComponent', () => {
   let component: ControlPanelConfigurationShopComponent;
@@ -43,6 +44,7 @@ describe('ControlPanelConfigurationShopComponent', () => {
         { provide: ActivatedRoute, useValue: { snapshot: { paramMap: convertToParamMap({ shopId: TestDataShops[0].Id }) } } },
         { provide: ShopService, useValue: shopServiceSpy },
         { provide: MatSnackBar, useValue: matSnackBarSpy },
+        ControlPanelConfigurationShopComponent,
         HttpClient,
         HttpHandler,
         Router
@@ -70,6 +72,7 @@ describe('ControlPanelConfigurationShopComponent', () => {
   });
 
   it('should send a call to the shop service when creating a new shop', () => {
+    component.activeMerchant = TestDataMerchants[0];
     component.queryStringShopId = '';
     component.controlName.setValue(TestDataShops[0].Name);
     component.controlSubDomain.setValue(TestDataShops[0].SubDomain!);
@@ -134,5 +137,65 @@ describe('ControlPanelConfigurationShopComponent', () => {
   it('should indicate subdomain is not available when a reserved subdomain was supplied', () => {
     component.checkSubDomainAvailability(Constants.RESERVED_SUBDOMAINS[0]);    
     expect(component.subDomainAvailable).toBe(false);
+  });
+
+  it('should check subdomain availability when a value is entered', fakeAsync(() => {
+    const componentStub: ControlPanelConfigurationShopComponent = TestBed.inject(ControlPanelConfigurationShopComponent);
+    spyOn(componentStub, 'checkSubDomainAvailability');
+    componentStub.controlSubDomain.setValue('test');
+    tick(1000);
+    expect(componentStub.checkSubDomainAvailability).toHaveBeenCalled();
+  }));
+});
+
+describe('ControlPanelConfigurationShopComponentWithErrors', () => {
+  let component: ControlPanelConfigurationShopComponent;
+  let fixture: ComponentFixture<ControlPanelConfigurationShopComponent>;
+
+  let shopServiceSpy: jasmine.SpyObj<ShopService>;
+  let matSnackBarSpy: jasmine.SpyObj<MatSnackBar>;
+
+  beforeEach(() => {
+    shopServiceSpy = jasmine.createSpyObj('ShopService', ['getById', 'create', 'update']);
+    shopServiceSpy.getById.and.returnValue(of(TestDataShops[0]));
+    shopServiceSpy.create.and.returnValue(throwError(() => new Error('ERROR')));
+    shopServiceSpy.update.and.returnValue(throwError(() => new Error('ERROR')));
+    matSnackBarSpy = jasmine.createSpyObj('MatSnackBar', ['open']);
+
+    TestBed.configureTestingModule({
+      declarations: [ControlPanelConfigurationShopComponent],
+      imports: [BrowserAnimationsModule, MatDialogModule, MatFormFieldModule, MatIconModule, MatInputModule, MatTooltipModule, ReactiveFormsModule, RouterLink, RouterTestingModule.withRoutes(
+        [{ path: 'control-panel/configuration/shops', component: ControlPanelConfigurationShopListComponent }]
+      )],
+      providers: [
+        { provide: ActivatedRoute, useValue: { snapshot: { paramMap: convertToParamMap({ shopId: TestDataShops[0].Id }) } } },
+        { provide: ShopService, useValue: shopServiceSpy },
+        { provide: MatSnackBar, useValue: matSnackBarSpy },
+        ControlPanelConfigurationShopComponent,
+        HttpClient,
+        HttpHandler,
+        Router
+      ]
+    });
+    fixture = TestBed.createComponent(ControlPanelConfigurationShopComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+  });
+
+  it('should trigger error handling when sending a call to the shop service when creating a new shop and the request fails', () => {
+    component.activeMerchant = TestDataMerchants[0];
+    component.queryStringShopId = '';
+    component.controlName.setValue(TestDataShops[0].Name);
+    component.controlSubDomain.setValue(TestDataShops[0].SubDomain!);
+    component.onSubmit();
+    expect(component.formLoading).toBeFalse();
+  });
+
+  it('should trigger error handling when sending a call to the shop service when updating an existing shop and the request fails', () => {
+    component.queryStringShopId = TestDataShops[0].Id;
+    component.controlName.setValue(TestDataShops[0].Name);
+    component.controlSubDomain.setValue(TestDataShops[0].SubDomain!);
+    component.onSubmit();
+    expect(component.formLoading).toBeFalse();
   });
 });

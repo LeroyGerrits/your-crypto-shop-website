@@ -1,6 +1,7 @@
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { HttpClient, HttpHandler } from '@angular/common/http';
+import { of, throwError } from 'rxjs';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ControlPanelConfigurationShopListComponent } from './shop-list.component';
@@ -17,14 +18,13 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { ShopService } from 'src/app/shared/services/Shop.service';
 import { Sort } from '@angular/material/sort';
 import { TestDataShops } from 'src/assets/test-data/Shops';
-import { of } from 'rxjs';
 
 describe('ControlPanelConfigurationShopListComponent', () => {
   let component: ControlPanelConfigurationShopListComponent;
   let fixture: ComponentFixture<ControlPanelConfigurationShopListComponent>;
 
   let matDialogRefSpy: any;
-  let matDialogSpy: jasmine.SpyObj<MatDialog>
+  let matDialogSpy: jasmine.SpyObj<MatDialog>;
   let matSnackBarSpy: jasmine.SpyObj<MatSnackBar>;
 
   let shopServiceSpy: jasmine.SpyObj<ShopService>;
@@ -113,5 +113,55 @@ describe('ControlPanelConfigurationShopListComponent', () => {
   it('should show a message when an unhandled error occurs', () => {
     component.handleOnSubmitError('Unhandled error');
     expect(matSnackBarSpy.open).toHaveBeenCalled();
+  });
+});
+
+describe('ControlPanelConfigurationShopListComponentWithErrors', () => {
+  let component: ControlPanelConfigurationShopListComponent;
+  let fixture: ComponentFixture<ControlPanelConfigurationShopListComponent>;
+
+  let matDialogRefSpy: any;
+  let matDialogSpy: jasmine.SpyObj<MatDialog>;
+  let matSnackBarSpy: jasmine.SpyObj<MatSnackBar>;
+
+  let shopServiceSpyWithErrors: jasmine.SpyObj<ShopService>;
+
+  beforeEach(() => {
+    matDialogRefSpy = jasmine.createSpyObj('MatDialogRef', ['close']);
+    matDialogRefSpy.componentInstance = { title: '', message: '' };
+    matDialogRefSpy.afterClosed = () => of(true);
+
+    matDialogSpy = jasmine.createSpyObj('MatDialog', ['open']);
+    matDialogSpy.open.and.returnValue(matDialogRefSpy);
+
+    matSnackBarSpy = jasmine.createSpyObj('MatSnackBar', ['open']);
+
+    shopServiceSpyWithErrors = jasmine.createSpyObj('ShopService', ['getList', 'delete']);
+    shopServiceSpyWithErrors.getList.and.returnValue(of(TestDataShops));
+    shopServiceSpyWithErrors.delete.and.returnValue(throwError(() => new Error('ERROR')));
+    
+    TestBed.configureTestingModule({
+      declarations: [ControlPanelConfigurationShopListComponent],
+      imports: [BrowserAnimationsModule, MatIconModule, MatFormFieldModule, MatInputModule, MatPaginatorModule, MatTableModule, ReactiveFormsModule, RouterLink, RouterLink, RouterTestingModule.withRoutes(
+        [{ path: 'control-panel/configuration/shops', component: ControlPanelConfigurationShopListComponent }]
+      )],
+      providers: [
+        { provide: ActivatedRoute, useValue: { snapshot: { data: {} } } },
+        { provide: MatDialog, useValue: matDialogSpy },
+        { provide: ShopService, useValue: shopServiceSpyWithErrors },
+        { provide: MatSnackBar, useValue: matSnackBarSpy },
+        HttpClient,
+        HttpHandler,
+        Router
+      ]
+    });
+    fixture = TestBed.createComponent(ControlPanelConfigurationShopListComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+  });
+
+  it('should create', () => {
+    component.deleteElement(TestDataShops[0]);
+    expect(component).toBeTruthy();
   });
 });
