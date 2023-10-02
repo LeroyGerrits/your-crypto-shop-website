@@ -3,7 +3,6 @@
 </div>
 
 <form (ngSubmit)="onSubmit()">
-
     <div class="ColumnOneHalf">
         <div class="WrapperPadding20-10-0-8">
             <mat-form-field>
@@ -45,7 +44,9 @@
     </div>
     <div class="ColumnOneHalf">
         <div class="WrapperPadding20-10-0-8">
-            <p>The subdomain your shop will be accessible from and which will evaluate to <strong>https://<span class="TextDecorationUnderline">subdomain</span>.{{environment.WEBSITE_DOMAIN}}</strong>. If left empty, the ID of your shop will
+            <p>The subdomain your shop will be accessible from and which will evaluate to <strong>https://<span
+                        class="TextDecorationUnderline">subdomain</span>.{{environment.WEBSITE_DOMAIN}}</strong>. If
+                left empty, the ID of your shop will
                 be used to format the address to your shop which is quite long and cryptic. Choose a short and easy to
                 remember subdomain to make it easier for your customers to find your shop. A subdomain can only consist
                 of alphanumeric characters.</p>
