@@ -34,6 +34,7 @@ import { PublicWebsiteIndexComponent } from './public-website/index/index.compon
 import { PublicWebsiteMerchantComponent } from './public-website/merchant/merchant.component';
 import { PublicWebsiteNewsComponent } from './public-website/news/news.component';
 import { PublicWebsiteNewsListComponent } from './public-website/news/news-list.component';
+import { PublicWebsiteNodeStatusComponent } from './public-website/node-status/node-status.component';
 import { PublicWebsiteNotAuthorizedComponent } from './public-website/not-authorized/not-authorized.component';
 import { PublicWebsiteNotFoundComponent } from './public-website/not-found/not-found.component';
 import { PublicWebsitePricingComponent } from './public-website/pricing/pricing.component';
@@ -78,6 +79,7 @@ const routes: Routes = [
       { path: 'news/:newsMessageId', component: PublicWebsiteNewsComponent, title: `${Constants.TITLE_PREFIX} - News` },
       { path: 'news/:newsMessageId/:newsMessageTitle', component: PublicWebsiteNewsComponent, title: `${Constants.TITLE_PREFIX} - News` },
       { path: 'not-authorized', component: PublicWebsiteNotAuthorizedComponent, title: `${Constants.TITLE_PREFIX} - Not authorized` },
+      { path: 'node-status', component: PublicWebsiteNodeStatusComponent, title: `${Constants.TITLE_PREFIX} - Node status` }, 
       { path: 'pricing', component: PublicWebsitePricingComponent, title: `${Constants.TITLE_PREFIX} - Pricing` },
       { path: 'faq', component: PublicWebsiteFaqListComponent, title: `${Constants.TITLE_PREFIX} - FAQ` },
       { path: 'faq/:faqId', component: PublicWebsiteFaqComponent, title: `${Constants.TITLE_PREFIX} - FAQ` },

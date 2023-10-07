@@ -1,0 +1,55 @@
+<div class="WrapperPadding20-20-20-8">
+    <h2>Node status</h2>
+</div>
+<div class="ColumnOneFourth">
+    <div class="WrapperPadding20-10-0-8">
+        <h3>Block count</h3>
+        <div *ngIf="this.nodeMiningInfo">
+            {{this.nodeMiningInfo.Blocks}}
+        </div>
+    </div>
+</div>
+<div class="ColumnOneFourth">
+    <div class="WrapperPadding20-10-0-10">
+        <h3>Mining difficulty</h3>
+        <div>
+            <table *ngIf="this.nodeDifficulty">
+                <tr>
+                    <td>SHA256</td>
+                    <td>{{this.nodeDifficulty!.Difficulties.Sha256d}}</td>
+                </tr>
+                <tr>
+                    <td>Scrypt</td>
+                    <td>{{this.nodeDifficulty!.Difficulties.Scrypt}}</td>
+                </tr>
+                <tr>
+                    <td>Skein</td>
+                    <td>{{this.nodeDifficulty!.Difficulties.Skein}}</td>
+                </tr>
+                <tr>
+                    <td>Qubit</td>
+                    <td>{{this.nodeDifficulty!.Difficulties.Qubit}}</td>
+                </tr>
+                <tr>
+                    <td>Odocrypt</td>
+                    <td>{{this.nodeDifficulty!.Difficulties.Odo}}</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
+<div class="ColumnOneFourth">
+    <div class="WrapperPadding20-10-0-10">
+        <h3>Hash rate</h3>
+        <div *ngIf="this.nodeMiningInfo">
+            {{this.nodeMiningInfo.NetworkHashPS | HashRate }}
+        </div>
+    </div>
+</div>
+<div class="ColumnOneFourth">
+    <div class="WrapperPadding20-8-0-10">
+        <h3>IP address</h3>
+        <div *ngFor="let ipAddress of this.nodeIpAddresses">{{ipAddress}}</div>
+    </div>
+</div>
+<div class="ClearLeft"></div>

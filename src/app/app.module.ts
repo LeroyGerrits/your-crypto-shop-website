@@ -30,11 +30,14 @@ import { DialogDeleteComponent } from './shared/dialogs/delete/dialog.delete.com
 import { DialogLoginComponent } from './shared/dialogs/login/dialog.login.component';
 import { DialogLogoutComponent } from './shared/dialogs/logout/dialog.logout.component';
 import { DialogSignUpComponent } from './shared/dialogs/signup/dialog.signup.component';
+import { DigiByteNodeService } from './shared/services/DigiByteNode.service';
 import { DigiByteWalletService } from './shared/services/DigiByteWallet.service';
 import { ErrorInterceptor } from './shared/interceptors/error.interceptor';
 import { FaqCategoryService } from './shared/services/FaqCategory.service';
 import { FaqService } from './shared/services/Faq.service';
+import { FileSizePipe } from './shared/pipes/FileSize.pipe';
 import { FinancialStatementTransactionService } from './shared/services/FinancialStatementTransaction.service';
+import { HashRatePipe } from './shared/pipes/HashRate.pipe';
 import { JwtInterceptor } from './shared/interceptors/jwt.interceptor';
 import { MatBadgeModule } from '@angular/material/badge';
 import { MatButtonModule } from '@angular/material/button';
@@ -74,6 +77,7 @@ import { PublicWebsiteFinancialStatementComponent } from './public-website/finan
 import { PublicWebsiteIndexComponent } from './public-website/index/index.component';
 import { PublicWebsiteNewsComponent } from './public-website/news/news.component';
 import { PublicWebsiteNewsListComponent } from './public-website/news/news-list.component';
+import { PublicWebsiteNodeStatusComponent } from './public-website/node-status/node-status.component';
 import { PublicWebsiteShopListComponent } from './public-website/shops/shop-list.component';
 import { QRCodeModule } from 'angularx-qrcode';
 import { RouterModule } from '@angular/router';
@@ -86,23 +90,26 @@ import { ShopService } from './shared/services/Shop.service';
     AccountDashboardComponent,
     AccountChangePasswordComponent,
     AccountSettingsComponent,
-    AppComponent,
+    AppComponent,    
+    ControlPanelComponent,
     ControlPanelCatalogCategoryListComponent,
     ControlPanelCatalogCategoryComponent,
-    ControlPanelComponent,
+    ControlPanelCatalogProductComponent,
+    ControlPanelCatalogProductListComponent,    
     ControlPanelConfigurationDeliveryMethodListComponent,
     ControlPanelConfigurationDeliveryMethodComponent,
     ControlPanelConfigurationDigiByteWalletListComponent,
     ControlPanelConfigurationDigiByteWalletComponent,
     ControlPanelConfigurationShopListComponent,
     ControlPanelConfigurationShopComponent,
-    ControlPanelDashboardComponent,
+    ControlPanelDashboardComponent,    
     DialogDeleteComponent,
     DialogLoginComponent,
     DialogLogoutComponent,
-    DialogSignUpComponent,
-    ControlPanelCatalogProductComponent,
-    ControlPanelCatalogProductListComponent,    
+    DialogSignUpComponent,    
+    FileSizePipe,
+    HashRatePipe,
+    MerchantLinkComponent,
     PublicWebsiteComponent,
     PublicWebsiteAboutComponent,
     PublicWebsiteFaqComponent,
@@ -111,9 +118,9 @@ import { ShopService } from './shared/services/Shop.service';
     PublicWebsiteFinancialStatementComponent,
     PublicWebsiteNewsComponent,
     PublicWebsiteNewsListComponent,    
+    PublicWebsiteNodeStatusComponent,
     PublicWebsiteShopListComponent,
-    SearchEngineFriendlyStringPipe,
-    MerchantLinkComponent
+    SearchEngineFriendlyStringPipe    
   ],
   imports: [
     AppRoutingModule,
@@ -156,8 +163,8 @@ import { ShopService } from './shared/services/Shop.service';
     AuthenticationService,
     CategoryService,
     CurrencyService,
-    DatePipe,
     DeliveryMethodService,
+    DigiByteNodeService,
     DigiByteWalletService,
     FaqService,
     FaqCategoryService,
