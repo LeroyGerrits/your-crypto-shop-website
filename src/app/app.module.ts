@@ -83,6 +83,7 @@ import { QRCodeModule } from 'angularx-qrcode';
 import { RouterModule } from '@angular/router';
 import { SearchEngineFriendlyStringPipe } from './shared/pipes/SearchEngineFriendlyString.pipe';
 import { ShopService } from './shared/services/Shop.service';
+import { StripHtmlPipe } from './shared/pipes/StripHtml.pipe';
 
 @NgModule({
   declarations: [
@@ -163,16 +164,20 @@ import { ShopService } from './shared/services/Shop.service';
     AuthenticationService,
     CategoryService,
     CurrencyService,
+    DatePipe,
     DeliveryMethodService,
     DigiByteNodeService,
     DigiByteWalletService,
     FaqService,
     FaqCategoryService,
+    FileSizePipe,
     FinancialStatementTransactionService,
+    HashRatePipe,
     MerchantService,
     MerchantPasswordResetLinkService,
     NewsMessageService,
-    ShopService
+    ShopService,
+    StripHtmlPipe
   ],
   bootstrap: [AppComponent]
 })

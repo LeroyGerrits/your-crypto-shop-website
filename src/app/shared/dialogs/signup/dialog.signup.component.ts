@@ -12,6 +12,7 @@ import { MutationResult } from '../../models/MutationResult';
 })
 export class DialogSignUpComponent implements OnInit {
     public controlEmailAddress = new FormControl('', Validators.required);
+    public controlUsername = new FormControl('', Validators.required);
     public controlGender = new FormControl('0', Validators.required)
     public controlFirstName = new FormControl('');
     public controlLastName = new FormControl('', Validators.required);
@@ -27,6 +28,7 @@ export class DialogSignUpComponent implements OnInit {
     ) {
         this.form = new FormGroup([
             this.controlEmailAddress,
+            this.controlUsername,
             this.controlGender,
             this.controlFirstName,
             this.controlLastName
@@ -47,6 +49,7 @@ export class DialogSignUpComponent implements OnInit {
         const merchantToCreate: Merchant = {
             Id: '',
             Salutation: '',
+            Username: this.controlUsername.value!,
             EmailAddress: this.controlEmailAddress.value!,
             FirstName: this.controlFirstName.value!,
             LastName: this.controlLastName.value!,

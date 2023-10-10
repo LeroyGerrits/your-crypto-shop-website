@@ -59,6 +59,7 @@ describe('DialogSignUpComponent', () => {
 
   it('should not create a new account when empty fields get supplied', () => {
     component.controlEmailAddress.setValue('');
+    component.controlUsername.setValue('');
     component.controlLastName.setValue('');
     component.controlGender.setValue('');
     component.onSubmit();
@@ -67,7 +68,8 @@ describe('DialogSignUpComponent', () => {
 
   it('should create a new account when all the required fields are supplied', () => {
     component.controlEmailAddress.setValue('merchant@dgbcommerce.com');
-    component.controlLastName.setValue('Chant');
+    component.controlUsername.setValue('DGB Commerce');
+    component.controlLastName.setValue('Doe');
     component.controlGender.setValue('0');
     component.onSubmit();
     expect(merchantServiceSpy.create).toHaveBeenCalled();
