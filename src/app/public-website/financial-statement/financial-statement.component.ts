@@ -25,7 +25,7 @@ export class PublicWebsiteFinancialStatementComponent implements OnInit {
   recurrances = Object.keys(Recurrance).filter(p => isNaN(p as any));
 
   constants = Constants;
-  
+
   financialStatementTransactions: FinancialStatementTransaction[] = [];
   dataSource = new MatTableDataSource<FinancialStatementTransaction>;
   displayedColumns: string[] = ['Date', 'Description', 'Recurrance', 'Type', 'Currency', 'Amount'];
