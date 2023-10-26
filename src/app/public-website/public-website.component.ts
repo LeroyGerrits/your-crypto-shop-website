@@ -11,7 +11,7 @@ import { ShopService } from '../shared/services/Shop.service';
   templateUrl: './public-website.component.html'
 })
 export class PublicWebsiteComponent implements OnInit {
-  public showCallToAction: boolean = false;
+  public showCallToAction: boolean = this.router.url == '/';
   public featuredShops: Shop[] | undefined;
 
   constructor(
