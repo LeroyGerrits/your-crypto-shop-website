@@ -5,7 +5,7 @@
             alt="Intuitive" />
         <p>A state of the art control panel makes handling your product catalog, customers and sales a breeze. Our user
             interface requires no technical knowledge whatsoever. Your store can be up and running in a matter
-            of minutes.</p>
+            of minutes. All you need is a DigiByte wallet, and a <a (click)="signUp()">account</a></p>
     </div>
 </div>
 <div class="ColumnOneThird">
@@ -21,14 +21,7 @@
     <div class="WrapperPadding20-8-20-20 TextAlignCenter">
         <h2>Donate</h2>
         <img class="PublicWebsiteImage" src="/assets/images/About Donate.png" width="150" height="150" alt="Donate" />
-        <p>Want to support this initiative? A DigiByte donation is most welcome!</p>
-        <div>
-            <qrcode [qrdata]="constants.DIGIBYTE_WALLET_ADDRESS_GENERAL" [width]="constants.QR_CODE_SIZE"
-                [errorCorrectionLevel]="'M'" [colorLight]="constants.QR_CODE_COLOR_LIGHT" [colorDark]="constants.QR_CODE_COLOR_DARK" [imageSrc]="constants.QR_CODE_LOGO"
-                [imageHeight]="constants.QR_CODE_LOGO_SIZE" [imageWidth]="constants.QR_CODE_LOGO_SIZE" />
-        </div>
-        <span class="FontSize0x8Em WordWrapBreakWord"><a
-                href="digibyte:{{constants.DIGIBYTE_WALLET_ADDRESS_GENERAL}}">{{constants.DIGIBYTE_WALLET_ADDRESS_GENERAL}}</a></span>
+        <p>This initiative is completely volunteer driven and until the userbase and sales volume is high enough, we are paying server costs out of our own pocket. Want to support the development of this platform? A <a (click)="donate()">DigiByte donation</a> is most welcome!</p>        
     </div>
 </div>
 <div class="ClearLeft"></div>

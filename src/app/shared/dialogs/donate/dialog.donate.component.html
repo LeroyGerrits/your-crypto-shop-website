@@ -1,0 +1,15 @@
+<h2 mat-dialog-title>DigiByte donation</h2>
+<mat-dialog-content class="mat-typography">
+  <div class="MaxWidth440 TextAlignCenter">
+    <p>DigiByte donations of &#394;&nbsp;1000 or higher will be listed in our financial statement. Let us know if you want the donation to mention
+      your name, website or social media handle.</p>
+    <div class="CanvasImageStretch">
+      <qrcode [qrdata]="constants.DIGIBYTE_WALLET_ADDRESS_GENERAL" [width]="constants.QR_CODE_SIZE * 2"
+        [errorCorrectionLevel]="'M'" [colorLight]="constants.QR_CODE_COLOR_LIGHT"
+        [colorDark]="constants.QR_CODE_COLOR_DARK" [imageSrc]="constants.QR_CODE_LOGO"
+        [imageHeight]="constants.QR_CODE_LOGO_SIZE * 2" [imageWidth]="constants.QR_CODE_LOGO_SIZE * 2" />
+    </div>
+    <span class="FontSize0x8Em WordWrapBreakWord"><a
+        href="digibyte:{{constants.DIGIBYTE_WALLET_ADDRESS_GENERAL}}">{{constants.DIGIBYTE_WALLET_ADDRESS_GENERAL}}</a></span>
+  </div>
+</mat-dialog-content>
