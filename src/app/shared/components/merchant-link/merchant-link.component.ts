@@ -8,7 +8,7 @@ import { Router } from '@angular/router';
 })
 export class MerchantLinkComponent implements OnInit {
   @Input() merchantId!: string;
-  @Input() merchantSalutation!: string;
+  @Input() merchantUsername!: string;
   @Input() merchantScore: undefined | number;
 
   merchantScoreHalf: boolean = false;

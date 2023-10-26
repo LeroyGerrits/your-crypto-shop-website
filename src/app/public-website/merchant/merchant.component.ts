@@ -30,7 +30,7 @@ export class PublicWebsiteMerchantComponent implements OnInit {
   GetMerchant(id: string) {
     this.merchantService.getByIdPublic(id.toString()).subscribe(merchant => {
       this.merchant = merchant;
-      this.titleService.setTitle(`${Constants.TITLE_PREFIX} - ${merchant.Salutation}`);
+      this.titleService.setTitle(`${Constants.TITLE_PREFIX} - ${merchant.Username}`);
     });
   }
 }
