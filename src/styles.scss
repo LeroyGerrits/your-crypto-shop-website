@@ -254,43 +254,44 @@ p {
   color: rgba(255, 255, 255, 1);
 }
 
-#Header div.CalltoAction {
+#Header div.CallToAction {
   height: 280px;
 }
 
-#Header div.CalltoAction div.Wrapper {
+#Header div.CallToAction div.Wrapper {
   margin: 0 auto;
   width: 630px;
 }
 
-#Header div.CalltoAction div.Wrapper img {
+#Header div.CallToAction div.Wrapper img {
   display: block;
   float: right;
   margin-left: 20px;
 }
 
-#Header div.CalltoAction div.Wrapper strong {
+#Header div.CallToAction div.Wrapper strong {
   display: block;
   font-family: 'robotoblack';
   font-size: 1.6em;
   padding: 60px 0 20px 0;
+  text-align: center;
   text-shadow: 1px 1px 0 #222;
 }
 
-#Header div.CalltoAction div.Wrapper span.Explanation {
+#Header div.CallToAction div.Wrapper span.Explanation {
   color: #e0e0e0;
   display: block;
   text-shadow: 1px 1px 0 #222;
 }
 
-#Header div.CalltoAction div.Wrapper div.Buttons {
+#Header div.CallToAction div.Wrapper div.Buttons {
   display: table;
   margin: 0 auto;
   padding-top: 20px;
   text-align: center;
 }
 
-#Header div.CalltoAction div.Wrapper div.Buttons button {
+#Header div.CallToAction div.Wrapper div.Buttons button {
   margin: 0 10px;
 }
 
@@ -717,38 +718,38 @@ mat-form-field {
     text-align: center;
   }
 
-  #Header div.CalltoAction {
+  #Header div.CallToAction {
     height: auto;
   }
 
-  #Header div.CalltoAction div.Wrapper {
+  #Header div.CallToAction div.Wrapper {
     text-align: center;
     padding: 20px 0;
     width: auto;
   }
 
-  #Header div.CalltoAction div.Wrapper img {
+  #Header div.CallToAction div.Wrapper img {
     display: none;
   }
 
-  #Header div.CalltoAction div.Wrapper strong {
+  #Header div.CallToAction div.Wrapper strong {
     padding: 0 0 10px 0;
   }
 
-  #Header div.CalltoAction div.Wrapper span.Explanation {
+  #Header div.CallToAction div.Wrapper span.Explanation {
     color: #e0e0e0;
     display: block;
     text-shadow: 1px 1px 0 #222;
   }
 
-  #Header div.CalltoAction div.Wrapper div.Buttons {
+  #Header div.CallToAction div.Wrapper div.Buttons {
     display: table;
     margin: 0 auto;
     padding-top: 20px;
     text-align: center;
   }
 
-  #Header div.CalltoAction div.Wrapper div.Buttons button {
+  #Header div.CallToAction div.Wrapper div.Buttons button {
     margin: 0 10px;
   }
 
