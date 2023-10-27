@@ -2,6 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { DialogDonateComponent } from './dialog.donate.component';
 import { MatDialogModule } from '@angular/material/dialog';
+import { QRCodeModule } from 'angularx-qrcode';
 
 describe('DialogDonateComponent', () => {
   let component: DialogDonateComponent;
@@ -10,7 +11,7 @@ describe('DialogDonateComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [DialogDonateComponent],
-      imports: [MatDialogModule]
+      imports: [MatDialogModule, QRCodeModule]
     });
     fixture = TestBed.createComponent(DialogDonateComponent);
     component = fixture.componentInstance;
