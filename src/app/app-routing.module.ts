@@ -32,6 +32,7 @@ import { PublicWebsiteFaqListComponent } from './public-website/faq/faq-list.com
 import { PublicWebsiteFinancialStatementComponent } from './public-website/financial-statement/financial-statement.component';
 import { PublicWebsiteIndexComponent } from './public-website/index/index.component';
 import { PublicWebsiteMerchantComponent } from './public-website/merchant/merchant.component';
+import { PublicWebsiteMessageComponent } from './public-website/message/message.component';
 import { PublicWebsiteNewsComponent } from './public-website/news/news.component';
 import { PublicWebsiteNewsListComponent } from './public-website/news/news-list.component';
 import { PublicWebsiteNodeStatusComponent } from './public-website/node-status/node-status.component';
@@ -79,12 +80,13 @@ const routes: Routes = [
       { path: 'news/:newsMessageId', component: PublicWebsiteNewsComponent, title: `${Constants.TITLE_PREFIX} - News` },
       { path: 'news/:newsMessageId/:newsMessageTitle', component: PublicWebsiteNewsComponent, title: `${Constants.TITLE_PREFIX} - News` },
       { path: 'not-authorized', component: PublicWebsiteNotAuthorizedComponent, title: `${Constants.TITLE_PREFIX} - Not authorized` },
-      { path: 'node-status', component: PublicWebsiteNodeStatusComponent, title: `${Constants.TITLE_PREFIX} - Node status` }, 
+      { path: 'node-status', component: PublicWebsiteNodeStatusComponent, title: `${Constants.TITLE_PREFIX} - Node status` },
       { path: 'pricing', component: PublicWebsitePricingComponent, title: `${Constants.TITLE_PREFIX} - Pricing` },
       { path: 'faq', component: PublicWebsiteFaqListComponent, title: `${Constants.TITLE_PREFIX} - FAQ` },
       { path: 'faq/:faqId', component: PublicWebsiteFaqComponent, title: `${Constants.TITLE_PREFIX} - FAQ` },
       { path: 'faq/:faqId/:faqTitle', component: PublicWebsiteFaqComponent, title: `${Constants.TITLE_PREFIX} - FAQ` },
       { path: 'merchant/:merchantId', component: PublicWebsiteMerchantComponent, title: `${Constants.TITLE_PREFIX} - Merchants` },
+      { path: 'message/:messageType', component: PublicWebsiteMessageComponent, title: Constants.TITLE_PREFIX },
       { path: 'shops', component: PublicWebsiteShopListComponent, title: `${Constants.TITLE_PREFIX} - Shops` },
       { path: 'reset-password', component: PublicWebsiteResetPasswordComponent, title: `${Constants.TITLE_PREFIX} - Reset password` },
       { path: '**', pathMatch: 'full', component: PublicWebsiteNotFoundComponent, title: `${Constants.TITLE_PREFIX} - Not found` }

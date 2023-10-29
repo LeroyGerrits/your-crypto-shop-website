@@ -3,7 +3,6 @@ import { HttpClient, HttpHandler } from '@angular/common/http';
 import { MAT_DIALOG_DATA, MatDialog, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { of, throwError } from 'rxjs';
 
-import { AccountComponent } from 'src/app/account/account.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DialogSignUpComponent } from './dialog.signup.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -11,6 +10,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatRadioModule } from '@angular/material/radio';
 import { MerchantService } from '../../services/Merchant.service';
 import { MutationResult } from '../../models/MutationResult';
+import { PublicWebsiteMessageComponent } from 'src/app/public-website/message/message.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RouterTestingModule } from '@angular/router/testing';
 
@@ -38,7 +38,7 @@ describe('DialogSignUpComponent', () => {
     TestBed.configureTestingModule({
       declarations: [DialogSignUpComponent],
       imports: [BrowserAnimationsModule, MatDialogModule, MatFormFieldModule, MatInputModule, MatRadioModule, ReactiveFormsModule, RouterTestingModule.withRoutes(
-        [{ path: 'account', component: AccountComponent }]
+        [{ path: 'message/account-registered', component: PublicWebsiteMessageComponent }]
       )],
       providers: [
         { provide: MatDialogRef, useValue: matDialogRefSpy },
@@ -93,7 +93,6 @@ describe('DialogSignUpComponentWithErrors', () => {
   let matDialogRefSpy: any;
   let matDialogSpy: jasmine.SpyObj<MatDialog>
   let merchantServiceSpy: jasmine.SpyObj<MerchantService>;
-  let mutationResult: MutationResult = { ErrorCode: 0, Identity: '', Message: '' };
 
   beforeEach(() => {
     matDialogRefSpy = jasmine.createSpyObj('MatDialogRef', ['close']);
@@ -110,7 +109,7 @@ describe('DialogSignUpComponentWithErrors', () => {
     TestBed.configureTestingModule({
       declarations: [DialogSignUpComponent],
       imports: [BrowserAnimationsModule, MatDialogModule, MatFormFieldModule, MatInputModule, MatRadioModule, ReactiveFormsModule, RouterTestingModule.withRoutes(
-        [{ path: 'account', component: AccountComponent }]
+        [{ path: 'message/account-registered', component: PublicWebsiteMessageComponent }]
       )],
       providers: [
         { provide: MatDialogRef, useValue: matDialogRefSpy },

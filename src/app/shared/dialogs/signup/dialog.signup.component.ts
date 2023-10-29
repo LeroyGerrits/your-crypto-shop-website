@@ -5,17 +5,18 @@ import { MatDialogRef } from '@angular/material/dialog';
 import { Merchant } from '../../models/Merchant.model';
 import { MerchantService } from '../../services/Merchant.service';
 import { MutationResult } from '../../models/MutationResult';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'dialog-signup',
     templateUrl: 'dialog.signup.component.html'
 })
-export class DialogSignUpComponent implements OnInit {
-    public controlEmailAddress = new FormControl('', Validators.required);
-    public controlUsername = new FormControl('', Validators.required);
+export class DialogSignUpComponent {
+    public controlEmailAddress = new FormControl('', [Validators.required, Validators.email]);
+    public controlUsername = new FormControl('', [Validators.maxLength(50), Validators.required]);
     public controlGender = new FormControl('0', Validators.required)
-    public controlFirstName = new FormControl('');
-    public controlLastName = new FormControl('', Validators.required);
+    public controlFirstName = new FormControl('', Validators.maxLength(255));
+    public controlLastName = new FormControl('', [Validators.maxLength(255), Validators.required]);
 
     public form!: FormGroup;
     public formLoading = false;
@@ -24,7 +25,8 @@ export class DialogSignUpComponent implements OnInit {
 
     constructor(
         private dialogRefComponent: MatDialogRef<any>,
-        private merchantService: MerchantService
+        private merchantService: MerchantService,
+        private router: Router
     ) {
         this.form = new FormGroup([
             this.controlEmailAddress,
@@ -35,19 +37,18 @@ export class DialogSignUpComponent implements OnInit {
         ]);
     }
 
-    ngOnInit() {
-
-    }
-
     onSubmit() {
         this.formSubmitted = true;
 
+        console.log('boem');
+
         if (this.form.invalid) {
+            console.log(this.form.errors);
+            console.log('invalid!');
             return;
         }
 
         const merchantToCreate: Merchant = {
-            Id: '',
             Salutation: '',
             Username: this.controlUsername.value!,
             EmailAddress: this.controlEmailAddress.value!,
@@ -59,18 +60,24 @@ export class DialogSignUpComponent implements OnInit {
         this.merchantService.create(merchantToCreate).subscribe({
             next: result => this.handleOnSubmitResult(result),
             error: error => this.handleOnSubmitError(error),
-            complete: () => {
-                this.formLoading = false
-                this.formLoading = true;
-            }
+            complete: () => this.formLoading = false
         });
     }
 
     handleOnSubmitResult(result: MutationResult) {
         if (result.ErrorCode == 0) {
-            this.dialogRefComponent.close();
+            if (this.dialogRefComponent)
+                this.dialogRefComponent.close();
+
+            this.router.navigate(['/message/account-registered']);
         } else {
-            this.formError = result.Message;
+            if (result.Constraint == 'UNIQUE_Merchant_EmailAddress') {
+                this.formError = `The e-mail address ${this.controlEmailAddress.value} is already in use.`;
+            } else if (result.Constraint == 'UNIQUE_Merchant_Username') {
+                this.formError = `The username ${this.controlUsername.value} is already in use.`;
+            } else {
+                this.formError = result.Message;
+            }
         }
     }
 

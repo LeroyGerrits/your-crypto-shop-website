@@ -1,7 +1,7 @@
 import { Gender } from 'src/app/shared/enums/Gender.enum';
 
 export class Merchant {
-    Id!: string;
+    Id?: string;
     EmailAddress!: string;
     Username!: string;
     Password?: string;
@@ -11,7 +11,7 @@ export class Merchant {
     LastLogin?: Date;
     LastIpAddress?: string;
     SecondLastLogin?: Date;
-    SecondLastIpAddress?: string;    
+    SecondLastIpAddress?: string;
     Salutation!: string;
     Score?: number;
 }

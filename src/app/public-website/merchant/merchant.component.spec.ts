@@ -2,7 +2,6 @@ import { ActivatedRoute, RouterLink, convertToParamMap } from '@angular/router';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { HttpClientTestingModule } from '@angular/common/http/testing';
-import { MatChipsModule } from '@angular/material/chips';
 import { MerchantService } from 'src/app/shared/services/Merchant.service';
 import { PublicWebsiteMerchantComponent } from './merchant.component';
 import { TestDataPublicMerchants } from 'src/assets/test-data/PublicMerchants';
@@ -11,7 +10,7 @@ import { of } from 'rxjs';
 describe('PublicWebsiteMerchantComponent', () => {
   let component: PublicWebsiteMerchantComponent;
   let fixture: ComponentFixture<PublicWebsiteMerchantComponent>;
-  
+
   let merchantServiceSpy: jasmine.SpyObj<MerchantService>;
 
   beforeEach(() => {
@@ -20,7 +19,7 @@ describe('PublicWebsiteMerchantComponent', () => {
 
     TestBed.configureTestingModule({
       declarations: [PublicWebsiteMerchantComponent],
-      imports: [RouterLink, MatChipsModule, HttpClientTestingModule],
+      imports: [RouterLink, HttpClientTestingModule],
       providers: [
         { provide: ActivatedRoute, useValue: { snapshot: { paramMap: convertToParamMap({ merchantId: TestDataPublicMerchants[0].Id }) } } },
         { provide: MerchantService, useValue: merchantServiceSpy }

@@ -100,7 +100,7 @@ export class ControlPanelConfigurationShopComponent implements OnInit {
     shopToUpdate.SubDomain = this.controlSubDomain.value!;
 
     if (this.activeMerchant)
-      shopToUpdate.MerchantId = this.activeMerchant!.Id;
+      shopToUpdate.MerchantId = this.activeMerchant!.Id!;
 
     if (this.queryStringShopId && this.queryStringShopId != 'new') {
       this.shopService.update(shopToUpdate).subscribe({
