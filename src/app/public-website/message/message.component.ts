@@ -13,7 +13,7 @@ export class PublicWebsiteMessageComponent implements OnInit {
   public message: string = '';
 
   constructor(
-    private route: ActivatedRoute,
+    public route: ActivatedRoute,
     private titleService: Title
   ) { }
 
@@ -21,18 +21,26 @@ export class PublicWebsiteMessageComponent implements OnInit {
     const queryStringMessageType = this.route.snapshot.paramMap.get('messageType');
 
     if (queryStringMessageType) {
-      switch (queryStringMessageType) {
-        case 'account-registered':
-          this.messageTitle = 'Your account was registered';
-          this.message = 'Before you can use your account, you will need to activate it first. Please follow the instructions of the e-mail we just sent to the address you specified.';
-          break;
-        default:
-          this.messageTitle = '';
-          this.message = '';
-          break;
-      }
-
-      this.titleService.setTitle(`${Constants.TITLE_PREFIX} - ${this.messageTitle}`);
+      this.setMessage(queryStringMessageType);
     }
+  }
+
+  setMessage(messageType: string) {
+    switch (messageType) {
+      case 'account-activated':
+        this.messageTitle = 'Your account was activated';
+        this.message = 'You can now log in using your e-mail address and the password you just set.';
+        break;
+      case 'account-registered':
+        this.messageTitle = 'Your account was registered';
+        this.message = 'Before you can use your account, you will need to activate it first. Please follow the instructions of the e-mail we just sent to the address you specified.';
+        break;
+      default:
+        this.messageTitle = '';
+        this.message = '';
+        break;
+    }
+
+    this.titleService.setTitle(`${Constants.TITLE_PREFIX} - ${this.messageTitle}`);
   }
 }

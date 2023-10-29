@@ -132,4 +132,15 @@ describe('DialogSignUpComponentWithErrors', () => {
     component.onSubmit();
     expect(merchantServiceSpy.create).toHaveBeenCalled();
   });
+
+  it('should show a specific error when handling submit result and an error code with constraint \'UNIQUE_Merchant_EmailAddress\' is applicable', () => {
+    const mutationResult = { Constraint: 'UNIQUE_Merchant_EmailAddress', ErrorCode: 666, Identity: '', Message: 'Evil error' };
+    component.handleOnSubmitResult(mutationResult);
+    expect(component).toBeTruthy();
+  });
+  it('should show a specific error when handling submit result and an error code with constraint \'UNIQUE_Merchant_Username\' is applicable', () => {
+    const mutationResult = { Constraint: 'UNIQUE_Merchant_Username', ErrorCode: 666, Identity: '', Message: 'Evil error' };
+    component.handleOnSubmitResult(mutationResult);
+    expect(component).toBeTruthy();
+  });
 });

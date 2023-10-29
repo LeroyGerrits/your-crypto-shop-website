@@ -9,7 +9,6 @@ describe('PublicWebsiteMessageComponent', () => {
   let fixture: ComponentFixture<PublicWebsiteMessageComponent>;
 
   beforeEach(() => {
-
     TestBed.configureTestingModule({
       declarations: [PublicWebsiteMessageComponent],
       imports: [RouterLink, HttpClientTestingModule],
@@ -26,8 +25,18 @@ describe('PublicWebsiteMessageComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should display a message', () => {
+  it('should set a message for type account-activated', () => {
+    component.setMessage('account-activated')
+    expect(component).toBeTruthy();
+  });
 
+  it('should set a message for type account-registered', () => {
+    component.setMessage('account-registered')
+    expect(component).toBeTruthy();
+  });
+
+  it('should set a default message', () => {
+    component.setMessage('')
     expect(component).toBeTruthy();
   });
 });
