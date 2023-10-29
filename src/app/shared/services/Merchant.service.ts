@@ -12,6 +12,10 @@ export class MerchantService {
 
     constructor(protected http: HttpClient) { }
 
+    getByIdAndPasswordPublic(id: string, password: string): Observable<PublicMerchant> {
+        return this.http.get<PublicMerchant>(`${this.apiUrl}/public/${id}/${password}`);
+    }
+
     getByIdPublic(id: string): Observable<PublicMerchant> {
         return this.http.get<PublicMerchant>(`${this.apiUrl}/public/${id}`);
     }

@@ -33,7 +33,7 @@ export class PublicWebsiteMessageComponent implements OnInit {
         break;
       case 'account-registered':
         this.messageTitle = 'Your account was registered';
-        this.message = 'Before you can use your account, you will need to activate it first. Please follow the instructions of the e-mail we just sent to the address you specified.';
+        this.message = 'Before you can use your account, you will need to activate it first. Please follow the instructions in the e-mail we just sent to the address you specified.';
         break;
       default:
         this.messageTitle = '';

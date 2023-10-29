@@ -71,6 +71,7 @@ import { MerchantService } from './shared/services/Merchant.service';
 import { NewsMessageService } from './shared/services/NewsMessage.service';
 import { NgModule } from '@angular/core';
 import { PublicWebsiteAboutComponent } from './public-website/about/about.component';
+import { PublicWebsiteAccountActivateComponent } from './public-website/account-activate/account-activate.component';
 import { PublicWebsiteComponent } from './public-website/public-website.component';
 import { PublicWebsiteFaqComponent } from './public-website/faq/faq.component';
 import { PublicWebsiteFaqListComponent } from './public-website/faq/faq-list.component';
@@ -92,38 +93,39 @@ import { StripHtmlPipe } from './shared/pipes/StripHtml.pipe';
     AccountDashboardComponent,
     AccountChangePasswordComponent,
     AccountSettingsComponent,
-    AppComponent,    
+    AppComponent,
     ControlPanelComponent,
     ControlPanelCatalogCategoryListComponent,
     ControlPanelCatalogCategoryComponent,
     ControlPanelCatalogProductComponent,
-    ControlPanelCatalogProductListComponent,    
+    ControlPanelCatalogProductListComponent,
     ControlPanelConfigurationDeliveryMethodListComponent,
     ControlPanelConfigurationDeliveryMethodComponent,
     ControlPanelConfigurationDigiByteWalletListComponent,
     ControlPanelConfigurationDigiByteWalletComponent,
     ControlPanelConfigurationShopListComponent,
     ControlPanelConfigurationShopComponent,
-    ControlPanelDashboardComponent,    
+    ControlPanelDashboardComponent,
     DialogDeleteComponent,
     DialogDonateComponent,
     DialogLoginComponent,
     DialogLogoutComponent,
-    DialogSignUpComponent,    
+    DialogSignUpComponent,
     FileSizePipe,
     HashRatePipe,
     MerchantLinkComponent,
     PublicWebsiteComponent,
+    PublicWebsiteAccountActivateComponent,
     PublicWebsiteAboutComponent,
     PublicWebsiteFaqComponent,
     PublicWebsiteFaqListComponent,
     PublicWebsiteIndexComponent,
     PublicWebsiteFinancialStatementComponent,
     PublicWebsiteNewsComponent,
-    PublicWebsiteNewsListComponent,    
+    PublicWebsiteNewsListComponent,
     PublicWebsiteNodeStatusComponent,
     PublicWebsiteShopListComponent,
-    SearchEngineFriendlyStringPipe    
+    SearchEngineFriendlyStringPipe
   ],
   imports: [
     AppRoutingModule,
@@ -133,7 +135,7 @@ import { StripHtmlPipe } from './shared/pipes/StripHtml.pipe';
     MatBadgeModule,
     MatCardModule,
     MatCheckboxModule,
-    MatChipsModule,    
+    MatChipsModule,
     MatDatepickerModule,
     MatDialogModule,
     MatButtonModule,
@@ -141,7 +143,7 @@ import { StripHtmlPipe } from './shared/pipes/StripHtml.pipe';
     MatGridListModule,
     MatIconModule,
     MatInputModule,
-    MatListModule,    
+    MatListModule,
     MatMenuModule,
     MatNativeDateModule,
     MatPaginatorModule,

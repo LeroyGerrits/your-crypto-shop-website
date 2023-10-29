@@ -26,6 +26,7 @@ import { CustomerListComponent } from './control-panel/customers/customer-list.c
 import { MerchantAuthorizedGuard } from './shared/guards/merchant-authorized.guard';
 import { NgModule } from '@angular/core';
 import { PublicWebsiteAboutComponent } from './public-website/about/about.component';
+import { PublicWebsiteAccountActivateComponent } from './public-website/account-activate/account-activate.component';
 import { PublicWebsiteComponent } from './public-website/public-website.component';
 import { PublicWebsiteFaqComponent } from './public-website/faq/faq.component';
 import { PublicWebsiteFaqListComponent } from './public-website/faq/faq-list.component';
@@ -75,6 +76,7 @@ const routes: Routes = [
     path: '', component: PublicWebsiteComponent, title: Constants.TITLE_PREFIX, children: [
       { path: '', component: PublicWebsiteIndexComponent },
       { path: 'about', component: PublicWebsiteAboutComponent, title: `${Constants.TITLE_PREFIX} - About` },
+      { path: 'account-activate/:merchantId/:merchantPassword', component: PublicWebsiteAccountActivateComponent, title: `${Constants.TITLE_PREFIX} - Activate account` },
       { path: 'financial-statement', component: PublicWebsiteFinancialStatementComponent, title: `${Constants.TITLE_PREFIX} - Financial statement` },
       { path: 'news', component: PublicWebsiteNewsListComponent, title: `${Constants.TITLE_PREFIX} - News` },
       { path: 'news/:newsMessageId', component: PublicWebsiteNewsComponent, title: `${Constants.TITLE_PREFIX} - News` },
