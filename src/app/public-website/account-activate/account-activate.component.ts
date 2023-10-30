@@ -3,8 +3,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar, MatSnackBarRef, TextOnlySnackBar } from '@angular/material/snack-bar';
 
+import { Merchant } from 'src/app/shared/models/Merchant.model';
 import { MerchantService } from 'src/app/shared/services/Merchant.service';
-import { PublicMerchant } from 'src/app/shared/models/viewmodels/PublicMerchant.model';
+import { MutationResult } from 'src/app/shared/models/MutationResult';
 
 @Component({
   selector: 'public-website-account-activate',
@@ -12,7 +13,7 @@ import { PublicMerchant } from 'src/app/shared/models/viewmodels/PublicMerchant.
 })
 
 export class PublicWebsiteAccountActivateComponent implements OnInit {
-  public merchant: PublicMerchant = new PublicMerchant();
+  public merchant: Merchant = new Merchant();
 
   public snackBarRef: MatSnackBarRef<TextOnlySnackBar> | undefined;
   public queryStringMerchantId: string | null = '';
@@ -31,8 +32,6 @@ export class PublicWebsiteAccountActivateComponent implements OnInit {
     private router: Router,
     private snackBar: MatSnackBar
   ) {
-    // this.authenticationService.merchant.subscribe(x => this.activeMerchant = x?.Merchant);
-
     this.form = new FormGroup([
       this.controlPassword,
       this.controlPasswordRepetition
@@ -44,22 +43,45 @@ export class PublicWebsiteAccountActivateComponent implements OnInit {
     this.queryStringMerchantPassword = this.route.snapshot.paramMap.get('merchantPassword');
 
     if (this.queryStringMerchantId && this.queryStringMerchantPassword) {
-      this.merchantService.getByIdAndPasswordPublic(this.queryStringMerchantId, this.queryStringMerchantPassword).subscribe(x => { this.onRetrieveData(x); });
+      this.merchantService.getByIdAndPassword(this.queryStringMerchantId, this.queryStringMerchantPassword).subscribe(x => { this.onRetrieveData(x); });
     }
   }
 
-  onRetrieveData(merchant: PublicMerchant) {
-    /*this.shop = shop;
-    this.pageTitle = shop.Name;
-    this.controlName.setValue(shop.Name);
-
-    if (shop.SubDomain) {
-      this.controlSubDomain.setValue(shop.SubDomain);
-      this.checkSubDomainAvailability(shop.SubDomain);
-    }*/
+  onRetrieveData(merchant: Merchant) {
+    this.merchant = merchant;
   }
 
   onSubmit() {
+    this.formSubmitted = true;
 
+    if (this.form.invalid) {
+      return;
+    }
+
+    if (this.controlPassword.value != this.controlPasswordRepetition.value) {
+      this.snackBarRef = this.snackBar.open('Your 2 passwords are not identical.', 'Close', { panelClass: ['error-snackbar'] });
+      return;
+    }
+
+    this.formLoading = true;
+
+    this.merchantService.activateAccount(this.queryStringMerchantId!, this.queryStringMerchantPassword!, this.controlPassword.value!).subscribe({
+      next: result => this.handleOnSubmitResult(result),
+      error: error => this.handleOnSubmitError(error),
+      complete: () => this.formLoading = false
+    });
+  }
+
+  handleOnSubmitResult(result: MutationResult) {
+    if (result.ErrorCode == 0) {
+      this.router.navigate(['/message/account-activated']);
+    } else {
+      this.snackBarRef = this.snackBar.open(result.Message, 'Close', { panelClass: ['error-snackbar'] });
+    }
+  }
+
+  handleOnSubmitError(error: string) {
+    this.snackBarRef = this.snackBar.open(error, 'Close', { panelClass: ['error-snackbar'] });
+    this.formLoading = false;
   }
 }
