@@ -35,9 +35,9 @@ describe('MerchantService', () => {
         expect(request.request.method).toBe('GET');
     });
 
-    it('should be able to get a public merchant by ID and password', () => {
-        service.getByIdAndPasswordPublic(Constants.EMPTY_GUID, 'password').subscribe();
-        const request = httpMock.expectOne(`${Environment.API_URL}/Merchant/public/${Constants.EMPTY_GUID}/password`);
+    it('should be able to get a merchant by ID and password', () => {
+        service.getByIdAndPassword(Constants.EMPTY_GUID, 'password').subscribe();
+        const request = httpMock.expectOne(`${Environment.API_URL}/Merchant/${Constants.EMPTY_GUID}/password`);
         expect(request.request.method).toBe('GET');
     });
 
@@ -50,6 +50,12 @@ describe('MerchantService', () => {
     it('should be able to update a merchant', () => {
         service.update(TestDataMerchants[0]).subscribe();
         const request = httpMock.expectOne(`${Environment.API_URL}/Merchant/${TestDataMerchants[0].Id}`);
+        expect(request.request.method).toBe('PUT');
+    });
+
+    it('should be able to activate a merchant\'s account', () => {
+        service.activateAccount(TestDataMerchants[0].Id!, 'PASSWORD', 'NEWPASSWORD').subscribe();
+        const request = httpMock.expectOne(`${Environment.API_URL}/Merchant/activate-account?merchantId=${TestDataMerchants[0].Id}&merchantPassword=PASSWORD&newPassword=NEWPASSWORD`);
         expect(request.request.method).toBe('PUT');
     });
 });

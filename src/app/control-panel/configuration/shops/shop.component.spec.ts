@@ -130,12 +130,12 @@ describe('ControlPanelConfigurationShopComponent', () => {
   });
 
   it('should indicate subdomain is available when a valid subdomain was supplied', () => {
-    component.checkSubDomainAvailability('untaken-subdomain');    
+    component.checkSubDomainAvailability('untaken-subdomain');
     expect(component.subDomainAvailable).toBe(true);
   });
 
   it('should indicate subdomain is not available when a reserved subdomain was supplied', () => {
-    component.checkSubDomainAvailability(Constants.RESERVED_SUBDOMAINS[0]);    
+    component.checkSubDomainAvailability(Constants.RESERVED_SUBDOMAINS[0]);
     expect(component.subDomainAvailable).toBe(false);
   });
 
