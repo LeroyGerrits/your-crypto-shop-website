@@ -40,11 +40,7 @@ export class DialogSignUpComponent {
     onSubmit() {
         this.formSubmitted = true;
 
-        console.log('boem');
-
         if (this.form.invalid) {
-            console.log(this.form.errors);
-            console.log('invalid!');
             return;
         }
 
