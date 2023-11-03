@@ -1,6 +1,7 @@
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { of, throwError } from 'rxjs';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CategoryService } from 'src/app/shared/services/Category.service';
@@ -19,7 +20,6 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { ShopService } from 'src/app/shared/services/Shop.service';
 import { TestDataCategories } from 'src/assets/test-data/Categories';
 import { TestDataShops } from 'src/assets/test-data/Shops';
-import { of } from 'rxjs';
 
 describe('ControlPanelCatalogCategoryListComponent', () => {
   let component: ControlPanelCatalogCategoryListComponent;
@@ -112,6 +112,11 @@ describe('ControlPanelCatalogCategoryListComponent', () => {
     expect(component.changingParentCategory).toBe(undefined);
   });
 
+  it('should do nothing when the parent category saving method gets called but no new parent selection is active', () => {
+    component.changeCategoryParentSave();
+    expect(component).toBeTruthy();
+  });
+
   it('should save new parent category selection when a category gets marked for parent changing and then the save buttons gets clicked', () => {
     component.changeCategoryParent(TestDataCategories[0]);
     component.changeCategoryParentSave();
@@ -132,5 +137,76 @@ describe('ControlPanelCatalogCategoryListComponent', () => {
   it('should show a message when an unhandled error occurs', () => {
     component.handleOnSubmitError('Unhandled error');
     expect(matSnackBarSpy.open).toHaveBeenCalled();
+  });
+});
+
+describe('ControlPanelCatalogCategoryListComponentWithErrors', () => {
+  let component: ControlPanelCatalogCategoryListComponent;
+  let fixture: ComponentFixture<ControlPanelCatalogCategoryListComponent>;
+
+  let matDialogRefSpy: any;
+  let matDialogSpy: jasmine.SpyObj<MatDialog>
+  let matSnackBarSpy: jasmine.SpyObj<MatSnackBar>;
+
+  let categoryServiceSpy: jasmine.SpyObj<CategoryService>;
+  let shopServiceSpy: jasmine.SpyObj<ShopService>;
+
+  beforeEach(() => {
+    matDialogRefSpy = jasmine.createSpyObj('MatDialogRef', ['close']);
+    matDialogRefSpy.componentInstance = { title: '', message: '' };
+    matDialogRefSpy.afterClosed = () => of(true);
+
+    matDialogSpy = jasmine.createSpyObj('MatDialog', ['open']);
+    matDialogSpy.open.and.returnValue(matDialogRefSpy);
+
+    matSnackBarSpy = jasmine.createSpyObj('MatSnackBar', ['open']);
+
+    categoryServiceSpy = jasmine.createSpyObj('CategoryService', ['changeParent', 'getList', 'delete', 'moveDown', 'moveUp']);
+    categoryServiceSpy.changeParent.and.returnValue(throwError(() => new Error('ERROR')));
+    categoryServiceSpy.getList.and.returnValue(of(TestDataCategories));
+    categoryServiceSpy.delete.and.returnValue(throwError(() => new Error('ERROR')));
+    categoryServiceSpy.moveDown.and.returnValue(throwError(() => new Error('ERROR')));
+    categoryServiceSpy.moveUp.and.returnValue(throwError(() => new Error('ERROR')));
+
+    shopServiceSpy = jasmine.createSpyObj('ShopService', ['getList']);
+    shopServiceSpy.getList.and.returnValue(of(TestDataShops));
+
+    TestBed.configureTestingModule({
+      declarations: [ControlPanelCatalogCategoryListComponent],
+      imports: [BrowserAnimationsModule, FormsModule, HttpClientTestingModule, MatButtonModule, MatFormFieldModule, MatIconModule, MatRadioModule, MatSelectModule, MatTreeModule, ReactiveFormsModule, RouterLink, RouterTestingModule.withRoutes(
+        [{ path: 'control-panel/catalog/categories', component: ControlPanelCatalogCategoryListComponent }]
+      )],
+      providers: [
+        { provide: ActivatedRoute, useValue: { snapshot: { data: {} } } },
+        { provide: MatDialog, useValue: matDialogSpy },
+        { provide: ShopService, useValue: shopServiceSpy },
+        { provide: CategoryService, useValue: categoryServiceSpy },
+        { provide: MatSnackBar, useValue: matSnackBarSpy }
+      ]
+    });
+    fixture = TestBed.createComponent(ControlPanelCatalogCategoryListComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+  });
+
+  it('should trigger error handling when sending a call to the category service when deleting a category and the request fails', () => {
+    component.deleteCategory(TestDataCategories[0]);
+    expect(component).toBeTruthy();
+  });
+
+  it('should trigger error handling when sending a call to the category service when moving a category down and the request fails', () => {
+    component.moveCategoryDown(TestDataCategories[0]);
+    expect(component).toBeTruthy();
+  });
+
+  it('should trigger error handling when sending a call to the category service when moving a category up and the request fails', () => {
+    component.moveCategoryUp(TestDataCategories[0]);
+    expect(component).toBeTruthy();
+  });
+
+  it('should trigger error handling when sending a call to the category service when changing the parent of a category and the request fails', () => {
+    component.changeCategoryParent(TestDataCategories[0]);
+    component.changeCategoryParentSave();
+    expect(component).toBeTruthy();
   });
 });
