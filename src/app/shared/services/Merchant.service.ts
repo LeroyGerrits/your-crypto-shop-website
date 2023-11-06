@@ -23,9 +23,8 @@ export class MerchantService {
         return this.http.get<PublicMerchant>(`${this.apiUrl}/public/${id}`);
     }
 
-    changePassword(id: string, currentPassword: string, newPassword: string): Observable<MutationResult> {
+    changePassword(currentPassword: string, newPassword: string): Observable<MutationResult> {
         const changePasswordRequest: ChangePasswordRequest = {
-            Id: id,
             CurrentPassword: currentPassword,
             NewPassword: newPassword
         };

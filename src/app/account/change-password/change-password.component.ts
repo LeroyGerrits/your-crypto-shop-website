@@ -55,7 +55,7 @@ export class AccountChangePasswordComponent {
 
         this.formLoading = true;
 
-        this.merchantService.changePassword(this.activeMerchant!.Id!, this.controlCurrentPassword.value!, this.controlPassword.value!).subscribe({
+        this.merchantService.changePassword(this.controlCurrentPassword.value!, this.controlPassword.value!).subscribe({
             next: result => this.handleOnSubmitResult(result),
             error: error => this.handleOnSubmitError(error),
             complete: () => this.formLoading = false
