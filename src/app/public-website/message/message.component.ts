@@ -27,13 +27,13 @@ export class PublicWebsiteMessageComponent implements OnInit {
 
   setMessage(messageType: string) {
     switch (messageType) {
-      case 'account-already-activated':
-        this.messageTitle = 'Your account has already been activated';
-        this.message = 'You can only use the link to activate your account and set a password once. If you forgot your password, use the \'I forgot my password\' button in the login dialog.';
-        break;
       case 'account-activated':
         this.messageTitle = 'Your account was activated';
         this.message = 'You can now log in using your e-mail address and the password you just set.';
+        break;
+      case 'account-already-activated':
+        this.messageTitle = 'Your account has already been activated';
+        this.message = 'You can only use the link to activate your account and set a password once. If you forgot your password, use the \'I forgot my password\' button in the login dialog.';
         break;
       case 'account-registered':
         this.messageTitle = 'Your account was registered';

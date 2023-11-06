@@ -30,6 +30,11 @@ describe('PublicWebsiteMessageComponent', () => {
     expect(component).toBeTruthy();
   });
 
+  it('should set a message for type account-already-activated', () => {
+    component.setMessage('account-already-activated')
+    expect(component).toBeTruthy();
+  });
+
   it('should set a message for type account-registered', () => {
     component.setMessage('account-registered')
     expect(component).toBeTruthy();
