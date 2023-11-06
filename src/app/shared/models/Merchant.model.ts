@@ -2,6 +2,7 @@ import { Gender } from 'src/app/shared/enums/Gender.enum';
 
 export class Merchant {
     Id?: string;
+    Activated?: Date;
     EmailAddress!: string;
     Username!: string;
     Password?: string;

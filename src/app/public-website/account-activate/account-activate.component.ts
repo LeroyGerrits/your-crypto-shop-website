@@ -26,6 +26,8 @@ export class PublicWebsiteAccountActivateComponent implements OnInit {
   public controlPassword = new FormControl('', Validators.required);
   public controlPasswordRepetition = new FormControl('', Validators.required);
 
+  public showForm = false;
+
   constructor(
     private merchantService: MerchantService,
     private route: ActivatedRoute,
@@ -43,12 +45,19 @@ export class PublicWebsiteAccountActivateComponent implements OnInit {
     this.queryStringMerchantPassword = this.route.snapshot.paramMap.get('merchantPassword');
 
     if (this.queryStringMerchantId && this.queryStringMerchantPassword) {
-      this.merchantService.getByIdAndPassword(this.queryStringMerchantId, this.queryStringMerchantPassword).subscribe(x => { this.onRetrieveData(x); });
+      this.merchantService.getByIdAndPassword(this.queryStringMerchantId, this.queryStringMerchantPassword).subscribe({
+        next: result => this.onRetrieveData(result),
+        error: _ => this.router.navigate(['/message/account-already-activated'])
+      });
     }
   }
 
   onRetrieveData(merchant: Merchant) {
+    if (merchant.Activated)
+      this.router.navigate(['/message/account-already-activated']);
+
     this.merchant = merchant;
+    this.showForm = true;
   }
 
   onSubmit() {

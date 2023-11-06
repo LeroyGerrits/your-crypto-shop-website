@@ -46,6 +46,7 @@
 :root {
   --error-color: #f55555;
   --green-color: #15a515;
+  --mdc-dialog-supporting-text-size: 14px;
   --mat-menu-item-label-text-size: 14px;
   --mat-option-label-text-size: 14px;
 }
@@ -653,11 +654,13 @@ div.WrapperPadding8 {
   text-align: right !important;
 }
 
+.mat-mdc-dialog-container .mdc-dialog__content {
+  font-size: 14px !important;
+}
+
 .mat-mdc-icon-button.mat-primary {
   color: $lightest-blue-color !important;
 }
-
-.mat-mdc-option {}
 
 .mat-mdc-option.mdc-list-item--selected:not(.mdc-list-item--disabled) .mdc-list-item__primary-text {
   color: $lightest-blue-color !important;
