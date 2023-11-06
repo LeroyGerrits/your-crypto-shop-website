@@ -1,5 +1,7 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 
+import { ActivateAccountRequest } from '../models/request/ActivateAccountRequest';
+import { ChangePasswordRequest } from '../models/request/ChangePasswordRequest';
 import { Environment } from 'src/app/shared/environments/Environment';
 import { Injectable } from '@angular/core';
 import { Merchant } from 'src/app/shared/models/Merchant.model';
@@ -21,6 +23,15 @@ export class MerchantService {
         return this.http.get<PublicMerchant>(`${this.apiUrl}/public/${id}`);
     }
 
+    changePassword(id: string, currentPassword: string, newPassword: string): Observable<MutationResult> {
+        const changePasswordRequest: ChangePasswordRequest = {
+            Id: id,
+            CurrentPassword: currentPassword,
+            NewPassword: newPassword
+        };
+        return this.http.put<MutationResult>(Environment.API_URL + '/change-password', changePasswordRequest);
+    }
+
     create(merchant: Merchant): Observable<MutationResult> {
         return this.http.post<MutationResult>(this.apiUrl, merchant);
     }
@@ -29,12 +40,12 @@ export class MerchantService {
         return this.http.put<MutationResult>(`${this.apiUrl}/${merchant.Id}`, merchant)
     }
 
-    activateAccount(merchantId: string, merchantPassword: string, newPassword: string): Observable<MutationResult> {
-        let httpParams = new HttpParams();
-        httpParams = httpParams.append('merchantId', merchantId);
-        httpParams = httpParams.append('merchantPassword', merchantPassword);
-        httpParams = httpParams.append('newPassword', newPassword);
-
-        return this.http.put<MutationResult>(`${this.apiUrl}/activate-account`, null, { params: httpParams })
+    activateAccount(id: string, currentPassword: string, newPassword: string): Observable<MutationResult> {
+        const activateAccountRequest: ActivateAccountRequest = {
+            Id: id,
+            CurrentPassword: currentPassword,
+            NewPassword: newPassword
+        };
+        return this.http.put<MutationResult>(`${this.apiUrl}/activate-account`, activateAccountRequest);
     }
 }

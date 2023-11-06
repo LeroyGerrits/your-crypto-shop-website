@@ -10,6 +10,7 @@
         </button>
 
         <mat-menu #Merchant="matMenu">
+          <button mat-menu-item [routerLink]="['/account']">Account dashboard</button>
           <button mat-menu-item [routerLink]="['/account/settings']">Settings</button>
           <button mat-menu-item [routerLink]="['/account/change-password']">Change password</button>
           <button mat-menu-item (click)="this.logout()">Log out</button>
