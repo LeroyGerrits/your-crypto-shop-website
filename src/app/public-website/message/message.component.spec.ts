@@ -35,6 +35,11 @@ describe('PublicWebsiteMessageComponent', () => {
     expect(component).toBeTruthy();
   });
 
+  it('should set a message for type account-password-changed', () => {
+    component.setMessage('account-password-changed')
+    expect(component).toBeTruthy();
+  });
+
   it('should set a message for type account-registered', () => {
     component.setMessage('account-registered')
     expect(component).toBeTruthy();

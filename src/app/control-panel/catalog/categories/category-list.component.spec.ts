@@ -125,7 +125,7 @@ describe('ControlPanelCatalogCategoryListComponent', () => {
 
   it('should refresh when handling submit result and no error code is applicable', () => {
     spyOn(component, 'retrieveCategoriesByShopId');
-    const mutationResult = <MutationResult>{ Constraint: '', ErrorCode: 0, Identity: '', Message: '' };
+    const mutationResult = <MutationResult>{ Constraint: '', ErrorCode: 0, Identity: '', Message: '', Success: true };
     component.handleOnSubmitResult(mutationResult);
     expect(component.retrieveCategoriesByShopId).toHaveBeenCalled();
   });

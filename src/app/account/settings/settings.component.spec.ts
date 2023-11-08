@@ -2,6 +2,7 @@ import { ActivatedRoute, RouterLink } from '@angular/router';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { AccountSettingsComponent } from './settings.component';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 
 describe('AccountSettingsComponent', () => {
@@ -15,7 +16,7 @@ describe('AccountSettingsComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [AccountSettingsComponent],
-      imports: [RouterLink, RouterTestingModule],
+      imports: [HttpClientTestingModule, RouterLink, RouterTestingModule],
       providers: [
         { provide: ActivatedRoute, useValue: fakeActivatedRoute }
       ]

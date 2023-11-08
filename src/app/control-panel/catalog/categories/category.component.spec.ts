@@ -112,7 +112,7 @@ describe('ControlPanelCatalogCategoryComponent', () => {
 
   it('should close the dialog when handling submit result and no errors are applicable', () => {
     spyOn(matDialogRefSpy, 'close');
-    const mutationResult = <MutationResult>{ Constraint: '', ErrorCode: 0, Identity: '', Message: '' };
+    const mutationResult = <MutationResult>{ Constraint: '', ErrorCode: 0, Identity: '', Message: '', Success: true };
     component.handleOnSubmitResult(mutationResult);
     expect(matDialogRefSpy.close).toHaveBeenCalled();
   });

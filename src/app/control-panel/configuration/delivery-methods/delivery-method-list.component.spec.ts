@@ -108,7 +108,7 @@ describe('ControlPanelConfigurationDeliveryMethodListComponent', () => {
   });
 
   it('should navigate when handling submit result and no error code is applicable', () => {
-    const mutationResult = <MutationResult>{ Constraint: '', ErrorCode: 0, Identity: '', Message: '' };
+    const mutationResult = <MutationResult>{ Constraint: '', ErrorCode: 0, Identity: '', Message: '', Success: true };
     const routerstub: Router = TestBed.inject(Router);
     spyOn(routerstub, 'navigate');
 

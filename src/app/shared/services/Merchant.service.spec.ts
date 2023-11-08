@@ -55,7 +55,7 @@ describe('MerchantService', () => {
 
     it('should be able to activate a merchant\'s account', () => {
         service.activateAccount(TestDataMerchants[0].Id!, 'PASSWORD', 'NEWPASSWORD').subscribe();
-        const request = httpMock.expectOne(`${Environment.API_URL}/Merchant/activate-account?merchantId=${TestDataMerchants[0].Id}&merchantPassword=PASSWORD&newPassword=NEWPASSWORD`);
+        const request = httpMock.expectOne(`${Environment.API_URL}/Merchant/activate-account`);
         expect(request.request.method).toBe('PUT');
     });
 });
