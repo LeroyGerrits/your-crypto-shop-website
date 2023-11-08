@@ -70,8 +70,8 @@ export class AccountChangePasswordComponent {
         }
     }
 
-    handleOnSubmitError(error: MutationResult) {
-        this.snackBarRef = this.snackBar.open(error.Message, 'Close', { panelClass: ['error-snackbar'] });
+    handleOnSubmitError(error: string) {
+        this.snackBarRef = this.snackBar.open(error, 'Close', { panelClass: ['error-snackbar'] });
         this.formLoading = false;
     }
 }
