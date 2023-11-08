@@ -118,7 +118,7 @@ export class ControlPanelConfigurationShopComponent implements OnInit {
   }
 
   handleOnSubmitResult(result: MutationResult) {
-    if (result.ErrorCode == 0) {
+    if (result.Success) {
       this.router.navigate(['/control-panel/configuration/shops']);
     } else {
       if (result.Constraint == 'UNIQUE_Shop_SubDomain') {

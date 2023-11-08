@@ -31,7 +31,7 @@ describe('ControlPanelCatalogCategoryListComponent', () => {
 
   let categoryServiceSpy: jasmine.SpyObj<CategoryService>;
   let shopServiceSpy: jasmine.SpyObj<ShopService>;
-  let mutationResult: MutationResult = { ErrorCode: 0, Identity: '', Message: '' };
+  let mutationResult: MutationResult = <MutationResult>{ ErrorCode: 0, Identity: '', Message: '' };
 
   beforeEach(() => {
     matDialogRefSpy = jasmine.createSpyObj('MatDialogRef', ['close']);
@@ -125,12 +125,14 @@ describe('ControlPanelCatalogCategoryListComponent', () => {
 
   it('should refresh when handling submit result and no error code is applicable', () => {
     spyOn(component, 'retrieveCategoriesByShopId');
-    component.handleOnSubmitResult({ Constraint: '', ErrorCode: 0, Identity: '', Message: '' });
+    const mutationResult = <MutationResult>{ Constraint: '', ErrorCode: 0, Identity: '', Message: '' };
+    component.handleOnSubmitResult(mutationResult);
     expect(component.retrieveCategoriesByShopId).toHaveBeenCalled();
   });
 
   it('should show an error when handling submit result and an error code is applicable', () => {
-    component.handleOnSubmitResult({ Constraint: '', ErrorCode: 666, Identity: '', Message: 'Evil error' });
+    const mutationResult = <MutationResult>{ Constraint: '', ErrorCode: 666, Identity: '', Message: 'Evil error' };
+    component.handleOnSubmitResult(mutationResult);
     expect(matSnackBarSpy.open).toHaveBeenCalled();
   });
 

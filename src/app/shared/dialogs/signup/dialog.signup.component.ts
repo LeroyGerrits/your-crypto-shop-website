@@ -61,7 +61,7 @@ export class DialogSignUpComponent {
     }
 
     handleOnSubmitResult(result: MutationResult) {
-        if (result.ErrorCode == 0) {
+        if (result.Success) {
             if (this.dialogRefComponent)
                 this.dialogRefComponent.close();
 

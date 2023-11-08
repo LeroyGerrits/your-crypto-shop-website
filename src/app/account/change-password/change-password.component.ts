@@ -63,15 +63,15 @@ export class AccountChangePasswordComponent {
     }
 
     handleOnSubmitResult(result: MutationResult) {
-        if (result.ErrorCode == 0) {
+        if (result.Success) {
             this.router.navigate(['/message/account-password-changed']);
         } else {
             this.snackBarRef = this.snackBar.open(result.Message, 'Close', { panelClass: ['error-snackbar'] });
         }
     }
 
-    handleOnSubmitError(error: string) {
-        this.snackBarRef = this.snackBar.open(error, 'Close', { panelClass: ['error-snackbar'] });
+    handleOnSubmitError(error: MutationResult) {
+        this.snackBarRef = this.snackBar.open(error.Message, 'Close', { panelClass: ['error-snackbar'] });
         this.formLoading = false;
     }
 }

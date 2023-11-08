@@ -24,20 +24,20 @@ describe('ControlPanelConfigurationDigiByteWalletListComponent', () => {
   let matDialogRefSpy: any;
   let matDialogSpy: jasmine.SpyObj<MatDialog>
   let digiByteWalletServiceSpy: jasmine.SpyObj<DigiByteWalletService>;
-  let mutationResult: MutationResult = { ErrorCode: 0, Identity: '', Message: '' };
+  let mutationResult: MutationResult = <MutationResult>{ ErrorCode: 0, Identity: '', Message: '' };
 
   beforeEach(() => {
     matDialogRefSpy = jasmine.createSpyObj('MatDialogRef', ['close']);
-    matDialogRefSpy.componentInstance = {title: '', message: ''};
+    matDialogRefSpy.componentInstance = { title: '', message: '' };
     matDialogRefSpy.afterClosed = () => of(true);
 
     matDialogSpy = jasmine.createSpyObj('MatDialog', ['open']);
     matDialogSpy.open.and.returnValue(matDialogRefSpy);
-    
+
     digiByteWalletServiceSpy = jasmine.createSpyObj('DigiByteWalletService', ['getList', 'delete']);
     digiByteWalletServiceSpy.getList.and.returnValue(of(TestDataDigiByteWallets));
     digiByteWalletServiceSpy.delete.and.returnValue(of(mutationResult));
-    
+
     TestBed.configureTestingModule({
       declarations: [ControlPanelConfigurationDigiByteWalletListComponent],
       imports: [BrowserAnimationsModule, MatFormFieldModule, MatIconModule, MatInputModule, MatPaginatorModule, MatTableModule, RouterTestingModule],

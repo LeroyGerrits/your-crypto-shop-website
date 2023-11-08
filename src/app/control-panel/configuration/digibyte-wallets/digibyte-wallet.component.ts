@@ -90,7 +90,7 @@ export class ControlPanelConfigurationDigiByteWalletComponent implements OnInit,
   }
 
   handleOnSubmitResult(result: MutationResult) {
-    if (result.ErrorCode == 0) {
+    if (result.Success) {
       this.router.navigate(['/control-panel/configuration/digibyte-wallets']);
     } else {
       if (result.Constraint == 'UNIQUE_DigiByteWallet_Name') {

@@ -90,7 +90,7 @@ export class ControlPanelConfigurationDeliveryMethodListComponent implements OnI
   }
 
   handleOnSubmitResult(result: MutationResult) {
-    if (result.ErrorCode == 0) {
+    if (result.Success) {
       this.router.navigate(['/control-panel/configuration/delivery-methods']);
     } else {
       this.snackBarRef = this.snackBar.open(result.Message, 'Close', { panelClass: ['error-snackbar'] });

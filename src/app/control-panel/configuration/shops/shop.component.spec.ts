@@ -26,7 +26,7 @@ describe('ControlPanelConfigurationShopComponent', () => {
 
   let shopServiceSpy: jasmine.SpyObj<ShopService>;
   let matSnackBarSpy: jasmine.SpyObj<MatSnackBar>;
-  let mutationResult: MutationResult = { ErrorCode: 0, Identity: '', Message: '' };
+  let mutationResult: MutationResult = <MutationResult>{ ErrorCode: 0, Identity: '', Message: '' };
 
   beforeEach(() => {
     shopServiceSpy = jasmine.createSpyObj('ShopService', ['getById', 'create', 'update']);
@@ -92,12 +92,7 @@ describe('ControlPanelConfigurationShopComponent', () => {
     const routerstub: Router = TestBed.inject(Router);
     spyOn(routerstub, 'navigate');
 
-    const mutationResult = {
-      Constraint: '',
-      ErrorCode: 0,
-      Identity: '',
-      Message: ''
-    };
+    const mutationResult = <MutationResult>{ Constraint: '', ErrorCode: 0, Identity: '', Message: '' };
     component.handleOnSubmitResult(mutationResult);
     expect(routerstub.navigate).toHaveBeenCalledWith(['/control-panel/configuration/shops']);
   });
@@ -108,23 +103,13 @@ describe('ControlPanelConfigurationShopComponent', () => {
   });
 
   it('should show an error when handling submit result and an error code is applicable', () => {
-    const mutationResult = {
-      Constraint: '',
-      ErrorCode: 666,
-      Identity: '',
-      Message: 'Evil error'
-    };
+    const mutationResult = <MutationResult>{ Constraint: '', ErrorCode: 666, Identity: '', Message: 'Evil error' };
     component.handleOnSubmitResult(mutationResult);
     expect(matSnackBarSpy.open).toHaveBeenCalled();
   });
 
   it('should show a specific error when handling submit result and an error code with constraint \'UNIQUE_Shop_SubDomain\' is applicable', () => {
-    const mutationResult = {
-      Constraint: 'UNIQUE_Shop_SubDomain',
-      ErrorCode: 666,
-      Identity: '',
-      Message: 'Evil error'
-    };
+    const mutationResult = <MutationResult>{ Constraint: 'UNIQUE_Shop_SubDomain', ErrorCode: 666, Identity: '', Message: 'Evil error' };
     component.handleOnSubmitResult(mutationResult);
     expect(matSnackBarSpy.open).toHaveBeenCalled();
   });

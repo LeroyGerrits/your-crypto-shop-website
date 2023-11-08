@@ -30,7 +30,7 @@ describe('ControlPanelCatalogCategoryComponent', () => {
 
   let matDialogRefSpy: any;
   let categoryServiceSpy: jasmine.SpyObj<CategoryService>;
-  let mutationResult: MutationResult = { ErrorCode: 0, Identity: '', Message: '' };
+  let mutationResult: MutationResult = <MutationResult>{ ErrorCode: 0, Identity: '', Message: '' };
 
   let mockDialogData: DialogData = {
     selectedShop: TestDataShops[0],
@@ -112,12 +112,7 @@ describe('ControlPanelCatalogCategoryComponent', () => {
 
   it('should close the dialog when handling submit result and no errors are applicable', () => {
     spyOn(matDialogRefSpy, 'close');
-    const mutationResult = {
-      Constraint: '',
-      ErrorCode: 0,
-      Identity: '',
-      Message: ''
-    };
+    const mutationResult = <MutationResult>{ Constraint: '', ErrorCode: 0, Identity: '', Message: '' };
     component.handleOnSubmitResult(mutationResult);
     expect(matDialogRefSpy.close).toHaveBeenCalled();
   });
@@ -129,13 +124,8 @@ describe('ControlPanelCatalogCategoryComponent', () => {
   });
 
   it('should show an error when handling submit result and an error code is applicable', () => {
-    const error ='Evil error'
-    const mutationResult = {
-      Constraint: '',
-      ErrorCode: 666,
-      Identity: '',
-      Message: error
-    };
+    const error = 'Evil error'
+    const mutationResult = <MutationResult>{ Constraint: '', ErrorCode: 666, Identity: '', Message: error };
     component.handleOnSubmitResult(mutationResult);
     expect(component.formError).toBe(error);
   });
@@ -147,7 +137,6 @@ describe('ControlPanelCatalogCategoryComponentWithErrors', () => {
 
   let matDialogRefSpy: any;
   let categoryServiceSpy: jasmine.SpyObj<CategoryService>;
-  let mutationResult: MutationResult = { ErrorCode: 0, Identity: '', Message: '' };
 
   let mockDialogData: DialogData = {
     selectedShop: TestDataShops[0],

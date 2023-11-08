@@ -36,7 +36,7 @@ export class ControlPanelCatalogCategoryComponent implements OnInit {
         private categoryService: CategoryService,
         private dialogRefComponent: MatDialogRef<any>,
         @Inject(MAT_DIALOG_DATA) public data: DialogData
-    ) { 
+    ) {
         this.form = new FormGroup([
             this.controlName,
             this.controlVisible
@@ -90,7 +90,7 @@ export class ControlPanelCatalogCategoryComponent implements OnInit {
     }
 
     handleOnSubmitResult(result: MutationResult) {
-        if (result.ErrorCode == 0) {
+        if (result.Success) {
             this.dialogRefComponent.close();
         } else {
             this.formError = result.Message;

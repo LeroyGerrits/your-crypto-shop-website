@@ -3,4 +3,6 @@ export class MutationResult {
     Identity!: string;
     Message!: string;
     Constraint?: string;
+
+    readonly Success: boolean = this.ErrorCode == 0;
 }

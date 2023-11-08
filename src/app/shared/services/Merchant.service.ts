@@ -28,7 +28,7 @@ export class MerchantService {
             CurrentPassword: currentPassword,
             NewPassword: newPassword
         };
-        return this.http.put<MutationResult>(Environment.API_URL + '/change-password', changePasswordRequest);
+        return this.http.put<MutationResult>(`${this.apiUrl}/change-password`, changePasswordRequest);
     }
 
     create(merchant: Merchant): Observable<MutationResult> {

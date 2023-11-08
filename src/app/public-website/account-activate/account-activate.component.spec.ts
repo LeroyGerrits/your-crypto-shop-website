@@ -21,7 +21,7 @@ describe('PublicWebsiteAccountActivateComponent', () => {
   let matSnackBarSpy: jasmine.SpyObj<MatSnackBar>;
 
   let merchantServiceSpy: jasmine.SpyObj<MerchantService>;
-  let mutationResult: MutationResult = { ErrorCode: 0, Identity: '', Message: '' };
+  let mutationResult: MutationResult = <MutationResult>{ ErrorCode: 0, Identity: '', Message: '' };
 
   beforeEach(() => {
     matSnackBarSpy = jasmine.createSpyObj('MatSnackBar', ['open']);
@@ -92,12 +92,7 @@ describe('PublicWebsiteAccountActivateComponent', () => {
     const routerstub: Router = TestBed.inject(Router);
     spyOn(routerstub, 'navigate');
 
-    const mutationResult = {
-      Constraint: '',
-      ErrorCode: 0,
-      Identity: '',
-      Message: ''
-    };
+    const mutationResult = <MutationResult>{ Constraint: '', ErrorCode: 0, Identity: '', Message: '' };
     component.handleOnSubmitResult(mutationResult);
     expect(routerstub.navigate).toHaveBeenCalledWith(['/message/account-activated']);
   });
@@ -108,12 +103,7 @@ describe('PublicWebsiteAccountActivateComponent', () => {
   });
 
   it('should show an error when handling submit result and an error code is applicable', () => {
-    const mutationResult = {
-      Constraint: '',
-      ErrorCode: 666,
-      Identity: '',
-      Message: 'Evil error'
-    };
+    const mutationResult = <MutationResult>{ Constraint: '', ErrorCode: 666, Identity: '', Message: 'Evil error' };
     component.handleOnSubmitResult(mutationResult);
     expect(matSnackBarSpy.open).toHaveBeenCalled();
   });

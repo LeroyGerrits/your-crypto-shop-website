@@ -21,7 +21,7 @@ describe('DialogSignUpComponent', () => {
   let matDialogRefSpy: any;
   let matDialogSpy: jasmine.SpyObj<MatDialog>
   let merchantServiceSpy: jasmine.SpyObj<MerchantService>;
-  let mutationResult: MutationResult = { ErrorCode: 0, Identity: '', Message: '' };
+  let mutationResult: MutationResult = <MutationResult>{ ErrorCode: 0, Identity: '', Message: '' };
 
   beforeEach(() => {
     matDialogRefSpy = jasmine.createSpyObj('MatDialogRef', ['close']);
@@ -76,11 +76,7 @@ describe('DialogSignUpComponent', () => {
   });
 
   it('should show an error when handling submit result and an error code is applicable', () => {
-    const mutationResult = {
-      ErrorCode: 666,
-      Identity: '',
-      Message: 'Evil error'
-    };
+    const mutationResult = <MutationResult>{ ErrorCode: 666, Identity: '', Message: 'Evil error' };
     component.handleOnSubmitResult(mutationResult);
     expect(component.formError).toBe(mutationResult.Message);
   });
@@ -134,12 +130,12 @@ describe('DialogSignUpComponentWithErrors', () => {
   });
 
   it('should show a specific error when handling submit result and an error code with constraint \'UNIQUE_Merchant_EmailAddress\' is applicable', () => {
-    const mutationResult = { Constraint: 'UNIQUE_Merchant_EmailAddress', ErrorCode: 666, Identity: '', Message: 'Evil error' };
+    const mutationResult = { Constraint: 'UNIQUE_Merchant_EmailAddress', ErrorCode: 666, Identity: '', Message: 'Evil error', Success: false };
     component.handleOnSubmitResult(mutationResult);
     expect(component).toBeTruthy();
   });
   it('should show a specific error when handling submit result and an error code with constraint \'UNIQUE_Merchant_Username\' is applicable', () => {
-    const mutationResult = { Constraint: 'UNIQUE_Merchant_Username', ErrorCode: 666, Identity: '', Message: 'Evil error' };
+    const mutationResult = { Constraint: 'UNIQUE_Merchant_Username', ErrorCode: 666, Identity: '', Message: 'Evil error', Success: false };
     component.handleOnSubmitResult(mutationResult);
     expect(component).toBeTruthy();
   });

@@ -22,7 +22,7 @@ describe('ControlPanelConfigurationDigiByteWalletComponent', () => {
 
   let digiByteWalletServiceSpy: jasmine.SpyObj<DigiByteWalletService>;
   let matSnackBarSpy: jasmine.SpyObj<MatSnackBar>;
-  let mutationResult: MutationResult = { ErrorCode: 0, Identity: '', Message: '' };
+  let mutationResult: MutationResult = <MutationResult>{ ErrorCode: 0, Identity: '', Message: '' };
 
   beforeEach(() => {
     digiByteWalletServiceSpy = jasmine.createSpyObj('DigiByteWalletService', ['getById', 'create', 'update']);
@@ -34,7 +34,7 @@ describe('ControlPanelConfigurationDigiByteWalletComponent', () => {
     TestBed.configureTestingModule({
       declarations: [ControlPanelConfigurationDigiByteWalletComponent],
       imports: [BrowserAnimationsModule, MatDialogModule, MatFormFieldModule, MatInputModule, ReactiveFormsModule, RouterLink, RouterTestingModule.withRoutes(
-        [{path: 'control-panel/configuration/digibyte-wallets', component: ControlPanelConfigurationDigiByteWalletListComponent}]
+        [{ path: 'control-panel/configuration/digibyte-wallets', component: ControlPanelConfigurationDigiByteWalletListComponent }]
       )],
       providers: [
         { provide: ActivatedRoute, useValue: { snapshot: { paramMap: convertToParamMap({ digiByteWalletId: TestDataDigiByteWallets[0].Id }) } } },
@@ -85,12 +85,7 @@ describe('ControlPanelConfigurationDigiByteWalletComponent', () => {
     const routerstub: Router = TestBed.inject(Router);
     spyOn(routerstub, 'navigate');
 
-    const mutationResult = {
-      Constraint: '',
-      ErrorCode: 0,
-      Identity: '',
-      Message: ''
-    };
+    const mutationResult = <MutationResult>{ Constraint: '', ErrorCode: 0, Identity: '', Message: '' };
     component.handleOnSubmitResult(mutationResult);
     expect(routerstub.navigate).toHaveBeenCalledWith(['/control-panel/configuration/digibyte-wallets']);
   });
@@ -101,39 +96,23 @@ describe('ControlPanelConfigurationDigiByteWalletComponent', () => {
   });
 
   it('should show an error when handling submit result and an error code is applicable', () => {
-    const mutationResult = {
-      Constraint: '',
-      ErrorCode: 666,
-      Identity: '',
-      Message: 'Evil error'
-    };
+    const mutationResult = <MutationResult>{ Constraint: '', ErrorCode: 666, Identity: '', Message: 'Evil error' };
     component.handleOnSubmitResult(mutationResult);
     expect(matSnackBarSpy.open).toHaveBeenCalled();
   });
 
   it('should show a specific error when handling submit result and an error code with constraint \'UNIQUE_DigiByteWallet_Name\' is applicable', () => {
-    const mutationResult = {
-      Constraint: 'UNIQUE_DigiByteWallet_Name',
-      ErrorCode: 666,
-      Identity: '',
-      Message: 'Evil error'
-    };
+    const mutationResult = <MutationResult>{ Constraint: 'UNIQUE_DigiByteWallet_Name', ErrorCode: 666, Identity: '', Message: 'Evil error' };
     component.handleOnSubmitResult(mutationResult);
     expect(matSnackBarSpy.open).toHaveBeenCalled();
   });
 
   it('should show a specific error when handling submit result and an error code with constraint \'UNIQUE_DigiByteWallet_Address\' is applicable', () => {
-    const mutationResult = {
-      Constraint: 'UNIQUE_DigiByteWallet_Address',
-      ErrorCode: 666,
-      Identity: '',
-      Message: 'Evil error'
-    };
+    const mutationResult = <MutationResult>{ Constraint: 'UNIQUE_DigiByteWallet_Address', ErrorCode: 666, Identity: '', Message: 'Evil error' };
     component.handleOnSubmitResult(mutationResult);
     expect(matSnackBarSpy.open).toHaveBeenCalled();
   });
 });
-
 
 describe('ControlPanelConfigurationDigiByteWalletComponentWithErrors', () => {
   let component: ControlPanelConfigurationDigiByteWalletComponent;
@@ -141,7 +120,7 @@ describe('ControlPanelConfigurationDigiByteWalletComponentWithErrors', () => {
 
   let digiByteWalletServiceSpy: jasmine.SpyObj<DigiByteWalletService>;
   let matSnackBarSpy: jasmine.SpyObj<MatSnackBar>;
-  
+
   beforeEach(() => {
     digiByteWalletServiceSpy = jasmine.createSpyObj('DigiByteWalletService', ['getById', 'create', 'update']);
     digiByteWalletServiceSpy.getById.and.returnValue(of(TestDataDigiByteWallets[0]));
@@ -152,7 +131,7 @@ describe('ControlPanelConfigurationDigiByteWalletComponentWithErrors', () => {
     TestBed.configureTestingModule({
       declarations: [ControlPanelConfigurationDigiByteWalletComponent],
       imports: [BrowserAnimationsModule, MatDialogModule, MatFormFieldModule, MatInputModule, ReactiveFormsModule, RouterLink, RouterTestingModule.withRoutes(
-        [{path: 'control-panel/configuration/digibyte-wallets', component: ControlPanelConfigurationDigiByteWalletListComponent}]
+        [{ path: 'control-panel/configuration/digibyte-wallets', component: ControlPanelConfigurationDigiByteWalletListComponent }]
       )],
       providers: [
         { provide: ActivatedRoute, useValue: { snapshot: { paramMap: convertToParamMap({ digiByteWalletId: TestDataDigiByteWallets[0].Id }) } } },

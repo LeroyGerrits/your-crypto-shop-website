@@ -28,7 +28,7 @@ describe('ControlPanelConfigurationShopListComponent', () => {
   let matSnackBarSpy: jasmine.SpyObj<MatSnackBar>;
 
   let shopServiceSpy: jasmine.SpyObj<ShopService>;
-  let mutationResult: MutationResult = { ErrorCode: 0, Identity: '', Message: '' };
+  let mutationResult: MutationResult = <MutationResult>{ ErrorCode: 0, Identity: '', Message: '' };
 
   beforeEach(() => {
     matDialogRefSpy = jasmine.createSpyObj('MatDialogRef', ['close']);
@@ -100,12 +100,7 @@ describe('ControlPanelConfigurationShopListComponent', () => {
   });
 
   it('should show an error when handling submit result and an error code is applicable', () => {
-    const mutationResult = {
-      Constraint: '',
-      ErrorCode: 666,
-      Identity: '',
-      Message: 'Evil error'
-    };
+    const mutationResult = <MutationResult>{ Constraint: '', ErrorCode: 666, Identity: '', Message: 'Evil error' };
     component.handleOnSubmitResult(mutationResult);
     expect(matSnackBarSpy.open).toHaveBeenCalled();
   });
@@ -139,7 +134,7 @@ describe('ControlPanelConfigurationShopListComponentWithErrors', () => {
     shopServiceSpyWithErrors = jasmine.createSpyObj('ShopService', ['getList', 'delete']);
     shopServiceSpyWithErrors.getList.and.returnValue(of(TestDataShops));
     shopServiceSpyWithErrors.delete.and.returnValue(throwError(() => new Error('ERROR')));
-    
+
     TestBed.configureTestingModule({
       declarations: [ControlPanelConfigurationShopListComponent],
       imports: [BrowserAnimationsModule, MatIconModule, MatFormFieldModule, MatInputModule, MatPaginatorModule, MatTableModule, ReactiveFormsModule, RouterLink, RouterLink, RouterTestingModule.withRoutes(

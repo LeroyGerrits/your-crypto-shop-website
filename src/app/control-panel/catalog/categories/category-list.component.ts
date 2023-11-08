@@ -19,7 +19,7 @@ import { ShopService } from 'src/app/shared/services/Shop.service';
   templateUrl: './category-list.component.html',
   styleUrls: ['./category-list.component.scss']
 })
-export class ControlPanelCatalogCategoryListComponent  implements OnInit {
+export class ControlPanelCatalogCategoryListComponent implements OnInit {
   public treeControl = new NestedTreeControl<Category>(category => category.Children);
   public dataSource = new MatTreeNestedDataSource<Category>();
 
@@ -156,7 +156,7 @@ export class ControlPanelCatalogCategoryListComponent  implements OnInit {
   }
 
   handleOnSubmitResult(result: MutationResult) {
-    if (result.ErrorCode == 0) {
+    if (result.Success) {
       this.retrieveCategoriesByShopId(this.controlFilterShop.value)
     } else {
       this.snackBarRef = this.snackBar.open(result.Message, 'Close', { panelClass: ['error-snackbar'] });

@@ -32,7 +32,7 @@ describe('ControlPanelConfigurationDeliveryMethodListComponent', () => {
 
   let deliveryMethodServiceSpy: jasmine.SpyObj<DeliveryMethodService>;
   let shopServiceSpy: jasmine.SpyObj<ShopService>;
-  let mutationResult: MutationResult = { ErrorCode: 0, Identity: '', Message: '' };
+  let mutationResult: MutationResult = <MutationResult>{ ErrorCode: 0, Identity: '', Message: '' };
 
   beforeEach(() => {
     matDialogRefSpy = jasmine.createSpyObj('MatDialogRef', ['close']);
@@ -108,7 +108,7 @@ describe('ControlPanelConfigurationDeliveryMethodListComponent', () => {
   });
 
   it('should navigate when handling submit result and no error code is applicable', () => {
-    const mutationResult = { Constraint: '', ErrorCode: 0, Identity: '', Message: '' };
+    const mutationResult = <MutationResult>{ Constraint: '', ErrorCode: 0, Identity: '', Message: '' };
     const routerstub: Router = TestBed.inject(Router);
     spyOn(routerstub, 'navigate');
 
@@ -117,7 +117,7 @@ describe('ControlPanelConfigurationDeliveryMethodListComponent', () => {
   });
 
   it('should show an error when handling submit result and an error code is applicable', () => {
-    const mutationResult = { Constraint: '', ErrorCode: 666, Identity: '', Message: 'Evil error' };
+    const mutationResult = <MutationResult>{ Constraint: '', ErrorCode: 666, Identity: '', Message: 'Evil error' };
     component.handleOnSubmitResult(mutationResult);
     expect(matSnackBarSpy.open).toHaveBeenCalled();
   });

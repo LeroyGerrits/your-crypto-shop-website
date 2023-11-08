@@ -104,7 +104,7 @@ export class ControlPanelConfigurationDeliveryMethodComponent implements OnInit,
   }
 
   handleOnSubmitResult(result: MutationResult) {
-    if (result.ErrorCode == 0) {
+    if (result.Success) {
       this.router.navigate(['/control-panel/configuration/delivery-methods']);
     } else {
       if (result.Constraint == 'UNIQUE_DeliveryMethod_Name') {

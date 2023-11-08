@@ -82,7 +82,7 @@ export class PublicWebsiteAccountActivateComponent implements OnInit {
   }
 
   handleOnSubmitResult(result: MutationResult) {
-    if (result.ErrorCode == 0) {
+    if (result.Success) {
       this.router.navigate(['/message/account-activated']);
     } else {
       this.snackBarRef = this.snackBar.open(result.Message, 'Close', { panelClass: ['error-snackbar'] });
