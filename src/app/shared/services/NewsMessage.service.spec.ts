@@ -19,15 +19,11 @@ describe('NewsMessageService', () => {
         service = TestBed.inject(NewsMessageService);
         httpMock = TestBed.inject(HttpTestingController);
     });
-    
+
     afterEach(() => {
         httpMock.verify();
     });
-    
-    it('should be created', () => {
-        expect(service).toBeTruthy();
-    });
-    
+
     it('should be able to get a list of News messages', () => {
         service.getList().subscribe();
         const request = httpMock.expectOne(Environment.API_URL + '/NewsMessage');
@@ -38,5 +34,5 @@ describe('NewsMessageService', () => {
         service.getById(Constants.EMPTY_GUID).subscribe();
         const request = httpMock.expectOne(Environment.API_URL + '/NewsMessage/' + Constants.EMPTY_GUID);
         expect(request.request.method).toBe('GET');
-    });    
+    });
 });

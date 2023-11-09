@@ -29,10 +29,6 @@ describe('FinancialStatementTransactionService', () => {
         httpMock.verify();
     });
 
-    it('should be created', () => {
-        expect(service).toBeTruthy();
-    });
-
     it('should be able to get a list of financial statement transactions', () => {
         const parameters: GetFinancialStatementTransactionsParameters = {
             DateFrom: new Date(),
@@ -44,7 +40,7 @@ describe('FinancialStatementTransactionService', () => {
         };
 
         service.getList(parameters).subscribe();
-        const request = httpMock.expectOne(`${Environment.API_URL}/FinancialStatementTransaction?dateFrom=${service.datePipe.transform(parameters.DateFrom, 'yyyy-MM-dd')}&dateUntil=${service.datePipe.transform( parameters.DateUntil, 'yyyy-MM-dd')}&type=${parameters.Type}&currencyId=${parameters.CurrencyId}&recurrance=${parameters.Recurrance}&description=${parameters.Description}`);
+        const request = httpMock.expectOne(`${Environment.API_URL}/FinancialStatementTransaction?dateFrom=${service.datePipe.transform(parameters.DateFrom, 'yyyy-MM-dd')}&dateUntil=${service.datePipe.transform(parameters.DateUntil, 'yyyy-MM-dd')}&type=${parameters.Type}&currencyId=${parameters.CurrencyId}&recurrance=${parameters.Recurrance}&description=${parameters.Description}`);
         expect(request.request.method).toBe('GET');
     });
 

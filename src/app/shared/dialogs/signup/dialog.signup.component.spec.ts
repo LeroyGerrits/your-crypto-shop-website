@@ -13,6 +13,7 @@ import { MutationResult } from '../../models/MutationResult';
 import { PublicWebsiteMessageComponent } from 'src/app/public-website/message/message.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RouterTestingModule } from '@angular/router/testing';
+import { Router } from '@angular/router';
 
 describe('DialogSignUpComponent', () => {
   let component: DialogSignUpComponent;
@@ -75,6 +76,15 @@ describe('DialogSignUpComponent', () => {
     expect(merchantServiceSpy.create).toHaveBeenCalled();
   });
 
+  it('should navigate when handling submit result and no error code is applicable', () => {
+    const mutationResult = <MutationResult>{ Constraint: '', ErrorCode: 0, Identity: '', Message: '', Success: true };
+    const routerstub: Router = TestBed.inject(Router);
+    spyOn(routerstub, 'navigate');
+
+    component.handleOnSubmitResult(mutationResult);
+    expect(routerstub.navigate).toHaveBeenCalledWith(['/message/account-registered']);
+  });
+
   it('should show an error when handling submit result and an error code is applicable', () => {
     const mutationResult = <MutationResult>{ ErrorCode: 666, Identity: '', Message: 'Evil error' };
     component.handleOnSubmitResult(mutationResult);
@@ -134,6 +144,7 @@ describe('DialogSignUpComponentWithErrors', () => {
     component.handleOnSubmitResult(mutationResult);
     expect(component).toBeTruthy();
   });
+
   it('should show a specific error when handling submit result and an error code with constraint \'UNIQUE_Merchant_Username\' is applicable', () => {
     const mutationResult = { Constraint: 'UNIQUE_Merchant_Username', ErrorCode: 666, Identity: '', Message: 'Evil error', Success: false };
     component.handleOnSubmitResult(mutationResult);

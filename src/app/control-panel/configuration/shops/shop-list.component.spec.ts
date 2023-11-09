@@ -64,10 +64,6 @@ describe('ControlPanelConfigurationShopListComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
-
   it('should edit the sortState when a sort direction is supplied', () => {
     const routerstub: Router = TestBed.inject(Router);
     spyOn(routerstub, 'navigate');
@@ -97,6 +93,15 @@ describe('ControlPanelConfigurationShopListComponent', () => {
   it('should show a dialog when delete icon is clicked', () => {
     component.deleteElement(TestDataShops[0]);
     expect(matDialogSpy.open).toHaveBeenCalled();
+  });
+
+  it('should navigate when handling submit result and no error code is applicable', () => {
+    const mutationResult = <MutationResult>{ Constraint: '', ErrorCode: 0, Identity: '', Message: '', Success: true };
+    const routerstub: Router = TestBed.inject(Router);
+    spyOn(routerstub, 'navigate');
+
+    component.handleOnSubmitResult(mutationResult);
+    expect(routerstub.navigate).toHaveBeenCalledWith(['/control-panel/configuration/shops']);
   });
 
   it('should show an error when handling submit result and an error code is applicable', () => {

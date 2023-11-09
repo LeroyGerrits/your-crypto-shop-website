@@ -17,10 +17,6 @@ describe('DialogDeleteComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
-
   it('should create with a custom dialogMessage', () => {
     component.dialogMessage = 'Custom message';
     expect(component).toBeTruthy();

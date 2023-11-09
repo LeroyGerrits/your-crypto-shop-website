@@ -19,15 +19,11 @@ describe('CurrencyService', () => {
         service = TestBed.inject(CurrencyService);
         httpMock = TestBed.inject(HttpTestingController);
     });
-    
+
     afterEach(() => {
         httpMock.verify();
     });
-    
-    it('should be created', () => {
-        expect(service).toBeTruthy();
-    });
-    
+
     it('should be able to get a list of currencies', () => {
         service.getList().subscribe();
         const request = httpMock.expectOne(Environment.API_URL + '/Currency');
@@ -38,5 +34,5 @@ describe('CurrencyService', () => {
         service.getById(Constants.EMPTY_GUID).subscribe();
         const request = httpMock.expectOne(Environment.API_URL + '/Currency/' + Constants.EMPTY_GUID);
         expect(request.request.method).toBe('GET');
-    });    
+    });
 });

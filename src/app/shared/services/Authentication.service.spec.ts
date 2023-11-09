@@ -18,13 +18,9 @@ describe('AuthenticationService', () => {
         service = TestBed.inject(AuthenticationService);
         httpMock = TestBed.inject(HttpTestingController);
     });
-    
+
     afterEach(() => {
         httpMock.verify();
-    });
-    
-    it('should be created', () => {
-        expect(service).toBeTruthy();
     });
 
     it('should be able to log in', () => {

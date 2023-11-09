@@ -19,15 +19,11 @@ describe('FaqService', () => {
         service = TestBed.inject(FaqService);
         httpMock = TestBed.inject(HttpTestingController);
     });
-    
+
     afterEach(() => {
         httpMock.verify();
     });
-    
-    it('should be created', () => {
-        expect(service).toBeTruthy();
-    });
-    
+
     it('should be able to get a list of FAQs', () => {
         service.getList().subscribe();
         const request = httpMock.expectOne(Environment.API_URL + '/Faq');
@@ -38,5 +34,5 @@ describe('FaqService', () => {
         service.getById(Constants.EMPTY_GUID).subscribe();
         const request = httpMock.expectOne(Environment.API_URL + '/Faq/' + Constants.EMPTY_GUID);
         expect(request.request.method).toBe('GET');
-    });    
+    });
 });

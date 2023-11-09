@@ -21,15 +21,11 @@ describe('CategoryService', () => {
         service = TestBed.inject(CategoryService);
         httpMock = TestBed.inject(HttpTestingController);
     });
-    
+
     afterEach(() => {
         httpMock.verify();
     });
-    
-    it('should be created', () => {
-        expect(service).toBeTruthy();
-    });
-    
+
     it('should be able to get a list of categories', () => {
         const parameters: GetCategoriesParameters = {
             ShopId: TestDataCategories[0].ShopId,
@@ -47,7 +43,7 @@ describe('CategoryService', () => {
         const request = httpMock.expectOne(`${Environment.API_URL}/Category/${Constants.EMPTY_GUID}`);
         expect(request.request.method).toBe('GET');
     });
-    
+
     it('should be able to create a category', () => {
         service.create(TestDataCategories[0]).subscribe();
         const request = httpMock.expectOne(`${Environment.API_URL}/Category`);

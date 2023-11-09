@@ -20,15 +20,11 @@ describe('DigiByteWalletService', () => {
         service = TestBed.inject(DigiByteWalletService);
         httpMock = TestBed.inject(HttpTestingController);
     });
-    
+
     afterEach(() => {
         httpMock.verify();
     });
-    
-    it('should be created', () => {
-        expect(service).toBeTruthy();
-    });
-    
+
     it('should be able to get a list of digibyte wallets', () => {
         service.getList().subscribe();
         const request = httpMock.expectOne(Environment.API_URL + '/DigiByteWallet');
@@ -40,7 +36,7 @@ describe('DigiByteWalletService', () => {
         const request = httpMock.expectOne(Environment.API_URL + '/DigiByteWallet/' + Constants.EMPTY_GUID);
         expect(request.request.method).toBe('GET');
     });
-    
+
     it('should be able to create a digibyte wallet', () => {
         service.create(TestDataDigiByteWallets[0]).subscribe();
         const request = httpMock.expectOne(Environment.API_URL + '/DigiByteWallet');

@@ -17,10 +17,6 @@ describe('MerchantLinkComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
-
   it('should display 3 full, 1 half and 1 empty star when a merchant\'s score is 3.5', () => {
     component.merchantScore = 3.5;
     component.ngOnInit();

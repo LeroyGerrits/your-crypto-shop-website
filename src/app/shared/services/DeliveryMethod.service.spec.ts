@@ -20,15 +20,11 @@ describe('DeliveryMethodService', () => {
         service = TestBed.inject(DeliveryMethodService);
         httpMock = TestBed.inject(HttpTestingController);
     });
-    
+
     afterEach(() => {
         httpMock.verify();
     });
-    
-    it('should be created', () => {
-        expect(service).toBeTruthy();
-    });
-    
+
     it('should be able to get a list of delivery methods', () => {
         service.getList().subscribe();
         const request = httpMock.expectOne(Environment.API_URL + '/DeliveryMethod');
@@ -40,7 +36,7 @@ describe('DeliveryMethodService', () => {
         const request = httpMock.expectOne(Environment.API_URL + '/DeliveryMethod/' + Constants.EMPTY_GUID);
         expect(request.request.method).toBe('GET');
     });
-    
+
     it('should be able to create a delivery method', () => {
         service.create(TestDataDeliveryMethods[0]).subscribe();
         const request = httpMock.expectOne(Environment.API_URL + '/DeliveryMethod');

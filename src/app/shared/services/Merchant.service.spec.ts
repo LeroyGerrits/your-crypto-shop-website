@@ -25,10 +25,6 @@ describe('MerchantService', () => {
         httpMock.verify();
     });
 
-    it('should be created', () => {
-        expect(service).toBeTruthy();
-    });
-
     it('should be able to get a public merchant by ID', () => {
         service.getByIdPublic(Constants.EMPTY_GUID).subscribe();
         const request = httpMock.expectOne(`${Environment.API_URL}/Merchant/public/${Constants.EMPTY_GUID}`);
@@ -56,6 +52,12 @@ describe('MerchantService', () => {
     it('should be able to activate a merchant\'s account', () => {
         service.activateAccount(TestDataMerchants[0].Id!, 'PASSWORD', 'NEWPASSWORD').subscribe();
         const request = httpMock.expectOne(`${Environment.API_URL}/Merchant/activate-account`);
+        expect(request.request.method).toBe('PUT');
+    });
+
+    it('should be able to change a merchant\'s password', () => {
+        service.changePassword('PASSWORD', 'NEWPASSWORD').subscribe();
+        const request = httpMock.expectOne(`${Environment.API_URL}/Merchant/change-password`);
         expect(request.request.method).toBe('PUT');
     });
 });

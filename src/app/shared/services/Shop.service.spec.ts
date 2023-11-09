@@ -21,13 +21,9 @@ describe('ShopService', () => {
         service = TestBed.inject(ShopService);
         httpMock = TestBed.inject(HttpTestingController);
     });
-    
+
     afterEach(() => {
         httpMock.verify();
-    });
-    
-    it('should be created', () => {
-        expect(service).toBeTruthy();
     });
 
     it('should be able to get a list of shops', () => {
@@ -57,7 +53,7 @@ describe('ShopService', () => {
         const request = httpMock.expectOne(`${Environment.API_URL}/Shop/public/featured`);
         expect(request.request.method).toBe('GET');
     });
-    
+
     it('should be able to get a list of shops', () => {
         service.getList().subscribe();
         const request = httpMock.expectOne(Environment.API_URL + '/Shop');
@@ -69,7 +65,7 @@ describe('ShopService', () => {
         const request = httpMock.expectOne(Environment.API_URL + '/Shop/' + Constants.EMPTY_GUID);
         expect(request.request.method).toBe('GET');
     });
-    
+
     it('should be able to create a shop', () => {
         service.create(TestDataShops[0]).subscribe();
         const request = httpMock.expectOne(Environment.API_URL + '/Shop');
