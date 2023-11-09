@@ -47,7 +47,7 @@ export class PublicWebsiteAccountActivateComponent implements OnInit {
     if (this.queryStringMerchantId && this.queryStringMerchantPassword) {
       this.merchantService.getByIdAndPassword(this.queryStringMerchantId, this.queryStringMerchantPassword).subscribe({
         next: result => this.onRetrieveData(result),
-        error: _ => this.router.navigate(['/message/account-already-activated'])
+        error: error => this.router.navigate(['/message/account-already-activated'])
       });
     }
   }

@@ -97,6 +97,16 @@ describe('PublicWebsiteAccountActivateComponent', () => {
     expect(routerstub.navigate).toHaveBeenCalledWith(['/message/account-activated']);
   });
 
+  it('should redirect when retrieving merchant data when merchant is already activated', () => {
+    const routerstub: Router = TestBed.inject(Router);
+    spyOn(routerstub, 'navigate');
+
+    const activatedMerchant = Object.assign({}, TestDataMerchants[0]);
+    activatedMerchant.Activated = new Date();
+    component.onRetrieveData(activatedMerchant)
+    expect(routerstub.navigate).toHaveBeenCalledWith(['/message/account-already-activated']);
+  });
+
   it('should show a message when an unhandled error occurs', () => {
     component.handleOnSubmitError('Unhandled error');
     expect(matSnackBarSpy.open).toHaveBeenCalled();
@@ -121,7 +131,7 @@ describe('PublicWebsiteAccountActivateComponentWithErrors', () => {
     matSnackBarSpy = jasmine.createSpyObj('MatSnackBar', ['open']);
 
     merchantServiceSpy = jasmine.createSpyObj('MerchantService', ['getByIdAndPassword', 'activateAccount']);
-    merchantServiceSpy.getByIdAndPassword.and.returnValue(of(TestDataMerchants[0]));
+    merchantServiceSpy.getByIdAndPassword.and.returnValue(throwError(() => new Error('ERROR')));
     merchantServiceSpy.activateAccount.and.returnValue(throwError(() => new Error('ERROR')));
 
     TestBed.configureTestingModule({
@@ -140,7 +150,7 @@ describe('PublicWebsiteAccountActivateComponentWithErrors', () => {
     fixture.detectChanges();
   });
 
-  it('should trigger error handling when sending a call to the merchant service to acticate the account and the request fails', () => {
+  it('should trigger error handling when sending a call to the merchant service to activate the account and the request fails', () => {
     component.controlPassword.setValue('PASSWORD');
     component.controlPasswordRepetition.setValue('PASSWORD');
     component.onSubmit();
