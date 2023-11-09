@@ -51,6 +51,15 @@
 
         <tr mat-header-row *matHeaderRowDef="this.displayedColumns"></tr>
         <tr mat-row *matRowDef="let row; columns: this.displayedColumns;"></tr>
+        <tr class="mat-row" *matNoDataRow>
+            <td class="mat-cell NoDataCell" [colSpan]="this.displayedColumns.length">
+                <span
+                    *ngIf="this.controlFilterName.value || this.controlFilterShop.value">{{constants.MESSAGE_NO_RECORDS_FOUND}}</span>
+                <span *ngIf="!this.controlFilterName.value && !this.controlFilterShop.value">You have not yet created a
+                    delivery method.
+                </span>
+            </td>
+        </tr>
     </table>
 
     <mat-paginator [pageSizeOptions]="[25, 50, 100]" showFirstLastButtons />

@@ -6,6 +6,7 @@ import { MatSnackBar, MatSnackBarRef, TextOnlySnackBar } from '@angular/material
 import { MatSort, Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
+import { Constants } from 'src/app/shared/Constants';
 import { DialogDeleteComponent } from 'src/app/shared/dialogs/delete/dialog.delete.component';
 import { Environment } from 'src/app/shared/environments/Environment';
 import { DeliveryMethod } from 'src/app/shared/models/DeliveryMethod.model';
@@ -26,6 +27,7 @@ export class ControlPanelConfigurationDeliveryMethodListComponent implements OnI
   public snackBarRef: MatSnackBarRef<TextOnlySnackBar> | undefined;
 
   environment = Environment;
+  constants = Constants;
   dataSource = new MatTableDataSource<DeliveryMethod>;
   displayedColumns: string[] = ['Name', 'Shop', 'ActionButtons'];
   sortDirection: string | null = 'asc';

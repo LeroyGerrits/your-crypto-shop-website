@@ -556,6 +556,11 @@ div.WrapperPadding8 {
   padding: 8px;
 }
 
+td.NoDataCell {
+  line-height: 50px;
+  text-align: center;
+}
+
 .CanvasImageStretch canvas {
   height: auto !important;
   width: 100% !important;
