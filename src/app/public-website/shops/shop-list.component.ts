@@ -36,19 +36,19 @@ export class PublicWebsiteShopListComponent implements OnInit {
       this.controlFilterSubDomain
     ]);
 
-    this.controlFilterName.valueChanges.pipe(debounceTime(1000), distinctUntilChanged()).subscribe(_ => this.filterShops());
-    this.controlFilterSubDomain.valueChanges.pipe(debounceTime(1000), distinctUntilChanged()).subscribe(_ => this.filterShops());
+    this.controlFilterName.valueChanges.pipe(debounceTime(1000), distinctUntilChanged()).subscribe(() => this.filterShops());
+    this.controlFilterSubDomain.valueChanges.pipe(debounceTime(1000), distinctUntilChanged()).subscribe(() => this.filterShops());
   }
 
   ngOnInit() {
     this.filterShops();
   }
 
-  filterShops(){
+  filterShops() {
     const parameters: GetShopsParameters = {
       Name: this.controlFilterName.value!,
       SubDomain: this.controlFilterSubDomain.value!
-  };
+    };
 
     this.shopService.getListPublic(parameters).subscribe(shops => {
       this.dataSource = new MatTableDataSource(shops);

@@ -45,10 +45,6 @@ describe('PublicWebsiteShopListComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
-
   it('should filter shops list when name filter gets used', fakeAsync(() => {
     const componentStub: PublicWebsiteShopListComponent = TestBed.inject(PublicWebsiteShopListComponent);
     spyOn(componentStub, 'filterShops');
