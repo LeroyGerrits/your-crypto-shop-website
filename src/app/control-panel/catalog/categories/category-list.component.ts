@@ -51,7 +51,7 @@ export class ControlPanelCatalogCategoryListComponent implements OnInit {
     this.shopService.getList().subscribe(shops => {
       this.shops = shops;
 
-      if (shops) {
+      if (shops && shops[0]) {
         this.retrieveCategoriesByShopId(shops[0].Id);
         this.controlFilterShop.setValue(shops[0].Id);
       }
