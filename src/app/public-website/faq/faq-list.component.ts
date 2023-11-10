@@ -15,8 +15,6 @@ export class PublicWebsiteFaqListComponent implements OnInit, OnDestroy {
   controlFilter = new FormControl('');
   subscriptionFilter: Subscription | undefined;
 
-  filterTimeout: void | undefined;
-
   faqCategories: FaqCategory[] | undefined;
   faqCategoriesFiltered: FaqCategory[] | undefined;
   faqs: Faq[] | undefined;

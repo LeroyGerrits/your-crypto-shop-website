@@ -19,7 +19,7 @@ export class ShopService {
 
         if (parameters) {
             if (parameters.Name) httpParams = httpParams.append('name', parameters.Name);
-            if (parameters.SubDomain) httpParams = httpParams.append('subdomain', parameters.SubDomain);            
+            if (parameters.SubDomain) httpParams = httpParams.append('subdomain', parameters.SubDomain);
         }
 
         return this.http.get<Shop[]>(this.apiUrl, { params: httpParams });
@@ -30,7 +30,7 @@ export class ShopService {
 
         if (parameters) {
             if (parameters.Name) httpParams = httpParams.append('name', parameters.Name);
-            if (parameters.SubDomain) httpParams = httpParams.append('subdomain', parameters.SubDomain);            
+            if (parameters.SubDomain) httpParams = httpParams.append('subdomain', parameters.SubDomain);
         }
 
         return this.http.get<PublicShop[]>(this.apiUrl + '/public', { params: httpParams });

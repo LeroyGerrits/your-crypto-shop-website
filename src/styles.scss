@@ -635,6 +635,15 @@ td.NoDataCell {
   vertical-align: middle;
 }
 
+.WarningBlock {
+  background-color: #402020;
+  border: solid 1px var(--error-color);
+  color: var(--error-color);
+  display: block;
+  padding: 10px;
+  text-align: center;
+}
+
 .WordWrapBreakWord {
   word-wrap: break-word;
 }

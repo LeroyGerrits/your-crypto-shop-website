@@ -1,11 +1,15 @@
 <div class="WrapperPadding20-8-0-8">
     <div class="FloatRight">
-        <button mat-raised-button color="primary" (click)="addCategory();">
+        <button mat-raised-button color="primary" (click)="addCategory();" [disabled]="!this.shops?.length">
             <mat-icon>add</mat-icon>
             Create new category
         </button>
     </div>
     <h2>Categories</h2>
+</div>
+<div class="WrapperPadding20-8-0-8" *ngIf="!this.shops?.length">
+    <span class="WarningBlock">You must <a [routerLink]="['/control-panel/configuration/shops/new']">create a shop</a>
+        first before you can manage categories.</span>
 </div>
 <div class="WrapperPadding20-8-0-8">
     <mat-form-field>
