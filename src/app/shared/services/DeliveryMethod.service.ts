@@ -1,6 +1,8 @@
+import { HttpClient, HttpParams } from '@angular/common/http';
+
 import { DeliveryMethod } from 'src/app/shared/models/DeliveryMethod.model';
 import { Environment } from 'src/app/shared/environments/Environment';
-import { HttpClient } from '@angular/common/http';
+import { GetDeliveryMethodsParameters } from '../models/parameters/GetDeliveryMethodsParameters.model';
 import { Injectable } from '@angular/core';
 import { MutationResult } from 'src/app/shared/models/MutationResult';
 import { Observable } from 'rxjs';
@@ -11,7 +13,14 @@ export class DeliveryMethodService {
 
     constructor(protected http: HttpClient) { }
 
-    getList(): Observable<DeliveryMethod[]> {
+    getList(parameters?: GetDeliveryMethodsParameters): Observable<DeliveryMethod[]> {
+        let httpParams = new HttpParams();
+
+        if (parameters) {
+            if (parameters.Name) httpParams = httpParams.append('name', parameters.Name);
+            if (parameters.ShopId) httpParams = httpParams.append('shopId', parameters.ShopId);
+        }
+
         return this.http.get<DeliveryMethod[]>(this.apiUrl);
     }
 

@@ -1,13 +1,17 @@
 <div class="WrapperPadding20-8-0-8">
     <div class="FloatRight">
-        <button mat-raised-button color="primary" [routerLink]="['/control-panel/configuration/delivery-methods/new']">
+        <button mat-raised-button color="primary" [routerLink]="['/control-panel/configuration/delivery-methods/new']"
+            [disabled]="!this.shops?.length">
             <mat-icon>add</mat-icon>
             Create new delivery method
         </button>
     </div>
     <h2>Delivery methods</h2>
 </div>
-
+<div class="WrapperPadding20-8-0-8" *ngIf="!this.shops?.length">
+    <span class="WarningBlock">You must <a [routerLink]="['/control-panel/configuration/shops/new']">create a shop</a>
+        first before you can manage delivery methods.</span>
+</div>
 <div class="ColumnOneFourth">
     <div class="WrapperPadding20-20-0-8">
         <mat-form-field>
@@ -24,7 +28,6 @@
         </mat-form-field>
     </div>
 </div>
-
 <div class="WrapperPadding20-8 ClearLeft">
     <table mat-table matSort [dataSource]="this.dataSource" (matSortChange)="onSortChange($event)">
         <ng-container matColumnDef="Name">

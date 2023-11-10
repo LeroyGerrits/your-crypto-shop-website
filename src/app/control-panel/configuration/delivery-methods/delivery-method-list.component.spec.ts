@@ -1,5 +1,5 @@
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, fakeAsync, tick } from '@angular/core/testing';
 import { HttpClient, HttpHandler } from '@angular/common/http';
 import { of, throwError } from 'rxjs';
 
@@ -62,8 +62,7 @@ describe('ControlPanelConfigurationDeliveryMethodListComponent', () => {
         { provide: ShopService, useValue: shopServiceSpy },
         { provide: DeliveryMethodService, useValue: deliveryMethodServiceSpy },
         { provide: MatSnackBar, useValue: matSnackBarSpy },
-        HttpClient,
-        HttpHandler,
+        ControlPanelConfigurationDeliveryMethodListComponent,
         Router
       ]
     });
@@ -72,9 +71,21 @@ describe('ControlPanelConfigurationDeliveryMethodListComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
+  it('should filter delivery methods list when name filter gets used', fakeAsync(() => {
+    const componentStub: ControlPanelConfigurationDeliveryMethodListComponent = TestBed.inject(ControlPanelConfigurationDeliveryMethodListComponent);
+    spyOn(componentStub, 'filterDeliveryMethods');
+    componentStub.controlFilterName.setValue('test');
+    tick(1000);
+    expect(componentStub.filterDeliveryMethods).toHaveBeenCalled();
+  }));
+
+  it('should filter delivery methods list when shop filter gets used', fakeAsync(() => {
+    const componentStub: ControlPanelConfigurationDeliveryMethodListComponent = TestBed.inject(ControlPanelConfigurationDeliveryMethodListComponent);
+    spyOn(componentStub, 'filterDeliveryMethods');
+    componentStub.controlFilterShop.setValue('test');
+    tick(1000);
+    expect(componentStub.filterDeliveryMethods).toHaveBeenCalled();
+  }));
 
   it('should edit the sortState when a sort direction is supplied', () => {
     const routerstub: Router = TestBed.inject(Router);

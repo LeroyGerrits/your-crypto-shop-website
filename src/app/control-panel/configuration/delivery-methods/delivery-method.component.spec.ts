@@ -57,10 +57,6 @@ describe('ControlPanelConfigurationDeliveryMethodComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
-
   it('should set page title on data retrieval', () => {
     component.onRetrieveData(TestDataDeliveryMethods[0]);
     expect(component.pageTitle).toBe(TestDataDeliveryMethods[0].Name);

@@ -6,12 +6,14 @@ import { MatSnackBar, MatSnackBarRef, TextOnlySnackBar } from '@angular/material
 import { MatSort, Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
+import { debounceTime, distinctUntilChanged } from 'rxjs';
 import { Constants } from 'src/app/shared/Constants';
 import { DialogDeleteComponent } from 'src/app/shared/dialogs/delete/dialog.delete.component';
 import { Environment } from 'src/app/shared/environments/Environment';
 import { DeliveryMethod } from 'src/app/shared/models/DeliveryMethod.model';
 import { MutationResult } from 'src/app/shared/models/MutationResult';
 import { Shop } from 'src/app/shared/models/Shop.model';
+import { GetDeliveryMethodsParameters } from 'src/app/shared/models/parameters/GetDeliveryMethodsParameters.model';
 import { DeliveryMethodService } from 'src/app/shared/services/DeliveryMethod.service';
 import { ShopService } from 'src/app/shared/services/Shop.service';
 
@@ -35,6 +37,7 @@ export class ControlPanelConfigurationDeliveryMethodListComponent implements OnI
   public form!: FormGroup;
   public controlFilterName = new FormControl('');
   public controlFilterShop = new FormControl('');
+
   public shops: Shop[] | undefined;
 
   constructor(
@@ -48,19 +51,31 @@ export class ControlPanelConfigurationDeliveryMethodListComponent implements OnI
       this.controlFilterName,
       this.controlFilterShop
     ]);
+
+    this.controlFilterName.valueChanges.pipe(debounceTime(1000), distinctUntilChanged()).subscribe(() => this.filterDeliveryMethods());
+    this.controlFilterShop.valueChanges.pipe(debounceTime(1000), distinctUntilChanged()).subscribe(() => this.filterDeliveryMethods());
   }
 
   ngOnInit() {
-    this.deliveryMethodService.getList().subscribe(deliveryMethods => {
-      this.dataSource = new MatTableDataSource(deliveryMethods);
-      this.dataSource.paginator = this.paginator;
-      this.dataSource.sort = this.sort;
-    });
     this.shopService.getList().subscribe(shops => this.shops = shops);
+    this.filterDeliveryMethods();
   }
 
   ngOnDestroy(): void {
     this.snackBarRef?.dismiss();
+  }
+
+  filterDeliveryMethods() {
+    const parameters: GetDeliveryMethodsParameters = {
+      Name: this.controlFilterName.value!,
+      ShopId: this.controlFilterShop.value!
+    };
+
+    this.deliveryMethodService.getList(parameters).subscribe(deliveryMethods => {
+      this.dataSource = new MatTableDataSource(deliveryMethods);
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
+    });
   }
 
   onSortChange(sortState: Sort) {
