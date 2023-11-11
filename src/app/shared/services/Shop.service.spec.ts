@@ -83,4 +83,10 @@ describe('ShopService', () => {
         const request = httpMock.expectOne(Environment.API_URL + '/Shop/' + TestDataShops[0].Id);
         expect(request.request.method).toBe('DELETE');
     });
+
+    it('should be able to check if a subdomain is available', () => {
+        service.subdomainAvailable('www', '00000000-0000-0000-0000-000000000000').subscribe();
+        const request = httpMock.expectOne(`${Environment.API_URL}/Shop/public/subdomain-available?subdomain=www&id=00000000-0000-0000-0000-000000000000`);
+        expect(request.request.method).toBe('GET');
+    });
 });
