@@ -1,6 +1,8 @@
+import { Shop } from "./Shop.model";
+
 export class Product {
     Id!: string;
-    ShopId!: string;
+    Shop!: Shop;
     Name!: string;
     Description?: string;
     Stock?: number;

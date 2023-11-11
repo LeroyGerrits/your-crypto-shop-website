@@ -52,20 +52,20 @@ export class ControlPanelCatalogProductListComponent {
       this.controlFilterShop
     ]);
 
-    this.controlFilterName.valueChanges.pipe(debounceTime(1000), distinctUntilChanged()).subscribe(() => this.filterDeliveryMethods());
-    this.controlFilterShop.valueChanges.pipe(debounceTime(1000), distinctUntilChanged()).subscribe(() => this.filterDeliveryMethods());
+    this.controlFilterName.valueChanges.pipe(debounceTime(1000), distinctUntilChanged()).subscribe(() => this.filterProducts());
+    this.controlFilterShop.valueChanges.pipe(debounceTime(1000), distinctUntilChanged()).subscribe(() => this.filterProducts());
   }
 
   ngOnInit() {
     this.shopService.getList().subscribe(shops => this.shops = shops);
-    this.filterDeliveryMethods();
+    this.filterProducts();
   }
 
   ngOnDestroy(): void {
     this.snackBarRef?.dismiss();
   }
 
-  filterDeliveryMethods() {
+  filterProducts() {
     const parameters: GetProductsParameters = {
       Name: this.controlFilterName.value!,
       ShopId: this.controlFilterShop.value!
