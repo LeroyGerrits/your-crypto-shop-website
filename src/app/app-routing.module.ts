@@ -61,7 +61,7 @@ const routes: Routes = [
       { path: 'configuration/delivery-methods', component: ControlPanelConfigurationDeliveryMethodListComponent, title: `${Constants.TITLE_PREFIX} - Delivery methods` },
       { path: 'configuration/delivery-methods/:deliveryMethodId', component: ControlPanelConfigurationDeliveryMethodComponent, title: `${Constants.TITLE_PREFIX} - Delivery methods` },
       { path: 'configuration/digibyte-wallets', component: ControlPanelConfigurationDigiByteWalletListComponent, title: `${Constants.TITLE_PREFIX} - DigiByte wallets` },
-      { path: 'configuration/digibyte-wallets/:digiBytewalletId', component: ControlPanelConfigurationDigiByteWalletComponent, title: `${Constants.TITLE_PREFIX} - DigiByte wallets` },
+      { path: 'configuration/digibyte-wallets/:digiByteWalletId', component: ControlPanelConfigurationDigiByteWalletComponent, title: `${Constants.TITLE_PREFIX} - DigiByte wallets` },
       { path: 'configuration/shops', component: ControlPanelConfigurationShopListComponent, title: `${Constants.TITLE_PREFIX} - Shops` },
       { path: 'configuration/shops/:shopId', component: ControlPanelConfigurationShopComponent, title: `${Constants.TITLE_PREFIX} - Shops` },
       { path: 'customers', component: CustomerListComponent, title: `${Constants.TITLE_PREFIX} - Customers` },
