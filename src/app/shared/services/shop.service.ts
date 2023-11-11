@@ -14,6 +14,15 @@ export class ShopService {
 
     constructor(protected http: HttpClient) { }
 
+
+    create(shop: Shop): Observable<MutationResult> {
+        return this.http.post<MutationResult>(this.apiUrl, shop);
+    }
+
+    delete(id: string): Observable<MutationResult> {
+        return this.http.delete<MutationResult>(`${this.apiUrl}/${id}`);
+    }
+
     getList(parameters?: GetShopsParameters): Observable<Shop[]> {
         let httpParams = new HttpParams();
 
@@ -44,15 +53,15 @@ export class ShopService {
         return this.http.get<Shop>(`${this.apiUrl}/${id}`);
     }
 
-    create(shop: Shop): Observable<MutationResult> {
-        return this.http.post<MutationResult>(this.apiUrl, shop);
+    subdomainAvailable(subDomain: string, id: string): Observable<boolean> {
+        let httpParams = new HttpParams();
+        if (subDomain) httpParams = httpParams.append('subdomain', subDomain);
+        if (id) httpParams = httpParams.append('id', id);
+
+        return this.http.get<boolean>(`${this.apiUrl}/public/subdomain-available`, { params: httpParams });
     }
 
     update(shop: Shop): Observable<MutationResult> {
         return this.http.put<MutationResult>(`${this.apiUrl}/${shop.Id}`, shop)
-    }
-
-    delete(id: string): Observable<MutationResult> {
-        return this.http.delete<MutationResult>(`${this.apiUrl}/${id}`);
     }
 }

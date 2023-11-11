@@ -31,11 +31,10 @@ export class ControlPanelConfigurationShopComponent implements OnInit {
 
   public controlName = new FormControl('', Validators.required);
   public controlSubDomain = new FormControl('', [Validators.minLength(3), Validators.pattern(/^[a-zA-Z0-9]*$/)])
-  subscriptionSubDomain: Subscription | undefined;
 
   public pageTitle = 'Create new shop'
   public shop: Shop = new Shop();
-  public subDomainAvailable = true;
+  public subDomainAvailable = false;
 
   constructor(
     private authenticationService: AuthenticationService,
@@ -50,7 +49,7 @@ export class ControlPanelConfigurationShopComponent implements OnInit {
       this.controlName,
       this.controlSubDomain
     ]);
-    this.subscriptionSubDomain = this.controlSubDomain.valueChanges.pipe(debounceTime(1000), distinctUntilChanged()).subscribe(value => this.checkSubDomainAvailability(value));
+    this.controlSubDomain.valueChanges.pipe(debounceTime(1000), distinctUntilChanged()).subscribe(value => this.checkSubDomainAvailability(value));
   }
 
   ngOnInit() {
@@ -72,16 +71,22 @@ export class ControlPanelConfigurationShopComponent implements OnInit {
 
     if (shop.SubDomain) {
       this.controlSubDomain.setValue(shop.SubDomain);
-      this.checkSubDomainAvailability(shop.SubDomain);
+      this.subDomainAvailable = true;
     }
   }
 
   checkSubDomainAvailability(subdomain: string | null) {
-    if (subdomain && !Constants.RESERVED_SUBDOMAINS.includes(subdomain)) {
-      // TO-DO: API call for availability
-      this.subDomainAvailable = true;
+    this.formLoading = true;
+
+    if (subdomain && subdomain.trim().length >= 3 && !Constants.RESERVED_SUBDOMAINS.includes(subdomain)) {
+      this.shopService.subdomainAvailable(subdomain, this.queryStringShopId!).subscribe({
+        next: result => this.subDomainAvailable = result,
+        error: error => this.handleOnSubmitError(error),
+        complete: () => this.formLoading = false
+      });
     } else {
       this.subDomainAvailable = false;
+      this.formLoading = false;
     }
 
   }

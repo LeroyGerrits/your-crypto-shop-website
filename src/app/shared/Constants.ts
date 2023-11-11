@@ -10,7 +10,7 @@ export abstract class Constants {
     static readonly QR_CODE_LOGO: string = 'assets/images/QrCodeLogo.png';
     static readonly QR_CODE_LOGO_SIZE: number = 50;
     static readonly QR_CODE_SIZE: number = 220;
-    static readonly RESERVED_SUBDOMAINS = ['admin', 'api', 'mail', 'shop', 'smtp', 'www'];
+    static readonly RESERVED_SUBDOMAINS = ['admin', 'api', 'cms', 'imap', 'mail', 'pop', 'shop', 'smtp', 'www'];
     static readonly REGEX_PATTERN_DECIMAL = /^-?\d*[.,]?\d{0,2}$/;
     static readonly REGEX_PATTERN_DIGIBYTE_ADDRESS = /^-?\d*[.,]?\d{0,2}$/;
     static readonly TITLE_PREFIX = 'DGB Commerce';

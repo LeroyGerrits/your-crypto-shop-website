@@ -15,12 +15,13 @@ export class MerchantService {
 
     constructor(protected http: HttpClient) { }
 
-    getByIdAndPassword(id: string, password: string): Observable<Merchant> {
-        return this.http.get<Merchant>(`${this.apiUrl}/${id}/${password}`);
-    }
-
-    getByIdPublic(id: string): Observable<PublicMerchant> {
-        return this.http.get<PublicMerchant>(`${this.apiUrl}/public/${id}`);
+    activateAccount(id: string, currentPassword: string, newPassword: string): Observable<MutationResult> {
+        const activateAccountRequest: ActivateAccountRequest = {
+            Id: id,
+            CurrentPassword: currentPassword,
+            NewPassword: newPassword
+        };
+        return this.http.put<MutationResult>(`${this.apiUrl}/activate-account`, activateAccountRequest);
     }
 
     changePassword(currentPassword: string, newPassword: string): Observable<MutationResult> {
@@ -35,16 +36,15 @@ export class MerchantService {
         return this.http.post<MutationResult>(this.apiUrl, merchant);
     }
 
-    update(merchant: Merchant): Observable<MutationResult> {
-        return this.http.put<MutationResult>(`${this.apiUrl}/${merchant.Id}`, merchant)
+    getByIdAndPassword(id: string, password: string): Observable<Merchant> {
+        return this.http.get<Merchant>(`${this.apiUrl}/${id}/${password}`);
     }
 
-    activateAccount(id: string, currentPassword: string, newPassword: string): Observable<MutationResult> {
-        const activateAccountRequest: ActivateAccountRequest = {
-            Id: id,
-            CurrentPassword: currentPassword,
-            NewPassword: newPassword
-        };
-        return this.http.put<MutationResult>(`${this.apiUrl}/activate-account`, activateAccountRequest);
+    getByIdPublic(id: string): Observable<PublicMerchant> {
+        return this.http.get<PublicMerchant>(`${this.apiUrl}/public/${id}`);
+    }
+
+    update(merchant: Merchant): Observable<MutationResult> {
+        return this.http.put<MutationResult>(`${this.apiUrl}/${merchant.Id}`, merchant)
     }
 }

@@ -29,9 +29,10 @@ describe('ControlPanelConfigurationShopComponent', () => {
   let mutationResult: MutationResult = <MutationResult>{ ErrorCode: 0, Identity: '', Message: '' };
 
   beforeEach(() => {
-    shopServiceSpy = jasmine.createSpyObj('ShopService', ['getById', 'create', 'update']);
-    shopServiceSpy.getById.and.returnValue(of(TestDataShops[0]));
+    shopServiceSpy = jasmine.createSpyObj('ShopService', ['create', 'getById', 'subdomainAvailable', 'update']);
     shopServiceSpy.create.and.returnValue(of(mutationResult));
+    shopServiceSpy.getById.and.returnValue(of(TestDataShops[0]));
+    shopServiceSpy.subdomainAvailable.and.returnValue(of(true));
     shopServiceSpy.update.and.returnValue(of(mutationResult));
     matSnackBarSpy = jasmine.createSpyObj('MatSnackBar', ['open']);
 
@@ -141,9 +142,10 @@ describe('ControlPanelConfigurationShopComponentWithErrors', () => {
   let matSnackBarSpy: jasmine.SpyObj<MatSnackBar>;
 
   beforeEach(() => {
-    shopServiceSpy = jasmine.createSpyObj('ShopService', ['getById', 'create', 'update']);
-    shopServiceSpy.getById.and.returnValue(of(TestDataShops[0]));
+    shopServiceSpy = jasmine.createSpyObj('ShopService', ['create', 'getById', 'subdomainAvailable', 'update']);
     shopServiceSpy.create.and.returnValue(throwError(() => new Error('ERROR')));
+    shopServiceSpy.getById.and.returnValue(of(TestDataShops[0]));
+    shopServiceSpy.subdomainAvailable.and.returnValue(of(true));
     shopServiceSpy.update.and.returnValue(throwError(() => new Error('ERROR')));
     matSnackBarSpy = jasmine.createSpyObj('MatSnackBar', ['open']);
 
