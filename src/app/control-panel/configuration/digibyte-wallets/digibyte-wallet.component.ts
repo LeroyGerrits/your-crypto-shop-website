@@ -96,7 +96,7 @@ export class ControlPanelConfigurationDigiByteWalletComponent implements OnInit,
       if (result.Constraint == 'UNIQUE_DigiByteWallet_Name') {
         this.snackBarRef = this.snackBar.open('A digibyte wallet with this name already exists.', 'Close', { panelClass: ['error-snackbar'] });
       } else if (result.Constraint == 'UNIQUE_DigiByteWallet_Address') {
-        this.snackBarRef = this.snackBar.open('A digibyte wallet with this address already exists.', 'Close', { panelClass: ['error-snackbar'] });
+        this.snackBarRef = this.snackBar.open('A digibyte wallet with this address has already been assigned.', 'Close', { panelClass: ['error-snackbar'] });
       } else {
         this.snackBarRef = this.snackBar.open(result.Message, 'Close', { panelClass: ['error-snackbar'] });
       }
