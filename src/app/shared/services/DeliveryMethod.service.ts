@@ -21,7 +21,7 @@ export class DeliveryMethodService {
             if (parameters.ShopId) httpParams = httpParams.append('shopId', parameters.ShopId);
         }
 
-        return this.http.get<DeliveryMethod[]>(this.apiUrl);
+        return this.http.get<DeliveryMethod[]>(this.apiUrl, { params: httpParams });
     }
 
     getById(id: string): Observable<DeliveryMethod> {

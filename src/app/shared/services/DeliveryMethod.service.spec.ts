@@ -4,6 +4,7 @@ import { HttpClientTestingModule, HttpTestingController } from '@angular/common/
 import { Constants } from 'src/app/shared/Constants';
 import { DeliveryMethodService } from './DeliveryMethod.service';
 import { Environment } from 'src/app/shared/environments/Environment';
+import { GetDeliveryMethodsParameters } from '../models/parameters/GetDeliveryMethodsParameters.model';
 import { TestBed } from '@angular/core/testing';
 import { TestDataDeliveryMethods } from 'src/assets/test-data/DeliveryMethods';
 
@@ -26,8 +27,13 @@ describe('DeliveryMethodService', () => {
     });
 
     it('should be able to get a list of delivery methods', () => {
-        service.getList().subscribe();
-        const request = httpMock.expectOne(Environment.API_URL + '/DeliveryMethod');
+        const parameters: GetDeliveryMethodsParameters = {
+            Name: 'Test',
+            ShopId: TestDataDeliveryMethods[0].Shop.Id
+        };
+
+        service.getList(parameters).subscribe();
+        const request = httpMock.expectOne(`${Environment.API_URL}/DeliveryMethod?name=${parameters.Name}&shopId=${parameters.ShopId}`);
         expect(request.request.method).toBe('GET');
     });
 
