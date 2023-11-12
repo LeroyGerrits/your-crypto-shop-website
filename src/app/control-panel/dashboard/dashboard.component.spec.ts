@@ -1,8 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { HttpClient, HttpHandler } from '@angular/common/http';
 
 import { ControlPanelDashboardComponent } from './dashboard.component';
-import { of } from 'rxjs';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 describe('ControlPanelDashboardComponent', () => {
   let component: ControlPanelDashboardComponent;
@@ -12,9 +11,7 @@ describe('ControlPanelDashboardComponent', () => {
 
     TestBed.configureTestingModule({
       declarations: [ControlPanelDashboardComponent],
-      providers: [
-        HttpClient, 
-        HttpHandler]
+      imports: [HttpClientTestingModule]
     });
     fixture = TestBed.createComponent(ControlPanelDashboardComponent);
     component = fixture.componentInstance;

@@ -1,5 +1,4 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { HttpClient, HttpHandler } from '@angular/common/http';
 import { MAT_DIALOG_DATA, MatDialog, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { of, throwError } from 'rxjs';
 
@@ -40,9 +39,7 @@ describe('DialogLoginComponent', () => {
       providers: [
         { provide: MatDialogRef, useValue: matDialogRefSpy },
         { provide: MAT_DIALOG_DATA, useValue: [] },
-        { provide: AuthenticationService, useValue: authenticationServiceSpy },
-        HttpClient,
-        HttpHandler
+        { provide: AuthenticationService, useValue: authenticationServiceSpy }
       ]
     });
     fixture = TestBed.createComponent(DialogLoginComponent);
@@ -97,9 +94,7 @@ describe('DialogLoginComponentWithErrors', () => {
       providers: [
         { provide: MatDialogRef, useValue: matDialogRefSpy },
         { provide: MAT_DIALOG_DATA, useValue: [] },
-        { provide: AuthenticationService, useValue: authenticationServiceSpy },
-        HttpClient,
-        HttpHandler
+        { provide: AuthenticationService, useValue: authenticationServiceSpy }
       ]
     });
     fixture = TestBed.createComponent(DialogLoginComponent);

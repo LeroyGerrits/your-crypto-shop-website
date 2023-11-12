@@ -1,7 +1,7 @@
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { HttpClient, HttpHandler } from '@angular/common/http';
 
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { MatCardModule } from '@angular/material/card';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { NewsMessageService } from 'src/app/shared/services/NewsMessage.service';
@@ -22,12 +22,10 @@ describe('PublicWebsiteNewsListComponent', () => {
 
     TestBed.configureTestingModule({
       declarations: [PublicWebsiteNewsListComponent, SearchEngineFriendlyStringPipe],
-      imports: [MatGridListModule, MatCardModule, RouterLink],
+      imports: [HttpClientTestingModule, MatGridListModule, MatCardModule, RouterLink],
       providers: [
         { provide: ActivatedRoute, useValue: { snapshot: { paramMap: { get: () => 0, }, }, } },
-        { provide: NewsMessageService, useValue: newsMessageServiceSpy },
-        HttpClient,
-        HttpHandler
+        { provide: NewsMessageService, useValue: newsMessageServiceSpy }
       ]
     });
     fixture = TestBed.createComponent(PublicWebsiteNewsListComponent);

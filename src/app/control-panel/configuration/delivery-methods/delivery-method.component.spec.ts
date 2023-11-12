@@ -1,23 +1,22 @@
-import { ActivatedRoute, Router, RouterLink, convertToParamMap } from '@angular/router';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { HttpClient, HttpHandler } from '@angular/common/http';
+import { ActivatedRoute, Router, RouterLink, convertToParamMap } from '@angular/router';
 import { of, throwError } from 'rxjs';
 
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { ControlPanelConfigurationDeliveryMethodComponent } from './delivery-method.component';
-import { ControlPanelConfigurationDeliveryMethodListComponent } from './delivery-method-list.component';
-import { DeliveryMethodService } from 'src/app/shared/services/DeliveryMethod.service';
+import { ReactiveFormsModule } from '@angular/forms';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { MutationResult } from 'src/app/shared/models/MutationResult';
-import { ReactiveFormsModule } from '@angular/forms';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterTestingModule } from '@angular/router/testing';
+import { MutationResult } from 'src/app/shared/models/MutationResult';
+import { DeliveryMethodService } from 'src/app/shared/services/DeliveryMethod.service';
 import { ShopService } from 'src/app/shared/services/Shop.service';
 import { TestDataDeliveryMethods } from 'src/assets/test-data/DeliveryMethods';
 import { TestDataShops } from 'src/assets/test-data/Shops';
+import { ControlPanelConfigurationDeliveryMethodListComponent } from './delivery-method-list.component';
+import { ControlPanelConfigurationDeliveryMethodComponent } from './delivery-method.component';
 
 describe('ControlPanelConfigurationDeliveryMethodComponent', () => {
   let component: ControlPanelConfigurationDeliveryMethodComponent;
@@ -47,8 +46,6 @@ describe('ControlPanelConfigurationDeliveryMethodComponent', () => {
         { provide: ShopService, useValue: shopServiceSpy },
         { provide: DeliveryMethodService, useValue: deliveryMethodServiceSpy },
         { provide: MatSnackBar, useValue: matSnackBarSpy },
-        HttpClient,
-        HttpHandler,
         Router
       ]
     });
@@ -147,8 +144,6 @@ describe('ControlPanelConfigurationDeliveryMethodComponentWithErrors', () => {
         { provide: ShopService, useValue: shopServiceSpy },
         { provide: DeliveryMethodService, useValue: deliveryMethodServiceSpy },
         { provide: MatSnackBar, useValue: matSnackBarSpy },
-        HttpClient,
-        HttpHandler,
         Router
       ]
     });

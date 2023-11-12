@@ -85,8 +85,8 @@ describe('ShopService', () => {
     });
 
     it('should be able to check if a subdomain is available', () => {
-        service.subdomainAvailable('www', '00000000-0000-0000-0000-000000000000').subscribe();
-        const request = httpMock.expectOne(`${Environment.API_URL}/Shop/public/subdomain-available?subdomain=www&id=00000000-0000-0000-0000-000000000000`);
+        service.subdomainAvailable('www', Constants.EMPTY_GUID).subscribe();
+        const request = httpMock.expectOne(`${Environment.API_URL}/Shop/public/subdomain-available?subdomain=www&id=${Constants.EMPTY_GUID}`);
         expect(request.request.method).toBe('GET');
     });
 });

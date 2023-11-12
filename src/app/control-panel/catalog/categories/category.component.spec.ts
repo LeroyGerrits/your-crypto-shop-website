@@ -1,22 +1,21 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { HttpClient, HttpHandler } from '@angular/common/http';
 import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { of, throwError } from 'rxjs';
 
-import { AccountComponent } from 'src/app/account/account.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { Category } from 'src/app/shared/models/Category.model';
-import { CategoryService } from 'src/app/shared/services/Category.service';
-import { ControlPanelCatalogCategoryComponent } from './category.component';
+import { ReactiveFormsModule } from '@angular/forms';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { MutationResult } from 'src/app/shared/models/MutationResult';
-import { ReactiveFormsModule } from '@angular/forms';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterTestingModule } from '@angular/router/testing';
+import { AccountComponent } from 'src/app/account/account.component';
+import { Category } from 'src/app/shared/models/Category.model';
+import { MutationResult } from 'src/app/shared/models/MutationResult';
 import { Shop } from 'src/app/shared/models/Shop.model';
+import { CategoryService } from 'src/app/shared/services/Category.service';
 import { TestDataCategories } from 'src/assets/test-data/Categories';
 import { TestDataShops } from 'src/assets/test-data/Shops';
+import { ControlPanelCatalogCategoryComponent } from './category.component';
 
 export interface DialogData {
   selectedShop: Shop;
@@ -54,9 +53,7 @@ describe('ControlPanelCatalogCategoryComponent', () => {
       providers: [
         { provide: MatDialogRef, useValue: matDialogRefSpy },
         { provide: MAT_DIALOG_DATA, useValue: mockDialogData },
-        { provide: CategoryService, useValue: categoryServiceSpy },
-        HttpClient,
-        HttpHandler
+        { provide: CategoryService, useValue: categoryServiceSpy }
       ]
     });
     fixture = TestBed.createComponent(ControlPanelCatalogCategoryComponent);
@@ -160,9 +157,7 @@ describe('ControlPanelCatalogCategoryComponentWithErrors', () => {
       providers: [
         { provide: MatDialogRef, useValue: matDialogRefSpy },
         { provide: MAT_DIALOG_DATA, useValue: mockDialogData },
-        { provide: CategoryService, useValue: categoryServiceSpy },
-        HttpClient,
-        HttpHandler
+        { provide: CategoryService, useValue: categoryServiceSpy }
       ]
     });
     fixture = TestBed.createComponent(ControlPanelCatalogCategoryComponent);

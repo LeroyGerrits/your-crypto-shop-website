@@ -9,32 +9,25 @@
     <div class="WrapperPadding20-10-0-10 TextAlignCenter">
         <h3>Our general wallet</h3>
         <div>
-            <qrcode [qrdata]="constants.DIGIBYTE_WALLET_ADDRESS_GENERAL" [width]="constants.QR_CODE_SIZE"
-                [errorCorrectionLevel]="'M'" [colorLight]="constants.QR_CODE_COLOR_LIGHT" [colorDark]="constants.QR_CODE_COLOR_DARK" [imageSrc]="constants.QR_CODE_LOGO"
-                [imageHeight]="constants.QR_CODE_LOGO_SIZE" [imageWidth]="constants.QR_CODE_LOGO_SIZE" />
+            <qrcode [qrdata]="constants.DIGIBYTE_WALLET_ADDRESS_GENERAL" [width]="constants.QR_CODE_SIZE" [errorCorrectionLevel]="'M'" [colorLight]="constants.QR_CODE_COLOR_LIGHT" [colorDark]="constants.QR_CODE_COLOR_DARK" [imageSrc]="constants.QR_CODE_LOGO" [imageHeight]="constants.QR_CODE_LOGO_SIZE" [imageWidth]="constants.QR_CODE_LOGO_SIZE" />
         </div>
-        <span class="FontSize0x8Em WordWrapBreakWord"><a
-                href="digibyte:{{constants.DIGIBYTE_WALLET_ADDRESS_GENERAL}}">{{constants.DIGIBYTE_WALLET_ADDRESS_GENERAL}}</a></span>
+        <span class="FontSize0x8Em WordWrapBreakWord"><a href="digibyte:{{constants.DIGIBYTE_WALLET_ADDRESS_GENERAL}}">{{constants.DIGIBYTE_WALLET_ADDRESS_GENERAL}}</a></span>
     </div>
 </div>
 <div class="ColumnOneFourth">
     <div class="WrapperPadding20-8-0-10 TextAlignCenter">
         <h3>Our transactions wallet</h3>
         <div>
-            <qrcode [qrdata]="constants.DIGIBYTE_WALLET_ADDRESS_TRANSACTIONS" [width]="constants.QR_CODE_SIZE"
-                [errorCorrectionLevel]="'M'" [colorLight]="constants.QR_CODE_COLOR_LIGHT" [colorDark]="constants.QR_CODE_COLOR_DARK" [imageSrc]="constants.QR_CODE_LOGO"
-                [imageHeight]="constants.QR_CODE_LOGO_SIZE" [imageWidth]="constants.QR_CODE_LOGO_SIZE" />
+            <qrcode [qrdata]="constants.DIGIBYTE_WALLET_ADDRESS_TRANSACTIONS" [width]="constants.QR_CODE_SIZE" [errorCorrectionLevel]="'M'" [colorLight]="constants.QR_CODE_COLOR_LIGHT" [colorDark]="constants.QR_CODE_COLOR_DARK" [imageSrc]="constants.QR_CODE_LOGO" [imageHeight]="constants.QR_CODE_LOGO_SIZE" [imageWidth]="constants.QR_CODE_LOGO_SIZE" />
         </div>
-        <span class="FontSize0x8Em WordWrapBreakWord"><a
-                href="digibyte:{{constants.DIGIBYTE_WALLET_ADDRESS_TRANSACTIONS}}">{{constants.DIGIBYTE_WALLET_ADDRESS_TRANSACTIONS}}</a></span>
+        <span class="FontSize0x8Em WordWrapBreakWord"><a href="digibyte:{{constants.DIGIBYTE_WALLET_ADDRESS_TRANSACTIONS}}">{{constants.DIGIBYTE_WALLET_ADDRESS_TRANSACTIONS}}</a></span>
     </div>
 </div>
 <div class="ColumnOneSixth ClearLeft">
     <div class="WrapperPadding20-10-0-8">
         <mat-form-field>
             <mat-label>Date from</mat-label>
-            <input matInput [formControl]="controlFilterDateFrom" [matDatepicker]="pickerDateFrom"
-                (change)="onFilter()" />
+            <input matInput [formControl]="controlFilterDateFrom" [matDatepicker]="pickerDateFrom" (change)="onFilter()" />
             <mat-datepicker-toggle matIconSuffix [for]="pickerDateFrom"></mat-datepicker-toggle>
             <mat-datepicker #pickerDateFrom></mat-datepicker>
         </mat-form-field>
@@ -44,8 +37,7 @@
     <div class="WrapperPadding20-10-0-10">
         <mat-form-field>
             <mat-label>Date until</mat-label>
-            <input matInput [formControl]="controlFilterDateUntil" [matDatepicker]="pickerDateUntil"
-                (change)="onFilter()" />
+            <input matInput [formControl]="controlFilterDateUntil" [matDatepicker]="pickerDateUntil" (change)="onFilter()" />
             <mat-datepicker-toggle matIconSuffix [for]="pickerDateUntil"></mat-datepicker-toggle>
             <mat-datepicker #pickerDateUntil></mat-datepicker>
         </mat-form-field>
@@ -118,8 +110,7 @@
 
         <ng-container matColumnDef="Type">
             <th mat-header-cell mat-sort-header *matHeaderCellDef>Type</th>
-            <td mat-cell *matCellDef="let element"><span
-                    [ngClass]="['Type', element.Type == 'Credit' ? 'TypeCredit' : 'TypeDebit']">{{element.Type}}</span>
+            <td mat-cell *matCellDef="let element"><span [ngClass]="['Type', element.Type == 'Credit' ? 'TypeCredit' : 'TypeDebit']">{{element.Type}}</span>
             </td>
         </ng-container>
 

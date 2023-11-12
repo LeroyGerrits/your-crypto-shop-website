@@ -1,23 +1,22 @@
-import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { ComponentFixture, TestBed, fakeAsync, tick } from '@angular/core/testing';
-import { HttpClient, HttpHandler } from '@angular/common/http';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { of, throwError } from 'rxjs';
 
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { ControlPanelConfigurationShopListComponent } from './shop-list.component';
+import { ReactiveFormsModule } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { MatTableModule } from '@angular/material/table';
-import { MutationResult } from 'src/app/shared/models/MutationResult';
-import { ReactiveFormsModule } from '@angular/forms';
-import { RouterTestingModule } from '@angular/router/testing';
-import { ShopService } from 'src/app/shared/services/Shop.service';
 import { Sort } from '@angular/material/sort';
+import { MatTableModule } from '@angular/material/table';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { RouterTestingModule } from '@angular/router/testing';
+import { MutationResult } from 'src/app/shared/models/MutationResult';
+import { ShopService } from 'src/app/shared/services/Shop.service';
 import { TestDataShops } from 'src/assets/test-data/Shops';
+import { ControlPanelConfigurationShopListComponent } from './shop-list.component';
 
 describe('ControlPanelConfigurationShopListComponent', () => {
   let component: ControlPanelConfigurationShopListComponent;
@@ -46,7 +45,7 @@ describe('ControlPanelConfigurationShopListComponent', () => {
 
     TestBed.configureTestingModule({
       declarations: [ControlPanelConfigurationShopListComponent],
-      imports: [BrowserAnimationsModule, MatIconModule, MatFormFieldModule, MatInputModule, MatPaginatorModule, MatTableModule, ReactiveFormsModule, RouterLink, RouterLink, RouterTestingModule.withRoutes(
+      imports: [BrowserAnimationsModule, MatIconModule, MatFormFieldModule, MatInputModule, MatPaginatorModule, MatTableModule, ReactiveFormsModule, RouterLink, RouterTestingModule.withRoutes(
         [{ path: 'control-panel/configuration/shops', component: ControlPanelConfigurationShopListComponent }]
       )],
       providers: [
@@ -157,7 +156,7 @@ describe('ControlPanelConfigurationShopListComponentWithErrors', () => {
 
     TestBed.configureTestingModule({
       declarations: [ControlPanelConfigurationShopListComponent],
-      imports: [BrowserAnimationsModule, MatIconModule, MatFormFieldModule, MatInputModule, MatPaginatorModule, MatTableModule, ReactiveFormsModule, RouterLink, RouterLink, RouterTestingModule.withRoutes(
+      imports: [BrowserAnimationsModule, MatIconModule, MatFormFieldModule, MatInputModule, MatPaginatorModule, MatTableModule, ReactiveFormsModule, RouterLink, RouterTestingModule.withRoutes(
         [{ path: 'control-panel/configuration/shops', component: ControlPanelConfigurationShopListComponent }]
       )],
       providers: [
@@ -165,8 +164,6 @@ describe('ControlPanelConfigurationShopListComponentWithErrors', () => {
         { provide: MatDialog, useValue: matDialogSpy },
         { provide: ShopService, useValue: shopServiceSpyWithErrors },
         { provide: MatSnackBar, useValue: matSnackBarSpy },
-        HttpClient,
-        HttpHandler,
         Router
       ]
     });

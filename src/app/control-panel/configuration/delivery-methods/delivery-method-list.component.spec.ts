@@ -1,11 +1,8 @@
-import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { ComponentFixture, TestBed, fakeAsync, tick } from '@angular/core/testing';
-import { HttpClient, HttpHandler } from '@angular/common/http';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { of, throwError } from 'rxjs';
 
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { ControlPanelConfigurationDeliveryMethodListComponent } from './delivery-method-list.component';
-import { DeliveryMethodService } from 'src/app/shared/services/DeliveryMethod.service';
+import { ReactiveFormsModule } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
@@ -13,14 +10,16 @@ import { MatInputModule } from '@angular/material/input';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSelectModule } from '@angular/material/select';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { MatTableModule } from '@angular/material/table';
-import { MutationResult } from 'src/app/shared/models/MutationResult';
-import { ReactiveFormsModule } from '@angular/forms';
-import { RouterTestingModule } from '@angular/router/testing';
-import { ShopService } from 'src/app/shared/services/Shop.service';
 import { Sort } from '@angular/material/sort';
+import { MatTableModule } from '@angular/material/table';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { RouterTestingModule } from '@angular/router/testing';
+import { MutationResult } from 'src/app/shared/models/MutationResult';
+import { DeliveryMethodService } from 'src/app/shared/services/DeliveryMethod.service';
+import { ShopService } from 'src/app/shared/services/Shop.service';
 import { TestDataDeliveryMethods } from 'src/assets/test-data/DeliveryMethods';
 import { TestDataShops } from 'src/assets/test-data/Shops';
+import { ControlPanelConfigurationDeliveryMethodListComponent } from './delivery-method-list.component';
 
 describe('ControlPanelConfigurationDeliveryMethodListComponent', () => {
   let component: ControlPanelConfigurationDeliveryMethodListComponent;
@@ -169,7 +168,7 @@ describe('ControlPanelConfigurationDeliveryMethodListComponentWithErrors', () =>
 
     TestBed.configureTestingModule({
       declarations: [ControlPanelConfigurationDeliveryMethodListComponent],
-      imports: [BrowserAnimationsModule, MatIconModule, MatFormFieldModule, MatInputModule, MatPaginatorModule, MatSelectModule, MatTableModule, ReactiveFormsModule, RouterLink, RouterLink, RouterTestingModule.withRoutes(
+      imports: [BrowserAnimationsModule, MatIconModule, MatFormFieldModule, MatInputModule, MatPaginatorModule, MatSelectModule, MatTableModule, ReactiveFormsModule, RouterLink, RouterTestingModule.withRoutes(
         [{ path: 'control-panel/configuration/delivery-methods', component: ControlPanelConfigurationDeliveryMethodListComponent }]
       )],
       providers: [
@@ -178,8 +177,6 @@ describe('ControlPanelConfigurationDeliveryMethodListComponentWithErrors', () =>
         { provide: ShopService, useValue: shopServiceSpy },
         { provide: DeliveryMethodService, useValue: deliveryMethodServiceSpy },
         { provide: MatSnackBar, useValue: matSnackBarSpy },
-        HttpClient,
-        HttpHandler,
         Router
       ]
     });

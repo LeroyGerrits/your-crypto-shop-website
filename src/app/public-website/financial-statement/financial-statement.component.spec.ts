@@ -1,12 +1,9 @@
 import { ActivatedRoute, Router } from '@angular/router';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { HttpClient, HttpHandler } from '@angular/common/http';
-import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CurrencyService } from 'src/app/shared/services/Currency.service';
 import { DatePipe } from '@angular/common';
-import { FinancialStatementTransaction } from 'src/app/shared/models/FinancialStatementTransaction.model';
 import { FinancialStatementTransactionService } from 'src/app/shared/services/FinancialStatementTransaction.service';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { MatDatepickerModule } from '@angular/material/datepicker';
@@ -14,6 +11,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSelectModule } from '@angular/material/select';
+import { MatTableModule } from '@angular/material/table';
 import { PublicWebsiteFinancialStatementComponent } from './financial-statement.component';
 import { QRCodeModule } from 'angularx-qrcode';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -56,7 +54,7 @@ describe('PublicWebsiteFinancialStatementComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {    
+  it('should create', () => {
     expect(component).toBeTruthy();
   });
 
@@ -82,10 +80,10 @@ describe('PublicWebsiteFinancialStatementComponent', () => {
     component.controlFilterRecurrance.setValue('0');
     component.controlFilterType.setValue('0');
     component.controlFilterCurrency.setValue(TestDataCurrencies[0].Id);
-    
+
     component.onFilter();
     fixture.detectChanges();
-    
+
     expect(component.dataSource).toBeDefined();
   });
 });

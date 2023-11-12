@@ -1,19 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { HttpClient, HttpHandler } from '@angular/common/http';
 import { MAT_DIALOG_DATA, MatDialog, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { of, throwError } from 'rxjs';
 
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { DialogSignUpComponent } from './dialog.signup.component';
+import { ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatRadioModule } from '@angular/material/radio';
-import { MerchantService } from '../../services/Merchant.service';
-import { MutationResult } from '../../models/MutationResult';
-import { PublicWebsiteMessageComponent } from 'src/app/public-website/message/message.component';
-import { ReactiveFormsModule } from '@angular/forms';
-import { RouterTestingModule } from '@angular/router/testing';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { Router } from '@angular/router';
+import { RouterTestingModule } from '@angular/router/testing';
+import { PublicWebsiteMessageComponent } from 'src/app/public-website/message/message.component';
+import { MutationResult } from '../../models/MutationResult';
+import { MerchantService } from '../../services/Merchant.service';
+import { DialogSignUpComponent } from './dialog.signup.component';
 
 describe('DialogSignUpComponent', () => {
   let component: DialogSignUpComponent;
@@ -44,9 +43,7 @@ describe('DialogSignUpComponent', () => {
       providers: [
         { provide: MatDialogRef, useValue: matDialogRefSpy },
         { provide: MAT_DIALOG_DATA, useValue: [] },
-        { provide: MerchantService, useValue: merchantServiceSpy },
-        HttpClient,
-        HttpHandler
+        { provide: MerchantService, useValue: merchantServiceSpy }
       ]
     });
     fixture = TestBed.createComponent(DialogSignUpComponent);
@@ -120,9 +117,7 @@ describe('DialogSignUpComponentWithErrors', () => {
       providers: [
         { provide: MatDialogRef, useValue: matDialogRefSpy },
         { provide: MAT_DIALOG_DATA, useValue: [] },
-        { provide: MerchantService, useValue: merchantServiceSpy },
-        HttpClient,
-        HttpHandler
+        { provide: MerchantService, useValue: merchantServiceSpy }
       ]
     });
     fixture = TestBed.createComponent(DialogSignUpComponent);

@@ -1,6 +1,5 @@
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { ComponentFixture, TestBed, fakeAsync, tick } from '@angular/core/testing';
-import { HttpClient, HttpHandler } from '@angular/common/http';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FaqCategoryService } from 'src/app/shared/services/FaqCategory.service';
@@ -34,8 +33,6 @@ describe('PublicWebsiteFaqListComponent', () => {
         { provide: ActivatedRoute, useValue: { snapshot: { paramMap: { get: () => 0, }, }, } },
         { provide: FaqCategoryService, useValue: faqCategoryServiceSpy },
         { provide: FaqService, useValue: faqServiceSpy },
-        HttpClient,
-        HttpHandler,
         PublicWebsiteFaqListComponent
       ]
     });

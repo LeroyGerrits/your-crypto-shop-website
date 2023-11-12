@@ -1,6 +1,5 @@
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { ComponentFixture, TestBed, fakeAsync, tick } from '@angular/core/testing';
-import { HttpClient, HttpHandler } from '@angular/common/http';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -28,14 +27,12 @@ describe('PublicWebsiteShopListComponent', () => {
 
     TestBed.configureTestingModule({
       declarations: [PublicWebsiteShopListComponent],
-      imports: [BrowserAnimationsModule, MatIconModule, MatFormFieldModule, MatInputModule, MatPaginatorModule, MatTableModule, ReactiveFormsModule, RouterLink, RouterLink, RouterTestingModule.withRoutes(
+      imports: [BrowserAnimationsModule, MatIconModule, MatFormFieldModule, MatInputModule, MatPaginatorModule, MatTableModule, ReactiveFormsModule, RouterLink, RouterTestingModule.withRoutes(
         [{ path: 'shops', component: PublicWebsiteShopListComponent }]
       )],
       providers: [
         { provide: ActivatedRoute, useValue: { snapshot: { data: {} } } },
         { provide: ShopService, useValue: shopServiceSpy },
-        HttpClient,
-        HttpHandler,
         PublicWebsiteShopListComponent,
         Router
       ]
