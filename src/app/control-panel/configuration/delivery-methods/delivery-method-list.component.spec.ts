@@ -53,7 +53,7 @@ describe('ControlPanelConfigurationDeliveryMethodListComponent', () => {
 
     TestBed.configureTestingModule({
       declarations: [ControlPanelConfigurationDeliveryMethodListComponent],
-      imports: [BrowserAnimationsModule, MatIconModule, MatFormFieldModule, MatInputModule, MatPaginatorModule, MatSelectModule, MatTableModule, ReactiveFormsModule, RouterLink, RouterLink, RouterTestingModule.withRoutes(
+      imports: [BrowserAnimationsModule, MatIconModule, MatFormFieldModule, MatInputModule, MatPaginatorModule, MatSelectModule, MatTableModule, ReactiveFormsModule, RouterLink, RouterTestingModule.withRoutes(
         [{ path: 'control-panel/configuration/delivery-methods', component: ControlPanelConfigurationDeliveryMethodListComponent }]
       )],
       providers: [

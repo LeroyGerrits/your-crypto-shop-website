@@ -145,7 +145,7 @@ describe('ControlPanelConfigurationShopComponentWithErrors', () => {
     shopServiceSpy = jasmine.createSpyObj('ShopService', ['create', 'getById', 'subdomainAvailable', 'update']);
     shopServiceSpy.create.and.returnValue(throwError(() => new Error('ERROR')));
     shopServiceSpy.getById.and.returnValue(of(TestDataShops[0]));
-    shopServiceSpy.subdomainAvailable.and.returnValue(of(true));
+    shopServiceSpy.subdomainAvailable.and.returnValue(throwError(() => new Error('ERROR')));
     shopServiceSpy.update.and.returnValue(throwError(() => new Error('ERROR')));
     matSnackBarSpy = jasmine.createSpyObj('MatSnackBar', ['open']);
 
@@ -183,6 +183,11 @@ describe('ControlPanelConfigurationShopComponentWithErrors', () => {
     component.controlName.setValue(TestDataShops[0].Name);
     component.controlSubDomain.setValue(TestDataShops[0].SubDomain!);
     component.onSubmit();
+    expect(component.formLoading).toBeFalse();
+  });
+
+  it('should trigger error handling when sending a call to the shop service when checking subdomain availability and the request fails', () => {
+    component.checkSubDomainAvailability('subdomain');
     expect(component.formLoading).toBeFalse();
   });
 });

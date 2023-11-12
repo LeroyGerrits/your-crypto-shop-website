@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
-import { MatSnackBarRef, TextOnlySnackBar } from '@angular/material/snack-bar';
+import { MatSnackBar, MatSnackBarRef, TextOnlySnackBar } from '@angular/material/snack-bar';
 import { MatSort, Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
@@ -11,6 +11,7 @@ import { Constants } from 'src/app/shared/Constants';
 import { DialogDeleteComponent } from 'src/app/shared/dialogs/delete/dialog.delete.component';
 import { Environment } from 'src/app/shared/environments/Environment';
 import { DigiByteWallet } from 'src/app/shared/models/DigiByteWallet.model';
+import { MutationResult } from 'src/app/shared/models/MutationResult';
 import { GetDigiByteWalletsParameters } from 'src/app/shared/models/parameters/GetDigiByteWalletsParameters.model';
 import { DigiByteWalletService } from 'src/app/shared/services/DigiByteWallet.service';
 
@@ -37,8 +38,9 @@ export class ControlPanelConfigurationDigiByteWalletListComponent implements OnD
 
   constructor(
     public dialog: MatDialog,
+    private digibyteWalletService: DigiByteWalletService,
     private router: Router,
-    private digibyteWalletService: DigiByteWalletService
+    private snackBar: MatSnackBar
   ) {
     this.form = new FormGroup([
       this.controlFilterName,
@@ -85,13 +87,28 @@ export class ControlPanelConfigurationDigiByteWalletListComponent implements OnD
   deleteElement(element: DigiByteWallet) {
     const dialogDelete = this.dialog.open(DialogDeleteComponent);
     const instance = dialogDelete.componentInstance;
-    instance.dialogMessage = `Are you sure you want to delete shop '${element.Name}'?`;
+    instance.dialogMessage = `Are you sure you want to delete the assignment to DigiByte wallet '${element.Name}'?`;
 
     dialogDelete.afterClosed().subscribe(result => {
       if (result) {
-        this.digibyteWalletService.delete(element.Id);
-        dialogDelete.close();
+        this.digibyteWalletService.delete(element.Id).subscribe({
+          next: result => this.handleOnSubmitResult(result),
+          error: error => this.handleOnSubmitError(error),
+          complete: () => dialogDelete.close()
+        });
       }
     });
+  }
+
+  handleOnSubmitResult(result: MutationResult) {
+    if (result.Success) {
+      this.router.navigate(['/control-panel/configuration/digibyte-wallets']);
+    } else {
+      this.snackBarRef = this.snackBar.open(result.Message, 'Close', { panelClass: ['error-snackbar'] });
+    }
+  }
+
+  handleOnSubmitError(error: string) {
+    this.snackBarRef = this.snackBar.open(error, 'Close', { panelClass: ['error-snackbar'] });
   }
 }

@@ -21,7 +21,7 @@ export class ProductService {
             if (parameters.ShopId) httpParams = httpParams.append('shopId', parameters.ShopId);
         }
 
-        return this.http.get<Product[]>(this.apiUrl);
+        return this.http.get<Product[]>(this.apiUrl, { params: httpParams });
     }
 
     getById(id: string): Observable<Product> {
