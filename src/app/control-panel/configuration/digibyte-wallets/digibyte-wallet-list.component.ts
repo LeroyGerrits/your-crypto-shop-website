@@ -102,7 +102,7 @@ export class ControlPanelConfigurationDigiByteWalletListComponent implements OnD
 
   handleOnSubmitResult(result: MutationResult) {
     if (result.Success) {
-      this.router.navigate(['/control-panel/configuration/digibyte-wallets']);
+      this.filterDigiByteWallets();
     } else {
       this.snackBarRef = this.snackBar.open(result.Message, 'Close', { panelClass: ['error-snackbar'] });
     }

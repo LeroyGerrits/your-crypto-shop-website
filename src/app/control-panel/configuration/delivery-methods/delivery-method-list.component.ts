@@ -108,7 +108,7 @@ export class ControlPanelConfigurationDeliveryMethodListComponent implements OnD
 
   handleOnSubmitResult(result: MutationResult) {
     if (result.Success) {
-      this.router.navigate(['/control-panel/configuration/delivery-methods']);
+      this.filterDeliveryMethods();
     } else {
       this.snackBarRef = this.snackBar.open(result.Message, 'Close', { panelClass: ['error-snackbar'] });
     }

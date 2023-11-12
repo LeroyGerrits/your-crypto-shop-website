@@ -110,13 +110,13 @@ describe('ControlPanelConfigurationShopListComponent', () => {
     expect(matDialogSpy.open).toHaveBeenCalled();
   });
 
-  it('should navigate when handling submit result and no error code is applicable', () => {
-    const mutationResult = <MutationResult>{ Constraint: '', ErrorCode: 0, Identity: '', Message: '', Success: true };
-    const routerstub: Router = TestBed.inject(Router);
-    spyOn(routerstub, 'navigate');
+  it('should reload when handling submit result and no error code is applicable', () => {
+    const componentStub: ControlPanelConfigurationShopListComponent = TestBed.inject(ControlPanelConfigurationShopListComponent);
+    spyOn(componentStub, 'filterShops');
 
-    component.handleOnSubmitResult(mutationResult);
-    expect(routerstub.navigate).toHaveBeenCalledWith(['/control-panel/configuration/shops']);
+    const mutationResult = <MutationResult>{ Constraint: '', ErrorCode: 0, Identity: '', Message: '', Success: true };
+    componentStub.handleOnSubmitResult(mutationResult);
+    expect(componentStub.filterShops).toHaveBeenCalled();
   });
 
   it('should show an error when handling submit result and an error code is applicable', () => {
