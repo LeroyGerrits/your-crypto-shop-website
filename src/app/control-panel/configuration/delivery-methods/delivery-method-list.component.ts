@@ -31,7 +31,7 @@ export class ControlPanelConfigurationDeliveryMethodListComponent implements OnD
   environment = Environment;
   constants = Constants;
   dataSource = new MatTableDataSource<DeliveryMethod>;
-  displayedColumns: string[] = ['Name', 'Shop', 'ActionButtons'];
+  displayedColumns: string[] = ['Name', 'Shop', 'Costs', 'ActionButtons'];
   sortDirection: string | null = 'asc';
 
   public form!: FormGroup;

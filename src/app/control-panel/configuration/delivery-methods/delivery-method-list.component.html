@@ -1,7 +1,6 @@
 <div class="WrapperPadding20-8-0-8">
     <div class="FloatRight">
-        <button mat-raised-button color="primary" [routerLink]="['/control-panel/configuration/delivery-methods/new']"
-            [disabled]="!this.shops?.length">
+        <button mat-raised-button color="primary" [routerLink]="['/control-panel/configuration/delivery-methods/new']" [disabled]="!this.shops?.length">
             <mat-icon>add</mat-icon>
             Create new delivery method
         </button>
@@ -24,7 +23,10 @@
     <div class="WrapperPadding20-20-0-20">
         <mat-form-field>
             <mat-label>Shop</mat-label>
-            <mat-select [formControl]="controlFilterShop" />
+            <mat-select [formControl]="controlFilterShop">
+                <mat-option></mat-option>
+                <mat-option *ngFor="let shop of this.shops" [value]="shop.Id">{{shop.Name}}</mat-option>
+            </mat-select>
         </mat-form-field>
     </div>
 </div>
@@ -38,6 +40,13 @@
         <ng-container matColumnDef="Shop">
             <th mat-header-cell mat-sort-header *matHeaderCellDef>Shop</th>
             <td mat-cell *matCellDef="let element">{{element.Shop.Name}}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="Costs">
+            <th mat-header-cell mat-sort-header *matHeaderCellDef>Costs</th>
+            <td mat-cell *matCellDef="let element" class="TextAlignRight">
+                <span *ngIf="element.Costs">Ɗ&nbsp;{{element.Costs | number:'1.2-8'}}</span>
+            </td>
         </ng-container>
 
         <ng-container matColumnDef="ActionButtons">
@@ -56,8 +65,7 @@
         <tr mat-row *matRowDef="let row; columns: this.displayedColumns;"></tr>
         <tr class="mat-row" *matNoDataRow>
             <td class="mat-cell NoDataCell" [colSpan]="this.displayedColumns.length">
-                <span
-                    *ngIf="this.controlFilterName.value || this.controlFilterShop.value">{{constants.MESSAGE_NO_RECORDS_FOUND}}</span>
+                <span *ngIf="this.controlFilterName.value || this.controlFilterShop.value">{{constants.MESSAGE_NO_RECORDS_FOUND}}</span>
                 <span *ngIf="!this.controlFilterName.value && !this.controlFilterShop.value">You have not yet created a
                     delivery method.
                 </span>
