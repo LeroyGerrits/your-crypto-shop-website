@@ -33,6 +33,7 @@ export class ControlPanelConfigurationDeliveryMethodListComponent implements OnD
   dataSource = new MatTableDataSource<DeliveryMethod>;
   displayedColumns: string[] = ['Name', 'Shop', 'Costs', 'ActionButtons'];
   sortDirection: string | null = 'asc';
+  finishedLoading: boolean = false;
 
   public form!: FormGroup;
   public controlFilterName = new FormControl('');
@@ -75,6 +76,7 @@ export class ControlPanelConfigurationDeliveryMethodListComponent implements OnD
       this.dataSource = new MatTableDataSource(deliveryMethods);
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
+      this.finishedLoading = true;
     });
   }
 

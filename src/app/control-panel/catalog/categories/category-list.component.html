@@ -7,9 +7,8 @@
     </div>
     <h2>Categories</h2>
 </div>
-<div class="WrapperPadding20-8-0-8" *ngIf="!this.shops?.length">
-    <span class="WarningBlock">You must <a [routerLink]="['/control-panel/configuration/shops/new']">create a shop</a>
-        first before you can manage categories.</span>
+<div class="WrapperPadding20-8-0-8" *ngIf="this.finishedLoading && !this.shops?.length">
+    <span class="WarningBlock">You must <a [routerLink]="['/control-panel/configuration/shops/new']">create a shop</a> first before you can manage categories.</span>
 </div>
 <div class="WrapperPadding20-8-0-8">
     <mat-form-field>
@@ -23,8 +22,7 @@
     <div class="ChangeParentCategoryMessage">
         <span>Select the new parent category for <strong>{{this.changingParentCategory?.Name}}</strong></span>
         <div>
-            <button mat-raised-button type="button" color="disabled"
-                (click)="changeCategoryParentCancel()">Cancel</button>
+            <button mat-raised-button type="button" color="disabled" (click)="changeCategoryParentCancel()">Cancel</button>
             <button mat-raised-button type="submit" color="primary" (click)="changeCategoryParentSave()">Save</button>
         </div>
     </div>
@@ -39,10 +37,8 @@
             <mat-tree [dataSource]="dataSource" [treeControl]="treeControl" class="tree">
                 <mat-tree-node *matTreeNodeDef="let category">
                     <mat-icon *ngIf="!this.changingParent">arrow_right</mat-icon>
-                    <mat-radio-button *ngIf="this.changingParent" [disabled]="category == this.changingParentCategory"
-                        color="primary" [value]="category.Id" />
-                    <span
-                        [ngClass]="{'TextDecorationLineThrough': !category.Visible, 'HighLight': category == this.changingParentCategory }">{{category.Name}}</span>
+                    <mat-radio-button *ngIf="this.changingParent" [disabled]="category == this.changingParentCategory" color="primary" [value]="category.Id" />
+                    <span [ngClass]="{'TextDecorationLineThrough': !category.Visible, 'HighLight': category == this.changingParentCategory }">{{category.Name}}</span>
                     <button *ngIf="!this.changingParent" mat-icon-button [matMenuTriggerFor]="menu" class="MenuButton">
                         <mat-icon color="primary">more_horiz</mat-icon>
                     </button>
@@ -70,13 +66,9 @@
                 <mat-nested-tree-node *matTreeNodeDef="let category; when: hasChild">
                     <div class="mat-tree-node">
                         <mat-icon *ngIf="!this.changingParent">arrow_right</mat-icon>
-                        <mat-radio-button *ngIf="this.changingParent"
-                            [disabled]="category == this.changingParentCategory" color="primary"
-                            [value]="category.Id" />
-                        <span
-                            [ngClass]="{'TextDecorationLineThrough': !category.Visible, 'HighLight': category == this.changingParentCategory}">{{category.Name}}</span>
-                        <button *ngIf="!this.changingParent" mat-icon-button [matMenuTriggerFor]="menu"
-                            class="MenuButton">
+                        <mat-radio-button *ngIf="this.changingParent" [disabled]="category == this.changingParentCategory" color="primary" [value]="category.Id" />
+                        <span [ngClass]="{'TextDecorationLineThrough': !category.Visible, 'HighLight': category == this.changingParentCategory}">{{category.Name}}</span>
+                        <button *ngIf="!this.changingParent" mat-icon-button [matMenuTriggerFor]="menu" class="MenuButton">
                             <mat-icon color="primary">more_horiz</mat-icon>
                         </button>
                         <mat-menu #menu="matMenu">

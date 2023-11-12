@@ -33,6 +33,7 @@ export class ControlPanelCatalogProductListComponent {
   dataSource = new MatTableDataSource<Product>;
   displayedColumns: string[] = ['Name', 'Shop', 'ActionButtons'];
   sortDirection: string | null = 'asc';
+  finishedLoading: boolean = false;
 
   public form!: FormGroup;
   public controlFilterName = new FormControl('');
@@ -75,6 +76,7 @@ export class ControlPanelCatalogProductListComponent {
       this.dataSource = new MatTableDataSource(products);
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
+      this.finishedLoading = true;
     });
   }
 

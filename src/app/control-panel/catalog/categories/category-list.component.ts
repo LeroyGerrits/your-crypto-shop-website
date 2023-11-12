@@ -35,6 +35,7 @@ export class ControlPanelCatalogCategoryListComponent implements OnInit {
   public categories: Category[] | undefined;
   public shops: Shop[] | undefined;
   public selectedShop: Shop | undefined;
+  public finishedLoading: boolean = false;
 
   constructor(
     public dialog: MatDialog,
@@ -73,6 +74,7 @@ export class ControlPanelCatalogCategoryListComponent implements OnInit {
       this.categories = categories;
       this.formLoading = false;
       this.dataSource.data = categories;
+      this.finishedLoading = true;
     });
   }
 
