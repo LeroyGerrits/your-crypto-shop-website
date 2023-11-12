@@ -2,11 +2,11 @@
 <form (ngSubmit)="onSubmit()">
   <mat-dialog-content class="mat-typography">
     <p>Set up shop in just a few minutes!<br />All we need is some basic information to get you going.</p>
+    <p class="TextError" *ngIf="!constants.ENABLE_REGISTRATIONS">Signing up is not possible at this moment. Keep an eye out on our social media channels for updates.</p>
 
     <mat-form-field>
       <mat-label>Your desired username</mat-label>
-      <input matInput [formControl]="controlUsername"
-        [ngClass]="{ 'is-invalid': this.formSubmitted && controlLastName.errors }" />
+      <input matInput [formControl]="controlUsername" [ngClass]="{ 'is-invalid': this.formSubmitted && controlLastName.errors }" />
       <div *ngIf="this.formSubmitted && controlUsername.errors" class="TextError">
         <div *ngIf="controlUsername.errors['required']">Username is required</div>
       </div>
@@ -14,8 +14,7 @@
 
     <mat-form-field>
       <mat-label>Your e-mail address</mat-label>
-      <input matInput [formControl]="controlEmailAddress"
-        [ngClass]="{ 'is-invalid': this.formSubmitted && controlEmailAddress.errors }" />
+      <input matInput [formControl]="controlEmailAddress" [ngClass]="{ 'is-invalid': this.formSubmitted && controlEmailAddress.errors }" />
       <div *ngIf="this.formSubmitted && controlEmailAddress.errors" class="TextError">
         <div *ngIf="controlEmailAddress.errors['required']">E-mail address is required</div>
         <div *ngIf="controlEmailAddress.errors['email']">A valid e-mail address is required</div>
@@ -31,14 +30,12 @@
 
     <mat-form-field>
       <mat-label>Your first name</mat-label>
-      <input matInput [formControl]="controlFirstName"
-        [ngClass]="{ 'is-invalid': this.formSubmitted && controlFirstName.errors }" />
+      <input matInput [formControl]="controlFirstName" [ngClass]="{ 'is-invalid': this.formSubmitted && controlFirstName.errors }" />
     </mat-form-field>
 
     <mat-form-field>
       <mat-label>Your last name</mat-label>
-      <input matInput [formControl]="controlLastName"
-        [ngClass]="{ 'is-invalid': this.formSubmitted && controlLastName.errors }" />
+      <input matInput [formControl]="controlLastName" [ngClass]="{ 'is-invalid': this.formSubmitted && controlLastName.errors }" />
       <div *ngIf="this.formSubmitted && controlLastName.errors" class="TextError">
         <div *ngIf="controlLastName.errors['required']">Last name is required</div>
       </div>
@@ -47,7 +44,7 @@
   </mat-dialog-content>
   <mat-dialog-actions align="end">
     <button mat-raised-button type="button" color="disabled" mat-dialog-close>Cancel</button>
-    <button mat-raised-button type="submit" color="primary" [disabled]="this.formLoading">
+    <button mat-raised-button type="submit" color="primary" [disabled]="this.formLoading || !constants.ENABLE_REGISTRATIONS">
       <mat-icon *ngIf="this.formLoading">
         <mat-spinner diameter="18" />
       </mat-icon>

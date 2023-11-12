@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
+import { Constants } from '../../Constants';
 import { MatDialogRef } from '@angular/material/dialog';
 import { Merchant } from '../../models/Merchant.model';
 import { MerchantService } from '../../services/Merchant.service';
@@ -12,6 +13,8 @@ import { Router } from '@angular/router';
     templateUrl: 'dialog.signup.component.html'
 })
 export class DialogSignUpComponent {
+    constants = Constants;
+
     public controlEmailAddress = new FormControl('', [Validators.required, Validators.email]);
     public controlUsername = new FormControl('', [Validators.maxLength(50), Validators.required]);
     public controlGender = new FormControl('0', Validators.required)
