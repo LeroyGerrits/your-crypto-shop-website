@@ -4,6 +4,7 @@ import { HttpClientTestingModule, HttpTestingController } from '@angular/common/
 import { Constants } from 'src/app/shared/Constants';
 import { DigiByteWalletService } from './DigiByteWallet.service';
 import { Environment } from 'src/app/shared/environments/Environment';
+import { GetDigiByteWalletsParameters } from '../models/parameters/GetDigiByteWalletsParameters.model';
 import { TestBed } from '@angular/core/testing';
 import { TestDataDigiByteWallets } from 'src/assets/test-data/DigiByteWallets';
 
@@ -26,32 +27,37 @@ describe('DigiByteWalletService', () => {
     });
 
     it('should be able to get a list of digibyte wallets', () => {
-        service.getList().subscribe();
-        const request = httpMock.expectOne(Environment.API_URL + '/DigiByteWallet');
+        const parameters: GetDigiByteWalletsParameters = {
+            Name: 'Test',
+            Address: 'Test'
+        };
+
+        service.getList(parameters).subscribe();
+        const request = httpMock.expectOne(`${Environment.API_URL}/DigiByteWallet?name=${parameters.Name}&address=${parameters.Address}`);
         expect(request.request.method).toBe('GET');
     });
 
     it('should be able to get a single digibyte wallet', () => {
         service.getById(Constants.EMPTY_GUID).subscribe();
-        const request = httpMock.expectOne(Environment.API_URL + '/DigiByteWallet/' + Constants.EMPTY_GUID);
+        const request = httpMock.expectOne(`${Environment.API_URL}/DigiByteWallet/${Constants.EMPTY_GUID}`);
         expect(request.request.method).toBe('GET');
     });
 
     it('should be able to create a digibyte wallet', () => {
         service.create(TestDataDigiByteWallets[0]).subscribe();
-        const request = httpMock.expectOne(Environment.API_URL + '/DigiByteWallet');
+        const request = httpMock.expectOne(`${Environment.API_URL}/DigiByteWallet`);
         expect(request.request.method).toBe('POST');
     });
 
     it('should be able to update a digibyte wallet', () => {
         service.update(TestDataDigiByteWallets[0]).subscribe();
-        const request = httpMock.expectOne(Environment.API_URL + '/DigiByteWallet/' + TestDataDigiByteWallets[0].Id);
+        const request = httpMock.expectOne(`${Environment.API_URL}/DigiByteWallet/${TestDataDigiByteWallets[0].Id}`);
         expect(request.request.method).toBe('PUT');
     });
 
     it('should be able to delete a digibyte wallet', () => {
         service.delete(TestDataDigiByteWallets[0].Id).subscribe();
-        const request = httpMock.expectOne(Environment.API_URL + '/DigiByteWallet/' + TestDataDigiByteWallets[0].Id);
+        const request = httpMock.expectOne(`${Environment.API_URL}/DigiByteWallet/${TestDataDigiByteWallets[0].Id}`);
         expect(request.request.method).toBe('DELETE');
     });
 });

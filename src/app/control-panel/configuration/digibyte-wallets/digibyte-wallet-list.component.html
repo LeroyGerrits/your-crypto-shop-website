@@ -1,5 +1,5 @@
 <div class="WrapperPadding20-8-0-8">
-    <div style="float:right;">
+    <div class="FloatRight">
         <button mat-raised-button color="primary" [routerLink]="['/control-panel/configuration/digibyte-wallets/new']">
             <mat-icon>add</mat-icon>
             Assign new DigiByte wallet
@@ -12,7 +12,7 @@
     <div class="WrapperPadding20-20-0-8">
         <mat-form-field>
             <mat-label>Name</mat-label>
-            <input matInput />
+            <input matInput [formControl]="controlFilterName" />
         </mat-form-field>
     </div>
 </div>
@@ -20,7 +20,7 @@
     <div class="WrapperPadding20-20-0-20">
         <mat-form-field>
             <mat-label>Address</mat-label>
-            <input matInput />
+            <input matInput [formControl]="controlFilterAddress" />
         </mat-form-field>
     </div>
 </div>
@@ -51,6 +51,12 @@
 
         <tr mat-header-row *matHeaderRowDef="this.displayedColumns"></tr>
         <tr mat-row *matRowDef="let row; columns: this.displayedColumns;"></tr>
+        <tr class="mat-row" *matNoDataRow>
+            <td class="mat-cell NoDataCell" [colSpan]="this.displayedColumns.length">
+                <span *ngIf="this.controlFilterName.value || this.controlFilterAddress.value">{{constants.MESSAGE_NO_RECORDS_FOUND}}</span>
+                <span *ngIf="!this.controlFilterName.value && !this.controlFilterAddress.value">You have not yet assigned a DigiByte wallet.</span>
+            </td>
+        </tr>
     </table>
 
     <mat-paginator [pageSizeOptions]="[25, 50, 100]" showFirstLastButtons />

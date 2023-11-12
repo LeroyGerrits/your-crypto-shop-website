@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
@@ -22,7 +22,7 @@ import { ShopService } from 'src/app/shared/services/Shop.service';
   templateUrl: './delivery-method-list.component.html'
 })
 
-export class ControlPanelConfigurationDeliveryMethodListComponent implements OnInit {
+export class ControlPanelConfigurationDeliveryMethodListComponent implements OnDestroy, OnInit {
   @ViewChild(MatPaginator, { static: false }) paginator!: MatPaginator;
   @ViewChild(MatSort, { static: false }) sort!: MatSort;
 
