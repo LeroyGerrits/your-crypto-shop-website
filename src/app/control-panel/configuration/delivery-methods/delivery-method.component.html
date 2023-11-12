@@ -44,7 +44,7 @@
                 <mat-label>Costs</mat-label>
                 <input matInput [formControl]="controlCosts" maxlength="20" placeholder="Example: 250.45" [ngClass]="{ 'is-invalid': formSubmitted && controlCosts.errors }" />
                 <div *ngIf="formSubmitted && controlCosts.errors" class="TextError">
-                    <div *ngIf="controlCosts.errors['pattern']">Costs can only be numerical</div>
+                    <div *ngIf="controlCosts.errors['pattern']">Costs can only be a numerical value with up to 2 decimals.</div>
                 </div>
             </mat-form-field>
         </div>
