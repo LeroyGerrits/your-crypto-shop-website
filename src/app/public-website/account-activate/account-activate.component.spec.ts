@@ -1,18 +1,18 @@
-import { ActivatedRoute, Router, convertToParamMap } from '@angular/router';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ActivatedRoute, Router, convertToParamMap } from '@angular/router';
 import { of, throwError } from 'rxjs';
 
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { MerchantService } from 'src/app/shared/services/Merchant.service';
-import { MutationResult } from 'src/app/shared/models/MutationResult';
-import { PublicWebsiteAccountActivateComponent } from './account-activate.component';
-import { PublicWebsiteMessageComponent } from '../message/message.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterTestingModule } from '@angular/router/testing';
+import { MutationResult } from 'src/app/shared/models/MutationResult';
+import { MerchantService } from 'src/app/shared/services/Merchant.service';
 import { TestDataMerchants } from 'src/assets/test-data/Merchants';
+import { PublicWebsiteMessageComponent } from '../message/message.component';
+import { PublicWebsiteAccountActivateComponent } from './account-activate.component';
 
 describe('PublicWebsiteAccountActivateComponent', () => {
   let component: PublicWebsiteAccountActivateComponent;

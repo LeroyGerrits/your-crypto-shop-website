@@ -1,37 +1,51 @@
 <div class="WrapperPadding20-8-0-8">
-    <h2><a [routerLink]="['/control-panel/configuration/digibyte-wallets']">DigiByte wallets</a> - {{this.pageTitle}}
-    </h2>
+    <h2><a [routerLink]="['/control-panel/configuration/digibyte-wallets']">DigiByte wallets</a> - {{this.pageTitle}} </h2>
 </div>
-<div class="WrapperPadding20-8">
-    <form (ngSubmit)="onSubmit()">
-        <mat-dialog-content>
+<form (ngSubmit)="onSubmit()">
+    <div class="ColumnOneHalf">
+        <div class="WrapperPadding20-10-0-8">
             <mat-form-field>
                 <mat-label>Name</mat-label>
-                <input matInput [formControl]="controlName" maxlength="255"
-                    [ngClass]="{ 'is-invalid': formSubmitted && controlName.errors }" />
+                <input matInput [formControl]="controlName" maxlength="255" [ngClass]="{ 'is-invalid': formSubmitted && controlName.errors }" />
                 <div *ngIf="formSubmitted && controlName.errors" class="TextError">
                     <div *ngIf="controlName.errors['required']">Name is required</div>
                 </div>
             </mat-form-field>
+        </div>
+    </div>
+    <div class="ColumnOneHalf">
+        <div class="WrapperPadding20-10-0-8">
+            <p>The name of your DigiByte wallet.</p>
+        </div>
+    </div>
+    <mat-divider class="ClearLeft" />
+    <div class="ColumnOneHalf">
+        <div class="WrapperPadding20-10-0-8">
             <mat-form-field>
                 <mat-label>Address</mat-label>
-                <input matInput [formControl]="controlAddress" maxlength="255"
-                    [ngClass]="{ 'is-invalid': formSubmitted && controlAddress.errors }" />
+                <input matInput [formControl]="controlAddress" maxlength="255" [ngClass]="{ 'is-invalid': formSubmitted && controlAddress.errors }" />
                 <div *ngIf="formSubmitted && controlAddress.errors" class="TextError">
                     <div *ngIf="controlAddress.errors['required']">Address is required</div>
                 </div>
             </mat-form-field>
-        </mat-dialog-content>
-
-        <div class="CenteredFormButtons">
-            <button mat-raised-button [disabled]="formLoading" type="button"
-                [routerLink]="['/control-panel/configuration/digibyte-wallets']">Cancel</button>
-            <button mat-raised-button [disabled]="formLoading" type="submit" color="primary">
-                <mat-icon *ngIf="formLoading">
-                    <mat-spinner diameter="18" />
-                </mat-icon>
-                Save
-            </button>
         </div>
-    </form>
-</div>
+    </div>
+    <div class="ColumnOneHalf">
+        <div class="WrapperPadding20-10-0-8">
+            <p>The address of your DigiByte wallet, can be either a legacy address (starting with capital D) or a bech32 address (starting with 'dgb1'). DGB Commerce will use this address to transfer any DigiByte to, should someone order and pay for products through one of your shops.</p>
+        </div>
+    </div>
+    <mat-divider class="ClearLeft" />
+    <div class="CenteredFormButtons">
+        <button mat-raised-button [disabled]="formLoading" type="button" [routerLink]="['/control-panel/configuration/digibyte-wallets']">Cancel</button>
+        <button mat-raised-button [disabled]="formLoading" type="submit" color="primary">
+            <mat-icon *ngIf="formLoading">
+                <mat-spinner diameter="18" />
+            </mat-icon>
+            Save
+        </button>
+    </div>
+
+
+
+</form>

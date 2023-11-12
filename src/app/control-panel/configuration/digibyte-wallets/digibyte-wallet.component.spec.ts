@@ -15,6 +15,7 @@ import { MutationResult } from 'src/app/shared/models/MutationResult';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RouterTestingModule } from '@angular/router/testing';
 import { TestDataDigiByteWallets } from 'src/assets/test-data/DigiByteWallets';
+import { MatDividerModule } from '@angular/material/divider';
 
 describe('ControlPanelConfigurationDigiByteWalletComponent', () => {
   let component: ControlPanelConfigurationDigiByteWalletComponent;
@@ -33,7 +34,7 @@ describe('ControlPanelConfigurationDigiByteWalletComponent', () => {
 
     TestBed.configureTestingModule({
       declarations: [ControlPanelConfigurationDigiByteWalletComponent],
-      imports: [BrowserAnimationsModule, MatDialogModule, MatFormFieldModule, MatInputModule, ReactiveFormsModule, RouterLink, RouterTestingModule.withRoutes(
+      imports: [BrowserAnimationsModule, MatDialogModule, MatDividerModule, MatFormFieldModule, MatInputModule, ReactiveFormsModule, RouterLink, RouterTestingModule.withRoutes(
         [{ path: 'control-panel/configuration/digibyte-wallets', component: ControlPanelConfigurationDigiByteWalletListComponent }]
       )],
       providers: [
@@ -130,7 +131,7 @@ describe('ControlPanelConfigurationDigiByteWalletComponentWithErrors', () => {
 
     TestBed.configureTestingModule({
       declarations: [ControlPanelConfigurationDigiByteWalletComponent],
-      imports: [BrowserAnimationsModule, MatDialogModule, MatFormFieldModule, MatInputModule, ReactiveFormsModule, RouterLink, RouterTestingModule.withRoutes(
+      imports: [BrowserAnimationsModule, MatDialogModule, MatDividerModule, MatFormFieldModule, MatInputModule, ReactiveFormsModule, RouterLink, RouterTestingModule.withRoutes(
         [{ path: 'control-panel/configuration/digibyte-wallets', component: ControlPanelConfigurationDigiByteWalletListComponent }]
       )],
       providers: [

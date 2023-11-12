@@ -11,8 +11,7 @@
             <div class="WrapperPadding20-10-0-8">
                 <mat-form-field>
                     <mat-label>Password</mat-label>
-                    <input matInput type="password" [formControl]="controlPassword"
-                        [ngClass]="{ 'is-invalid': formSubmitted && controlPassword.errors }" />
+                    <input matInput type="password" [formControl]="controlPassword" [ngClass]="{ 'is-invalid': formSubmitted && controlPassword.errors }" />
                     <div *ngIf="formSubmitted && controlPassword.errors" class="TextError">
                         <div *ngIf="controlPassword.errors['required']">Password is required</div>
                     </div>
@@ -21,16 +20,14 @@
         </div>
         <div class="ColumnOneHalf">
             <div class="WrapperPadding20-10-0-8">
-                <p>Use a unique password that you don't use on any other website and does not contain your name,
-                    birthdate, family member or pet names. The longer and more cryptic your password, the better.</p>
+                <p>Use a unique password that you don't use on any other website and does not contain your name, birthdate, family member or pet names. The longer and more cryptic your password, the better.</p>
             </div>
         </div>
         <div class="ColumnOneHalf ClearLeft">
             <div class="WrapperPadding20-10-0-8">
                 <mat-form-field>
                     <mat-label>Repeat password</mat-label>
-                    <input matInput type="password" [formControl]="controlPasswordRepetition"
-                        [ngClass]="{ 'is-invalid': formSubmitted && controlPasswordRepetition.errors }" />
+                    <input matInput type="password" [formControl]="controlPasswordRepetition" [ngClass]="{ 'is-invalid': formSubmitted && controlPasswordRepetition.errors }" />
                     <div *ngIf="formSubmitted && controlPasswordRepetition.errors" class="TextError">
                         <div *ngIf="controlPasswordRepetition.errors['required']">Repeated password is required</div>
                     </div>
