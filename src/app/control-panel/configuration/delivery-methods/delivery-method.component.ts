@@ -3,6 +3,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar, MatSnackBarRef, TextOnlySnackBar } from '@angular/material/snack-bar';
 
+import { Constants } from 'src/app/shared/Constants';
 import { DeliveryMethod } from 'src/app/shared/models/DeliveryMethod.model';
 import { DeliveryMethodService } from 'src/app/shared/services/DeliveryMethod.service';
 import { Environment } from 'src/app/shared/environments/Environment';
@@ -25,7 +26,7 @@ export class ControlPanelConfigurationDeliveryMethodComponent implements OnInit,
   public formSubmitted = false;
   public controlName = new FormControl('', Validators.required);
   public controlShop = new FormControl('', Validators.required);
-  public controlCosts = new FormControl('', Validators.pattern(/^-?\d*[.,]?\d{0,2}$/));
+  public controlCosts = new FormControl('', Validators.pattern(Constants.REGEX_PATTERN_DECIMAL));
 
   public pageTitle = 'Create new delivery method'
   public deliveryMethod: DeliveryMethod = new DeliveryMethod();
