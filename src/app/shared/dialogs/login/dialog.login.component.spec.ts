@@ -34,7 +34,7 @@ describe('DialogLoginComponent', () => {
     TestBed.configureTestingModule({
       declarations: [DialogLoginComponent],
       imports: [BrowserAnimationsModule, MatDialogModule, MatFormFieldModule, MatInputModule, ReactiveFormsModule, RouterTestingModule.withRoutes(
-        [{ path: 'account', component: AccountComponent }]
+        [{ path: 'control-panel', component: AccountComponent }]
       )],
       providers: [
         { provide: MatDialogRef, useValue: matDialogRefSpy },
@@ -89,7 +89,7 @@ describe('DialogLoginComponentWithErrors', () => {
     TestBed.configureTestingModule({
       declarations: [DialogLoginComponent],
       imports: [BrowserAnimationsModule, MatDialogModule, MatFormFieldModule, MatInputModule, ReactiveFormsModule, RouterTestingModule.withRoutes(
-        [{ path: 'account', component: AccountComponent }]
+        [{ path: 'control-panel', component: AccountComponent }]
       )],
       providers: [
         { provide: MatDialogRef, useValue: matDialogRefSpy },

@@ -2,7 +2,6 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { AccountChangePasswordComponent } from './account/change-password/change-password.component';
 import { AccountComponent } from './account/account.component';
-import { AccountDashboardComponent } from './account/dashboard/dashboard.component';
 import { AccountSettingsComponent } from './account/settings/settings.component';
 import { Constants } from './shared/Constants';
 import { ControlPanelCatalogCategoryComponent } from './control-panel/catalog/categories/category.component';
@@ -46,7 +45,6 @@ import { PublicWebsiteShopListComponent } from './public-website/shops/shop-list
 const routes: Routes = [
   {
     path: 'account', component: AccountComponent, canActivate: [MerchantAuthorizedGuard], title: `${Constants.TITLE_PREFIX} - Account`, children: [
-      { path: '', component: AccountDashboardComponent, title: `${Constants.TITLE_PREFIX} - Account dashboard` },
       { path: 'settings', component: AccountSettingsComponent, title: `${Constants.TITLE_PREFIX} - Settings` },
       { path: 'change-password', component: AccountChangePasswordComponent, title: `${Constants.TITLE_PREFIX} - Change password` }
     ]

@@ -1,18 +1,31 @@
 <div class="WrapperPadding20-10-0-8">
     <h2>Dashboard</h2>
 </div>
-<div class="WrapperPadding20-8-0-8">
-    <h3>Sales</h3>
-    <div>Chart with sales will be shown here later.</div>
+
+<div class="ColumnOneHalf">
+    <div class="WrapperPadding20-10-0-8">
+        <p>Hi {{this.activeMerchant?.Username}}
+            <span *ngIf="this.activeMerchant?.SecondLastLogin" class="DisplayBlock">Your last login was
+                {{this.activeMerchant?.SecondLastLogin | date:constants.DATE_TIME_FORMAT:'+00:00'}} from IP address
+                {{this.activeMerchant?.SecondLastIpAddress}}.
+            </span>
+        </p>
+    </div>
 </div>
 <div class="ColumnOneHalf">
     <div class="WrapperPadding20-8-0-10">
+        <h3>Sales</h3>
+        <div>Chart with sales will be shown here later.</div>
+    </div>
+</div>
+<div class="ColumnOneHalf ClearLeft">
+    <div class="WrapperPadding20-10-0-8">
         <h3>Newest customers</h3>
         <div>Table with newest customers will be shown here later.</div>
     </div>
 </div>
 <div class="ColumnOneHalf">
-    <div class="WrapperPadding20-10-0-8">
+    <div class="WrapperPadding20-8-0-10">
         <h3>Most popular products</h3>
         <div>Table with most popular products will be shown here later.</div>
     </div>

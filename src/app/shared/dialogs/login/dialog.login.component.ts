@@ -46,7 +46,7 @@ export class DialogLoginComponent implements OnInit {
             .pipe(first())
             .subscribe({
                 next: () => {
-                    this.router.navigate(['/account']);
+                    this.router.navigate(['/control-panel']);
 
                     if (this.dialogRefComponent)
                         this.dialogRefComponent.close();

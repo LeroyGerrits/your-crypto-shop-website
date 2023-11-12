@@ -7,8 +7,6 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { RouterTestingModule } from '@angular/router/testing';
-import { AccountComponent } from 'src/app/account/account.component';
 import { Category } from 'src/app/shared/models/Category.model';
 import { MutationResult } from 'src/app/shared/models/MutationResult';
 import { Shop } from 'src/app/shared/models/Shop.model';
@@ -47,9 +45,7 @@ describe('ControlPanelCatalogCategoryComponent', () => {
 
     TestBed.configureTestingModule({
       declarations: [ControlPanelCatalogCategoryComponent],
-      imports: [BrowserAnimationsModule, MatCheckboxModule, MatDialogModule, MatFormFieldModule, MatInputModule, ReactiveFormsModule, RouterTestingModule.withRoutes(
-        [{ path: 'account', component: AccountComponent }]
-      )],
+      imports: [BrowserAnimationsModule, MatCheckboxModule, MatDialogModule, MatFormFieldModule, MatInputModule, ReactiveFormsModule],
       providers: [
         { provide: MatDialogRef, useValue: matDialogRefSpy },
         { provide: MAT_DIALOG_DATA, useValue: mockDialogData },
@@ -151,9 +147,7 @@ describe('ControlPanelCatalogCategoryComponentWithErrors', () => {
 
     TestBed.configureTestingModule({
       declarations: [ControlPanelCatalogCategoryComponent],
-      imports: [BrowserAnimationsModule, MatCheckboxModule, MatDialogModule, MatFormFieldModule, MatInputModule, ReactiveFormsModule, RouterTestingModule.withRoutes(
-        [{ path: 'account', component: AccountComponent }]
-      )],
+      imports: [BrowserAnimationsModule, MatCheckboxModule, MatDialogModule, MatFormFieldModule, MatInputModule, ReactiveFormsModule],
       providers: [
         { provide: MatDialogRef, useValue: matDialogRefSpy },
         { provide: MAT_DIALOG_DATA, useValue: mockDialogData },

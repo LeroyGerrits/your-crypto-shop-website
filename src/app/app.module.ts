@@ -3,7 +3,6 @@ import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 
 import { AccountChangePasswordComponent } from './account/change-password/change-password.component';
 import { AccountComponent } from './account/account.component';
-import { AccountDashboardComponent } from './account/dashboard/dashboard.component';
 import { AccountSettingsComponent } from './account/settings/settings.component';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
@@ -92,7 +91,6 @@ import { StripHtmlPipe } from './shared/pipes/StripHtml.pipe';
 @NgModule({
   declarations: [
     AccountComponent,
-    AccountDashboardComponent,
     AccountChangePasswordComponent,
     AccountSettingsComponent,
     AppComponent,
