@@ -4,6 +4,7 @@ import { of, throwError } from 'rxjs';
 
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatDividerModule } from '@angular/material/divider';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
@@ -38,7 +39,7 @@ describe('ControlPanelConfigurationDeliveryMethodComponent', () => {
 
     TestBed.configureTestingModule({
       declarations: [ControlPanelConfigurationDeliveryMethodComponent],
-      imports: [BrowserAnimationsModule, MatDialogModule, MatFormFieldModule, MatInputModule, MatSelectModule, ReactiveFormsModule, RouterLink, RouterTestingModule.withRoutes(
+      imports: [BrowserAnimationsModule, MatDialogModule, MatDividerModule, MatFormFieldModule, MatInputModule, MatSelectModule, ReactiveFormsModule, RouterLink, RouterTestingModule.withRoutes(
         [{ path: 'control-panel/configuration/delivery-methods', component: ControlPanelConfigurationDeliveryMethodListComponent }]
       )],
       providers: [
@@ -136,7 +137,7 @@ describe('ControlPanelConfigurationDeliveryMethodComponentWithErrors', () => {
 
     TestBed.configureTestingModule({
       declarations: [ControlPanelConfigurationDeliveryMethodComponent],
-      imports: [BrowserAnimationsModule, MatDialogModule, MatFormFieldModule, MatInputModule, MatSelectModule, ReactiveFormsModule, RouterLink, RouterTestingModule.withRoutes(
+      imports: [BrowserAnimationsModule, MatDialogModule, MatDividerModule, MatFormFieldModule, MatInputModule, MatSelectModule, ReactiveFormsModule, RouterLink, RouterTestingModule.withRoutes(
         [{ path: 'control-panel/configuration/delivery-methods', component: ControlPanelConfigurationDeliveryMethodListComponent }]
       )],
       providers: [

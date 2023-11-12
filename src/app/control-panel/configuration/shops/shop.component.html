@@ -18,7 +18,8 @@
             <p>The name of your shop and it's main point of recognition. Choose a short, unique and easy to remember name for your customers.</p>
         </div>
     </div>
-    <div class="ColumnOneHalf ClearLeft">
+    <mat-divider class="ClearLeft" />
+    <div class="ColumnOneHalf">
         <div class="WrapperPadding20-10-0-8">
             <mat-form-field>
                 <mat-icon *ngIf="controlSubDomain.value && !controlSubDomain.errors" [ngClass]="{
@@ -42,7 +43,8 @@
             <p>The subdomain your shop will be accessible from and which will evaluate to <strong>https://<span class="TextDecorationUnderline">subdomain</span>.{{environment.WEBSITE_DOMAIN}}</strong>. If left empty, the ID of your shop will be used to format the address to your shop which is quite long and cryptic. Choose a short and easy to remember subdomain to make it easier for your customers to find your shop. A subdomain can only consist of alphanumeric characters.</p>
         </div>
     </div>
-    <div class="CenteredFormButtons ClearLeft">
+    <mat-divider class="ClearLeft" />
+    <div class="CenteredFormButtons">
         <button mat-raised-button [disabled]="formLoading" type="button" [routerLink]="['/control-panel/configuration/shops']">Cancel</button>
         <button mat-raised-button [disabled]="formLoading" type="submit" color="primary">
             <mat-icon *ngIf="formLoading">

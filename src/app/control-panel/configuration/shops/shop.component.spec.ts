@@ -1,24 +1,25 @@
-import { ActivatedRoute, Router, RouterLink, convertToParamMap } from '@angular/router';
-import { ComponentFixture, TestBed, fakeAsync, tick } from '@angular/core/testing';
 import { HttpClient, HttpHandler } from '@angular/common/http';
+import { ComponentFixture, TestBed, fakeAsync, tick } from '@angular/core/testing';
+import { ActivatedRoute, Router, RouterLink, convertToParamMap } from '@angular/router';
 import { of, throwError } from 'rxjs';
 
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { Constants } from 'src/app/shared/Constants';
-import { ControlPanelConfigurationShopComponent } from './shop.component';
-import { ControlPanelConfigurationShopListComponent } from './shop-list.component';
+import { ReactiveFormsModule } from '@angular/forms';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatDividerModule } from '@angular/material/divider';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatTooltipModule } from '@angular/material/tooltip';
-import { MutationResult } from 'src/app/shared/models/MutationResult';
-import { ReactiveFormsModule } from '@angular/forms';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterTestingModule } from '@angular/router/testing';
+import { Constants } from 'src/app/shared/Constants';
+import { MutationResult } from 'src/app/shared/models/MutationResult';
 import { ShopService } from 'src/app/shared/services/Shop.service';
 import { TestDataMerchants } from 'src/assets/test-data/Merchants';
 import { TestDataShops } from 'src/assets/test-data/Shops';
+import { ControlPanelConfigurationShopListComponent } from './shop-list.component';
+import { ControlPanelConfigurationShopComponent } from './shop.component';
 
 describe('ControlPanelConfigurationShopComponent', () => {
   let component: ControlPanelConfigurationShopComponent;
@@ -38,7 +39,7 @@ describe('ControlPanelConfigurationShopComponent', () => {
 
     TestBed.configureTestingModule({
       declarations: [ControlPanelConfigurationShopComponent],
-      imports: [BrowserAnimationsModule, MatDialogModule, MatFormFieldModule, MatIconModule, MatInputModule, MatTooltipModule, ReactiveFormsModule, RouterLink, RouterTestingModule.withRoutes(
+      imports: [BrowserAnimationsModule, MatDialogModule, MatDividerModule, MatFormFieldModule, MatIconModule, MatInputModule, MatTooltipModule, ReactiveFormsModule, RouterLink, RouterTestingModule.withRoutes(
         [{ path: 'control-panel/configuration/shops', component: ControlPanelConfigurationShopListComponent }]
       )],
       providers: [
@@ -151,7 +152,7 @@ describe('ControlPanelConfigurationShopComponentWithErrors', () => {
 
     TestBed.configureTestingModule({
       declarations: [ControlPanelConfigurationShopComponent],
-      imports: [BrowserAnimationsModule, MatDialogModule, MatFormFieldModule, MatIconModule, MatInputModule, MatTooltipModule, ReactiveFormsModule, RouterLink, RouterTestingModule.withRoutes(
+      imports: [BrowserAnimationsModule, MatDialogModule, MatDividerModule, MatFormFieldModule, MatIconModule, MatInputModule, MatTooltipModule, ReactiveFormsModule, RouterLink, RouterTestingModule.withRoutes(
         [{ path: 'control-panel/configuration/shops', component: ControlPanelConfigurationShopListComponent }]
       )],
       providers: [
