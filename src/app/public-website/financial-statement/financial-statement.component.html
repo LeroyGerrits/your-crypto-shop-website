@@ -27,7 +27,7 @@
     <div class="WrapperPadding20-10-0-8">
         <mat-form-field>
             <mat-label>Date from</mat-label>
-            <input matInput [formControl]="controlFilterDateFrom" [matDatepicker]="pickerDateFrom" (change)="onFilter()" />
+            <input matInput [formControl]="controlFilterDateFrom" [matDatepicker]="pickerDateFrom" />
             <mat-datepicker-toggle matIconSuffix [for]="pickerDateFrom"></mat-datepicker-toggle>
             <mat-datepicker #pickerDateFrom></mat-datepicker>
         </mat-form-field>
@@ -37,7 +37,7 @@
     <div class="WrapperPadding20-10-0-10">
         <mat-form-field>
             <mat-label>Date until</mat-label>
-            <input matInput [formControl]="controlFilterDateUntil" [matDatepicker]="pickerDateUntil" (change)="onFilter()" />
+            <input matInput [formControl]="controlFilterDateUntil" [matDatepicker]="pickerDateUntil" />
             <mat-datepicker-toggle matIconSuffix [for]="pickerDateUntil"></mat-datepicker-toggle>
             <mat-datepicker #pickerDateUntil></mat-datepicker>
         </mat-form-field>
@@ -47,7 +47,7 @@
     <div class="WrapperPadding20-10-0-10">
         <mat-form-field>
             <mat-label>Description</mat-label>
-            <input matInput [formControl]="controlFilterDescription" (change)="onFilter()" />
+            <input matInput [formControl]="controlFilterDescription" />
         </mat-form-field>
     </div>
 </div>
@@ -55,7 +55,7 @@
     <div class="WrapperPadding20-10-0-10">
         <mat-form-field>
             <mat-label>Recurrance</mat-label>
-            <mat-select [formControl]="controlFilterRecurrance" (selectionChange)="onFilter()">
+            <mat-select [formControl]="controlFilterRecurrance">
                 <mat-option />
                 <mat-option *ngFor="let type of recurrances | keyvalue;" [value]="type.key">
                     {{type.value}}
@@ -68,7 +68,7 @@
     <div class="WrapperPadding20-10-0-10">
         <mat-form-field>
             <mat-label>Type</mat-label>
-            <mat-select [formControl]="controlFilterType" (selectionChange)="onFilter()">
+            <mat-select [formControl]="controlFilterType">
                 <mat-option />
                 <mat-option *ngFor="let type of financialStatementTransactionTypes | keyvalue;" [value]="type.key">
                     {{type.value}}
@@ -81,7 +81,7 @@
     <div class="WrapperPadding20-8-0-10">
         <mat-form-field>
             <mat-label>Currency</mat-label>
-            <mat-select [formControl]="controlFilterCurrency" (selectionChange)="onFilter()">
+            <mat-select [formControl]="controlFilterCurrency">
                 <mat-option />
                 <mat-option *ngFor="let currency of this.currencies" [value]="currency.Id">
                     {{currency.Name}} ({{currency.Symbol}})

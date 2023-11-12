@@ -81,7 +81,7 @@ describe('PublicWebsiteFinancialStatementComponent', () => {
     component.controlFilterType.setValue('0');
     component.controlFilterCurrency.setValue(TestDataCurrencies[0].Id);
 
-    component.onFilter();
+    component.filterFinancialStatementTransactions();
     fixture.detectChanges();
 
     expect(component.dataSource).toBeDefined();

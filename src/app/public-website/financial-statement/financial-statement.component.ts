@@ -3,6 +3,7 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort, Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
+import { debounceTime, distinctUntilChanged } from 'rxjs';
 import { Constants } from 'src/app/shared/Constants';
 import { FinancialStatementTransactionType } from 'src/app/shared/enums/FinancialStatementTransactionType.enum';
 import { Recurrance } from 'src/app/shared/enums/Recurrance.enum';
@@ -55,11 +56,18 @@ export class PublicWebsiteFinancialStatementComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.onFilter();
+    this.filterFinancialStatementTransactions();
     this.currencyService.getList().subscribe(currencies => this.currencies = currencies);
+
+    this.controlFilterDateFrom.valueChanges.pipe(debounceTime(1000), distinctUntilChanged()).subscribe(() => this.filterFinancialStatementTransactions());
+    this.controlFilterDateUntil.valueChanges.pipe(debounceTime(1000), distinctUntilChanged()).subscribe(() => this.filterFinancialStatementTransactions());
+    this.controlFilterDescription.valueChanges.pipe(debounceTime(1000), distinctUntilChanged()).subscribe(() => this.filterFinancialStatementTransactions());
+    this.controlFilterRecurrance.valueChanges.pipe(debounceTime(1000), distinctUntilChanged()).subscribe(() => this.filterFinancialStatementTransactions());
+    this.controlFilterType.valueChanges.pipe(debounceTime(1000), distinctUntilChanged()).subscribe(() => this.filterFinancialStatementTransactions());
+    this.controlFilterCurrency.valueChanges.pipe(debounceTime(1000), distinctUntilChanged()).subscribe(() => this.filterFinancialStatementTransactions());
   }
 
-  onFilter() {
+  filterFinancialStatementTransactions() {
     const parameters: GetFinancialStatementTransactionsParameters = {};
     if (this.controlFilterDateFrom.value) parameters.DateFrom = new Date(this.controlFilterDateFrom.value);
     if (this.controlFilterDateUntil.value) parameters.DateUntil = new Date(this.controlFilterDateUntil.value);
