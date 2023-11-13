@@ -55,6 +55,8 @@ export class ControlPanelCatalogCategoryListComponent implements OnInit {
       if (shops && shops[0]) {
         this.retrieveCategoriesByShopId(shops[0].Id);
         this.controlFilterShop.setValue(shops[0].Id);
+      } else {
+        this.finishedLoading = true;
       }
     });
   }
