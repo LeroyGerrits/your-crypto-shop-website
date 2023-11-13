@@ -36,19 +36,14 @@
         <ng-container matColumnDef="SubDomain">
             <th mat-header-cell mat-sort-header *matHeaderCellDef>Subdomain</th>
             <td mat-cell *matCellDef="let element">
-                <span *ngIf="!element.SubDomain"><a href="https://{{element.Id}}.{{environment.WEBSITE_DOMAIN}}"
-                        target="_blank">https://<strong
-                            class="TextDecorationUnderline">{{element.Id}}</strong>.{{environment.WEBSITE_DOMAIN}}</a></span>
-                <span *ngIf="element.SubDomain"><a href="https://{{element.SubDomain}}.{{environment.WEBSITE_DOMAIN}}"
-                        target="_blank">https://<strong
-                            class="TextDecorationUnderline">{{element.SubDomain}}</strong>.{{environment.WEBSITE_DOMAIN}}</a></span>
+                <span *ngIf="!element.SubDomain"><a href="https://{{element.Id}}.{{environment.WEBSITE_DOMAIN}}" target="_blank">https://<strong class="TextDecorationUnderline">{{element.Id}}</strong>.{{environment.WEBSITE_DOMAIN}}</a></span>
+                <span *ngIf="element.SubDomain"><a href="https://{{element.SubDomain}}.{{environment.WEBSITE_DOMAIN}}" target="_blank">https://<strong class="TextDecorationUnderline">{{element.SubDomain}}</strong>.{{environment.WEBSITE_DOMAIN}}</a></span>
             </td>
         </ng-container>
 
         <ng-container matColumnDef="Merchant">
             <th mat-header-cell mat-sort-header *matHeaderCellDef>Merchant</th>
-            <td mat-cell *matCellDef="let element"><app-merchant-link [merchantId]="element.MerchantId"
-                    [merchantUsername]="element.MerchantUsername" [merchantScore]="element.MerchantScore" /></td>
+            <td mat-cell *matCellDef="let element"><app-merchant-link [merchantId]="element.MerchantId" [merchantUsername]="element.MerchantUsername" [merchantScore]="element.MerchantScore" /></td>
         </ng-container>
 
         <tr mat-header-row *matHeaderRowDef="this.displayedColumns"></tr>
