@@ -22,14 +22,9 @@
     <div class="ColumnOneHalf">
         <div class="WrapperPadding20-10-0-8">
             <mat-form-field>
-                <mat-icon *ngIf="controlSubDomain.value && !controlSubDomain.errors" [ngClass]="{
-                            'SubDomainAvailabilityIcon':true, 
-                            'SubDomainAvailabilityIconColorGreen':this.subDomainAvailable, 
-                            'SubDomainAvailabilityIconColorRed':!this.subDomainAvailable
-                        }" [matTooltip]="this.subDomainAvailable ? 'Subdomain is available' : 'Subdomain is unavailable'">{{this.subDomainAvailable
-                    ? 'check_circle' : 'cancel'}}</mat-icon>
+                <mat-icon *ngIf="controlSubDomain.value && !controlSubDomain.errors" [ngClass]="{ 'SubDomainAvailabilityIcon':true,  'SubDomainAvailabilityIconColorGreen':this.subDomainAvailable,  'SubDomainAvailabilityIconColorRed':!this.subDomainAvailable }" [matTooltip]="this.subDomainAvailable ? 'Subdomain is available' : 'Subdomain is unavailable'">{{this.subDomainAvailable ? 'check_circle' : 'cancel'}}</mat-icon>
                 <mat-label>Subdomain ( https://subdomain.{{environment.WEBSITE_DOMAIN}})</mat-label>
-                <input matInput [formControl]="controlSubDomain" maxlength="100" [ngClass]="{ 'is-invalid': controlSubDomain.errors }" />
+                <input matInput [formControl]="controlSubDomain" maxlength="100" [ngClass]="{ 'is-invalid': controlSubDomain.errors, 'TextTransformLowerCase': true }" />
                 <div *ngIf="formSubmitted && controlSubDomain.errors" class="TextError">
                     <div *ngIf="controlSubDomain.errors['pattern']">Only alphanumerical characters are allowed</div>
                     <div *ngIf="controlSubDomain.errors['minlength']">SubDomain needs to be at least 3 characters long
