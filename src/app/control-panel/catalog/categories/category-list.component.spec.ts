@@ -171,7 +171,7 @@ describe('ControlPanelCatalogCategoryListComponentWithErrors', () => {
     categoryServiceSpy.moveUp.and.returnValue(throwError(() => new Error('ERROR')));
 
     shopServiceSpy = jasmine.createSpyObj('ShopService', ['getList']);
-    shopServiceSpy.getList.and.returnValue(of(TestDataShops));
+    shopServiceSpy.getList.and.returnValue(of([]));
 
     TestBed.configureTestingModule({
       declarations: [ControlPanelCatalogCategoryListComponent],

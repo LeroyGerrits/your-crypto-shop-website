@@ -1,5 +1,5 @@
 import { ActivatedRoute, Router } from '@angular/router';
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, fakeAsync, tick } from '@angular/core/testing';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CurrencyService } from 'src/app/shared/services/Currency.service';
@@ -46,6 +46,7 @@ describe('PublicWebsiteFinancialStatementComponent', () => {
         { provide: ActivatedRoute, useValue: fakeActivatedRoute },
         { provide: CurrencyService, useValue: currencyServiceSpy },
         { provide: FinancialStatementTransactionService, useValue: financialStatementTransactionServiceSpy },
+        PublicWebsiteFinancialStatementComponent,
         DatePipe
       ]
     });
@@ -57,6 +58,54 @@ describe('PublicWebsiteFinancialStatementComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should filter financial statement transactions when date from filter gets used', fakeAsync(() => {
+    const componentStub: PublicWebsiteFinancialStatementComponent = TestBed.inject(PublicWebsiteFinancialStatementComponent);
+    spyOn(componentStub, 'filterFinancialStatementTransactions');
+    componentStub.controlFilterDateFrom.setValue('x');
+    tick(1000);
+    expect(componentStub.filterFinancialStatementTransactions).toHaveBeenCalled();
+  }));
+
+  it('should filter financial statement transactions when date until filter gets used', fakeAsync(() => {
+    const componentStub: PublicWebsiteFinancialStatementComponent = TestBed.inject(PublicWebsiteFinancialStatementComponent);
+    spyOn(componentStub, 'filterFinancialStatementTransactions');
+    componentStub.controlFilterDateUntil.setValue('x');
+    tick(1000);
+    expect(componentStub.filterFinancialStatementTransactions).toHaveBeenCalled();
+  }));
+
+  it('should filter financial statement transactions when description filter gets used', fakeAsync(() => {
+    const componentStub: PublicWebsiteFinancialStatementComponent = TestBed.inject(PublicWebsiteFinancialStatementComponent);
+    spyOn(componentStub, 'filterFinancialStatementTransactions');
+    componentStub.controlFilterDescription.setValue('x');
+    tick(1000);
+    expect(componentStub.filterFinancialStatementTransactions).toHaveBeenCalled();
+  }));
+
+  it('should filter financial statement transactions when recurrance filter gets used', fakeAsync(() => {
+    const componentStub: PublicWebsiteFinancialStatementComponent = TestBed.inject(PublicWebsiteFinancialStatementComponent);
+    spyOn(componentStub, 'filterFinancialStatementTransactions');
+    componentStub.controlFilterRecurrance.setValue('x');
+    tick(1000);
+    expect(componentStub.filterFinancialStatementTransactions).toHaveBeenCalled();
+  }));
+
+  it('should filter financial statement transactions when type filter gets used', fakeAsync(() => {
+    const componentStub: PublicWebsiteFinancialStatementComponent = TestBed.inject(PublicWebsiteFinancialStatementComponent);
+    spyOn(componentStub, 'filterFinancialStatementTransactions');
+    componentStub.controlFilterType.setValue('x');
+    tick(1000);
+    expect(componentStub.filterFinancialStatementTransactions).toHaveBeenCalled();
+  }));
+
+  it('should filter financial statement transactions when currency filter gets used', fakeAsync(() => {
+    const componentStub: PublicWebsiteFinancialStatementComponent = TestBed.inject(PublicWebsiteFinancialStatementComponent);
+    spyOn(componentStub, 'filterFinancialStatementTransactions');
+    componentStub.controlFilterCurrency.setValue('x');
+    tick(1000);
+    expect(componentStub.filterFinancialStatementTransactions).toHaveBeenCalled();
+  }));
 
   it('should edit the sortState when a sort direction is supplied', () => {
     const routerstub: Router = TestBed.inject(Router);

@@ -53,11 +53,6 @@ export class PublicWebsiteFinancialStatementComponent implements OnInit {
       this.controlFilterType,
       this.controlFilterCurrency
     ]);
-  }
-
-  ngOnInit() {
-    this.filterFinancialStatementTransactions();
-    this.currencyService.getList().subscribe(currencies => this.currencies = currencies);
 
     this.controlFilterDateFrom.valueChanges.pipe(debounceTime(1000), distinctUntilChanged()).subscribe(() => this.filterFinancialStatementTransactions());
     this.controlFilterDateUntil.valueChanges.pipe(debounceTime(1000), distinctUntilChanged()).subscribe(() => this.filterFinancialStatementTransactions());
@@ -65,6 +60,11 @@ export class PublicWebsiteFinancialStatementComponent implements OnInit {
     this.controlFilterRecurrance.valueChanges.pipe(debounceTime(1000), distinctUntilChanged()).subscribe(() => this.filterFinancialStatementTransactions());
     this.controlFilterType.valueChanges.pipe(debounceTime(1000), distinctUntilChanged()).subscribe(() => this.filterFinancialStatementTransactions());
     this.controlFilterCurrency.valueChanges.pipe(debounceTime(1000), distinctUntilChanged()).subscribe(() => this.filterFinancialStatementTransactions());
+  }
+
+  ngOnInit() {
+    this.filterFinancialStatementTransactions();
+    this.currencyService.getList().subscribe(currencies => this.currencies = currencies);
   }
 
   filterFinancialStatementTransactions() {
