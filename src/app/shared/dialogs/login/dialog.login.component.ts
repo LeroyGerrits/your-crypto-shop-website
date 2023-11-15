@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { MatSnackBar, MatSnackBarRef, TextOnlySnackBar } from '@angular/material/snack-bar';
 
 import { AuthenticationService } from 'src/app/shared/services/Authentication.service';
-import { MatDialogRef } from '@angular/material/dialog';
+import { DialogForgotPasswordComponent } from '../forgot-password/dialog.forgot-password.component';
 import { Router } from '@angular/router';
 import { first } from 'rxjs/operators';
 
@@ -11,25 +13,35 @@ import { first } from 'rxjs/operators';
     templateUrl: 'dialog.login.component.html'
 })
 export class DialogLoginComponent implements OnInit {
-    controlUsername = new FormControl('', Validators.required);
+    controlEmailAddress = new FormControl('', [Validators.required, Validators.email]);
     controlPassword = new FormControl('', Validators.required)
+
+    public snackBarRef: MatSnackBarRef<TextOnlySnackBar> | undefined;
 
     public form!: FormGroup;
     public formLoading = false;
     public formSubmitted = false;
-    public formError = '';
 
     constructor(
+        private dialog: MatDialog,
         private router: Router,
         private authenticationService: AuthenticationService,
-        private dialogRefComponent: MatDialogRef<any>
+        private dialogRefComponent: MatDialogRef<any>,
+        private snackBar: MatSnackBar
     ) { }
 
     ngOnInit() {
         this.form = new FormGroup([
-            this.controlUsername,
+            this.controlEmailAddress,
             this.controlPassword
         ]);
+    }
+
+    forgotPassword() {
+        if (this.dialogRefComponent)
+            this.dialogRefComponent.close();
+
+        this.dialog.open(DialogForgotPasswordComponent);
     }
 
     onSubmit() {
@@ -39,22 +51,21 @@ export class DialogLoginComponent implements OnInit {
             return;
         }
 
-        this.formError = '';
         this.formLoading = true;
 
-        this.authenticationService.login(this.controlUsername.value!, this.controlPassword.value!)
+        this.authenticationService.login(this.controlEmailAddress.value!, this.controlPassword.value!)
             .pipe(first())
             .subscribe({
                 next: () => {
-                    this.router.navigate(['/control-panel']);
-
                     if (this.dialogRefComponent)
                         this.dialogRefComponent.close();
+
+                    this.router.navigate(['/control-panel']);
                 },
                 error: error => {
-                    this.formError = error;
-                    this.formLoading = false;
-                }
+                    this.snackBarRef = this.snackBar.open(error, 'Close', { panelClass: ['error-snackbar'] });
+                },
+                complete: () => this.formLoading = false
             });
     }
 }

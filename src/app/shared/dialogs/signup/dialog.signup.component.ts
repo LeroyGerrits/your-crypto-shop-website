@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { MatSnackBar, MatSnackBarRef, TextOnlySnackBar } from '@angular/material/snack-bar';
 
+import { Component } from '@angular/core';
 import { Constants } from '../../Constants';
 import { MatDialogRef } from '@angular/material/dialog';
 import { Merchant } from '../../models/Merchant.model';
@@ -21,15 +22,17 @@ export class DialogSignUpComponent {
     public controlFirstName = new FormControl('', Validators.maxLength(255));
     public controlLastName = new FormControl('', [Validators.maxLength(255), Validators.required]);
 
+    public snackBarRef: MatSnackBarRef<TextOnlySnackBar> | undefined;
+
     public form!: FormGroup;
     public formLoading = false;
     public formSubmitted = false;
-    public formError = '';
 
     constructor(
         private dialogRefComponent: MatDialogRef<any>,
         private merchantService: MerchantService,
-        private router: Router
+        private router: Router,
+        private snackBar: MatSnackBar
     ) {
         this.form = new FormGroup([
             this.controlEmailAddress,
@@ -71,17 +74,17 @@ export class DialogSignUpComponent {
             this.router.navigate(['/message/account-registered']);
         } else {
             if (result.Constraint == 'UNIQUE_Merchant_EmailAddress') {
-                this.formError = `The e-mail address ${this.controlEmailAddress.value} is already in use.`;
+                this.snackBarRef = this.snackBar.open(`The e-mail address ${this.controlEmailAddress.value} is already in use.`, 'Close', { panelClass: ['error-snackbar'] });
             } else if (result.Constraint == 'UNIQUE_Merchant_Username') {
-                this.formError = `The username ${this.controlUsername.value} is already in use.`;
+                this.snackBarRef = this.snackBar.open(`The username ${this.controlUsername.value} is already in use.`, 'Close', { panelClass: ['error-snackbar'] });
             } else {
-                this.formError = result.Message;
+                this.snackBarRef = this.snackBar.open(result.Message, 'Close', { panelClass: ['error-snackbar'] });
             }
         }
     }
 
     handleOnSubmitError(error: string) {
-        this.formError = error;
+        this.snackBarRef = this.snackBar.open(error, 'Close', { panelClass: ['error-snackbar'] });
         this.formLoading = false;
     }
 }

@@ -13,10 +13,13 @@ import { PublicWebsiteMessageComponent } from 'src/app/public-website/message/me
 import { MutationResult } from '../../models/MutationResult';
 import { MerchantService } from '../../services/Merchant.service';
 import { DialogSignUpComponent } from './dialog.signup.component';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 describe('DialogSignUpComponent', () => {
   let component: DialogSignUpComponent;
   let fixture: ComponentFixture<DialogSignUpComponent>;
+
+  let matSnackBarSpy: jasmine.SpyObj<MatSnackBar>;
 
   let matDialogRefSpy: any;
   let matDialogSpy: jasmine.SpyObj<MatDialog>
@@ -24,6 +27,8 @@ describe('DialogSignUpComponent', () => {
   let mutationResult: MutationResult = <MutationResult>{ ErrorCode: 0, Identity: '', Message: '' };
 
   beforeEach(() => {
+    matSnackBarSpy = jasmine.createSpyObj('MatSnackBar', ['open']);
+
     matDialogRefSpy = jasmine.createSpyObj('MatDialogRef', ['close']);
     matDialogRefSpy.componentInstance = { title: '', message: '' };
     matDialogRefSpy.afterClosed = () => of(true);
@@ -43,16 +48,13 @@ describe('DialogSignUpComponent', () => {
       providers: [
         { provide: MatDialogRef, useValue: matDialogRefSpy },
         { provide: MAT_DIALOG_DATA, useValue: [] },
+        { provide: MatSnackBar, useValue: matSnackBarSpy },
         { provide: MerchantService, useValue: merchantServiceSpy }
       ]
     });
     fixture = TestBed.createComponent(DialogSignUpComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
-  });
-
-  it('should create', () => {
-    expect(component).toBeTruthy();
   });
 
   it('should not create a new account when empty fields get supplied', () => {
@@ -85,7 +87,7 @@ describe('DialogSignUpComponent', () => {
   it('should show an error when handling submit result and an error code is applicable', () => {
     const mutationResult = <MutationResult>{ ErrorCode: 666, Identity: '', Message: 'Evil error' };
     component.handleOnSubmitResult(mutationResult);
-    expect(component.formError).toBe(mutationResult.Message);
+    expect(matSnackBarSpy.open).toHaveBeenCalled();
   });
 });
 
@@ -111,9 +113,7 @@ describe('DialogSignUpComponentWithErrors', () => {
 
     TestBed.configureTestingModule({
       declarations: [DialogSignUpComponent],
-      imports: [BrowserAnimationsModule, MatDialogModule, MatFormFieldModule, MatInputModule, MatRadioModule, ReactiveFormsModule, RouterTestingModule.withRoutes(
-        [{ path: 'message/account-registered', component: PublicWebsiteMessageComponent }]
-      )],
+      imports: [BrowserAnimationsModule, MatDialogModule, MatFormFieldModule, MatInputModule, MatRadioModule, ReactiveFormsModule],
       providers: [
         { provide: MatDialogRef, useValue: matDialogRefSpy },
         { provide: MAT_DIALOG_DATA, useValue: [] },

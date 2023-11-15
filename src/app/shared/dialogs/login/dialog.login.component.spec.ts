@@ -5,9 +5,13 @@ import { of, throwError } from 'rxjs';
 import { AccountComponent } from 'src/app/account/account.component';
 import { AuthenticationService } from 'src/app/shared/services/Authentication.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { DialogForgotPasswordComponent } from '../forgot-password/dialog.forgot-password.component';
 import { DialogLoginComponent } from './dialog.login.component';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { MerchantService } from '../../services/Merchant.service';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RouterTestingModule } from '@angular/router/testing';
 
@@ -15,11 +19,15 @@ describe('DialogLoginComponent', () => {
   let component: DialogLoginComponent;
   let fixture: ComponentFixture<DialogLoginComponent>;
 
+  let matSnackBarSpy: jasmine.SpyObj<MatSnackBar>;
+
   let matDialogRefSpy: any;
   let matDialogSpy: jasmine.SpyObj<MatDialog>
   let authenticationServiceSpy: jasmine.SpyObj<AuthenticationService>;
 
   beforeEach(() => {
+    matSnackBarSpy = jasmine.createSpyObj('MatSnackBar', ['open']);
+
     matDialogRefSpy = jasmine.createSpyObj('MatDialogRef', ['close']);
     matDialogRefSpy.componentInstance = { title: '', message: '' };
     matDialogRefSpy.afterClosed = () => of(true);
@@ -33,13 +41,16 @@ describe('DialogLoginComponent', () => {
 
     TestBed.configureTestingModule({
       declarations: [DialogLoginComponent],
-      imports: [BrowserAnimationsModule, MatDialogModule, MatFormFieldModule, MatInputModule, ReactiveFormsModule, RouterTestingModule.withRoutes(
+      imports: [BrowserAnimationsModule, HttpClientTestingModule, MatDialogModule, MatFormFieldModule, MatInputModule, ReactiveFormsModule, RouterTestingModule.withRoutes(
         [{ path: 'control-panel', component: AccountComponent }]
       )],
       providers: [
+        { provide: MatDialog, useValue: matDialogSpy },
         { provide: MatDialogRef, useValue: matDialogRefSpy },
         { provide: MAT_DIALOG_DATA, useValue: [] },
-        { provide: AuthenticationService, useValue: authenticationServiceSpy }
+        { provide: AuthenticationService, useValue: authenticationServiceSpy },
+        { provide: MatSnackBar, useValue: matSnackBarSpy },
+        MerchantService
       ]
     });
     fixture = TestBed.createComponent(DialogLoginComponent);
@@ -47,19 +58,20 @@ describe('DialogLoginComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
+  it('should show a forgot password dialog', () => {
+    component.forgotPassword();
+    expect(matDialogSpy.open).toHaveBeenCalled();
   });
 
   it('should not authenticate nothing when empty credentials get supplied', () => {
-    component.controlUsername.setValue('');
+    component.controlEmailAddress.setValue('');
     component.controlPassword.setValue('');
     component.onSubmit();
     expect(authenticationServiceSpy.login).toHaveBeenCalledTimes(0);
   });
 
   it('should authenticate when a username and password are entered', () => {
-    component.controlUsername.setValue('merchant@dgbcommerce.com');
+    component.controlEmailAddress.setValue('merchant@dgbcommerce.com');
     component.controlPassword.setValue('********');
     component.onSubmit();
     expect(authenticationServiceSpy.login).toHaveBeenCalled();
@@ -103,7 +115,7 @@ describe('DialogLoginComponentWithErrors', () => {
   });
 
   it('should trigger error handling when sending a call to the authentication service and the request fails', () => {
-    component.controlUsername.setValue('merchant@dgbcommerce.com');
+    component.controlEmailAddress.setValue('merchant@dgbcommerce.com');
     component.controlPassword.setValue('********');
     component.onSubmit();
     expect(authenticationServiceSpy.login).toHaveBeenCalled();
