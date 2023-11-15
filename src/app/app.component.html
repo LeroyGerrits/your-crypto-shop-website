@@ -2,11 +2,18 @@
   <div class="CenteredContainer">
     <div class="RightMenu">
       <mat-toolbar>
-        <button *ngIf="!this.activeMerchant" mat-button (click)="signUp()">Sign up</button>
-        <button *ngIf="!this.activeMerchant" mat-button (click)="login()">Merchant login</button>
+        <button *ngIf="!this.activeMerchant" mat-button (click)="signUp()">
+          <mat-icon>account_box</mat-icon>
+          Sign up
+        </button>
+        <button *ngIf="!this.activeMerchant" mat-button (click)="login()">
+          <mat-icon>login</mat-icon>
+          Merchant login
+        </button>
 
         <button *ngIf="this.activeMerchant" mat-button [matMenuTriggerFor]="Merchant">
-          Logged in as <strong>{{this.activeMerchant.EmailAddress}}</strong>
+          <mat-icon>account_box</mat-icon>
+          {{this.activeMerchant.Username}}
         </button>
 
         <mat-menu #Merchant="matMenu">
@@ -18,12 +25,30 @@
     </div>
 
     <mat-toolbar *ngIf="this.activeMerchant">
-      <button mat-button [routerLink]="['/']">Website</button>
-      <button mat-button [routerLink]="['/control-panel']">Dashboard</button>
-      <button mat-button [matMenuTriggerFor]="ControlPanelConfiguration">Configuration</button>
-      <button mat-button [matMenuTriggerFor]="ControlPanelCatalog">Catalog</button>
-      <button mat-button [routerLink]="['/control-panel/customers']">Customers</button>
-      <button mat-button [matMenuTriggerFor]="ControlPanelSales">Sales</button>
+      <button mat-button [routerLink]="['/']">
+        <mat-icon>arrow_circle_left</mat-icon>
+        Website
+      </button>
+      <button mat-button [routerLink]="['/control-panel']">
+        <mat-icon>dashboard</mat-icon>
+        Dashboard
+      </button>
+      <button mat-button [matMenuTriggerFor]="ControlPanelConfiguration">
+        <mat-icon>settings</mat-icon>
+        Configuration
+      </button>
+      <button mat-button [matMenuTriggerFor]="ControlPanelCatalog">
+        <mat-icon>inventory</mat-icon>
+        Catalog
+      </button>
+      <button mat-button [routerLink]="['/control-panel/customers']">
+        <mat-icon>person</mat-icon>
+        Customers
+      </button>
+      <button mat-button [matMenuTriggerFor]="ControlPanelSales">
+        <mat-icon>attach_money</mat-icon>
+        Sales
+      </button>
 
       <mat-menu #ControlPanelConfiguration="matMenu">
         <button mat-menu-item [routerLink]="['/control-panel/configuration/delivery-methods']">Delivery methods</button>

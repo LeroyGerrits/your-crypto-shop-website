@@ -3,6 +3,7 @@ import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 
 import { AppComponent } from './app.component';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { RouterTestingModule } from '@angular/router/testing';
@@ -25,7 +26,7 @@ describe('AppComponent', () => {
 
     TestBed.configureTestingModule({
       declarations: [AppComponent],
-      imports: [HttpClientTestingModule, MatDialogModule, MatMenuModule, MatToolbarModule, RouterTestingModule],
+      imports: [HttpClientTestingModule, MatDialogModule, MatIconModule, MatMenuModule, MatToolbarModule, RouterTestingModule],
       providers: [
         { provide: MatDialog, useValue: matDialogSpy }
       ]
