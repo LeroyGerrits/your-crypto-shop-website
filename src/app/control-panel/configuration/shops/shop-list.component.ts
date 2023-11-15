@@ -7,6 +7,7 @@ import { MatSort, Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { debounceTime, distinctUntilChanged } from 'rxjs';
+import { Constants } from 'src/app/shared/Constants';
 import { DialogDeleteComponent } from 'src/app/shared/dialogs/delete/dialog.delete.component';
 import { Environment } from 'src/app/shared/environments/Environment';
 import { MutationResult } from 'src/app/shared/models/MutationResult';
@@ -27,6 +28,7 @@ export class ControlPanelConfigurationShopListComponent implements OnInit {
   public snackBarRef: MatSnackBarRef<TextOnlySnackBar> | undefined;
 
   environment = Environment;
+  constants = Constants;
   dataSource = new MatTableDataSource<Shop>;
   displayedColumns: string[] = ['Featured', 'Name', 'SubDomain', 'ActionButtons'];
   sortDirection: string | null = 'asc';
