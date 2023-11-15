@@ -681,6 +681,11 @@ td.NoDataCell {
   color: $lightest-blue-color !important;
 }
 
+.mdc-list-item__primary-text img {
+  margin-right: 10px;
+  vertical-align: middle;
+}
+
 .mat-mdc-option.mdc-list-item--selected:not(.mdc-list-item--disabled) .mdc-list-item__primary-text {
   color: $lightest-blue-color !important;
 }

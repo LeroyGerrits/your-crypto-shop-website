@@ -20,21 +20,28 @@ import { TestDataMerchants } from 'src/assets/test-data/Merchants';
 import { TestDataShops } from 'src/assets/test-data/Shops';
 import { ControlPanelConfigurationShopListComponent } from './shop-list.component';
 import { ControlPanelConfigurationShopComponent } from './shop.component';
+import { CountryService } from 'src/app/shared/services/Country.service';
+import { TestDataCountries } from 'src/assets/test-data/Countries';
 
 describe('ControlPanelConfigurationShopComponent', () => {
   let component: ControlPanelConfigurationShopComponent;
   let fixture: ComponentFixture<ControlPanelConfigurationShopComponent>;
 
+  let countryServiceSpy: jasmine.SpyObj<CountryService>;
   let shopServiceSpy: jasmine.SpyObj<ShopService>;
   let matSnackBarSpy: jasmine.SpyObj<MatSnackBar>;
   let mutationResult: MutationResult = <MutationResult>{ ErrorCode: 0, Identity: '', Message: '' };
 
   beforeEach(() => {
+    countryServiceSpy = jasmine.createSpyObj('CountryService', ['getList']);
+    countryServiceSpy.getList.and.returnValue(of(TestDataCountries));
+
     shopServiceSpy = jasmine.createSpyObj('ShopService', ['create', 'getById', 'subdomainAvailable', 'update']);
     shopServiceSpy.create.and.returnValue(of(mutationResult));
     shopServiceSpy.getById.and.returnValue(of(TestDataShops[0]));
     shopServiceSpy.subdomainAvailable.and.returnValue(of(true));
     shopServiceSpy.update.and.returnValue(of(mutationResult));
+
     matSnackBarSpy = jasmine.createSpyObj('MatSnackBar', ['open']);
 
     TestBed.configureTestingModule({
@@ -44,6 +51,7 @@ describe('ControlPanelConfigurationShopComponent', () => {
       )],
       providers: [
         { provide: ActivatedRoute, useValue: { snapshot: { paramMap: convertToParamMap({ shopId: TestDataShops[0].Id }) } } },
+        { provide: CountryService, useValue: countryServiceSpy },
         { provide: ShopService, useValue: shopServiceSpy },
         { provide: MatSnackBar, useValue: matSnackBarSpy },
         ControlPanelConfigurationShopComponent,
@@ -139,15 +147,20 @@ describe('ControlPanelConfigurationShopComponentWithErrors', () => {
   let component: ControlPanelConfigurationShopComponent;
   let fixture: ComponentFixture<ControlPanelConfigurationShopComponent>;
 
+  let countryServiceSpy: jasmine.SpyObj<CountryService>;
   let shopServiceSpy: jasmine.SpyObj<ShopService>;
   let matSnackBarSpy: jasmine.SpyObj<MatSnackBar>;
 
   beforeEach(() => {
+    countryServiceSpy = jasmine.createSpyObj('CountryService', ['getList']);
+    countryServiceSpy.getList.and.returnValue(of(TestDataCountries));
+
     shopServiceSpy = jasmine.createSpyObj('ShopService', ['create', 'getById', 'subdomainAvailable', 'update']);
     shopServiceSpy.create.and.returnValue(throwError(() => new Error('ERROR')));
     shopServiceSpy.getById.and.returnValue(of(TestDataShops[0]));
     shopServiceSpy.subdomainAvailable.and.returnValue(throwError(() => new Error('ERROR')));
     shopServiceSpy.update.and.returnValue(throwError(() => new Error('ERROR')));
+
     matSnackBarSpy = jasmine.createSpyObj('MatSnackBar', ['open']);
 
     TestBed.configureTestingModule({
@@ -157,6 +170,7 @@ describe('ControlPanelConfigurationShopComponentWithErrors', () => {
       )],
       providers: [
         { provide: ActivatedRoute, useValue: { snapshot: { paramMap: convertToParamMap({ shopId: TestDataShops[0].Id }) } } },
+        { provide: CountryService, useValue: countryServiceSpy },
         { provide: ShopService, useValue: shopServiceSpy },
         { provide: MatSnackBar, useValue: matSnackBarSpy },
         ControlPanelConfigurationShopComponent,

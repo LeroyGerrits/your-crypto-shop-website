@@ -33,7 +33,9 @@ describe('ControlPanelConfigurationDeliveryMethodComponent', () => {
     deliveryMethodServiceSpy.getById.and.returnValue(of(TestDataDeliveryMethods[0]));
     deliveryMethodServiceSpy.create.and.returnValue(of(mutationResult));
     deliveryMethodServiceSpy.update.and.returnValue(of(mutationResult));
+
     matSnackBarSpy = jasmine.createSpyObj('MatSnackBar', ['open']);
+
     shopServiceSpy = jasmine.createSpyObj('ShopService', ['getList']);
     shopServiceSpy.getList.and.returnValue(of(TestDataShops));
 

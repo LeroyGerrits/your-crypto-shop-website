@@ -6,6 +6,8 @@ import { debounceTime, distinctUntilChanged } from 'rxjs';
 
 import { AuthenticationService } from 'src/app/shared/services/Authentication.service';
 import { Constants } from 'src/app/shared/Constants';
+import { Country } from 'src/app/shared/models/Country.model';
+import { CountryService } from 'src/app/shared/services/Country.service';
 import { Environment } from 'src/app/shared/environments/Environment';
 import { Merchant } from 'src/app/shared/models/Merchant.model';
 import { MutationResult } from 'src/app/shared/models/MutationResult';
@@ -31,13 +33,16 @@ export class ControlPanelConfigurationShopComponent implements OnInit {
 
   public controlName = new FormControl('', Validators.required);
   public controlSubDomain = new FormControl('', [Validators.minLength(3), Validators.pattern(/^[a-zA-Z0-9]*$/)])
+  public controlCountry = new FormControl('');
 
   public pageTitle = 'Create new shop'
   public shop: Shop = new Shop();
   public subDomainAvailable = false;
+  public countries: Country[] | undefined;
 
   constructor(
     private authenticationService: AuthenticationService,
+    private countryService: CountryService,
     private route: ActivatedRoute,
     private router: Router,
     private snackBar: MatSnackBar,
@@ -47,7 +52,8 @@ export class ControlPanelConfigurationShopComponent implements OnInit {
 
     this.form = new FormGroup([
       this.controlName,
-      this.controlSubDomain
+      this.controlSubDomain,
+      this.controlCountry
     ]);
     this.controlSubDomain.valueChanges.pipe(debounceTime(1000), distinctUntilChanged()).subscribe(value => this.checkSubDomainAvailability(value));
   }
@@ -58,6 +64,8 @@ export class ControlPanelConfigurationShopComponent implements OnInit {
     if (this.queryStringShopId && this.queryStringShopId != 'new') {
       this.shopService.getById(this.queryStringShopId).subscribe(x => { this.onRetrieveData(x); });
     }
+
+    this.countryService.getList().subscribe(countries => this.countries = countries);
   }
 
   ngOnDestroy() {

@@ -39,6 +39,28 @@
         </div>
     </div>
     <mat-divider class="ClearLeft" />
+    <div class="ColumnOneHalf">
+        <div class="WrapperPadding20-10-0-8">
+            <mat-form-field>
+                <mat-label>Country</mat-label>
+                <mat-select [formControl]="controlCountry" [ngClass]="{ 'is-invalid': controlCountry.errors }">
+                    <mat-option *ngFor="let country of this.countries" [value]="country.Id">
+                        <img src="/assets/images/flags/{{country.Code.toLowerCase()}}.png" width="24" height="24" alt="{{country.Code}}" />
+                        {{country.Name}}
+                    </mat-option>
+                </mat-select>
+                <div *ngIf="formSubmitted && controlCountry.errors" class="TextError">
+                    <div *ngIf="controlCountry.errors['required']">Shop is required</div>
+                </div>
+            </mat-form-field>
+        </div>
+    </div>
+    <div class="ColumnOneHalf">
+        <div class="WrapperPadding20-10-0-8">
+            <p>The country this shop operates from.</p>
+        </div>
+    </div>
+    <mat-divider class="ClearLeft" />
     <div class="CenteredFormButtons">
         <button mat-raised-button [disabled]="formLoading" type="button" [routerLink]="['/control-panel/configuration/shops']">Cancel</button>
         <button mat-raised-button [disabled]="formLoading" type="submit" color="primary">
