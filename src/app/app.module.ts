@@ -22,6 +22,7 @@ import { ControlPanelConfigurationDigiByteWalletListComponent } from './control-
 import { ControlPanelConfigurationShopComponent } from './control-panel/configuration/shops/shop.component';
 import { ControlPanelConfigurationShopListComponent } from './control-panel/configuration/shops/shop-list.component';
 import { ControlPanelDashboardComponent } from './control-panel/dashboard/dashboard.component';
+import { CountryService } from './shared/services/Country.service';
 import { CurrencyService } from './shared/services/Currency.service';
 import { DatePipe } from '@angular/common';
 import { DeliveryMethodService } from './shared/services/DeliveryMethod.service';
@@ -174,6 +175,7 @@ import { StripHtmlPipe } from './shared/pipes/StripHtml.pipe';
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
     AuthenticationService,
     CategoryService,
+    CountryService,
     CurrencyService,
     DatePipe,
     DeliveryMethodService,
