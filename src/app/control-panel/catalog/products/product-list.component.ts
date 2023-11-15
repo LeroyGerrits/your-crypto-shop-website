@@ -10,10 +10,12 @@ import { debounceTime, distinctUntilChanged } from 'rxjs';
 import { Constants } from 'src/app/shared/Constants';
 import { DialogDeleteComponent } from 'src/app/shared/dialogs/delete/dialog.delete.component';
 import { Environment } from 'src/app/shared/environments/Environment';
+import { Category } from 'src/app/shared/models/Category.model';
 import { MutationResult } from 'src/app/shared/models/MutationResult';
 import { Product } from 'src/app/shared/models/Product.model';
 import { Shop } from 'src/app/shared/models/Shop.model';
 import { GetProductsParameters } from 'src/app/shared/models/parameters/GetProductsParameters.model';
+import { CategoryService } from 'src/app/shared/services/Category.service';
 import { ProductService } from 'src/app/shared/services/Product.service';
 import { ShopService } from 'src/app/shared/services/Shop.service';
 
@@ -38,11 +40,14 @@ export class ControlPanelCatalogProductListComponent {
   public form!: FormGroup;
   public controlFilterName = new FormControl('');
   public controlFilterShop = new FormControl('');
+  public controlFilterCategory = new FormControl('');
 
   public shops: Shop[] | undefined;
+  public categories: Category[] | undefined;
 
   constructor(
-    public dialog: MatDialog,
+    private categoryService: CategoryService,
+    private dialog: MatDialog,
     private snackBar: MatSnackBar,
     private router: Router,
     private productService: ProductService,
@@ -50,16 +55,30 @@ export class ControlPanelCatalogProductListComponent {
   ) {
     this.form = new FormGroup([
       this.controlFilterName,
-      this.controlFilterShop
+      this.controlFilterShop,
+      this.controlFilterCategory
     ]);
 
     this.controlFilterName.valueChanges.pipe(debounceTime(1000), distinctUntilChanged()).subscribe(() => this.filterProducts());
-    this.controlFilterShop.valueChanges.pipe(debounceTime(1000), distinctUntilChanged()).subscribe(() => this.filterProducts());
+    this.controlFilterCategory.valueChanges.pipe(debounceTime(1000), distinctUntilChanged()).subscribe(() => this.filterProducts());
   }
 
   ngOnInit() {
-    this.shopService.getList().subscribe(shops => this.shops = shops);
-    this.filterProducts();
+    this.shopService.getList().subscribe(shops => {
+      this.shops = shops;
+
+      if (shops && shops[0]) {
+        this.filterProducts();
+        this.controlFilterShop.setValue(shops[0].Id);
+      } else {
+        this.finishedLoading = true;
+      }
+    });
+
+    this.categoryService.getList().subscribe(categories => {
+      this.categories = categories;
+      // Construct dictionary here for filter dropdown
+    });
   }
 
   ngOnDestroy(): void {

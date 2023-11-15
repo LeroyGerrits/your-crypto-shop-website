@@ -10,3 +10,72 @@
 <div class="WrapperPadding20-8-0-8" *ngIf="this.finishedLoading && !this.shops?.length">
     <span class="WarningBlock">You must <a [routerLink]="['/control-panel/configuration/shops/new']">create a shop</a> first before you can manage products.</span>
 </div>
+<div class="WrapperPadding20-8-0-8">
+    <mat-form-field>
+        <mat-label>Shop</mat-label>
+        <mat-select [formControl]="controlFilterShop" (valueChange)="this.filterProducts()">
+            <mat-option *ngFor="let shop of this.shops" [value]="shop.Id">{{shop.Name}}</mat-option>
+        </mat-select>
+    </mat-form-field>
+</div>
+<div class="ColumnOneFourth">
+    <div class="WrapperPadding20-20-0-8">
+        <mat-form-field>
+            <mat-label>Name</mat-label>
+            <input matInput [formControl]="controlFilterName" />
+        </mat-form-field>
+    </div>
+</div>
+<div class="ColumnOneFourth">
+    <div class="WrapperPadding20-20-0-20">
+        <mat-form-field>
+            <mat-label>Category</mat-label>
+            <mat-select [formControl]="controlFilterCategory">
+                <mat-option></mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+</div>
+<div class="WrapperPadding20-8 ClearLeft">
+    <table mat-table matSort [dataSource]="this.dataSource" (matSortChange)="onSortChange($event)">
+        <ng-container matColumnDef="Name">
+            <th mat-header-cell mat-sort-header *matHeaderCellDef>Name</th>
+            <td mat-cell *matCellDef="let element">{{element.Name}}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="Shop">
+            <th mat-header-cell mat-sort-header *matHeaderCellDef>Stock</th>
+            <td mat-cell *matCellDef="let element">{{element.Stock}}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="Costs">
+            <th mat-header-cell mat-sort-header *matHeaderCellDef>Price</th>
+            <td mat-cell *matCellDef="let element" class="TextAlignRight">
+                <span>Ɗ&nbsp;{{element.Price | number:'1.2-8'}}</span>
+            </td>
+        </ng-container>
+
+        <ng-container matColumnDef="ActionButtons">
+            <th mat-header-cell *matHeaderCellDef></th>
+            <td mat-cell *matCellDef="let element">
+                <button mat-icon-button color="primary" (click)="editElement(element)">
+                    <mat-icon>edit</mat-icon>
+                </button>
+                <button mat-icon-button color="warn" (click)="deleteElement(element)">
+                    <mat-icon>delete</mat-icon>
+                </button>
+            </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="this.displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: this.displayedColumns;"></tr>
+        <tr class="mat-row" *matNoDataRow>
+            <td class="mat-cell NoDataCell" [colSpan]="this.displayedColumns.length">
+                <span *ngIf="this.controlFilterName.value || this.controlFilterShop.value">{{constants.MESSAGE_NO_RECORDS_FOUND}}</span>
+                <span *ngIf="!this.controlFilterName.value && !this.controlFilterShop.value">You have not yet created a product.</span>
+            </td>
+        </tr>
+    </table>
+
+    <mat-paginator [pageSizeOptions]="[25, 50, 100]" showFirstLastButtons />
+</div>

@@ -1,3 +1,82 @@
-<div class="WrapperPadding20-8">
-    <h2>Product {{this.product.Name}} ({{this.product.Id}})</h2>
+<div class="WrapperPadding20-8-0-8">
+    <h2><a [routerLink]="['/control-panel/catalog/products']">Products</a> - {{this.pageTitle}}</h2>
 </div>
+<form (ngSubmit)="onSubmit()">
+
+    <mat-tab-group>
+        <mat-tab label="Product">
+            <div class="ColumnOneHalf">
+                <div class="WrapperPadding20-10-0-8">
+                    <mat-form-field>
+                        <mat-label>Name</mat-label>
+                        <input matInput [formControl]="controlName" maxlength="255" [ngClass]="{ 'is-invalid': formSubmitted && controlName.errors }" />
+                        <div *ngIf="formSubmitted && controlName.errors" class="TextError">
+                            <div *ngIf="controlName.errors['required']">Name is required</div>
+                        </div>
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="ColumnOneHalf">
+                <div class="WrapperPadding20-10-0-8">
+                    <p>The name of your product. Choose a descriptive name so your customers will now what any additional charges are for.</p>
+                </div>
+            </div>
+            <mat-divider class="ClearLeft" />
+            <div class="ColumnOneHalf">
+                <div class="WrapperPadding20-10-0-8">
+                    <mat-form-field>
+                        <mat-label>Shop</mat-label>
+                        <mat-select [formControl]="controlShop" [ngClass]="{ 'is-invalid': controlShop.errors }">
+                            <mat-option *ngFor="let shop of this.shops" [value]="shop.Id">{{shop.Name}}</mat-option>
+                        </mat-select>
+                        <div *ngIf="formSubmitted && controlShop.errors" class="TextError">
+                            <div *ngIf="controlShop.errors['required']">Shop is required</div>
+                        </div>
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="ColumnOneHalf">
+                <div class="WrapperPadding20-10-0-8">
+                    <p>The shop this delivery method is applicable to.</p>
+                </div>
+            </div>
+            <mat-divider class="ClearLeft" />
+            <div class="ColumnOneHalf">
+                <div class="WrapperPadding20-10-0-8">
+                    <mat-form-field>
+                        <mat-label>Price</mat-label>
+                        <input matInput [formControl]="controlPrice" maxlength="20" placeholder="Example: 250.45" [ngClass]="{ 'is-invalid': formSubmitted && controlPrice.errors }" />
+                        <div *ngIf="formSubmitted && controlPrice.errors" class="TextError">
+                            <div *ngIf="controlPrice.errors['pattern']">Price can only be a numerical value with up to 2 decimals.</div>
+                        </div>
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="ColumnOneHalf">
+                <div class="WrapperPadding20-10-0-8">
+                    <p>The price of the product in flat DigiByte.</p>
+                </div>
+            </div>
+        </mat-tab>
+        <mat-tab label="Description">
+            <div class="WrapperPadding20-8-0-8">
+                <mat-form-field>
+                    <textarea matInput placeholder="A clear description of your product. You can put as much information in here as you'd like." [formControl]="controlDescription" rows="10" [ngClass]="{ 'is-invalid': formSubmitted && controlDescription.errors }"></textarea>
+                </mat-form-field>
+            </div>
+        </mat-tab>
+        <mat-tab label="Categories">
+            Category list
+        </mat-tab>
+    </mat-tab-group>
+    <mat-divider class="ClearLeft" />
+    <div class="CenteredFormButtons">
+        <button mat-raised-button [disabled]="formLoading" type="button" [routerLink]="['/control-panel/catalog/products']">Cancel</button>
+        <button mat-raised-button [disabled]="formLoading" type="submit" color="primary">
+            <mat-icon *ngIf="formLoading">
+                <mat-spinner diameter="18" />
+            </mat-icon>
+            Save
+        </button>
+    </div>
+</form>

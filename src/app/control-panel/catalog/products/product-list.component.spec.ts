@@ -20,6 +20,8 @@ import { ShopService } from 'src/app/shared/services/Shop.service';
 import { TestDataProducts } from 'src/assets/test-data/Products';
 import { TestDataShops } from 'src/assets/test-data/Shops';
 import { ControlPanelCatalogProductListComponent } from './product-list.component';
+import { TestDataCategories } from 'src/assets/test-data/Categories';
+import { CategoryService } from 'src/app/shared/services/Category.service';
 
 describe('ControlPanelCatalogProductListComponent', () => {
   let component: ControlPanelCatalogProductListComponent;
@@ -29,6 +31,7 @@ describe('ControlPanelCatalogProductListComponent', () => {
   let matDialogSpy: jasmine.SpyObj<MatDialog>
   let matSnackBarSpy: jasmine.SpyObj<MatSnackBar>;
 
+  let categoryServiceSpy: jasmine.SpyObj<CategoryService>;
   let productServiceSpy: jasmine.SpyObj<ProductService>;
   let shopServiceSpy: jasmine.SpyObj<ShopService>;
   let mutationResult: MutationResult = <MutationResult>{ ErrorCode: 0, Identity: '', Message: '' };
@@ -47,6 +50,9 @@ describe('ControlPanelCatalogProductListComponent', () => {
     productServiceSpy.getList.and.returnValue(of(TestDataProducts));
     productServiceSpy.delete.and.returnValue(of(mutationResult));
 
+    categoryServiceSpy = jasmine.createSpyObj('CategoryService', ['getList']);
+    categoryServiceSpy.getList.and.returnValue(of(TestDataCategories));
+
     shopServiceSpy = jasmine.createSpyObj('ShopService', ['getList']);
     shopServiceSpy.getList.and.returnValue(of(TestDataShops));
 
@@ -57,6 +63,7 @@ describe('ControlPanelCatalogProductListComponent', () => {
       )],
       providers: [
         { provide: ActivatedRoute, useValue: { snapshot: { data: {} } } },
+        { provide: CategoryService, useValue: categoryServiceSpy },
         { provide: MatDialog, useValue: matDialogSpy },
         { provide: ShopService, useValue: shopServiceSpy },
         { provide: ProductService, useValue: productServiceSpy },
@@ -70,7 +77,7 @@ describe('ControlPanelCatalogProductListComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should filter delivery methods list when name filter gets used', fakeAsync(() => {
+  it('should filter products list when name filter gets used', fakeAsync(() => {
     const componentStub: ControlPanelCatalogProductListComponent = TestBed.inject(ControlPanelCatalogProductListComponent);
     spyOn(componentStub, 'filterProducts');
     componentStub.controlFilterName.setValue('test');
@@ -78,10 +85,10 @@ describe('ControlPanelCatalogProductListComponent', () => {
     expect(componentStub.filterProducts).toHaveBeenCalled();
   }));
 
-  it('should filter delivery methods list when shop filter gets used', fakeAsync(() => {
+  it('should filter products list when category filter gets used', fakeAsync(() => {
     const componentStub: ControlPanelCatalogProductListComponent = TestBed.inject(ControlPanelCatalogProductListComponent);
     spyOn(componentStub, 'filterProducts');
-    componentStub.controlFilterShop.setValue('test');
+    componentStub.controlFilterCategory.setValue('test');
     tick(1000);
     expect(componentStub.filterProducts).toHaveBeenCalled();
   }));
@@ -146,6 +153,7 @@ describe('ControlPanelCatalogProductListComponentWithErrors', () => {
   let matDialogSpy: jasmine.SpyObj<MatDialog>
   let matSnackBarSpy: jasmine.SpyObj<MatSnackBar>;
 
+  let categoryServiceSpy: jasmine.SpyObj<CategoryService>;
   let productServiceSpy: jasmine.SpyObj<ProductService>;
   let shopServiceSpy: jasmine.SpyObj<ShopService>;
 
@@ -163,6 +171,9 @@ describe('ControlPanelCatalogProductListComponentWithErrors', () => {
     productServiceSpy.getList.and.returnValue(of(TestDataProducts));
     productServiceSpy.delete.and.returnValue(throwError(() => new Error('ERROR')));
 
+    categoryServiceSpy = jasmine.createSpyObj('CategoryService', ['getList']);
+    categoryServiceSpy.getList.and.returnValue(of(TestDataCategories));
+
     shopServiceSpy = jasmine.createSpyObj('ShopService', ['getList']);
     shopServiceSpy.getList.and.returnValue(of(TestDataShops));
 
@@ -173,6 +184,7 @@ describe('ControlPanelCatalogProductListComponentWithErrors', () => {
       )],
       providers: [
         { provide: ActivatedRoute, useValue: { snapshot: { data: {} } } },
+        { provide: CategoryService, useValue: categoryServiceSpy },
         { provide: MatDialog, useValue: matDialogSpy },
         { provide: ShopService, useValue: shopServiceSpy },
         { provide: ProductService, useValue: productServiceSpy },
