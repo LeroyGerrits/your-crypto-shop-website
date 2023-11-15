@@ -1,4 +1,3 @@
-import { ActivatedRoute, Router } from '@angular/router';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar, MatSnackBarRef, TextOnlySnackBar } from '@angular/material/snack-bar';
 
@@ -7,6 +6,7 @@ import { Component } from '@angular/core';
 import { Merchant } from 'src/app/shared/models/Merchant.model';
 import { MerchantService } from 'src/app/shared/services/Merchant.service';
 import { MutationResult } from 'src/app/shared/models/MutationResult';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'account-change-password',
@@ -29,7 +29,6 @@ export class AccountChangePasswordComponent {
     constructor(
         private authenticationService: AuthenticationService,
         private merchantService: MerchantService,
-        private route: ActivatedRoute,
         private router: Router,
         private snackBar: MatSnackBar
     ) {
