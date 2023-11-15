@@ -45,6 +45,11 @@ describe('PublicWebsiteMessageComponent', () => {
     expect(component).toBeTruthy();
   });
 
+  it('should set a message for type password-reset-link-sent', () => {
+    component.setMessage('password-reset-link-sent')
+    expect(component).toBeTruthy();
+  });
+
   it('should set a default message', () => {
     component.setMessage('')
     expect(component).toBeTruthy();

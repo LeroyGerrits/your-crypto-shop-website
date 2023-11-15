@@ -27,6 +27,7 @@ import { DatePipe } from '@angular/common';
 import { DeliveryMethodService } from './shared/services/DeliveryMethod.service';
 import { DialogDeleteComponent } from './shared/dialogs/delete/dialog.delete.component';
 import { DialogDonateComponent } from './shared/dialogs/donate/dialog.donate.component';
+import { DialogForgotPasswordComponent } from './shared/dialogs/forgot-password/dialog.forgot-password.component';
 import { DialogLoginComponent } from './shared/dialogs/login/dialog.login.component';
 import { DialogLogoutComponent } from './shared/dialogs/logout/dialog.logout.component';
 import { DialogSignUpComponent } from './shared/dialogs/signup/dialog.signup.component';
@@ -108,6 +109,7 @@ import { StripHtmlPipe } from './shared/pipes/StripHtml.pipe';
     ControlPanelDashboardComponent,
     DialogDeleteComponent,
     DialogDonateComponent,
+    DialogForgotPasswordComponent,
     DialogLoginComponent,
     DialogLogoutComponent,
     DialogSignUpComponent,

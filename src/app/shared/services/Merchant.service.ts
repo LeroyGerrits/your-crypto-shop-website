@@ -1,8 +1,9 @@
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 
 import { ActivateAccountRequest } from '../models/request/ActivateAccountRequest';
 import { ChangePasswordRequest } from '../models/request/ChangePasswordRequest';
 import { Environment } from 'src/app/shared/environments/Environment';
+import { ForgotPasswordRequest } from '../models/request/ForgotPasswordRequest';
 import { Injectable } from '@angular/core';
 import { Merchant } from 'src/app/shared/models/Merchant.model';
 import { MutationResult } from 'src/app/shared/models/MutationResult';
@@ -30,6 +31,13 @@ export class MerchantService {
             NewPassword: newPassword
         };
         return this.http.put<MutationResult>(`${this.apiUrl}/change-password`, changePasswordRequest);
+    }
+
+    forgotPassword(emailAddress: string): Observable<any> {
+        const forgotPasswordRequest: ForgotPasswordRequest = {
+            EmailAddress: emailAddress
+        };
+        return this.http.post(`${this.apiUrl}/public/forgot-password`, forgotPasswordRequest);
     }
 
     create(merchant: Merchant): Observable<MutationResult> {

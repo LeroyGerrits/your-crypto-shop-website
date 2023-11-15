@@ -60,4 +60,10 @@ describe('MerchantService', () => {
         const request = httpMock.expectOne(`${Environment.API_URL}/Merchant/change-password`);
         expect(request.request.method).toBe('PUT');
     });
+
+    it('should be able to reset a merchant\'s account', () => {
+        service.forgotPassword(TestDataMerchants[0].EmailAddress).subscribe();
+        const request = httpMock.expectOne(`${Environment.API_URL}/Merchant/public/forgot-password`);
+        expect(request.request.method).toBe('POST');
+    });
 });

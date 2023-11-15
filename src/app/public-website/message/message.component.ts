@@ -43,6 +43,10 @@ export class PublicWebsiteMessageComponent implements OnInit {
         this.messageTitle = 'Your account was registered';
         this.message = 'Before you can use your account, you will need to activate it first. Please follow the instructions in the e-mail we just sent to the address you specified.';
         break;
+      case 'password-reset-link-sent':
+        this.messageTitle = 'Password reset link sent';
+        this.message = 'If the e-mail address you entered was correct, an e-mail with instructions on how to reset your password has been sent.';
+        break;
       default:
         this.messageTitle = '';
         this.message = '';
