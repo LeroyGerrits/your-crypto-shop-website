@@ -46,10 +46,6 @@ describe('PublicWebsiteAccountActivateComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
-
   it('should retrieve data when querystring parameters were supplied', () => {
     component.ngOnInit();
     expect(merchantServiceSpy.getByIdAndPassword).toHaveBeenCalled();

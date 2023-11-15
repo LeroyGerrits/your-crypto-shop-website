@@ -82,6 +82,7 @@ import { PublicWebsiteIndexComponent } from './public-website/index/index.compon
 import { PublicWebsiteNewsComponent } from './public-website/news/news.component';
 import { PublicWebsiteNewsListComponent } from './public-website/news/news-list.component';
 import { PublicWebsiteNodeStatusComponent } from './public-website/node-status/node-status.component';
+import { PublicWebsiteResetPasswordComponent } from './public-website/reset-password/reset-password.component';
 import { PublicWebsiteShopListComponent } from './public-website/shops/shop-list.component';
 import { QRCodeModule } from 'angularx-qrcode';
 import { RouterModule } from '@angular/router';
@@ -127,6 +128,7 @@ import { StripHtmlPipe } from './shared/pipes/StripHtml.pipe';
     PublicWebsiteNewsListComponent,
     PublicWebsiteNodeStatusComponent,
     PublicWebsiteShopListComponent,
+    PublicWebsiteResetPasswordComponent,
     SearchEngineFriendlyStringPipe
   ],
   imports: [

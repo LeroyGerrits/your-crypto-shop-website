@@ -27,13 +27,13 @@ describe('MerchantPasswordResetLinkService', () => {
 
     it('should be able to get a single merchant password reset link', () => {
         service.getByIdAndKey(Constants.EMPTY_GUID, 'test').subscribe();
-        const request = httpMock.expectOne(Environment.API_URL + '/MerchantPasswordResetLink?id=' + Constants.EMPTY_GUID + '&key=test');
+        const request = httpMock.expectOne(Environment.API_URL + '/MerchantPasswordResetLink/public?id=' + Constants.EMPTY_GUID + '&key=test');
         expect(request.request.method).toBe('GET');
     });
 
-    it('should be able to update a merchant password reset link', () => {
-        service.update(TestDataMerchantPasswordResetLinks[0]).subscribe();
-        const request = httpMock.expectOne(`${Environment.API_URL}/MerchantPasswordResetLink/${TestDataMerchantPasswordResetLinks[0].Id}`);
+    it('should be able to reset a password using a merchant password reset link', () => {
+        service.resetPassword(TestDataMerchantPasswordResetLinks[0].Id, TestDataMerchantPasswordResetLinks[0].Key, 'PASSWORD').subscribe();
+        const request = httpMock.expectOne(`${Environment.API_URL}/MerchantPasswordResetLink/public/reset-password`);
         expect(request.request.method).toBe('PUT');
     });
 });

@@ -21,10 +21,6 @@ describe('PublicWebsiteMessageComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
-
   it('should set a message for type account-activated', () => {
     component.setMessage('account-activated')
     expect(component).toBeTruthy();
@@ -42,6 +38,16 @@ describe('PublicWebsiteMessageComponent', () => {
 
   it('should set a message for type account-registered', () => {
     component.setMessage('account-registered')
+    expect(component).toBeTruthy();
+  });
+
+  it('should set a message for type password-reset-link-already-used', () => {
+    component.setMessage('password-reset-link-already-used')
+    expect(component).toBeTruthy();
+  });
+
+  it('should set a message for type password-reset-finished', () => {
+    component.setMessage('password-reset-finished')
     expect(component).toBeTruthy();
   });
 

@@ -43,6 +43,14 @@ export class PublicWebsiteMessageComponent implements OnInit {
         this.messageTitle = 'Your account was registered';
         this.message = 'Before you can use your account, you will need to activate it first. Please follow the instructions in the e-mail we just sent to the address you specified.';
         break;
+      case 'password-reset-link-already-used':
+        this.messageTitle = 'Password reset link already used or expired';
+        this.message = 'The password reset link has already been used or has expired. You can only use a password reset link once, within 24 hours of requesting.';
+        break;
+      case 'password-reset-finished':
+        this.messageTitle = 'New password set';
+        this.message = 'You can now log in with the new password you have just set.';
+        break;
       case 'password-reset-link-sent':
         this.messageTitle = 'Password reset link sent';
         this.message = 'If the e-mail address you entered was correct, an e-mail with instructions on how to reset your password has been sent.';

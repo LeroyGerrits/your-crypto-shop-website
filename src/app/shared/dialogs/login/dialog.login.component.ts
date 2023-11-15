@@ -64,8 +64,8 @@ export class DialogLoginComponent implements OnInit {
                 },
                 error: error => {
                     this.snackBarRef = this.snackBar.open(error, 'Close', { panelClass: ['error-snackbar'] });
-                },
-                complete: () => this.formLoading = false
+                    this.formLoading = false;
+                }
             });
     }
 }

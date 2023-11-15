@@ -88,7 +88,7 @@ const routes: Routes = [
       { path: 'merchant/:merchantId', component: PublicWebsiteMerchantComponent, title: `${Constants.TITLE_PREFIX} - Merchants` },
       { path: 'message/:messageType', component: PublicWebsiteMessageComponent, title: Constants.TITLE_PREFIX },
       { path: 'shops', component: PublicWebsiteShopListComponent, title: `${Constants.TITLE_PREFIX} - Shops` },
-      { path: 'reset-password', component: PublicWebsiteResetPasswordComponent, title: `${Constants.TITLE_PREFIX} - Reset password` },
+      { path: 'reset-password/:id/:key', component: PublicWebsiteResetPasswordComponent, title: `${Constants.TITLE_PREFIX} - Reset password` },
       { path: '**', pathMatch: 'full', component: PublicWebsiteNotFoundComponent, title: `${Constants.TITLE_PREFIX} - Not found` }
     ]
   }
