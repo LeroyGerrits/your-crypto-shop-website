@@ -3,9 +3,14 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar, MatSnackBarRef, TextOnlySnackBar } from '@angular/material/snack-bar';
 
+import { Category } from 'src/app/shared/models/Category.model';
+import { CategoryService } from 'src/app/shared/services/Category.service';
 import { Constants } from 'src/app/shared/Constants';
 import { Environment } from 'src/app/shared/environments/Environment';
+import { GetCategoriesParameters } from 'src/app/shared/models/parameters/GetCategoriesParameters.model';
+import { MatTreeNestedDataSource } from '@angular/material/tree';
 import { MutationResult } from 'src/app/shared/models/MutationResult';
+import { NestedTreeControl } from '@angular/cdk/tree';
 import { Product } from 'src/app/shared/models/Product.model';
 import { ProductService } from 'src/app/shared/services/Product.service';
 import { Shop } from 'src/app/shared/models/Shop.model';
@@ -17,6 +22,9 @@ import { ShopService } from 'src/app/shared/services/Shop.service';
 })
 
 export class ControlPanelCatalogProductComponent implements OnInit, OnDestroy {
+  public treeControl = new NestedTreeControl<Category>(category => category.Children);
+  public dataSource = new MatTreeNestedDataSource<Category>();
+
   public environment = Environment;
   public snackBarRef: MatSnackBarRef<TextOnlySnackBar> | undefined;
   public queryStringProductId: string | null = '';
@@ -33,16 +41,18 @@ export class ControlPanelCatalogProductComponent implements OnInit, OnDestroy {
   public controlStock = new FormControl('', Validators.pattern(Constants.REGEX_PATTERN_NUMBER));
   public controlVisible = new FormControl(true);
 
+  public categories: Category[] | undefined;
   public pageTitle = 'Create new product'
   public product: Product = new Product();
   public shops: Shop[] | undefined;
 
   constructor(
+    private categoryService: CategoryService,
+    private productService: ProductService,
     private route: ActivatedRoute,
     private router: Router,
-    private snackBar: MatSnackBar,
-    private productService: ProductService,
-    private shopService: ShopService
+    private shopService: ShopService,
+    private snackBar: MatSnackBar
   ) {
     this.form = new FormGroup([
       this.controlName,
@@ -73,11 +83,23 @@ export class ControlPanelCatalogProductComponent implements OnInit, OnDestroy {
         }
       }
     });
+
+    const parameters: GetCategoriesParameters = {};
+    if (this.queryStringShopId) {
+      parameters.ShopId = this.queryStringShopId;
+    }
+
+    this.categoryService.getList(parameters).subscribe(categories => {
+      this.categories = categories;
+      this.dataSource.data = categories;
+    });
   }
 
   ngOnDestroy() {
     this.snackBarRef?.dismiss();
   }
+
+  hasChild = (_: number, category: Category) => !!category.Children && category.Children.length > 0;
 
   onRetrieveData(product: Product) {
     this.product = product;
@@ -114,6 +136,16 @@ export class ControlPanelCatalogProductComponent implements OnInit, OnDestroy {
 
     if (this.controlDescription.value)
       productToUpdate.Description = this.controlDescription.value;
+
+    if (this.categories) {
+      this.categories.forEach(category => {
+        console.log(category.Name);
+        var element = <HTMLInputElement>document.getElementById('category' + category.Id);
+        console.log(element.checked);
+      });
+    }
+
+    return;
 
     if (this.queryStringProductId && this.queryStringProductId != 'new') {
       this.productService.update(productToUpdate).subscribe({

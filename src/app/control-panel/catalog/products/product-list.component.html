@@ -58,11 +58,14 @@
         <ng-container matColumnDef="ActionButtons">
             <th mat-header-cell *matHeaderCellDef></th>
             <td mat-cell *matCellDef="let element">
+                <button mat-icon-button color="primary" (click)="editPhotos(element)">
+                    <mat-icon matTooltip="Manage photos">photo</mat-icon>
+                </button>
                 <button mat-icon-button color="primary" (click)="editElement(element)">
-                    <mat-icon>edit</mat-icon>
+                    <mat-icon matTooltip="Edit">edit</mat-icon>
                 </button>
                 <button mat-icon-button color="warn" (click)="deleteElement(element)">
-                    <mat-icon>delete</mat-icon>
+                    <mat-icon matTooltip="Delete">delete</mat-icon>
                 </button>
             </td>
         </ng-container>

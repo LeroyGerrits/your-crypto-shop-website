@@ -94,7 +94,21 @@
             </div>
         </mat-tab>
         <mat-tab label="Categories">
-            Category list
+
+            <mat-tree [dataSource]="dataSource" [treeControl]="treeControl" class="tree">
+                <mat-tree-node *matTreeNodeDef="let category">
+                    <mat-checkbox [id]="'category' + category.Id" color="primary">{{category.Name}}</mat-checkbox>
+                </mat-tree-node>
+                <mat-nested-tree-node *matTreeNodeDef="let category; when: hasChild">
+                    <div class="mat-tree-node">
+                        <mat-checkbox [id]="'category' + category.Id" color="primary">{{category.Name}}</mat-checkbox>
+                    </div>
+                    <div role="group">
+                        <ng-container matTreeNodeOutlet></ng-container>
+                    </div>
+                </mat-nested-tree-node>
+            </mat-tree>
+
         </mat-tab>
     </mat-tab-group>
     <mat-divider class="ClearLeft" />

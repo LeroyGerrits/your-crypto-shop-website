@@ -111,6 +111,10 @@ export class ControlPanelCatalogProductListComponent {
     this.router.navigate([`/control-panel/catalog/products/${element.Id}`]);
   }
 
+  editPhotos(element: Product) {
+    this.router.navigate([`/control-panel/catalog/products/${element.Id}/photos`]);
+  }
+
   deleteElement(element: Product) {
     const dialogDelete = this.dialog.open(DialogDeleteComponent);
     const instance = dialogDelete.componentInstance;
