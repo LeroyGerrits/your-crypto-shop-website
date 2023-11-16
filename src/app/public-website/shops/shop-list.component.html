@@ -3,7 +3,7 @@
 </div>
 
 <div class="ColumnOneFourth">
-    <div class="WrapperPadding20-20-0-8">
+    <div class="WrapperPadding20-10-0-8">
         <mat-form-field>
             <mat-label>Name</mat-label>
             <input matInput [formControl]="controlFilterName" />
@@ -11,10 +11,36 @@
     </div>
 </div>
 <div class="ColumnOneFourth">
-    <div class="WrapperPadding20-20-0-20">
+    <div class="WrapperPadding20-10-0-10">
         <mat-form-field>
             <mat-label>Subdomain</mat-label>
             <input matInput [formControl]="controlFilterSubDomain" />
+        </mat-form-field>
+    </div>
+</div>
+<div class="ColumnOneFourth">
+    <div class="WrapperPadding20-10-0-10">
+        <mat-form-field>
+            <mat-label>Country</mat-label>
+            <mat-select [formControl]="controlFilterCountry">
+                <mat-option></mat-option>
+                <mat-option *ngFor="let country of this.countries" [value]="country.Id">
+                    <img src="/assets/images/flags/{{country.Code.toLowerCase()}}.png" width="24" height="24" alt="{{country.Code}}" />{{country.Name}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+</div>
+<div class="ColumnOneFourth">
+    <div class="WrapperPadding20-8-0-10">
+        <mat-form-field>
+            <mat-label>Category</mat-label>
+            <mat-select [formControl]="controlFilterShopCategory">
+                <mat-option></mat-option>
+                <mat-option *ngFor="let shopCategory of this.shopCategories" [value]="shopCategory.Id">
+                    {{shopCategory.Name}}
+                </mat-option>
+            </mat-select>
         </mat-form-field>
     </div>
 </div>
@@ -39,6 +65,20 @@
                 <span *ngIf="!element.SubDomain"><a href="https://{{element.Id}}.{{environment.WEBSITE_DOMAIN}}" target="_blank">https://<strong class="TextDecorationUnderline">{{element.Id}}</strong>.{{environment.WEBSITE_DOMAIN}}</a></span>
                 <span *ngIf="element.SubDomain"><a href="https://{{element.SubDomain}}.{{environment.WEBSITE_DOMAIN}}" target="_blank">https://<strong class="TextDecorationUnderline">{{element.SubDomain}}</strong>.{{environment.WEBSITE_DOMAIN}}</a></span>
             </td>
+        </ng-container>
+
+        <ng-container matColumnDef="Country">
+            <th mat-header-cell mat-sort-header *matHeaderCellDef>Country</th>
+            <td mat-cell *matCellDef="let element">
+                <div class="CellCountry" *ngIf="element.CountryId">
+                    <img src="/assets/images/flags/{{element.CountryCode.toLowerCase()}}.png" width="24" height="24" alt="{{element.CountryCode}}" />{{element.CountryName}}
+                </div>
+            </td>
+        </ng-container>
+
+        <ng-container matColumnDef="Category">
+            <th mat-header-cell mat-sort-header *matHeaderCellDef>Category</th>
+            <td mat-cell *matCellDef="let element">{{element.CategoryName}}</td>
         </ng-container>
 
         <ng-container matColumnDef="Merchant">

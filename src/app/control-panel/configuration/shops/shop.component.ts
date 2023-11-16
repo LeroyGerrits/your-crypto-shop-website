@@ -12,6 +12,8 @@ import { Environment } from 'src/app/shared/environments/Environment';
 import { Merchant } from 'src/app/shared/models/Merchant.model';
 import { MutationResult } from 'src/app/shared/models/MutationResult';
 import { Shop } from 'src/app/shared/models/Shop.model';
+import { ShopCategory } from 'src/app/shared/models/ShopCategory.model';
+import { ShopCategoryService } from 'src/app/shared/services/ShopCategory.service';
 import { ShopService } from 'src/app/shared/services/Shop.service';
 
 @Component({
@@ -34,11 +36,13 @@ export class ControlPanelConfigurationShopComponent implements OnInit {
   public controlName = new FormControl('', Validators.required);
   public controlSubDomain = new FormControl('', [Validators.minLength(3), Validators.pattern(/^[a-zA-Z0-9]*$/)])
   public controlCountry = new FormControl('');
+  public controlShopCategory = new FormControl('');
 
   public pageTitle = 'Create new shop'
   public shop: Shop = new Shop();
   public subDomainAvailable = false;
   public countries: Country[] | undefined;
+  public shopCategories: ShopCategory[] | undefined;
 
   constructor(
     private authenticationService: AuthenticationService,
@@ -46,14 +50,16 @@ export class ControlPanelConfigurationShopComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private snackBar: MatSnackBar,
-    private shopService: ShopService
+    private shopService: ShopService,
+    private shopCategoryService: ShopCategoryService
   ) {
     this.authenticationService.merchant.subscribe(x => this.activeMerchant = x?.Merchant);
 
     this.form = new FormGroup([
       this.controlName,
       this.controlSubDomain,
-      this.controlCountry
+      this.controlCountry,
+      this.controlShopCategory
     ]);
     this.controlSubDomain.valueChanges.pipe(debounceTime(1000), distinctUntilChanged()).subscribe(value => this.checkSubDomainAvailability(value));
   }
@@ -66,6 +72,7 @@ export class ControlPanelConfigurationShopComponent implements OnInit {
     }
 
     this.countryService.getList().subscribe(countries => this.countries = countries);
+    this.shopCategoryService.getList().subscribe(shopCategories => this.shopCategories = shopCategories);
   }
 
   ngOnDestroy() {
@@ -81,6 +88,12 @@ export class ControlPanelConfigurationShopComponent implements OnInit {
       this.controlSubDomain.setValue(shop.SubDomain);
       this.subDomainAvailable = true;
     }
+
+    if (shop.Country)
+      this.controlCountry.setValue(shop.Country.Id);
+
+    if (shop.Category)
+      this.controlShopCategory.setValue(shop.Category.Id);
   }
 
   checkSubDomainAvailability(subdomain: string | null) {
@@ -96,7 +109,6 @@ export class ControlPanelConfigurationShopComponent implements OnInit {
       this.subDomainAvailable = false;
       this.formLoading = false;
     }
-
   }
 
   onSubmit() {
@@ -114,6 +126,14 @@ export class ControlPanelConfigurationShopComponent implements OnInit {
 
     if (this.activeMerchant)
       shopToUpdate.MerchantId = this.activeMerchant!.Id!;
+
+    var selectedCountry = this.countries?.find(x => x.Id == this.controlCountry.value);
+    if (selectedCountry)
+      shopToUpdate.Country = selectedCountry;
+
+    var selectedShopCategory = this.shopCategories?.find(x => x.Id == this.controlShopCategory.value);
+    if (selectedShopCategory)
+      shopToUpdate.Category = selectedShopCategory;
 
     if (this.queryStringShopId && this.queryStringShopId != 'new') {
       this.shopService.update(shopToUpdate).subscribe({

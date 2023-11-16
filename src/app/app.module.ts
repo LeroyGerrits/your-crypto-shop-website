@@ -89,6 +89,7 @@ import { PublicWebsiteShopListComponent } from './public-website/shops/shop-list
 import { QRCodeModule } from 'angularx-qrcode';
 import { RouterModule } from '@angular/router';
 import { SearchEngineFriendlyStringPipe } from './shared/pipes/SearchEngineFriendlyString.pipe';
+import { ShopCategoryService } from './shared/services/ShopCategory.service';
 import { ShopService } from './shared/services/Shop.service';
 import { StripHtmlPipe } from './shared/pipes/StripHtml.pipe';
 
@@ -191,6 +192,7 @@ import { StripHtmlPipe } from './shared/pipes/StripHtml.pipe';
     NewsMessageService,
     ProductService,
     ShopService,
+    ShopCategoryService,
     StripHtmlPipe
   ],
   bootstrap: [AppComponent]

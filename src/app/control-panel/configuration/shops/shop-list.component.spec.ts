@@ -17,6 +17,11 @@ import { MutationResult } from 'src/app/shared/models/MutationResult';
 import { ShopService } from 'src/app/shared/services/Shop.service';
 import { TestDataShops } from 'src/assets/test-data/Shops';
 import { ControlPanelConfigurationShopListComponent } from './shop-list.component';
+import { CountryService } from 'src/app/shared/services/Country.service';
+import { ShopCategoryService } from 'src/app/shared/services/ShopCategory.service';
+import { TestDataCountries } from 'src/assets/test-data/Countries';
+import { TestDataShopCategories } from 'src/assets/test-data/ShopCategories';
+import { MatSelectModule } from '@angular/material/select';
 
 describe('ControlPanelConfigurationShopListComponent', () => {
   let component: ControlPanelConfigurationShopListComponent;
@@ -26,7 +31,9 @@ describe('ControlPanelConfigurationShopListComponent', () => {
   let matDialogSpy: jasmine.SpyObj<MatDialog>;
   let matSnackBarSpy: jasmine.SpyObj<MatSnackBar>;
 
+  let countryServiceSpy: jasmine.SpyObj<CountryService>;
   let shopServiceSpy: jasmine.SpyObj<ShopService>;
+  let shopCategoryServiceSpy: jasmine.SpyObj<ShopCategoryService>;
   let mutationResult: MutationResult = <MutationResult>{ ErrorCode: 0, Identity: '', Message: '' };
 
   beforeEach(() => {
@@ -39,19 +46,27 @@ describe('ControlPanelConfigurationShopListComponent', () => {
 
     matSnackBarSpy = jasmine.createSpyObj('MatSnackBar', ['open']);
 
+    countryServiceSpy = jasmine.createSpyObj('CountryService', ['getList']);
+    countryServiceSpy.getList.and.returnValue(of(TestDataCountries));
+
+    shopCategoryServiceSpy = jasmine.createSpyObj('ShopCategoryService', ['getList']);
+    shopCategoryServiceSpy.getList.and.returnValue(of(TestDataShopCategories));
+
     shopServiceSpy = jasmine.createSpyObj('ShopService', ['getList', 'delete']);
     shopServiceSpy.getList.and.returnValue(of(TestDataShops));
     shopServiceSpy.delete.and.returnValue(of(mutationResult));
 
     TestBed.configureTestingModule({
       declarations: [ControlPanelConfigurationShopListComponent],
-      imports: [BrowserAnimationsModule, MatIconModule, MatFormFieldModule, MatInputModule, MatPaginatorModule, MatTableModule, ReactiveFormsModule, RouterLink, RouterTestingModule.withRoutes(
+      imports: [BrowserAnimationsModule, MatIconModule, MatFormFieldModule, MatInputModule, MatPaginatorModule, MatSelectModule, MatTableModule, ReactiveFormsModule, RouterLink, RouterTestingModule.withRoutes(
         [{ path: 'control-panel/configuration/shops', component: ControlPanelConfigurationShopListComponent }]
       )],
       providers: [
         { provide: ActivatedRoute, useValue: { snapshot: { data: {} } } },
+        { provide: CountryService, useValue: countryServiceSpy },
         { provide: MatDialog, useValue: matDialogSpy },
         { provide: ShopService, useValue: shopServiceSpy },
+        { provide: ShopCategoryService, useValue: shopCategoryServiceSpy },
         { provide: MatSnackBar, useValue: matSnackBarSpy },
         ControlPanelConfigurationShopListComponent,
         Router
@@ -74,6 +89,22 @@ describe('ControlPanelConfigurationShopListComponent', () => {
     const componentStub: ControlPanelConfigurationShopListComponent = TestBed.inject(ControlPanelConfigurationShopListComponent);
     spyOn(componentStub, 'filterShops');
     componentStub.controlFilterSubDomain.setValue('test');
+    tick(1000);
+    expect(componentStub.filterShops).toHaveBeenCalled();
+  }));
+
+  it('should filter shops list when country filter gets used', fakeAsync(() => {
+    const componentStub: ControlPanelConfigurationShopListComponent = TestBed.inject(ControlPanelConfigurationShopListComponent);
+    spyOn(componentStub, 'filterShops');
+    componentStub.controlFilterCountry.setValue('test');
+    tick(1000);
+    expect(componentStub.filterShops).toHaveBeenCalled();
+  }));
+
+  it('should filter shops list when category filter gets used', fakeAsync(() => {
+    const componentStub: ControlPanelConfigurationShopListComponent = TestBed.inject(ControlPanelConfigurationShopListComponent);
+    spyOn(componentStub, 'filterShops');
+    componentStub.controlFilterShopCategory.setValue('test');
     tick(1000);
     expect(componentStub.filterShops).toHaveBeenCalled();
   }));
@@ -138,7 +169,9 @@ describe('ControlPanelConfigurationShopListComponentWithErrors', () => {
   let matDialogSpy: jasmine.SpyObj<MatDialog>;
   let matSnackBarSpy: jasmine.SpyObj<MatSnackBar>;
 
-  let shopServiceSpyWithErrors: jasmine.SpyObj<ShopService>;
+  let countryServiceSpy: jasmine.SpyObj<CountryService>;
+  let shopServiceSpy: jasmine.SpyObj<ShopService>;
+  let shopCategoryServiceSpy: jasmine.SpyObj<ShopCategoryService>;
 
   beforeEach(() => {
     matDialogRefSpy = jasmine.createSpyObj('MatDialogRef', ['close']);
@@ -150,19 +183,27 @@ describe('ControlPanelConfigurationShopListComponentWithErrors', () => {
 
     matSnackBarSpy = jasmine.createSpyObj('MatSnackBar', ['open']);
 
-    shopServiceSpyWithErrors = jasmine.createSpyObj('ShopService', ['getList', 'delete']);
-    shopServiceSpyWithErrors.getList.and.returnValue(of(TestDataShops));
-    shopServiceSpyWithErrors.delete.and.returnValue(throwError(() => new Error('ERROR')));
+    countryServiceSpy = jasmine.createSpyObj('CountryService', ['getList']);
+    countryServiceSpy.getList.and.returnValue(of(TestDataCountries));
+
+    shopCategoryServiceSpy = jasmine.createSpyObj('ShopCategoryService', ['getList']);
+    shopCategoryServiceSpy.getList.and.returnValue(of(TestDataShopCategories));
+
+    shopServiceSpy = jasmine.createSpyObj('ShopService', ['getList', 'delete']);
+    shopServiceSpy.getList.and.returnValue(of(TestDataShops));
+    shopServiceSpy.delete.and.returnValue(throwError(() => new Error('ERROR')));
 
     TestBed.configureTestingModule({
       declarations: [ControlPanelConfigurationShopListComponent],
-      imports: [BrowserAnimationsModule, MatIconModule, MatFormFieldModule, MatInputModule, MatPaginatorModule, MatTableModule, ReactiveFormsModule, RouterLink, RouterTestingModule.withRoutes(
+      imports: [BrowserAnimationsModule, MatIconModule, MatFormFieldModule, MatInputModule, MatPaginatorModule, MatSelectModule, MatTableModule, ReactiveFormsModule, RouterLink, RouterTestingModule.withRoutes(
         [{ path: 'control-panel/configuration/shops', component: ControlPanelConfigurationShopListComponent }]
       )],
       providers: [
         { provide: ActivatedRoute, useValue: { snapshot: { data: {} } } },
+        { provide: CountryService, useValue: countryServiceSpy },
         { provide: MatDialog, useValue: matDialogSpy },
-        { provide: ShopService, useValue: shopServiceSpyWithErrors },
+        { provide: ShopService, useValue: shopServiceSpy },
+        { provide: ShopCategoryService, useValue: shopCategoryServiceSpy },
         { provide: MatSnackBar, useValue: matSnackBarSpy },
         Router
       ]

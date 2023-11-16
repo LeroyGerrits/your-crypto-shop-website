@@ -6,6 +6,8 @@ import { Environment } from 'src/app/shared/environments/Environment';
 import { GetShopsParameters } from '../models/parameters/GetShopsParameters.model';
 import { ShopService } from './Shop.service';
 import { TestBed } from '@angular/core/testing';
+import { TestDataCountries } from 'src/assets/test-data/Countries';
+import { TestDataShopCategories } from 'src/assets/test-data/ShopCategories';
 import { TestDataShops } from 'src/assets/test-data/Shops';
 
 describe('ShopService', () => {
@@ -29,22 +31,26 @@ describe('ShopService', () => {
     it('should be able to get a list of shops', () => {
         const parameters: GetShopsParameters = {
             Name: 'Test',
-            SubDomain: 'Test'
+            SubDomain: 'Test',
+            CountryId: TestDataCountries[0].Id,
+            ShopCategoryId: TestDataShopCategories[0].Id
         };
 
         service.getList(parameters).subscribe();
-        const request = httpMock.expectOne(`${Environment.API_URL}/Shop?name=${parameters.Name}&subdomain=${parameters.SubDomain}`);
+        const request = httpMock.expectOne(`${Environment.API_URL}/Shop?name=${parameters.Name}&subdomain=${parameters.SubDomain}&countryId=${parameters.CountryId}&categoryId=${parameters.ShopCategoryId}`);
         expect(request.request.method).toBe('GET');
     });
 
     it('should be able to get a list of public shops', () => {
         const parameters: GetShopsParameters = {
             Name: 'Test',
-            SubDomain: 'Test'
+            SubDomain: 'Test',
+            CountryId: TestDataCountries[0].Id,
+            ShopCategoryId: TestDataShopCategories[0].Id
         };
 
         service.getListPublic(parameters).subscribe();
-        const request = httpMock.expectOne(`${Environment.API_URL}/Shop/public?name=${parameters.Name}&subdomain=${parameters.SubDomain}`);
+        const request = httpMock.expectOne(`${Environment.API_URL}/Shop/public?name=${parameters.Name}&subdomain=${parameters.SubDomain}&countryId=${parameters.CountryId}&categoryId=${parameters.ShopCategoryId}`);
         expect(request.request.method).toBe('GET');
     });
 
