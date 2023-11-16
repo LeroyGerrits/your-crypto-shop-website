@@ -1,6 +1,6 @@
 <div class="WrapperPadding20-8-0-8">
     <div class="FloatRight">
-        <button mat-raised-button color="primary" [routerLink]="['/control-panel/catalog/products/new']" [disabled]="!this.shops?.length">
+        <button mat-raised-button color="primary" [routerLink]="['/control-panel/catalog/products/new/' + this.controlFilterShop.value]" [disabled]="!this.shops?.length">
             <mat-icon>add</mat-icon>
             Create new product
         </button>

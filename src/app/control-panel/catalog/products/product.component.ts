@@ -20,14 +20,18 @@ export class ControlPanelCatalogProductComponent implements OnInit, OnDestroy {
   public environment = Environment;
   public snackBarRef: MatSnackBarRef<TextOnlySnackBar> | undefined;
   public queryStringProductId: string | null = '';
+  public queryStringShopId: string | null = '';
 
   public form!: FormGroup;
   public formLoading = false;
   public formSubmitted = false;
+
   public controlName = new FormControl('', Validators.required);
-  public controlDescription = new FormControl('');
   public controlShop = new FormControl('', Validators.required);
-  public controlPrice = new FormControl('', Validators.pattern(Constants.REGEX_PATTERN_DECIMAL));
+  public controlDescription = new FormControl('');
+  public controlPrice = new FormControl('', [Validators.required, Validators.pattern(Constants.REGEX_PATTERN_DECIMAL_8)]);
+  public controlStock = new FormControl('', Validators.pattern(Constants.REGEX_PATTERN_NUMBER));
+  public controlVisible = new FormControl(true);
 
   public pageTitle = 'Create new product'
   public product: Product = new Product();
@@ -42,20 +46,33 @@ export class ControlPanelCatalogProductComponent implements OnInit, OnDestroy {
   ) {
     this.form = new FormGroup([
       this.controlName,
-      this.controlDescription,
       this.controlShop,
-      this.controlPrice
+      this.controlDescription,
+      this.controlPrice,
+      this.controlStock,
+      this.controlVisible
     ]);
   }
 
   ngOnInit() {
     this.queryStringProductId = this.route.snapshot.paramMap.get('productId');
+    this.queryStringShopId = this.route.snapshot.paramMap.get('shopId');
 
     if (this.queryStringProductId && this.queryStringProductId != 'new') {
       this.productService.getById(this.queryStringProductId).subscribe(x => { this.onRetrieveData(x); });
     }
 
-    this.shopService.getList().subscribe(shops => this.shops = shops);
+    this.shopService.getList().subscribe(shops => {
+      this.shops = shops;
+
+      if (this.queryStringShopId) {
+        var selectedShop = this.shops?.find(x => x.Id == this.queryStringShopId);
+        if (selectedShop) {
+          this.controlShop.setValue(selectedShop.Id);
+          this.pageTitle = `Create new product for shop '${selectedShop.Name}'`
+        }
+      }
+    });
   }
 
   ngOnDestroy() {
@@ -66,8 +83,14 @@ export class ControlPanelCatalogProductComponent implements OnInit, OnDestroy {
     this.product = product;
     this.pageTitle = product.Name;
     this.controlName.setValue(product.Name);
-    this.controlShop.setValue(product.Shop.Id);
+    this.controlShop.setValue(product.ShopId);
     this.controlPrice.setValue(product.Price.toString());
+
+    if (product.Stock)
+      this.controlStock.setValue(product.Stock.toString());
+
+    if (product.Description)
+      this.controlDescription.setValue(product.Description);
   }
 
   onSubmit() {
@@ -81,15 +104,16 @@ export class ControlPanelCatalogProductComponent implements OnInit, OnDestroy {
 
     const productToUpdate: Product = Object.assign({}, this.product);
     productToUpdate.Name = this.controlName.value!;
+    productToUpdate.ShopId = this.controlShop.value!;
+    productToUpdate.Price = parseFloat(this.controlPrice.value!);
+
+    if (this.controlStock.value)
+      productToUpdate.Stock = parseInt(this.controlStock.value);
+
+    productToUpdate.Visible = this.controlVisible.value!;
 
     if (this.controlDescription.value)
       productToUpdate.Description = this.controlDescription.value;
-
-    var selectedShop = this.shops?.find(x => x.Id == this.controlShop.value);
-    if (selectedShop)
-      productToUpdate.Shop = selectedShop;
-
-    productToUpdate.Price = parseFloat(this.controlPrice.value!);
 
     if (this.queryStringProductId && this.queryStringProductId != 'new') {
       this.productService.update(productToUpdate).subscribe({

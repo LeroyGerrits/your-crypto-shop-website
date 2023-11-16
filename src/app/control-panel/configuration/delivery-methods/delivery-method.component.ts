@@ -26,7 +26,7 @@ export class ControlPanelConfigurationDeliveryMethodComponent implements OnInit,
   public formSubmitted = false;
   public controlName = new FormControl('', Validators.required);
   public controlShop = new FormControl('', Validators.required);
-  public controlCosts = new FormControl('', Validators.pattern(Constants.REGEX_PATTERN_DECIMAL));
+  public controlCosts = new FormControl('', Validators.pattern(Constants.REGEX_PATTERN_DECIMAL_2));
 
   public pageTitle = 'Create new delivery method'
   public deliveryMethod: DeliveryMethod = new DeliveryMethod();

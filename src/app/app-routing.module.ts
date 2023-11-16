@@ -56,6 +56,7 @@ const routes: Routes = [
       { path: 'catalog/categories/:categoryId', component: ControlPanelCatalogCategoryComponent, title: `${Constants.TITLE_PREFIX} - Categories` },
       { path: 'catalog/products', component: ControlPanelCatalogProductListComponent, title: `${Constants.TITLE_PREFIX} - Products` },
       { path: 'catalog/products/:productId', component: ControlPanelCatalogProductComponent, title: `${Constants.TITLE_PREFIX} - Products` },
+      { path: 'catalog/products/:productId/:shopId', component: ControlPanelCatalogProductComponent, title: `${Constants.TITLE_PREFIX} - Products` },
       { path: 'configuration/delivery-methods', component: ControlPanelConfigurationDeliveryMethodListComponent, title: `${Constants.TITLE_PREFIX} - Delivery methods` },
       { path: 'configuration/delivery-methods/:deliveryMethodId', component: ControlPanelConfigurationDeliveryMethodComponent, title: `${Constants.TITLE_PREFIX} - Delivery methods` },
       { path: 'configuration/digibyte-wallets', component: ControlPanelConfigurationDigiByteWalletListComponent, title: `${Constants.TITLE_PREFIX} - DigiByte wallets` },

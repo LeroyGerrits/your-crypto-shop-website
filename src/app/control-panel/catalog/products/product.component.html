@@ -1,9 +1,9 @@
-<div class="WrapperPadding20-8-0-8">
+<div class="WrapperPadding20-8">
     <h2><a [routerLink]="['/control-panel/catalog/products']">Products</a> - {{this.pageTitle}}</h2>
 </div>
 <form (ngSubmit)="onSubmit()">
 
-    <mat-tab-group>
+    <mat-tab-group animationDuration="0">
         <mat-tab label="Product">
             <div class="ColumnOneHalf">
                 <div class="WrapperPadding20-10-0-8">
@@ -37,7 +37,7 @@
             </div>
             <div class="ColumnOneHalf">
                 <div class="WrapperPadding20-10-0-8">
-                    <p>The shop this delivery method is applicable to.</p>
+                    <p>The shop this product will be listed under.</p>
                 </div>
             </div>
             <mat-divider class="ClearLeft" />
@@ -47,7 +47,7 @@
                         <mat-label>Price</mat-label>
                         <input matInput [formControl]="controlPrice" maxlength="20" placeholder="Example: 250.45" [ngClass]="{ 'is-invalid': formSubmitted && controlPrice.errors }" />
                         <div *ngIf="formSubmitted && controlPrice.errors" class="TextError">
-                            <div *ngIf="controlPrice.errors['pattern']">Price can only be a numerical value with up to 2 decimals.</div>
+                            <div *ngIf="controlPrice.errors['pattern']">Price can only be a numerical value with up to 8 decimals.</div>
                         </div>
                     </mat-form-field>
                 </div>
@@ -55,6 +55,34 @@
             <div class="ColumnOneHalf">
                 <div class="WrapperPadding20-10-0-8">
                     <p>The price of the product in flat DigiByte.</p>
+                </div>
+            </div>
+            <mat-divider class="ClearLeft" />
+            <div class="ColumnOneHalf">
+                <div class="WrapperPadding20-10-0-8">
+                    <mat-form-field>
+                        <mat-label>Amount in stock</mat-label>
+                        <input matInput [formControl]="controlStock" maxlength="20" placeholder="Example: 25" [ngClass]="{ 'is-invalid': formSubmitted && controlStock.errors }" />
+                        <div *ngIf="formSubmitted && controlStock.errors" class="TextError">
+                            <div *ngIf="controlStock.errors['pattern']">Amount in stock can only be a numerical value.</div>
+                        </div>
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="ColumnOneHalf">
+                <div class="WrapperPadding20-10-0-8">
+                    <p>The amount in stock of this product. If your product does not run out of stock, leave this field empty. If an amount is set, this amount decreases every time a customer orders this product until there are 0 left.</p>
+                </div>
+            </div>
+            <mat-divider class="ClearLeft" />
+            <div class="ColumnOneHalf">
+                <div class="WrapperPadding20-10-0-8 TextAlignRight">
+                    <mat-checkbox [formControl]="controlVisible" color="primary" />
+                </div>
+            </div>
+            <div class="ColumnOneHalf">
+                <div class="WrapperPadding20-10-0-8">
+                    <p>Visible on shop.</p>
                 </div>
             </div>
         </mat-tab>
