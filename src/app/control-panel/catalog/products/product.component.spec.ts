@@ -19,17 +19,25 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { RouterTestingModule } from '@angular/router/testing';
 import { ControlPanelCatalogProductListComponent } from './product-list.component';
 import { MatTabsModule } from '@angular/material/tabs';
+import { CategoryService } from 'src/app/shared/services/Category.service';
+import { TestDataCategories } from 'src/assets/test-data/Categories';
+import { MatTreeModule } from '@angular/material/tree';
 
 describe('ControlPanelCatalogProductComponent', () => {
   let component: ControlPanelCatalogProductComponent;
   let fixture: ComponentFixture<ControlPanelCatalogProductComponent>;
 
   let matSnackBarSpy: jasmine.SpyObj<MatSnackBar>;
+
+  let categoryServiceSpy: jasmine.SpyObj<CategoryService>;
   let productServiceSpy: jasmine.SpyObj<ProductService>;
   let shopServiceSpy: jasmine.SpyObj<ShopService>;
   let mutationResult: MutationResult = <MutationResult>{ ErrorCode: 0, Identity: '', Message: '' };
 
   beforeEach(() => {
+    categoryServiceSpy = jasmine.createSpyObj('CategoryService', ['getList']);
+    categoryServiceSpy.getList.and.returnValue(of(TestDataCategories));
+
     productServiceSpy = jasmine.createSpyObj('ProductService', ['getById', 'create', 'update']);
     productServiceSpy.getById.and.returnValue(of(TestDataProducts[0]));
     productServiceSpy.create.and.returnValue(of(mutationResult));
@@ -42,11 +50,12 @@ describe('ControlPanelCatalogProductComponent', () => {
 
     TestBed.configureTestingModule({
       declarations: [ControlPanelCatalogProductComponent],
-      imports: [BrowserAnimationsModule, MatDialogModule, MatDividerModule, MatFormFieldModule, MatInputModule, MatSelectModule, MatTabsModule, ReactiveFormsModule, RouterLink, RouterTestingModule.withRoutes(
+      imports: [BrowserAnimationsModule, MatDialogModule, MatDividerModule, MatFormFieldModule, MatInputModule, MatSelectModule, MatTabsModule, MatTreeModule, ReactiveFormsModule, RouterLink, RouterTestingModule.withRoutes(
         [{ path: 'control-panel/catalog/products', component: ControlPanelCatalogProductListComponent }]
       )],
       providers: [
         { provide: ActivatedRoute, useValue: { snapshot: { paramMap: convertToParamMap({ productId: TestDataProducts[0].Id }) } } },
+        { provide: CategoryService, useValue: categoryServiceSpy },
         { provide: ProductService, useValue: productServiceSpy },
         { provide: ShopService, useValue: shopServiceSpy }
       ]

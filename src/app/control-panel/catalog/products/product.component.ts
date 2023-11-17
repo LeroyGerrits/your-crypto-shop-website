@@ -15,6 +15,7 @@ import { Product } from 'src/app/shared/models/Product.model';
 import { ProductService } from 'src/app/shared/services/Product.service';
 import { Shop } from 'src/app/shared/models/Shop.model';
 import { ShopService } from 'src/app/shared/services/Shop.service';
+import { MutateProductRequest } from 'src/app/shared/models/request/MutateProductRequest';
 
 @Component({
   selector: 'control-panel-catalog-product',
@@ -137,32 +138,56 @@ export class ControlPanelCatalogProductComponent implements OnInit, OnDestroy {
     if (this.controlDescription.value)
       productToUpdate.Description = this.controlDescription.value;
 
+    let checkedCategories: string = '';
+
     if (this.categories) {
       this.categories.forEach(category => {
-        console.log(category.Name);
-        var element = <HTMLInputElement>document.getElementById('category' + category.Id + '-input');
-        console.log(element.checked);
+        checkedCategories = checkedCategories + this.checkCategoryChecked(category);
       });
     }
 
-    return;
+    const request: MutateProductRequest = {
+      Product: productToUpdate,
+      CheckedCategories: checkedCategories
+    };
 
     if (this.queryStringProductId && this.queryStringProductId != 'new') {
-      this.productService.update(productToUpdate).subscribe({
+      this.productService.update(request,).subscribe({
         next: result => this.handleOnSubmitResult(result),
         error: error => this.handleOnSubmitError(error),
-        complete: () => this.formLoading = false
+        complete: () => this.saveCheckedCategories()
       });
     } else {
-      this.productService.create(productToUpdate).subscribe({
+      this.productService.create(request).subscribe({
         next: result => this.handleOnSubmitResult(result),
         error: error => this.handleOnSubmitError(error),
-        complete: () => this.formLoading = false
+        complete: () => this.saveCheckedCategories()
       });
     }
   }
 
+  checkCategoryChecked(category: Category): string {
+    let result: string = '';
 
+    var element = <HTMLInputElement>document.getElementById('category' + category.Id + '-input');
+    if (element && element.checked) {
+      result = ',' + category.Id;
+    }
+
+    if (category.Children) {
+      category.Children.forEach(childCategory => {
+        result = result + this.checkCategoryChecked(childCategory);
+      });
+    }
+
+    return result;
+  }
+
+  saveCheckedCategories() {
+
+
+    this.formLoading = false;
+  }
 
   handleOnSubmitResult(result: MutationResult) {
     if (result.Success) {
