@@ -140,7 +140,7 @@ export class ControlPanelCatalogProductComponent implements OnInit, OnDestroy {
     if (this.categories) {
       this.categories.forEach(category => {
         console.log(category.Name);
-        var element = <HTMLInputElement>document.getElementById('category' + category.Id);
+        var element = <HTMLInputElement>document.getElementById('category' + category.Id + '-input');
         console.log(element.checked);
       });
     }
@@ -161,6 +161,8 @@ export class ControlPanelCatalogProductComponent implements OnInit, OnDestroy {
       });
     }
   }
+
+
 
   handleOnSubmitResult(result: MutationResult) {
     if (result.Success) {
