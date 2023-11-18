@@ -94,7 +94,6 @@
             </div>
         </mat-tab>
         <mat-tab label="Categories">
-
             <mat-tree [dataSource]="dataSourceCategories" [treeControl]="treeControl" class="tree">
                 <mat-tree-node *matTreeNodeDef="let category">
                     <mat-checkbox [id]="'category' + category.Id" color="primary" [checked]="this.categoryIds.includes(category.Id)">{{category.Name}}</mat-checkbox>
@@ -108,7 +107,6 @@
                     </div>
                 </mat-nested-tree-node>
             </mat-tree>
-
         </mat-tab>
     </mat-tab-group>
     <mat-divider class="ClearLeft" />

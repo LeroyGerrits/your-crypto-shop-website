@@ -99,6 +99,9 @@ export class ControlPanelCatalogProductComponent implements OnInit, OnDestroy {
           this.categories = categories;
           this.dataSourceCategories.data = categories;
         });
+      } else {
+        this.categories = categories;
+        this.dataSourceCategories.data = categories;
       }
     });
   }
