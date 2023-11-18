@@ -96,11 +96,11 @@
         <mat-tab label="Categories">
             <mat-tree [dataSource]="dataSourceCategories" [treeControl]="treeControl" class="tree">
                 <mat-tree-node *matTreeNodeDef="let category">
-                    <mat-checkbox [id]="'category' + category.Id" color="primary" [checked]="this.categoryIds.includes(category.Id)">{{category.Name}}</mat-checkbox>
+                    <mat-checkbox [id]="'category' + category.Id" color="primary" [checked]="this.categoryIds.includes(category.Id)" (change)="checkCategory(category, $event)">{{category.Name}}</mat-checkbox>
                 </mat-tree-node>
                 <mat-nested-tree-node *matTreeNodeDef="let category; when: hasChild">
                     <div class="mat-tree-node">
-                        <mat-checkbox [id]="'category' + category.Id" color="primary" [checked]="this.categoryIds.includes(category.Id)">{{category.Name}}</mat-checkbox>
+                        <mat-checkbox [id]="'category' + category.Id" color="primary" [checked]="this.categoryIds.includes(category.Id)" (change)="checkCategory(category, $event)">{{category.Name}}</mat-checkbox>
                     </div>
                     <div role="group">
                         <ng-container matTreeNodeOutlet></ng-container>

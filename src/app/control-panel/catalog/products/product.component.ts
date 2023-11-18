@@ -8,15 +8,16 @@ import { CategoryService } from 'src/app/shared/services/Category.service';
 import { Constants } from 'src/app/shared/Constants';
 import { Environment } from 'src/app/shared/environments/Environment';
 import { GetCategoriesParameters } from 'src/app/shared/models/parameters/GetCategoriesParameters.model';
+import { GetProductResponse } from 'src/app/shared/models/response/GetProductResponse.model';
+import { MatCheckboxChange } from '@angular/material/checkbox';
 import { MatTreeNestedDataSource } from '@angular/material/tree';
+import { MutateProductRequest } from 'src/app/shared/models/request/MutateProductRequest.model';
 import { MutationResult } from 'src/app/shared/models/MutationResult';
 import { NestedTreeControl } from '@angular/cdk/tree';
 import { Product } from 'src/app/shared/models/Product.model';
 import { ProductService } from 'src/app/shared/services/Product.service';
 import { Shop } from 'src/app/shared/models/Shop.model';
 import { ShopService } from 'src/app/shared/services/Shop.service';
-import { MutateProductRequest } from 'src/app/shared/models/request/MutateProductRequest.model';
-import { GetProductResponse } from 'src/app/shared/models/response/GetProductResponse.model';
 
 @Component({
   selector: 'control-panel-catalog-product',
@@ -179,11 +180,20 @@ export class ControlPanelCatalogProductComponent implements OnInit, OnDestroy {
     }
   }
 
+  checkCategory(category: Category, event: MatCheckboxChange) {
+    if (event.checked) {
+      if (!this.categoryIds.includes(category.Id))
+        this.categoryIds.push(category.Id);
+    } else {
+      if (this.categoryIds.includes(category.Id))
+        this.categoryIds.splice(this.categoryIds.indexOf(category.Id), 1);
+    }
+  }
+
   getCategoryChecked(category: Category): string {
     let result: string = '';
 
-    var element = <HTMLInputElement>document.getElementById('category' + category.Id + '-input');
-    if (element && element.checked) {
+    if (this.categoryIds.includes(category.Id)) {
       result = ',' + category.Id;
     }
 
