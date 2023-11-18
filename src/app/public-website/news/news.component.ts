@@ -9,7 +9,7 @@ import { Title } from '@angular/platform-browser';
 @Component({
   selector: 'public-website-news',
   templateUrl: './news.component.html',
-  styleUrls: ['./news.component.scss']
+  styleUrl: './news.component.scss'
 })
 
 export class PublicWebsiteNewsComponent implements OnInit {

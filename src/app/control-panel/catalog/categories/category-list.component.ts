@@ -17,7 +17,7 @@ import { ShopService } from 'src/app/shared/services/Shop.service';
 @Component({
   selector: 'control-panel-catalog-category-list',
   templateUrl: './category-list.component.html',
-  styleUrls: ['./category-list.component.scss']
+  styleUrl: './category-list.component.scss'
 })
 export class ControlPanelCatalogCategoryListComponent implements OnInit {
   public treeControl = new NestedTreeControl<Category>(category => category.Children);

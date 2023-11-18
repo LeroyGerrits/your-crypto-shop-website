@@ -21,7 +21,8 @@ import { ShopService } from 'src/app/shared/services/Shop.service';
 
 @Component({
   selector: 'control-panel-catalog-product-list',
-  templateUrl: './product-list.component.html'
+  templateUrl: './product-list.component.html',
+  styleUrl: './product-list.component.scss'
 })
 
 export class ControlPanelCatalogProductListComponent {
@@ -33,7 +34,7 @@ export class ControlPanelCatalogProductListComponent {
   environment = Environment;
   constants = Constants;
   dataSource = new MatTableDataSource<Product>;
-  displayedColumns: string[] = ['Name', 'Shop', 'ActionButtons'];
+  displayedColumns: string[] = ['Photo', 'Name', 'Stock', 'Price', 'ActionButtons'];
   sortDirection: string | null = 'asc';
   finishedLoading: boolean = false;
 

@@ -19,7 +19,7 @@ import { ShopService } from 'src/app/shared/services/Shop.service';
 @Component({
   selector: 'control-panel-configuration-shop',
   templateUrl: './shop.component.html',
-  styleUrls: ['./shop.component.scss']
+  styleUrl: './shop.component.scss'
 })
 
 export class ControlPanelConfigurationShopComponent implements OnInit {

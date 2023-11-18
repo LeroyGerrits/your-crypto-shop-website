@@ -17,7 +17,8 @@ import { DigiByteWalletService } from 'src/app/shared/services/DigiByteWallet.se
 
 @Component({
   selector: 'control-panel-configuration-digibyte-wallet-list',
-  templateUrl: './digibyte-wallet-list.component.html'
+  templateUrl: './digibyte-wallet-list.component.html',
+  styleUrl: './digibyte-wallet-list.component.scss'
 })
 
 export class ControlPanelConfigurationDigiByteWalletListComponent implements OnDestroy, OnInit {

@@ -7,7 +7,7 @@ import { GetMiningInfoResponse } from 'src/app/shared/models/GetMiningInfoRespon
 @Component({
   selector: 'public-website-node-status',
   templateUrl: './node-status.component.html',
-  styleUrls: ['./node-status.component.scss']
+  styleUrl: './node-status.component.scss'
 })
 export class PublicWebsiteNodeStatusComponent implements OnInit {
   nodeDifficulty: GetDifficultyResponse | undefined;

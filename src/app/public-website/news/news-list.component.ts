@@ -6,7 +6,7 @@ import { NewsMessageService } from 'src/app/shared/services/NewsMessage.service'
 @Component({
   selector: 'public-website-news-list',
   templateUrl: './news-list.component.html',
-  styleUrls: ['./news-list.component.scss']
+  styleUrl: './news-list.component.scss'
 })
 export class PublicWebsiteNewsListComponent implements OnInit {
   newsMessages: NewsMessage[] | undefined;

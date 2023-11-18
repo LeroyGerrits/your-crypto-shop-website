@@ -16,7 +16,7 @@ import { FinancialStatementTransactionService } from 'src/app/shared/services/Fi
 @Component({
   selector: 'public-website-financial-statement',
   templateUrl: './financial-statement.component.html',
-  styleUrls: ['./financial-statement.component.scss']
+  styleUrl: './financial-statement.component.scss'
 })
 
 export class PublicWebsiteFinancialStatementComponent implements OnInit {

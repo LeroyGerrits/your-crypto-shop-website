@@ -22,7 +22,7 @@ import { ShopCategoryService } from 'src/app/shared/services/ShopCategory.servic
 @Component({
   selector: 'control-panel-configuration-shop-list',
   templateUrl: './shop-list.component.html',
-  styleUrls: ['./shop-list.component.scss']
+  styleUrl: './shop-list.component.scss'
 })
 
 export class ControlPanelConfigurationShopListComponent implements OnInit {
