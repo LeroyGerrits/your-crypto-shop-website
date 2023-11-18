@@ -134,7 +134,7 @@ export class ControlPanelCatalogProductListComponent {
 
   handleOnSubmitResult(result: MutationResult) {
     if (result.Success) {
-      this.router.navigate(['/control-panel/catalog/products']);
+      this.filterProducts();
     } else {
       this.snackBarRef = this.snackBar.open(result.Message, 'Close', { panelClass: ['error-snackbar'] });
     }

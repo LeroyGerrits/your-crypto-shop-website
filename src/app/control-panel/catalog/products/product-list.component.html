@@ -26,7 +26,7 @@
         </mat-form-field>
     </div>
 </div>
-<div class="ColumnOneFourth">
+<div class="ColumnOneFourth" style="display:none;">
     <div class="WrapperPadding20-20-0-20">
         <mat-form-field>
             <mat-label>Category</mat-label>
@@ -84,8 +84,8 @@
         <tr mat-row *matRowDef="let row; columns: this.displayedColumns;" (dblclick)="editElement(row)"></tr>
         <tr class="mat-row" *matNoDataRow>
             <td class="mat-cell NoDataCell" [colSpan]="this.displayedColumns.length">
-                <span *ngIf="this.controlFilterName.value || this.controlFilterShop.value">{{constants.MESSAGE_NO_RECORDS_FOUND}}</span>
-                <span *ngIf="!this.controlFilterName.value && !this.controlFilterShop.value">You have not yet created a product.</span>
+                <span *ngIf="this.controlFilterName.value || this.controlFilterCategory.value">{{constants.MESSAGE_NO_RECORDS_FOUND}}</span>
+                <span *ngIf="!this.controlFilterName.value && !this.controlFilterCategory.value">You have not yet created a product.</span>
             </td>
         </tr>
     </table>
