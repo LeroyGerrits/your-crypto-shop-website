@@ -92,6 +92,7 @@ import { RouterModule } from '@angular/router';
 import { SearchEngineFriendlyStringPipe } from './shared/pipes/SearchEngineFriendlyString.pipe';
 import { ShopCategoryService } from './shared/services/ShopCategory.service';
 import { ShopService } from './shared/services/Shop.service';
+import { StatsService } from './shared/services/Stats.service';
 import { StripHtmlPipe } from './shared/pipes/StripHtml.pipe';
 
 @NgModule({
@@ -195,6 +196,7 @@ import { StripHtmlPipe } from './shared/pipes/StripHtml.pipe';
     ProductService,
     ShopService,
     ShopCategoryService,
+    StatsService,
     StripHtmlPipe
   ],
   bootstrap: [AppComponent]

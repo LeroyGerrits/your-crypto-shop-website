@@ -7,6 +7,8 @@ import { PublicWebsiteComponent } from './public-website.component';
 import { ShopService } from '../shared/services/Shop.service';
 import { TestDataPublicShops } from 'src/assets/test-data/PublicShops';
 import { of } from 'rxjs';
+import { StatsService } from '../shared/services/Stats.service';
+import { Stats } from '../shared/models/Stats.model';
 
 describe('PublicWebsiteComponent', () => {
   let component: PublicWebsiteComponent;
@@ -16,6 +18,7 @@ describe('PublicWebsiteComponent', () => {
   let matDialogSpy: jasmine.SpyObj<MatDialog>
 
   let shopServiceSpy: jasmine.SpyObj<ShopService>;
+  let statsServiceSpy: jasmine.SpyObj<StatsService>;
 
   const fakeActivatedRoute = {
     snapshot: { data: {} }
@@ -32,13 +35,17 @@ describe('PublicWebsiteComponent', () => {
     shopServiceSpy = jasmine.createSpyObj('ShopService', ['getListFeaturedPublic']);
     shopServiceSpy.getListFeaturedPublic.and.returnValue(of(TestDataPublicShops));
 
+    statsServiceSpy = jasmine.createSpyObj('StatsService', ['get']);
+    statsServiceSpy.get.and.returnValue(of(<Stats>{ Merchants: 0, Shops: 0, Orders: 0, Transactions: 0 }));
+
     TestBed.configureTestingModule({
       declarations: [PublicWebsiteComponent],
       imports: [RouterLink, RouterLinkActive, RouterOutlet],
       providers: [
         { provide: ActivatedRoute, useValue: fakeActivatedRoute },
         { provide: MatDialog, useValue: matDialogSpy },
-        { provide: ShopService, useValue: shopServiceSpy }
+        { provide: ShopService, useValue: shopServiceSpy },
+        { provide: StatsService, useValue: statsServiceSpy }
       ]
     });
     fixture = TestBed.createComponent(PublicWebsiteComponent);

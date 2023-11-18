@@ -302,12 +302,26 @@ p {
   padding: 20px 0;
 }
 
-#Footer {
-  background-color: $dark-gray-color;
+#Stats div {
+  text-align: center;
 }
 
-#Footer div.CenteredContainer {
-  border-top: solid 1px #303030;
+#Stats div.CenteredContainer {
+  padding: 20px 0;
+}
+
+#Stats div strong {
+  display: block;
+  font-family: 'robotoblack';
+  font-size: 3em;
+  font-weight: bold;
+  line-height: 1em;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+#Footer {
+  background-color: $dark-gray-color;
 }
 
 #Footer p {

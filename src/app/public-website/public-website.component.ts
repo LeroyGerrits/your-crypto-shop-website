@@ -5,6 +5,8 @@ import { DialogSignUpComponent } from '../shared/dialogs/signup/dialog.signup.co
 import { MatDialog } from '@angular/material/dialog';
 import { Shop } from '../shared/models/Shop.model';
 import { ShopService } from '../shared/services/Shop.service';
+import { StatsService } from '../shared/services/Stats.service';
+import { Stats } from '../shared/models/Stats.model';
 
 @Component({
   selector: 'public-website',
@@ -13,14 +15,22 @@ import { ShopService } from '../shared/services/Shop.service';
 export class PublicWebsiteComponent implements OnInit {
   public showCallToAction: boolean = this.router.url == '/';
   public featuredShops: Shop[] | undefined;
+  public stats: Stats = <Stats>{
+    Merchants: 0,
+    Shops: 0,
+    Orders: 0,
+    Transactions: 0
+  };
 
   constructor(
-    public dialog: MatDialog,
+    private dialog: MatDialog,
     private router: Router,
-    private shopService: ShopService) { }
+    private shopService: ShopService,
+    private statsService: StatsService) { }
 
   ngOnInit() {
     this.shopService.getListFeaturedPublic().subscribe(shops => this.featuredShops = shops);
+    this.statsService.get().subscribe(stats => this.stats = stats);
 
     this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
