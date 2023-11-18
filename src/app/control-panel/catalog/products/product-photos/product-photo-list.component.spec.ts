@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { ActivatedRoute, Router, RouterLink } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink, convertToParamMap } from '@angular/router';
 import { of } from 'rxjs';
 
 import { ReactiveFormsModule } from '@angular/forms';
@@ -21,6 +21,7 @@ import { TestDataCategories } from 'src/assets/test-data/Categories';
 import { TestDataProducts } from 'src/assets/test-data/Products';
 import { TestDataShops } from 'src/assets/test-data/Shops';
 import { ControlPanelCatalogProductPhotoListComponent } from './product-photo-list.component';
+import { GetProductResponse } from 'src/app/shared/models/response/GetProductResponse.model';
 
 describe('ControlPanelCatalogProductPhotoListComponent', () => {
   let component: ControlPanelCatalogProductPhotoListComponent;
@@ -45,12 +46,8 @@ describe('ControlPanelCatalogProductPhotoListComponent', () => {
 
     matSnackBarSpy = jasmine.createSpyObj('MatSnackBar', ['open']);
 
-    productServiceSpy = jasmine.createSpyObj('ProductService', ['getList', 'delete']);
-    productServiceSpy.getList.and.returnValue(of(TestDataProducts));
-    productServiceSpy.delete.and.returnValue(of(mutationResult));
-
-    categoryServiceSpy = jasmine.createSpyObj('CategoryService', ['getList']);
-    categoryServiceSpy.getList.and.returnValue(of(TestDataCategories));
+    productServiceSpy = jasmine.createSpyObj('ProductService', ['getById']);
+    productServiceSpy.getById.and.returnValue(of(<GetProductResponse>{ Product: TestDataProducts[0], CategoryIds: [''] }));
 
     shopServiceSpy = jasmine.createSpyObj('ShopService', ['getList']);
     shopServiceSpy.getList.and.returnValue(of(TestDataShops));
@@ -62,7 +59,7 @@ describe('ControlPanelCatalogProductPhotoListComponent', () => {
       )],
       providers: [
         { provide: ActivatedRoute, useValue: { snapshot: { data: {} } } },
-        { provide: CategoryService, useValue: categoryServiceSpy },
+        { provide: ActivatedRoute, useValue: { snapshot: { paramMap: convertToParamMap({ productId: TestDataProducts[0].Id, shopId: TestDataProducts[0].ShopId }) } } },
         { provide: MatDialog, useValue: matDialogSpy },
         { provide: ShopService, useValue: shopServiceSpy },
         { provide: ProductService, useValue: productServiceSpy },
