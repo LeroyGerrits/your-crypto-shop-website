@@ -22,6 +22,8 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { CategoryService } from 'src/app/shared/services/Category.service';
 import { TestDataCategories } from 'src/assets/test-data/Categories';
 import { MatTreeModule } from '@angular/material/tree';
+import { GetProductResponse } from 'src/app/shared/models/response/GetProductResponse.model';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 describe('ControlPanelCatalogProductComponent', () => {
   let component: ControlPanelCatalogProductComponent;
@@ -39,7 +41,7 @@ describe('ControlPanelCatalogProductComponent', () => {
     categoryServiceSpy.getList.and.returnValue(of(TestDataCategories));
 
     productServiceSpy = jasmine.createSpyObj('ProductService', ['getById', 'create', 'update']);
-    productServiceSpy.getById.and.returnValue(of(TestDataProducts[0]));
+    productServiceSpy.getById.and.returnValue(of(<GetProductResponse>{ Product: TestDataProducts[0], CategoryIds: [''] }));
     productServiceSpy.create.and.returnValue(of(mutationResult));
     productServiceSpy.update.and.returnValue(of(mutationResult));
 
@@ -50,7 +52,7 @@ describe('ControlPanelCatalogProductComponent', () => {
 
     TestBed.configureTestingModule({
       declarations: [ControlPanelCatalogProductComponent],
-      imports: [BrowserAnimationsModule, MatDialogModule, MatDividerModule, MatFormFieldModule, MatInputModule, MatSelectModule, MatTabsModule, MatTreeModule, ReactiveFormsModule, RouterLink, RouterTestingModule.withRoutes(
+      imports: [BrowserAnimationsModule, MatCheckboxModule, MatDialogModule, MatDividerModule, MatFormFieldModule, MatInputModule, MatSelectModule, MatTabsModule, MatTreeModule, ReactiveFormsModule, RouterLink, RouterTestingModule.withRoutes(
         [{ path: 'control-panel/catalog/products', component: ControlPanelCatalogProductListComponent }]
       )],
       providers: [
