@@ -1,9 +1,9 @@
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 
-import { ActivateAccountRequest } from '../models/request/ActivateAccountRequest';
-import { ChangePasswordRequest } from '../models/request/ChangePasswordRequest';
+import { ActivateAccountRequest } from '../models/request/ActivateAccountRequest.model';
+import { ChangePasswordRequest } from '../models/request/ChangePasswordRequest.model';
 import { Environment } from 'src/app/shared/environments/Environment';
-import { ForgotPasswordRequest } from '../models/request/ForgotPasswordRequest';
+import { ForgotPasswordRequest } from '../models/request/ForgotPasswordRequest.model';
 import { Injectable } from '@angular/core';
 import { Merchant } from 'src/app/shared/models/Merchant.model';
 import { MutationResult } from 'src/app/shared/models/MutationResult';

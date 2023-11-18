@@ -1,9 +1,10 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 
 import { Environment } from 'src/app/shared/environments/Environment';
+import { GetProductResponse } from '../models/response/GetProductResponse.model';
 import { GetProductsParameters } from '../models/parameters/GetProductsParameters.model';
 import { Injectable } from '@angular/core';
-import { MutateProductRequest } from '../models/request/MutateProductRequest';
+import { MutateProductRequest } from '../models/request/MutateProductRequest.model';
 import { MutationResult } from 'src/app/shared/models/MutationResult';
 import { Observable } from 'rxjs';
 import { Product } from 'src/app/shared/models/Product.model';
@@ -25,8 +26,8 @@ export class ProductService {
         return this.http.get<Product[]>(this.apiUrl, { params: httpParams });
     }
 
-    getById(id: string): Observable<Product> {
-        return this.http.get<Product>(`${this.apiUrl}/${id}`);
+    getById(id: string): Observable<GetProductResponse> {
+        return this.http.get<GetProductResponse>(`${this.apiUrl}/${id}`);
     }
 
     create(request: MutateProductRequest): Observable<MutationResult> {

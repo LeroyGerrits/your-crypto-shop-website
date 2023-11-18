@@ -15,7 +15,8 @@ import { Product } from 'src/app/shared/models/Product.model';
 import { ProductService } from 'src/app/shared/services/Product.service';
 import { Shop } from 'src/app/shared/models/Shop.model';
 import { ShopService } from 'src/app/shared/services/Shop.service';
-import { MutateProductRequest } from 'src/app/shared/models/request/MutateProductRequest';
+import { MutateProductRequest } from 'src/app/shared/models/request/MutateProductRequest.model';
+import { GetProductResponse } from 'src/app/shared/models/response/GetProductResponse.model';
 
 @Component({
   selector: 'control-panel-catalog-product',
@@ -24,7 +25,7 @@ import { MutateProductRequest } from 'src/app/shared/models/request/MutateProduc
 
 export class ControlPanelCatalogProductComponent implements OnInit, OnDestroy {
   public treeControl = new NestedTreeControl<Category>(category => category.Children);
-  public dataSource = new MatTreeNestedDataSource<Category>();
+  public dataSourceCategories = new MatTreeNestedDataSource<Category>();
 
   public environment = Environment;
   public snackBarRef: MatSnackBarRef<TextOnlySnackBar> | undefined;
@@ -45,6 +46,7 @@ export class ControlPanelCatalogProductComponent implements OnInit, OnDestroy {
   public categories: Category[] | undefined;
   public pageTitle = 'Create new product'
   public product: Product = new Product();
+  public categoryIds: string[] = [];
   public shops: Shop[] | undefined;
 
   constructor(
@@ -69,10 +71,6 @@ export class ControlPanelCatalogProductComponent implements OnInit, OnDestroy {
     this.queryStringProductId = this.route.snapshot.paramMap.get('productId');
     this.queryStringShopId = this.route.snapshot.paramMap.get('shopId');
 
-    if (this.queryStringProductId && this.queryStringProductId != 'new') {
-      this.productService.getById(this.queryStringProductId).subscribe(x => { this.onRetrieveData(x); });
-    }
-
     this.shopService.getList().subscribe(shops => {
       this.shops = shops;
 
@@ -91,8 +89,17 @@ export class ControlPanelCatalogProductComponent implements OnInit, OnDestroy {
     }
 
     this.categoryService.getList(parameters).subscribe(categories => {
-      this.categories = categories;
-      this.dataSource.data = categories;
+
+      // Fetch products info after categories were fetched
+      if (this.queryStringProductId && this.queryStringProductId != 'new') {
+        this.productService.getById(this.queryStringProductId).subscribe(x => {
+          this.onRetrieveProductData(x);
+
+          // Set tree datasource after we've retrieved the checked category IDs
+          this.categories = categories;
+          this.dataSourceCategories.data = categories;
+        });
+      }
     });
   }
 
@@ -102,18 +109,21 @@ export class ControlPanelCatalogProductComponent implements OnInit, OnDestroy {
 
   hasChild = (_: number, category: Category) => !!category.Children && category.Children.length > 0;
 
-  onRetrieveData(product: Product) {
-    this.product = product;
-    this.pageTitle = product.Name;
-    this.controlName.setValue(product.Name);
-    this.controlShop.setValue(product.ShopId);
-    this.controlPrice.setValue(product.Price.toString());
+  onRetrieveProductData(response: GetProductResponse) {
+    this.product = response.Product;
+    this.pageTitle = response.Product.Name;
+    this.controlName.setValue(response.Product.Name);
+    this.controlShop.setValue(response.Product.ShopId);
+    this.controlPrice.setValue(response.Product.Price.toString());
 
-    if (product.Stock)
-      this.controlStock.setValue(product.Stock.toString());
+    if (response.Product.Stock)
+      this.controlStock.setValue(response.Product.Stock.toString());
 
-    if (product.Description)
-      this.controlDescription.setValue(product.Description);
+    if (response.Product.Description)
+      this.controlDescription.setValue(response.Product.Description);
+
+    if (response.CategoryIds)
+      this.categoryIds = response.CategoryIds;
   }
 
   onSubmit() {
@@ -142,7 +152,7 @@ export class ControlPanelCatalogProductComponent implements OnInit, OnDestroy {
 
     if (this.categories) {
       this.categories.forEach(category => {
-        checkedCategories = checkedCategories + this.checkCategoryChecked(category);
+        checkedCategories = checkedCategories + this.getCategoryChecked(category);
       });
     }
 
@@ -155,18 +165,18 @@ export class ControlPanelCatalogProductComponent implements OnInit, OnDestroy {
       this.productService.update(request,).subscribe({
         next: result => this.handleOnSubmitResult(result),
         error: error => this.handleOnSubmitError(error),
-        complete: () => this.saveCheckedCategories()
+        complete: () => this.formLoading = false
       });
     } else {
       this.productService.create(request).subscribe({
         next: result => this.handleOnSubmitResult(result),
         error: error => this.handleOnSubmitError(error),
-        complete: () => this.saveCheckedCategories()
+        complete: () => this.formLoading = false
       });
     }
   }
 
-  checkCategoryChecked(category: Category): string {
+  getCategoryChecked(category: Category): string {
     let result: string = '';
 
     var element = <HTMLInputElement>document.getElementById('category' + category.Id + '-input');
@@ -176,17 +186,11 @@ export class ControlPanelCatalogProductComponent implements OnInit, OnDestroy {
 
     if (category.Children) {
       category.Children.forEach(childCategory => {
-        result = result + this.checkCategoryChecked(childCategory);
+        result = result + this.getCategoryChecked(childCategory);
       });
     }
 
     return result;
-  }
-
-  saveCheckedCategories() {
-
-
-    this.formLoading = false;
   }
 
   handleOnSubmitResult(result: MutationResult) {

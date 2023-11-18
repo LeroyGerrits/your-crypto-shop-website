@@ -4,7 +4,7 @@ import { Injectable } from '@angular/core';
 import { MerchantPasswordResetLink } from '../models/MerchantPasswordResetLink.model';
 import { MutationResult } from '../models/MutationResult';
 import { Observable } from 'rxjs';
-import { ResetPasswordRequest } from '../models/request/ResetPasswordRequest';
+import { ResetPasswordRequest } from '../models/request/ResetPasswordRequest.model';
 
 @Injectable()
 export class MerchantPasswordResetLinkService {

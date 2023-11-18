@@ -4,7 +4,7 @@ import { HttpClientTestingModule, HttpTestingController } from '@angular/common/
 import { Constants } from 'src/app/shared/Constants';
 import { Environment } from 'src/app/shared/environments/Environment';
 import { GetProductsParameters } from '../models/parameters/GetProductsParameters.model';
-import { MutateProductRequest } from '../models/request/MutateProductRequest';
+import { MutateProductRequest } from '../models/request/MutateProductRequest.model';
 import { ProductService } from './Product.service';
 import { TestBed } from '@angular/core/testing';
 import { TestDataProducts } from 'src/assets/test-data/Products';
