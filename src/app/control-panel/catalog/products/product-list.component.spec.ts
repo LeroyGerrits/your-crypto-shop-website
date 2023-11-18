@@ -116,7 +116,7 @@ describe('ControlPanelCatalogProductListComponent', () => {
     spyOn(routerstub, 'navigate');
 
     component.editElement(TestDataProducts[0]);
-    expect(routerstub.navigate).toHaveBeenCalledWith(['/control-panel/catalog/products/' + TestDataProducts[0].Id]);
+    expect(routerstub.navigate).toHaveBeenCalledWith([`/control-panel/catalog/products/${TestDataProducts[0].Id}/${TestDataProducts[0].ShopId}`]);
   });
 
   it('should show a dialog when delete icon is clicked', () => {
