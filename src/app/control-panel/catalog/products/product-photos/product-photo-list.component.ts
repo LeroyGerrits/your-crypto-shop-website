@@ -1,6 +1,7 @@
 import { ActivatedRoute, Router } from '@angular/router';
 import { Component, ViewChild } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
+import { HttpClient, HttpErrorResponse, HttpEventType } from '@angular/common/http';
 import { MatSnackBar, MatSnackBarRef, TextOnlySnackBar } from '@angular/material/snack-bar';
 import { MatSort, Sort } from '@angular/material/sort';
 import { debounceTime, distinctUntilChanged } from 'rxjs';
@@ -40,8 +41,13 @@ export class ControlPanelCatalogProductPhotoListComponent {
   public shop: Shop | undefined;
   public product: Product | undefined;
 
+  public progress: number = 0;
+  public message: string = '';
+
+
   constructor(
     private dialog: MatDialog,
+    private http: HttpClient,
     private snackBar: MatSnackBar,
     private route: ActivatedRoute,
     private router: Router,
@@ -63,6 +69,31 @@ export class ControlPanelCatalogProductPhotoListComponent {
 
   ngOnDestroy(): void {
     this.snackBarRef?.dismiss();
+  }
+
+  uploadFile(files: FileList) {
+    if (files.length === 0) {
+      return;
+    }
+
+    const formData = new FormData();
+    for (let index = 0; index < files.length; index++) {
+      const fileToUpload = files[index];
+      formData.append('file', fileToUpload, fileToUpload.name);
+    }
+
+    this.http.post('https://localhost:7170/ProductPhoto', formData, { reportProgress: true, observe: 'events' })
+      .subscribe({
+        next: (event) => {
+          if (event.type === HttpEventType.UploadProgress)
+            this.progress = Math.round(100 * event.loaded / event.total!);
+          else if (event.type === HttpEventType.Response) {
+            this.message = 'Upload success.';
+          }
+        },
+        error: (err: HttpErrorResponse) => console.log(err),
+        complete: () => console.log('klaar!')
+      });
   }
 
   deleteElement(element: Product) {

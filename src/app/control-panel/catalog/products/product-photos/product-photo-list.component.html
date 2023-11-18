@@ -1,12 +1,16 @@
 <div class="WrapperPadding20-8-0-8">
     <div class="FloatRight">
-        <button mat-raised-button color="primary">
+        <button mat-raised-button color="primary" (click)="file.click()">
             <mat-icon>file_upload</mat-icon>
             Upload new photo
         </button>
+
+        <input type="file" #file class="DisplayNone" (change)="uploadFile(file.files!)" multiple="multiple" accept=".png,.jpg,.jpeg,.bmp">
     </div>
     <h2><a [routerLink]="['/control-panel/catalog/products']">Products</a> - {{this.product?.Name}} - Photos</h2>
 </div>
 <div class="WrapperPadding20-8-0-8">
     Photo management will be here later.
+    {{this.progress}}<br />
+    {{this.message}}
 </div>
