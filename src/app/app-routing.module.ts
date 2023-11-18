@@ -8,6 +8,7 @@ import { ControlPanelCatalogCategoryComponent } from './control-panel/catalog/ca
 import { ControlPanelCatalogCategoryListComponent } from './control-panel/catalog/categories/category-list.component';
 import { ControlPanelCatalogProductComponent } from './control-panel/catalog/products/product.component';
 import { ControlPanelCatalogProductListComponent } from './control-panel/catalog/products/product-list.component';
+import { ControlPanelCatalogProductPhotoListComponent } from './control-panel/catalog/products/product-photos/product-photo-list.component';
 import { ControlPanelComponent } from './control-panel/control-panel.component';
 import { ControlPanelConfigurationDeliveryMethodComponent } from './control-panel/configuration/delivery-methods/delivery-method.component';
 import { ControlPanelConfigurationDeliveryMethodListComponent } from './control-panel/configuration/delivery-methods/delivery-method-list.component';
@@ -55,8 +56,8 @@ const routes: Routes = [
       { path: 'catalog/categories', component: ControlPanelCatalogCategoryListComponent, title: `${Constants.TITLE_PREFIX} - Categories` },
       { path: 'catalog/categories/:categoryId', component: ControlPanelCatalogCategoryComponent, title: `${Constants.TITLE_PREFIX} - Categories` },
       { path: 'catalog/products', component: ControlPanelCatalogProductListComponent, title: `${Constants.TITLE_PREFIX} - Products` },
-      { path: 'catalog/products/:productId', component: ControlPanelCatalogProductComponent, title: `${Constants.TITLE_PREFIX} - Products` },
       { path: 'catalog/products/:productId/:shopId', component: ControlPanelCatalogProductComponent, title: `${Constants.TITLE_PREFIX} - Products` },
+      { path: 'catalog/products/:productId/:shopId/photos', component: ControlPanelCatalogProductPhotoListComponent, title: `${Constants.TITLE_PREFIX} - Product photos` },
       { path: 'configuration/delivery-methods', component: ControlPanelConfigurationDeliveryMethodListComponent, title: `${Constants.TITLE_PREFIX} - Delivery methods` },
       { path: 'configuration/delivery-methods/:deliveryMethodId', component: ControlPanelConfigurationDeliveryMethodComponent, title: `${Constants.TITLE_PREFIX} - Delivery methods` },
       { path: 'configuration/digibyte-wallets', component: ControlPanelConfigurationDigiByteWalletListComponent, title: `${Constants.TITLE_PREFIX} - DigiByte wallets` },

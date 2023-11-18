@@ -14,6 +14,7 @@ import { ControlPanelCatalogCategoryComponent } from './control-panel/catalog/ca
 import { ControlPanelCatalogCategoryListComponent } from './control-panel/catalog/categories/category-list.component';
 import { ControlPanelCatalogProductComponent } from './control-panel/catalog/products/product.component';
 import { ControlPanelCatalogProductListComponent } from './control-panel/catalog/products/product-list.component';
+import { ControlPanelCatalogProductPhotoListComponent } from './control-panel/catalog/products/product-photos/product-photo-list.component';
 import { ControlPanelComponent } from './control-panel/control-panel.component';
 import { ControlPanelConfigurationDeliveryMethodComponent } from './control-panel/configuration/delivery-methods/delivery-method.component';
 import { ControlPanelConfigurationDeliveryMethodListComponent } from './control-panel/configuration/delivery-methods/delivery-method-list.component';
@@ -104,6 +105,7 @@ import { StripHtmlPipe } from './shared/pipes/StripHtml.pipe';
     ControlPanelCatalogCategoryComponent,
     ControlPanelCatalogProductComponent,
     ControlPanelCatalogProductListComponent,
+    ControlPanelCatalogProductPhotoListComponent,
     ControlPanelConfigurationDeliveryMethodListComponent,
     ControlPanelConfigurationDeliveryMethodComponent,
     ControlPanelConfigurationDigiByteWalletListComponent,

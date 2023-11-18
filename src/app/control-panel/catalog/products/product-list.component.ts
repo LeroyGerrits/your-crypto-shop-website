@@ -109,11 +109,11 @@ export class ControlPanelCatalogProductListComponent {
   }
 
   editElement(element: Product) {
-    this.router.navigate([`/control-panel/catalog/products/${element.Id}`]);
+    this.router.navigate([`/control-panel/catalog/products/${element.Id}/${this.controlFilterShop.value}`]);
   }
 
   editPhotos(element: Product) {
-    this.router.navigate([`/control-panel/catalog/products/${element.Id}/photos`]);
+    this.router.navigate([`/control-panel/catalog/products/${element.Id}/${this.controlFilterShop.value}/photos`]);
   }
 
   deleteElement(element: Product) {
