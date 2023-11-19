@@ -5,12 +5,36 @@
             Upload new photo
         </button>
 
-        <input type="file" #file class="DisplayNone" (change)="uploadFile(file.files!)" multiple="multiple" accept=".png,.jpg,.jpeg,.bmp">
+        <input type="file" #file class="DisplayNone" (change)="uploadFile(file.files!)" multiple="multiple" [accept]="this.fileUploadAllowedExtensionsAccept">
     </div>
     <h2><a [routerLink]="['/control-panel/catalog/products']">Products</a> - {{this.product?.Name}} - Photos</h2>
 </div>
 <div class="WrapperPadding20-8-0-8">
-    Photo management will be here later.
-    {{this.progress}}<br />
-    {{this.message}}
+
+    <table class="TableProgress" style="width:100%;">
+        <tr class="RowHeader">
+            <th class="ColumnNumber">#</th>
+            <th>File</th>
+            <th>%</th>
+            <th>Progress</th>
+            <th class="ColumnButton"></th>
+        </tr>
+        <ng-container *ngFor="let fileUploadProgressItem of this.fileUploadProgressItems">
+            <tr *ngIf="fileUploadProgressItem.Visible">
+                <td>{{fileUploadProgressItem.Number}}</td>
+                <td>{{fileUploadProgressItem.FileName}}</td>
+                <td>{{fileUploadProgressItem.Progress}}</td>
+                <td>
+                    <span *ngIf="!fileUploadProgressItem.Finished" [ngStyle]="{ 'width': fileUploadProgressItem.Progress + '%'}" class="ProgressBar">&nbsp;</span>
+                    {{fileUploadProgressItem.Message}}
+                </td>
+                <td>
+                    <button mat-icon-button *ngIf="fileUploadProgressItem.Finished" (click)="deleteFileUploadProgress(fileUploadProgressItem)">
+                        <mat-icon color="primary">highlight_remove</mat-icon>
+                    </button>
+                </td>
+            </tr>
+        </ng-container>
+    </table>
+
 </div>

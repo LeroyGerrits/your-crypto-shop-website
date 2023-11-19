@@ -49,7 +49,20 @@
   --mdc-dialog-supporting-text-size: 14px;
   --mat-menu-item-label-text-size: 14px;
   --mat-option-label-text-size: 14px;
+
+  --font-main: 'open_sansregular', Helvetica, Tahoma !important;
+  --dark-blue-color: #002352;
+  --dark-gray-color: #202020;
+  --light-blue-color: #2080e0;
+  --lighter-blue-color: #3090f0;
+  --lightest-blue-color: #3f9fff;
+  --error-color: #dc3545;
+  --table-header-background-color: #303030;
+  --table-row-background-color: #404040;
+  --table-row-alternating-background-color: #383838;
 }
+
+
 
 $md-dgbcommercepalette-primary: (
   50 : #e4f0fb,
@@ -115,15 +128,8 @@ $md-dgbcommercepalette-accent: (
   )
 );
 
-$font-main: 'open_sansregular', Helvetica, Tahoma !important;
 $my-primary: mat.define-palette($md-dgbcommercepalette-primary, 500);
 $my-accent: mat.define-palette($md-dgbcommercepalette-accent, 500);
-$dark-blue-color: #002352;
-$dark-gray-color: #202020;
-$light-blue-color: #2080e0;
-$lighter-blue-color: #3090f0;
-$lightest-blue-color: #3f9fff;
-$error-color: #dc3545;
 
 $my-theme: mat.define-dark-theme((color: (primary: $my-primary,
         accent: $my-accent,
@@ -148,7 +154,7 @@ a:hover {
 }
 
 body {
-  background-color: $dark-blue-color;
+  background-color: var(--dark-blue-color);
   color: #fff;
   font-family: 'open_sansregular', Helvetica, Tahoma !important;
   margin: 0;
@@ -171,7 +177,7 @@ p {
 }
 
 #TopBar {
-  background-color: $dark-blue-color;
+  background-color: var(--dark-blue-color);
 }
 
 #TopBar .mat-toolbar {
@@ -298,7 +304,7 @@ p {
 
 
 #Body {
-  background-color: $dark-gray-color;
+  background-color: var(--dark-gray-color);
   padding: 20px 0;
 }
 
@@ -321,7 +327,7 @@ p {
 }
 
 #Footer {
-  background-color: $dark-gray-color;
+  background-color: var(--dark-gray-color);
 }
 
 #Footer p {
@@ -342,7 +348,7 @@ p {
 }
 
 #BottomBar {
-  background-color: $dark-blue-color;
+  background-color: var(--dark-blue-color);
   color: #bbb;
 }
 
@@ -710,7 +716,7 @@ td.NoDataCell {
 }
 
 .mat-mdc-icon-button.mat-primary {
-  color: $lightest-blue-color !important;
+  color: var(--lightest-blue-color) !important;
 }
 
 .mdc-list-item__primary-text img {
@@ -719,7 +725,7 @@ td.NoDataCell {
 }
 
 .mat-mdc-option.mdc-list-item--selected:not(.mdc-list-item--disabled) .mdc-list-item__primary-text {
-  color: $lightest-blue-color !important;
+  color: var(--lightest-blue-color) !important;
 }
 
 .mat-mdc-snack-bar-container {
@@ -732,19 +738,19 @@ td.NoDataCell {
 
 table.mat-mdc-table tr.mat-mdc-header-row,
 .mat-mdc-paginator {
-  background-color: #303030 !important;
-}
-
-table.mat-mdc-table tbody tr:nth-child(even) {
-  background-color: #383838;
+  background-color: var(--table-header-background-color) !important;
 }
 
 table.mat-mdc-table tbody tr:nth-child(odd) {
-  background-color: #404040;
+  background-color: var(--table-row-background-color);
+}
+
+table.mat-mdc-table tbody tr:nth-child(even) {
+  background-color: var(--table-row-alternating-background-color);
 }
 
 .mdc-text-field--focused:not(.mdc-text-field--disabled) .mdc-floating-label {
-  color: $lightest-blue-color !important;
+  color: var(--lightest-blue-color) !important;
 }
 
 mat-form-field {

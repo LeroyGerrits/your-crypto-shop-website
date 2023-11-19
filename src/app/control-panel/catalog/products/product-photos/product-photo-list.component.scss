@@ -1,9 +1,41 @@
-.mat-column-Photo {
-    flex: none;
-    width: 100px;
+table.TableProgress {
+    border-spacing: 0;
+    width: 100%;
 }
 
-.mat-column-ActionButtons {
-    flex: none;
+table.TableProgress tr.RowHeader {
+    background-color: var(--table-header-background-color) !important;
+}
+
+table.TableProgress tr th {
+    font-weight: normal;
+    line-height: 48px;
+    text-align: left;
+}
+
+table.TableProgress tr th.ColumnNumber {
     width: 48px;
+}
+
+table.TableProgress tr th.ColumnButton {
+    width: 48px;
+}
+
+table.TableProgress tr th,
+table.TableProgress tr td {
+    padding: 0 8px;
+}
+
+table.TableProgress tr:nth-child(odd) {
+    background-color: var(--table-row-background-color);
+}
+
+table.TableProgress tr:nth-child(even) {
+    background-color: var(--table-row-alternating-background-color);
+}
+
+table.TableProgress tr td span.ProgressBar {
+    background-color: var(--light-blue-color);
+    display: inline-block;
+    height: 1em;
 }

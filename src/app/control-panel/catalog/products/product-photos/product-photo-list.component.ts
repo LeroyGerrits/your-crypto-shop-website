@@ -11,12 +11,15 @@ import { CategoryService } from 'src/app/shared/services/Category.service';
 import { Constants } from 'src/app/shared/Constants';
 import { DialogDeleteComponent } from 'src/app/shared/dialogs/delete/dialog.delete.component';
 import { Environment } from 'src/app/shared/environments/Environment';
+import { FileSizePipe } from 'src/app/shared/pipes/FileSize.pipe';
+import { FileUploadProgress } from 'src/app/shared/models/system/FileUploadProgress.model';
 import { GetProductsParameters } from 'src/app/shared/models/parameters/GetProductsParameters.model';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { MutationResult } from 'src/app/shared/models/MutationResult';
 import { Product } from 'src/app/shared/models/Product.model';
+import { ProductPhotoService } from 'src/app/shared/services/ProductPhoto.service';
 import { ProductService } from 'src/app/shared/services/Product.service';
 import { Shop } from 'src/app/shared/models/Shop.model';
 import { ShopService } from 'src/app/shared/services/Shop.service';
@@ -41,18 +44,19 @@ export class ControlPanelCatalogProductPhotoListComponent {
   public shop: Shop | undefined;
   public product: Product | undefined;
 
-  public progress: number = 0;
-  public message: string = '';
-
+  public fileUploadCounter = 0;
+  public fileUploadProgressItems: FileUploadProgress[] = [];
+  public fileUploadAllowedExtensionsAccept: string = '';
 
   constructor(
     private dialog: MatDialog,
-    private http: HttpClient,
-    private snackBar: MatSnackBar,
+    private fileSizePipe: FileSizePipe,
+    private productService: ProductService,
+    private productPhotoService: ProductPhotoService,
     private route: ActivatedRoute,
     private router: Router,
-    private productService: ProductService,
-    private shopService: ShopService
+    private shopService: ShopService,
+    private snackBar: MatSnackBar
   ) {
     this.form = new FormGroup([
       this.controlFile
@@ -65,6 +69,10 @@ export class ControlPanelCatalogProductPhotoListComponent {
 
     if (this.queryStringProductId)
       this.productService.getById(this.queryStringProductId).subscribe(product => this.product = product.Product);
+
+    Constants.UPLOAD_ALLOWED_EXTENSIONS.forEach(extension => {
+      this.fileUploadAllowedExtensionsAccept += (this.fileUploadAllowedExtensionsAccept != '' ? ',' : '') + `.${extension}`
+    });
   }
 
   ngOnDestroy(): void {
@@ -76,24 +84,58 @@ export class ControlPanelCatalogProductPhotoListComponent {
       return;
     }
 
-    const formData = new FormData();
     for (let index = 0; index < files.length; index++) {
       const fileToUpload = files[index];
-      formData.append('file', fileToUpload, fileToUpload.name);
-    }
+      const fileNameSplit = fileToUpload.name.split('.');
+      const fileExtention = fileNameSplit[fileNameSplit.length - 1];
 
-    this.http.post('https://localhost:7170/ProductPhoto', formData, { reportProgress: true, observe: 'events' })
-      .subscribe({
-        next: (event) => {
-          if (event.type === HttpEventType.UploadProgress)
-            this.progress = Math.round(100 * event.loaded / event.total!);
-          else if (event.type === HttpEventType.Response) {
-            this.message = 'Upload success.';
-          }
-        },
-        error: (err: HttpErrorResponse) => console.log(err),
-        complete: () => console.log('klaar!')
-      });
+      let fileUploadIndex = this.fileUploadCounter++;
+      let fileUploadProgressItem: FileUploadProgress = {
+        Number: fileUploadIndex + 1,
+        Progress: 0,
+        FileName: fileToUpload.name,
+        Finished: false,
+        Visible: true
+      }
+
+      this.fileUploadProgressItems.push(fileUploadProgressItem);
+
+      if (!Constants.UPLOAD_ALLOWED_EXTENSIONS.includes(fileExtention.toLowerCase())) {
+        this.fileUploadProgressItems[fileUploadIndex].Message = `File type ${fileExtention} is not allowed. Only the following file types are allowed: ${Constants.UPLOAD_ALLOWED_EXTENSIONS}`;
+        this.fileUploadProgressItems[fileUploadIndex].Finished = true;
+        continue;
+      }
+
+      if (fileToUpload.size > Constants.UPLOAD_MAXIMUM_FILE_SIZE) {
+        this.fileUploadProgressItems[fileUploadIndex].Message = 'File was too large. The maximum allowed file size is ' + this.fileSizePipe.transform(Constants.UPLOAD_MAXIMUM_FILE_SIZE);
+        this.fileUploadProgressItems[fileUploadIndex].Finished = true;
+        continue;
+      }
+
+      const formData = new FormData();
+      formData.append('file', fileToUpload, fileToUpload.name);
+
+      this.productPhotoService.upload(this.queryStringProductId!, formData)
+        .subscribe({
+          next: (event) => {
+            if (event.type === HttpEventType.UploadProgress)
+              this.fileUploadProgressItems[fileUploadIndex].Progress = Math.round(100 * event.loaded / event.total!);
+            else if (event.type === HttpEventType.Response) {
+              this.fileUploadProgressItems[fileUploadIndex].Message = 'Successfully uploaded';
+            }
+          },
+          error: (err: HttpErrorResponse) => {
+            this.fileUploadProgressItems[fileUploadIndex].Message = err.message;
+            this.fileUploadProgressItems[fileUploadIndex].Finished = true;
+          },
+          complete: () => this.fileUploadProgressItems[fileUploadIndex].Finished = true
+        });
+
+    }
+  }
+
+  deleteFileUploadProgress(fileUploadProgress: FileUploadProgress) {
+    this.fileUploadProgressItems[fileUploadProgress.Number - 1].Visible = false;
   }
 
   deleteElement(element: Product) {

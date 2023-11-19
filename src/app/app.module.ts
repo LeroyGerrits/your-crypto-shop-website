@@ -74,6 +74,7 @@ import { MerchantPasswordResetLinkService } from './shared/services/MerchantPass
 import { MerchantService } from './shared/services/Merchant.service';
 import { NewsMessageService } from './shared/services/NewsMessage.service';
 import { NgModule } from '@angular/core';
+import { ProductPhotoService } from './shared/services/ProductPhoto.service';
 import { ProductService } from './shared/services/Product.service';
 import { PublicWebsiteAboutComponent } from './public-website/about/about.component';
 import { PublicWebsiteAccountActivateComponent } from './public-website/account-activate/account-activate.component';
@@ -194,6 +195,7 @@ import { StripHtmlPipe } from './shared/pipes/StripHtml.pipe';
     MerchantPasswordResetLinkService,
     NewsMessageService,
     ProductService,
+    ProductPhotoService,
     ShopService,
     ShopCategoryService,
     StatsService,
