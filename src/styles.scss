@@ -56,6 +56,7 @@
   --light-blue-color: #2080e0;
   --lighter-blue-color: #3090f0;
   --lightest-blue-color: #3f9fff;
+  --light-gray-color: #404040;
   --error-color: #dc3545;
   --table-header-background-color: #303030;
   --table-row-background-color: #404040;
@@ -478,7 +479,7 @@ div.InvalidFeedback {
 }
 
 div.LighterBlock {
-  background-color: #444;
+  background-color: var(--light-gray-color);
   padding: 20px;
 }
 
