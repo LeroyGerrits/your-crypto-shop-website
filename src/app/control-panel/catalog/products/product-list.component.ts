@@ -11,10 +11,12 @@ import { Constants } from 'src/app/shared/Constants';
 import { DialogDeleteComponent } from 'src/app/shared/dialogs/delete/dialog.delete.component';
 import { Environment } from 'src/app/shared/environments/Environment';
 import { Category } from 'src/app/shared/models/Category.model';
+import { Merchant } from 'src/app/shared/models/Merchant.model';
 import { MutationResult } from 'src/app/shared/models/MutationResult';
 import { Product } from 'src/app/shared/models/Product.model';
 import { Shop } from 'src/app/shared/models/Shop.model';
 import { GetProductsParameters } from 'src/app/shared/models/parameters/GetProductsParameters.model';
+import { AuthenticationService } from 'src/app/shared/services/Authentication.service';
 import { CategoryService } from 'src/app/shared/services/Category.service';
 import { ProductService } from 'src/app/shared/services/Product.service';
 import { ShopService } from 'src/app/shared/services/Shop.service';
@@ -28,6 +30,8 @@ import { ShopService } from 'src/app/shared/services/Shop.service';
 export class ControlPanelCatalogProductListComponent {
   @ViewChild(MatPaginator, { static: false }) paginator!: MatPaginator;
   @ViewChild(MatSort, { static: false }) sort!: MatSort;
+
+  public activeMerchant?: Merchant | null;
 
   public snackBarRef: MatSnackBarRef<TextOnlySnackBar> | undefined;
 
@@ -47,6 +51,7 @@ export class ControlPanelCatalogProductListComponent {
   public categories: Category[] | undefined;
 
   constructor(
+    private authenticationService: AuthenticationService,
     private categoryService: CategoryService,
     private dialog: MatDialog,
     private snackBar: MatSnackBar,
@@ -65,6 +70,8 @@ export class ControlPanelCatalogProductListComponent {
   }
 
   ngOnInit() {
+    this.authenticationService.merchant.subscribe(x => this.activeMerchant = x?.Merchant);
+
     this.shopService.getList().subscribe(shops => {
       this.shops = shops;
 

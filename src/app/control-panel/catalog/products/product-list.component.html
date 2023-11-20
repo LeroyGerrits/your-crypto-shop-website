@@ -40,7 +40,9 @@
     <table mat-table matSort [dataSource]="this.dataSource" (matSortChange)="onSortChange($event)">
         <ng-container matColumnDef="Photo">
             <th mat-header-cell *matHeaderCellDef>&nbsp;</th>
-            <td mat-cell *matCellDef="let element"></td>
+            <td mat-cell *matCellDef="let element">
+                <img *ngIf="element.MainPhotoId" src="{{environment.API_URL}}/Resources/{{this.activeMerchant?.Id}}/ProductPhoto/{{element.MainPhotoId}}_thumbnail_100x100.{{element.MainPhotoExtension}}" width="100" height="100" alt="{{element.Name}}" />
+            </td>
         </ng-container>
 
         <ng-container matColumnDef="Name">
