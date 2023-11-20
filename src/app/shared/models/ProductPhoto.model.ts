@@ -7,4 +7,6 @@ export class ProductPhoto {
     ThumbnailUrl!: string;
     PhotoUrl!: string;
     SortOrder?: number;
+    Main!: boolean;
+    Visible!: boolean;
 }

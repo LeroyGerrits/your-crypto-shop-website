@@ -2,20 +2,20 @@
     <div class="FloatRight">
         <button mat-raised-button color="primary" (click)="file.click()">
             <mat-icon>file_upload</mat-icon>
-            Upload new photo
+            Upload photos
         </button>
 
         <input type="file" #file class="DisplayNone" (change)="uploadFile(file.files!)" multiple="multiple" [accept]="this.fileUploadAllowedExtensionsAccept">
     </div>
     <h2><a [routerLink]="['/control-panel/catalog/products']">Products</a> - {{this.product?.Name}} - Photos</h2>
 </div>
-<div class="WrapperPadding20-8-0-8">
 
-    <table class="TableProgress" style="width:100%;">
+<div class="WrapperPadding20-8-0-8 ClearBoth" *ngIf="this.fileUploadProgressItems.length > 0">
+    <table class="TableProgress">
         <tr class="RowHeader">
             <th class="ColumnNumber">#</th>
             <th>File</th>
-            <th>%</th>
+            <th class="ColumnNumber">%</th>
             <th>Progress</th>
             <th class="ColumnButton"></th>
         </tr>
@@ -23,18 +23,61 @@
             <tr *ngIf="fileUploadProgressItem.Visible">
                 <td>{{fileUploadProgressItem.Number}}</td>
                 <td>{{fileUploadProgressItem.FileName}}</td>
-                <td>{{fileUploadProgressItem.Progress}}</td>
+                <td><span *ngIf="!fileUploadProgressItem.Finished">{{fileUploadProgressItem.Progress}}</span></td>
                 <td>
                     <span *ngIf="!fileUploadProgressItem.Finished" [ngStyle]="{ 'width': fileUploadProgressItem.Progress + '%'}" class="ProgressBar">&nbsp;</span>
                     {{fileUploadProgressItem.Message}}
                 </td>
                 <td>
-                    <button mat-icon-button *ngIf="fileUploadProgressItem.Finished" (click)="deleteFileUploadProgress(fileUploadProgressItem)">
+                    <button mat-icon-button (click)="hideFileUploadProgress(fileUploadProgressItem)">
                         <mat-icon color="primary">highlight_remove</mat-icon>
                     </button>
                 </td>
             </tr>
         </ng-container>
     </table>
-
 </div>
+<div class="ClearRight"></div>
+<div [ngClass]="{ 'ColumnOneThird': true, 'ClearLeft': (i % 3 == 0) }" *ngFor="let productPhoto of this.productPhotos; let i = index">
+    <div [ngClass]="{ 'WrapperPadding20-10-0-8': (i % 3 == 0), 'WrapperPadding20-10-0-10': ((i - 1) % 3 == 0), 'WrapperPadding20-8-0-10': ((i - 2) % 3 == 0) }">
+        <div class="ProductPhoto">
+            <button mat-icon-button [matMenuTriggerFor]="menu" class="FloatRight">
+                <mat-icon color="primary">more_horiz</mat-icon>
+            </button>
+            <mat-menu #menu="matMenu">
+                <button mat-menu-item color="primary" (click)="editDescription(productPhoto)">
+                    <mat-icon color="primary">edit</mat-icon> <span>Edit description</span>
+                </button>
+                <button mat-menu-item (click)="moveUp(productPhoto)">
+                    <mat-icon color="primary">move_up</mat-icon> <span>Move up</span>
+                </button>
+                <button mat-menu-item (click)="moveDown(productPhoto)">
+                    <mat-icon color="primary">move_down</mat-icon> <span>Move down</span>
+                </button>
+                <button mat-menu-item color="warn" (click)="delete(productPhoto)">
+                    <mat-icon color="warn">delete</mat-icon> <span>Delete</span>
+                </button>
+            </mat-menu>
+
+            <button mat-icon-button *ngIf="productPhoto.Main" matTooltip="This photo is the main photo for this product">
+                <mat-icon class="ColorGold">star</mat-icon>
+            </button>
+            <button mat-icon-button *ngIf="!productPhoto.Main" matTooltip="This photo is not the main photo for this product" (click)="setMain(productPhoto)">
+                <mat-icon color="primary">star_border</mat-icon>
+            </button>
+            <button mat-icon-button *ngIf="productPhoto.Visible" matTooltip="This photo is visible" (click)="setVisible(productPhoto, false)">
+                <mat-icon color="primary">remove_red_eye</mat-icon>
+            </button>
+            <button mat-icon-button *ngIf="!productPhoto.Visible" matTooltip="This photo is not visible" (click)="setVisible(productPhoto, true)">
+                <mat-icon color="primary">disabled_visible</mat-icon>
+            </button>
+
+            <span class="FileName">{{productPhoto.File}}</span>
+            <a href="#">
+                <img src="{{environment.API_URL}}/Resources/{{this.activeMerchant?.Id}}/ProductPhoto/{{productPhoto.Id}}_thumbnail_400x400.{{productPhoto.Extension}}" width="400" height="400" alt="{{productPhoto.File}}" />
+            </a>
+            <p>{{productPhoto.Description}}</p>
+        </div>
+    </div>
+</div>
+<div class="ClearLeft"></div>

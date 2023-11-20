@@ -1,36 +1,33 @@
 import { ActivatedRoute, Router } from '@angular/router';
-import { Component, ViewChild } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
-import { HttpClient, HttpErrorResponse, HttpEventType } from '@angular/common/http';
+import { HttpErrorResponse, HttpEventType } from '@angular/common/http';
 import { MatSnackBar, MatSnackBarRef, TextOnlySnackBar } from '@angular/material/snack-bar';
-import { MatSort, Sort } from '@angular/material/sort';
-import { debounceTime, distinctUntilChanged } from 'rxjs';
 
-import { Category } from 'src/app/shared/models/Category.model';
-import { CategoryService } from 'src/app/shared/services/Category.service';
+import { AuthenticationService } from 'src/app/shared/services/Authentication.service';
+import { Component } from '@angular/core';
 import { Constants } from 'src/app/shared/Constants';
+import { ControlPanelCatalogProductPhotoComponent } from './product-photo.component';
 import { DialogDeleteComponent } from 'src/app/shared/dialogs/delete/dialog.delete.component';
 import { Environment } from 'src/app/shared/environments/Environment';
 import { FileSizePipe } from 'src/app/shared/pipes/FileSize.pipe';
 import { FileUploadProgress } from 'src/app/shared/models/system/FileUploadProgress.model';
-import { GetProductsParameters } from 'src/app/shared/models/parameters/GetProductsParameters.model';
+import { GetProductPhotosParameters } from 'src/app/shared/models/parameters/GetProductPhotosParameters.model';
 import { MatDialog } from '@angular/material/dialog';
-import { MatPaginator } from '@angular/material/paginator';
-import { MatTableDataSource } from '@angular/material/table';
+import { Merchant } from 'src/app/shared/models/Merchant.model';
 import { MutationResult } from 'src/app/shared/models/MutationResult';
 import { Product } from 'src/app/shared/models/Product.model';
+import { ProductPhoto } from 'src/app/shared/models/ProductPhoto.model';
 import { ProductPhotoService } from 'src/app/shared/services/ProductPhoto.service';
 import { ProductService } from 'src/app/shared/services/Product.service';
-import { Shop } from 'src/app/shared/models/Shop.model';
-import { ShopService } from 'src/app/shared/services/Shop.service';
 
 @Component({
-  selector: 'control-panel-catalog-product-list',
+  selector: 'control-panel-catalog-product-photo-list',
   templateUrl: './product-photo-list.component.html',
   styleUrl: './product-photo-list.component.scss'
 })
 
 export class ControlPanelCatalogProductPhotoListComponent {
+  public activeMerchant?: Merchant | null;
+
   public snackBarRef: MatSnackBarRef<TextOnlySnackBar> | undefined;
   public queryStringProductId: string | null = '';
   public queryStringShopId: string | null = '';
@@ -38,32 +35,30 @@ export class ControlPanelCatalogProductPhotoListComponent {
   environment = Environment;
   constants = Constants;
 
-  public form!: FormGroup;
-  public controlFile = new FormControl('');
-
-  public shop: Shop | undefined;
   public product: Product | undefined;
+  public productPhotos: ProductPhoto[] = [];
 
   public fileUploadCounter = 0;
   public fileUploadProgressItems: FileUploadProgress[] = [];
   public fileUploadAllowedExtensionsAccept: string = '';
+  public formLoading: boolean = false;
 
   constructor(
+    private authenticationService: AuthenticationService,
     private dialog: MatDialog,
     private fileSizePipe: FileSizePipe,
     private productService: ProductService,
     private productPhotoService: ProductPhotoService,
     private route: ActivatedRoute,
     private router: Router,
-    private shopService: ShopService,
     private snackBar: MatSnackBar
   ) {
-    this.form = new FormGroup([
-      this.controlFile
-    ]);
+
   }
 
   ngOnInit() {
+    this.authenticationService.merchant.subscribe(x => this.activeMerchant = x?.Merchant);
+
     this.queryStringProductId = this.route.snapshot.paramMap.get('productId');
     this.queryStringShopId = this.route.snapshot.paramMap.get('shopId');
 
@@ -73,10 +68,92 @@ export class ControlPanelCatalogProductPhotoListComponent {
     Constants.UPLOAD_ALLOWED_EXTENSIONS.forEach(extension => {
       this.fileUploadAllowedExtensionsAccept += (this.fileUploadAllowedExtensionsAccept != '' ? ',' : '') + `.${extension}`
     });
+
+    this.retrieveProductPhotos();
   }
 
   ngOnDestroy(): void {
     this.snackBarRef?.dismiss();
+  }
+
+  retrieveProductPhotos() {
+    const parameters: GetProductPhotosParameters = {
+      ProductId: this.queryStringProductId!
+    };
+
+    this.productPhotoService.getList(parameters).subscribe(productPhotos => this.productPhotos = productPhotos);
+  }
+
+  editDescription(productPhoto: ProductPhoto) {
+    const dialogProductPhoto = this.dialog.open(ControlPanelCatalogProductPhotoComponent, {
+      data: { productPhotoToEdit: productPhoto }
+    });
+
+    dialogProductPhoto.afterClosed().subscribe(() => this.retrieveProductPhotos());
+  }
+
+  setMain(productPhoto: ProductPhoto) {
+    if (!this.formLoading) {
+      this.formLoading = true;
+
+      this.productPhotoService.changeMain(productPhoto.Id).subscribe({
+        next: result => this.handleOnSubmitResult(result),
+        error: error => this.handleOnSubmitError(error),
+        complete: () => this.formLoading = false
+      });
+    }
+  }
+
+  setVisible(productPhoto: ProductPhoto, visible: boolean) {
+    if (!this.formLoading) {
+      this.formLoading = true;
+
+      this.productPhotoService.changeVisible(productPhoto.Id, visible).subscribe({
+        next: result => this.handleOnSubmitResult(result),
+        error: error => this.handleOnSubmitError(error),
+        complete: () => this.formLoading = false
+      });
+    }
+  }
+
+  moveUp(productPhoto: ProductPhoto) {
+    if (!this.formLoading) {
+      this.formLoading = true;
+
+      this.productPhotoService.moveUp(productPhoto.Id).subscribe({
+        next: result => this.handleOnSubmitResult(result),
+        error: error => this.handleOnSubmitError(error),
+        complete: () => this.formLoading = false
+      });
+    }
+  }
+
+  moveDown(productPhoto: ProductPhoto) {
+    if (!this.formLoading) {
+      this.formLoading = true;
+
+      this.productPhotoService.moveDown(productPhoto.Id).subscribe({
+        next: result => this.handleOnSubmitResult(result),
+        error: error => this.handleOnSubmitError(error),
+        complete: () => this.formLoading = false
+      });
+    }
+  }
+
+  delete(productPhoto: ProductPhoto) {
+    const dialogDelete = this.dialog.open(DialogDeleteComponent);
+    const instance = dialogDelete.componentInstance;
+    instance.dialogMessage = `Are you sure you want to delete photo '${productPhoto.File}'?`;
+
+    dialogDelete.afterClosed().subscribe(result => {
+      if (result) {
+        this.productPhotoService.delete(productPhoto.Id).subscribe({
+          next: result => this.handleOnSubmitResult(result),
+          error: error => this.handleOnSubmitError(error),
+          complete: () => dialogDelete.close()
+        });
+      }
+    });
   }
 
   uploadFile(files: FileList) {
@@ -107,7 +184,7 @@ export class ControlPanelCatalogProductPhotoListComponent {
       }
 
       if (fileToUpload.size > Constants.UPLOAD_MAXIMUM_FILE_SIZE) {
-        this.fileUploadProgressItems[fileUploadIndex].Message = 'File was too large. The maximum allowed file size is ' + this.fileSizePipe.transform(Constants.UPLOAD_MAXIMUM_FILE_SIZE);
+        this.fileUploadProgressItems[fileUploadIndex].Message = 'File was too large. The maximum allowed file size is ' + this.fileSizePipe.transform(Constants.UPLOAD_MAXIMUM_FILE_SIZE) + '.';
         this.fileUploadProgressItems[fileUploadIndex].Finished = true;
         continue;
       }
@@ -134,7 +211,7 @@ export class ControlPanelCatalogProductPhotoListComponent {
     }
   }
 
-  deleteFileUploadProgress(fileUploadProgress: FileUploadProgress) {
+  hideFileUploadProgress(fileUploadProgress: FileUploadProgress) {
     this.fileUploadProgressItems[fileUploadProgress.Number - 1].Visible = false;
   }
 
@@ -156,13 +233,15 @@ export class ControlPanelCatalogProductPhotoListComponent {
 
   handleOnSubmitResult(result: MutationResult) {
     if (result.Success) {
-      this.router.navigate(['/control-panel/catalog/products']);
+      this.retrieveProductPhotos();
     } else {
       this.snackBarRef = this.snackBar.open(result.Message, 'Close', { panelClass: ['error-snackbar'] });
+      this.formLoading = false;
     }
   }
 
   handleOnSubmitError(error: string) {
     this.snackBarRef = this.snackBar.open(error, 'Close', { panelClass: ['error-snackbar'] });
+    this.formLoading = false;
   }
 }

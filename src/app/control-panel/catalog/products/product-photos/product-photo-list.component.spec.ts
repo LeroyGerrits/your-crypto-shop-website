@@ -2,6 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ActivatedRoute, Router, RouterLink, convertToParamMap } from '@angular/router';
 import { of } from 'rxjs';
 
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -14,14 +15,15 @@ import { MatTableModule } from '@angular/material/table';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterTestingModule } from '@angular/router/testing';
 import { MutationResult } from 'src/app/shared/models/MutationResult';
+import { GetProductResponse } from 'src/app/shared/models/response/GetProductResponse.model';
+import { FileSizePipe } from 'src/app/shared/pipes/FileSize.pipe';
 import { CategoryService } from 'src/app/shared/services/Category.service';
 import { ProductService } from 'src/app/shared/services/Product.service';
-import { ShopService } from 'src/app/shared/services/Shop.service';
-import { TestDataCategories } from 'src/assets/test-data/Categories';
+import { ProductPhotoService } from 'src/app/shared/services/ProductPhoto.service';
+import { TestDataProductPhotos } from 'src/assets/test-data/ProductPhotos';
 import { TestDataProducts } from 'src/assets/test-data/Products';
-import { TestDataShops } from 'src/assets/test-data/Shops';
 import { ControlPanelCatalogProductPhotoListComponent } from './product-photo-list.component';
-import { GetProductResponse } from 'src/app/shared/models/response/GetProductResponse.model';
+import { MatMenuModule } from '@angular/material/menu';
 
 describe('ControlPanelCatalogProductPhotoListComponent', () => {
   let component: ControlPanelCatalogProductPhotoListComponent;
@@ -33,7 +35,7 @@ describe('ControlPanelCatalogProductPhotoListComponent', () => {
 
   let categoryServiceSpy: jasmine.SpyObj<CategoryService>;
   let productServiceSpy: jasmine.SpyObj<ProductService>;
-  let shopServiceSpy: jasmine.SpyObj<ShopService>;
+  let ProductPhotoServiceSpy: jasmine.SpyObj<ProductPhotoService>;
   let mutationResult: MutationResult = <MutationResult>{ ErrorCode: 0, Identity: '', Message: '' };
 
   beforeEach(() => {
@@ -49,22 +51,23 @@ describe('ControlPanelCatalogProductPhotoListComponent', () => {
     productServiceSpy = jasmine.createSpyObj('ProductService', ['getById']);
     productServiceSpy.getById.and.returnValue(of(<GetProductResponse>{ Product: TestDataProducts[0], CategoryIds: [''] }));
 
-    shopServiceSpy = jasmine.createSpyObj('ShopService', ['getList']);
-    shopServiceSpy.getList.and.returnValue(of(TestDataShops));
+    ProductPhotoServiceSpy = jasmine.createSpyObj('ShopService', ['getList']);
+    ProductPhotoServiceSpy.getList.and.returnValue(of(TestDataProductPhotos));
 
     TestBed.configureTestingModule({
       declarations: [ControlPanelCatalogProductPhotoListComponent],
-      imports: [BrowserAnimationsModule, MatIconModule, MatFormFieldModule, MatInputModule, MatPaginatorModule, MatSelectModule, MatTableModule, ReactiveFormsModule, RouterLink, RouterTestingModule.withRoutes(
+      imports: [BrowserAnimationsModule, HttpClientTestingModule, MatIconModule, MatFormFieldModule, MatInputModule, MatMenuModule, MatPaginatorModule, MatSelectModule, MatTableModule, ReactiveFormsModule, RouterLink, RouterTestingModule.withRoutes(
         [{ path: 'control-panel/catalog/products', component: ControlPanelCatalogProductPhotoListComponent }]
       )],
       providers: [
         { provide: ActivatedRoute, useValue: { snapshot: { data: {} } } },
         { provide: ActivatedRoute, useValue: { snapshot: { paramMap: convertToParamMap({ productId: TestDataProducts[0].Id, shopId: TestDataProducts[0].ShopId }) } } },
         { provide: MatDialog, useValue: matDialogSpy },
-        { provide: ShopService, useValue: shopServiceSpy },
         { provide: ProductService, useValue: productServiceSpy },
+        { provide: ProductPhotoService, useValue: ProductPhotoServiceSpy },
         { provide: MatSnackBar, useValue: matSnackBarSpy },
         ControlPanelCatalogProductPhotoListComponent,
+        FileSizePipe,
         Router
       ]
     });

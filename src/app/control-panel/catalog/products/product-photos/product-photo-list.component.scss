@@ -39,3 +39,30 @@ table.TableProgress tr td span.ProgressBar {
     display: inline-block;
     height: 1em;
 }
+
+div.ProductPhoto {
+    background-color: var(--light-gray-color);
+}
+
+div.ProductPhoto span.FileName {
+    color: #bbb;
+    display: block;
+    height: 2em;
+    font-size: 0.8em;
+    padding: 0 20px;
+}
+
+div.ProductPhoto img {
+    border: none;
+    display: block;
+    height: auto;
+    width: 100%;
+}
+
+div.ProductPhoto p {
+    display: block;
+    min-height: 4.8em;
+    line-height: 1.6em;
+    margin: 0 !important;
+    padding: 10px 20px;
+}
