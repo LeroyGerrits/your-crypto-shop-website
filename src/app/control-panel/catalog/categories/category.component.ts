@@ -1,11 +1,12 @@
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
-import { Component, Inject, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, Inject, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { Category } from 'src/app/shared/models/Category.model';
 import { MutationResult } from 'src/app/shared/models/MutationResult';
 import { Shop } from 'src/app/shared/models/Shop.model';
 import { CategoryService } from 'src/app/shared/services/Category.service';
+import { MatSnackBar, MatSnackBarRef, TextOnlySnackBar } from '@angular/material/snack-bar';
 
 export interface DialogData {
     selectedShop: Shop;
@@ -18,7 +19,9 @@ export interface DialogData {
     templateUrl: 'category.component.html',
     encapsulation: ViewEncapsulation.Emulated
 })
-export class ControlPanelCatalogCategoryComponent implements OnInit {
+export class ControlPanelCatalogCategoryComponent implements OnInit, OnDestroy {
+    public snackBarRef: MatSnackBarRef<TextOnlySnackBar> | undefined;
+
     public queryStringCategoryId: string | null = '';
 
     controlName = new FormControl('', Validators.required)
@@ -27,7 +30,6 @@ export class ControlPanelCatalogCategoryComponent implements OnInit {
     public form!: FormGroup;
     public formLoading = false;
     public formSubmitted = false;
-    public formError = '';
 
     public pageTitle = 'Create new category'
     public category: Category = new Category();
@@ -35,6 +37,7 @@ export class ControlPanelCatalogCategoryComponent implements OnInit {
     constructor(
         private categoryService: CategoryService,
         private dialogRefComponent: MatDialogRef<any>,
+        private snackBar: MatSnackBar,
         @Inject(MAT_DIALOG_DATA) public data: DialogData
     ) {
         this.form = new FormGroup([
@@ -56,6 +59,10 @@ export class ControlPanelCatalogCategoryComponent implements OnInit {
         }
     }
 
+    ngOnDestroy() {
+        this.snackBarRef?.dismiss();
+    }
+
     onSubmit() {
         this.formSubmitted = true;
 
@@ -63,7 +70,6 @@ export class ControlPanelCatalogCategoryComponent implements OnInit {
             return;
         }
 
-        this.formError = '';
         this.formLoading = true;
 
         const categoryToUpdate: Category = Object.assign({}, this.category)
@@ -93,12 +99,12 @@ export class ControlPanelCatalogCategoryComponent implements OnInit {
         if (result.Success) {
             this.dialogRefComponent.close();
         } else {
-            this.formError = result.Message;
+            this.snackBarRef = this.snackBar.open(result.Message, 'Close', { panelClass: ['error-snackbar'] });
         }
     }
 
     handleOnSubmitError(error: string) {
-        this.formError = error;
+        this.snackBarRef = this.snackBar.open(error, 'Close', { panelClass: ['error-snackbar'] });
         this.formLoading = false;
     }
 }

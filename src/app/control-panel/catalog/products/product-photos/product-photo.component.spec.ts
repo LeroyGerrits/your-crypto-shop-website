@@ -33,10 +33,10 @@ describe('ControlPanelCatalogProductPhotoComponent', () => {
   };
 
   beforeEach(() => {
-    matSnackBarSpy = jasmine.createSpyObj('MatSnackBar', ['open']);
-
     matDialogRefSpy = jasmine.createSpyObj('MatDialogRef', ['close']);
     matDialogRefSpy.close = () => of(true);
+
+    matSnackBarSpy = jasmine.createSpyObj('MatSnackBar', ['open']);
 
     ProductPhotoServiceSpy = jasmine.createSpyObj('ProductPhotoService', ['changeDescription']);
     ProductPhotoServiceSpy.changeDescription.and.returnValue(of(mutationResult));

@@ -14,6 +14,7 @@ import { CategoryService } from 'src/app/shared/services/Category.service';
 import { TestDataCategories } from 'src/assets/test-data/Categories';
 import { TestDataShops } from 'src/assets/test-data/Shops';
 import { ControlPanelCatalogCategoryComponent } from './category.component';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 export interface DialogData {
   selectedShop: Shop;
@@ -24,6 +25,8 @@ export interface DialogData {
 describe('ControlPanelCatalogCategoryComponent', () => {
   let component: ControlPanelCatalogCategoryComponent;
   let fixture: ComponentFixture<ControlPanelCatalogCategoryComponent>;
+
+  let matSnackBarSpy: jasmine.SpyObj<MatSnackBar>;
 
   let matDialogRefSpy: any;
   let categoryServiceSpy: jasmine.SpyObj<CategoryService>;
@@ -39,6 +42,8 @@ describe('ControlPanelCatalogCategoryComponent', () => {
     matDialogRefSpy = jasmine.createSpyObj('MatDialogRef', ['close']);
     matDialogRefSpy.close = () => of(true);
 
+    matSnackBarSpy = jasmine.createSpyObj('MatSnackBar', ['open']);
+
     categoryServiceSpy = jasmine.createSpyObj('CategoryService', ['create', 'update']);
     categoryServiceSpy.create.and.returnValue(of(mutationResult));
     categoryServiceSpy.update.and.returnValue(of(mutationResult));
@@ -47,9 +52,10 @@ describe('ControlPanelCatalogCategoryComponent', () => {
       declarations: [ControlPanelCatalogCategoryComponent],
       imports: [BrowserAnimationsModule, MatCheckboxModule, MatDialogModule, MatFormFieldModule, MatInputModule, ReactiveFormsModule],
       providers: [
+        { provide: CategoryService, useValue: categoryServiceSpy },
         { provide: MatDialogRef, useValue: matDialogRefSpy },
-        { provide: MAT_DIALOG_DATA, useValue: mockDialogData },
-        { provide: CategoryService, useValue: categoryServiceSpy }
+        { provide: MatSnackBar, useValue: matSnackBarSpy },
+        { provide: MAT_DIALOG_DATA, useValue: mockDialogData }
       ]
     });
     fixture = TestBed.createComponent(ControlPanelCatalogCategoryComponent);
@@ -113,14 +119,14 @@ describe('ControlPanelCatalogCategoryComponent', () => {
   it('should show a message when an unhandled error occurs', () => {
     const error = 'Unhandled error'
     component.handleOnSubmitError(error);
-    expect(component.formError).toBe(error);
+    expect(matSnackBarSpy.open).toHaveBeenCalled();
   });
 
   it('should show an error when handling submit result and an error code is applicable', () => {
     const error = 'Evil error'
     const mutationResult = <MutationResult>{ Constraint: '', ErrorCode: 666, Identity: '', Message: error };
     component.handleOnSubmitResult(mutationResult);
-    expect(component.formError).toBe(error);
+    expect(matSnackBarSpy.open).toHaveBeenCalled();
   });
 });
 
