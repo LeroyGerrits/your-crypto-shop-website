@@ -22,6 +22,7 @@ import { TestDataShops } from 'src/assets/test-data/Shops';
 import { ControlPanelCatalogProductListComponent } from './product-list.component';
 import { TestDataCategories } from 'src/assets/test-data/Categories';
 import { CategoryService } from 'src/app/shared/services/Category.service';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 describe('ControlPanelCatalogProductListComponent', () => {
   let component: ControlPanelCatalogProductListComponent;
@@ -58,7 +59,7 @@ describe('ControlPanelCatalogProductListComponent', () => {
 
     TestBed.configureTestingModule({
       declarations: [ControlPanelCatalogProductListComponent],
-      imports: [BrowserAnimationsModule, MatIconModule, MatFormFieldModule, MatInputModule, MatPaginatorModule, MatSelectModule, MatTableModule, ReactiveFormsModule, RouterLink, RouterTestingModule.withRoutes(
+      imports: [BrowserAnimationsModule, HttpClientTestingModule, MatIconModule, MatFormFieldModule, MatInputModule, MatPaginatorModule, MatSelectModule, MatTableModule, ReactiveFormsModule, RouterLink, RouterTestingModule.withRoutes(
         [{ path: 'control-panel/catalog/products', component: ControlPanelCatalogProductListComponent }]
       )],
       providers: [
@@ -170,7 +171,7 @@ describe('ControlPanelCatalogProductListComponentWithErrors', () => {
 
     TestBed.configureTestingModule({
       declarations: [ControlPanelCatalogProductListComponent],
-      imports: [BrowserAnimationsModule, MatIconModule, MatFormFieldModule, MatInputModule, MatPaginatorModule, MatSelectModule, MatTableModule, ReactiveFormsModule, RouterLink, RouterTestingModule.withRoutes(
+      imports: [BrowserAnimationsModule, HttpClientTestingModule, MatIconModule, MatFormFieldModule, MatInputModule, MatPaginatorModule, MatSelectModule, MatTableModule, ReactiveFormsModule, RouterLink, RouterTestingModule.withRoutes(
         [{ path: 'control-panel/catalog/products', component: ControlPanelCatalogProductListComponent }]
       )],
       providers: [

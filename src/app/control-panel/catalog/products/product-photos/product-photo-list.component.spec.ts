@@ -55,7 +55,7 @@ describe('ControlPanelCatalogProductPhotoListComponent', () => {
     ProductPhotoServiceSpy.getList.and.returnValue(of(TestDataProductPhotos));
 
     TestBed.configureTestingModule({
-      declarations: [ControlPanelCatalogProductPhotoListComponent],
+      declarations: [ControlPanelCatalogProductPhotoListComponent, FileSizePipe],
       imports: [BrowserAnimationsModule, HttpClientTestingModule, MatIconModule, MatFormFieldModule, MatInputModule, MatMenuModule, MatPaginatorModule, MatSelectModule, MatTableModule, ReactiveFormsModule, RouterLink, RouterTestingModule.withRoutes(
         [{ path: 'control-panel/catalog/products', component: ControlPanelCatalogProductPhotoListComponent }]
       )],

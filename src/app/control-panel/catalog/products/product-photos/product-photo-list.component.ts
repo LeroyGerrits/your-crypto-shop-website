@@ -41,6 +41,7 @@ export class ControlPanelCatalogProductPhotoListComponent {
   public fileUploadCounter = 0;
   public fileUploadProgressItems: FileUploadProgress[] = [];
   public fileUploadAllowedExtensionsAccept: string = '';
+  public fileUploadAllowedExtensionsText: string = '';
   public formLoading: boolean = false;
 
   constructor(
@@ -67,6 +68,7 @@ export class ControlPanelCatalogProductPhotoListComponent {
 
     Constants.UPLOAD_ALLOWED_EXTENSIONS.forEach(extension => {
       this.fileUploadAllowedExtensionsAccept += (this.fileUploadAllowedExtensionsAccept != '' ? ',' : '') + `.${extension}`
+      this.fileUploadAllowedExtensionsText += (this.fileUploadAllowedExtensionsText != '' ? ',' : '') + ` ${extension.toUpperCase()}`
     });
 
     this.retrieveProductPhotos();
@@ -180,12 +182,14 @@ export class ControlPanelCatalogProductPhotoListComponent {
       if (!Constants.UPLOAD_ALLOWED_EXTENSIONS.includes(fileExtention.toLowerCase())) {
         this.fileUploadProgressItems[fileUploadIndex].Message = `File type ${fileExtention} is not allowed. Only the following file types are allowed: ${Constants.UPLOAD_ALLOWED_EXTENSIONS}`;
         this.fileUploadProgressItems[fileUploadIndex].Finished = true;
+        this.checkFileUploadsFinished();
         continue;
       }
 
       if (fileToUpload.size > Constants.UPLOAD_MAXIMUM_FILE_SIZE) {
         this.fileUploadProgressItems[fileUploadIndex].Message = 'File was too large. The maximum allowed file size is ' + this.fileSizePipe.transform(Constants.UPLOAD_MAXIMUM_FILE_SIZE) + '.';
         this.fileUploadProgressItems[fileUploadIndex].Finished = true;
+        this.checkFileUploadsFinished();
         continue;
       }
 
@@ -204,11 +208,21 @@ export class ControlPanelCatalogProductPhotoListComponent {
           error: (err: HttpErrorResponse) => {
             this.fileUploadProgressItems[fileUploadIndex].Message = err.message;
             this.fileUploadProgressItems[fileUploadIndex].Finished = true;
+            this.checkFileUploadsFinished();
           },
-          complete: () => this.fileUploadProgressItems[fileUploadIndex].Finished = true
+          complete: () => {
+            this.fileUploadProgressItems[fileUploadIndex].Finished = true;
+            this.checkFileUploadsFinished();
+          }
         });
 
     }
+  }
+
+  checkFileUploadsFinished() {
+    const unfinishedUploadProgressItems = this.fileUploadProgressItems?.find(x => !x.Finished);
+    if (!unfinishedUploadProgressItems)
+      this.retrieveProductPhotos();
   }
 
   hideFileUploadProgress(fileUploadProgress: FileUploadProgress) {
