@@ -37,8 +37,8 @@ describe('ProductPhotoService', () => {
 
     it('should be able to upload a product photo', () => {
         const data = new FormData();
-        service.upload(TestDataProductPhotos[0].Id, data).subscribe();
-        const request = httpMock.expectOne(`${Environment.API_URL}/ProductPhoto`);
+        service.upload(TestDataProductPhotos[0].ProductId, data).subscribe();
+        const request = httpMock.expectOne(`${Environment.API_URL}/ProductPhoto?productId=${TestDataProductPhotos[0].ProductId}`);
         expect(request.request.method).toBe('POST');
     });
 

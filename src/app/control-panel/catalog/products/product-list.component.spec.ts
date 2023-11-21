@@ -23,6 +23,8 @@ import { ControlPanelCatalogProductListComponent } from './product-list.componen
 import { TestDataCategories } from 'src/assets/test-data/Categories';
 import { CategoryService } from 'src/app/shared/services/Category.service';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { Product } from 'src/app/shared/models/Product.model';
+import { Shop } from 'src/app/shared/models/Shop.model';
 
 describe('ControlPanelCatalogProductListComponent', () => {
   let component: ControlPanelCatalogProductListComponent;
@@ -120,9 +122,24 @@ describe('ControlPanelCatalogProductListComponent', () => {
     expect(routerstub.navigate).toHaveBeenCalledWith([`/control-panel/catalog/products/${TestDataProducts[0].Id}/${TestDataProducts[0].ShopId}`]);
   });
 
+  it('should go to photo management page when photo management icon is clicked', () => {
+    const routerstub: Router = TestBed.inject(Router);
+    spyOn(routerstub, 'navigate');
+
+    component.editPhotos(TestDataProducts[0]);
+    expect(routerstub.navigate).toHaveBeenCalledWith([`/control-panel/catalog/products/${TestDataProducts[0].Id}/${TestDataProducts[0].ShopId}/photos`]);
+  });
+
   it('should show a dialog when delete icon is clicked', () => {
     component.deleteElement(TestDataProducts[0]);
     expect(matDialogSpy.open).toHaveBeenCalled();
+  });
+
+  it('should refresh when handling submit result and no error code is applicable', () => {
+    spyOn(component, 'filterProducts');
+    const mutationResult = <MutationResult>{ Constraint: '', ErrorCode: 0, Identity: '', Message: '', Success: true };
+    component.handleOnSubmitResult(mutationResult);
+    expect(component.filterProducts).toHaveBeenCalled();
   });
 
   it('should show an error when handling submit result and an error code is applicable', () => {
@@ -149,6 +166,8 @@ describe('ControlPanelCatalogProductListComponentWithErrors', () => {
   let productServiceSpy: jasmine.SpyObj<ProductService>;
   let shopServiceSpy: jasmine.SpyObj<ShopService>;
 
+  let emptyListShops: Shop[] = [];
+
   beforeEach(() => {
     matDialogRefSpy = jasmine.createSpyObj('MatDialogRef', ['close']);
     matDialogRefSpy.componentInstance = { title: '', message: '' };
@@ -160,14 +179,14 @@ describe('ControlPanelCatalogProductListComponentWithErrors', () => {
     matSnackBarSpy = jasmine.createSpyObj('MatSnackBar', ['open']);
 
     productServiceSpy = jasmine.createSpyObj('ProductService', ['getList', 'delete']);
-    productServiceSpy.getList.and.returnValue(of(TestDataProducts));
+    productServiceSpy.getList.and.returnValue(of());
     productServiceSpy.delete.and.returnValue(throwError(() => new Error('ERROR')));
 
     categoryServiceSpy = jasmine.createSpyObj('CategoryService', ['getList']);
     categoryServiceSpy.getList.and.returnValue(of(TestDataCategories));
 
     shopServiceSpy = jasmine.createSpyObj('ShopService', ['getList']);
-    shopServiceSpy.getList.and.returnValue(of(TestDataShops));
+    shopServiceSpy.getList.and.returnValue(of(emptyListShops));
 
     TestBed.configureTestingModule({
       declarations: [ControlPanelCatalogProductListComponent],
