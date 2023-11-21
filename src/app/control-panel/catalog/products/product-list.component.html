@@ -41,7 +41,9 @@
         <ng-container matColumnDef="Photo">
             <th mat-header-cell *matHeaderCellDef>&nbsp;</th>
             <td mat-cell *matCellDef="let element">
-                <img *ngIf="element.MainPhotoId" src="{{environment.API_URL}}/Resources/{{this.activeMerchant?.Id}}/ProductPhoto/{{element.MainPhotoId}}_thumbnail_100x100.{{element.MainPhotoExtension}}" width="100" height="100" alt="{{element.Name}}" />
+                <a href="{{environment.API_URL}}/Resources/{{this.activeMerchant?.Id}}/ProductPhoto/{{element.MainPhotoId}}.{{element.MainPhotoExtension}}" data-lightbox="productPhoto" title="{{element.Name}}">
+                    <img *ngIf="element.MainPhotoId" src="{{environment.API_URL}}/Resources/{{this.activeMerchant?.Id}}/ProductPhoto/{{element.MainPhotoId}}_thumbnail_100x100.{{element.MainPhotoExtension}}" width="100" height="100" alt="{{element.Name}}" />
+                </a>
             </td>
         </ng-container>
 

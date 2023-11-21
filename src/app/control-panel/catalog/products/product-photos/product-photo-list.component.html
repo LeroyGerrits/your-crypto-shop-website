@@ -77,7 +77,7 @@
             </button>
 
             <span class="FileName">{{productPhoto.File}}</span>
-            <a href="#">
+            <a href="{{environment.API_URL}}/Resources/{{this.activeMerchant?.Id}}/ProductPhoto/{{productPhoto.Id}}.{{productPhoto.Extension}}" data-lightbox="productPhoto" title="{{productPhoto.Description}}">
                 <img src="{{environment.API_URL}}/Resources/{{this.activeMerchant?.Id}}/ProductPhoto/{{productPhoto.Id}}_thumbnail_400x400.{{productPhoto.Extension}}" width="400" height="400" alt="{{productPhoto.File}}" />
             </a>
             <p>{{productPhoto.Description}}</p>
