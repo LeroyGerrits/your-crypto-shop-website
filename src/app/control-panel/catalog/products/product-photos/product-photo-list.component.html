@@ -12,9 +12,6 @@
 <div class="WrapperPadding20-8-0-8 ClearRight">
     <div class="LighterBlock">You can only upload photos with a maximum of {{ constants.UPLOAD_MAXIMUM_FILE_SIZE | FileSize }} in file size, with the following extensions:<br />{{this.fileUploadAllowedExtensionsText}}</div>
 </div>
-<div class="WrapperPadding20-8-0-8" *ngIf="!this.productPhotos?.length">
-    <span class="WarningBlock">You hav not yet uploaded any photos for this product. Products with good, detailed photos will get more exposure in your shop.</span>
-</div>
 <div class="WrapperPadding20-8-0-8" *ngIf="this.fileUploadProgressItems.length > 0">
     <table class="TableProgress">
         <tr class="RowHeader">
@@ -41,6 +38,9 @@
             </tr>
         </ng-container>
     </table>
+</div>
+<div class="WrapperPadding20-8" *ngIf="!this.productPhotos?.length">
+    <span class="WarningBlock">You hav not yet uploaded any photos for this product. Products with good, detailed photos will get more exposure in your shop.</span>
 </div>
 <div [ngClass]="{ 'ColumnOneThird': true, 'ClearLeft': (i % 3 == 0) }" *ngFor="let productPhoto of this.productPhotos; let i = index">
     <div [ngClass]="{ 'WrapperPadding20-10-0-8': (i % 3 == 0), 'WrapperPadding20-10-0-10': ((i - 1) % 3 == 0), 'WrapperPadding20-8-0-10': ((i - 2) % 3 == 0) }">
