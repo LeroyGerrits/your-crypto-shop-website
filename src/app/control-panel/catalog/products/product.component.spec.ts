@@ -1,4 +1,4 @@
-import { ActivatedRoute, RouterLink, convertToParamMap } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink, convertToParamMap } from '@angular/router';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ControlPanelCatalogProductComponent } from './product.component';
@@ -23,7 +23,7 @@ import { CategoryService } from 'src/app/shared/services/Category.service';
 import { TestDataCategories } from 'src/assets/test-data/Categories';
 import { MatTreeModule } from '@angular/material/tree';
 import { GetProductResponse } from 'src/app/shared/models/response/GetProductResponse.model';
-import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatCheckboxChange, MatCheckboxModule } from '@angular/material/checkbox';
 
 describe('ControlPanelCatalogProductComponent', () => {
   let component: ControlPanelCatalogProductComponent;
@@ -41,7 +41,7 @@ describe('ControlPanelCatalogProductComponent', () => {
     categoryServiceSpy.getList.and.returnValue(of(TestDataCategories));
 
     productServiceSpy = jasmine.createSpyObj('ProductService', ['getById', 'create', 'update']);
-    productServiceSpy.getById.and.returnValue(of(<GetProductResponse>{ Product: TestDataProducts[0], CategoryIds: [''] }));
+    productServiceSpy.getById.and.returnValue(of(<GetProductResponse>{ Product: TestDataProducts[0], CategoryIds: [TestDataCategories[0].Id] }));
     productServiceSpy.create.and.returnValue(of(mutationResult));
     productServiceSpy.update.and.returnValue(of(mutationResult));
 
@@ -58,6 +58,7 @@ describe('ControlPanelCatalogProductComponent', () => {
       providers: [
         { provide: ActivatedRoute, useValue: { snapshot: { paramMap: convertToParamMap({ productId: TestDataProducts[0].Id, shopId: TestDataProducts[0].ShopId }) } } },
         { provide: CategoryService, useValue: categoryServiceSpy },
+        { provide: MatSnackBar, useValue: matSnackBarSpy },
         { provide: ProductService, useValue: productServiceSpy },
         { provide: ShopService, useValue: shopServiceSpy }
       ]
@@ -67,8 +68,65 @@ describe('ControlPanelCatalogProductComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
+  it('should not proceed submitting when required form values are not filled in', () => {
+    component.controlName.setValue('');
+    component.onSubmit();
+    expect(component.formSubmitted).toBeTrue();
+    expect(component.formLoading).toBeFalse();
+  });
+
+  it('should send a call to the product service when creating a new product', () => {
+    component.queryStringProductId = '';
+    component.queryStringShopId = TestDataProducts[0].ShopId;
+    component.controlName.setValue(TestDataProducts[0].Name);
+    component.controlShop.setValue(TestDataProducts[0].ShopId);
+    component.controlPrice.setValue(TestDataProducts[0].Price!.toString());
+    component.controlDescription.setValue(TestDataProducts[0].Description!);
+    component.onSubmit();
+    expect(component.formLoading).toBeFalse();
+  });
+
+  it('should send a call to the product service when updating an existing product', () => {
+    component.queryStringProductId = TestDataProducts[0].Id;
+    component.queryStringShopId = TestDataProducts[0].ShopId;
+    component.controlName.setValue(TestDataProducts[0].Name);
+    component.controlShop.setValue(TestDataProducts[0].ShopId);
+    component.controlPrice.setValue(TestDataProducts[0].Price!.toString());
+    component.controlDescription.setValue(TestDataProducts[0].Description!);
+    component.onSubmit();
+    expect(component.formLoading).toBeFalse();
+  });
+
+  it('should redirect when handling submit result and no errors are applicable', () => {
+    const routerstub: Router = TestBed.inject(Router);
+    spyOn(routerstub, 'navigate');
+
+    const mutationResult = <MutationResult>{ Constraint: '', ErrorCode: 0, Identity: '', Message: '', Success: true };
+    component.handleOnSubmitResult(mutationResult);
+    expect(routerstub.navigate).toHaveBeenCalledWith(['/control-panel/catalog/products']);
+  });
+
+  it('should show a message when an unhandled error occurs', () => {
+    component.handleOnSubmitError('Unhandled error');
+    expect(matSnackBarSpy.open).toHaveBeenCalled();
+  });
+
+  it('should show an error when handling submit result and an error code is applicable', () => {
+    const mutationResult = <MutationResult>{ Constraint: '', ErrorCode: 666, Identity: '', Message: 'Evil error' };
+    component.handleOnSubmitResult(mutationResult);
+    expect(matSnackBarSpy.open).toHaveBeenCalled();
+  });
+
+  it('should store a category in memory when it gets checked', () => {
+    const fakeCheckboxChangeEvent = <MatCheckboxChange>{ checked: true };
+    component.checkCategory(TestDataCategories[1], fakeCheckboxChangeEvent);
+    expect(component.categoryIds.includes(TestDataCategories[1].Id)).toBeTrue();
+  });
+
+  it('should remove a category from memory when it gets unchecked', () => {
+    const fakeCheckboxChangeEvent = <MatCheckboxChange>{ checked: false };
+    component.checkCategory(TestDataCategories[0], fakeCheckboxChangeEvent);
+    expect(component.categoryIds.includes(TestDataCategories[0].Id)).toBeFalse();
   });
 });
 
@@ -105,6 +163,7 @@ describe('ControlPanelCatalogProductComponentWithErrors', () => {
       providers: [
         { provide: ActivatedRoute, useValue: { snapshot: { paramMap: convertToParamMap({ productId: 'new', shopId: TestDataProducts[0].ShopId }) } } },
         { provide: CategoryService, useValue: categoryServiceSpy },
+        { provide: MatSnackBar, useValue: matSnackBarSpy },
         { provide: ProductService, useValue: productServiceSpy },
         { provide: ShopService, useValue: shopServiceSpy }
       ]
@@ -114,7 +173,25 @@ describe('ControlPanelCatalogProductComponentWithErrors', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
+  it('should trigger error handling when sending a call to the product service when creating a new product and the request fails', () => {
+    component.queryStringProductId = '';
+    component.queryStringShopId = TestDataProducts[0].ShopId;
+    component.controlName.setValue(TestDataProducts[0].Name);
+    component.controlShop.setValue(TestDataProducts[0].ShopId);
+    component.controlPrice.setValue(TestDataProducts[0].Price!.toString());
+    component.controlDescription.setValue(TestDataProducts[0].Description!);
+    component.onSubmit();
+    expect(component.formLoading).toBeFalse();
+  });
+
+  it('should trigger error handling when sending a call to the product service when updating an product shop and the request fails', () => {
+    component.queryStringProductId = TestDataProducts[0].Id;
+    component.queryStringShopId = TestDataProducts[0].ShopId;
+    component.controlName.setValue(TestDataProducts[0].Name);
+    component.controlShop.setValue(TestDataProducts[0].ShopId);
+    component.controlPrice.setValue(TestDataProducts[0].Price!.toString());
+    component.controlDescription.setValue(TestDataProducts[0].Description!);
+    component.onSubmit();
+    expect(component.formLoading).toBeFalse();
   });
 });

@@ -8,7 +8,8 @@ export const TestDataProducts: Product[] = [
         Name: 'Test product',
         Stock: 25,
         Price: 1250,
-        Visible: true
+        Visible: true,
+        Description: 'This is a product'
     },
     {
         Id: '00000000-0000-0000-0000-000000000002',
@@ -16,6 +17,7 @@ export const TestDataProducts: Product[] = [
         Name: 'Test product 2',
         Stock: 0,
         Price: 250,
-        Visible: true
+        Visible: true,
+        Description: 'This is a product'
     }
 ];

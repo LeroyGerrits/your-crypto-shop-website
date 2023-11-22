@@ -215,7 +215,6 @@ export class ControlPanelCatalogProductPhotoListComponent {
             this.checkFileUploadsFinished();
           }
         });
-
     }
   }
 
@@ -227,22 +226,6 @@ export class ControlPanelCatalogProductPhotoListComponent {
 
   hideFileUploadProgress(fileUploadProgress: FileUploadProgress) {
     this.fileUploadProgressItems[fileUploadProgress.Number - 1].Visible = false;
-  }
-
-  deleteElement(element: Product) {
-    const dialogDelete = this.dialog.open(DialogDeleteComponent);
-    const instance = dialogDelete.componentInstance;
-    instance.dialogMessage = `Are you sure you want to delete photo '${element.Name}'?`;
-
-    dialogDelete.afterClosed().subscribe(result => {
-      if (result) {
-        this.productService.delete(element.Id).subscribe({
-          next: result => this.handleOnSubmitResult(result),
-          error: error => this.handleOnSubmitError(error),
-          complete: () => dialogDelete.close()
-        });
-      }
-    });
   }
 
   handleOnSubmitResult(result: MutationResult) {

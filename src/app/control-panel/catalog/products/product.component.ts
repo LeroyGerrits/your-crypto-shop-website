@@ -211,6 +211,7 @@ export class ControlPanelCatalogProductComponent implements OnInit, OnDestroy {
       this.router.navigate(['/control-panel/catalog/products']);
     } else {
       this.snackBarRef = this.snackBar.open(result.Message, 'Close', { panelClass: ['error-snackbar'] });
+      this.formLoading = false;
     }
   }
 

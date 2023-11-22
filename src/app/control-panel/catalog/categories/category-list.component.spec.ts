@@ -55,7 +55,7 @@ describe('ControlPanelCatalogCategoryListComponent', () => {
 
     TestBed.configureTestingModule({
       declarations: [ControlPanelCatalogCategoryListComponent],
-      imports: [BrowserAnimationsModule, FormsModule, HttpClientTestingModule, MatButtonModule, MatFormFieldModule, MatIconModule, MatRadioModule, MatSelectModule, MatTreeModule, ReactiveFormsModule, RouterLink, RouterTestingModule.withRoutes(
+      imports: [BrowserAnimationsModule, FormsModule, HttpClientTestingModule, MatButtonModule, MatFormFieldModule, MatIconModule, MatRadioModule, MatSelectModule, MatTreeModule, ReactiveFormsModule, RouterLink, RouterLink, RouterTestingModule.withRoutes(
         [{ path: 'control-panel/catalog/categories', component: ControlPanelCatalogCategoryListComponent }]
       )],
       providers: [
@@ -71,7 +71,8 @@ describe('ControlPanelCatalogCategoryListComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it('should bla', () => {
+    component.ngOnInit();
     expect(component).toBeTruthy();
   });
 
@@ -175,7 +176,7 @@ describe('ControlPanelCatalogCategoryListComponentWithErrors', () => {
 
     TestBed.configureTestingModule({
       declarations: [ControlPanelCatalogCategoryListComponent],
-      imports: [BrowserAnimationsModule, FormsModule, HttpClientTestingModule, MatButtonModule, MatFormFieldModule, MatIconModule, MatRadioModule, MatSelectModule, MatTreeModule, ReactiveFormsModule, RouterLink, RouterTestingModule.withRoutes(
+      imports: [BrowserAnimationsModule, FormsModule, HttpClientTestingModule, MatButtonModule, MatFormFieldModule, MatIconModule, MatRadioModule, MatSelectModule, MatTreeModule, ReactiveFormsModule, RouterLink, RouterLink, RouterTestingModule.withRoutes(
         [{ path: 'control-panel/catalog/categories', component: ControlPanelCatalogCategoryListComponent }]
       )],
       providers: [

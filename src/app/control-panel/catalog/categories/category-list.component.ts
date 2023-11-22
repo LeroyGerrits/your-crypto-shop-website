@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { MatSnackBar, MatSnackBarRef, TextOnlySnackBar } from '@angular/material/snack-bar';
 
@@ -19,7 +19,7 @@ import { ShopService } from 'src/app/shared/services/Shop.service';
   templateUrl: './category-list.component.html',
   styleUrl: './category-list.component.scss'
 })
-export class ControlPanelCatalogCategoryListComponent implements OnInit {
+export class ControlPanelCatalogCategoryListComponent implements OnInit, OnDestroy {
   public treeControl = new NestedTreeControl<Category>(category => category.Children);
   public dataSource = new MatTreeNestedDataSource<Category>();
 
@@ -59,6 +59,10 @@ export class ControlPanelCatalogCategoryListComponent implements OnInit {
         this.finishedLoading = true;
       }
     });
+  }
+
+  ngOnDestroy() {
+    this.snackBarRef?.dismiss();
   }
 
   hasChild = (_: number, category: Category) => !!category.Children && category.Children.length > 0;
