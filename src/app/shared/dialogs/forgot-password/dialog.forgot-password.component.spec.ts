@@ -54,10 +54,6 @@ describe('DialogForgotPasswordComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
-
   it('should not authenticate nothing when empty credentials get supplied', () => {
     component.controlEmailAddress.setValue('');
     component.onSubmit();

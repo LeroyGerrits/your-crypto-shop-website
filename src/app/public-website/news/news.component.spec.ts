@@ -30,10 +30,6 @@ describe('PublicWebsiteNewsComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
-
   it('should retrieve a news message', () => {
     component.GetNewsMessage(TestDataNewsMessages[0].Id);
     expect(newsMessageServiceSpy.getById).toHaveBeenCalled();

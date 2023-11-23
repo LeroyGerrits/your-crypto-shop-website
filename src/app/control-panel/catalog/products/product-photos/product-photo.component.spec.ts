@@ -56,10 +56,6 @@ describe('ControlPanelCatalogProductPhotoComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
-
   it('should not proceed submitting when required form values are not filled in', () => {
     component.controlDescription.setValue('');
     component.onSubmit();

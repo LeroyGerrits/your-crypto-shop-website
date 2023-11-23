@@ -63,10 +63,6 @@ describe('ControlPanelCatalogCategoryComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
-
   it('should set a page title mentioning the category name when editing', () => {
     component.data.categoryToEdit = TestDataCategories[0];
     component.ngOnInit();

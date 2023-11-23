@@ -73,10 +73,6 @@ describe('ControlPanelConfigurationShopComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
-
   it('should set page title on data retrieval', () => {
     component.onRetrieveData(TestDataShops[0]);
     expect(component.pageTitle).toBe(TestDataShops[0].Name);

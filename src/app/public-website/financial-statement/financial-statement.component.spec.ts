@@ -55,10 +55,6 @@ describe('PublicWebsiteFinancialStatementComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
-
   it('should filter financial statement transactions when date from filter gets used', fakeAsync(() => {
     const componentStub: PublicWebsiteFinancialStatementComponent = TestBed.inject(PublicWebsiteFinancialStatementComponent);
     spyOn(componentStub, 'filterFinancialStatementTransactions');

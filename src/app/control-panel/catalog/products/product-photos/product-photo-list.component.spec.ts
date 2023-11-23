@@ -8,6 +8,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
+import { MatMenuModule } from '@angular/material/menu';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSelectModule } from '@angular/material/select';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -16,15 +17,13 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterTestingModule } from '@angular/router/testing';
 import { MutationResult } from 'src/app/shared/models/MutationResult';
 import { GetProductResponse } from 'src/app/shared/models/response/GetProductResponse.model';
+import { FileUploadProgress } from 'src/app/shared/models/system/FileUploadProgress.model';
 import { FileSizePipe } from 'src/app/shared/pipes/FileSize.pipe';
-import { CategoryService } from 'src/app/shared/services/Category.service';
 import { ProductService } from 'src/app/shared/services/Product.service';
 import { ProductPhotoService } from 'src/app/shared/services/ProductPhoto.service';
 import { TestDataProductPhotos } from 'src/assets/test-data/ProductPhotos';
 import { TestDataProducts } from 'src/assets/test-data/Products';
 import { ControlPanelCatalogProductPhotoListComponent } from './product-photo-list.component';
-import { MatMenuModule } from '@angular/material/menu';
-import { FileUploadProgress } from 'src/app/shared/models/system/FileUploadProgress.model';
 
 interface MockFile {
   name: string;

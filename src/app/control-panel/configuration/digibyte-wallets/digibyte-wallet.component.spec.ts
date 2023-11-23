@@ -50,10 +50,6 @@ describe('ControlPanelConfigurationDigiByteWalletComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
-
   it('should set page title on data retrieval', () => {
     component.onRetrieveData(TestDataDigiByteWallets[0]);
     expect(component.pageTitle).toBe(TestDataDigiByteWallets[0].Name);

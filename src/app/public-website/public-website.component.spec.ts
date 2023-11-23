@@ -53,10 +53,6 @@ describe('PublicWebsiteComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
-
   it('should show call to action when index page is active', () => {
     let indexNav = new NavigationEnd(1, '/', '/');
     TestBed.get(Router).events.next(indexNav);

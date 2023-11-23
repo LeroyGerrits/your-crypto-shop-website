@@ -41,10 +41,6 @@ describe('PublicWebsiteFaqListComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
-
   it('should filter FAQs and categories when text filter gets used', fakeAsync(() => {
     const componentStub: PublicWebsiteFaqListComponent = TestBed.inject(PublicWebsiteFaqListComponent);
     spyOn(componentStub, 'filterFaqs');

@@ -38,10 +38,6 @@ describe('PublicWebsiteIndexComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
-
   it('should show a donate dialog', () => {
     component.donate();
     expect(matDialogSpy.open).toHaveBeenCalled();
