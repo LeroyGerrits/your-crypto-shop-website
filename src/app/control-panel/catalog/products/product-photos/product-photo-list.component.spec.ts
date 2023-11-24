@@ -219,11 +219,11 @@ describe('ControlPanelCatalogProductPhotoListComponentWithErrors', () => {
     productPhotoServiceSpy = jasmine.createSpyObj('ProductPhotoService', ['changeMain', 'changeVisible', 'delete', 'getList', 'moveDown', 'moveUp', 'upload']);
     productPhotoServiceSpy.changeMain.and.returnValue(throwError(() => new Error('ERROR')));
     productPhotoServiceSpy.changeVisible.and.returnValue(throwError(() => new Error('ERROR')));
-    productPhotoServiceSpy.getList.and.returnValue(throwError(() => new Error('ERROR')));
+    productPhotoServiceSpy.getList.and.returnValue(of(TestDataProductPhotos));
     productPhotoServiceSpy.delete.and.returnValue(throwError(() => new Error('ERROR')));
     productPhotoServiceSpy.moveDown.and.returnValue(throwError(() => new Error('ERROR')));
     productPhotoServiceSpy.moveUp.and.returnValue(throwError(() => new Error('ERROR')));
-    productPhotoServiceSpy.upload.and.returnValue(throwError(() => new Error('ERRORXXX')));
+    productPhotoServiceSpy.upload.and.returnValue(throwError(() => new Error('ERROR')));
 
     TestBed.configureTestingModule({
       declarations: [ControlPanelCatalogProductPhotoListComponent, FileSizePipe],
@@ -245,6 +245,15 @@ describe('ControlPanelCatalogProductPhotoListComponentWithErrors', () => {
     fixture = TestBed.createComponent(ControlPanelCatalogProductPhotoListComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
+  });
+
+  const fileList = createMockFileList([
+    { name: 'test.jpg', body: 'test', mimeType: 'text/plain', size: 123 }
+  ]);
+
+  it('should trigger error handling when uploading files and the request to product photo service fails', () => {
+    component.uploadFile(fileList);
+    expect(productPhotoServiceSpy.upload).toHaveBeenCalled();
   });
 
   it('should trigger error handling when sending a call to the product photo service when deleting a product photo and the request fails', () => {
