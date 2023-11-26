@@ -23,9 +23,11 @@ import { ControlPanelConfigurationDigiByteWalletComponent } from './control-pane
 import { ControlPanelConfigurationDigiByteWalletListComponent } from './control-panel/configuration/digibyte-wallets/digibyte-wallet-list.component';
 import { ControlPanelConfigurationShopComponent } from './control-panel/configuration/shops/shop.component';
 import { ControlPanelConfigurationShopListComponent } from './control-panel/configuration/shops/shop-list.component';
+import { ControlPanelCustomerListComponent } from './control-panel/customers/customer-list.component';
 import { ControlPanelDashboardComponent } from './control-panel/dashboard/dashboard.component';
 import { CountryService } from './shared/services/Country.service';
 import { CurrencyService } from './shared/services/Currency.service';
+import { CustomerService } from './shared/services/Customer.service';
 import { DatePipe } from '@angular/common';
 import { DeliveryMethodService } from './shared/services/DeliveryMethod.service';
 import { DialogDeleteComponent } from './shared/dialogs/delete/dialog.delete.component';
@@ -116,6 +118,7 @@ import { StripHtmlPipe } from './shared/pipes/StripHtml.pipe';
     ControlPanelConfigurationDigiByteWalletComponent,
     ControlPanelConfigurationShopListComponent,
     ControlPanelConfigurationShopComponent,
+    ControlPanelCustomerListComponent,
     ControlPanelDashboardComponent,
     DialogDeleteComponent,
     DialogDonateComponent,
@@ -184,6 +187,7 @@ import { StripHtmlPipe } from './shared/pipes/StripHtml.pipe';
     CategoryService,
     CountryService,
     CurrencyService,
+    CustomerService,
     DatePipe,
     DeliveryMethodService,
     DigiByteNodeService,
