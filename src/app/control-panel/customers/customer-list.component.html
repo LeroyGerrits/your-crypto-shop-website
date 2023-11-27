@@ -1,51 +1,75 @@
 <div class="WrapperPadding20-8-0-8">
     <div class="FloatRight">
-        <button mat-raised-button color="primary" [routerLink]="['/control-panel/configuration/delivery-methods/new']" [disabled]="!this.shops?.length">
+        <button mat-raised-button color="primary" [routerLink]="['/control-panel/customers/new/' + this.controlFilterShop.value]" [disabled]="!this.shops?.length">
             <mat-icon>add</mat-icon>
-            Create new delivery method
+            Create new customer
         </button>
     </div>
     <h2>Customers</h2>
 </div>
 <div class="WrapperPadding20-8-0-8" *ngIf="this.finishedLoading && !this.shops?.length">
-    <span class="WarningBlock">You must <a [routerLink]="['/control-panel/configuration/shops/new']">create a shop</a> first before you can manage delivery methods.</span>
+    <span class="WarningBlock">You must <a [routerLink]="['/control-panel/configuration/shops/new']">create a shop</a> first before you can manage customers.</span>
+</div>
+<div class="WrapperPadding20-8-0-8">
+    <mat-form-field>
+        <mat-label>Shop</mat-label>
+        <mat-select [formControl]="controlFilterShop" (valueChange)="this.filterCustomers()">
+            <mat-option *ngFor="let shop of this.shops" [value]="shop.Id">{{shop.Name}}</mat-option>
+        </mat-select>
+    </mat-form-field>
 </div>
 <div class="ColumnOneFourth">
     <div class="WrapperPadding20-20-0-8">
         <mat-form-field>
-            <mat-label>Name</mat-label>
-            <input matInput [formControl]="controlFilterName" />
+            <mat-label>Username</mat-label>
+            <input matInput [formControl]="controlFilterUsername" />
         </mat-form-field>
     </div>
 </div>
 <div class="ColumnOneFourth">
-    <div class="WrapperPadding20-20-0-20">
+    <div class="WrapperPadding20-20-0-8">
         <mat-form-field>
-            <mat-label>Shop</mat-label>
-            <mat-select [formControl]="controlFilterShop">
-                <mat-option></mat-option>
-                <mat-option *ngFor="let shop of this.shops" [value]="shop.Id">{{shop.Name}}</mat-option>
-            </mat-select>
+            <mat-label>E-mail address</mat-label>
+            <input matInput [formControl]="controlFilterEmailAddress" />
+        </mat-form-field>
+    </div>
+</div>
+<div class="ColumnOneFourth">
+    <div class="WrapperPadding20-20-0-8">
+        <mat-form-field>
+            <mat-label>First name</mat-label>
+            <input matInput [formControl]="controlFilterFirstName" />
+        </mat-form-field>
+    </div>
+</div>
+<div class="ColumnOneFourth">
+    <div class="WrapperPadding20-20-0-8">
+        <mat-form-field>
+            <mat-label>Last name</mat-label>
+            <input matInput [formControl]="controlFilterLastName" />
         </mat-form-field>
     </div>
 </div>
 <div class="WrapperPadding20-8 ClearLeft">
     <table mat-table matSort [dataSource]="this.dataSource" (matSortChange)="onSortChange($event)">
-        <ng-container matColumnDef="Name">
-            <th mat-header-cell mat-sort-header *matHeaderCellDef>Name</th>
-            <td mat-cell *matCellDef="let element">{{element.Name}}</td>
+        <ng-container matColumnDef="Username">
+            <th mat-header-cell mat-sort-header *matHeaderCellDef>Username</th>
+            <td mat-cell *matCellDef="let element">{{element.Username}}</td>
         </ng-container>
 
-        <ng-container matColumnDef="Shop">
-            <th mat-header-cell mat-sort-header *matHeaderCellDef>Shop</th>
-            <td mat-cell *matCellDef="let element">{{element.Shop.Name}}</td>
+        <ng-container matColumnDef="EmailAddress">
+            <th mat-header-cell mat-sort-header *matHeaderCellDef>E-mail address</th>
+            <td mat-cell *matCellDef="let element">{{element.EmailAddress}}</td>
         </ng-container>
 
-        <ng-container matColumnDef="Costs">
-            <th mat-header-cell mat-sort-header *matHeaderCellDef>Costs</th>
-            <td mat-cell *matCellDef="let element" class="TextAlignRight">
-                <span *ngIf="element.Costs">Ɗ&nbsp;{{element.Costs | number:'1.2-8'}}</span>
-            </td>
+        <ng-container matColumnDef="FirstName">
+            <th mat-header-cell mat-sort-header *matHeaderCellDef>First name</th>
+            <td mat-cell *matCellDef="let element">{{element.FirstName}}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="LastName">
+            <th mat-header-cell mat-sort-header *matHeaderCellDef>Last name</th>
+            <td mat-cell *matCellDef="let element">{{element.LastName}}</td>
         </ng-container>
 
         <ng-container matColumnDef="ActionButtons">
@@ -69,8 +93,8 @@
         <tr mat-row *matRowDef="let row; columns: this.displayedColumns;" (dblclick)="editElement(row)"></tr>
         <tr class="mat-row" *matNoDataRow>
             <td class="mat-cell NoDataCell" [colSpan]="this.displayedColumns.length">
-                <span *ngIf="this.controlFilterName.value || this.controlFilterShop.value">{{constants.MESSAGE_NO_RECORDS_FOUND}}</span>
-                <span *ngIf="!this.controlFilterName.value && !this.controlFilterShop.value">You have not yet created a delivery method.</span>
+                <span *ngIf="this.controlFilterUsername.value || this.controlFilterEmailAddress.value || this.controlFilterFirstName.value || this.controlFilterLastName.value">{{constants.MESSAGE_NO_RECORDS_FOUND}}</span>
+                <span *ngIf="!this.controlFilterUsername.value && !this.controlFilterEmailAddress.value && !this.controlFilterFirstName.value && !this.controlFilterLastName.value">No customers have signed up in your shop yet.</span>
             </td>
         </tr>
     </table>

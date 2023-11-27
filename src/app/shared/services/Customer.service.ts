@@ -45,12 +45,19 @@ export class CustomerService {
         return this.http.post(`${this.apiUrl}/public/forgot-password`, forgotPasswordRequest);
     }
 
+    getById(id: string): Observable<Customer> {
+        return this.http.get<Customer>(`${this.apiUrl}/${id}`);
+    }
+
     getList(parameters?: GetCustomersParameters): Observable<Customer[]> {
         let httpParams = new HttpParams();
 
         if (parameters) {
             if (parameters.ShopId) httpParams = httpParams.append('shopId', parameters.ShopId);
             if (parameters.Username) httpParams = httpParams.append('username', parameters.Username);
+            if (parameters.EmailAddress) httpParams = httpParams.append('emailAddress', parameters.EmailAddress);
+            if (parameters.FirstName) httpParams = httpParams.append('firstName', parameters.FirstName);
+            if (parameters.LastName) httpParams = httpParams.append('lastName', parameters.LastName);
         }
 
         return this.http.get<Customer[]>(this.apiUrl, { params: httpParams });

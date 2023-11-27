@@ -16,13 +16,13 @@ import { ControlPanelConfigurationDigiByteWalletComponent } from './control-pane
 import { ControlPanelConfigurationDigiByteWalletListComponent } from './control-panel/configuration/digibyte-wallets/digibyte-wallet-list.component';
 import { ControlPanelConfigurationShopComponent } from './control-panel/configuration/shops/shop.component';
 import { ControlPanelConfigurationShopListComponent } from './control-panel/configuration/shops/shop-list.component';
+import { ControlPanelCustomerComponent } from './control-panel/customers/customer.component';
 import { ControlPanelCustomerListComponent } from './control-panel/customers/customer-list.component';
 import { ControlPanelDashboardComponent } from './control-panel/dashboard/dashboard.component';
 import { ControlPanelSalesOrderComponent } from './control-panel/sales/orders/order.component';
 import { ControlPanelSalesOrderListComponent } from './control-panel/sales/orders/order-list.component';
 import { ControlPanelSalesTransactionComponent } from './control-panel/sales/transactions/transaction.component';
 import { ControlPanelSalesTransactionListComponent } from './control-panel/sales/transactions/transaction-list.component';
-import { CustomerComponent } from './control-panel/customers/customer.component';
 import { MerchantAuthorizedGuard } from './shared/guards/merchant-authorized.guard';
 import { NgModule } from '@angular/core';
 import { PublicWebsiteAboutComponent } from './public-website/about/about.component';
@@ -65,7 +65,8 @@ const routes: Routes = [
       { path: 'configuration/shops', component: ControlPanelConfigurationShopListComponent, title: `${Constants.TITLE_PREFIX} - Shops` },
       { path: 'configuration/shops/:shopId', component: ControlPanelConfigurationShopComponent, title: `${Constants.TITLE_PREFIX} - Shops` },
       { path: 'customers', component: ControlPanelCustomerListComponent, title: `${Constants.TITLE_PREFIX} - Customers` },
-      { path: 'customers/:orderId', component: CustomerComponent, title: `${Constants.TITLE_PREFIX} - Customers` },
+      { path: 'customers/:customerId/:shopId', component: ControlPanelCustomerComponent, title: `${Constants.TITLE_PREFIX} - Customers` },
+      { path: 'customers/:customerId/:shopId/orders', component: ControlPanelCustomerComponent, title: `${Constants.TITLE_PREFIX} - Customer orders` },
       { path: 'sales/orders', component: ControlPanelSalesOrderListComponent, title: `${Constants.TITLE_PREFIX} - Orders` },
       { path: 'sales/orders/:orderId', component: ControlPanelSalesOrderComponent, title: `${Constants.TITLE_PREFIX} - Orders` },
       { path: 'sales/transactions', component: ControlPanelSalesTransactionListComponent, title: `${Constants.TITLE_PREFIX} - Transactions` },

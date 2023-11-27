@@ -1,3 +1,129 @@
-<div class="WrapperPadding20-8">
-    <h2>Customer {{this.customer.LastName}}</h2>
-</div>
+<form (ngSubmit)="onSubmit()">
+    <div class="WrapperPadding20-8">
+        <div class="FloatRight FormButtons">
+            <button mat-raised-button [disabled]="formLoading" type="button" [routerLink]="['/control-panel/catalog/products']">Cancel</button>
+            <button mat-raised-button [disabled]="formLoading" type="submit" color="primary">
+                <mat-icon *ngIf="formLoading">
+                    <mat-spinner diameter="18" />
+                </mat-icon>
+                Save
+            </button>
+        </div>
+        <h2><a [routerLink]="['/control-panel/catalog/products']">Products</a> - {{this.pageTitle}}</h2>
+    </div>
+    <div class="ClearRight">
+        <mat-tab-group animationDuration="0">
+            <mat-tab label="Product">
+                <div class="ColumnOneHalf">
+                    <div class="WrapperPadding20-10-0-8">
+                        <mat-form-field>
+                            <mat-label>Shop</mat-label>
+                            <mat-select [formControl]="controlShop" [ngClass]="{ 'is-invalid': controlShop.errors }">
+                                <mat-option *ngFor="let shop of this.shops" [value]="shop.Id">{{shop.Name}}</mat-option>
+                            </mat-select>
+                            <div *ngIf="formSubmitted && controlShop.errors" class="TextError">
+                                <div *ngIf="controlShop.errors['required']">Shop is required</div>
+                            </div>
+                        </mat-form-field>
+                    </div>
+                </div>
+                <div class="ColumnOneHalf">
+                    <div class="WrapperPadding20-10-0-8">
+                        <p>The shop this customer will be assigned to.</p>
+                    </div>
+                </div>
+
+                <mat-divider class="ClearLeft" />
+                <div class="ColumnOneHalf">
+                    <div class="WrapperPadding20-10-0-8">
+                        <mat-form-field>
+                            <mat-label>E-mail address</mat-label>
+                            <input matInput [formControl]="controlEmailAddress" maxlength="255" [ngClass]="{ 'is-invalid': formSubmitted && controlEmailAddress.errors }" />
+                            <div *ngIf="formSubmitted && controlEmailAddress.errors" class="TextError">
+                                <div *ngIf="controlEmailAddress.errors['required']">E-mail address is required</div>
+                                <div *ngIf="controlEmailAddress.errors['email']">A valid e-mail address is required</div>
+                            </div>
+                        </mat-form-field>
+                    </div>
+                </div>
+                <div class="ColumnOneHalf">
+                    <div class="WrapperPadding20-10-0-8">
+                        <p>The customer's e-mail address. Will be used for all forms of communication. E-mail addresses are unique per shop.</p>
+                    </div>
+                </div>
+
+                <mat-divider class="ClearLeft" />
+                <div class="ColumnOneHalf">
+                    <div class="WrapperPadding20-10-0-8">
+                        <mat-form-field>
+                            <mat-label>Username</mat-label>
+                            <input matInput [formControl]="controlUsername" maxlength="50" [ngClass]="{ 'is-invalid': formSubmitted && controlUsername.errors }" />
+                            <div *ngIf="formSubmitted && controlUsername.errors" class="TextError">
+                                <div *ngIf="controlUsername.errors['required']">Username is required</div>
+                            </div>
+                        </mat-form-field>
+                    </div>
+                </div>
+                <div class="ColumnOneHalf">
+                    <div class="WrapperPadding20-10-0-8">
+                        <p>The username of the merchant. Whenever a merchant is displayed on public sections of your shop, just the username will be displayed. Usernames are unique per shop.</p>
+                    </div>
+                </div>
+
+                <mat-divider class="ClearLeft" />
+                <div class="ColumnOneHalf">
+                    <div class="WrapperPadding20-10-0-8 TextAlignRight">
+                        <mat-radio-group aria-labelledby="gender" [formControl]="controlGender">
+                            <mat-radio-button value="1" color="primary">Male</mat-radio-button>
+                            <mat-radio-button value="2" color="primary">Female</mat-radio-button>
+                            <mat-radio-button value="0" color="primary">Unspecified</mat-radio-button>
+                        </mat-radio-group>
+                    </div>
+                </div>
+                <div class="ColumnOneHalf">
+                    <div class="WrapperPadding20-10-0-8">
+                        <p>The gender of the customer. Will be used to determine the salutation used in various places in your shop and e-mails.</p>
+                    </div>
+                </div>
+
+                <mat-divider class="ClearLeft" />
+                <div class="ColumnOneHalf">
+                    <div class="WrapperPadding20-10-0-8">
+                        <mat-form-field>
+                            <mat-label>First name</mat-label>
+                            <input matInput [formControl]="controlFirstName" maxlength="255" [ngClass]="{ 'is-invalid': formSubmitted && controlFirstName.errors }" />
+                        </mat-form-field>
+                    </div>
+                </div>
+                <div class="ColumnOneHalf">
+                    <div class="WrapperPadding20-10-0-8">
+                        <p>The first name of the merchant.</p>
+                    </div>
+                </div>
+
+                <mat-divider class="ClearLeft" />
+                <div class="ColumnOneHalf">
+                    <div class="WrapperPadding20-10-0-8">
+                        <mat-form-field>
+                            <mat-label>Last name</mat-label>
+                            <input matInput [formControl]="controlLastName" maxlength="50" [ngClass]="{ 'is-invalid': formSubmitted && controlLastName.errors }" />
+                            <div *ngIf="formSubmitted && controlLastName.errors" class="TextError">
+                                <div *ngIf="controlLastName.errors['required']">Last name is required</div>
+                            </div>
+                        </mat-form-field>
+                    </div>
+                </div>
+                <div class="ColumnOneHalf">
+                    <div class="WrapperPadding20-10-0-8">
+                        <p>The username of the merchant. Whenever a merchant is displayed on public sections of your shop, just the username will be displayed. Usernames are unique per shop.</p>
+                    </div>
+                </div>
+
+            </mat-tab>
+            <mat-tab label="Address">
+                x
+            </mat-tab>
+
+        </mat-tab-group>
+    </div>
+</form>

@@ -1,9 +1,8 @@
 import { Gender } from 'src/app/shared/enums/Gender.enum';
-import { Shop } from './Shop.model';
 
 export class Customer {
     Id!: string;
-    Shop!: Shop;
+    ShopId!: string;
     Activated?: Date;
     EmailAddress!: string;
     Username!: string;

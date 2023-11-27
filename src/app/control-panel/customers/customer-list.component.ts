@@ -18,7 +18,7 @@ import { CustomerService } from 'src/app/shared/services/Customer.service';
 import { ShopService } from 'src/app/shared/services/Shop.service';
 
 @Component({
-  selector: 'control-panel-configuration-customer-list',
+  selector: 'control-panel-customer-list',
   templateUrl: './customer-list.component.html',
   styleUrl: './customer-list.component.scss'
 })
@@ -32,13 +32,16 @@ export class ControlPanelCustomerListComponent implements OnDestroy, OnInit {
   environment = Environment;
   constants = Constants;
   dataSource = new MatTableDataSource<Customer>;
-  displayedColumns: string[] = ['Name', 'Shop', 'Costs', 'ActionButtons'];
+  displayedColumns: string[] = ['Username', 'EmailAddress', 'FirstName', 'LastName', 'ActionButtons'];
   sortDirection: string | null = 'asc';
   finishedLoading: boolean = false;
 
   public form!: FormGroup;
-  public controlFilterName = new FormControl('');
   public controlFilterShop = new FormControl('');
+  public controlFilterUsername = new FormControl('');
+  public controlFilterEmailAddress = new FormControl('');
+  public controlFilterFirstName = new FormControl('');
+  public controlFilterLastName = new FormControl('');
 
   public shops: Shop[] | undefined;
 
@@ -50,17 +53,30 @@ export class ControlPanelCustomerListComponent implements OnDestroy, OnInit {
     private shopService: ShopService
   ) {
     this.form = new FormGroup([
-      this.controlFilterName,
-      this.controlFilterShop
+      this.controlFilterShop,
+      this.controlFilterUsername,
+      this.controlFilterEmailAddress,
+      this.controlFilterFirstName,
+      this.controlFilterLastName
     ]);
 
-    this.controlFilterName.valueChanges.pipe(debounceTime(1000), distinctUntilChanged()).subscribe(() => this.filterCustomers());
-    this.controlFilterShop.valueChanges.pipe(debounceTime(1000), distinctUntilChanged()).subscribe(() => this.filterCustomers());
+    this.controlFilterUsername.valueChanges.pipe(debounceTime(1000), distinctUntilChanged()).subscribe(() => this.filterCustomers());
+    this.controlFilterEmailAddress.valueChanges.pipe(debounceTime(1000), distinctUntilChanged()).subscribe(() => this.filterCustomers());
+    this.controlFilterFirstName.valueChanges.pipe(debounceTime(1000), distinctUntilChanged()).subscribe(() => this.filterCustomers());
+    this.controlFilterLastName.valueChanges.pipe(debounceTime(1000), distinctUntilChanged()).subscribe(() => this.filterCustomers());
   }
 
   ngOnInit() {
-    this.shopService.getList().subscribe(shops => this.shops = shops);
-    this.filterCustomers();
+    this.shopService.getList().subscribe(shops => {
+      this.shops = shops;
+
+      if (shops && shops[0]) {
+        this.filterCustomers();
+        this.controlFilterShop.setValue(shops[0].Id);
+      } else {
+        this.finishedLoading = true;
+      }
+    });
   }
 
   ngOnDestroy(): void {
@@ -69,8 +85,11 @@ export class ControlPanelCustomerListComponent implements OnDestroy, OnInit {
 
   filterCustomers() {
     const parameters: GetCustomersParameters = {
-      Username: this.controlFilterName.value!,
-      ShopId: this.controlFilterShop.value!
+      ShopId: this.controlFilterShop.value!,
+      Username: this.controlFilterUsername.value!,
+      EmailAddress: this.controlFilterEmailAddress.value!,
+      FirstName: this.controlFilterFirstName.value!,
+      LastName: this.controlFilterLastName.value!
     };
 
     this.customerService.getList(parameters).subscribe(customers => {
@@ -90,13 +109,13 @@ export class ControlPanelCustomerListComponent implements OnDestroy, OnInit {
   }
 
   editElement(element: Customer) {
-    this.router.navigate([`/control-panel/configuration/customers/${element.Id}`]);
+    this.router.navigate([`/control-panel/customers/${element.Id}`]);
   }
 
   deleteElement(element: Customer) {
     const dialogDelete = this.dialog.open(DialogDeleteComponent);
     const instance = dialogDelete.componentInstance;
-    instance.dialogMessage = `Are you sure you want to delete delivery method '${element.Username}'?`;
+    instance.dialogMessage = `Are you sure you want to delete customer '${element.Username}'?`;
 
     dialogDelete.afterClosed().subscribe(result => {
       if (result) {

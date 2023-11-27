@@ -23,6 +23,7 @@ import { ControlPanelConfigurationDigiByteWalletComponent } from './control-pane
 import { ControlPanelConfigurationDigiByteWalletListComponent } from './control-panel/configuration/digibyte-wallets/digibyte-wallet-list.component';
 import { ControlPanelConfigurationShopComponent } from './control-panel/configuration/shops/shop.component';
 import { ControlPanelConfigurationShopListComponent } from './control-panel/configuration/shops/shop-list.component';
+import { ControlPanelCustomerComponent } from './control-panel/customers/customer.component';
 import { ControlPanelCustomerListComponent } from './control-panel/customers/customer-list.component';
 import { ControlPanelDashboardComponent } from './control-panel/dashboard/dashboard.component';
 import { CountryService } from './shared/services/Country.service';
@@ -119,6 +120,7 @@ import { StripHtmlPipe } from './shared/pipes/StripHtml.pipe';
     ControlPanelConfigurationShopListComponent,
     ControlPanelConfigurationShopComponent,
     ControlPanelCustomerListComponent,
+    ControlPanelCustomerComponent,
     ControlPanelDashboardComponent,
     DialogDeleteComponent,
     DialogDonateComponent,
