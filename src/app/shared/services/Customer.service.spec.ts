@@ -4,6 +4,7 @@ import { HttpClientTestingModule, HttpTestingController } from '@angular/common/
 import { Constants } from '../Constants';
 import { CustomerService } from './Customer.service';
 import { Environment } from 'src/app/shared/environments/Environment';
+import { GetCustomersParameters } from '../models/parameters/GetCustomersParameters.model';
 import { MutateCustomerRequest } from '../models/request/MutateCustomerRequest.model';
 import { TestBed } from '@angular/core/testing';
 import { TestDataCountries } from 'src/assets/test-data/Countries';
@@ -27,19 +28,39 @@ describe('CustomerService', () => {
         httpMock.verify();
     });
 
-    it('should be able to get a public merchant by ID', () => {
+    it('should be able to get a list of customers', () => {
+        const parameters: GetCustomersParameters = {
+            ShopId: TestDataCustomers[0].ShopId,
+            Username: 'Test',
+            EmailAddress: 'Test',
+            FirstName: 'Test',
+            LastName: 'Test'
+        };
+
+        service.getList(parameters).subscribe();
+        const request = httpMock.expectOne(`${Environment.API_URL}/Customer?shopId=${parameters.ShopId}&username=${parameters.Username}&emailAddress=${parameters.EmailAddress}&firstName=${parameters.FirstName}&lastName=${parameters.LastName}`);
+        expect(request.request.method).toBe('GET');
+    });
+
+    it('should be able to get a single customer', () => {
+        service.getById(Constants.EMPTY_GUID).subscribe();
+        const request = httpMock.expectOne(`${Environment.API_URL}/Customer/${Constants.EMPTY_GUID}`);
+        expect(request.request.method).toBe('GET');
+    });
+
+    it('should be able to get a public customer by ID', () => {
         service.getByIdPublic(Constants.EMPTY_GUID).subscribe();
         const request = httpMock.expectOne(`${Environment.API_URL}/Customer/public/${Constants.EMPTY_GUID}`);
         expect(request.request.method).toBe('GET');
     });
 
-    it('should be able to get a merchant by ID and password', () => {
+    it('should be able to get a customer by ID and password', () => {
         service.getByIdAndPassword(Constants.EMPTY_GUID, 'password').subscribe();
         const request = httpMock.expectOne(`${Environment.API_URL}/Customer/${Constants.EMPTY_GUID}/password`);
         expect(request.request.method).toBe('GET');
     });
 
-    it('should be able to create a merchant', () => {
+    it('should be able to create a customer', () => {
         const mutateCustomerRequest: MutateCustomerRequest = {
             Customer: TestDataCustomers[0],
             AddressLine1: 'Sesame Street 123',
@@ -54,7 +75,7 @@ describe('CustomerService', () => {
         expect(request.request.method).toBe('POST');
     });
 
-    it('should be able to update a merchant', () => {
+    it('should be able to update a customer', () => {
         const mutateCustomerRequest: MutateCustomerRequest = {
             Customer: TestDataCustomers[0],
             AddressLine1: 'Sesame Street 123',
@@ -69,21 +90,27 @@ describe('CustomerService', () => {
         expect(request.request.method).toBe('PUT');
     });
 
-    it('should be able to activate a merchant\'s account', () => {
+    it('should be able to activate a customer\'s account', () => {
         service.activateAccount(TestDataCustomers[0].Id!, 'PASSWORD', 'NEWPASSWORD').subscribe();
         const request = httpMock.expectOne(`${Environment.API_URL}/Customer/activate-account`);
         expect(request.request.method).toBe('PUT');
     });
 
-    it('should be able to change a merchant\'s password', () => {
+    it('should be able to change a customer\'s password', () => {
         service.changePassword('PASSWORD', 'NEWPASSWORD').subscribe();
         const request = httpMock.expectOne(`${Environment.API_URL}/Customer/change-password`);
         expect(request.request.method).toBe('PUT');
     });
 
-    it('should be able to reset a merchant\'s account', () => {
+    it('should be able to reset a customer\'s account', () => {
         service.forgotPassword(TestDataCustomers[0].EmailAddress).subscribe();
         const request = httpMock.expectOne(`${Environment.API_URL}/Customer/public/forgot-password`);
         expect(request.request.method).toBe('POST');
+    });
+
+    it('should be able to delete a product', () => {
+        service.delete(TestDataCustomers[0].Id).subscribe();
+        const request = httpMock.expectOne(`${Environment.API_URL}/Customer/${TestDataCustomers[0].Id}`);
+        expect(request.request.method).toBe('DELETE');
     });
 });

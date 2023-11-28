@@ -33,7 +33,8 @@ interface MockFile {
 }
 
 const createFileFromMockFile = (file: MockFile): File => {
-  const blob = new Blob([file.body], { type: file.mimeType }) as any;
+  const fileBody: string = '.'.repeat(file.size);
+  const blob = new Blob([fileBody], { type: file.mimeType }) as any;
   blob['lastModifiedDate'] = new Date();
   blob['name'] = file.name;
   return blob as File;
@@ -111,7 +112,7 @@ describe('ControlPanelCatalogProductPhotoListComponent', () => {
   const fileList = createMockFileList([
     { name: 'test.jpg', body: 'test', mimeType: 'text/plain', size: 123 },
     { name: 'wrong extension.txt', body: 'test', mimeType: 'text/plain', size: 123 },
-    { name: 'bigfile.jpg', body: 'test', mimeType: 'text/plain', size: 99999999999 }
+    { name: 'bigfile.jpg', body: 'test', mimeType: 'text/plain', size: 99999999 }
   ]);
 
   it('should upload files', () => {

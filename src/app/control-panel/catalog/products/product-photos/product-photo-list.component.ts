@@ -187,8 +187,6 @@ export class ControlPanelCatalogProductPhotoListComponent {
       }
 
       if (fileToUpload.size > Constants.UPLOAD_MAXIMUM_FILE_SIZE) {
-        console.log('SIZE!!!!');
-        console.log(fileToUpload.size);
         this.fileUploadProgressItems[fileUploadIndex].Message = 'File was too large. The maximum allowed file size is ' + this.fileSizePipe.transform(Constants.UPLOAD_MAXIMUM_FILE_SIZE) + '.';
         this.fileUploadProgressItems[fileUploadIndex].Finished = true;
         this.checkFileUploadsFinished();
