@@ -4,7 +4,9 @@ import { HttpClientTestingModule, HttpTestingController } from '@angular/common/
 import { Constants } from '../Constants';
 import { CustomerService } from './Customer.service';
 import { Environment } from 'src/app/shared/environments/Environment';
+import { MutateCustomerRequest } from '../models/request/MutateCustomerRequest.model';
 import { TestBed } from '@angular/core/testing';
+import { TestDataCountries } from 'src/assets/test-data/Countries';
 import { TestDataCustomers } from 'src/assets/test-data/Customers';
 
 describe('CustomerService', () => {
@@ -38,13 +40,31 @@ describe('CustomerService', () => {
     });
 
     it('should be able to create a merchant', () => {
-        service.create(TestDataCustomers[0]).subscribe();
+        const mutateCustomerRequest: MutateCustomerRequest = {
+            Customer: TestDataCustomers[0],
+            AddressLine1: 'Sesame Street 123',
+            AddressLine2: 'Block ABC',
+            PostalCode: '12345 AB',
+            City: 'Manhattan',
+            Province: 'New York',
+            Country: TestDataCountries[0]
+        };
+        service.create(mutateCustomerRequest).subscribe();
         const request = httpMock.expectOne(`${Environment.API_URL}/Customer`);
         expect(request.request.method).toBe('POST');
     });
 
     it('should be able to update a merchant', () => {
-        service.update(TestDataCustomers[0]).subscribe();
+        const mutateCustomerRequest: MutateCustomerRequest = {
+            Customer: TestDataCustomers[0],
+            AddressLine1: 'Sesame Street 123',
+            AddressLine2: 'Block ABC',
+            PostalCode: '12345 AB',
+            City: 'Manhattan',
+            Province: 'New York',
+            Country: TestDataCountries[0]
+        };
+        service.update(mutateCustomerRequest).subscribe();
         const request = httpMock.expectOne(`${Environment.API_URL}/Customer/${TestDataCustomers[0].Id}`);
         expect(request.request.method).toBe('PUT');
     });

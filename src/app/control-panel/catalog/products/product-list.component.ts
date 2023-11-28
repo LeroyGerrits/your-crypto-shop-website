@@ -85,7 +85,7 @@ export class ControlPanelCatalogProductListComponent {
 
     this.categoryService.getList().subscribe(categories => {
       this.categories = categories;
-      // Construct dictionary here for filter dropdown
+      // TO-DO: Construct dictionary here for filter dropdown
     });
   }
 

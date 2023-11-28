@@ -1,3 +1,4 @@
+import { Address } from './Address.model';
 import { Gender } from 'src/app/shared/enums/Gender.enum';
 
 export class Customer {
@@ -9,6 +10,7 @@ export class Customer {
     Password?: string;
     Gender!: Gender;
     FirstName?: string;
+    Address!: Address;
     LastName!: string;
     LastLogin?: Date;
     LastIpAddress?: string;

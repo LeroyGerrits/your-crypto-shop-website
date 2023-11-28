@@ -1,5 +1,6 @@
 import { Customer } from 'src/app/shared/models/Customer.model';
 import { Gender } from 'src/app/shared/enums/Gender.enum';
+import { TestDataAddresses } from './Addresses';
 import { TestDataShops } from './Shops';
 
 export const TestDataCustomers: Customer[] = [
@@ -10,7 +11,8 @@ export const TestDataCustomers: Customer[] = [
         Username: 'DGB Commerce',
         Gender: Gender.Male,
         LastName: 'Test',
-        Salutation: 'Mr. Test'
+        Salutation: 'Mr. Test',
+        Address: TestDataAddresses[0]
     }, {
         Id: '00000000-0000-0000-0000-000000000002',
         ShopId: TestDataShops[0].Id,
@@ -18,6 +20,7 @@ export const TestDataCustomers: Customer[] = [
         Username: 'DGB Commerce',
         Gender: Gender.Female,
         LastName: 'Test',
-        Salutation: 'Ms. Test'
+        Salutation: 'Ms. Test',
+        Address: TestDataAddresses[0]
     }
 ];

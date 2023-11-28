@@ -7,6 +7,7 @@ import { Environment } from 'src/app/shared/environments/Environment';
 import { ForgotPasswordRequest } from '../models/request/ForgotPasswordRequest.model';
 import { GetCustomersParameters } from '../models/parameters/GetCustomersParameters.model';
 import { Injectable } from '@angular/core';
+import { MutateCustomerRequest } from '../models/request/MutateCustomerRequest.model';
 import { MutationResult } from 'src/app/shared/models/MutationResult';
 import { Observable } from 'rxjs';
 import { PublicCustomer } from '../models/viewmodels/PublicCustomer.model';
@@ -34,6 +35,10 @@ export class CustomerService {
         return this.http.put<MutationResult>(`${this.apiUrl}/change-password`, changePasswordRequest);
     }
 
+    create(request: MutateCustomerRequest): Observable<MutationResult> {
+        return this.http.post<MutationResult>(this.apiUrl, request);
+    }
+
     delete(id: string): Observable<MutationResult> {
         return this.http.delete<MutationResult>(`${this.apiUrl}/${id}`);
     }
@@ -47,6 +52,14 @@ export class CustomerService {
 
     getById(id: string): Observable<Customer> {
         return this.http.get<Customer>(`${this.apiUrl}/${id}`);
+    }
+
+    getByIdAndPassword(id: string, password: string): Observable<Customer> {
+        return this.http.get<Customer>(`${this.apiUrl}/${id}/${password}`);
+    }
+
+    getByIdPublic(id: string): Observable<PublicCustomer> {
+        return this.http.get<PublicCustomer>(`${this.apiUrl}/public/${id}`);
     }
 
     getList(parameters?: GetCustomersParameters): Observable<Customer[]> {
@@ -63,19 +76,7 @@ export class CustomerService {
         return this.http.get<Customer[]>(this.apiUrl, { params: httpParams });
     }
 
-    create(customer: Customer): Observable<MutationResult> {
-        return this.http.post<MutationResult>(this.apiUrl, customer);
-    }
-
-    getByIdAndPassword(id: string, password: string): Observable<Customer> {
-        return this.http.get<Customer>(`${this.apiUrl}/${id}/${password}`);
-    }
-
-    getByIdPublic(id: string): Observable<PublicCustomer> {
-        return this.http.get<PublicCustomer>(`${this.apiUrl}/public/${id}`);
-    }
-
-    update(customer: Customer): Observable<MutationResult> {
-        return this.http.put<MutationResult>(`${this.apiUrl}/${customer.Id}`, customer)
+    update(request: MutateCustomerRequest): Observable<MutationResult> {
+        return this.http.put<MutationResult>(`${this.apiUrl}/${request.Customer.Id}`, request)
     }
 }

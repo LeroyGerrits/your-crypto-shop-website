@@ -1,7 +1,7 @@
 <form (ngSubmit)="onSubmit()">
     <div class="WrapperPadding20-8">
         <div class="FloatRight FormButtons">
-            <button mat-raised-button [disabled]="formLoading" type="button" [routerLink]="['/control-panel/catalog/products']">Cancel</button>
+            <button mat-raised-button [disabled]="formLoading" type="button" [routerLink]="['/control-panel/customers']">Cancel</button>
             <button mat-raised-button [disabled]="formLoading" type="submit" color="primary">
                 <mat-icon *ngIf="formLoading">
                     <mat-spinner diameter="18" />
@@ -9,11 +9,15 @@
                 Save
             </button>
         </div>
-        <h2><a [routerLink]="['/control-panel/catalog/products']">Products</a> - {{this.pageTitle}}</h2>
+        <h2><a [routerLink]="['/control-panel/customers']">Customers</a> - {{this.pageTitle}}</h2>
     </div>
     <div class="ClearRight">
         <mat-tab-group animationDuration="0">
-            <mat-tab label="Product">
+            <mat-tab>
+                <ng-template mat-tab-label>
+                    <mat-icon color="warn" class="TabWarnIcon" *ngIf="this.formSubmitted && (controlShop.errors || controlEmailAddress.errors || controlUsername.errors || controlLastName.errors)">error_outline</mat-icon>
+                    Customer
+                </ng-template>
                 <div class="ColumnOneHalf">
                     <div class="WrapperPadding20-10-0-8">
                         <mat-form-field>
@@ -32,7 +36,6 @@
                         <p>The shop this customer will be assigned to.</p>
                     </div>
                 </div>
-
                 <mat-divider class="ClearLeft" />
                 <div class="ColumnOneHalf">
                     <div class="WrapperPadding20-10-0-8">
@@ -51,7 +54,6 @@
                         <p>The customer's e-mail address. Will be used for all forms of communication. E-mail addresses are unique per shop.</p>
                     </div>
                 </div>
-
                 <mat-divider class="ClearLeft" />
                 <div class="ColumnOneHalf">
                     <div class="WrapperPadding20-10-0-8">
@@ -69,7 +71,6 @@
                         <p>The username of the merchant. Whenever a merchant is displayed on public sections of your shop, just the username will be displayed. Usernames are unique per shop.</p>
                     </div>
                 </div>
-
                 <mat-divider class="ClearLeft" />
                 <div class="ColumnOneHalf">
                     <div class="WrapperPadding20-10-0-8 TextAlignRight">
@@ -85,7 +86,6 @@
                         <p>The gender of the customer. Will be used to determine the salutation used in various places in your shop and e-mails.</p>
                     </div>
                 </div>
-
                 <mat-divider class="ClearLeft" />
                 <div class="ColumnOneHalf">
                     <div class="WrapperPadding20-10-0-8">
@@ -100,7 +100,6 @@
                         <p>The first name of the merchant.</p>
                     </div>
                 </div>
-
                 <mat-divider class="ClearLeft" />
                 <div class="ColumnOneHalf">
                     <div class="WrapperPadding20-10-0-8">
@@ -118,10 +117,113 @@
                         <p>The username of the merchant. Whenever a merchant is displayed on public sections of your shop, just the username will be displayed. Usernames are unique per shop.</p>
                     </div>
                 </div>
-
             </mat-tab>
-            <mat-tab label="Address">
-                x
+            <mat-tab>
+                <ng-template mat-tab-label>
+                    <mat-icon color="warn" class="TabWarnIcon" *ngIf="this.formSubmitted && (controlAddressLine1.errors || controlPostalCode.errors || controlCity.errors || controlCountry.errors)">error_outline</mat-icon>
+                    Address
+                </ng-template>
+                <mat-divider class="ClearLeft" />
+                <div class="ColumnOneHalf">
+                    <div class="WrapperPadding20-10-0-8">
+                        <mat-form-field>
+                            <mat-label>Address line 1</mat-label>
+                            <input matInput [formControl]="controlAddressLine1" maxlength="255" [ngClass]="{ 'is-invalid': formSubmitted && controlAddressLine1.errors }" />
+                            <div *ngIf="formSubmitted && controlAddressLine1.errors" class="TextError">
+                                <div *ngIf="controlAddressLine1.errors['required']">Address line is required</div>
+                            </div>
+                        </mat-form-field>
+                    </div>
+                </div>
+                <div class="ColumnOneHalf">
+                    <div class="WrapperPadding20-10-0-8">
+                        <p>The customer's address line (street and number).</p>
+                    </div>
+                </div>
+                <mat-divider class="ClearLeft" />
+                <div class="ColumnOneHalf">
+                    <div class="WrapperPadding20-10-0-8">
+                        <mat-form-field>
+                            <mat-label>Address line 2</mat-label>
+                            <input matInput [formControl]="controlAddressLine2" maxlength="255" [ngClass]="{ 'is-invalid': formSubmitted && controlAddressLine2.errors }" />
+                        </mat-form-field>
+                    </div>
+                </div>
+                <div class="ColumnOneHalf">
+                    <div class="WrapperPadding20-10-0-8">
+                        <p>The customer's second address line, if any.</p>
+                    </div>
+                </div>
+                <mat-divider class="ClearLeft" />
+                <div class="ColumnOneHalf">
+                    <div class="WrapperPadding20-10-0-8">
+                        <mat-form-field>
+                            <mat-label>Postal code</mat-label>
+                            <input matInput [formControl]="controlPostalCode" maxlength="255" [ngClass]="{ 'is-invalid': formSubmitted && controlPostalCode.errors }" />
+                            <div *ngIf="formSubmitted && controlPostalCode.errors" class="TextError">
+                                <div *ngIf="controlPostalCode.errors['required']">Postal code is required</div>
+                            </div>
+                        </mat-form-field>
+                    </div>
+                </div>
+                <div class="ColumnOneHalf">
+                    <div class="WrapperPadding20-10-0-8">
+                        <p>The customer's city.</p>
+                    </div>
+                </div>
+                <mat-divider class="ClearLeft" />
+                <div class="ColumnOneHalf">
+                    <div class="WrapperPadding20-10-0-8">
+                        <mat-form-field>
+                            <mat-label>City</mat-label>
+                            <input matInput [formControl]="controlCity" maxlength="255" [ngClass]="{ 'is-invalid': formSubmitted && controlCity.errors }" />
+                            <div *ngIf="formSubmitted && controlCity.errors" class="TextError">
+                                <div *ngIf="controlCity.errors['required']">City is required</div>
+                            </div>
+                        </mat-form-field>
+                    </div>
+                </div>
+                <div class="ColumnOneHalf">
+                    <div class="WrapperPadding20-10-0-8">
+                        <p>The customer's city.</p>
+                    </div>
+                </div>
+                <mat-divider class="ClearLeft" />
+                <div class="ColumnOneHalf">
+                    <div class="WrapperPadding20-10-0-8">
+                        <mat-form-field>
+                            <mat-label>State / province</mat-label>
+                            <input matInput [formControl]="controlProvince" maxlength="255" [ngClass]="{ 'is-invalid': formSubmitted && controlProvince.errors }" />
+                        </mat-form-field>
+                    </div>
+                </div>
+                <div class="ColumnOneHalf">
+                    <div class="WrapperPadding20-10-0-8">
+                        <p>The customer's state or province, if any.</p>
+                    </div>
+                </div>
+                <mat-divider class="ClearLeft" />
+                <div class="ColumnOneHalf">
+                    <div class="WrapperPadding20-10-0-8">
+                        <mat-form-field>
+                            <mat-label>Country</mat-label>
+                            <mat-select [formControl]="controlCountry" [ngClass]="{ 'is-invalid': formSubmitted && controlCountry.errors }">
+                                <mat-option></mat-option>
+                                <mat-option *ngFor="let country of this.countries" [value]="country.Id">
+                                    <img src="/assets/images/flags/{{country.Code.toLowerCase()}}.png" width="24" height="24" alt="{{country.Code}}" />{{country.Name}}
+                                </mat-option>
+                            </mat-select>
+                            <div *ngIf="formSubmitted && controlCountry.errors" class="TextError">
+                                <div *ngIf="controlCountry.errors['required']">Country is required</div>
+                            </div>
+                        </mat-form-field>
+                    </div>
+                </div>
+                <div class="ColumnOneHalf">
+                    <div class="WrapperPadding20-10-0-8">
+                        <p>The customer's country.</p>
+                    </div>
+                </div>
             </mat-tab>
 
         </mat-tab-group>
