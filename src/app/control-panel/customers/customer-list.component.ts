@@ -109,7 +109,7 @@ export class ControlPanelCustomerListComponent implements OnDestroy, OnInit {
   }
 
   editElement(element: Customer) {
-    this.router.navigate([`/control-panel/customers/${element.Id}`]);
+    this.router.navigate([`/control-panel/customers/${element.Id}/${this.controlFilterShop.value}`]);
   }
 
   deleteElement(element: Customer) {
