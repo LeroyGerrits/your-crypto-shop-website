@@ -106,8 +106,6 @@ export class ControlPanelCustomerComponent implements OnInit, OnDestroy {
   }
 
   onRetrieveCustomerData(customer: Customer) {
-    console.log(customer);
-
     this.customer = customer;
     this.pageTitle = customer.Username;
     this.controlShop.setValue(customer.ShopId);

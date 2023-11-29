@@ -23,6 +23,9 @@ import { TestDataCategories } from 'src/assets/test-data/Categories';
 import { MatTreeModule } from '@angular/material/tree';
 import { MatCheckboxChange, MatCheckboxModule } from '@angular/material/checkbox';
 import { ControlPanelCustomerListComponent } from './customer-list.component';
+import { CountryService } from 'src/app/shared/services/Country.service';
+import { TestDataCountries } from 'src/assets/test-data/Countries';
+import { MatRadioModule } from '@angular/material/radio';
 
 describe('ControlPanelCustomerComponent', () => {
   let component: ControlPanelCustomerComponent;
@@ -31,6 +34,7 @@ describe('ControlPanelCustomerComponent', () => {
   let matSnackBarSpy: jasmine.SpyObj<MatSnackBar>;
 
   let categoryServiceSpy: jasmine.SpyObj<CategoryService>;
+  let countryServiceSpy: jasmine.SpyObj<CountryService>;
   let customerServiceSpy: jasmine.SpyObj<CustomerService>;
   let shopServiceSpy: jasmine.SpyObj<ShopService>;
   let mutationResult: MutationResult = <MutationResult>{ ErrorCode: 0, Identity: '', Message: '' };
@@ -38,6 +42,9 @@ describe('ControlPanelCustomerComponent', () => {
   beforeEach(() => {
     categoryServiceSpy = jasmine.createSpyObj('CategoryService', ['getList']);
     categoryServiceSpy.getList.and.returnValue(of(TestDataCategories));
+
+    countryServiceSpy = jasmine.createSpyObj('CountryService', ['getList']);
+    countryServiceSpy.getList.and.returnValue(of(TestDataCountries));
 
     customerServiceSpy = jasmine.createSpyObj('CustomerService', ['getById', 'create', 'update']);
     customerServiceSpy.getById.and.returnValue(of(TestDataCustomers[0]));
@@ -51,14 +58,15 @@ describe('ControlPanelCustomerComponent', () => {
 
     TestBed.configureTestingModule({
       declarations: [ControlPanelCustomerComponent],
-      imports: [BrowserAnimationsModule, MatCheckboxModule, MatDialogModule, MatDividerModule, MatFormFieldModule, MatInputModule, MatSelectModule, MatTabsModule, MatTreeModule, ReactiveFormsModule, RouterLink, RouterTestingModule.withRoutes(
+      imports: [BrowserAnimationsModule, MatCheckboxModule, MatDialogModule, MatDividerModule, MatFormFieldModule, MatInputModule, MatSelectModule, MatTabsModule, MatRadioModule, MatTreeModule, ReactiveFormsModule, RouterLink, RouterTestingModule.withRoutes(
         [{ path: 'control-panel/customers', component: ControlPanelCustomerListComponent }]
       )],
       providers: [
         { provide: ActivatedRoute, useValue: { snapshot: { paramMap: convertToParamMap({ customerId: TestDataCustomers[0].Id, shopId: TestDataCustomers[0].ShopId }) } } },
         { provide: CategoryService, useValue: categoryServiceSpy },
-        { provide: MatSnackBar, useValue: matSnackBarSpy },
+        { provide: CountryService, useValue: countryServiceSpy },
         { provide: CustomerService, useValue: customerServiceSpy },
+        { provide: MatSnackBar, useValue: matSnackBarSpy },
         { provide: ShopService, useValue: shopServiceSpy }
       ]
     });
@@ -102,7 +110,7 @@ describe('ControlPanelCustomerComponent', () => {
 
     const mutationResult = <MutationResult>{ Constraint: '', ErrorCode: 0, Identity: '', Message: '', Success: true };
     component.handleOnSubmitResult(mutationResult);
-    expect(routerstub.navigate).toHaveBeenCalledWith(['/control-panel/catalog/customers']);
+    expect(routerstub.navigate).toHaveBeenCalledWith(['/control-panel/customers']);
   });
 
   it('should show a message when an unhandled error occurs', () => {
@@ -124,13 +132,16 @@ describe('ControlPanelCustomerComponentWithErrors', () => {
   let matSnackBarSpy: jasmine.SpyObj<MatSnackBar>;
 
   let categoryServiceSpy: jasmine.SpyObj<CategoryService>;
+  let countryServiceSpy: jasmine.SpyObj<CountryService>;
   let customerServiceSpy: jasmine.SpyObj<CustomerService>;
   let shopServiceSpy: jasmine.SpyObj<ShopService>;
-  let mutationResult: MutationResult = <MutationResult>{ ErrorCode: 0, Identity: '', Message: '' };
 
   beforeEach(() => {
     categoryServiceSpy = jasmine.createSpyObj('CategoryService', ['getList']);
     categoryServiceSpy.getList.and.returnValue(of(TestDataCategories));
+
+    countryServiceSpy = jasmine.createSpyObj('CountryService', ['getList']);
+    countryServiceSpy.getList.and.returnValue(of(TestDataCountries));
 
     customerServiceSpy = jasmine.createSpyObj('CustomerService', ['getById', 'create', 'update']);
     customerServiceSpy.getById.and.returnValue(of(TestDataCustomers[0]));
@@ -144,14 +155,15 @@ describe('ControlPanelCustomerComponentWithErrors', () => {
 
     TestBed.configureTestingModule({
       declarations: [ControlPanelCustomerComponent],
-      imports: [BrowserAnimationsModule, MatCheckboxModule, MatDialogModule, MatDividerModule, MatFormFieldModule, MatInputModule, MatSelectModule, MatTabsModule, MatTreeModule, ReactiveFormsModule, RouterLink, RouterTestingModule.withRoutes(
-        [{ path: 'control-panel/catalog/customers', component: ControlPanelCustomerListComponent }]
+      imports: [BrowserAnimationsModule, MatCheckboxModule, MatDialogModule, MatDividerModule, MatFormFieldModule, MatInputModule, MatSelectModule, MatTabsModule, MatRadioModule, MatTreeModule, ReactiveFormsModule, RouterLink, RouterTestingModule.withRoutes(
+        [{ path: 'control-panel/customers', component: ControlPanelCustomerListComponent }]
       )],
       providers: [
         { provide: ActivatedRoute, useValue: { snapshot: { paramMap: convertToParamMap({ customerId: 'new', shopId: TestDataCustomers[0].ShopId }) } } },
         { provide: CategoryService, useValue: categoryServiceSpy },
-        { provide: MatSnackBar, useValue: matSnackBarSpy },
+        { provide: CountryService, useValue: countryServiceSpy },
         { provide: CustomerService, useValue: customerServiceSpy },
+        { provide: MatSnackBar, useValue: matSnackBarSpy },
         { provide: ShopService, useValue: shopServiceSpy }
       ]
     });
