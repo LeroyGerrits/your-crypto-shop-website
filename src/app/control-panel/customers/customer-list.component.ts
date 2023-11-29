@@ -84,8 +84,6 @@ export class ControlPanelCustomerListComponent implements OnDestroy, OnInit {
   }
 
   filterCustomers() {
-    console.log(this.controlFilterShop.value);
-
     const parameters: GetCustomersParameters = {
       ShopId: this.controlFilterShop.value!,
       Username: this.controlFilterUsername.value!,
