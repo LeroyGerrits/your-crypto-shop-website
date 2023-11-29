@@ -18,8 +18,8 @@ export class PublicWebsiteComponent implements OnInit {
   public stats: Stats = <Stats>{
     Merchants: 0,
     Shops: 0,
-    Orders: 0,
-    Transactions: 0
+    Products: 0,
+    Orders: 0
   };
 
   constructor(
