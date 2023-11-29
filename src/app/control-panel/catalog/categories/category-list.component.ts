@@ -53,8 +53,8 @@ export class ControlPanelCatalogCategoryListComponent implements OnInit, OnDestr
       this.shops = shops;
 
       if (shops && shops[0]) {
-        this.retrieveCategoriesByShopId(shops[0].Id);
         this.controlFilterShop.setValue(shops[0].Id);
+        this.retrieveCategoriesByShopId(shops[0].Id);
       } else {
         this.finishedLoading = true;
       }

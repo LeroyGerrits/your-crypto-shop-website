@@ -13,7 +13,7 @@
 <div class="WrapperPadding20-8-0-8">
     <mat-form-field>
         <mat-label>Shop</mat-label>
-        <mat-select [formControl]="controlFilterShop" (valueChange)="this.filterCustomers()">
+        <mat-select [formControl]="controlFilterShop" (selectionChange)="this.filterCustomers()">
             <mat-option *ngFor="let shop of this.shops" [value]="shop.Id">{{shop.Name}}</mat-option>
         </mat-select>
     </mat-form-field>

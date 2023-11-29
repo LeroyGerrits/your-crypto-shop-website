@@ -76,8 +76,8 @@ export class ControlPanelCatalogProductListComponent {
       this.shops = shops;
 
       if (shops && shops[0]) {
-        this.filterProducts();
         this.controlFilterShop.setValue(shops[0].Id);
+        this.filterProducts();
       } else {
         this.finishedLoading = true;
       }

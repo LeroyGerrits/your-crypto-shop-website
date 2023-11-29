@@ -71,8 +71,8 @@ export class ControlPanelCustomerListComponent implements OnDestroy, OnInit {
       this.shops = shops;
 
       if (shops && shops[0]) {
-        this.filterCustomers();
         this.controlFilterShop.setValue(shops[0].Id);
+        this.filterCustomers();
       } else {
         this.finishedLoading = true;
       }
@@ -84,6 +84,8 @@ export class ControlPanelCustomerListComponent implements OnDestroy, OnInit {
   }
 
   filterCustomers() {
+    console.log(this.controlFilterShop.value);
+
     const parameters: GetCustomersParameters = {
       ShopId: this.controlFilterShop.value!,
       Username: this.controlFilterUsername.value!,
