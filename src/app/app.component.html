@@ -25,30 +25,49 @@
     </div>
 
     <mat-toolbar *ngIf="this.activeMerchant">
-      <button mat-button [routerLink]="['/']">
-        <mat-icon>arrow_circle_left</mat-icon>
-        Website
+      <button mat-button [matMenuTriggerFor]="ControlPanel" class="ToolbarItemCollapsible">
+        <mat-icon>menu</mat-icon>
+        Control panel
       </button>
-      <button mat-button [routerLink]="['/control-panel']">
-        <mat-icon>dashboard</mat-icon>
-        Dashboard
+      <button mat-button class="ToolbarItemNonCollapsible" [routerLink]="['/']">
+        <mat-icon>arrow_circle_left</mat-icon> Website
       </button>
-      <button mat-button [matMenuTriggerFor]="ControlPanelConfiguration">
-        <mat-icon>settings</mat-icon>
-        Configuration
+      <button mat-button class="ToolbarItemNonCollapsible" [routerLink]="['/control-panel']">
+        <mat-icon>dashboard</mat-icon> Dashboard
       </button>
-      <button mat-button [matMenuTriggerFor]="ControlPanelCatalog">
-        <mat-icon>inventory</mat-icon>
-        Catalog
+      <button mat-button class="ToolbarItemNonCollapsible" [matMenuTriggerFor]="ControlPanelConfiguration">
+        <mat-icon>settings</mat-icon> Configuration
       </button>
-      <button mat-button [routerLink]="['/control-panel/customers']">
-        <mat-icon>person</mat-icon>
-        Customers
+      <button mat-button class="ToolbarItemNonCollapsible" [matMenuTriggerFor]="ControlPanelCatalog">
+        <mat-icon>inventory</mat-icon> Catalog
       </button>
-      <button mat-button [matMenuTriggerFor]="ControlPanelSales">
-        <mat-icon>attach_money</mat-icon>
-        Sales
+      <button mat-button class="ToolbarItemNonCollapsible" [routerLink]="['/control-panel/customers']">
+        <mat-icon>person</mat-icon> Customers
       </button>
+      <button mat-button class="ToolbarItemNonCollapsible" [matMenuTriggerFor]="ControlPanelSales">
+        <mat-icon>attach_money</mat-icon> Sales
+      </button>
+
+      <mat-menu #ControlPanel="matMenu">
+        <button mat-menu-item [routerLink]="['/']">
+          <mat-icon>arrow_circle_left</mat-icon> Back to website
+        </button>
+        <button mat-menu-item [routerLink]="['/control-panel']">
+          <mat-icon>dashboard</mat-icon> Dashboard
+        </button>
+        <button mat-menu-item [matMenuTriggerFor]="ControlPanelConfiguration">
+          <mat-icon>settings</mat-icon> Configuration
+        </button>
+        <button mat-menu-item [matMenuTriggerFor]="ControlPanelCatalog">
+          <mat-icon>inventory</mat-icon> Catalog
+        </button>
+        <button mat-menu-item [routerLink]="['/control-panel/customers']">
+          <mat-icon>person</mat-icon> Customers
+        </button>
+        <button mat-menu-item [matMenuTriggerFor]="ControlPanelSales">
+          <mat-icon>attach_money</mat-icon> Sales
+        </button>
+      </mat-menu>
 
       <mat-menu #ControlPanelConfiguration="matMenu">
         <button mat-menu-item [routerLink]="['/control-panel/configuration/delivery-methods']">Delivery methods</button>

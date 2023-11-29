@@ -199,6 +199,10 @@ p {
   float: right;
 }
 
+#TopBar button.ToolbarItemCollapsible {
+  display: none;
+}
+
 #Header {
   background-image: url('assets/images/BodyBackground.jpg');
   background-position: top center;
@@ -788,6 +792,14 @@ mat-form-field {
 /* Responsiveness */
 
 @media all and (max-width: 1000px) {
+  #TopBar button.ToolbarItemCollapsible {
+    display: inline-flex;
+  }
+
+  #TopBar button.ToolbarItemNonCollapsible {
+    display: none;
+  }
+
   #Header div.LogoAndNavigation a#Logo {
     float: none;
     margin: 0;
