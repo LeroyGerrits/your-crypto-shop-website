@@ -36,7 +36,7 @@ describe('PublicWebsiteComponent', () => {
     shopServiceSpy.getListFeaturedPublic.and.returnValue(of(TestDataPublicShops));
 
     statsServiceSpy = jasmine.createSpyObj('StatsService', ['get']);
-    statsServiceSpy.get.and.returnValue(of(<Stats>{ Merchants: 0, Shops: 0, Orders: 0, Transactions: 0 }));
+    statsServiceSpy.get.and.returnValue(of(<Stats>{ Merchants: 0, Shops: 0, Products: 0, Orders: 0 }));
 
     TestBed.configureTestingModule({
       declarations: [PublicWebsiteComponent],
