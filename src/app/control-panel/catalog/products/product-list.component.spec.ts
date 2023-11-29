@@ -2,6 +2,7 @@ import { ComponentFixture, TestBed, fakeAsync, tick } from '@angular/core/testin
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { of, throwError } from 'rxjs';
 
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -15,16 +16,14 @@ import { MatTableModule } from '@angular/material/table';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterTestingModule } from '@angular/router/testing';
 import { MutationResult } from 'src/app/shared/models/MutationResult';
+import { Shop } from 'src/app/shared/models/Shop.model';
+import { CategoryService } from 'src/app/shared/services/Category.service';
 import { ProductService } from 'src/app/shared/services/Product.service';
 import { ShopService } from 'src/app/shared/services/Shop.service';
+import { TestDataCategories } from 'src/assets/test-data/Categories';
 import { TestDataProducts } from 'src/assets/test-data/Products';
 import { TestDataShops } from 'src/assets/test-data/Shops';
 import { ControlPanelCatalogProductListComponent } from './product-list.component';
-import { TestDataCategories } from 'src/assets/test-data/Categories';
-import { CategoryService } from 'src/app/shared/services/Category.service';
-import { HttpClientTestingModule } from '@angular/common/http/testing';
-import { Product } from 'src/app/shared/models/Product.model';
-import { Shop } from 'src/app/shared/models/Shop.model';
 
 describe('ControlPanelCatalogProductListComponent', () => {
   let component: ControlPanelCatalogProductListComponent;
