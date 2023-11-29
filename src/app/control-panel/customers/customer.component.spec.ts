@@ -161,6 +161,18 @@ describe('ControlPanelCustomerComponent', () => {
     component.handleOnSubmitResult(mutationResult);
     expect(matSnackBarSpy.open).toHaveBeenCalled();
   });
+
+  it('should show a specific error when handling submit result and an error code with constraint \'UNIQUE_Customer_Username\' is applicable', () => {
+    const mutationResult = <MutationResult>{ Constraint: 'UNIQUE_Customer_Username', ErrorCode: 666, Identity: '', Message: 'Evil error' };
+    component.handleOnSubmitResult(mutationResult);
+    expect(matSnackBarSpy.open).toHaveBeenCalled();
+  });
+
+  it('should show a specific error when handling submit result and an error code with constraint \'UNIQUE_Customer_EmailAddress\' is applicable', () => {
+    const mutationResult = <MutationResult>{ Constraint: 'UNIQUE_Customer_EmailAddress', ErrorCode: 666, Identity: '', Message: 'Evil error' };
+    component.handleOnSubmitResult(mutationResult);
+    expect(matSnackBarSpy.open).toHaveBeenCalled();
+  });
 });
 
 describe('ControlPanelCustomerComponentWithErrors', () => {

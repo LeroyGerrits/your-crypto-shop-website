@@ -194,6 +194,15 @@ export class ControlPanelCustomerComponent implements OnInit, OnDestroy {
       this.router.navigate(['/control-panel/customers']);
     } else {
       this.snackBarRef = this.snackBar.open(result.Message, 'Close', { panelClass: ['error-snackbar'] });
+
+      if (result.Constraint == 'UNIQUE_Customer_Username') {
+        this.snackBarRef = this.snackBar.open('A customer with this username already exists for this shop.', 'Close', { panelClass: ['error-snackbar'] });
+      } else if (result.Constraint == 'UNIQUE_Customer_EmailAddress') {
+        this.snackBarRef = this.snackBar.open('A customer with this e-mail address already exists for this shop.', 'Close', { panelClass: ['error-snackbar'] });
+      } else {
+        this.snackBarRef = this.snackBar.open(result.Message, 'Close', { panelClass: ['error-snackbar'] });
+      }
+
       this.formLoading = false;
     }
   }
