@@ -1,31 +1,33 @@
-import { ActivatedRoute, Router, RouterLink, convertToParamMap } from '@angular/router';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ActivatedRoute, Router, RouterLink, convertToParamMap } from '@angular/router';
 
-import { ControlPanelCustomerComponent } from './customer.component';
-import { TestDataCustomers } from 'src/assets/test-data/Customers';
-import { CustomerService } from 'src/app/shared/services/Customer.service';
-import { ShopService } from 'src/app/shared/services/Shop.service';
-import { MatSnackBar } from '@angular/material/snack-bar';
-import { MutationResult } from 'src/app/shared/models/MutationResult';
-import { of, throwError } from 'rxjs';
-import { TestDataShops } from 'src/assets/test-data/Shops';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ReactiveFormsModule } from '@angular/forms';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { MatSelectModule } from '@angular/material/select';
-import { ReactiveFormsModule } from '@angular/forms';
-import { RouterTestingModule } from '@angular/router/testing';
-import { MatTabsModule } from '@angular/material/tabs';
-import { CategoryService } from 'src/app/shared/services/Category.service';
-import { TestDataCategories } from 'src/assets/test-data/Categories';
-import { MatTreeModule } from '@angular/material/tree';
-import { MatCheckboxChange, MatCheckboxModule } from '@angular/material/checkbox';
-import { ControlPanelCustomerListComponent } from './customer-list.component';
-import { CountryService } from 'src/app/shared/services/Country.service';
-import { TestDataCountries } from 'src/assets/test-data/Countries';
 import { MatRadioModule } from '@angular/material/radio';
+import { MatSelectModule } from '@angular/material/select';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatTabsModule } from '@angular/material/tabs';
+import { MatTreeModule } from '@angular/material/tree';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { RouterTestingModule } from '@angular/router/testing';
+import { of, throwError } from 'rxjs';
+import { MutationResult } from 'src/app/shared/models/MutationResult';
+import { CategoryService } from 'src/app/shared/services/Category.service';
+import { CountryService } from 'src/app/shared/services/Country.service';
+import { CustomerService } from 'src/app/shared/services/Customer.service';
+import { ShopService } from 'src/app/shared/services/Shop.service';
+import { TestDataCategories } from 'src/assets/test-data/Categories';
+import { TestDataCountries } from 'src/assets/test-data/Countries';
+import { TestDataCustomers } from 'src/assets/test-data/Customers';
+import { TestDataShops } from 'src/assets/test-data/Shops';
+import { ControlPanelCustomerListComponent } from './customer-list.component';
+import { ControlPanelCustomerComponent } from './customer.component';
+import { TestDataAddresses } from 'src/assets/test-data/Addresses';
+import { Gender } from 'src/app/shared/enums/Gender.enum';
 
 describe('ControlPanelCustomerComponent', () => {
   let component: ControlPanelCustomerComponent;
@@ -75,6 +77,24 @@ describe('ControlPanelCustomerComponent', () => {
     fixture.detectChanges();
   });
 
+  it('should select the male gender radio button when customer is male', () => {
+    TestDataCustomers[0].Gender = Gender.Male;
+    component.onRetrieveCustomerData(TestDataCustomers[0]);
+    expect(component).toBeTruthy();
+  });
+
+  it('should select the female gender radio button when customer is female', () => {
+    TestDataCustomers[0].Gender = Gender.Female;
+    component.onRetrieveCustomerData(TestDataCustomers[0]);
+    expect(component).toBeTruthy();
+  });
+
+  it('should select the unspecified gender radio button when customer does not have specified gender', () => {
+    TestDataCustomers[0].Gender = Gender.Unspecified;
+    component.onRetrieveCustomerData(TestDataCustomers[0]);
+    expect(component).toBeTruthy();
+  });
+
   it('should not proceed submitting when required form values are not filled in', () => {
     component.controlUsername.setValue('');
     component.onSubmit();
@@ -86,8 +106,17 @@ describe('ControlPanelCustomerComponent', () => {
     component.queryStringCustomerId = '';
     component.queryStringShopId = TestDataCustomers[0].ShopId;
     component.controlShop.setValue(TestDataCustomers[0].ShopId);
+    component.controlEmailAddress.setValue(TestDataCustomers[0].EmailAddress);
     component.controlUsername.setValue(TestDataCustomers[0].Username);
-    ///////////////
+    component.controlGender.setValue(TestDataCustomers[0].Gender.toString());
+    component.controlFirstName.setValue(TestDataCustomers[0].FirstName!);
+    component.controlLastName.setValue(TestDataCustomers[0].LastName);
+    component.controlAddressLine1.setValue(TestDataAddresses[0].AddressLine1);
+    component.controlAddressLine2.setValue(TestDataAddresses[0].AddressLine2!);
+    component.controlPostalCode.setValue(TestDataAddresses[0].PostalCode);
+    component.controlCity.setValue(TestDataAddresses[0].City);
+    component.controlProvince.setValue(TestDataAddresses[0].Province!);
+    component.controlCountry.setValue(TestDataAddresses[0].Country!.Id);
 
     component.onSubmit();
     expect(component.formLoading).toBeFalse();
@@ -97,8 +126,17 @@ describe('ControlPanelCustomerComponent', () => {
     component.queryStringCustomerId = TestDataCustomers[0].Id;
     component.queryStringShopId = TestDataCustomers[0].ShopId;
     component.controlShop.setValue(TestDataCustomers[0].ShopId);
+    component.controlEmailAddress.setValue(TestDataCustomers[0].EmailAddress);
     component.controlUsername.setValue(TestDataCustomers[0].Username);
-    ///////////
+    component.controlGender.setValue(TestDataCustomers[0].Gender.toString());
+    component.controlFirstName.setValue(TestDataCustomers[0].FirstName!);
+    component.controlLastName.setValue(TestDataCustomers[0].LastName);
+    component.controlAddressLine1.setValue(TestDataAddresses[0].AddressLine1);
+    component.controlAddressLine2.setValue(TestDataAddresses[0].AddressLine2!);
+    component.controlPostalCode.setValue(TestDataAddresses[0].PostalCode);
+    component.controlCity.setValue(TestDataAddresses[0].City);
+    component.controlProvince.setValue(TestDataAddresses[0].Province!);
+    component.controlCountry.setValue(TestDataAddresses[0].Country!.Id);
 
     component.onSubmit();
     expect(component.formLoading).toBeFalse();
@@ -176,8 +214,17 @@ describe('ControlPanelCustomerComponentWithErrors', () => {
     component.queryStringCustomerId = '';
     component.queryStringShopId = TestDataCustomers[0].ShopId;
     component.controlShop.setValue(TestDataCustomers[0].ShopId);
+    component.controlEmailAddress.setValue(TestDataCustomers[0].EmailAddress);
     component.controlUsername.setValue(TestDataCustomers[0].Username);
-    /////////
+    component.controlGender.setValue(TestDataCustomers[0].Gender.toString());
+    component.controlFirstName.setValue(TestDataCustomers[0].FirstName!);
+    component.controlLastName.setValue(TestDataCustomers[0].LastName);
+    component.controlAddressLine1.setValue(TestDataAddresses[0].AddressLine1);
+    component.controlAddressLine2.setValue(TestDataAddresses[0].AddressLine2!);
+    component.controlPostalCode.setValue(TestDataAddresses[0].PostalCode);
+    component.controlCity.setValue(TestDataAddresses[0].City);
+    component.controlProvince.setValue(TestDataAddresses[0].Province!);
+    component.controlCountry.setValue(TestDataAddresses[0].Country!.Id);
 
     component.onSubmit();
     expect(component.formLoading).toBeFalse();
@@ -187,8 +234,17 @@ describe('ControlPanelCustomerComponentWithErrors', () => {
     component.queryStringCustomerId = TestDataCustomers[0].Id;
     component.queryStringShopId = TestDataCustomers[0].ShopId;
     component.controlShop.setValue(TestDataCustomers[0].ShopId);
+    component.controlEmailAddress.setValue(TestDataCustomers[0].EmailAddress);
     component.controlUsername.setValue(TestDataCustomers[0].Username);
-    /////////
+    component.controlGender.setValue(TestDataCustomers[0].Gender.toString());
+    component.controlFirstName.setValue(TestDataCustomers[0].FirstName!);
+    component.controlLastName.setValue(TestDataCustomers[0].LastName);
+    component.controlAddressLine1.setValue(TestDataAddresses[0].AddressLine1);
+    component.controlAddressLine2.setValue(TestDataAddresses[0].AddressLine2!);
+    component.controlPostalCode.setValue(TestDataAddresses[0].PostalCode);
+    component.controlCity.setValue(TestDataAddresses[0].City);
+    component.controlProvince.setValue(TestDataAddresses[0].Province!);
+    component.controlCountry.setValue(TestDataAddresses[0].Country!.Id);
 
     component.onSubmit();
     expect(component.formLoading).toBeFalse();

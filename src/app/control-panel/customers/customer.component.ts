@@ -112,9 +112,9 @@ export class ControlPanelCustomerComponent implements OnInit, OnDestroy {
     this.controlEmailAddress.setValue(customer.EmailAddress);
     this.controlUsername.setValue(customer.Username);
 
-    if (customer.Gender.toString() == 'Male') {
+    if (customer.Gender.toString() == 'Male' || customer.Gender.toString() == Gender.Male.toString()) {
       this.controlGender.setValue(this.genderType.Male.toString());
-    } else if (customer.Gender.toString() == 'Female') {
+    } else if (customer.Gender.toString() == 'Female' || customer.Gender.toString() == Gender.Female.toString()) {
       this.controlGender.setValue(this.genderType.Female.toString());
     } else {
       this.controlGender.setValue(this.genderType.Unspecified.toString());

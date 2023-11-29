@@ -10,6 +10,7 @@ export const TestDataCustomers: Customer[] = [
         EmailAddress: 'customer@dgbcommerce.com',
         Username: 'DGB Commerce',
         Gender: Gender.Male,
+        FirstName: 'Test',
         LastName: 'Test',
         Salutation: 'Mr. Test',
         Address: TestDataAddresses[0]
@@ -19,6 +20,7 @@ export const TestDataCustomers: Customer[] = [
         EmailAddress: 'customer@dgbcommerce.com',
         Username: 'DGB Commerce',
         Gender: Gender.Female,
+        FirstName: 'Test',
         LastName: 'Test',
         Salutation: 'Ms. Test',
         Address: TestDataAddresses[0]
