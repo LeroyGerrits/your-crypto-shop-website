@@ -1,8 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { DigiByteNodeService } from 'src/app/shared/services/DigiByteNode.service';
-import { GetDifficultyResponse } from 'src/app/shared/models/GetDifficultyResponse.model';
-import { GetMiningInfoResponse } from 'src/app/shared/models/GetMiningInfoResponse.model';
+import { GetDifficultyResponse } from 'src/app/shared/models/parameters/GetDifficultyResponse.model';
+import { GetMiningInfoResponse } from 'src/app/shared/models/parameters/GetMiningInfoResponse.model';
 import { HashRatePipe } from 'src/app/shared/pipes/HashRate.pipe';
 import { PublicWebsiteNodeStatusComponent } from './node-status.component';
 import { of } from 'rxjs';

@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
 import { DigiByteNodeService } from 'src/app/shared/services/DigiByteNode.service';
-import { GetDifficultyResponse } from 'src/app/shared/models/GetDifficultyResponse.model';
-import { GetMiningInfoResponse } from 'src/app/shared/models/GetMiningInfoResponse.model';
+import { GetDifficultyResponse } from 'src/app/shared/models/parameters/GetDifficultyResponse.model';
+import { GetMiningInfoResponse } from 'src/app/shared/models/parameters/GetMiningInfoResponse.model';
 
 @Component({
   selector: 'public-website-node-status',
