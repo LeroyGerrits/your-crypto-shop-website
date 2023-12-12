@@ -19,7 +19,7 @@
           "options": {
             "allowedCommonJsDependencies": [
               "qrcode"
-           ],
+            ],
             "outputPath": "dist/www-dgbcommerce-com",
             "index": "src/index.html",
             "main": "src/main.ts",
