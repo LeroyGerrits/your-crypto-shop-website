@@ -124,44 +124,10 @@ describe('ControlPanelCatalogCategoryComponent', () => {
     component.handleOnSubmitResult(mutationResult);
     expect(matSnackBarSpy.open).toHaveBeenCalled();
   });
-});
-
-describe('ControlPanelCatalogCategoryComponentWithErrors', () => {
-  let component: ControlPanelCatalogCategoryComponent;
-  let fixture: ComponentFixture<ControlPanelCatalogCategoryComponent>;
-
-  let matDialogRefSpy: any;
-  let categoryServiceSpy: jasmine.SpyObj<CategoryService>;
-
-  let mockDialogData: DialogData = {
-    selectedShop: TestDataShops[0],
-    categoryToEdit: TestDataCategories[0],
-    parentCategory: null
-  };
-
-  beforeEach(() => {
-    matDialogRefSpy = jasmine.createSpyObj('MatDialogRef', ['close']);
-    matDialogRefSpy.close = () => of(true);
-
-    categoryServiceSpy = jasmine.createSpyObj('CategoryService', ['create', 'update']);
-    categoryServiceSpy.create.and.returnValue(throwError(() => new Error('ERROR')));
-    categoryServiceSpy.update.and.returnValue(throwError(() => new Error('ERROR')));
-
-    TestBed.configureTestingModule({
-      declarations: [ControlPanelCatalogCategoryComponent],
-      imports: [BrowserAnimationsModule, MatCheckboxModule, MatDialogModule, MatFormFieldModule, MatInputModule, ReactiveFormsModule],
-      providers: [
-        { provide: MatDialogRef, useValue: matDialogRefSpy },
-        { provide: MAT_DIALOG_DATA, useValue: mockDialogData },
-        { provide: CategoryService, useValue: categoryServiceSpy }
-      ]
-    });
-    fixture = TestBed.createComponent(ControlPanelCatalogCategoryComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
 
   it('should trigger error handling when sending a call to the category service when creating a new category and the request fails', () => {
+    categoryServiceSpy.create.and.returnValue(throwError(() => new Error('ERROR')));
+
     component.queryStringCategoryId = '';
     component.data.categoryToEdit = null;
     component.data.selectedShop = TestDataShops[0];
@@ -171,6 +137,8 @@ describe('ControlPanelCatalogCategoryComponentWithErrors', () => {
   });
 
   it('should trigger error handling when sending a call to the category service when updating an existing category and the request fails', () => {
+    categoryServiceSpy.update.and.returnValue(throwError(() => new Error('ERROR')));
+
     component.queryStringCategoryId = TestDataCategories[0].Id;
     component.data.categoryToEdit = TestDataCategories[0];
     component.controlName.setValue(TestDataCategories[0].Name);

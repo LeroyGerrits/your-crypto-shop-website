@@ -81,42 +81,10 @@ describe('AccountChangePasswordComponent', () => {
     component.handleOnSubmitError('Unhandled error');
     expect(matSnackBarSpy.open).toHaveBeenCalled();
   });
-});
-
-describe('AccountChangePasswordComponentWithErrors', () => {
-  let component: AccountChangePasswordComponent;
-  let fixture: ComponentFixture<AccountChangePasswordComponent>;
-
-  let matSnackBarSpy: jasmine.SpyObj<MatSnackBar>;
-
-  let merchantServiceSpy: jasmine.SpyObj<MerchantService>;
-  let mutationResult: MutationResult = <MutationResult>{ ErrorCode: 0, Identity: '', Message: '' };
-
-  const fakeActivatedRoute = {
-    snapshot: { data: {} }
-  } as ActivatedRoute;
-
-  beforeEach(() => {
-    matSnackBarSpy = jasmine.createSpyObj('MatSnackBar', ['open']);
-
-    merchantServiceSpy = jasmine.createSpyObj('MerchantService', ['getByIdAndPassword', 'changePassword']);
-    merchantServiceSpy.changePassword.and.returnValue(throwError(() => new Error('ERROR')));
-
-    TestBed.configureTestingModule({
-      declarations: [AccountChangePasswordComponent],
-      imports: [BrowserAnimationsModule, HttpClientTestingModule, MatFormFieldModule, MatInputModule, ReactiveFormsModule, RouterLink],
-      providers: [
-        { provide: ActivatedRoute, useValue: fakeActivatedRoute },
-        { provide: MatSnackBar, useValue: matSnackBarSpy },
-        { provide: MerchantService, useValue: merchantServiceSpy },
-      ]
-    });
-    fixture = TestBed.createComponent(AccountChangePasswordComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
 
   it('should trigger error handling when sending a call to the merchant service when changing password and the request fails', () => {
+    merchantServiceSpy.changePassword.and.returnValue(throwError(() => new Error('ERROR')));
+
     component.controlCurrentPassword.setValue('********');
     component.controlPassword.setValue('NEWPASSWORD');
     component.controlPasswordRepetition.setValue('NEWPASSWORD');

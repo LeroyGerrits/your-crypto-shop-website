@@ -151,64 +151,16 @@ describe('ControlPanelCatalogProductListComponent', () => {
     component.handleOnSubmitError('Unhandled error');
     expect(matSnackBarSpy.open).toHaveBeenCalled();
   });
-});
 
-describe('ControlPanelCatalogProductListComponentWithErrors', () => {
-  let component: ControlPanelCatalogProductListComponent;
-  let fixture: ComponentFixture<ControlPanelCatalogProductListComponent>;
-
-  let matDialogRefSpy: any;
-  let matDialogSpy: jasmine.SpyObj<MatDialog>
-  let matSnackBarSpy: jasmine.SpyObj<MatSnackBar>;
-
-  let categoryServiceSpy: jasmine.SpyObj<CategoryService>;
-  let productServiceSpy: jasmine.SpyObj<ProductService>;
-  let shopServiceSpy: jasmine.SpyObj<ShopService>;
-
-  let emptyListShops: Shop[] = [];
-
-  beforeEach(() => {
-    matDialogRefSpy = jasmine.createSpyObj('MatDialogRef', ['close']);
-    matDialogRefSpy.componentInstance = { title: '', message: '' };
-    matDialogRefSpy.afterClosed = () => of(true);
-
-    matDialogSpy = jasmine.createSpyObj('MatDialog', ['open']);
-    matDialogSpy.open.and.returnValue(matDialogRefSpy);
-
-    matSnackBarSpy = jasmine.createSpyObj('MatSnackBar', ['open']);
-
-    productServiceSpy = jasmine.createSpyObj('ProductService', ['getList', 'delete']);
-    productServiceSpy.getList.and.returnValue(of());
+  it('should trigger error handling when sending a call to the product service when deleting a product and the request fails', () => {
     productServiceSpy.delete.and.returnValue(throwError(() => new Error('ERROR')));
-
-    categoryServiceSpy = jasmine.createSpyObj('CategoryService', ['getList']);
-    categoryServiceSpy.getList.and.returnValue(of(TestDataCategories));
-
-    shopServiceSpy = jasmine.createSpyObj('ShopService', ['getList']);
-    shopServiceSpy.getList.and.returnValue(of(emptyListShops));
-
-    TestBed.configureTestingModule({
-      declarations: [ControlPanelCatalogProductListComponent],
-      imports: [BrowserAnimationsModule, HttpClientTestingModule, MatIconModule, MatFormFieldModule, MatInputModule, MatPaginatorModule, MatSelectModule, MatTableModule, ReactiveFormsModule, RouterLink, RouterTestingModule.withRoutes(
-        [{ path: 'control-panel/catalog/products', component: ControlPanelCatalogProductListComponent }]
-      )],
-      providers: [
-        { provide: ActivatedRoute, useValue: { snapshot: { data: {} } } },
-        { provide: CategoryService, useValue: categoryServiceSpy },
-        { provide: MatDialog, useValue: matDialogSpy },
-        { provide: ShopService, useValue: shopServiceSpy },
-        { provide: ProductService, useValue: productServiceSpy },
-        { provide: MatSnackBar, useValue: matSnackBarSpy },
-        Router
-      ]
-    });
-    fixture = TestBed.createComponent(ControlPanelCatalogProductListComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
+    component.deleteElement(TestDataProducts[0]);
+    expect(component).toBeTruthy();
   });
 
-  it('should create', () => {
-    component.deleteElement(TestDataProducts[0]);
+  it('should not retrieve products when there are no shops', () => {
+    shopServiceSpy.getList.and.returnValue(of([]));
+    component.ngOnInit();
     expect(component).toBeTruthy();
   });
 });

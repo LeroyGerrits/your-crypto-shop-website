@@ -141,75 +141,35 @@ describe('ControlPanelCatalogCategoryListComponent', () => {
     component.handleOnSubmitError('Unhandled error');
     expect(matSnackBarSpy.open).toHaveBeenCalled();
   });
-});
-
-describe('ControlPanelCatalogCategoryListComponentWithErrors', () => {
-  let component: ControlPanelCatalogCategoryListComponent;
-  let fixture: ComponentFixture<ControlPanelCatalogCategoryListComponent>;
-
-  let matDialogRefSpy: any;
-  let matDialogSpy: jasmine.SpyObj<MatDialog>
-  let matSnackBarSpy: jasmine.SpyObj<MatSnackBar>;
-
-  let categoryServiceSpy: jasmine.SpyObj<CategoryService>;
-  let shopServiceSpy: jasmine.SpyObj<ShopService>;
-
-  beforeEach(() => {
-    matDialogRefSpy = jasmine.createSpyObj('MatDialogRef', ['close']);
-    matDialogRefSpy.componentInstance = { title: '', message: '' };
-    matDialogRefSpy.afterClosed = () => of(true);
-
-    matDialogSpy = jasmine.createSpyObj('MatDialog', ['open']);
-    matDialogSpy.open.and.returnValue(matDialogRefSpy);
-
-    matSnackBarSpy = jasmine.createSpyObj('MatSnackBar', ['open']);
-
-    categoryServiceSpy = jasmine.createSpyObj('CategoryService', ['changeParent', 'getList', 'delete', 'moveDown', 'moveUp']);
-    categoryServiceSpy.changeParent.and.returnValue(throwError(() => new Error('ERROR')));
-    categoryServiceSpy.getList.and.returnValue(of(TestDataCategories));
-    categoryServiceSpy.delete.and.returnValue(throwError(() => new Error('ERROR')));
-    categoryServiceSpy.moveDown.and.returnValue(throwError(() => new Error('ERROR')));
-    categoryServiceSpy.moveUp.and.returnValue(throwError(() => new Error('ERROR')));
-
-    shopServiceSpy = jasmine.createSpyObj('ShopService', ['getList']);
-    shopServiceSpy.getList.and.returnValue(of([]));
-
-    TestBed.configureTestingModule({
-      declarations: [ControlPanelCatalogCategoryListComponent],
-      imports: [BrowserAnimationsModule, FormsModule, HttpClientTestingModule, MatButtonModule, MatFormFieldModule, MatIconModule, MatRadioModule, MatSelectModule, MatTreeModule, ReactiveFormsModule, RouterLink, RouterLink, RouterTestingModule.withRoutes(
-        [{ path: 'control-panel/catalog/categories', component: ControlPanelCatalogCategoryListComponent }]
-      )],
-      providers: [
-        { provide: ActivatedRoute, useValue: { snapshot: { data: {} } } },
-        { provide: MatDialog, useValue: matDialogSpy },
-        { provide: ShopService, useValue: shopServiceSpy },
-        { provide: CategoryService, useValue: categoryServiceSpy },
-        { provide: MatSnackBar, useValue: matSnackBarSpy }
-      ]
-    });
-    fixture = TestBed.createComponent(ControlPanelCatalogCategoryListComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
 
   it('should trigger error handling when sending a call to the category service when deleting a category and the request fails', () => {
+    categoryServiceSpy.delete.and.returnValue(throwError(() => new Error('ERROR')));
     component.deleteCategory(TestDataCategories[0]);
     expect(component).toBeTruthy();
   });
 
   it('should trigger error handling when sending a call to the category service when moving a category down and the request fails', () => {
+    categoryServiceSpy.moveDown.and.returnValue(throwError(() => new Error('ERROR')));
     component.moveCategoryDown(TestDataCategories[0]);
     expect(component).toBeTruthy();
   });
 
   it('should trigger error handling when sending a call to the category service when moving a category up and the request fails', () => {
+    categoryServiceSpy.moveUp.and.returnValue(throwError(() => new Error('ERROR')));
     component.moveCategoryUp(TestDataCategories[0]);
     expect(component).toBeTruthy();
   });
 
   it('should trigger error handling when sending a call to the category service when changing the parent of a category and the request fails', () => {
+    categoryServiceSpy.changeParent.and.returnValue(throwError(() => new Error('ERROR')));
     component.changeCategoryParent(TestDataCategories[0]);
     component.changeCategoryParentSave();
+    expect(component).toBeTruthy();
+  });
+
+  it('should not retrieve categories when there are no shops', () => {
+    shopServiceSpy.getList.and.returnValue(of([]));
+    component.ngOnInit();
     expect(component).toBeTruthy();
   });
 });
