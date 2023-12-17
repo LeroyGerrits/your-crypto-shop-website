@@ -128,52 +128,9 @@ describe('ControlPanelConfigurationDigiByteWalletListComponent', () => {
     component.handleOnSubmitError('Unhandled error');
     expect(matSnackBarSpy.open).toHaveBeenCalled();
   });
-});
 
-describe('ControlPanelConfigurationDigiByteWalletListComponentWithErrors', () => {
-  let component: ControlPanelConfigurationDigiByteWalletListComponent;
-  let fixture: ComponentFixture<ControlPanelConfigurationDigiByteWalletListComponent>;
-
-  let matDialogRefSpy: any;
-  let matDialogSpy: jasmine.SpyObj<MatDialog>
-  let matSnackBarSpy: jasmine.SpyObj<MatSnackBar>;
-
-  let digiByteWalletServiceSpy: jasmine.SpyObj<DigiByteWalletService>;
-
-  beforeEach(() => {
-    matDialogRefSpy = jasmine.createSpyObj('MatDialogRef', ['close']);
-    matDialogRefSpy.componentInstance = { title: '', message: '' };
-    matDialogRefSpy.afterClosed = () => of(true);
-
-    matDialogSpy = jasmine.createSpyObj('MatDialog', ['open']);
-    matDialogSpy.open.and.returnValue(matDialogRefSpy);
-
-    matSnackBarSpy = jasmine.createSpyObj('MatSnackBar', ['open']);
-
-    digiByteWalletServiceSpy = jasmine.createSpyObj('DigiByteWalletService', ['getList', 'delete']);
-    digiByteWalletServiceSpy.getList.and.returnValue(of(TestDataDigiByteWallets));
+  it('should trigger error handling when sending a call to the DigiByte wallet service when deleting a DigiByte wallet and the request fails', () => {
     digiByteWalletServiceSpy.delete.and.returnValue(throwError(() => new Error('ERROR')));
-
-    TestBed.configureTestingModule({
-      declarations: [ControlPanelConfigurationDigiByteWalletListComponent],
-      imports: [BrowserAnimationsModule, MatIconModule, MatFormFieldModule, MatInputModule, MatPaginatorModule, MatTableModule, ReactiveFormsModule, RouterLink, RouterTestingModule.withRoutes(
-        [{ path: 'control-panel/configuration/digibyte-wallets', component: ControlPanelConfigurationDigiByteWalletListComponent }]
-      )],
-      providers: [
-        { provide: ActivatedRoute, useValue: { snapshot: { data: {} } } },
-        { provide: MatDialog, useValue: matDialogSpy },
-        { provide: DigiByteWalletService, useValue: digiByteWalletServiceSpy },
-        { provide: MatSnackBar, useValue: matSnackBarSpy },
-        ControlPanelConfigurationDigiByteWalletListComponent,
-        Router
-      ]
-    });
-    fixture = TestBed.createComponent(ControlPanelConfigurationDigiByteWalletListComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
-
-  it('should create', () => {
     component.deleteElement(TestDataDigiByteWallets[0]);
     expect(component).toBeTruthy();
   });

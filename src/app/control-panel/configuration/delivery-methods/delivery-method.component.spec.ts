@@ -118,44 +118,10 @@ describe('ControlPanelConfigurationDeliveryMethodComponent', () => {
     component.handleOnSubmitResult(mutationResult);
     expect(matSnackBarSpy.open).toHaveBeenCalled();
   });
-});
-
-describe('ControlPanelConfigurationDeliveryMethodComponentWithErrors', () => {
-  let component: ControlPanelConfigurationDeliveryMethodComponent;
-  let fixture: ComponentFixture<ControlPanelConfigurationDeliveryMethodComponent>;
-
-  let deliveryMethodServiceSpy: jasmine.SpyObj<DeliveryMethodService>;
-  let matSnackBarSpy: jasmine.SpyObj<MatSnackBar>;
-  let shopServiceSpy: jasmine.SpyObj<ShopService>;
-
-  beforeEach(() => {
-    deliveryMethodServiceSpy = jasmine.createSpyObj('DeliveryMethodService', ['getById', 'create', 'update']);
-    deliveryMethodServiceSpy.getById.and.returnValue(of(TestDataDeliveryMethods[0]));
-    deliveryMethodServiceSpy.create.and.returnValue(throwError(() => new Error('ERROR')));
-    deliveryMethodServiceSpy.update.and.returnValue(throwError(() => new Error('ERROR')));
-    matSnackBarSpy = jasmine.createSpyObj('MatSnackBar', ['open']);
-    shopServiceSpy = jasmine.createSpyObj('ShopService', ['getList']);
-    shopServiceSpy.getList.and.returnValue(of(TestDataShops));
-
-    TestBed.configureTestingModule({
-      declarations: [ControlPanelConfigurationDeliveryMethodComponent],
-      imports: [BrowserAnimationsModule, MatDialogModule, MatDividerModule, MatFormFieldModule, MatInputModule, MatSelectModule, ReactiveFormsModule, RouterLink, RouterTestingModule.withRoutes(
-        [{ path: 'control-panel/configuration/delivery-methods', component: ControlPanelConfigurationDeliveryMethodListComponent }]
-      )],
-      providers: [
-        { provide: ActivatedRoute, useValue: { snapshot: { paramMap: convertToParamMap({ deliveryMethodId: TestDataDeliveryMethods[0].Id }) } } },
-        { provide: ShopService, useValue: shopServiceSpy },
-        { provide: DeliveryMethodService, useValue: deliveryMethodServiceSpy },
-        { provide: MatSnackBar, useValue: matSnackBarSpy },
-        Router
-      ]
-    });
-    fixture = TestBed.createComponent(ControlPanelConfigurationDeliveryMethodComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
 
   it('should trigger error handling when sending a call to the delivery method service when creating a new delivery method and the request fails', () => {
+    deliveryMethodServiceSpy.create.and.returnValue(throwError(() => new Error('ERROR')));
+
     component.queryStringDeliveryMethodId = '';
     component.controlName.setValue(TestDataDeliveryMethods[0].Name);
     component.controlCosts.setValue(TestDataDeliveryMethods[0].Costs!.toString());
@@ -163,7 +129,9 @@ describe('ControlPanelConfigurationDeliveryMethodComponentWithErrors', () => {
     expect(component.formLoading).toBeFalse();
   });
 
-  it('should trigger error handling when sending a call to the delivery method service when updating an delivery method shop and the request fails', () => {
+  it('should trigger error handling when sending a call to the delivery method service when updating an delivery method and the request fails', () => {
+    deliveryMethodServiceSpy.update.and.returnValue(throwError(() => new Error('ERROR')));
+
     component.queryStringDeliveryMethodId = TestDataShops[0].Id;
     component.controlName.setValue(TestDataDeliveryMethods[0].Name);
     component.controlCosts.setValue(TestDataDeliveryMethods[0].Costs!.toString());

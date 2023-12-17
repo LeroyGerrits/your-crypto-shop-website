@@ -65,43 +65,10 @@ describe('DialogForgotPasswordComponent', () => {
     component.onSubmit();
     expect(merchantServiceSpy.forgotPassword).toHaveBeenCalled();
   });
-});
-
-describe('DialogForgotPasswordComponentWithErrors', () => {
-  let component: DialogForgotPasswordComponent;
-  let fixture: ComponentFixture<DialogForgotPasswordComponent>;
-
-  let matDialogRefSpy: any;
-  let matDialogSpy: jasmine.SpyObj<MatDialog>
-  let merchantServiceSpy: jasmine.SpyObj<MerchantService>;
-
-  beforeEach(() => {
-    matDialogRefSpy = jasmine.createSpyObj('MatDialogRef', ['close']);
-    matDialogRefSpy.componentInstance = { title: '', message: '' };
-    matDialogRefSpy.afterClosed = () => of(true);
-    matDialogRefSpy.close = () => of(true);
-
-    matDialogSpy = jasmine.createSpyObj('MatDialog', ['open']);
-    matDialogSpy.open.and.returnValue(matDialogRefSpy);
-
-    merchantServiceSpy = jasmine.createSpyObj('MerchantService', ['forgotPassword']);
-    merchantServiceSpy.forgotPassword.and.returnValue(throwError(() => new Error('ERROR')));
-
-    TestBed.configureTestingModule({
-      declarations: [DialogForgotPasswordComponent],
-      imports: [BrowserAnimationsModule, MatDialogModule, MatFormFieldModule, MatInputModule, ReactiveFormsModule],
-      providers: [
-        { provide: MatDialogRef, useValue: matDialogRefSpy },
-        { provide: MAT_DIALOG_DATA, useValue: [] },
-        { provide: MerchantService, useValue: merchantServiceSpy }
-      ]
-    });
-    fixture = TestBed.createComponent(DialogForgotPasswordComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
 
   it('should trigger error handling when sending a call to the merchant service and the request fails', () => {
+    merchantServiceSpy.forgotPassword.and.returnValue(throwError(() => new Error('ERROR')));
+
     component.controlEmailAddress.setValue('merchant@dgbcommerce.com');
     component.onSubmit();
     expect(merchantServiceSpy.forgotPassword).toHaveBeenCalled();

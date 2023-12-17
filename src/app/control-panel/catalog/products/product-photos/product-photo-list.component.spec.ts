@@ -191,93 +191,39 @@ describe('ControlPanelCatalogProductPhotoListComponent', () => {
     component.hideFileUploadProgress(progress1);
     expect(component.fileUploadProgressItems[progress1.Number - 1].Visible).toBeFalse();
   });
-});
-
-describe('ControlPanelCatalogProductPhotoListComponentWithErrors', () => {
-  let component: ControlPanelCatalogProductPhotoListComponent;
-  let fixture: ComponentFixture<ControlPanelCatalogProductPhotoListComponent>;
-
-  let matDialogRefSpy: any;
-  let matDialogSpy: jasmine.SpyObj<MatDialog>
-  let matSnackBarSpy: jasmine.SpyObj<MatSnackBar>;
-
-  let productServiceSpy: jasmine.SpyObj<ProductService>;
-  let productPhotoServiceSpy: jasmine.SpyObj<ProductPhotoService>;
-
-  beforeEach(() => {
-    matDialogRefSpy = jasmine.createSpyObj('MatDialogRef', ['close']);
-    matDialogRefSpy.componentInstance = { title: '', message: '' };
-    matDialogRefSpy.afterClosed = () => of(true);
-
-    matDialogSpy = jasmine.createSpyObj('MatDialog', ['open']);
-    matDialogSpy.open.and.returnValue(matDialogRefSpy);
-
-    matSnackBarSpy = jasmine.createSpyObj('MatSnackBar', ['open']);
-
-    productServiceSpy = jasmine.createSpyObj('ProductService', ['getById']);
-    productServiceSpy.getById.and.returnValue(of(<GetProductResponse>{ Product: TestDataProducts[0], CategoryIds: [''] }));
-
-    productPhotoServiceSpy = jasmine.createSpyObj('ProductPhotoService', ['changeMain', 'changeVisible', 'delete', 'getList', 'moveDown', 'moveUp', 'upload']);
-    productPhotoServiceSpy.changeMain.and.returnValue(throwError(() => new Error('ERROR')));
-    productPhotoServiceSpy.changeVisible.and.returnValue(throwError(() => new Error('ERROR')));
-    productPhotoServiceSpy.getList.and.returnValue(of(TestDataProductPhotos));
-    productPhotoServiceSpy.delete.and.returnValue(throwError(() => new Error('ERROR')));
-    productPhotoServiceSpy.moveDown.and.returnValue(throwError(() => new Error('ERROR')));
-    productPhotoServiceSpy.moveUp.and.returnValue(throwError(() => new Error('ERROR')));
-    productPhotoServiceSpy.upload.and.returnValue(throwError(() => new Error('ERROR')));
-
-    TestBed.configureTestingModule({
-      declarations: [ControlPanelCatalogProductPhotoListComponent, FileSizePipe],
-      imports: [BrowserAnimationsModule, HttpClientTestingModule, MatIconModule, MatFormFieldModule, MatInputModule, MatMenuModule, MatPaginatorModule, MatSelectModule, MatTableModule, ReactiveFormsModule, RouterLink, RouterTestingModule.withRoutes(
-        [{ path: 'control-panel/catalog/products', component: ControlPanelCatalogProductPhotoListComponent }]
-      )],
-      providers: [
-        { provide: ActivatedRoute, useValue: { snapshot: { data: {} } } },
-        { provide: ActivatedRoute, useValue: { snapshot: { paramMap: convertToParamMap({ productId: TestDataProducts[0].Id, shopId: TestDataProducts[0].ShopId }) } } },
-        { provide: MatDialog, useValue: matDialogSpy },
-        { provide: ProductService, useValue: productServiceSpy },
-        { provide: ProductPhotoService, useValue: productPhotoServiceSpy },
-        { provide: MatSnackBar, useValue: matSnackBarSpy },
-        ControlPanelCatalogProductPhotoListComponent,
-        FileSizePipe,
-        Router
-      ]
-    });
-    fixture = TestBed.createComponent(ControlPanelCatalogProductPhotoListComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
-
-  const fileList = createMockFileList([
-    { name: 'test.jpg', body: 'test', mimeType: 'text/plain', size: 123 }
-  ]);
 
   it('should trigger error handling when uploading files and the request to product photo service fails', () => {
+    productPhotoServiceSpy.upload.and.returnValue(throwError(() => new Error('ERROR')));
     component.uploadFile(fileList);
     expect(productPhotoServiceSpy.upload).toHaveBeenCalled();
   });
 
   it('should trigger error handling when sending a call to the product photo service when deleting a product photo and the request fails', () => {
+    productPhotoServiceSpy.delete.and.returnValue(throwError(() => new Error('ERROR')));
     component.delete(TestDataProductPhotos[0]);
     expect(component).toBeTruthy();
   });
 
   it('should trigger error handling when sending a call to the product photo service when setting a product photo as main and the request fails', () => {
+    productPhotoServiceSpy.changeMain.and.returnValue(throwError(() => new Error('ERROR')));
     component.setMain(TestDataProductPhotos[0]);
     expect(productPhotoServiceSpy.changeMain).toHaveBeenCalled();
   });
 
   it('should trigger error handling when sending a call to the product photo service when setting a product photo as visible and the request fails', () => {
+    productPhotoServiceSpy.changeVisible.and.returnValue(throwError(() => new Error('ERROR')));
     component.setVisible(TestDataProductPhotos[0], true);
     expect(productPhotoServiceSpy.changeVisible).toHaveBeenCalled();
   });
 
   it('should trigger error handling when sending a call to the product photo service when moving a product photo up and the request fails', () => {
+    productPhotoServiceSpy.moveUp.and.returnValue(throwError(() => new Error('ERROR')));
     component.moveUp(TestDataProductPhotos[0]);
     expect(productPhotoServiceSpy.moveUp).toHaveBeenCalled();
   });
 
   it('should trigger error handling when sending a call to the product photo service when moving a product photo down and the request fails', () => {
+    productPhotoServiceSpy.moveDown.and.returnValue(throwError(() => new Error('ERROR')));
     component.moveDown(TestDataProductPhotos[0]);
     expect(productPhotoServiceSpy.moveDown).toHaveBeenCalled();
   });

@@ -145,55 +145,10 @@ describe('ControlPanelConfigurationShopComponent', () => {
     tick(1000);
     expect(componentStub.checkSubDomainAvailability).toHaveBeenCalled();
   }));
-});
-
-describe('ControlPanelConfigurationShopComponentWithErrors', () => {
-  let component: ControlPanelConfigurationShopComponent;
-  let fixture: ComponentFixture<ControlPanelConfigurationShopComponent>;
-
-  let countryServiceSpy: jasmine.SpyObj<CountryService>;
-  let shopServiceSpy: jasmine.SpyObj<ShopService>;
-  let shopCategoryServiceSpy: jasmine.SpyObj<ShopCategoryService>;
-  let matSnackBarSpy: jasmine.SpyObj<MatSnackBar>;
-
-  beforeEach(() => {
-    countryServiceSpy = jasmine.createSpyObj('CountryService', ['getList']);
-    countryServiceSpy.getList.and.returnValue(of(TestDataCountries));
-
-    shopCategoryServiceSpy = jasmine.createSpyObj('ShopCategoryService', ['getList']);
-    shopCategoryServiceSpy.getList.and.returnValue(of(TestDataShopCategories));
-
-    shopServiceSpy = jasmine.createSpyObj('ShopService', ['create', 'getById', 'subdomainAvailable', 'update']);
-    shopServiceSpy.create.and.returnValue(throwError(() => new Error('ERROR')));
-    shopServiceSpy.getById.and.returnValue(of(TestDataShops[0]));
-    shopServiceSpy.subdomainAvailable.and.returnValue(throwError(() => new Error('ERROR')));
-    shopServiceSpy.update.and.returnValue(throwError(() => new Error('ERROR')));
-
-    matSnackBarSpy = jasmine.createSpyObj('MatSnackBar', ['open']);
-
-    TestBed.configureTestingModule({
-      declarations: [ControlPanelConfigurationShopComponent],
-      imports: [BrowserAnimationsModule, MatDialogModule, MatDividerModule, MatFormFieldModule, MatIconModule, MatInputModule, MatSelectModule, MatTooltipModule, ReactiveFormsModule, RouterLink, RouterTestingModule.withRoutes(
-        [{ path: 'control-panel/configuration/shops', component: ControlPanelConfigurationShopListComponent }]
-      )],
-      providers: [
-        { provide: ActivatedRoute, useValue: { snapshot: { paramMap: convertToParamMap({ shopId: TestDataShops[0].Id }) } } },
-        { provide: CountryService, useValue: countryServiceSpy },
-        { provide: ShopService, useValue: shopServiceSpy },
-        { provide: ShopCategoryService, useValue: shopCategoryServiceSpy },
-        { provide: MatSnackBar, useValue: matSnackBarSpy },
-        ControlPanelConfigurationShopComponent,
-        HttpClient,
-        HttpHandler,
-        Router
-      ]
-    });
-    fixture = TestBed.createComponent(ControlPanelConfigurationShopComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
 
   it('should trigger error handling when sending a call to the shop service when creating a new shop and the request fails', () => {
+    shopServiceSpy.create.and.returnValue(throwError(() => new Error('ERROR')));
+
     component.activeMerchant = TestDataMerchants[0];
     component.queryStringShopId = '';
     component.controlName.setValue(TestDataShops[0].Name);
@@ -203,6 +158,8 @@ describe('ControlPanelConfigurationShopComponentWithErrors', () => {
   });
 
   it('should trigger error handling when sending a call to the shop service when updating an existing shop and the request fails', () => {
+    shopServiceSpy.update.and.returnValue(throwError(() => new Error('ERROR')));
+
     component.queryStringShopId = TestDataShops[0].Id;
     component.controlName.setValue(TestDataShops[0].Name);
     component.controlSubDomain.setValue(TestDataShops[0].SubDomain!);
@@ -211,6 +168,7 @@ describe('ControlPanelConfigurationShopComponentWithErrors', () => {
   });
 
   it('should trigger error handling when sending a call to the shop service when checking subdomain availability and the request fails', () => {
+    shopServiceSpy.subdomainAvailable.and.returnValue(throwError(() => new Error('ERROR')));
     component.checkSubDomainAvailability('subdomain');
     expect(component.formLoading).toBeFalse();
   });

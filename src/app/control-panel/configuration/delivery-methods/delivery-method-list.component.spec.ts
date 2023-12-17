@@ -136,56 +136,9 @@ describe('ControlPanelConfigurationDeliveryMethodListComponent', () => {
     component.handleOnSubmitError('Unhandled error');
     expect(matSnackBarSpy.open).toHaveBeenCalled();
   });
-});
 
-describe('ControlPanelConfigurationDeliveryMethodListComponentWithErrors', () => {
-  let component: ControlPanelConfigurationDeliveryMethodListComponent;
-  let fixture: ComponentFixture<ControlPanelConfigurationDeliveryMethodListComponent>;
-
-  let matDialogRefSpy: any;
-  let matDialogSpy: jasmine.SpyObj<MatDialog>
-  let matSnackBarSpy: jasmine.SpyObj<MatSnackBar>;
-
-  let deliveryMethodServiceSpy: jasmine.SpyObj<DeliveryMethodService>;
-  let shopServiceSpy: jasmine.SpyObj<ShopService>;
-
-  beforeEach(() => {
-    matDialogRefSpy = jasmine.createSpyObj('MatDialogRef', ['close']);
-    matDialogRefSpy.componentInstance = { title: '', message: '' };
-    matDialogRefSpy.afterClosed = () => of(true);
-
-    matDialogSpy = jasmine.createSpyObj('MatDialog', ['open']);
-    matDialogSpy.open.and.returnValue(matDialogRefSpy);
-
-    matSnackBarSpy = jasmine.createSpyObj('MatSnackBar', ['open']);
-
-    deliveryMethodServiceSpy = jasmine.createSpyObj('DeliveryMethodService', ['getList', 'delete']);
-    deliveryMethodServiceSpy.getList.and.returnValue(of(TestDataDeliveryMethods));
+  it('should trigger error handling when sending a call to the delivery method service when deleting a delivery method and the request fails', () => {
     deliveryMethodServiceSpy.delete.and.returnValue(throwError(() => new Error('ERROR')));
-
-    shopServiceSpy = jasmine.createSpyObj('ShopService', ['getList']);
-    shopServiceSpy.getList.and.returnValue(of(TestDataShops));
-
-    TestBed.configureTestingModule({
-      declarations: [ControlPanelConfigurationDeliveryMethodListComponent],
-      imports: [BrowserAnimationsModule, MatIconModule, MatFormFieldModule, MatInputModule, MatPaginatorModule, MatSelectModule, MatTableModule, ReactiveFormsModule, RouterLink, RouterTestingModule.withRoutes(
-        [{ path: 'control-panel/configuration/delivery-methods', component: ControlPanelConfigurationDeliveryMethodListComponent }]
-      )],
-      providers: [
-        { provide: ActivatedRoute, useValue: { snapshot: { data: {} } } },
-        { provide: MatDialog, useValue: matDialogSpy },
-        { provide: ShopService, useValue: shopServiceSpy },
-        { provide: DeliveryMethodService, useValue: deliveryMethodServiceSpy },
-        { provide: MatSnackBar, useValue: matSnackBarSpy },
-        Router
-      ]
-    });
-    fixture = TestBed.createComponent(ControlPanelConfigurationDeliveryMethodListComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
-
-  it('should create', () => {
     component.deleteElement(TestDataDeliveryMethods[0]);
     expect(component).toBeTruthy();
   });
