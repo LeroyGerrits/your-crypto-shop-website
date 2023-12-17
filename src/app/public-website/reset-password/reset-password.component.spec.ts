@@ -33,7 +33,10 @@ describe('PublicWebsiteResetPasswordComponent', () => {
     TestBed.configureTestingModule({
       declarations: [PublicWebsiteResetPasswordComponent],
       imports: [BrowserAnimationsModule, MatFormFieldModule, MatInputModule, ReactiveFormsModule, RouterTestingModule.withRoutes(
-        [{ path: 'message/account-activated', component: PublicWebsiteMessageComponent }]
+        [
+          { path: 'message/account-activated', component: PublicWebsiteMessageComponent },
+          { path: 'message/password-reset-link-already-used', component: PublicWebsiteMessageComponent }
+        ]
       )],
       providers: [
         { provide: ActivatedRoute, useValue: { snapshot: { paramMap: convertToParamMap({ id: TestDataMerchantPasswordResetLinks[0].Id, key: TestDataMerchantPasswordResetLinks[0].Key }) } } },
@@ -113,41 +116,12 @@ describe('PublicWebsiteResetPasswordComponent', () => {
     component.handleOnSubmitResult(mutationResult);
     expect(matSnackBarSpy.open).toHaveBeenCalled();
   });
-});
 
-describe('PublicWebsiteResetPasswordComponentWithErrors', () => {
-  let component: PublicWebsiteResetPasswordComponent;
-  let fixture: ComponentFixture<PublicWebsiteResetPasswordComponent>;
-
-  let matSnackBarSpy: jasmine.SpyObj<MatSnackBar>;
-
-  let merchantPasswordResetLinkServiceSpy: jasmine.SpyObj<MerchantPasswordResetLinkService>;
-  let mutationResult: MutationResult = <MutationResult>{ ErrorCode: 0, Identity: '', Message: '' };
-
-  beforeEach(() => {
-    matSnackBarSpy = jasmine.createSpyObj('MatSnackBar', ['open']);
-
-    merchantPasswordResetLinkServiceSpy = jasmine.createSpyObj('MerchantService', ['getByIdAndKey', 'resetPassword']);
+  it('should trigger error handling when sending a call to the merchant password reset link service to reset the password and the request fails', () => {
     merchantPasswordResetLinkServiceSpy.getByIdAndKey.and.returnValue(throwError(() => new Error('ERROR')))
     merchantPasswordResetLinkServiceSpy.resetPassword.and.returnValue(throwError(() => new Error('ERROR')))
 
-    TestBed.configureTestingModule({
-      declarations: [PublicWebsiteResetPasswordComponent],
-      imports: [BrowserAnimationsModule, MatFormFieldModule, MatInputModule, ReactiveFormsModule, RouterTestingModule.withRoutes(
-        [{ path: 'message/account-activated', component: PublicWebsiteMessageComponent }]
-      )],
-      providers: [
-        { provide: ActivatedRoute, useValue: { snapshot: { paramMap: convertToParamMap({ id: TestDataMerchantPasswordResetLinks[0].Id, key: TestDataMerchantPasswordResetLinks[0].Key }) } } },
-        { provide: MatSnackBar, useValue: matSnackBarSpy },
-        { provide: MerchantPasswordResetLinkService, useValue: merchantPasswordResetLinkServiceSpy },
-      ]
-    });
-    fixture = TestBed.createComponent(PublicWebsiteResetPasswordComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
-
-  it('should trigger error handling when sending a call to the merchant password reset link service to reset the password and the request fails', () => {
+    component.ngOnInit();
     component.controlPassword.setValue('PASSWORD');
     component.controlPasswordRepetition.setValue('PASSWORD');
     component.onSubmit();

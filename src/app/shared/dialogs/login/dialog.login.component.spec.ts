@@ -76,45 +76,10 @@ describe('DialogLoginComponent', () => {
     component.onSubmit();
     expect(authenticationServiceSpy.login).toHaveBeenCalled();
   });
-});
-
-describe('DialogLoginComponentWithErrors', () => {
-  let component: DialogLoginComponent;
-  let fixture: ComponentFixture<DialogLoginComponent>;
-
-  let matDialogRefSpy: any;
-  let matDialogSpy: jasmine.SpyObj<MatDialog>
-  let authenticationServiceSpy: jasmine.SpyObj<AuthenticationService>;
-
-  beforeEach(() => {
-    matDialogRefSpy = jasmine.createSpyObj('MatDialogRef', ['close']);
-    matDialogRefSpy.componentInstance = { title: '', message: '' };
-    matDialogRefSpy.afterClosed = () => of(true);
-    matDialogRefSpy.close = () => of(true);
-
-    matDialogSpy = jasmine.createSpyObj('MatDialog', ['open']);
-    matDialogSpy.open.and.returnValue(matDialogRefSpy);
-
-    authenticationServiceSpy = jasmine.createSpyObj('AuthenticationService', ['login']);
-    authenticationServiceSpy.login.and.returnValue(throwError(() => new Error('ERROR')));
-
-    TestBed.configureTestingModule({
-      declarations: [DialogLoginComponent],
-      imports: [BrowserAnimationsModule, MatDialogModule, MatFormFieldModule, MatInputModule, ReactiveFormsModule, RouterTestingModule.withRoutes(
-        [{ path: 'control-panel', component: AccountComponent }]
-      )],
-      providers: [
-        { provide: MatDialogRef, useValue: matDialogRefSpy },
-        { provide: MAT_DIALOG_DATA, useValue: [] },
-        { provide: AuthenticationService, useValue: authenticationServiceSpy }
-      ]
-    });
-    fixture = TestBed.createComponent(DialogLoginComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
 
   it('should trigger error handling when sending a call to the authentication service and the request fails', () => {
+    authenticationServiceSpy.login.and.returnValue(throwError(() => new Error('ERROR')));
+
     component.controlEmailAddress.setValue('merchant@dgbcommerce.com');
     component.controlPassword.setValue('********');
     component.onSubmit();

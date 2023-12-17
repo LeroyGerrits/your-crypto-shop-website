@@ -33,7 +33,10 @@ describe('PublicWebsiteAccountActivateComponent', () => {
     TestBed.configureTestingModule({
       declarations: [PublicWebsiteAccountActivateComponent],
       imports: [BrowserAnimationsModule, MatFormFieldModule, MatInputModule, ReactiveFormsModule, RouterTestingModule.withRoutes(
-        [{ path: 'message/account-activated', component: PublicWebsiteMessageComponent }]
+        [
+          { path: 'message/account-activated', component: PublicWebsiteMessageComponent },
+          { path: 'message/account-already-activated', component: PublicWebsiteMessageComponent }
+        ]
       )],
       providers: [
         { provide: ActivatedRoute, useValue: { snapshot: { paramMap: convertToParamMap({ merchantId: TestDataMerchants[0].Id, merchantPassword: 'PASSWORD' }) } } },
@@ -113,40 +116,12 @@ describe('PublicWebsiteAccountActivateComponent', () => {
     component.handleOnSubmitResult(mutationResult);
     expect(matSnackBarSpy.open).toHaveBeenCalled();
   });
-});
 
-describe('PublicWebsiteAccountActivateComponentWithErrors', () => {
-  let component: PublicWebsiteAccountActivateComponent;
-  let fixture: ComponentFixture<PublicWebsiteAccountActivateComponent>;
-
-  let matSnackBarSpy: jasmine.SpyObj<MatSnackBar>;
-
-  let merchantServiceSpy: jasmine.SpyObj<MerchantService>;
-
-  beforeEach(() => {
-    matSnackBarSpy = jasmine.createSpyObj('MatSnackBar', ['open']);
-
-    merchantServiceSpy = jasmine.createSpyObj('MerchantService', ['getByIdAndPassword', 'activateAccount']);
+  it('should trigger error handling when sending a call to the merchant service to activate the account and the request fails', () => {
     merchantServiceSpy.getByIdAndPassword.and.returnValue(throwError(() => new Error('ERROR')));
     merchantServiceSpy.activateAccount.and.returnValue(throwError(() => new Error('ERROR')));
 
-    TestBed.configureTestingModule({
-      declarations: [PublicWebsiteAccountActivateComponent],
-      imports: [BrowserAnimationsModule, MatFormFieldModule, MatInputModule, ReactiveFormsModule, RouterTestingModule.withRoutes(
-        [{ path: 'message/account-activated', component: PublicWebsiteMessageComponent }]
-      )],
-      providers: [
-        { provide: ActivatedRoute, useValue: { snapshot: { paramMap: convertToParamMap({ merchantId: TestDataMerchants[0].Id, merchantPassword: 'PASSWORD' }) } } },
-        { provide: MatSnackBar, useValue: matSnackBarSpy },
-        { provide: MerchantService, useValue: merchantServiceSpy },
-      ]
-    });
-    fixture = TestBed.createComponent(PublicWebsiteAccountActivateComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
-
-  it('should trigger error handling when sending a call to the merchant service to activate the account and the request fails', () => {
+    component.ngOnInit();
     component.controlPassword.setValue('PASSWORD');
     component.controlPasswordRepetition.setValue('PASSWORD');
     component.onSubmit();

@@ -90,41 +90,10 @@ describe('ControlPanelCatalogProductPhotoComponent', () => {
     component.handleOnSubmitResult(mutationResult);
     expect(matSnackBarSpy.open).toHaveBeenCalled();
   });
-});
-
-describe('ControlPanelCatalogProductPhotoComponentWithErrors', () => {
-  let component: ControlPanelCatalogProductPhotoComponent;
-  let fixture: ComponentFixture<ControlPanelCatalogProductPhotoComponent>;
-
-  let matDialogRefSpy: any;
-  let ProductPhotoServiceSpy: jasmine.SpyObj<ProductPhotoService>;
-
-  let mockDialogData: DialogData = {
-    productPhotoToEdit: TestDataProductPhotos[0],
-  };
-
-  beforeEach(() => {
-    matDialogRefSpy = jasmine.createSpyObj('MatDialogRef', ['close']);
-    matDialogRefSpy.close = () => of(true);
-
-    ProductPhotoServiceSpy = jasmine.createSpyObj('ProductPhotoService', ['changeDescription']);
-    ProductPhotoServiceSpy.changeDescription.and.returnValue(throwError(() => new Error('ERROR')));
-
-    TestBed.configureTestingModule({
-      declarations: [ControlPanelCatalogProductPhotoComponent],
-      imports: [BrowserAnimationsModule, MatCheckboxModule, MatDialogModule, MatFormFieldModule, MatInputModule, ReactiveFormsModule],
-      providers: [
-        { provide: MatDialogRef, useValue: matDialogRefSpy },
-        { provide: MAT_DIALOG_DATA, useValue: mockDialogData },
-        { provide: ProductPhotoService, useValue: ProductPhotoServiceSpy }
-      ]
-    });
-    fixture = TestBed.createComponent(ControlPanelCatalogProductPhotoComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
 
   it('should trigger error handling when sending a call to the ProductPhoto service when updating an existing ProductPhoto and the request fails', () => {
+    ProductPhotoServiceSpy.changeDescription.and.returnValue(throwError(() => new Error('ERROR')));
+
     component.controlDescription.setValue(TestDataProductPhotos[0].Description!);
     component.onSubmit();
     expect(component.formLoading).toBeFalse();

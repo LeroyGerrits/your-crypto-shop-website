@@ -89,50 +89,6 @@ describe('DialogSignUpComponent', () => {
     component.handleOnSubmitResult(mutationResult);
     expect(matSnackBarSpy.open).toHaveBeenCalled();
   });
-});
-
-describe('DialogSignUpComponentWithErrors', () => {
-  let component: DialogSignUpComponent;
-  let fixture: ComponentFixture<DialogSignUpComponent>;
-
-  let matDialogRefSpy: any;
-  let matDialogSpy: jasmine.SpyObj<MatDialog>
-  let merchantServiceSpy: jasmine.SpyObj<MerchantService>;
-
-  beforeEach(() => {
-    matDialogRefSpy = jasmine.createSpyObj('MatDialogRef', ['close']);
-    matDialogRefSpy.componentInstance = { title: '', message: '' };
-    matDialogRefSpy.afterClosed = () => of(true);
-    matDialogRefSpy.close = () => of(true);
-
-    matDialogSpy = jasmine.createSpyObj('MatDialog', ['open']);
-    matDialogSpy.open.and.returnValue(matDialogRefSpy);
-
-    merchantServiceSpy = jasmine.createSpyObj('MerchantService', ['create']);
-    merchantServiceSpy.create.and.returnValue(throwError(() => new Error('ERROR')));
-
-    TestBed.configureTestingModule({
-      declarations: [DialogSignUpComponent],
-      imports: [BrowserAnimationsModule, MatDialogModule, MatFormFieldModule, MatInputModule, MatRadioModule, ReactiveFormsModule],
-      providers: [
-        { provide: MatDialogRef, useValue: matDialogRefSpy },
-        { provide: MAT_DIALOG_DATA, useValue: [] },
-        { provide: MerchantService, useValue: merchantServiceSpy }
-      ]
-    });
-    fixture = TestBed.createComponent(DialogSignUpComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
-
-  it('should trigger error handling when sending a call to the merchant service and the request fails', () => {
-    component.controlEmailAddress.setValue('merchant@dgbcommerce.com');
-    component.controlUsername.setValue('DGB Commerce');
-    component.controlLastName.setValue('Doe');
-    component.controlGender.setValue('0');
-    component.onSubmit();
-    expect(merchantServiceSpy.create).toHaveBeenCalled();
-  });
 
   it('should show a specific error when handling submit result and an error code with constraint \'UNIQUE_Merchant_EmailAddress\' is applicable', () => {
     const mutationResult = { Constraint: 'UNIQUE_Merchant_EmailAddress', ErrorCode: 666, Identity: '', Message: 'Evil error', Success: false };
@@ -144,5 +100,16 @@ describe('DialogSignUpComponentWithErrors', () => {
     const mutationResult = { Constraint: 'UNIQUE_Merchant_Username', ErrorCode: 666, Identity: '', Message: 'Evil error', Success: false };
     component.handleOnSubmitResult(mutationResult);
     expect(component).toBeTruthy();
+  });
+
+  it('should trigger error handling when sending a call to the merchant service and the request fails', () => {
+    merchantServiceSpy.create.and.returnValue(throwError(() => new Error('ERROR')));
+
+    component.controlEmailAddress.setValue('merchant@dgbcommerce.com');
+    component.controlUsername.setValue('DGB Commerce');
+    component.controlLastName.setValue('Doe');
+    component.controlGender.setValue('0');
+    component.onSubmit();
+    expect(merchantServiceSpy.create).toHaveBeenCalled();
   });
 });
