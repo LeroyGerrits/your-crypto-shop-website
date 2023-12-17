@@ -173,56 +173,10 @@ describe('ControlPanelCustomerComponent', () => {
     component.handleOnSubmitResult(mutationResult);
     expect(matSnackBarSpy.open).toHaveBeenCalled();
   });
-});
-
-describe('ControlPanelCustomerComponentWithErrors', () => {
-  let component: ControlPanelCustomerComponent;
-  let fixture: ComponentFixture<ControlPanelCustomerComponent>;
-
-  let matSnackBarSpy: jasmine.SpyObj<MatSnackBar>;
-
-  let categoryServiceSpy: jasmine.SpyObj<CategoryService>;
-  let countryServiceSpy: jasmine.SpyObj<CountryService>;
-  let customerServiceSpy: jasmine.SpyObj<CustomerService>;
-  let shopServiceSpy: jasmine.SpyObj<ShopService>;
-
-  beforeEach(() => {
-    categoryServiceSpy = jasmine.createSpyObj('CategoryService', ['getList']);
-    categoryServiceSpy.getList.and.returnValue(of(TestDataCategories));
-
-    countryServiceSpy = jasmine.createSpyObj('CountryService', ['getList']);
-    countryServiceSpy.getList.and.returnValue(of(TestDataCountries));
-
-    customerServiceSpy = jasmine.createSpyObj('CustomerService', ['getById', 'create', 'update']);
-    customerServiceSpy.getById.and.returnValue(of(TestDataCustomers[0]));
-    customerServiceSpy.create.and.returnValue(throwError(() => new Error('ERROR')));
-    customerServiceSpy.update.and.returnValue(throwError(() => new Error('ERROR')));
-
-    matSnackBarSpy = jasmine.createSpyObj('MatSnackBar', ['open']);
-
-    shopServiceSpy = jasmine.createSpyObj('ShopService', ['getList']);
-    shopServiceSpy.getList.and.returnValue(of(TestDataShops));
-
-    TestBed.configureTestingModule({
-      declarations: [ControlPanelCustomerComponent],
-      imports: [BrowserAnimationsModule, MatCheckboxModule, MatDialogModule, MatDividerModule, MatFormFieldModule, MatInputModule, MatSelectModule, MatTabsModule, MatRadioModule, MatTreeModule, ReactiveFormsModule, RouterLink, RouterTestingModule.withRoutes(
-        [{ path: 'control-panel/customers', component: ControlPanelCustomerListComponent }]
-      )],
-      providers: [
-        { provide: ActivatedRoute, useValue: { snapshot: { paramMap: convertToParamMap({ customerId: 'new', shopId: TestDataCustomers[0].ShopId }) } } },
-        { provide: CategoryService, useValue: categoryServiceSpy },
-        { provide: CountryService, useValue: countryServiceSpy },
-        { provide: CustomerService, useValue: customerServiceSpy },
-        { provide: MatSnackBar, useValue: matSnackBarSpy },
-        { provide: ShopService, useValue: shopServiceSpy }
-      ]
-    });
-    fixture = TestBed.createComponent(ControlPanelCustomerComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
 
   it('should trigger error handling when sending a call to the customer service when creating a new customer and the request fails', () => {
+    customerServiceSpy.create.and.returnValue(throwError(() => new Error('ERROR')));
+
     component.queryStringCustomerId = '';
     component.queryStringShopId = TestDataCustomers[0].ShopId;
     component.controlShop.setValue(TestDataCustomers[0].ShopId);
@@ -236,13 +190,15 @@ describe('ControlPanelCustomerComponentWithErrors', () => {
     component.controlPostalCode.setValue(TestDataAddresses[0].PostalCode);
     component.controlCity.setValue(TestDataAddresses[0].City);
     component.controlProvince.setValue(TestDataAddresses[0].Province!);
-    component.controlCountry.setValue(TestDataAddresses[0].Country!.Id);
+    component.controlCountry.setValue(TestDataCountries[0].Id);
 
     component.onSubmit();
     expect(component.formLoading).toBeFalse();
   });
 
   it('should trigger error handling when sending a call to the customer service when updating an customer shop and the request fails', () => {
+    customerServiceSpy.update.and.returnValue(throwError(() => new Error('ERROR')));
+
     component.queryStringCustomerId = TestDataCustomers[0].Id;
     component.queryStringShopId = TestDataCustomers[0].ShopId;
     component.controlShop.setValue(TestDataCustomers[0].ShopId);
@@ -256,7 +212,7 @@ describe('ControlPanelCustomerComponentWithErrors', () => {
     component.controlPostalCode.setValue(TestDataAddresses[0].PostalCode);
     component.controlCity.setValue(TestDataAddresses[0].City);
     component.controlProvince.setValue(TestDataAddresses[0].Province!);
-    component.controlCountry.setValue(TestDataAddresses[0].Country!.Id);
+    component.controlCountry.setValue(TestDataCountries[0].Id);
 
     component.onSubmit();
     expect(component.formLoading).toBeFalse();

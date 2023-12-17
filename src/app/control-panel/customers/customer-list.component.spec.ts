@@ -152,60 +152,16 @@ describe('ControlPanelCustomerListComponent', () => {
     component.handleOnSubmitError('Unhandled error');
     expect(matSnackBarSpy.open).toHaveBeenCalled();
   });
-});
 
-describe('ControlPanelCustomerListComponentWithErrors', () => {
-  let component: ControlPanelCustomerListComponent;
-  let fixture: ComponentFixture<ControlPanelCustomerListComponent>;
-
-  let matDialogRefSpy: any;
-  let matDialogSpy: jasmine.SpyObj<MatDialog>
-  let matSnackBarSpy: jasmine.SpyObj<MatSnackBar>;
-
-  let customerServiceSpy: jasmine.SpyObj<CustomerService>;
-  let shopServiceSpy: jasmine.SpyObj<ShopService>;
-
-  let emptyListShops: Shop[] = [];
-
-  beforeEach(() => {
-    matDialogRefSpy = jasmine.createSpyObj('MatDialogRef', ['close']);
-    matDialogRefSpy.componentInstance = { title: '', message: '' };
-    matDialogRefSpy.afterClosed = () => of(true);
-
-    matDialogSpy = jasmine.createSpyObj('MatDialog', ['open']);
-    matDialogSpy.open.and.returnValue(matDialogRefSpy);
-
-    matSnackBarSpy = jasmine.createSpyObj('MatSnackBar', ['open']);
-
-    customerServiceSpy = jasmine.createSpyObj('ProductService', ['getList', 'delete']);
-    customerServiceSpy.getList.and.returnValue(of());
+  it('should trigger error handling when sending a call to the customer service when deleting a customer shop and the request fails', () => {
     customerServiceSpy.delete.and.returnValue(throwError(() => new Error('ERROR')));
-
-    shopServiceSpy = jasmine.createSpyObj('ShopService', ['getList']);
-    shopServiceSpy.getList.and.returnValue(of(emptyListShops));
-
-    TestBed.configureTestingModule({
-      declarations: [ControlPanelCustomerListComponent],
-      imports: [BrowserAnimationsModule, HttpClientTestingModule, MatIconModule, MatFormFieldModule, MatInputModule, MatPaginatorModule, MatSelectModule, MatTableModule, ReactiveFormsModule, RouterLink, RouterTestingModule.withRoutes(
-        [{ path: 'control-panel/customers', component: ControlPanelCustomerListComponent }]
-      )],
-      providers: [
-        { provide: ActivatedRoute, useValue: { snapshot: { data: {} } } },
-        { provide: MatDialog, useValue: matDialogSpy },
-        { provide: ShopService, useValue: shopServiceSpy },
-        { provide: CustomerService, useValue: customerServiceSpy },
-        { provide: MatSnackBar, useValue: matSnackBarSpy },
-        ControlPanelCustomerListComponent,
-        Router
-      ]
-    });
-    fixture = TestBed.createComponent(ControlPanelCustomerListComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
+    component.deleteElement(TestDataCustomers[0]);
+    expect(component).toBeTruthy();
   });
 
-  it('should create', () => {
-    component.deleteElement(TestDataCustomers[0]);
+  it('should not retrieve customers when there are no shops', () => {
+    shopServiceSpy.getList.and.returnValue(of([]));
+    component.ngOnInit();
     expect(component).toBeTruthy();
   });
 });
