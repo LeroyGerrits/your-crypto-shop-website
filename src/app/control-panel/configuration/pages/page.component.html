@@ -1,0 +1,83 @@
+<form (ngSubmit)="onSubmit()">
+    <div class="WrapperPadding20-8">
+        <div class="FloatRight FormButtons">
+            <button mat-raised-button [disabled]="formLoading" type="button" [routerLink]="['/control-panel/catalog/pages']">Cancel</button>
+            <button mat-raised-button [disabled]="formLoading" type="submit" color="primary">
+                <mat-icon *ngIf="formLoading">
+                    <mat-spinner diameter="18" />
+                </mat-icon>
+                Save
+            </button>
+        </div>
+        <h2><a [routerLink]="['/control-panel/catalog/pages']">Pages</a> - {{this.pageTitle}}</h2>
+    </div>
+    <div class="ClearRight">
+        <mat-tab-group animationDuration="0">
+            <mat-tab>
+                <ng-template mat-tab-label>
+                    <mat-icon color="warn" class="TabWarnIcon" *ngIf="this.formSubmitted && (controlShop.errors || controlTitle.errors || controlPrice.errors)">error_outline</mat-icon>
+                    Page
+                </ng-template>
+                <div class="ColumnOneHalf">
+                    <div class="WrapperPadding20-10-0-8">
+                        <mat-form-field>
+                            <mat-label>Shop</mat-label>
+                            <mat-select [formControl]="controlShop" [ngClass]="{ 'is-invalid': controlShop.errors }">
+                                <mat-option *ngFor="let shop of this.shops" [value]="shop.Id">{{shop.Name}}</mat-option>
+                            </mat-select>
+                            <div *ngIf="formSubmitted && controlShop.errors" class="TextError">
+                                <div *ngIf="controlShop.errors['required']">Shop is required</div>
+                            </div>
+                        </mat-form-field>
+                    </div>
+                </div>
+                <div class="ColumnOneHalf">
+                    <div class="WrapperPadding20-10-0-8">
+                        <p>The shop this page will be listed under.</p>
+                    </div>
+                </div>
+                <mat-divider class="ClearLeft" />
+                <div class="ColumnOneHalf">
+                    <div class="WrapperPadding20-10-0-8">
+                        <mat-form-field>
+                            <mat-label>Name</mat-label>
+                            <input matInput [formControl]="controlTitle" maxlength="255" [ngClass]="{ 'is-invalid': formSubmitted && controlTitle.errors }" />
+                            <div *ngIf="formSubmitted && controlTitle.errors" class="TextError">
+                                <div *ngIf="controlTitle.errors['required']">Name is required</div>
+                            </div>
+                        </mat-form-field>
+                    </div>
+                </div>
+                <div class="ColumnOneHalf">
+                    <div class="WrapperPadding20-10-0-8">
+                        <p>The title of your page.</p>
+                    </div>
+                </div>
+                <mat-divider class="ClearLeft" />
+                <mat-divider class="ClearLeft" />
+                <div class="ColumnOneHalf">
+                    <div class="WrapperPadding10-10-0-8 TextAlignRight">
+                        <mat-checkbox [formControl]="controlVisible" color="primary" />
+                    </div>
+                </div>
+                <div class="ColumnOneHalf">
+                    <div class="WrapperPadding20-10-0-8">
+                        <p>Visible on shop.</p>
+                    </div>
+                </div>
+            </mat-tab>
+            <mat-tab label="Content">
+                <div class="WrapperPadding20-8-0-8">
+                    <mat-form-field>
+                        <textarea matInput placeholder="The contents of your page. You can put as much information in here as you'd like, but it's generally better to make multiple smaller pages rather than one large page." [formControl]="controlContent" rows="10" [ngClass]="{ 'is-invalid': formSubmitted && controlContent.errors }"></textarea>
+                    </mat-form-field>
+                </div>
+            </mat-tab>
+            <mat-tab label="Categories">
+                <div *ngFor="let category of this.categories">
+                    <mat-checkbox [id]="'category' + category.Id" color="primary" [checked]="this.categoryIds.includes(category.Id)" (change)="checkCategory(category, $event)">{{category.Name}}</mat-checkbox>
+                </div>
+            </mat-tab>
+        </mat-tab-group>
+    </div>
+</form>

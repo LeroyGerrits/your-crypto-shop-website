@@ -21,6 +21,8 @@ import { ControlPanelConfigurationDeliveryMethodComponent } from './control-pane
 import { ControlPanelConfigurationDeliveryMethodListComponent } from './control-panel/configuration/delivery-methods/delivery-method-list.component';
 import { ControlPanelConfigurationDigiByteWalletComponent } from './control-panel/configuration/digibyte-wallets/digibyte-wallet.component';
 import { ControlPanelConfigurationDigiByteWalletListComponent } from './control-panel/configuration/digibyte-wallets/digibyte-wallet-list.component';
+import { ControlPanelConfigurationPageComponent } from './control-panel/configuration/pages/page.component';
+import { ControlPanelConfigurationPageListComponent } from './control-panel/configuration/pages/page-list.component';
 import { ControlPanelConfigurationShopComponent } from './control-panel/configuration/shops/shop.component';
 import { ControlPanelConfigurationShopListComponent } from './control-panel/configuration/shops/shop-list.component';
 import { ControlPanelCustomerComponent } from './control-panel/customers/customer.component';
@@ -119,6 +121,8 @@ import { StripHtmlPipe } from './shared/pipes/StripHtml.pipe';
     ControlPanelConfigurationDeliveryMethodComponent,
     ControlPanelConfigurationDigiByteWalletListComponent,
     ControlPanelConfigurationDigiByteWalletComponent,
+    ControlPanelConfigurationPageListComponent,
+    ControlPanelConfigurationPageComponent,
     ControlPanelConfigurationShopListComponent,
     ControlPanelConfigurationShopComponent,
     ControlPanelCustomerListComponent,

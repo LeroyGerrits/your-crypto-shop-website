@@ -14,6 +14,8 @@ import { ControlPanelConfigurationDeliveryMethodComponent } from './control-pane
 import { ControlPanelConfigurationDeliveryMethodListComponent } from './control-panel/configuration/delivery-methods/delivery-method-list.component';
 import { ControlPanelConfigurationDigiByteWalletComponent } from './control-panel/configuration/digibyte-wallets/digibyte-wallet.component';
 import { ControlPanelConfigurationDigiByteWalletListComponent } from './control-panel/configuration/digibyte-wallets/digibyte-wallet-list.component';
+import { ControlPanelConfigurationPageComponent } from './control-panel/configuration/pages/page.component';
+import { ControlPanelConfigurationPageListComponent } from './control-panel/configuration/pages/page-list.component';
 import { ControlPanelConfigurationShopComponent } from './control-panel/configuration/shops/shop.component';
 import { ControlPanelConfigurationShopListComponent } from './control-panel/configuration/shops/shop-list.component';
 import { ControlPanelCustomerComponent } from './control-panel/customers/customer.component';
@@ -62,6 +64,8 @@ const routes: Routes = [
       { path: 'configuration/delivery-methods/:deliveryMethodId', component: ControlPanelConfigurationDeliveryMethodComponent, title: `${Constants.TITLE_PREFIX} - Delivery methods` },
       { path: 'configuration/digibyte-wallets', component: ControlPanelConfigurationDigiByteWalletListComponent, title: `${Constants.TITLE_PREFIX} - DigiByte wallets` },
       { path: 'configuration/digibyte-wallets/:digiByteWalletId', component: ControlPanelConfigurationDigiByteWalletComponent, title: `${Constants.TITLE_PREFIX} - DigiByte wallets` },
+      { path: 'configuration/pages', component: ControlPanelConfigurationPageListComponent, title: `${Constants.TITLE_PREFIX} - Pages` },
+      { path: 'configuration/pages/:pageId', component: ControlPanelConfigurationPageComponent, title: `${Constants.TITLE_PREFIX} - Pages` },
       { path: 'configuration/shops', component: ControlPanelConfigurationShopListComponent, title: `${Constants.TITLE_PREFIX} - Shops` },
       { path: 'configuration/shops/:shopId', component: ControlPanelConfigurationShopComponent, title: `${Constants.TITLE_PREFIX} - Shops` },
       { path: 'customers', component: ControlPanelCustomerListComponent, title: `${Constants.TITLE_PREFIX} - Customers` },
