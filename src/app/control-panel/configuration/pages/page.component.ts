@@ -1,6 +1,5 @@
 import { ActivatedRoute, Router } from '@angular/router';
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { FlatTreeControl, NestedTreeControl } from '@angular/cdk/tree';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar, MatSnackBarRef, TextOnlySnackBar } from '@angular/material/snack-bar';
 
@@ -8,7 +7,6 @@ import { Constants } from 'src/app/shared/Constants';
 import { Environment } from 'src/app/shared/environments/Environment';
 import { GetPageResponse } from 'src/app/shared/models/response/GetPageResponse.model';
 import { MatCheckboxChange } from '@angular/material/checkbox';
-import { MatTreeNestedDataSource } from '@angular/material/tree';
 import { MutatePageRequest } from 'src/app/shared/models/request/MutatePageRequest.model';
 import { MutationResult } from 'src/app/shared/models/MutationResult';
 import { Page } from 'src/app/shared/models/Page.model';
@@ -36,8 +34,6 @@ export class ControlPanelConfigurationPageComponent implements OnInit, OnDestroy
   public controlTitle = new FormControl('', Validators.required);
   public controlShop = new FormControl('', Validators.required);
   public controlContent = new FormControl('');
-  public controlPrice = new FormControl('', [Validators.required, Validators.pattern(Constants.REGEX_PATTERN_DECIMAL_8)]);
-  public controlStock = new FormControl('', Validators.pattern(Constants.REGEX_PATTERN_NUMBER));
   public controlVisible = new FormControl(true);
 
   public categories: PageCategory[] | undefined;
@@ -85,7 +81,6 @@ export class ControlPanelConfigurationPageComponent implements OnInit, OnDestroy
         this.pageService.getById(this.queryStringPageId).subscribe(x => {
           this.onRetrievePageData(x);
 
-          // Set tree datasource after we've retrieved the checked category IDs
           this.categories = categories;
         });
       } else {
@@ -123,8 +118,11 @@ export class ControlPanelConfigurationPageComponent implements OnInit, OnDestroy
 
     const pageToUpdate: Page = Object.assign({}, this.page);
     pageToUpdate.Title = this.controlTitle.value!;
-    //pageToUpdate.ShopId = this.controlShop.value!;
     pageToUpdate.Visible = this.controlVisible.value!;
+
+    var selectedShop = this.shops?.find(x => x.Id == this.controlShop.value);
+    if (selectedShop)
+      pageToUpdate.Shop = selectedShop;
 
     if (this.controlContent.value)
       pageToUpdate.Content = this.controlContent.value;
@@ -179,7 +177,7 @@ export class ControlPanelConfigurationPageComponent implements OnInit, OnDestroy
 
   handleOnSubmitResult(result: MutationResult) {
     if (result.Success) {
-      this.router.navigate(['/control-panel/catalog/pages']);
+      this.router.navigate(['/control-panel/configuration/pages']);
     } else {
       this.snackBarRef = this.snackBar.open(result.Message, 'Close', { panelClass: ['error-snackbar'] });
       this.formLoading = false;

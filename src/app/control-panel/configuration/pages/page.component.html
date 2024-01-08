@@ -1,7 +1,7 @@
 <form (ngSubmit)="onSubmit()">
     <div class="WrapperPadding20-8">
         <div class="FloatRight FormButtons">
-            <button mat-raised-button [disabled]="formLoading" type="button" [routerLink]="['/control-panel/catalog/pages']">Cancel</button>
+            <button mat-raised-button [disabled]="formLoading" type="button" [routerLink]="['/control-panel/configuration/pages']">Cancel</button>
             <button mat-raised-button [disabled]="formLoading" type="submit" color="primary">
                 <mat-icon *ngIf="formLoading">
                     <mat-spinner diameter="18" />
@@ -9,13 +9,13 @@
                 Save
             </button>
         </div>
-        <h2><a [routerLink]="['/control-panel/catalog/pages']">Pages</a> - {{this.pageTitle}}</h2>
+        <h2><a [routerLink]="['/control-panel/configuration/pages']">Pages</a> - {{this.pageTitle}}</h2>
     </div>
     <div class="ClearRight">
         <mat-tab-group animationDuration="0">
             <mat-tab>
                 <ng-template mat-tab-label>
-                    <mat-icon color="warn" class="TabWarnIcon" *ngIf="this.formSubmitted && (controlShop.errors || controlTitle.errors || controlPrice.errors)">error_outline</mat-icon>
+                    <mat-icon color="warn" class="TabWarnIcon" *ngIf="this.formSubmitted && (controlShop.errors || controlTitle.errors)">error_outline</mat-icon>
                     Page
                 </ng-template>
                 <div class="ColumnOneHalf">
@@ -40,10 +40,10 @@
                 <div class="ColumnOneHalf">
                     <div class="WrapperPadding20-10-0-8">
                         <mat-form-field>
-                            <mat-label>Name</mat-label>
+                            <mat-label>Title</mat-label>
                             <input matInput [formControl]="controlTitle" maxlength="255" [ngClass]="{ 'is-invalid': formSubmitted && controlTitle.errors }" />
                             <div *ngIf="formSubmitted && controlTitle.errors" class="TextError">
-                                <div *ngIf="controlTitle.errors['required']">Name is required</div>
+                                <div *ngIf="controlTitle.errors['required']">Title is required</div>
                             </div>
                         </mat-form-field>
                     </div>
@@ -74,9 +74,11 @@
                 </div>
             </mat-tab>
             <mat-tab label="Categories">
-                <div *ngFor="let category of this.categories">
-                    <mat-checkbox [id]="'category' + category.Id" color="primary" [checked]="this.categoryIds.includes(category.Id)" (change)="checkCategory(category, $event)">{{category.Name}}</mat-checkbox>
-                </div>
+                <ul class="ListStyleTypeNone Margin0">
+                    <li *ngFor="let category of this.categories">
+                        <mat-checkbox [id]="'category' + category.Id" color="primary" [checked]="this.categoryIds.includes(category.Id)" (change)="checkCategory(category, $event)">{{category.Name}}</mat-checkbox>
+                    </li>
+                </ul>
             </mat-tab>
         </mat-tab-group>
     </div>
