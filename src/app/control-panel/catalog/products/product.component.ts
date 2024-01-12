@@ -43,6 +43,7 @@ export class ControlPanelCatalogProductComponent implements OnInit, OnDestroy {
   public controlPrice = new FormControl('', [Validators.required, Validators.pattern(Constants.REGEX_PATTERN_DECIMAL_8)]);
   public controlStock = new FormControl('', Validators.pattern(Constants.REGEX_PATTERN_NUMBER));
   public controlVisible = new FormControl(true);
+  public controlShowOnHome = new FormControl(false);
 
   public categories: Category[] | undefined;
   public pageTitle = 'Create new product'
@@ -64,7 +65,8 @@ export class ControlPanelCatalogProductComponent implements OnInit, OnDestroy {
       this.controlDescription,
       this.controlPrice,
       this.controlStock,
-      this.controlVisible
+      this.controlVisible,
+      this.controlShowOnHome
     ]);
   }
 
@@ -90,7 +92,6 @@ export class ControlPanelCatalogProductComponent implements OnInit, OnDestroy {
     }
 
     this.categoryService.getList(parameters).subscribe(categories => {
-
       // Fetch products info after categories were fetched
       if (this.queryStringProductId && this.queryStringProductId != 'new') {
         this.productService.getById(this.queryStringProductId).subscribe(x => {
@@ -119,6 +120,8 @@ export class ControlPanelCatalogProductComponent implements OnInit, OnDestroy {
     this.controlName.setValue(response.Product.Name);
     this.controlShop.setValue(response.Product.ShopId);
     this.controlPrice.setValue(response.Product.Price.toString());
+    this.controlVisible.setValue(response.Product.Visible);
+    this.controlShowOnHome.setValue(response.Product.ShowOnHome);
 
     if (response.Product.Stock)
       this.controlStock.setValue(response.Product.Stock.toString());
@@ -148,6 +151,7 @@ export class ControlPanelCatalogProductComponent implements OnInit, OnDestroy {
       productToUpdate.Stock = parseInt(this.controlStock.value);
 
     productToUpdate.Visible = this.controlVisible.value!;
+    productToUpdate.ShowOnHome = this.controlShowOnHome.value!;
 
     if (this.controlDescription.value)
       productToUpdate.Description = this.controlDescription.value;

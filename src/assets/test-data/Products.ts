@@ -9,6 +9,7 @@ export const TestDataProducts: Product[] = [
         Stock: 25,
         Price: 1250,
         Visible: true,
+        ShowOnHome: false,
         Description: 'This is a product'
     },
     {
@@ -18,6 +19,7 @@ export const TestDataProducts: Product[] = [
         Stock: 0,
         Price: 250,
         Visible: true,
+        ShowOnHome: false,
         Description: 'This is a product'
     }
 ];

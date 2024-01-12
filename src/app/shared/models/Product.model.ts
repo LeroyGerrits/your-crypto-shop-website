@@ -6,6 +6,7 @@ export class Product {
     Stock?: number;
     Price!: number;
     Visible!: boolean;
+    ShowOnHome!: boolean;
     MainPhotoId?: string;
     MainPhotoExtension?: string;
 }
