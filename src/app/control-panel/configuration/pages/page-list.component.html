@@ -11,7 +11,7 @@
     <span class="WarningBlock">You must <a [routerLink]="['/control-panel/configuration/shops/new']">create a shop</a> first before you can manage pages.</span>
 </div>
 <div class="ColumnOneFourth">
-    <div class="WrapperPadding20-20-0-8">
+    <div class="WrapperPadding20-10-0-8">
         <mat-form-field>
             <mat-label>Name</mat-label>
             <input matInput [formControl]="controlFilterTitle" />
@@ -19,12 +19,24 @@
     </div>
 </div>
 <div class="ColumnOneFourth">
-    <div class="WrapperPadding20-20-0-20">
+    <div class="WrapperPadding20-10-0-10">
         <mat-form-field>
             <mat-label>Shop</mat-label>
             <mat-select [formControl]="controlFilterShop">
                 <mat-option></mat-option>
                 <mat-option *ngFor="let shop of this.shops" [value]="shop.Id">{{shop.Name}}</mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+</div>
+<div class="ColumnOneFourth">
+    <div class="WrapperPadding20-10-0-10">
+        <mat-form-field>
+            <mat-label>Visible</mat-label>
+            <mat-select [formControl]="controlFilterVisible">
+                <mat-option></mat-option>
+                <mat-option value="true">Yes</mat-option>
+                <mat-option value="false">No</mat-option>
             </mat-select>
         </mat-form-field>
     </div>

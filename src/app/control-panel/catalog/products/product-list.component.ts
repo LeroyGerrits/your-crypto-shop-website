@@ -16,6 +16,7 @@ import { MutationResult } from 'src/app/shared/models/MutationResult';
 import { Product } from 'src/app/shared/models/Product.model';
 import { Shop } from 'src/app/shared/models/Shop.model';
 import { GetProductsParameters } from 'src/app/shared/models/parameters/GetProductsParameters.model';
+import { BooleanConvertPipe } from 'src/app/shared/pipes/BooleanConvert.pipe';
 import { AuthenticationService } from 'src/app/shared/services/Authentication.service';
 import { CategoryService } from 'src/app/shared/services/Category.service';
 import { ProductService } from 'src/app/shared/services/Product.service';
@@ -46,12 +47,15 @@ export class ControlPanelCatalogProductListComponent {
   public controlFilterName = new FormControl('');
   public controlFilterShop = new FormControl('');
   public controlFilterCategory = new FormControl('');
+  public controlFilterVisible = new FormControl('');
+  public controlFilterShowOnHome = new FormControl('');
 
   public shops: Shop[] | undefined;
   public categories: Category[] | undefined;
 
   constructor(
     private authenticationService: AuthenticationService,
+    private booleanConvertPipe: BooleanConvertPipe,
     private categoryService: CategoryService,
     private dialog: MatDialog,
     private snackBar: MatSnackBar,
@@ -62,7 +66,9 @@ export class ControlPanelCatalogProductListComponent {
     this.form = new FormGroup([
       this.controlFilterName,
       this.controlFilterShop,
-      this.controlFilterCategory
+      this.controlFilterCategory,
+      this.controlFilterVisible,
+      this.controlFilterShowOnHome
     ]);
 
     this.controlFilterName.valueChanges.pipe(debounceTime(1000), distinctUntilChanged()).subscribe(() => this.filterProducts());
@@ -98,6 +104,12 @@ export class ControlPanelCatalogProductListComponent {
       Name: this.controlFilterName.value!,
       ShopId: this.controlFilterShop.value!
     };
+
+    if (this.controlFilterVisible.value)
+      parameters.Visible = this.booleanConvertPipe.transform(this.controlFilterVisible.value);
+
+    if (this.controlFilterShowOnHome.value)
+      parameters.Visible = this.booleanConvertPipe.transform(this.controlFilterShowOnHome.value);
 
     this.productService.getList(parameters).subscribe(products => {
       this.dataSource = new MatTableDataSource(products);

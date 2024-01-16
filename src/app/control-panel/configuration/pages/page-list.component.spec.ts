@@ -15,6 +15,7 @@ import { MatTableModule } from '@angular/material/table';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterTestingModule } from '@angular/router/testing';
 import { MutationResult } from 'src/app/shared/models/MutationResult';
+import { BooleanConvertPipe } from 'src/app/shared/pipes/BooleanConvert.pipe';
 import { PageService } from 'src/app/shared/services/Page.service';
 import { ShopService } from 'src/app/shared/services/Shop.service';
 import { TestDataPages } from 'src/assets/test-data/Pages';
@@ -61,6 +62,7 @@ describe('ControlPanelConfigurationPageListComponent', () => {
         { provide: ShopService, useValue: shopServiceSpy },
         { provide: PageService, useValue: pageServiceSpy },
         { provide: MatSnackBar, useValue: matSnackBarSpy },
+        BooleanConvertPipe,
         ControlPanelConfigurationPageListComponent,
         Router
       ]

@@ -7,6 +7,7 @@ import { AccountSettingsComponent } from './account/settings/settings.component'
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { AuthenticationService } from './shared/services/Authentication.service';
+import { BooleanConvertPipe } from './shared/pipes/BooleanConvert.pipe';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BrowserModule } from '@angular/platform-browser';
 import { CategoryService } from './shared/services/Category.service';
@@ -192,6 +193,7 @@ import { StripHtmlPipe } from './shared/pipes/StripHtml.pipe';
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
     AuthenticationService,
+    BooleanConvertPipe,
     CategoryService,
     CountryService,
     CurrencyService,

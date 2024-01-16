@@ -21,7 +21,7 @@ export class PageService {
         if (parameters) {
             if (parameters.Title) httpParams = httpParams.append('title', parameters.Title);
             if (parameters.ShopId) httpParams = httpParams.append('shopId', parameters.ShopId);
-            if (parameters.Visible) httpParams = httpParams.append('visible', parameters.Visible);
+            if (parameters.Visible != null) httpParams = httpParams.append('visible', parameters.Visible);
         }
 
         return this.http.get<Page[]>(this.apiUrl, { params: httpParams });

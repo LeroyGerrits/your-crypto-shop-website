@@ -10,10 +10,11 @@ import { debounceTime, distinctUntilChanged } from 'rxjs';
 import { Constants } from 'src/app/shared/Constants';
 import { DialogDeleteComponent } from 'src/app/shared/dialogs/delete/dialog.delete.component';
 import { Environment } from 'src/app/shared/environments/Environment';
-import { Page } from 'src/app/shared/models/Page.model';
 import { MutationResult } from 'src/app/shared/models/MutationResult';
+import { Page } from 'src/app/shared/models/Page.model';
 import { Shop } from 'src/app/shared/models/Shop.model';
 import { GetPagesParameters } from 'src/app/shared/models/parameters/GetPagesParameters.model';
+import { BooleanConvertPipe } from 'src/app/shared/pipes/BooleanConvert.pipe';
 import { PageService } from 'src/app/shared/services/Page.service';
 import { ShopService } from 'src/app/shared/services/Shop.service';
 
@@ -39,10 +40,12 @@ export class ControlPanelConfigurationPageListComponent implements OnDestroy, On
   public form!: FormGroup;
   public controlFilterTitle = new FormControl('');
   public controlFilterShop = new FormControl('');
+  public controlFilterVisible = new FormControl('');
 
   public shops: Shop[] | undefined;
 
   constructor(
+    private booleanConvertPipe: BooleanConvertPipe,
     public dialog: MatDialog,
     private snackBar: MatSnackBar,
     private router: Router,
@@ -51,11 +54,13 @@ export class ControlPanelConfigurationPageListComponent implements OnDestroy, On
   ) {
     this.form = new FormGroup([
       this.controlFilterTitle,
-      this.controlFilterShop
+      this.controlFilterShop,
+      this.controlFilterVisible
     ]);
 
     this.controlFilterTitle.valueChanges.pipe(debounceTime(1000), distinctUntilChanged()).subscribe(() => this.filterPages());
     this.controlFilterShop.valueChanges.pipe(debounceTime(1000), distinctUntilChanged()).subscribe(() => this.filterPages());
+    this.controlFilterVisible.valueChanges.pipe(debounceTime(1000), distinctUntilChanged()).subscribe(() => this.filterPages());
   }
 
   ngOnInit() {
@@ -70,8 +75,11 @@ export class ControlPanelConfigurationPageListComponent implements OnDestroy, On
   filterPages() {
     const parameters: GetPagesParameters = {
       Title: this.controlFilterTitle.value!,
-      ShopId: this.controlFilterShop.value!
+      ShopId: this.controlFilterShop.value!      
     };
+
+    if(this.controlFilterVisible.value)
+      parameters.Visible = this.booleanConvertPipe.transform(this.controlFilterVisible.value);
 
     this.pageService.getList(parameters).subscribe(pages => {
       this.dataSource = new MatTableDataSource(pages);

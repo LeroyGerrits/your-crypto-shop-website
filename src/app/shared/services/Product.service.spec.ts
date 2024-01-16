@@ -30,11 +30,13 @@ describe('ProductService', () => {
     it('should be able to get a list of products', () => {
         const parameters: GetProductsParameters = {
             Name: 'Test',
-            ShopId: TestDataProducts[0].ShopId
+            ShopId: TestDataProducts[0].ShopId,
+            Visible: true,
+            ShowOnHome: true
         };
 
         service.getList(parameters).subscribe();
-        const request = httpMock.expectOne(`${Environment.API_URL}/Product?name=${parameters.Name}&shopId=${parameters.ShopId}`);
+        const request = httpMock.expectOne(`${Environment.API_URL}/Product?name=${parameters.Name}&shopId=${parameters.ShopId}&visible=${parameters.Visible}&showOnHome=${parameters.ShowOnHome}`);
         expect(request.request.method).toBe('GET');
     });
 

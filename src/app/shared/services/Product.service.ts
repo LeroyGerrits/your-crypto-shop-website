@@ -21,6 +21,8 @@ export class ProductService {
         if (parameters) {
             if (parameters.Name) httpParams = httpParams.append('name', parameters.Name);
             if (parameters.ShopId) httpParams = httpParams.append('shopId', parameters.ShopId);
+            if (parameters.Visible != null) httpParams = httpParams.append('visible', parameters.Visible);
+            if (parameters.ShowOnHome != null) httpParams = httpParams.append('showOnHome', parameters.ShowOnHome);
         }
 
         return this.http.get<Product[]>(this.apiUrl, { params: httpParams });
