@@ -12,7 +12,7 @@
         <h2><a [routerLink]="['/control-panel/configuration/pages']">Pages</a> - {{this.pageTitle}}</h2>
     </div>
     <div class="ClearRight">
-        <mat-tab-group animationDuration="0">
+        <mat-tab-group animationDuration="0" dynamicHeight>
             <mat-tab>
                 <ng-template mat-tab-label>
                     <mat-icon color="warn" class="TabWarnIcon" *ngIf="this.formSubmitted && (controlShop.errors || controlTitle.errors)">error_outline</mat-icon>
@@ -54,7 +54,6 @@
                     </div>
                 </div>
                 <mat-divider class="ClearLeft" />
-                <mat-divider class="ClearLeft" />
                 <div class="ColumnOneHalf">
                     <div class="WrapperPadding10-10-0-8 TextAlignRight">
                         <mat-checkbox [formControl]="controlVisible" color="primary" />
@@ -74,11 +73,13 @@
                 </div>
             </mat-tab>
             <mat-tab label="Categories">
-                <ul class="ListStyleTypeNone Margin0">
-                    <li *ngFor="let category of this.categories">
-                        <mat-checkbox [id]="'category' + category.Id" color="primary" [checked]="this.categoryIds.includes(category.Id)" (change)="checkCategory(category, $event)">{{category.Name}}</mat-checkbox>
-                    </li>
-                </ul>
+                <div class="WrapperPadding20-8-0-8">
+                    <ul class="ListStyleTypeNone Margin0 Padding0">
+                        <li *ngFor="let category of this.categories">
+                            <mat-checkbox [id]="'category' + category.Id" color="primary" [checked]="this.categoryIds.includes(category.Id)" (change)="checkCategory(category, $event)">{{category.Name}}</mat-checkbox>
+                        </li>
+                    </ul>
+                </div>
             </mat-tab>
         </mat-tab-group>
     </div>
