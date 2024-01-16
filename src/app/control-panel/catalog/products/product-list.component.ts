@@ -111,7 +111,7 @@ export class ControlPanelCatalogProductListComponent {
       parameters.Visible = this.booleanConvertPipe.transform(this.controlFilterVisible.value);
 
     if (this.controlFilterShowOnHome.value)
-      parameters.Visible = this.booleanConvertPipe.transform(this.controlFilterShowOnHome.value);
+      parameters.ShowOnHome = this.booleanConvertPipe.transform(this.controlFilterShowOnHome.value);
 
     this.productService.getList(parameters).subscribe(products => {
       this.dataSource = new MatTableDataSource(products);

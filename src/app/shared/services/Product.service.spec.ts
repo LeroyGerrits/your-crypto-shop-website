@@ -7,6 +7,7 @@ import { GetProductsParameters } from '../models/parameters/GetProductsParameter
 import { MutateProductRequest } from '../models/request/MutateProductRequest.model';
 import { ProductService } from './Product.service';
 import { TestBed } from '@angular/core/testing';
+import { TestDataCategories } from 'src/assets/test-data/Categories';
 import { TestDataProducts } from 'src/assets/test-data/Products';
 
 describe('ProductService', () => {
@@ -31,12 +32,13 @@ describe('ProductService', () => {
         const parameters: GetProductsParameters = {
             Name: 'Test',
             ShopId: TestDataProducts[0].ShopId,
+            CategoryId: TestDataCategories[0].Id,
             Visible: true,
             ShowOnHome: true
         };
 
         service.getList(parameters).subscribe();
-        const request = httpMock.expectOne(`${Environment.API_URL}/Product?name=${parameters.Name}&shopId=${parameters.ShopId}&visible=${parameters.Visible}&showOnHome=${parameters.ShowOnHome}`);
+        const request = httpMock.expectOne(`${Environment.API_URL}/Product?name=${parameters.Name}&shopId=${parameters.ShopId}&categoryId=${parameters.CategoryId}&visible=${parameters.Visible}&showOnHome=${parameters.ShowOnHome}`);
         expect(request.request.method).toBe('GET');
     });
 

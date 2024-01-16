@@ -73,7 +73,7 @@
 
         <ng-container matColumnDef="Name">
             <th mat-header-cell mat-sort-header *matHeaderCellDef>Name</th>
-            <td mat-cell *matCellDef="let element">{{element.Name}}</td>
+            <td mat-cell *matCellDef="let element" [ngClass]="{ 'TextDecorationLineThrough': !element.Visible }">{{element.Name}}</td>
         </ng-container>
 
         <ng-container matColumnDef="Stock">
