@@ -26,9 +26,6 @@ export class ProductService {
             if (parameters.ShowOnHome != null) httpParams = httpParams.append('showOnHome', parameters.ShowOnHome);
         }
 
-        console.log('PARAMETERS');
-console.log(parameters);
-
         return this.http.get<Product[]>(this.apiUrl, { params: httpParams });
     }
 
