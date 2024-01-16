@@ -73,6 +73,8 @@ export class ControlPanelCatalogProductListComponent {
 
     this.controlFilterName.valueChanges.pipe(debounceTime(1000), distinctUntilChanged()).subscribe(() => this.filterProducts());
     this.controlFilterCategory.valueChanges.pipe(debounceTime(1000), distinctUntilChanged()).subscribe(() => this.filterProducts());
+    this.controlFilterVisible.valueChanges.pipe(debounceTime(1000), distinctUntilChanged()).subscribe(() => this.filterProducts());
+    this.controlFilterShowOnHome.valueChanges.pipe(debounceTime(1000), distinctUntilChanged()).subscribe(() => this.filterProducts());
   }
 
   ngOnInit() {

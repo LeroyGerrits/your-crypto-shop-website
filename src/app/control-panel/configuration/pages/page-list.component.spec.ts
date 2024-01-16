@@ -88,6 +88,14 @@ describe('ControlPanelConfigurationPageListComponent', () => {
     expect(componentStub.filterPages).toHaveBeenCalled();
   }));
 
+  it('should filter pages list when visible filter gets used', fakeAsync(() => {
+    const componentStub: ControlPanelConfigurationPageListComponent = TestBed.inject(ControlPanelConfigurationPageListComponent);
+    spyOn(componentStub, 'filterPages');
+    componentStub.controlFilterVisible.setValue('test');
+    tick(1000);
+    expect(componentStub.filterPages).toHaveBeenCalled();
+  }));
+
   it('should edit the sortState when a sort direction is supplied', () => {
     const routerstub: Router = TestBed.inject(Router);
     spyOn(routerstub, 'navigate');

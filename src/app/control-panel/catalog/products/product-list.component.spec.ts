@@ -96,6 +96,22 @@ describe('ControlPanelCatalogProductListComponent', () => {
     expect(componentStub.filterProducts).toHaveBeenCalled();
   }));
 
+  it('should filter products list when visible filter gets used', fakeAsync(() => {
+    const componentStub: ControlPanelCatalogProductListComponent = TestBed.inject(ControlPanelCatalogProductListComponent);
+    spyOn(componentStub, 'filterProducts');
+    componentStub.controlFilterVisible.setValue('true');
+    tick(1000);
+    expect(componentStub.filterProducts).toHaveBeenCalled();
+  }));
+
+  it('should filter products list when show on home page filter gets used', fakeAsync(() => {
+    const componentStub: ControlPanelCatalogProductListComponent = TestBed.inject(ControlPanelCatalogProductListComponent);
+    spyOn(componentStub, 'filterProducts');
+    componentStub.controlFilterShowOnHome.setValue('true');
+    tick(1000);
+    expect(componentStub.filterProducts).toHaveBeenCalled();
+  }));
+
   it('should edit the sortState when a sort direction is supplied', () => {
     const routerstub: Router = TestBed.inject(Router);
     spyOn(routerstub, 'navigate');
