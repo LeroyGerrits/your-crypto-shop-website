@@ -46,7 +46,7 @@ export class ControlPanelConfigurationPageListComponent implements OnDestroy, On
 
   constructor(
     private booleanConvertPipe: BooleanConvertPipe,
-    public dialog: MatDialog,
+    private dialog: MatDialog,
     private snackBar: MatSnackBar,
     private router: Router,
     private pageService: PageService,
@@ -75,11 +75,9 @@ export class ControlPanelConfigurationPageListComponent implements OnDestroy, On
   filterPages() {
     const parameters: GetPagesParameters = {
       Title: this.controlFilterTitle.value!,
-      ShopId: this.controlFilterShop.value!      
+      ShopId: this.controlFilterShop.value!,
+      Visible: this.booleanConvertPipe.transform(this.controlFilterVisible.value)
     };
-
-    if(this.controlFilterVisible.value)
-      parameters.Visible = this.booleanConvertPipe.transform(this.controlFilterVisible.value);
 
     this.pageService.getList(parameters).subscribe(pages => {
       this.dataSource = new MatTableDataSource(pages);

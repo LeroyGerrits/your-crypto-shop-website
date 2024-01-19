@@ -3,7 +3,11 @@ import { BooleanConvertPipe } from "./BooleanConvert.pipe";
 describe('BooleanConvertPipe', () => {
     const pipe = new BooleanConvertPipe();
 
-    it('should return true when the input evaluates to a true boolean', () => {
+    it('should return true when the boolean input evaluates to a true boolean', () => {
+        expect(pipe.transform(true)).toBeTrue();
+    });
+
+    it('should return true when the textual input evaluates to a true boolean', () => {
         expect(pipe.transform('true')).toBeTrue();
     });
 
