@@ -104,10 +104,14 @@ export class ControlPanelCatalogProductListComponent {
   filterProducts() {
     const parameters: GetProductsParameters = {
       Name: this.controlFilterName.value!,
-      ShopId: this.controlFilterShop.value!,
-      Visible: this.booleanConvertPipe.transform(this.controlFilterVisible.value),
-      ShowOnHome: this.booleanConvertPipe.transform(this.controlFilterShowOnHome.value)
+      ShopId: this.controlFilterShop.value!
     };
+
+    if (this.controlFilterVisible.value)
+      parameters.Visible = this.booleanConvertPipe.transform(this.controlFilterVisible.value!);
+
+    if (this.controlFilterShowOnHome.value)
+      parameters.ShowOnHome = this.booleanConvertPipe.transform(this.controlFilterShowOnHome.value!);
 
     this.productService.getList(parameters).subscribe(products => {
       this.dataSource = new MatTableDataSource(products);

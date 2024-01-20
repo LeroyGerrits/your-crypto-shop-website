@@ -75,9 +75,11 @@ export class ControlPanelConfigurationPageListComponent implements OnDestroy, On
   filterPages() {
     const parameters: GetPagesParameters = {
       Title: this.controlFilterTitle.value!,
-      ShopId: this.controlFilterShop.value!,
-      Visible: this.booleanConvertPipe.transform(this.controlFilterVisible.value)
+      ShopId: this.controlFilterShop.value!
     };
+
+    if (this.controlFilterVisible.value)
+      parameters.Visible = this.booleanConvertPipe.transform(this.controlFilterVisible.value!);
 
     this.pageService.getList(parameters).subscribe(pages => {
       this.dataSource = new MatTableDataSource(pages);
