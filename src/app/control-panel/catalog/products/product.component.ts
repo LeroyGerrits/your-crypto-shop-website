@@ -149,6 +149,8 @@ export class ControlPanelCatalogProductComponent implements OnInit, OnDestroy {
 
     if (this.controlStock.value)
       productToUpdate.Stock = parseInt(this.controlStock.value);
+    else
+      productToUpdate.Stock = undefined;
 
     productToUpdate.Visible = this.controlVisible.value!;
     productToUpdate.ShowOnHome = this.controlShowOnHome.value!;
