@@ -1,8 +1,6 @@
-import { Merchant } from './Merchant.model';
-
 export class DigiByteWallet {
     Id!: string;
-    Merchant!: Merchant;
+    MerchantId!: string;
     Name!: string;
     Address!: string;
 }

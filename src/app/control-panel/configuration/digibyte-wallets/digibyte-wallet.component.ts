@@ -7,6 +7,7 @@ import { AuthenticationService } from 'src/app/shared/services/Authentication.se
 import { DigiByteWallet } from 'src/app/shared/models/DigiByteWallet.model';
 import { DigiByteWalletService } from 'src/app/shared/services/DigiByteWallet.service';
 import { Environment } from 'src/app/shared/environments/Environment';
+import { Merchant } from 'src/app/shared/models/Merchant.model';
 import { MutationResult } from 'src/app/shared/models/MutationResult';
 
 @Component({
@@ -15,6 +16,8 @@ import { MutationResult } from 'src/app/shared/models/MutationResult';
 })
 
 export class ControlPanelConfigurationDigiByteWalletComponent implements OnInit, OnDestroy {
+  public activeMerchant?: Merchant | null;
+
   public environment = Environment;
   public snackBarRef: MatSnackBarRef<TextOnlySnackBar> | undefined;
   public queryStringDigiByteWalletId: string | null = '';
@@ -29,12 +32,14 @@ export class ControlPanelConfigurationDigiByteWalletComponent implements OnInit,
   public digibyteWallet: DigiByteWallet = new DigiByteWallet();
 
   constructor(
+    private authenticationService: AuthenticationService,
+    private digibyteWalletService: DigiByteWalletService,
     private route: ActivatedRoute,
     private router: Router,
-    private snackBar: MatSnackBar,
-    private digibyteWalletService: DigiByteWalletService,
-    private authenticationService: AuthenticationService
+    private snackBar: MatSnackBar
   ) {
+    this.authenticationService.merchant.subscribe(x => this.activeMerchant = x?.Merchant);
+
     this.form = new FormGroup([
       this.controlName,
       this.controlAddress
@@ -70,7 +75,10 @@ export class ControlPanelConfigurationDigiByteWalletComponent implements OnInit,
     this.formLoading = true;
 
     const digibyteWalletToUpdate: DigiByteWallet = Object.assign({}, this.digibyteWallet);
-    digibyteWalletToUpdate.Merchant = this.authenticationService.authenticatedMerchant?.Merchant!;
+
+    if (this.activeMerchant)
+      digibyteWalletToUpdate.MerchantId = this.activeMerchant!.Id!;
+
     digibyteWalletToUpdate.Name = this.controlName.value!;
     digibyteWalletToUpdate.Address = this.controlAddress.value!;
 

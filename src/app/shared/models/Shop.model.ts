@@ -1,4 +1,5 @@
 import { Country } from "./Country.model";
+import { DigiByteWallet } from "./DigiByteWallet.model";
 import { ShopCategory } from "./ShopCategory.model";
 
 export class Shop {
@@ -8,5 +9,6 @@ export class Shop {
     SubDomain?: string;
     Country?: Country;
     Category?: ShopCategory;
+    Wallet?: DigiByteWallet;
     Featured!: boolean;
 }

@@ -8,6 +8,8 @@ import { AuthenticationService } from 'src/app/shared/services/Authentication.se
 import { Constants } from 'src/app/shared/Constants';
 import { Country } from 'src/app/shared/models/Country.model';
 import { CountryService } from 'src/app/shared/services/Country.service';
+import { DigiByteWallet } from 'src/app/shared/models/DigiByteWallet.model';
+import { DigiByteWalletService } from 'src/app/shared/services/DigiByteWallet.service';
 import { Environment } from 'src/app/shared/environments/Environment';
 import { Merchant } from 'src/app/shared/models/Merchant.model';
 import { MutationResult } from 'src/app/shared/models/MutationResult';
@@ -37,16 +39,19 @@ export class ControlPanelConfigurationShopComponent implements OnInit {
   public controlSubDomain = new FormControl('', [Validators.minLength(3), Validators.pattern(/^[a-zA-Z0-9]*$/)])
   public controlCountry = new FormControl('');
   public controlShopCategory = new FormControl('');
+  public controlDigiByteWallet = new FormControl('');
 
   public pageTitle = 'Create new shop'
   public shop: Shop = new Shop();
   public subDomainAvailable = false;
   public countries: Country[] | undefined;
   public shopCategories: ShopCategory[] | undefined;
+  public digiByteWallets: DigiByteWallet[] | undefined;
 
   constructor(
     private authenticationService: AuthenticationService,
     private countryService: CountryService,
+    private digiByteWalletService: DigiByteWalletService,
     private route: ActivatedRoute,
     private router: Router,
     private snackBar: MatSnackBar,
@@ -73,6 +78,7 @@ export class ControlPanelConfigurationShopComponent implements OnInit {
 
     this.countryService.getList().subscribe(countries => this.countries = countries);
     this.shopCategoryService.getList().subscribe(shopCategories => this.shopCategories = shopCategories);
+    this.digiByteWalletService.getList().subscribe(digiByteWallets => this.digiByteWallets = digiByteWallets);
   }
 
   ngOnDestroy() {
@@ -94,6 +100,9 @@ export class ControlPanelConfigurationShopComponent implements OnInit {
 
     if (shop.Category)
       this.controlShopCategory.setValue(shop.Category.Id);
+
+    if (shop.Wallet)
+      this.controlDigiByteWallet.setValue(shop.Wallet.Id);
   }
 
   checkSubDomainAvailability(subdomain: string | null) {
@@ -134,6 +143,10 @@ export class ControlPanelConfigurationShopComponent implements OnInit {
     var selectedShopCategory = this.shopCategories?.find(x => x.Id == this.controlShopCategory.value);
     if (selectedShopCategory)
       shopToUpdate.Category = selectedShopCategory;
+
+    var selectedDigiByteWallet = this.digiByteWallets?.find(x => x.Id == this.controlDigiByteWallet.value);
+    if (selectedDigiByteWallet)
+      shopToUpdate.Wallet = selectedDigiByteWallet;
 
     if (this.queryStringShopId && this.queryStringShopId != 'new') {
       this.shopService.update(shopToUpdate).subscribe({
