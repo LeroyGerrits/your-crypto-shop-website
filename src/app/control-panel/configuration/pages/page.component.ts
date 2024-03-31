@@ -35,6 +35,8 @@ export class ControlPanelConfigurationPageComponent implements OnInit, OnDestroy
   public controlShop = new FormControl('', Validators.required);
   public controlContent = new FormControl('');
   public controlVisible = new FormControl(true);
+  public controlIndex = new FormControl(false);
+
 
   public categories: PageCategory[] | undefined;
   public pageTitle = 'Create new page'
@@ -54,7 +56,8 @@ export class ControlPanelConfigurationPageComponent implements OnInit, OnDestroy
       this.controlTitle,
       this.controlShop,
       this.controlContent,
-      this.controlVisible
+      this.controlVisible,
+      this.controlIndex
     ]);
   }
 
@@ -99,6 +102,7 @@ export class ControlPanelConfigurationPageComponent implements OnInit, OnDestroy
     this.controlTitle.setValue(response.Page.Title);
     this.controlShop.setValue(response.Page.Shop.Id);
     this.controlVisible.setValue(response.Page.Visible);
+    this.controlIndex.setValue(response.Page.Index);
 
     if (response.Page.Content)
       this.controlContent.setValue(response.Page.Content);
@@ -119,6 +123,7 @@ export class ControlPanelConfigurationPageComponent implements OnInit, OnDestroy
     const pageToUpdate: Page = Object.assign({}, this.page);
     pageToUpdate.Title = this.controlTitle.value!;
     pageToUpdate.Visible = this.controlVisible.value!;
+    pageToUpdate.Index = this.controlIndex.value!;
 
     var selectedShop = this.shops?.find(x => x.Id == this.controlShop.value);
     if (selectedShop)

@@ -6,4 +6,5 @@ export class Page {
     Title!: string;
     Content?: string;
     Visible!: boolean;
+    Index!: boolean;
 }

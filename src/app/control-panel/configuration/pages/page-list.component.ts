@@ -33,7 +33,7 @@ export class ControlPanelConfigurationPageListComponent implements OnDestroy, On
   environment = Environment;
   constants = Constants;
   dataSource = new MatTableDataSource<Page>;
-  displayedColumns: string[] = ['Title', 'Shop', 'ActionButtons'];
+  displayedColumns: string[] = ['Index', 'Title', 'Shop', 'ActionButtons'];
   sortDirection: string | null = 'asc';
   finishedLoading: boolean = false;
 
