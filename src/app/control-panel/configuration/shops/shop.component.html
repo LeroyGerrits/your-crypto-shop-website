@@ -96,6 +96,21 @@
         </div>
     </div>
     <mat-divider class="ClearLeft" />
+    <div class="ColumnOneHalf">
+        <div class="WrapperPadding20-10-0-8 TextAlignRight">
+            <mat-radio-group aria-labelledby="gender" [formControl]="controlOrderMethod">
+                <mat-radio-button value="0" color="primary">Automated</mat-radio-button>
+                <mat-radio-button value="1" color="primary">Manual action required</mat-radio-button>
+            </mat-radio-group>
+        </div>
+    </div>
+    <div class="ColumnOneHalf">
+        <div class="WrapperPadding20-10-0-8">
+            <p>The order method of the shop.</p>
+            <p><strong>Automated:</strong> Customers are presented with a payment request immediately after checkout. This makes the ordering and checkout process more streamlined, but you have to make sure the prices of your products and delivery methods are set appropriately keeping possible international shipment in mind.</p>
+            <p><strong>Manual action required:</strong> Customers are presented with a confirmation message after checkout. Only when the order is manually reviewed and verified by you in the Control Panel, the customer will receive a link with a payment request.</p>
+        </div>
+    </div>
     <div class="CenteredFormButtons">
         <button mat-raised-button [disabled]="formLoading" type="button" [routerLink]="['/control-panel/configuration/shops']">Cancel</button>
         <button mat-raised-button [disabled]="formLoading" type="submit" color="primary">

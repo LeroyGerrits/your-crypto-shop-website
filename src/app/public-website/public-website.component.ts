@@ -3,10 +3,10 @@ import { NavigationEnd, Router } from '@angular/router';
 
 import { DialogSignUpComponent } from '../shared/dialogs/signup/dialog.signup.component';
 import { MatDialog } from '@angular/material/dialog';
-import { Shop } from '../shared/models/Shop.model';
 import { ShopService } from '../shared/services/Shop.service';
 import { StatsService } from '../shared/services/Stats.service';
 import { Stats } from '../shared/models/Stats.model';
+import { PublicShop } from '../shared/models/viewmodels/PublicShop.model';
 
 @Component({
   selector: 'public-website',
@@ -14,7 +14,7 @@ import { Stats } from '../shared/models/Stats.model';
 })
 export class PublicWebsiteComponent implements OnInit {
   public showCallToAction: boolean = this.router.url == '/';
-  public featuredShops: Shop[] | undefined;
+  public featuredShops: PublicShop[] | undefined;
   public stats: Stats = <Stats>{
     Merchants: 0,
     Shops: 0,

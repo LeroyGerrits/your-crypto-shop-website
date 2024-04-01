@@ -16,6 +16,7 @@ import { MutationResult } from 'src/app/shared/models/MutationResult';
 import { Shop } from 'src/app/shared/models/Shop.model';
 import { ShopCategory } from 'src/app/shared/models/ShopCategory.model';
 import { ShopCategoryService } from 'src/app/shared/services/ShopCategory.service';
+import { ShopOrderMethod } from 'src/app/shared/enums/ShopOrderMethod.enum';
 import { ShopService } from 'src/app/shared/services/Shop.service';
 
 @Component({
@@ -40,6 +41,7 @@ export class ControlPanelConfigurationShopComponent implements OnInit {
   public controlCountry = new FormControl('');
   public controlShopCategory = new FormControl('');
   public controlDigiByteWallet = new FormControl('');
+  public controlOrderMethod = new FormControl('0', Validators.required);
 
   public pageTitle = 'Create new shop'
   public shop: Shop = new Shop();
@@ -47,6 +49,8 @@ export class ControlPanelConfigurationShopComponent implements OnInit {
   public countries: Country[] | undefined;
   public shopCategories: ShopCategory[] | undefined;
   public digiByteWallets: DigiByteWallet[] | undefined;
+
+  public orderMethodType: typeof ShopOrderMethod = ShopOrderMethod;
 
   constructor(
     private authenticationService: AuthenticationService,
@@ -64,8 +68,11 @@ export class ControlPanelConfigurationShopComponent implements OnInit {
       this.controlName,
       this.controlSubDomain,
       this.controlCountry,
-      this.controlShopCategory
+      this.controlShopCategory,
+      this.controlDigiByteWallet,
+      this.controlOrderMethod
     ]);
+
     this.controlSubDomain.valueChanges.pipe(debounceTime(1000), distinctUntilChanged()).subscribe(value => this.checkSubDomainAvailability(value));
   }
 
@@ -103,6 +110,12 @@ export class ControlPanelConfigurationShopComponent implements OnInit {
 
     if (shop.Wallet)
       this.controlDigiByteWallet.setValue(shop.Wallet.Id);
+
+    if (shop.OrderMethod.toString() == 'ManualActionRequired' || shop.OrderMethod.toString() == ShopOrderMethod.ManualActionRequired.toString()) {
+      this.controlOrderMethod.setValue(this.orderMethodType.ManualActionRequired.toString());
+    } else {
+      this.controlOrderMethod.setValue(this.orderMethodType.Automated.toString());
+    }
   }
 
   checkSubDomainAvailability(subdomain: string | null) {
@@ -132,6 +145,7 @@ export class ControlPanelConfigurationShopComponent implements OnInit {
     const shopToUpdate: Shop = Object.assign({}, this.shop);
     shopToUpdate.Name = this.controlName.value!;
     shopToUpdate.SubDomain = this.controlSubDomain.value!;
+    shopToUpdate.OrderMethod = parseInt(this.controlOrderMethod.value!)
 
     if (this.activeMerchant)
       shopToUpdate.MerchantId = this.activeMerchant!.Id!;
