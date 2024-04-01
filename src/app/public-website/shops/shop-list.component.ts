@@ -25,7 +25,7 @@ export class PublicWebsiteShopListComponent implements OnInit {
 
   environment = Environment;
   dataSource = new MatTableDataSource<PublicShop>;
-  displayedColumns: string[] = ['Featured', 'Name', 'SubDomain', 'Country', 'Category', 'Merchant'];
+  displayedColumns: string[] = ['Featured', 'Name', 'Country', 'Category', 'Merchant'];
   sortDirection: string | null = 'asc';
 
   public form!: FormGroup;
