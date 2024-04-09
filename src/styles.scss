@@ -448,6 +448,12 @@ div.Column16Pct {
   float: left;
   width: 16%;
 }
+
+div.Column20Pct {
+  float: left;
+  width: 20%;
+}
+
 div.Column25Pct {
   float: left;
   width: 25%;
@@ -910,6 +916,7 @@ mat-accordion mat-expansion-panel mat-expansion-panel-header span.Text {
   }
 
   div.Column16Pct,
+  div.Column20Pct,
   div.Column25Pct,
   div.ColumnOneSixth,
   div.ColumnOneFifth,

@@ -1,3 +1,110 @@
 <div class="WrapperPadding20-8">
     <h2>Orders</h2>
 </div>
+<div class="WrapperPadding20-8-0-8">
+    <mat-accordion>
+        <mat-expansion-panel>
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                    <mat-icon>filter_list</mat-icon>
+                    <span class="Text">Filters</span>
+                </mat-panel-title>
+            </mat-expansion-panel-header>
+            <div class="Column20Pct">
+                <div class="WrapperPadding0-10-0-0">
+                    <mat-form-field subscriptSizing="dynamic">
+                        <mat-label>Date from</mat-label>
+                        <input matInput [formControl]="controlFilterDateFrom" [matDatepicker]="pickerDateFrom" />
+                        <mat-datepicker-toggle matIconSuffix [for]="pickerDateFrom"></mat-datepicker-toggle>
+                        <mat-datepicker #pickerDateFrom></mat-datepicker>
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="Column20Pct">
+                <div class="WrapperPadding0-10">
+                    <mat-form-field subscriptSizing="dynamic">
+                        <mat-label>Date until</mat-label>
+                        <input matInput [formControl]="controlFilterDateUntil" [matDatepicker]="pickerDateUntil" />
+                        <mat-datepicker-toggle matIconSuffix [for]="pickerDateUntil"></mat-datepicker-toggle>
+                        <mat-datepicker #pickerDateUntil></mat-datepicker>
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="Column20Pct">
+                <div class="WrapperPadding0-10">
+                    <mat-form-field subscriptSizing="dynamic">
+                        <mat-label>Shop</mat-label>                        
+                        <mat-select [formControl]="controlFilterShop">
+                            <mat-option></mat-option>
+                            <mat-option *ngFor="let shop of this.shops" [value]="shop.Id">{{shop.Name}}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="Column20Pct">
+                <div class="WrapperPadding0-10">
+                    <mat-form-field subscriptSizing="dynamic">
+                        <mat-label>Customer</mat-label>
+                        <input matInput [formControl]="controlFilterCustomer" />
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="Column20Pct">
+                <div class="WrapperPadding0-0-0-10">
+                    <mat-form-field subscriptSizing="dynamic">
+                        <mat-label>Status</mat-label>
+                        <input matInput [formControl]="controlFilterStatus" />
+                    </mat-form-field>
+                </div>
+            </div>
+        </mat-expansion-panel>
+    </mat-accordion>
+</div>
+<div class="WrapperPadding20-8">
+    <table mat-table matSort [dataSource]="this.dataSource" (matSortChange)="onSortChange($event)">
+        <ng-container matColumnDef="Date">
+            <th mat-header-cell mat-sort-header *matHeaderCellDef>Date</th>
+            <td mat-cell *matCellDef="let element">{{element.Date}}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="Shop">
+            <th mat-header-cell mat-sort-header *matHeaderCellDef>Shop</th>
+            <td mat-cell *matCellDef="let element">{{element.Shop.Name}}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="Customer">
+            <th mat-header-cell mat-sort-header *matHeaderCellDef>Customer</th>
+            <td mat-cell *matCellDef="let element">{{element.Customer.Username}}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="Status">
+            <th mat-header-cell mat-sort-header *matHeaderCellDef>Status</th>
+            <td mat-cell *matCellDef="let element">{{element.Status}}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="ActionButtons">
+            <th mat-header-cell *matHeaderCellDef></th>
+            <td mat-cell *matCellDef="let element">
+                <button mat-icon-button [matMenuTriggerFor]="menu">
+                    <mat-icon color="primary">more_horiz</mat-icon>
+                </button>
+                <mat-menu #menu="matMenu">
+                    <button mat-menu-item color="primary" (click)="editElement(element)">
+                        <mat-icon color="primary">edit</mat-icon> <span>Edit</span>
+                    </button>
+                </mat-menu>
+            </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="this.displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: this.displayedColumns;" (dblclick)="editElement(row)"></tr>
+        <tr class="mat-row" *matNoDataRow>
+            <td class="mat-cell NoDataCell" [colSpan]="this.displayedColumns.length">
+                <span *ngIf="this.controlFilterDateFrom.value || this.controlFilterDateUntil.value || this.controlFilterShop.value || this.controlFilterCustomer.value || this.controlFilterStatus.value">{{constants.MESSAGE_NO_RECORDS_FOUND}}</span>
+                <span *ngIf="!this.controlFilterDateFrom.value && !this.controlFilterDateUntil.value && !this.controlFilterShop.value && !this.controlFilterCustomer.value && !this.controlFilterStatus.value">No customers have signed up in your shop yet.</span>
+            </td>
+        </tr>
+    </table>
+
+    <mat-paginator [pageSizeOptions]="[25, 50, 100]" showFirstLastButtons />
+</div>
