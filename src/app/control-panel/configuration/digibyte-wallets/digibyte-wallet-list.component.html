@@ -7,25 +7,35 @@
     </div>
     <h2>DigiByte wallets</h2>
 </div>
-
-<div class="ColumnOneFourth">
-    <div class="WrapperPadding20-20-0-8">
-        <mat-form-field>
-            <mat-label>Name</mat-label>
-            <input matInput [formControl]="controlFilterName" />
-        </mat-form-field>
-    </div>
+<div class="WrapperPadding20-8-0-8">
+    <mat-accordion>
+        <mat-expansion-panel>
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                    <mat-icon>filter_list</mat-icon>
+                    <span class="Text">Filters</span>
+                </mat-panel-title>
+            </mat-expansion-panel-header>
+            <div class="Column25Pct">
+                <div class="WrapperPadding0-10-0-0">
+                    <mat-form-field subscriptSizing="dynamic">
+                        <mat-label>Name</mat-label>
+                        <input matInput [formControl]="controlFilterName" />
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="Column25Pct">
+                <div class="WrapperPadding0-10">
+                    <mat-form-field subscriptSizing="dynamic">
+                        <mat-label>Address</mat-label>
+                        <input matInput [formControl]="controlFilterAddress" />
+                    </mat-form-field>
+                </div>
+            </div>
+        </mat-expansion-panel>
+    </mat-accordion>
 </div>
-<div class="ColumnOneFourth">
-    <div class="WrapperPadding20-20-0-20">
-        <mat-form-field>
-            <mat-label>Address</mat-label>
-            <input matInput [formControl]="controlFilterAddress" />
-        </mat-form-field>
-    </div>
-</div>
-
-<div class="WrapperPadding20-8 ClearLeft">
+<div class="WrapperPadding20-8">
     <table mat-table matSort [dataSource]="this.dataSource" (matSortChange)="onSortChange($event)">
         <ng-container matColumnDef="Name">
             <th mat-header-cell mat-sort-header *matHeaderCellDef>Name</th>

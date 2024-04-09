@@ -2,12 +2,11 @@
     <h2>FAQ</h2>
 </div>
 <div class="WrapperPadding20-8-0-8">
-    <mat-form-field>
+    <mat-form-field subscriptSizing="dynamic">
         <mat-label>Search</mat-label>
         <input matInput placeholder="What can we help you with?" [formControl]="controlFilter" />
     </mat-form-field>
 </div>
-
 <div *ngFor="let faqCategory of this.faqCategoriesFiltered">
     <div class="WrapperPadding20-8-0-8" *ngIf="this.faqsByCategoryId[faqCategory.Id]">
         <h3>{{faqCategory.Name}}</h3>

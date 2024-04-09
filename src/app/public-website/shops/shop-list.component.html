@@ -2,50 +2,61 @@
     <h2>Shops</h2>
 </div>
 
-<div class="ColumnOneFourth">
-    <div class="WrapperPadding20-10-0-8">
-        <mat-form-field>
-            <mat-label>Name</mat-label>
-            <input matInput [formControl]="controlFilterName" />
-        </mat-form-field>
-    </div>
+<div class="WrapperPadding20-8-0-8">
+    <mat-accordion>
+        <mat-expansion-panel>
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                    <mat-icon>filter_list</mat-icon>
+                    <span class="Text">Filters</span>
+                </mat-panel-title>
+            </mat-expansion-panel-header>
+            <div class="Column25Pct">
+                <div class="WrapperPadding0-10-0-0">
+                    <mat-form-field subscriptSizing="dynamic">
+                        <mat-label>Name</mat-label>
+                        <input matInput [formControl]="controlFilterName" />
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="Column25Pct">
+                <div class="WrapperPadding0-10">
+                    <mat-form-field subscriptSizing="dynamic">
+                        <mat-label>Subdomain</mat-label>
+                        <input matInput [formControl]="controlFilterSubDomain" />
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="Column25Pct">
+                <div class="WrapperPadding0-10">
+                    <mat-form-field subscriptSizing="dynamic">
+                        <mat-label>Country</mat-label>
+                        <mat-select [formControl]="controlFilterCountry">
+                            <mat-option></mat-option>
+                            <mat-option *ngFor="let country of this.countries" [value]="country.Id">
+                                <img src="/assets/images/flags/{{country.Code.toLowerCase()}}.png" width="24" height="24" alt="{{country.Code}}" />{{country.Name}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="Column25Pct">
+                <div class="WrapperPadding0-0-0-10">
+                    <mat-form-field subscriptSizing="dynamic">
+                        <mat-label>Category</mat-label>
+                        <mat-select [formControl]="controlFilterShopCategory">
+                            <mat-option></mat-option>
+                            <mat-option *ngFor="let shopCategory of this.shopCategories" [value]="shopCategory.Id">
+                                {{shopCategory.Name}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+            </div>
+        </mat-expansion-panel>
+    </mat-accordion>
 </div>
-<div class="ColumnOneFourth">
-    <div class="WrapperPadding20-10-0-10">
-        <mat-form-field>
-            <mat-label>Subdomain</mat-label>
-            <input matInput [formControl]="controlFilterSubDomain" />
-        </mat-form-field>
-    </div>
-</div>
-<div class="ColumnOneFourth">
-    <div class="WrapperPadding20-10-0-10">
-        <mat-form-field>
-            <mat-label>Country</mat-label>
-            <mat-select [formControl]="controlFilterCountry">
-                <mat-option></mat-option>
-                <mat-option *ngFor="let country of this.countries" [value]="country.Id">
-                    <img src="/assets/images/flags/{{country.Code.toLowerCase()}}.png" width="24" height="24" alt="{{country.Code}}" />{{country.Name}}
-                </mat-option>
-            </mat-select>
-        </mat-form-field>
-    </div>
-</div>
-<div class="ColumnOneFourth">
-    <div class="WrapperPadding20-8-0-10">
-        <mat-form-field>
-            <mat-label>Category</mat-label>
-            <mat-select [formControl]="controlFilterShopCategory">
-                <mat-option></mat-option>
-                <mat-option *ngFor="let shopCategory of this.shopCategories" [value]="shopCategory.Id">
-                    {{shopCategory.Name}}
-                </mat-option>
-            </mat-select>
-        </mat-form-field>
-    </div>
-</div>
-
-<div class="WrapperPadding20-8 ClearLeft">
+<div class="WrapperPadding20-8">
     <table mat-table matSort [dataSource]="this.dataSource" (matSortChange)="onSortChange($event)">
         <ng-container matColumnDef="Featured">
             <th mat-header-cell *matHeaderCellDef></th>

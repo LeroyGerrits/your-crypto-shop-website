@@ -444,6 +444,10 @@ div.CenteredFormButtons button {
   margin: 0 10px;
 }
 
+div.Column16Pct {
+  float: left;
+  width: 16%;
+}
 div.Column25Pct {
   float: left;
   width: 25%;
@@ -508,6 +512,14 @@ img.PublicWebsiteImageStretch {
   display: block;
   height: auto;
   width: 100%;
+}
+
+div.WrapperPadding0-0-0-10 {
+  padding: 0 0 0 10px;
+}
+
+div.WrapperPadding0-10-0-0 {
+  padding: 0 10px 0 0;
 }
 
 div.WrapperPadding0-10-0-8 {
@@ -897,6 +909,7 @@ mat-accordion mat-expansion-panel mat-expansion-panel-header span.Text {
     width: auto;
   }
 
+  div.Column16Pct,
   div.Column25Pct,
   div.ColumnOneSixth,
   div.ColumnOneFifth,
@@ -909,6 +922,8 @@ mat-accordion mat-expansion-panel mat-expansion-panel-header span.Text {
     width: auto;
   }
 
+  div.WrapperPadding0-0-0-10,
+  div.WrapperPadding0-10-0-0,
   div.WrapperPadding0-10-0-8,
   div.WrapperPadding0-10,
   div.WrapperPadding0-8,
