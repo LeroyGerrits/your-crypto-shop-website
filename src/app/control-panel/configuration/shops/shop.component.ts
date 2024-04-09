@@ -42,6 +42,7 @@ export class ControlPanelConfigurationShopComponent implements OnInit {
   public controlShopCategory = new FormControl('');
   public controlDigiByteWallet = new FormControl('');
   public controlOrderMethod = new FormControl('0', Validators.required);
+  public controlRequireAddresses = new FormControl(true, Validators.required);
 
   public pageTitle = 'Create new shop'
   public shop: Shop = new Shop();
@@ -70,7 +71,8 @@ export class ControlPanelConfigurationShopComponent implements OnInit {
       this.controlCountry,
       this.controlShopCategory,
       this.controlDigiByteWallet,
-      this.controlOrderMethod
+      this.controlOrderMethod,
+      this.controlRequireAddresses
     ]);
 
     this.controlSubDomain.valueChanges.pipe(debounceTime(1000), distinctUntilChanged()).subscribe(value => this.checkSubDomainAvailability(value));
@@ -116,6 +118,8 @@ export class ControlPanelConfigurationShopComponent implements OnInit {
     } else {
       this.controlOrderMethod.setValue(this.orderMethodType.Automated.toString());
     }
+
+    this.controlRequireAddresses.setValue(shop.RequireAddresses);
   }
 
   checkSubDomainAvailability(subdomain: string | null) {
@@ -146,6 +150,7 @@ export class ControlPanelConfigurationShopComponent implements OnInit {
     shopToUpdate.Name = this.controlName.value!;
     shopToUpdate.SubDomain = this.controlSubDomain.value!;
     shopToUpdate.OrderMethod = parseInt(this.controlOrderMethod.value!)
+    shopToUpdate.RequireAddresses = this.controlRequireAddresses.value!;
 
     if (this.activeMerchant)
       shopToUpdate.MerchantId = this.activeMerchant!.Id!;

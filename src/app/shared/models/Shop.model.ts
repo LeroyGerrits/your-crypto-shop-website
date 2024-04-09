@@ -11,6 +11,7 @@ export class Shop {
     Country?: Country;
     Category?: ShopCategory;
     Wallet?: DigiByteWallet;
-    Featured!: boolean;
     OrderMethod!: ShopOrderMethod;
+    RequireAddresses!: boolean;
+    Featured!: boolean;
 }
