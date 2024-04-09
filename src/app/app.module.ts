@@ -29,6 +29,8 @@ import { ControlPanelConfigurationShopListComponent } from './control-panel/conf
 import { ControlPanelCustomerComponent } from './control-panel/customers/customer.component';
 import { ControlPanelCustomerListComponent } from './control-panel/customers/customer-list.component';
 import { ControlPanelDashboardComponent } from './control-panel/dashboard/dashboard.component';
+import { ControlPanelSalesOrderComponent } from './control-panel/sales/orders/order.component';
+import { ControlPanelSalesOrderListComponent } from './control-panel/sales/orders/order-list.component';
 import { CountryService } from './shared/services/Country.service';
 import { CurrencyService } from './shared/services/Currency.service';
 import { CustomerService } from './shared/services/Customer.service';
@@ -57,6 +59,7 @@ import { MatChipsModule } from '@angular/material/chips';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatDividerModule } from '@angular/material/divider';
+import { MatExpansionModule } from '@angular/material/expansion';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatIconModule } from '@angular/material/icon';
@@ -129,6 +132,8 @@ import { StripHtmlPipe } from './shared/pipes/StripHtml.pipe';
     ControlPanelCustomerListComponent,
     ControlPanelCustomerComponent,
     ControlPanelDashboardComponent,
+    ControlPanelSalesOrderListComponent,
+    ControlPanelSalesOrderComponent,
     DialogDeleteComponent,
     DialogDonateComponent,
     DialogForgotPasswordComponent,
@@ -158,13 +163,14 @@ import { StripHtmlPipe } from './shared/pipes/StripHtml.pipe';
     BrowserModule,
     HttpClientModule,
     MatBadgeModule,
+    MatButtonModule,
     MatCardModule,
     MatCheckboxModule,
     MatChipsModule,
     MatDatepickerModule,
     MatDialogModule,
     MatDividerModule,
-    MatButtonModule,
+    MatExpansionModule,
     MatFormFieldModule,
     MatGridListModule,
     MatIconModule,

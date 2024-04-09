@@ -39,11 +39,12 @@ export class ControlPanelCatalogProductListComponent {
   environment = Environment;
   constants = Constants;
   dataSource = new MatTableDataSource<Product>;
-  displayedColumns: string[] = ['Photo', 'Name', 'Stock', 'Price', 'ActionButtons'];
+  displayedColumns: string[] = ['Photo', 'Code', 'Name', 'Stock', 'Price', 'ActionButtons'];
   sortDirection: string | null = 'asc';
   finishedLoading: boolean = false;
 
   public form!: FormGroup;
+  public controlFilterCode = new FormControl('');
   public controlFilterName = new FormControl('');
   public controlFilterShop = new FormControl('');
   public controlFilterCategory = new FormControl('');
@@ -64,6 +65,7 @@ export class ControlPanelCatalogProductListComponent {
     private shopService: ShopService
   ) {
     this.form = new FormGroup([
+      this.controlFilterCode,
       this.controlFilterName,
       this.controlFilterShop,
       this.controlFilterCategory,
@@ -71,6 +73,7 @@ export class ControlPanelCatalogProductListComponent {
       this.controlFilterShowOnHome
     ]);
 
+    this.controlFilterCode.valueChanges.pipe(debounceTime(1000), distinctUntilChanged()).subscribe(() => this.filterProducts());
     this.controlFilterName.valueChanges.pipe(debounceTime(1000), distinctUntilChanged()).subscribe(() => this.filterProducts());
     this.controlFilterCategory.valueChanges.pipe(debounceTime(1000), distinctUntilChanged()).subscribe(() => this.filterProducts());
     this.controlFilterVisible.valueChanges.pipe(debounceTime(1000), distinctUntilChanged()).subscribe(() => this.filterProducts());
@@ -103,6 +106,7 @@ export class ControlPanelCatalogProductListComponent {
 
   filterProducts() {
     const parameters: GetProductsParameters = {
+      Code: this.controlFilterCode.value!,
       Name: this.controlFilterName.value!,
       ShopId: this.controlFilterShop.value!
     };

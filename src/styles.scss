@@ -444,6 +444,11 @@ div.CenteredFormButtons button {
   margin: 0 10px;
 }
 
+div.Column25Pct {
+  float: left;
+  width: 25%;
+}
+
 div.ColumnOneSixth {
   float: left;
   width: 210px;
@@ -505,8 +510,20 @@ img.PublicWebsiteImageStretch {
   width: 100%;
 }
 
+div.WrapperPadding0-10-0-8 {
+  padding: 0 10px 0 8px;
+}
+
+div.WrapperPadding0-10 {
+  padding: 0 10px;
+}
+
 div.WrapperPadding0-8 {
   padding: 0 8px;
+}
+
+div.WrapperPadding0-8-0-10 {
+  padding: 0 8px 0 10px;
 }
 
 div.WrapperPadding10 {
@@ -789,6 +806,12 @@ mat-form-field {
   width: 100%;
 }
 
+mat-accordion mat-expansion-panel mat-expansion-panel-header span.Text {
+  display: inline-block;
+  margin-left: 20px;
+}
+
+
 .mat-tree {
   background-color: transparent !important;
 }
@@ -874,6 +897,7 @@ mat-form-field {
     width: auto;
   }
 
+  div.Column25Pct,
   div.ColumnOneSixth,
   div.ColumnOneFifth,
   div.ColumnOneFourth,
@@ -885,7 +909,10 @@ mat-form-field {
     width: auto;
   }
 
+  div.WrapperPadding0-10-0-8,
+  div.WrapperPadding0-10,
   div.WrapperPadding0-8,
+  div.WrapperPadding0-8-0-10,
   div.WrapperPadding10,
   div.WrapperPadding10-8-10-10,
   div.WrapperPadding10-10-0-8,

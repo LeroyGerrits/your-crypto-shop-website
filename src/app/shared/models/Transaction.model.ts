@@ -1,10 +1,10 @@
-import { DigiByteWallet } from './DigiByteWallet.model';
-
 export class Transaction {
     Id!: string;
-    SenderWallet!: DigiByteWallet;
-    RecipientWallet!: DigiByteWallet;
-    Amount!: number;
-    Fee!: number;
+    ShopId!: string;
     Date!: Date;
+    Recipient!: string;
+    AmountDue!: number;
+    AmountPaid!: number;
+    PaidInFull?: Date;
+    Tx?: string;
 }

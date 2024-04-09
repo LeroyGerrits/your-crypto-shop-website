@@ -19,6 +19,7 @@ export class ProductService {
         let httpParams = new HttpParams();
 
         if (parameters) {
+            if (parameters.Code) httpParams = httpParams.append('code', parameters.Code);
             if (parameters.Name) httpParams = httpParams.append('name', parameters.Name);
             if (parameters.ShopId) httpParams = httpParams.append('shopId', parameters.ShopId);
             if (parameters.CategoryId) httpParams = httpParams.append('categoryId', parameters.CategoryId);

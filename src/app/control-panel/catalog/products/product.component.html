@@ -40,6 +40,20 @@
                 <div class="ColumnOneHalf">
                     <div class="WrapperPadding20-10-0-8">
                         <mat-form-field>
+                            <mat-label>Code</mat-label>
+                            <input matInput [formControl]="controlCode" maxlength="50" [ngClass]="{ 'is-invalid': formSubmitted && controlCode.errors }" />
+                        </mat-form-field>
+                    </div>
+                </div>
+                <div class="ColumnOneHalf">
+                    <div class="WrapperPadding20-10-0-8">
+                        <p>The product code / SKU.</p>
+                    </div>
+                </div>
+                <mat-divider class="ClearLeft" />
+                <div class="ColumnOneHalf">
+                    <div class="WrapperPadding20-10-0-8">
+                        <mat-form-field>
                             <mat-label>Name</mat-label>
                             <input matInput [formControl]="controlName" maxlength="255" [ngClass]="{ 'is-invalid': formSubmitted && controlName.errors }" />
                             <div *ngIf="formSubmitted && controlName.errors" class="TextError">

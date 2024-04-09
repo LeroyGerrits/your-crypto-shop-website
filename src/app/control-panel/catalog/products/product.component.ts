@@ -37,6 +37,7 @@ export class ControlPanelCatalogProductComponent implements OnInit, OnDestroy {
   public formLoading = false;
   public formSubmitted = false;
 
+  public controlCode = new FormControl('');
   public controlName = new FormControl('', Validators.required);
   public controlShop = new FormControl('', Validators.required);
   public controlDescription = new FormControl('');
@@ -60,6 +61,7 @@ export class ControlPanelCatalogProductComponent implements OnInit, OnDestroy {
     private snackBar: MatSnackBar
   ) {
     this.form = new FormGroup([
+      this.controlCode,
       this.controlName,
       this.controlShop,
       this.controlDescription,
@@ -117,6 +119,10 @@ export class ControlPanelCatalogProductComponent implements OnInit, OnDestroy {
   onRetrieveProductData(response: GetProductResponse) {
     this.product = response.Product;
     this.pageTitle = response.Product.Name;
+
+    if (response.Product.Code)
+      this.controlCode.setValue(response.Product.Code);
+
     this.controlName.setValue(response.Product.Name);
     this.controlShop.setValue(response.Product.ShopId);
     this.controlPrice.setValue(response.Product.Price.toString());
@@ -143,6 +149,7 @@ export class ControlPanelCatalogProductComponent implements OnInit, OnDestroy {
     this.formLoading = true;
 
     const productToUpdate: Product = Object.assign({}, this.product);
+    productToUpdate.Code = this.controlCode.value!;
     productToUpdate.Name = this.controlName.value!;
     productToUpdate.ShopId = this.controlShop.value!;
     productToUpdate.Price = parseFloat(this.controlPrice.value!);
