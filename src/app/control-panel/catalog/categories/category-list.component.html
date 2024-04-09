@@ -11,7 +11,7 @@
     <span class="WarningBlock">You must <a [routerLink]="['/control-panel/configuration/shops/new']">create a shop</a> first before you can manage categories.</span>
 </div>
 <div class="WrapperPadding20-8-0-8">
-    <mat-form-field>
+    <mat-form-field subscriptSizing="dynamic">
         <mat-label>Shop</mat-label>
         <mat-select [formControl]="controlFilterShop" (valueChange)="this.retrieveCategoriesByShopId($event)">
             <mat-option *ngFor="let shop of this.shops" [value]="shop.Id">{{shop.Name}}</mat-option>
