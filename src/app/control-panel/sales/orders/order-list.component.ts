@@ -8,15 +8,14 @@ import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { debounceTime, distinctUntilChanged } from 'rxjs';
 import { Constants } from 'src/app/shared/Constants';
-import { DialogDeleteComponent } from 'src/app/shared/dialogs/delete/dialog.delete.component';
+import { OrderStatus } from 'src/app/shared/enums/OrderStatus.enum';
 import { Environment } from 'src/app/shared/environments/Environment';
-import { Order } from 'src/app/shared/models/Order.model';
 import { MutationResult } from 'src/app/shared/models/MutationResult';
+import { Order } from 'src/app/shared/models/Order.model';
 import { Shop } from 'src/app/shared/models/Shop.model';
 import { GetOrdersParameters } from 'src/app/shared/models/parameters/GetOrdersParameters.model';
 import { OrderService } from 'src/app/shared/services/Order.service';
 import { ShopService } from 'src/app/shared/services/Shop.service';
-import { OrderStatus } from 'src/app/shared/enums/OrderStatus.enum';
 
 @Component({
   templateUrl: './order-list.component.html',
@@ -44,6 +43,7 @@ export class ControlPanelSalesOrderListComponent implements OnDestroy, OnInit {
   public controlFilterStatus = new FormControl('');
 
   public shops: Shop[] | undefined;
+  public orderStatusType = Object.keys(OrderStatus).filter(p => isNaN(p as any));
 
   constructor(
     public dialog: MatDialog,
@@ -71,6 +71,8 @@ export class ControlPanelSalesOrderListComponent implements OnDestroy, OnInit {
     this.shopService.getList().subscribe(shops => {
       this.shops = shops;
     });
+
+    this.filterOrders();
   }
 
   ngOnDestroy(): void {
@@ -82,7 +84,7 @@ export class ControlPanelSalesOrderListComponent implements OnDestroy, OnInit {
     if (this.controlFilterDateFrom.value) parameters.DateFrom = new Date(this.controlFilterDateFrom.value);
     if (this.controlFilterDateUntil.value) parameters.DateUntil = new Date(this.controlFilterDateUntil.value);
     if (this.controlFilterShop.value) parameters.ShopId = this.controlFilterShop.value;
-    if (this.controlFilterCustomer.value) parameters.CustomerId = this.controlFilterCustomer.value;
+    if (this.controlFilterCustomer.value) parameters.Customer = this.controlFilterCustomer.value;
     if (this.controlFilterStatus.value) parameters.Status = <OrderStatus>parseInt(this.controlFilterStatus.value);
 
     this.orderService.getList(parameters).subscribe(orders => {

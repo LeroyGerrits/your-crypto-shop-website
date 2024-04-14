@@ -21,7 +21,8 @@ export class OrderService {
         if (parameters) {
             if (parameters.ShopId) httpParams = httpParams.append('shopId', parameters.ShopId);
             if (parameters.CustomerId) httpParams = httpParams.append('customerId', parameters.CustomerId);
-            if (parameters.Status) httpParams = httpParams.append('status', parameters.Status);
+            if (parameters.Customer) httpParams = httpParams.append('customer', parameters.Customer);
+            if (parameters.Status || parameters.Status == 0) httpParams = httpParams.append('status', parameters.Status);
             if (parameters.DateFrom) httpParams = httpParams.append('dateFrom', this.datePipe.transform(parameters.DateFrom, 'yyyy-MM-dd')!);
             if (parameters.DateUntil) httpParams = httpParams.append('dateUntil', this.datePipe.transform(parameters.DateUntil, 'yyyy-MM-dd')!);
         }
