@@ -306,6 +306,10 @@ p {
   margin: 0 0 1.6em 0 !important;
 }
 
+p img {
+  vertical-align: middle;
+}
+
 #TopBar {
   background-color: var(--dark-blue-color);
 }

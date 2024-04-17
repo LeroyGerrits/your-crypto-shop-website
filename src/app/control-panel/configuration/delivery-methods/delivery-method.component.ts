@@ -4,9 +4,15 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar, MatSnackBarRef, TextOnlySnackBar } from '@angular/material/snack-bar';
 
 import { Constants } from 'src/app/shared/Constants';
+import { Country } from 'src/app/shared/models/Country.model';
+import { CountryService } from 'src/app/shared/services/Country.service';
 import { DeliveryMethod } from 'src/app/shared/models/DeliveryMethod.model';
 import { DeliveryMethodService } from 'src/app/shared/services/DeliveryMethod.service';
 import { Environment } from 'src/app/shared/environments/Environment';
+import { GetDeliveryMethodResponse } from 'src/app/shared/models/response/GetDeliveryMethodResponse.model';
+import { IDictionaryFormControl } from 'src/app/shared/interfaces/idictionary-formcontrol.interface';
+import { IDictionaryNumber } from 'src/app/shared/interfaces/idictionary-number.interface';
+import { MutateDeliveryMethodRequest } from 'src/app/shared/models/request/MutateDeliveryMethodRequest.model';
 import { MutationResult } from 'src/app/shared/models/MutationResult';
 import { Shop } from 'src/app/shared/models/Shop.model';
 import { ShopService } from 'src/app/shared/services/Shop.service';
@@ -22,22 +28,27 @@ export class ControlPanelConfigurationDeliveryMethodComponent implements OnInit,
   public queryStringDeliveryMethodId: string | null = '';
 
   public form!: FormGroup;
+  public formErrorCostsPerCountry = false;
   public formLoading = false;
   public formSubmitted = false;
   public controlName = new FormControl('', Validators.required);
   public controlShop = new FormControl('', Validators.required);
   public controlCosts = new FormControl('', Validators.pattern(Constants.REGEX_PATTERN_DECIMAL_2));
+  public controlsCostsPerCountry = {} as IDictionaryFormControl;
 
-  public pageTitle = 'Create new delivery method'
   public deliveryMethod: DeliveryMethod = new DeliveryMethod();
+  public deliveryMethodCostsPerCountry: IDictionaryNumber = {};
+  public countries: Country[] | undefined;
   public shops: Shop[] | undefined;
+  public pageTitle = 'Create new delivery method'
 
   constructor(
+    private countryService: CountryService,
+    private deliveryMethodService: DeliveryMethodService,
     private route: ActivatedRoute,
     private router: Router,
-    private snackBar: MatSnackBar,
-    private deliveryMethodService: DeliveryMethodService,
-    private shopService: ShopService
+    private shopService: ShopService,
+    private snackBar: MatSnackBar
   ) {
     this.form = new FormGroup([
       this.controlName,
@@ -50,7 +61,17 @@ export class ControlPanelConfigurationDeliveryMethodComponent implements OnInit,
     this.queryStringDeliveryMethodId = this.route.snapshot.paramMap.get('deliveryMethodId');
 
     if (this.queryStringDeliveryMethodId && this.queryStringDeliveryMethodId != 'new') {
-      this.deliveryMethodService.getById(this.queryStringDeliveryMethodId).subscribe(x => { this.onRetrieveData(x); });
+      this.deliveryMethodService.getById(this.queryStringDeliveryMethodId).subscribe(deliveryMethod => {
+        this.onRetrieveDeliveryMethodData(deliveryMethod);
+
+        // Fetch countries after delivery methods are fetched because 
+        this.countryService.getList().subscribe(countries => {
+          this.countries = countries;
+          this.countries.forEach(country => {
+            this.controlsCostsPerCountry[country.Id] = new FormControl(this.deliveryMethodCostsPerCountry[country.Id] ?? '', Validators.pattern(Constants.REGEX_PATTERN_DECIMAL_2));
+          });
+        });
+      });
     }
 
     this.shopService.getList().subscribe(shops => this.shops = shops);
@@ -60,20 +81,34 @@ export class ControlPanelConfigurationDeliveryMethodComponent implements OnInit,
     this.snackBarRef?.dismiss();
   }
 
-  onRetrieveData(deliveryMethod: DeliveryMethod) {
-    this.deliveryMethod = deliveryMethod;
-    this.pageTitle = deliveryMethod.Name;
-    this.controlName.setValue(deliveryMethod.Name);
-    this.controlShop.setValue(deliveryMethod.Shop.Id);
+  onRetrieveDeliveryMethodData(response: GetDeliveryMethodResponse) {
+    this.deliveryMethod = response.DeliveryMethod;
+    this.pageTitle = response.DeliveryMethod.Name;
+    this.controlName.setValue(response.DeliveryMethod.Name);
+    this.controlShop.setValue(response.DeliveryMethod.Shop.Id);
 
-    if (deliveryMethod.Costs)
-      this.controlCosts.setValue(deliveryMethod.Costs.toString());
+    if (response.DeliveryMethod.Costs)
+      this.controlCosts.setValue(response.DeliveryMethod.Costs.toString());
+
+    if (response.CostsPerCountry)
+      this.deliveryMethodCostsPerCountry = response.CostsPerCountry;
   }
 
   onSubmit() {
     this.formSubmitted = true;
+    this.formErrorCostsPerCountry = false;
 
-    if (this.form.invalid) {
+    const dictCostsPerCountry: IDictionaryNumber = {};
+
+    for (let key in this.controlsCostsPerCountry) {
+      if (this.controlsCostsPerCountry[key].errors)
+        this.formErrorCostsPerCountry = true;
+
+      if (this.controlsCostsPerCountry[key].value)
+        dictCostsPerCountry[key] = this.controlsCostsPerCountry[key].value;
+    }
+
+    if (this.form.invalid || this.formErrorCostsPerCountry) {
       return;
     }
 
@@ -89,14 +124,19 @@ export class ControlPanelConfigurationDeliveryMethodComponent implements OnInit,
     if (this.controlCosts.value)
       deliveryMethodToUpdate.Costs = parseFloat(this.controlCosts.value);
 
+    const request: MutateDeliveryMethodRequest = {
+      DeliveryMethod: deliveryMethodToUpdate,
+      CostsPerCountry: dictCostsPerCountry
+    };
+
     if (this.queryStringDeliveryMethodId && this.queryStringDeliveryMethodId != 'new') {
-      this.deliveryMethodService.update(deliveryMethodToUpdate).subscribe({
+      this.deliveryMethodService.update(request).subscribe({
         next: result => this.handleOnSubmitResult(result),
         error: error => this.handleOnSubmitError(error),
         complete: () => this.formLoading = false
       });
     } else {
-      this.deliveryMethodService.create(deliveryMethodToUpdate).subscribe({
+      this.deliveryMethodService.create(request).subscribe({
         next: result => this.handleOnSubmitResult(result),
         error: error => this.handleOnSubmitError(error),
         complete: () => this.formLoading = false

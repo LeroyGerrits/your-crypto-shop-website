@@ -2,8 +2,10 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 
 import { DeliveryMethod } from 'src/app/shared/models/DeliveryMethod.model';
 import { Environment } from 'src/app/shared/environments/Environment';
+import { GetDeliveryMethodResponse } from '../models/response/GetDeliveryMethodResponse.model';
 import { GetDeliveryMethodsParameters } from '../models/parameters/GetDeliveryMethodsParameters.model';
 import { Injectable } from '@angular/core';
+import { MutateDeliveryMethodRequest } from '../models/request/MutateDeliveryMethodRequest.model';
 import { MutationResult } from 'src/app/shared/models/MutationResult';
 import { Observable } from 'rxjs';
 
@@ -24,16 +26,16 @@ export class DeliveryMethodService {
         return this.http.get<DeliveryMethod[]>(this.apiUrl, { params: httpParams });
     }
 
-    getById(id: string): Observable<DeliveryMethod> {
-        return this.http.get<DeliveryMethod>(`${this.apiUrl}/${id}`);
+    getById(id: string): Observable<GetDeliveryMethodResponse> {
+        return this.http.get<GetDeliveryMethodResponse>(`${this.apiUrl}/${id}`);
     }
 
-    create(deliveryMethod: DeliveryMethod): Observable<MutationResult> {
+    create(deliveryMethod: MutateDeliveryMethodRequest): Observable<MutationResult> {
         return this.http.post<MutationResult>(this.apiUrl, deliveryMethod);
     }
 
-    update(deliveryMethod: DeliveryMethod): Observable<MutationResult> {
-        return this.http.put<MutationResult>(`${this.apiUrl}/${deliveryMethod.Id}`, deliveryMethod)
+    update(deliveryMethod: MutateDeliveryMethodRequest): Observable<MutationResult> {
+        return this.http.put<MutationResult>(`${this.apiUrl}/${deliveryMethod.DeliveryMethod.Id}`, deliveryMethod)
     }
 
     delete(id: string): Observable<MutationResult> {

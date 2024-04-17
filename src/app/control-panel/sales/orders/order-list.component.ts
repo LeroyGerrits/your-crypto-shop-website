@@ -104,7 +104,7 @@ export class ControlPanelSalesOrderListComponent implements OnDestroy, OnInit {
   }
 
   editElement(element: Order) {
-    this.router.navigate([`/control-panel/orders/${element.Id}/${this.controlFilterShop.value}`]);
+    this.router.navigate([`/control-panel/sales/orders/${element.Id}/${this.controlFilterShop.value}`]);
   }
 
   handleOnSubmitResult(result: MutationResult) {

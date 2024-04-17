@@ -1,3 +1,12 @@
 <div class="WrapperPadding20-8-0-8">
-    <h2><a [routerLink]="['/control-panel/configuration/orders']">Orders</a> - {{this.order.Date}}</h2>
+    <div class="FloatRight FormButtons">
+        <button mat-raised-button [disabled]="formLoading" type="button" [routerLink]="['/control-panel/catalog/products']">Cancel</button>
+        <button mat-raised-button [disabled]="formLoading" type="submit" color="primary">
+            <mat-icon *ngIf="formLoading">
+                <mat-spinner diameter="18" />
+            </mat-icon>
+            XXX
+        </button>
+    </div>
+    <h2><a [routerLink]="['/control-panel/configuration/sales/orders']">Orders</a> - {{this.pageTitle}}</h2>
 </div>
