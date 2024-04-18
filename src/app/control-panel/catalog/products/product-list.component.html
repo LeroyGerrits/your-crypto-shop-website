@@ -109,7 +109,7 @@
         <ng-container matColumnDef="Price">
             <th mat-header-cell mat-sort-header *matHeaderCellDef class="TextAlignRight">Price</th>
             <td mat-cell *matCellDef="let element" class="TextAlignRight">
-                <span>Ɗ&nbsp;{{element.Price | number:'1.2-8'}}</span>
+                <span>{{constants.CURRENCY_SYMBOL}}&nbsp;{{element.Price | number:'1.2-8'}}</span>
             </td>
         </ng-container>
 

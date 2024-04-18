@@ -7,6 +7,7 @@ import { Injectable } from '@angular/core';
 import { MutationResult } from 'src/app/shared/models/MutationResult';
 import { Observable } from 'rxjs';
 import { Order } from 'src/app/shared/models/Order.model';
+import { OrderItem } from '../models/OrderItem.model';
 import { OrderStatus } from '../enums/OrderStatus.enum';
 
 @Injectable()
@@ -32,6 +33,18 @@ export class OrderService {
 
     getById(id: string): Observable<Order> {
         return this.http.get<Order>(`${this.apiUrl}/${id}`);
+    }
+
+    addItem(orderItem: OrderItem): Observable<MutationResult> {
+        return this.http.post<MutationResult>(`${this.apiUrl}/AddItem`, orderItem);
+    }
+
+    updateItem(orderItem: OrderItem): Observable<MutationResult> {
+        return this.http.put<MutationResult>(`${this.apiUrl}/EditItem/${orderItem.Id}`, orderItem)
+    }
+
+    deleteItem(orderId: string, id: string): Observable<MutationResult> {
+        return this.http.delete<MutationResult>(`${this.apiUrl}/DeleteItem/${orderId}/${id}`);
     }
 
     create(order: Order): Observable<MutationResult> {

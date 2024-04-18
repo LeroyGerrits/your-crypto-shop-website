@@ -1,12 +1,112 @@
 <div class="WrapperPadding20-8-0-8">
     <div class="FloatRight FormButtons">
-        <button mat-raised-button [disabled]="formLoading" type="button" [routerLink]="['/control-panel/catalog/products']">Cancel</button>
-        <button mat-raised-button [disabled]="formLoading" type="submit" color="primary">
-            <mat-icon *ngIf="formLoading">
-                <mat-spinner diameter="18" />
-            </mat-icon>
-            XXX
-        </button>
+        <button mat-raised-button type="button" [routerLink]="['/control-panel/sales/orders']">Back</button>
+        <button mat-raised-button [disabled]="formLoading" type="button" [routerLink]="['/control-panel/sales/orders']">Back</button>
     </div>
-    <h2><a [routerLink]="['/control-panel/configuration/sales/orders']">Orders</a> - {{this.pageTitle}}</h2>
+    <h2><a [routerLink]="['/control-panel/sales/orders']">Orders</a> - {{this.pageTitle}}</h2>
+</div>
+<div class="ColumnOneThird ClearBoth">
+    <div class="WrapperPadding20-10-0-8">
+        <mat-card *ngIf="order.Customer">
+            <div class="WrapperPadding20">
+                <h3>Customer</h3>
+                <span class="DisplayBlock">{{order.Customer.Salutation}}</span>
+                <span class="DisplayBlock"><a href="mailto:{{order.Customer.EmailAddress}}">{{order.Customer.EmailAddress}}</a></span>
+            </div>
+        </mat-card>
+    </div>
+</div>
+<div class="ColumnOneThird">
+    <div class="WrapperPadding20-10-0-10">
+        <mat-card *ngIf="order.BillingAddress">
+            <div class="WrapperPadding20">
+                <h3>Billing address</h3>
+                <span class="DisplayBlock">{{order.BillingAddress.AddressLine1}}</span>
+                <span class="DisplayBlock">{{order.BillingAddress.AddressLine2}}</span>
+                <span class="DisplayBlock">{{order.BillingAddress.PostalCode}} {{order.BillingAddress.City}}</span>
+                <span class="DisplayBlock">{{order.BillingAddress.Province}}</span>
+                <span class="DisplayBlock">{{order.BillingAddress.Country?.Name}}</span>
+            </div>
+        </mat-card>
+    </div>
+</div>
+<div class="ColumnOneThird">
+    <div class="WrapperPadding20-8-0-10">
+        <mat-card *ngIf="order.ShippingAddress">
+            <div class="WrapperPadding20">
+                <h3>Shipping address</h3>
+                <span class="DisplayBlock">{{order.ShippingAddress.AddressLine1}}</span>
+                <span class="DisplayBlock">{{order.ShippingAddress.AddressLine2}}</span>
+                <span class="DisplayBlock">{{order.ShippingAddress.PostalCode}} {{order.BillingAddress.City}}</span>
+                <span class="DisplayBlock">{{order.ShippingAddress.Province}}</span>
+                <span class="DisplayBlock">{{order.ShippingAddress.Country?.Name}}</span>
+            </div>
+        </mat-card>
+    </div>
+</div>
+<div class="WrapperPadding20-8-0-8 ClearLeft" *ngIf="order.Comments">
+    <mat-card>
+        <div class="WrapperPadding20">
+            {{order.Comments}}
+        </div>
+    </mat-card>
+</div>
+<div class="ClearLeft">
+    <div class="WrapperPadding20-8">
+        <table mat-table matSort [dataSource]="this.dataSource" (matSortChange)="onSortChange($event)">
+            <ng-container matColumnDef="Product">
+                <th mat-header-cell mat-sort-header *matHeaderCellDef>Product</th>
+                <td mat-cell *matCellDef="let element">
+                    {{element.Description}}
+                </td>
+                <td mat-footer-cell *matFooterCellDef></td>
+            </ng-container>
+
+            <ng-container matColumnDef="Amount">
+                <th mat-header-cell mat-sort-header *matHeaderCellDef>Amount</th>
+                <td mat-cell *matCellDef="let element" class="TextAlignRight">{{element.Amount}}</td>
+                <td mat-footer-cell *matFooterCellDef class="FontWeightBold TextAlignRight">{{order.CumulativeAmount}}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="Price">
+                <th mat-header-cell mat-sort-header *matHeaderCellDef>Price</th>
+                <td mat-cell *matCellDef="let element" class="TextAlignRight">{{constants.CURRENCY_SYMBOL}}&nbsp;{{element.Price | number:'1.0-8'}}</td>
+                <td mat-footer-cell *matFooterCellDef></td>
+            </ng-container>
+
+            <ng-container matColumnDef="Total">
+                <th mat-header-cell mat-sort-header *matHeaderCellDef>Total</th>
+                <td mat-cell *matCellDef="let element" class="TextAlignRight">{{constants.CURRENCY_SYMBOL}}&nbsp;{{element.Total | number:'1.0-8'}}</td>
+                <td mat-footer-cell *matFooterCellDef class="FontWeightBold TextAlignRight">{{constants.CURRENCY_SYMBOL}}&nbsp;{{order.CumulativeTotal | number:'1.0-8'}}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="ActionButtons">
+                <th mat-header-cell *matHeaderCellDef></th>
+                <td mat-cell *matCellDef="let element">
+                    <button mat-icon-button [matMenuTriggerFor]="menu">
+                        <mat-icon color="primary">more_horiz</mat-icon>
+                    </button>
+                    <mat-menu #menu="matMenu">
+                        <button mat-menu-item color="primary" (click)="editElement(element)">
+                            <mat-icon color="primary">edit</mat-icon> <span>Edit</span>
+                        </button>
+                        <button mat-menu-item color="warn" (click)="deleteElement(element)">
+                            <mat-icon color="warn">delete</mat-icon> <span>Delete</span>
+                        </button>
+                    </mat-menu>
+                </td>
+                <td mat-footer-cell *matFooterCellDef></td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="this.displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: this.displayedColumns;"></tr>
+            <tr class="mat-row" *matNoDataRow>
+                <td class="mat-cell NoDataCell" [colSpan]="this.displayedColumns.length">
+                    This order is empty.
+                </td>
+            </tr>
+            <tr mat-footer-row *matFooterRowDef="this.displayedColumns"></tr>
+        </table>
+
+    </div>
 </div>

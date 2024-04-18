@@ -1,4 +1,5 @@
 export abstract class Constants {
+    static readonly CURRENCY_SYMBOL: string = 'Ɗ';
     static readonly DATE_FORMAT: string = 'dd-MM-yyyy';
     static readonly DATE_TIME_FORMAT: string = 'dd-MM-yyyy HH:mm';
     static readonly DIGIBYTE_WALLET_ADDRESS_GENERAL: string = 'dgb1qvkxgpells5z2yeazs0hq6spks362urnj3fs86k';

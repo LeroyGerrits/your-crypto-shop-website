@@ -2,13 +2,19 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar, MatSnackBarRef, TextOnlySnackBar } from '@angular/material/snack-bar';
 
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
+import { Constants } from 'src/app/shared/Constants';
 import { DatePipe } from '@angular/common';
 import { Environment } from 'src/app/shared/environments/Environment';
 import { MutationResult } from 'src/app/shared/models/MutationResult';
 import { Order } from 'src/app/shared/models/Order.model';
+import { OrderItem } from 'src/app/shared/models/OrderItem.model';
 import { OrderService } from 'src/app/shared/services/Order.service';
 import { ShopService } from 'src/app/shared/services/Shop.service';
+import { MatSort, Sort } from '@angular/material/sort';
+import { MatTableDataSource } from '@angular/material/table';
+import { DialogDeleteComponent } from 'src/app/shared/dialogs/delete/dialog.delete.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'control-panel-sales-order',
@@ -16,6 +22,8 @@ import { ShopService } from 'src/app/shared/services/Shop.service';
 })
 
 export class ControlPanelSalesOrderComponent {
+  @ViewChild(MatSort, { static: false }) sort!: MatSort;
+
   public environment = Environment;
   public snackBarRef: MatSnackBarRef<TextOnlySnackBar> | undefined;
   public queryStringOrderId: string | null = '';
@@ -28,9 +36,17 @@ export class ControlPanelSalesOrderComponent {
 
   public pageTitle = 'Create new customer'
   public order: Order = new Order();
+  public orderCustomerSalutation: string = '';
+
+  constants = Constants;
+
+  dataSource = new MatTableDataSource<OrderItem>;
+  displayedColumns: string[] = ['Product', 'Amount', 'Price', 'Total', 'ActionButtons'];
+  sortDirection: string | null = 'asc';
 
   constructor(
     private datePipe: DatePipe,
+    private dialog: MatDialog,
     private route: ActivatedRoute,
     private router: Router,
     private orderService: OrderService,
@@ -45,7 +61,13 @@ export class ControlPanelSalesOrderComponent {
     this.queryStringOrderId = this.route.snapshot.paramMap.get('orderId');
 
     if (this.queryStringOrderId && this.queryStringOrderId != 'new') {
-      this.orderService.getById(this.queryStringOrderId).subscribe(x => this.onRetrieveOrderData(x));
+      this.orderService.getById(this.queryStringOrderId).subscribe(order => {
+        this.order = order;
+        this.pageTitle = this.datePipe.transform(order.Date, 'dd-MM-yyyy HH:ss') + ` (${order.Customer.Username})`;
+
+        this.dataSource = new MatTableDataSource(order.Items);
+        this.dataSource.sort = this.sort;
+      });
     }
   }
 
@@ -53,61 +75,34 @@ export class ControlPanelSalesOrderComponent {
     this.snackBarRef?.dismiss();
   }
 
-  onRetrieveOrderData(order: Order) {
-    this.order = order;
-    this.pageTitle = this.datePipe.transform(order.Date, 'dd-MM-yyyy HH:ss') + ` (${order.Customer.Username})`;
-
+  editElement(element: OrderItem) {
+    /*const dialogShoppingCartItem = this.dialog.open(DialogEditShoppingCartItemComponent);
+    const instance = dialogShoppingCartItem.componentInstance;
+    instance.shoppingCartItem = element;*/
   }
 
-  onSubmit() {
-    this.formSubmitted = true;
+  deleteElement(element: OrderItem) {
+    const dialogDelete = this.dialog.open(DialogDeleteComponent);
+    const instance = dialogDelete.componentInstance;
+    instance.dialogMessage = `Are you sure you want to remove '${element.Description}' from this order'?`;
 
-    if (this.form.invalid) {
-      return;
-    }
+    dialogDelete.afterClosed().subscribe(result => {
+      if (result) {
+        this.orderService.deleteItem(this.order.Id, element.Id!).subscribe({
+          next: result => this.handleOnSubmitResult(result),
+          error: error => this.handleOnSubmitError(error),
+          complete: () => dialogDelete.close()
+        });
+      }
+    });
+  }
 
-    this.formLoading = true;
-
-    /*const customerToUpdate: Customer = Object.assign({}, this.customer);
-    customerToUpdate.ShopId = this.controlShop.value!;
-    customerToUpdate.EmailAddress = this.controlEmailAddress.value!;
-    customerToUpdate.Username = this.controlUsername.value!;
-    customerToUpdate.LastName = this.controlLastName.value!;
-    customerToUpdate.Gender = parseInt(this.controlGender.value!)
-
-    if (this.controlFirstName.value)
-      customerToUpdate.FirstName = this.controlFirstName.value;
-
-    const request: MutateCustomerRequest = {
-      Customer: customerToUpdate,
-      AddressLine1: this.controlAddressLine1.value!,
-      PostalCode: this.controlPostalCode.value!,
-      City: this.controlCity.value!
-    };
-
-    if (this.controlAddressLine2.value)
-      request.AddressLine2 = this.controlAddressLine2.value;
-
-    if (this.controlProvince.value)
-      request.Province = this.controlProvince.value;
-
-    var selectedCountry = this.countries?.find(x => x.Id == this.controlCountry.value);
-    if (selectedCountry)
-      request.Country = selectedCountry;
-
-    if (this.queryStringCustomerId && this.queryStringCustomerId != 'new') {
-      this.customerService.update(request).subscribe({
-        next: result => this.handleOnSubmitResult(result),
-        error: error => this.handleOnSubmitError(error),
-        complete: () => this.formLoading = false
-      });
+  onSortChange(sortState: Sort) {
+    if (sortState.direction) {
+      this.sortDirection = sortState.direction.toString();
     } else {
-      this.customerService.create(request).subscribe({
-        next: result => this.handleOnSubmitResult(result),
-        error: error => this.handleOnSubmitError(error),
-        complete: () => this.formLoading = false
-      });
-    }*/
+      this.sortDirection = null;
+    }
   }
 
   handleOnSubmitResult(result: MutationResult) {
