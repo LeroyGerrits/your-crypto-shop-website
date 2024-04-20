@@ -1,11 +1,33 @@
 <div class="WrapperPadding20-8-0-8">
     <div class="FloatRight FormButtons">
         <button mat-raised-button type="button" [routerLink]="['/control-panel/sales/orders']">Back</button>
-        <button mat-raised-button [disabled]="formLoading" type="button" [routerLink]="['/control-panel/sales/orders']">Back</button>
+        <button mat-raised-button color="primary" type="button" (click)="sendPaymentLink()" *ngIf="this.orderStatus == 'New'">Send payment link</button>
     </div>
     <h2><a [routerLink]="['/control-panel/sales/orders']">Orders</a> - {{this.pageTitle}}</h2>
 </div>
-<div class="ColumnOneThird ClearBoth">
+<div class="ColumnOneHalf ClearBoth">
+    <div class="WrapperPadding20-10-0-8">
+        <mat-card>
+            <div class="WrapperPadding20">
+                <strong>Status:</strong> {{order.Status}}
+            </div>
+        </mat-card>
+    </div>
+</div>
+<div class="ColumnOneHalf" *ngIf="order.Transaction">
+    <div class="WrapperPadding20-8-0-10">
+        <mat-card>
+            <div class="WrapperPadding20">
+                <h3>Transaction</h3>
+                <span class="DisplayBlock"><strong>Date:</strong> {{order.Transaction.Date | date:'dd-MM-yyyy HH:mm'}}</span>
+                <span class="DisplayBlock"><strong>Recipient:</strong> {{order.Transaction.Recipient}}</span>
+                <span class="DisplayBlock"><strong>Amount due:</strong> {{constants.CURRENCY_SYMBOL}}&nbsp;{{order.Transaction.AmountDue | number:'1.2-8'}}</span>
+                <span class="DisplayBlock"><strong>Amount paid:</strong> {{constants.CURRENCY_SYMBOL}}&nbsp;{{order.Transaction.AmountPaid | number:'1.2-8'}}</span>
+            </div>
+        </mat-card>
+    </div>
+</div>
+<div class="ColumnOneThird ClearLeft">
     <div class="WrapperPadding20-10-0-8">
         <mat-card *ngIf="order.Customer">
             <div class="WrapperPadding20">
@@ -57,7 +79,10 @@
             <ng-container matColumnDef="Product">
                 <th mat-header-cell mat-sort-header *matHeaderCellDef>Product</th>
                 <td mat-cell *matCellDef="let element">
-                    {{element.Description}}
+                    {{element.Description}}<br />
+                    <span class="ColorGray FontSize0x8Em">
+                        <strong *ngIf="element.ProductCode">{{element.ProductCode}} - </strong>{{element.ProductName}}
+                    </span>
                 </td>
                 <td mat-footer-cell *matFooterCellDef></td>
             </ng-container>
@@ -83,7 +108,7 @@
             <ng-container matColumnDef="ActionButtons">
                 <th mat-header-cell *matHeaderCellDef></th>
                 <td mat-cell *matCellDef="let element">
-                    <button mat-icon-button [matMenuTriggerFor]="menu">
+                    <button mat-icon-button [matMenuTriggerFor]="menu" *ngIf="order.Status.toString() == 'New'">
                         <mat-icon color="primary">more_horiz</mat-icon>
                     </button>
                     <mat-menu #menu="matMenu">

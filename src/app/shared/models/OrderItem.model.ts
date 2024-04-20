@@ -4,7 +4,10 @@ export class OrderItem {
     Id?: string;
     OrderId!: string;
     Type!: OrderItemType;
-    ProductId!: string;
+    ProductId?: string;
+    ProductCode?: string;
+    ProductName?: string;
+    ProductPrice?: number;
     Description!: string;
     Amount!: number;
     Price!: number;
