@@ -14,6 +14,8 @@ import { MutationResult } from 'src/app/shared/models/MutationResult';
 import { Order } from 'src/app/shared/models/Order.model';
 import { OrderItem } from 'src/app/shared/models/OrderItem.model';
 import { OrderService } from 'src/app/shared/services/Order.service';
+import { DialogConfirmComponent } from 'src/app/shared/dialogs/confirm/dialog.confirm.component';
+import { OrderStatus } from 'src/app/shared/enums/OrderStatus.enum';
 
 @Component({
   selector: 'control-panel-sales-order',
@@ -57,13 +59,17 @@ export class ControlPanelSalesOrderComponent {
   }
 
   ngOnInit() {
+    this.retrieveOrder();
+  }
+
+  retrieveOrder(){
     this.queryStringOrderId = this.route.snapshot.paramMap.get('orderId');
 
     if (this.queryStringOrderId && this.queryStringOrderId != 'new') {
       this.orderService.getById(this.queryStringOrderId).subscribe(order => {
         this.order = order;
         this.orderStatus = order.Status.toString();
-        this.pageTitle = this.datePipe.transform(order.Date, 'dd-MM-yyyy HH:ss') + ` (${order.Customer.Username})`;
+        this.pageTitle = this.datePipe.transform(order.Date, 'dd-MM-yyyy HH:mm') + ` (${order.Customer.Username})`;
 
         this.dataSource = new MatTableDataSource(order.Items);
         this.dataSource.sort = this.sort;
@@ -75,8 +81,36 @@ export class ControlPanelSalesOrderComponent {
     this.snackBarRef?.dismiss();
   }
 
-  sendPaymentLink() {
-    alert('bonk');
+  updateStatusAwaitingPayment() {
+    const dialogConfirm = this.dialog.open(DialogConfirmComponent);
+    const instance = dialogConfirm.componentInstance;
+    instance.dialogMessage = `Are you you want to confirm this order and send the customer a payment link? The order status will change to 'Awaiting payment' and the order can no longer be edited.`;
+
+    dialogConfirm.afterClosed().subscribe(result => {
+      if (result) {
+        this.orderService.updateStatus(this.order.Id, OrderStatus.AwaitingPayment).subscribe({
+          next: result => this.handleOnSubmitResult(result),
+          error: error => this.handleOnSubmitError(error),
+          complete: () => dialogConfirm.close()
+        });
+      }
+    });
+  }
+
+  updateStatusCanceled() {
+    const dialogConfirm = this.dialog.open(DialogConfirmComponent);
+    const instance = dialogConfirm.componentInstance;
+    instance.dialogMessage = `Are you you want to cancel this order? The order status will change to 'Canceled' and the order can no longer be edited. The customer will receive an e-mail.`;
+
+    dialogConfirm.afterClosed().subscribe(result => {
+      if (result) {
+        this.orderService.updateStatus(this.order.Id, OrderStatus.Canceled).subscribe({
+          next: result => this.handleOnSubmitResult(result),
+          error: error => this.handleOnSubmitError(error),
+          complete: () => dialogConfirm.close()
+        });
+      }
+    });
   }
 
   editElement(element: OrderItem) {
@@ -111,7 +145,7 @@ export class ControlPanelSalesOrderComponent {
 
   handleOnSubmitResult(result: MutationResult) {
     if (result.Success) {
-      this.router.navigate(['/control-panel/customers']);
+      this.retrieveOrder();
     } else {
       this.snackBarRef = this.snackBar.open(result.Message, 'Close', { panelClass: ['error-snackbar'] });
     }

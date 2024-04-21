@@ -4,5 +4,6 @@ export enum OrderStatus {
     Abandoned = 2,
     Paid = 3,
     Shipped = 4,
-    Finished = 5
+    Finished = 5,
+    Canceled = 6
 }

@@ -36,8 +36,10 @@ import { CurrencyService } from './shared/services/Currency.service';
 import { CustomerService } from './shared/services/Customer.service';
 import { DatePipe } from '@angular/common';
 import { DeliveryMethodService } from './shared/services/DeliveryMethod.service';
+import { DialogConfirmComponent } from './shared/dialogs/confirm/dialog.confirm.component';
 import { DialogDeleteComponent } from './shared/dialogs/delete/dialog.delete.component';
 import { DialogDonateComponent } from './shared/dialogs/donate/dialog.donate.component';
+import { DialogEditOrderItemComponent } from './shared/dialogs/edit-order-item/dialog.edit-order-item.component';
 import { DialogForgotPasswordComponent } from './shared/dialogs/forgot-password/dialog.forgot-password.component';
 import { DialogLoginComponent } from './shared/dialogs/login/dialog.login.component';
 import { DialogLogoutComponent } from './shared/dialogs/logout/dialog.logout.component';
@@ -135,8 +137,10 @@ import { StripHtmlPipe } from './shared/pipes/StripHtml.pipe';
     ControlPanelDashboardComponent,
     ControlPanelSalesOrderListComponent,
     ControlPanelSalesOrderComponent,
+    DialogConfirmComponent,
     DialogDeleteComponent,
     DialogDonateComponent,
+    DialogEditOrderItemComponent,
     DialogForgotPasswordComponent,
     DialogLoginComponent,
     DialogLogoutComponent,

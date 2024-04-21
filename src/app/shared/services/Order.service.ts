@@ -35,16 +35,16 @@ export class OrderService {
         return this.http.get<Order>(`${this.apiUrl}/${id}`);
     }
 
-    addItem(orderItem: OrderItem): Observable<MutationResult> {
-        return this.http.post<MutationResult>(`${this.apiUrl}/AddItem`, orderItem);
+    addItem(orderId: string, orderItem: OrderItem): Observable<MutationResult> {
+        return this.http.post<MutationResult>(`${this.apiUrl}/${orderId}/AddItem`, orderItem);
     }
 
-    updateItem(orderItem: OrderItem): Observable<MutationResult> {
-        return this.http.put<MutationResult>(`${this.apiUrl}/EditItem/${orderItem.Id}`, orderItem)
+    updateItem(orderId:string, orderItem: OrderItem): Observable<MutationResult> {
+        return this.http.put<MutationResult>(`${this.apiUrl}/${orderId}/EditItem/${orderItem.Id}`, orderItem)
     }
 
     deleteItem(orderId: string, id: string): Observable<MutationResult> {
-        return this.http.delete<MutationResult>(`${this.apiUrl}/DeleteItem/${orderId}/${id}`);
+        return this.http.delete<MutationResult>(`${this.apiUrl}/${orderId}/DeleteItem/${id}`);
     }
 
     create(order: Order): Observable<MutationResult> {
