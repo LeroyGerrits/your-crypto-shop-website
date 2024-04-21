@@ -2,6 +2,8 @@
     <div class="FloatRight FormButtons">
         <button mat-raised-button type="button" [routerLink]="['/control-panel/sales/orders']">Back</button>
         <button mat-raised-button color="primary" type="button" (click)="updateStatusAwaitingPayment()" *ngIf="this.orderStatus == 'New'">Confirm order and send payment link</button>
+        <button mat-raised-button color="primary" type="button" (click)="updateStatusShipped()" *ngIf="this.orderStatus == 'Paid'">Set order status to 'Shipped'</button>
+        <button mat-raised-button color="primary" type="button" (click)="updateStatusFinished()" *ngIf="this.orderStatus == 'Paid' || this.orderStatus == 'Shipped'">Set order status to 'Finished'</button>
         <button mat-raised-button color="warn" type="button" (click)="updateStatusCanceled()" *ngIf="this.orderStatus == 'New'">Cancel order</button>
     </div>
     <h2><a [routerLink]="['/control-panel/sales/orders']">Orders</a> - {{this.pageTitle}}</h2>

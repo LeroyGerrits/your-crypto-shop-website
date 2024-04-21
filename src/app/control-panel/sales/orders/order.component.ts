@@ -8,14 +8,15 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatSort, Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Constants } from 'src/app/shared/Constants';
+import { DialogConfirmComponent } from 'src/app/shared/dialogs/confirm/dialog.confirm.component';
 import { DialogDeleteComponent } from 'src/app/shared/dialogs/delete/dialog.delete.component';
+import { DialogEditOrderItemComponent } from 'src/app/shared/dialogs/edit-order-item/dialog.edit-order-item.component';
+import { OrderStatus } from 'src/app/shared/enums/OrderStatus.enum';
 import { Environment } from 'src/app/shared/environments/Environment';
 import { MutationResult } from 'src/app/shared/models/MutationResult';
 import { Order } from 'src/app/shared/models/Order.model';
 import { OrderItem } from 'src/app/shared/models/OrderItem.model';
 import { OrderService } from 'src/app/shared/services/Order.service';
-import { DialogConfirmComponent } from 'src/app/shared/dialogs/confirm/dialog.confirm.component';
-import { OrderStatus } from 'src/app/shared/enums/OrderStatus.enum';
 
 @Component({
   selector: 'control-panel-sales-order',
@@ -62,7 +63,7 @@ export class ControlPanelSalesOrderComponent {
     this.retrieveOrder();
   }
 
-  retrieveOrder(){
+  retrieveOrder() {
     this.queryStringOrderId = this.route.snapshot.paramMap.get('orderId');
 
     if (this.queryStringOrderId && this.queryStringOrderId != 'new') {
@@ -113,10 +114,47 @@ export class ControlPanelSalesOrderComponent {
     });
   }
 
+  updateStatusShipped() {
+    const dialogConfirm = this.dialog.open(DialogConfirmComponent);
+    const instance = dialogConfirm.componentInstance;
+    instance.dialogMessage = `Are you you want to set the status of this order to 'Shipped'? The customer will receive an e-mail.`;
+
+    dialogConfirm.afterClosed().subscribe(result => {
+      if (result) {
+        this.orderService.updateStatus(this.order.Id, OrderStatus.Shipped).subscribe({
+          next: result => this.handleOnSubmitResult(result),
+          error: error => this.handleOnSubmitError(error),
+          complete: () => dialogConfirm.close()
+        });
+      }
+    });
+  }
+
+  updateStatusFinished() {
+    const dialogConfirm = this.dialog.open(DialogConfirmComponent);
+    const instance = dialogConfirm.componentInstance;
+    instance.dialogMessage = `Are you you want to set the status of this order to 'Finished'? The customer will receive an e-mail.`;
+
+    dialogConfirm.afterClosed().subscribe(result => {
+      if (result) {
+        this.orderService.updateStatus(this.order.Id, OrderStatus.Finished).subscribe({
+          next: result => this.handleOnSubmitResult(result),
+          error: error => this.handleOnSubmitError(error),
+          complete: () => dialogConfirm.close()
+        });
+      }
+    });
+  }
+
   editElement(element: OrderItem) {
-    /*const dialogShoppingCartItem = this.dialog.open(DialogEditShoppingCartItemComponent);
-    const instance = dialogShoppingCartItem.componentInstance;
-    instance.shoppingCartItem = element;*/
+    const dialogOrderItem = this.dialog.open(DialogEditOrderItemComponent);
+    const instance = dialogOrderItem.componentInstance;
+    instance.orderId = this.order.Id;
+    instance.orderItem = element;
+
+    dialogOrderItem.afterClosed().subscribe(_ => {
+        this.retrieveOrder();
+    });
   }
 
   deleteElement(element: OrderItem) {
@@ -144,7 +182,7 @@ export class ControlPanelSalesOrderComponent {
   }
 
   handleOnSubmitResult(result: MutationResult) {
-    if (result.Success) {
+    if (result.Success) {      
       this.retrieveOrder();
     } else {
       this.snackBarRef = this.snackBar.open(result.Message, 'Close', { panelClass: ['error-snackbar'] });

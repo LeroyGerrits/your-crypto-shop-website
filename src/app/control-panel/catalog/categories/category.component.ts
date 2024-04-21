@@ -97,7 +97,8 @@ export class ControlPanelCatalogCategoryComponent implements OnInit, OnDestroy {
 
     handleOnSubmitResult(result: MutationResult) {
         if (result.Success) {
-            this.dialogRefComponent.close();
+            if (this.dialogRefComponent)
+                this.dialogRefComponent.close();
         } else {
             this.snackBarRef = this.snackBar.open(result.Message, 'Close', { panelClass: ['error-snackbar'] });
         }

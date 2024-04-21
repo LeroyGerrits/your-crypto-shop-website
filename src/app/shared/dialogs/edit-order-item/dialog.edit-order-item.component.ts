@@ -1,14 +1,15 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Inject, Input, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar, MatSnackBarRef, TextOnlySnackBar } from '@angular/material/snack-bar';
 
 import { Constants } from 'src/app/shared/Constants';
-import { MatDialogRef } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { MutationResult } from 'src/app/shared/models/MutationResult';
 import { OrderItem } from '../../models/OrderItem.model';
 import { OrderService } from '../../services/Order.service';
 import { ProductService } from '../../services/Product.service';
 import { Router } from '@angular/router';
+import { DialogData } from 'src/app/control-panel/catalog/categories/category.component';
 
 @Component({
   templateUrl: 'dialog.edit-order-item.component.html',
@@ -20,6 +21,7 @@ export class DialogEditOrderItemComponent implements OnInit {
   constants = Constants;
 
   public controlDescription = new FormControl('', Validators.required);
+  public controlPrice = new FormControl('', [Validators.required, Validators.pattern(Constants.REGEX_PATTERN_DECIMAL_8)]);
   public controlAmount = new FormControl('', [Validators.required, Validators.pattern(Constants.REGEX_PATTERN_NUMBER)]);
 
   public snackBarRef: MatSnackBarRef<TextOnlySnackBar> | undefined;
@@ -33,18 +35,20 @@ export class DialogEditOrderItemComponent implements OnInit {
   constructor(
     private dialogRefComponent: MatDialogRef<any>,
     private orderService: OrderService,
-    private productService: ProductService,
-    private router: Router,    
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    @Inject(MAT_DIALOG_DATA) public data: DialogData
   ) {
     this.form = new FormGroup([
       this.controlDescription,
+      this.controlPrice,
       this.controlAmount
     ]);
   }
 
   ngOnInit(): void {
-    //this.controlAmount.setValue(this.shoppingCartItem.Amount.toString());
+    this.controlDescription.setValue(this.orderItem.Description);
+    this.controlPrice.setValue(this.orderItem.Price.toString());
+    this.controlAmount.setValue(this.orderItem.Amount.toString());
   }
 
   minus() {
@@ -82,7 +86,9 @@ export class DialogEditOrderItemComponent implements OnInit {
     }
 
     const orderItemToUpdate = Object.assign({}, this.orderItem)
+    orderItemToUpdate.Description = this.controlDescription.value!;
     orderItemToUpdate.Amount = parseInt(this.controlAmount.value!);
+    orderItemToUpdate.Price = parseFloat(this.controlPrice.value!);
 
     this.orderService.updateItem(this.orderId, orderItemToUpdate).subscribe({
       next: result => this.handleSave(result),
