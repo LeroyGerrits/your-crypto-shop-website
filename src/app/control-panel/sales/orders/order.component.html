@@ -37,6 +37,7 @@
                 <h3>Customer</h3>
                 <span class="DisplayBlock">{{order.Customer.Salutation}}</span>
                 <span class="DisplayBlock"><a href="mailto:{{order.Customer.EmailAddress}}">{{order.Customer.EmailAddress}}</a></span>
+                <span class="DisplayBlock" *ngIf="order.SenderWalletAddress">{{order.SenderWalletAddress}}</span>
             </div>
         </mat-card>
     </div>
