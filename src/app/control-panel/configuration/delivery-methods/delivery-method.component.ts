@@ -87,7 +87,7 @@ export class ControlPanelConfigurationDeliveryMethodComponent implements OnInit,
     this.controlName.setValue(response.DeliveryMethod.Name);
     this.controlShop.setValue(response.DeliveryMethod.Shop.Id);
 
-    if (response.DeliveryMethod.Costs)
+    if (response.DeliveryMethod.Costs != undefined)
       this.controlCosts.setValue(response.DeliveryMethod.Costs.toString());
 
     if (response.CostsPerCountry)
@@ -123,6 +123,8 @@ export class ControlPanelConfigurationDeliveryMethodComponent implements OnInit,
 
     if (this.controlCosts.value)
       deliveryMethodToUpdate.Costs = parseFloat(this.controlCosts.value);
+    else
+      deliveryMethodToUpdate.Costs = undefined;
 
     const request: MutateDeliveryMethodRequest = {
       DeliveryMethod: deliveryMethodToUpdate,

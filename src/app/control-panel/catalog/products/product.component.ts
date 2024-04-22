@@ -129,7 +129,7 @@ export class ControlPanelCatalogProductComponent implements OnInit, OnDestroy {
     this.controlVisible.setValue(response.Product.Visible);
     this.controlShowOnHome.setValue(response.Product.ShowOnHome);
 
-    if (response.Product.Stock)
+    if (response.Product.Stock != undefined)
       this.controlStock.setValue(response.Product.Stock.toString());
 
     if (response.Product.Description)
