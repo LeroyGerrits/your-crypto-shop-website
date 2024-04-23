@@ -6,7 +6,8 @@ import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'public-website-index',
-  templateUrl: './index.component.html'
+  templateUrl: './index.component.html',
+  styleUrl: './index.component.scss',
 })
 export class PublicWebsiteIndexComponent {
   constants = Constants;
