@@ -34,7 +34,7 @@ export class ControlPanelConfigurationDeliveryMethodComponent implements OnInit,
   public controlName = new FormControl('', Validators.required);
   public controlShop = new FormControl('', Validators.required);
   public controlCosts = new FormControl('', Validators.pattern(Constants.REGEX_PATTERN_DECIMAL_2));
-  public controlsCostsPerCountry = {} as IDictionaryFormControl;
+  public controlsCostsPerCountry: IDictionaryFormControl = {};
 
   public deliveryMethod: DeliveryMethod = new DeliveryMethod();
   public deliveryMethodCostsPerCountry: IDictionaryNumber = {};
@@ -60,19 +60,23 @@ export class ControlPanelConfigurationDeliveryMethodComponent implements OnInit,
   ngOnInit() {
     this.queryStringDeliveryMethodId = this.route.snapshot.paramMap.get('deliveryMethodId');
 
-    if (this.queryStringDeliveryMethodId && this.queryStringDeliveryMethodId != 'new') {
-      this.deliveryMethodService.getById(this.queryStringDeliveryMethodId).subscribe(deliveryMethod => {
-        this.onRetrieveDeliveryMethodData(deliveryMethod);
+    this.countryService.getList().subscribe(countries => {
+      this.countries = countries;
 
-        // Fetch countries after delivery methods are fetched because 
-        this.countryService.getList().subscribe(countries => {
-          this.countries = countries;
-          this.countries.forEach(country => {
-            this.controlsCostsPerCountry[country.Id] = new FormControl(this.deliveryMethodCostsPerCountry[country.Id] ?? '', Validators.pattern(Constants.REGEX_PATTERN_DECIMAL_2));
+      countries.forEach(country => {
+        this.controlsCostsPerCountry[country.Id] = new FormControl('', Validators.pattern(Constants.REGEX_PATTERN_DECIMAL_2));
+      });
+
+      if (this.queryStringDeliveryMethodId && this.queryStringDeliveryMethodId != 'new') {
+        this.deliveryMethodService.getById(this.queryStringDeliveryMethodId).subscribe(deliveryMethod => {
+          this.onRetrieveDeliveryMethodData(deliveryMethod);
+
+          countries.forEach(country => {
+            this.controlsCostsPerCountry[country.Id].setValue(this.deliveryMethodCostsPerCountry[country.Id]);
           });
         });
-      });
-    }
+      }
+    });
 
     this.shopService.getList().subscribe(shops => this.shops = shops);
   }
