@@ -158,14 +158,20 @@ export class ControlPanelConfigurationShopComponent implements OnInit {
     var selectedCountry = this.countries?.find(x => x.Id == this.controlCountry.value);
     if (selectedCountry)
       shopToUpdate.Country = selectedCountry;
+    else
+      shopToUpdate.Country = undefined;
 
     var selectedShopCategory = this.shopCategories?.find(x => x.Id == this.controlShopCategory.value);
     if (selectedShopCategory)
       shopToUpdate.Category = selectedShopCategory;
+    else
+      shopToUpdate.Category = undefined;
 
     var selectedDigiByteWallet = this.digiByteWallets?.find(x => x.Id == this.controlDigiByteWallet.value);
     if (selectedDigiByteWallet)
       shopToUpdate.Wallet = selectedDigiByteWallet;
+    else
+      shopToUpdate.Wallet = undefined;
 
     if (this.queryStringShopId && this.queryStringShopId != 'new') {
       this.shopService.update(shopToUpdate).subscribe({
