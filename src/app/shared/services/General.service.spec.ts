@@ -2,20 +2,20 @@ import { CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from '@angular/core';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 
 import { Environment } from 'src/app/shared/environments/Environment';
-import { StatsService } from './Stats.service';
+import { GeneralService } from './General.service';
 import { TestBed } from '@angular/core/testing';
 
-describe('StatsService', () => {
-    let service: StatsService;
+describe('GeneralService', () => {
+    let service: GeneralService;
     let httpMock: HttpTestingController;
 
     beforeEach(() => {
         TestBed.configureTestingModule({
             schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
             imports: [HttpClientTestingModule],
-            providers: [StatsService]
+            providers: [GeneralService]
         });
-        service = TestBed.inject(StatsService);
+        service = TestBed.inject(GeneralService);
         httpMock = TestBed.inject(HttpTestingController);
     });
 
@@ -24,8 +24,8 @@ describe('StatsService', () => {
     });
 
     it('should be able to get stats', () => {
-        service.get().subscribe();
-        const request = httpMock.expectOne(Environment.API_URL + '/Stats');
+        service.getStats().subscribe();
+        const request = httpMock.expectOne(Environment.API_URL + '/General/GetStats');
         expect(request.request.method).toBe('GET');
     });
 });

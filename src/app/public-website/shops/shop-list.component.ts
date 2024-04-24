@@ -66,7 +66,8 @@ export class PublicWebsiteShopListComponent implements OnInit {
       Name: this.controlFilterName.value!,
       SubDomain: this.controlFilterSubDomain.value!,
       CountryId: this.controlFilterCountry.value!,
-      ShopCategoryId: this.controlFilterShopCategory.value!
+      ShopCategoryId: this.controlFilterShopCategory.value!,
+      Usable: true
     };
 
     this.shopService.getListPublic(parameters).subscribe(shops => {

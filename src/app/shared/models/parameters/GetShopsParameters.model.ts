@@ -3,4 +3,5 @@ export class GetShopsParameters {
     SubDomain?: string;
     CountryId?: string;
     ShopCategoryId?: string;
+    Usable?: boolean;
 }

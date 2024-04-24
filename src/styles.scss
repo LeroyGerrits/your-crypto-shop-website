@@ -49,10 +49,10 @@
   --mdc-dialog-supporting-text-size: 14px;
   --mat-menu-item-label-text-size: 14px;
   --mat-option-label-text-size: 14px;
-
   --font-main: 'open_sansregular', Helvetica, Tahoma !important;
   --dark-blue-color: #002352;
   --dark-gray-color: #202020;
+  --font-color: #fff;
   --light-blue-color: #2080e0;
   --lighter-blue-color: #3090f0;
   --lightest-blue-color: #3f9fff;
@@ -156,7 +156,7 @@ a:hover {
 
 body {
   background-color: var(--dark-blue-color);
-  color: #fff;
+  color: var(--font-color);
   font-family: 'open_sansregular', Helvetica, Tahoma !important;
   margin: 0;
 }

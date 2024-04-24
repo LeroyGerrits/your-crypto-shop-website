@@ -4,7 +4,7 @@ import { NavigationEnd, Router } from '@angular/router';
 import { DialogSignUpComponent } from '../shared/dialogs/signup/dialog.signup.component';
 import { MatDialog } from '@angular/material/dialog';
 import { ShopService } from '../shared/services/Shop.service';
-import { StatsService } from '../shared/services/Stats.service';
+import { GeneralService } from '../shared/services/General.service';
 import { Stats } from '../shared/models/Stats.model';
 import { PublicShop } from '../shared/models/viewmodels/PublicShop.model';
 
@@ -24,13 +24,14 @@ export class PublicWebsiteComponent implements OnInit {
 
   constructor(
     private dialog: MatDialog,
+    private generalService: GeneralService,
     private router: Router,
-    private shopService: ShopService,
-    private statsService: StatsService) { }
+    private shopService: ShopService
+    ) { }
 
   ngOnInit() {
     this.shopService.getListFeaturedPublic().subscribe(shops => this.featuredShops = shops);
-    this.statsService.get().subscribe(stats => this.stats = stats);
+    this.generalService.getStats().subscribe(stats => this.stats = stats);
 
     this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {

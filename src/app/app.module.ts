@@ -51,6 +51,7 @@ import { FaqCategoryService } from './shared/services/FaqCategory.service';
 import { FaqService } from './shared/services/Faq.service';
 import { FileSizePipe } from './shared/pipes/FileSize.pipe';
 import { FinancialStatementTransactionService } from './shared/services/FinancialStatementTransaction.service';
+import { GeneralService } from './shared/services/General.service';
 import { HashRatePipe } from './shared/pipes/HashRate.pipe';
 import { JwtInterceptor } from './shared/interceptors/jwt.interceptor';
 import { MatBadgeModule } from '@angular/material/badge';
@@ -108,7 +109,6 @@ import { RouterModule } from '@angular/router';
 import { SearchEngineFriendlyStringPipe } from './shared/pipes/SearchEngineFriendlyString.pipe';
 import { ShopCategoryService } from './shared/services/ShopCategory.service';
 import { ShopService } from './shared/services/Shop.service';
-import { StatsService } from './shared/services/Stats.service';
 import { StripHtmlPipe } from './shared/pipes/StripHtml.pipe';
 
 @NgModule({
@@ -217,6 +217,7 @@ import { StripHtmlPipe } from './shared/pipes/StripHtml.pipe';
     FaqCategoryService,
     FileSizePipe,
     FinancialStatementTransactionService,
+    GeneralService,
     HashRatePipe,
     MerchantService,
     MerchantPasswordResetLinkService,
@@ -228,7 +229,6 @@ import { StripHtmlPipe } from './shared/pipes/StripHtml.pipe';
     ProductPhotoService,
     ShopService,
     ShopCategoryService,
-    StatsService,
     StripHtmlPipe
   ],
   bootstrap: [AppComponent]

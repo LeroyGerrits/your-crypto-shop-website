@@ -1,14 +1,14 @@
-import { ActivatedRoute, Router, RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ActivatedRoute, Router, RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 
 import { MatDialog } from '@angular/material/dialog';
 import { NavigationEnd } from '@angular/router';
-import { PublicWebsiteComponent } from './public-website.component';
-import { ShopService } from '../shared/services/Shop.service';
-import { TestDataPublicShops } from 'src/assets/test-data/PublicShops';
 import { of } from 'rxjs';
-import { StatsService } from '../shared/services/Stats.service';
+import { TestDataPublicShops } from 'src/assets/test-data/PublicShops';
 import { Stats } from '../shared/models/Stats.model';
+import { GeneralService } from '../shared/services/General.service';
+import { ShopService } from '../shared/services/Shop.service';
+import { PublicWebsiteComponent } from './public-website.component';
 
 describe('PublicWebsiteComponent', () => {
   let component: PublicWebsiteComponent;
@@ -18,7 +18,7 @@ describe('PublicWebsiteComponent', () => {
   let matDialogSpy: jasmine.SpyObj<MatDialog>
 
   let shopServiceSpy: jasmine.SpyObj<ShopService>;
-  let statsServiceSpy: jasmine.SpyObj<StatsService>;
+  let generalServiceSpy: jasmine.SpyObj<GeneralService>;
 
   const fakeActivatedRoute = {
     snapshot: { data: {} }
@@ -35,8 +35,8 @@ describe('PublicWebsiteComponent', () => {
     shopServiceSpy = jasmine.createSpyObj('ShopService', ['getListFeaturedPublic']);
     shopServiceSpy.getListFeaturedPublic.and.returnValue(of(TestDataPublicShops));
 
-    statsServiceSpy = jasmine.createSpyObj('StatsService', ['get']);
-    statsServiceSpy.get.and.returnValue(of(<Stats>{ Merchants: 0, Shops: 0, Products: 0, Orders: 0 }));
+    generalServiceSpy = jasmine.createSpyObj('GeneralService', ['get']);
+    generalServiceSpy.getStats.and.returnValue(of(<Stats>{ Merchants: 0, Shops: 0, Products: 0, Orders: 0 }));
 
     TestBed.configureTestingModule({
       declarations: [PublicWebsiteComponent],
@@ -45,7 +45,7 @@ describe('PublicWebsiteComponent', () => {
         { provide: ActivatedRoute, useValue: fakeActivatedRoute },
         { provide: MatDialog, useValue: matDialogSpy },
         { provide: ShopService, useValue: shopServiceSpy },
-        { provide: StatsService, useValue: statsServiceSpy }
+        { provide: GeneralService, useValue: generalServiceSpy }
       ]
     });
     fixture = TestBed.createComponent(PublicWebsiteComponent);
