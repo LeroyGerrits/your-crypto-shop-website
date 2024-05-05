@@ -8,6 +8,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { debounceTime, distinctUntilChanged } from 'rxjs';
 import { Constants } from 'src/app/shared/Constants';
+import { DialogConfirmComponent } from 'src/app/shared/dialogs/confirm/dialog.confirm.component';
 import { DialogDeleteComponent } from 'src/app/shared/dialogs/delete/dialog.delete.component';
 import { Environment } from 'src/app/shared/environments/Environment';
 import { Category } from 'src/app/shared/models/Category.model';
@@ -139,6 +140,22 @@ export class ControlPanelCatalogProductListComponent {
 
   editPhotos(element: Product) {
     this.router.navigate([`/control-panel/catalog/products/${element.Id}/${this.controlFilterShop.value}/photos`]);
+  }
+
+  duplicateElement(element: Product) {
+    const dialogConfirm = this.dialog.open(DialogConfirmComponent);
+    const instance = dialogConfirm.componentInstance;
+    instance.dialogMessage = `Are you sure you want to duplicate product '${element.Name}'? A copy of this product will be created, the product name will be suffixed with *COPY*.`;
+
+    dialogConfirm.afterClosed().subscribe(result => {
+      if (result) {
+        this.productService.duplicate(element.Id).subscribe({
+          next: result => this.handleOnSubmitResult(result),
+          error: error => this.handleOnSubmitError(error),
+          complete: () => dialogConfirm.close()
+        });
+      }
+    });
   }
 
   deleteElement(element: Product) {

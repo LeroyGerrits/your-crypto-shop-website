@@ -42,6 +42,10 @@ export class ProductService {
         return this.http.put<MutationResult>(`${this.apiUrl}/${request.Product.Id}`, request)
     }
 
+    duplicate(id: string): Observable<MutationResult> {
+        return this.http.put<MutationResult>(`${this.apiUrl}/${id}/Duplicate`, null)
+    }
+
     delete(id: string): Observable<MutationResult> {
         return this.http.delete<MutationResult>(`${this.apiUrl}/${id}`);
     }
