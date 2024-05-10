@@ -22,6 +22,8 @@ import { ControlPanelConfigurationDeliveryMethodComponent } from './control-pane
 import { ControlPanelConfigurationDeliveryMethodListComponent } from './control-panel/configuration/delivery-methods/delivery-method-list.component';
 import { ControlPanelConfigurationDigiByteWalletComponent } from './control-panel/configuration/digibyte-wallets/digibyte-wallet.component';
 import { ControlPanelConfigurationDigiByteWalletListComponent } from './control-panel/configuration/digibyte-wallets/digibyte-wallet-list.component';
+import { ControlPanelConfigurationFieldComponent } from './control-panel/configuration/fields/field.component';
+import { ControlPanelConfigurationFieldListComponent } from './control-panel/configuration/fields/field-list.component';
 import { ControlPanelConfigurationPageComponent } from './control-panel/configuration/pages/page.component';
 import { ControlPanelConfigurationPageListComponent } from './control-panel/configuration/pages/page-list.component';
 import { ControlPanelConfigurationShopComponent } from './control-panel/configuration/shops/shop.component';
@@ -49,6 +51,7 @@ import { DigiByteWalletService } from './shared/services/DigiByteWallet.service'
 import { ErrorInterceptor } from './shared/interceptors/error.interceptor';
 import { FaqCategoryService } from './shared/services/FaqCategory.service';
 import { FaqService } from './shared/services/Faq.service';
+import { FieldService } from './shared/services/Field.service';
 import { FileSizePipe } from './shared/pipes/FileSize.pipe';
 import { FinancialStatementTransactionService } from './shared/services/FinancialStatementTransaction.service';
 import { GeneralService } from './shared/services/General.service';
@@ -128,6 +131,8 @@ import { StripHtmlPipe } from './shared/pipes/StripHtml.pipe';
     ControlPanelConfigurationDeliveryMethodComponent,
     ControlPanelConfigurationDigiByteWalletListComponent,
     ControlPanelConfigurationDigiByteWalletComponent,
+    ControlPanelConfigurationFieldListComponent,
+    ControlPanelConfigurationFieldComponent,
     ControlPanelConfigurationPageListComponent,
     ControlPanelConfigurationPageComponent,
     ControlPanelConfigurationShopListComponent,
@@ -215,6 +220,7 @@ import { StripHtmlPipe } from './shared/pipes/StripHtml.pipe';
     DigiByteWalletService,
     FaqService,
     FaqCategoryService,
+    FieldService,
     FileSizePipe,
     FinancialStatementTransactionService,
     GeneralService,
