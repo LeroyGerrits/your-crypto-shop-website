@@ -52,6 +52,7 @@ import { ErrorInterceptor } from './shared/interceptors/error.interceptor';
 import { FaqCategoryService } from './shared/services/FaqCategory.service';
 import { FaqService } from './shared/services/Faq.service';
 import { FieldService } from './shared/services/Field.service';
+import { FieldTypePipe } from './shared/pipes/fieldType.pipe';
 import { FileSizePipe } from './shared/pipes/FileSize.pipe';
 import { FinancialStatementTransactionService } from './shared/services/FinancialStatementTransaction.service';
 import { GeneralService } from './shared/services/General.service';
@@ -151,6 +152,7 @@ import { StripHtmlPipe } from './shared/pipes/StripHtml.pipe';
     DialogLogoutComponent,
     DialogSignUpComponent,
     FileSizePipe,
+    FieldTypePipe,
     HashRatePipe,
     MerchantLinkComponent,
     PublicWebsiteComponent,
@@ -222,6 +224,7 @@ import { StripHtmlPipe } from './shared/pipes/StripHtml.pipe';
     FaqCategoryService,
     FieldService,
     FileSizePipe,
+    FieldTypePipe,
     FinancialStatementTransactionService,
     GeneralService,
     HashRatePipe,

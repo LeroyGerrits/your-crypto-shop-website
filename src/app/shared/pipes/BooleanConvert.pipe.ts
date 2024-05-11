@@ -6,7 +6,7 @@ export class BooleanConvertPipe implements PipeTransform {
     constructor() { }
 
     transform(text: any): boolean {
-        switch(text){
+        switch (text) {
             case true:
             case "true":
             case 1:
@@ -14,7 +14,7 @@ export class BooleanConvertPipe implements PipeTransform {
             case "on":
             case "yes":
                 return true;
-            default: 
+            default:
                 return false;
         }
     }

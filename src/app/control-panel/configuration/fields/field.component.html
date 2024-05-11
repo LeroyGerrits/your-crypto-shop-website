@@ -49,6 +49,120 @@
             </div>
         </div>
         <mat-divider class="ClearLeft" />
+        <div class="ColumnOneHalf">
+            <div class="WrapperPadding20-10-0-8">
+                <mat-form-field>
+                    <mat-label>Entity</mat-label>
+                    <mat-select [formControl]="controlEntity" [ngClass]="{ 'is-invalid': controlEntity.errors }">
+                        <mat-option *ngFor="let type of fieldEntities | keyvalue;" [value]="type.key">
+                            {{type.value}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+        </div>
+        <div class="ColumnOneHalf">
+            <div class="WrapperPadding20-10-0-8">
+                <p>The entity this field will be added to.</p>
+            </div>
+        </div>
+        <mat-divider class="ClearLeft" />
+        <div class="ColumnOneHalf">
+            <div class="WrapperPadding20-10-0-8">
+                <mat-form-field>
+                    <mat-label>Type</mat-label>
+                    <mat-select [formControl]="controlType" [ngClass]="{ 'is-invalid': controlType.errors }">
+                        <mat-option *ngFor="let type of fieldTypes | keyvalue;" [value]="type.key">
+                            {{type.value}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+        </div>
+        <div class="ColumnOneHalf">
+            <div class="WrapperPadding20-10-0-8">
+                <p>The type of field.</p>
+                <p>
+                    <strong>Static:</strong> Displays whatever information is entered by you as a merchant.<br />
+                    <strong>Customer defined:</strong> Allows the customer to input or select information.
+                </p>
+            </div>
+        </div>
+        <mat-divider class="ClearLeft" />
+        <div *ngIf="this.controlType.value == '1'">
+            <div class="ColumnOneHalf">
+                <div class="WrapperPadding10-10-0-8 TextAlignRight">
+                    <mat-checkbox [formControl]="controlUserDefinedMandatory" color="primary" />
+                </div>
+            </div>
+            <div class="ColumnOneHalf">
+                <div class="WrapperPadding20-10-0-8">
+                    <p>Customer is required to input or select a value, field is mandatory.</p>
+                </div>
+            </div>
+            <mat-divider class="ClearLeft" />
+        </div>
+        <div class="ColumnOneHalf">
+            <div class="WrapperPadding20-10-0-8">
+                <mat-form-field>
+                    <mat-label>Data type</mat-label>
+                    <mat-select [formControl]="controlDataType" [ngClass]="{ 'is-invalid': controlDataType.errors }">
+                        <mat-option *ngFor="let type of fieldDataTypes | keyvalue;" [value]="type.key">
+                            {{type.value}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+        </div>
+        <div class="ColumnOneHalf">
+            <div class="WrapperPadding20-10-0-8">
+                <p>The data type of field. The data type will determine how information is entered and how the information is validated.</p>
+                <p>
+                    <strong>Text:</strong> Free text with no validation up to 255 characters.<br />
+                    <strong>Number:</strong> Flat, rounded numbers only.<br />
+                    <strong>Decimal:</strong> Numbers with up to 2 decimals.<br />
+                    <strong>Date:</strong> A date, selectable with a calendar.<br />
+                    <strong>Enumeration:</strong> A preset range of selectable values.
+                </p>
+            </div>
+        </div>
+        <mat-divider class="ClearLeft" />
+        <div *ngIf="this.controlDataType.value == '4'">
+            <div class="ColumnOneHalf">
+                <div class="WrapperPadding20-10-0-8">
+                    <mat-form-field class="example-chip-list">
+                        <mat-label>Enumerations</mat-label>
+                        <mat-chip-grid #chipGrid aria-label="Manage enumerations">
+                            <mat-chip-row *ngFor="let enumeration of enumerations; track enumeration" [aria-description]="'press enter to edit ' + enumeration" [editable]="true" (removed)="removeEnumeration(enumeration)" (edited)="editEnumeration(enumeration, $event)">
+                                {{enumeration}}
+                                <button matChipRemove [attr.aria-label]="'remove ' + enumeration">
+                                    <mat-icon>cancel</mat-icon>
+                                </button>
+                            </mat-chip-row>
+                            <input placeholder="New value..." [matChipInputFor]="chipGrid" [matChipInputSeparatorKeyCodes]="separatorKeysCodes" [matChipInputAddOnBlur]="true" (matChipInputTokenEnd)="addEnumeration($event)" />
+                        </mat-chip-grid>
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="ColumnOneHalf">
+                <div class="WrapperPadding20-10-0-8">
+                    <p>The values that can be selected.</p>
+                </div>
+            </div>
+            <mat-divider class="ClearLeft" />
+        </div>
+        <div class="ColumnOneHalf">
+            <div class="WrapperPadding10-10-0-8 TextAlignRight">
+                <mat-checkbox [formControl]="controlVisible" color="primary" />
+            </div>
+        </div>
+        <div class="ColumnOneHalf">
+            <div class="WrapperPadding20-10-0-8">
+                <p>Visible on shop.</p>
+            </div>
+        </div>
+        <mat-divider class="ClearLeft" />
+
         <div class="CenteredFormButtons">
             <button mat-raised-button [disabled]="formLoading" type="button" [routerLink]="['/control-panel/configuration/fields']">Cancel</button>
             <button mat-raised-button [disabled]="formLoading" type="submit" color="primary">

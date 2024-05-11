@@ -1,12 +1,17 @@
 import { ActivatedRoute, Router } from '@angular/router';
+import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { MatChipEditedEvent, MatChipInputEvent } from '@angular/material/chips';
 import { MatSnackBar, MatSnackBarRef, TextOnlySnackBar } from '@angular/material/snack-bar';
 
-import { CountryService } from 'src/app/shared/services/Country.service';
+import { Constants } from 'src/app/shared/Constants';
 import { Environment } from 'src/app/shared/environments/Environment';
 import { Field } from 'src/app/shared/models/Field.model';
+import { FieldDataType } from 'src/app/shared/enums/FieldDataType.enum';
+import { FieldEntity } from 'src/app/shared/enums/FieldEntity.enum';
 import { FieldService } from 'src/app/shared/services/Field.service';
+import { FieldType } from 'src/app/shared/enums/FieldType.enum';
 import { MutationResult } from 'src/app/shared/models/MutationResult';
 import { Shop } from 'src/app/shared/models/Shop.model';
 import { ShopService } from 'src/app/shared/services/Shop.service';
@@ -17,6 +22,13 @@ import { ShopService } from 'src/app/shared/services/Shop.service';
 })
 
 export class ControlPanelConfigurationFieldComponent implements OnInit, OnDestroy {
+  fieldDataTypes = Object.keys(FieldDataType).filter(p => isNaN(p as any));
+  fieldEntities = Object.keys(FieldEntity).filter(p => isNaN(p as any));
+  fieldTypes = Object.keys(FieldType).filter(p => isNaN(p as any));
+
+  readonly separatorKeysCodes = [ENTER, COMMA] as const;
+  enumerations: string[] = ['Lemon', 'Lime', 'Apple'];
+
   public environment = Environment;
   public snackBarRef: MatSnackBarRef<TextOnlySnackBar> | undefined;
   public queryStringFieldId: string | null = '';
@@ -26,6 +38,13 @@ export class ControlPanelConfigurationFieldComponent implements OnInit, OnDestro
   public formSubmitted = false;
   public controlName = new FormControl('', Validators.required);
   public controlShop = new FormControl('', Validators.required);
+  public controlEntity = new FormControl('0', Validators.required);
+  public controlType = new FormControl('0', Validators.required);
+  public controlUserDefinedMandatory = new FormControl(false, Validators.required);
+  public controlDataType = new FormControl('0', Validators.required);
+  public controlEnumerations = new FormControl('');
+  public controlSortOrder = new FormControl('', Validators.pattern(Constants.REGEX_PATTERN_NUMBER));
+  public controlVisible = new FormControl('', Validators.required);
 
   public field: Field = new Field();
   public shops: Shop[] | undefined;
@@ -40,7 +59,14 @@ export class ControlPanelConfigurationFieldComponent implements OnInit, OnDestro
   ) {
     this.form = new FormGroup([
       this.controlName,
-      this.controlShop
+      this.controlShop,
+      this.controlEntity,
+      this.controlType,
+      this.controlUserDefinedMandatory,
+      this.controlDataType,
+      this.controlEnumerations,
+      this.controlSortOrder,
+      this.controlVisible
     ]);
   }
 
@@ -63,6 +89,42 @@ export class ControlPanelConfigurationFieldComponent implements OnInit, OnDestro
     this.pageTitle = field.Name;
     this.controlName.setValue(field.Name);
     this.controlShop.setValue(field.Shop.Id);
+  }
+
+  addEnumeration(event: MatChipInputEvent): void {
+    const value = (event.value || '').trim();
+
+    if (value) {
+      this.enumerations.push(value);
+    }
+
+    // Clear the input value
+    event.chipInput!.clear();
+  }
+
+  removeEnumeration(enumeration: string): void {
+    const index = this.enumerations.indexOf(enumeration);
+
+    if (index >= 0) {
+      this.enumerations.splice(index, 1);
+      //this.announcer.announce(`Removed ${fruit}`);
+    }
+  }
+
+  editEnumeration(enumeration: string, event: MatChipEditedEvent) {
+    const value = event.value.trim();
+
+    // Remove fruit if it no longer has a name
+    if (!value) {
+      this.removeEnumeration(enumeration);
+      return;
+    }
+
+    // Edit existing fruit
+    const index = this.enumerations.indexOf(enumeration);
+    if (index >= 0) {
+      this.enumerations[index] = value;
+    }
   }
 
   onSubmit() {
