@@ -7,8 +7,15 @@ import { Category } from 'src/app/shared/models/Category.model';
 import { CategoryService } from 'src/app/shared/services/Category.service';
 import { Constants } from 'src/app/shared/Constants';
 import { Environment } from 'src/app/shared/environments/Environment';
+import { Field } from 'src/app/shared/models/Field.model';
+import { FieldDataType } from 'src/app/shared/enums/FieldDataType.enum';
+import { FieldEntity } from 'src/app/shared/enums/FieldEntity.enum';
+import { FieldService } from 'src/app/shared/services/Field.service';
+import { FieldType } from 'src/app/shared/enums/FieldType.enum';
 import { GetCategoriesParameters } from 'src/app/shared/models/parameters/GetCategoriesParameters.model';
+import { GetFieldsParameters } from 'src/app/shared/models/parameters/GetFieldsParameters.model';
 import { GetProductResponse } from 'src/app/shared/models/response/GetProductResponse.model';
+import { IDictionaryFormControl } from 'src/app/shared/interfaces/idictionary-formcontrol.interface';
 import { MatCheckboxChange } from '@angular/material/checkbox';
 import { MatTreeNestedDataSource } from '@angular/material/tree';
 import { MutateProductRequest } from 'src/app/shared/models/request/MutateProductRequest.model';
@@ -45,15 +52,20 @@ export class ControlPanelCatalogProductComponent implements OnInit, OnDestroy {
   public controlStock = new FormControl('', Validators.pattern(Constants.REGEX_PATTERN_NUMBER));
   public controlVisible = new FormControl(true);
   public controlShowOnHome = new FormControl(false);
+  public controlFields: IDictionaryFormControl = {};
 
   public categories: Category[] | undefined;
   public pageTitle = 'Create new product'
   public product: Product = new Product();
   public categoryIds: string[] = [];
   public shops: Shop[] | undefined;
+  public fields: Field[] | undefined;
+
+  public hasFieldErrors: boolean = false;
 
   constructor(
     private categoryService: CategoryService,
+    private fieldService: FieldService,
     private productService: ProductService,
     private route: ActivatedRoute,
     private router: Router,
@@ -76,6 +88,7 @@ export class ControlPanelCatalogProductComponent implements OnInit, OnDestroy {
     this.queryStringProductId = this.route.snapshot.paramMap.get('productId');
     this.queryStringShopId = this.route.snapshot.paramMap.get('shopId');
 
+    // Fetch shop
     this.shopService.getList().subscribe(shops => {
       this.shops = shops;
 
@@ -88,12 +101,36 @@ export class ControlPanelCatalogProductComponent implements OnInit, OnDestroy {
       }
     });
 
-    const parameters: GetCategoriesParameters = {};
+    // Fetch static fields for products
+    const getFieldsParameters: GetFieldsParameters = {
+      Entity: FieldEntity.Product,
+      Type: FieldType.Static
+    };
+
+    this.fieldService.getList(getFieldsParameters).subscribe(fields => {
+      this.fields = fields;
+
+      fields.forEach(field => {
+        let controlField = new FormControl('');
+
+        if (field.DataType == FieldDataType.Number)
+          controlField.addValidators(Validators.pattern(Constants.REGEX_PATTERN_NUMBER));
+
+        if (field.DataType == FieldDataType.Decimal)
+          controlField.addValidators(Validators.pattern(Constants.REGEX_PATTERN_DECIMAL_2));
+
+        this.controlFields[field.Id] = controlField;
+        this.form.addControl(field.Id, controlField);
+      });
+    });
+
+    // Fetch categories
+    const getCategoriesParameters: GetCategoriesParameters = {};
     if (this.queryStringShopId) {
-      parameters.ShopId = this.queryStringShopId;
+      getCategoriesParameters.ShopId = this.queryStringShopId;
     }
 
-    this.categoryService.getList(parameters).subscribe(categories => {
+    this.categoryService.getList(getCategoriesParameters).subscribe(categories => {
       // Fetch products info after categories were fetched
       if (this.queryStringProductId && this.queryStringProductId != 'new') {
         this.productService.getById(this.queryStringProductId).subscribe(x => {

@@ -19,6 +19,10 @@ export class FieldService {
         if (parameters) {
             if (parameters.Name) httpParams = httpParams.append('name', parameters.Name);
             if (parameters.ShopId) httpParams = httpParams.append('shopId', parameters.ShopId);
+            if (parameters.Entity != null) httpParams = httpParams.append('entity', parameters.Entity);
+            if (parameters.Type != null) httpParams = httpParams.append('type', parameters.Type);
+            if (parameters.DataType != null) httpParams = httpParams.append('dataType', parameters.DataType);
+            if (parameters.Visible != null) httpParams = httpParams.append('visible', parameters.Visible);
         }
 
         return this.http.get<Field[]>(this.apiUrl, { params: httpParams });

@@ -125,6 +125,47 @@
                     </div>
                 </div>
             </mat-tab>
+            <mat-tab *ngIf="this.fields">
+                <ng-template mat-tab-label>
+                    <mat-icon color="warn" class="TabWarnIcon" *ngIf="this.formSubmitted && this.hasFieldErrors">error_outline</mat-icon>
+                    Fields
+                </ng-template>
+                <ng-container *ngFor="let field of this.fields">
+                    <div class="WrapperPadding20-8-0-8">
+                        <mat-form-field>
+                            <mat-label>{{field.Name}}</mat-label>
+
+                            <ng-container [ngSwitch]="field.DataType">
+                                <ng-container *ngSwitchCase="field.DataType == 1 || field.DataType == 2">
+                                    <input matInput [formControl]="controlFields[field.Id]" maxlength="255" [ngClass]="{ 'is-invalid': formSubmitted && controlFields[field.Id].errors }" />
+                                </ng-container>
+                                <ng-container *ngSwitchCase="'Date'">
+                                    <input matInput [formControl]="controlFields[field.Id]" [matDatepicker]="pickerField" />
+                                    <mat-datepicker-toggle matIconSuffix [for]="pickerField"></mat-datepicker-toggle>
+                                    <mat-datepicker #pickerField></mat-datepicker>
+                                </ng-container>
+                                <ng-container *ngSwitchCase="'Enumeration'">
+                                    <mat-select [formControl]="controlFields[field.Id]">
+                                        <mat-option />
+                                        <mat-option *ngFor="let enumeration of field.Enumerations" [value]="enumeration">
+                                            {{enumeration}}
+                                        </mat-option>
+                                    </mat-select>
+                                </ng-container>
+                                <ng-container *ngSwitchDefault>
+                                    <input matInput [formControl]="controlFields[field.Id]" maxlength="255" [ngClass]="{ 'is-invalid': formSubmitted && controlFields[field.Id].errors }" />
+                                </ng-container>
+                            </ng-container>
+                            <div *ngIf="formSubmitted && controlFields[field.Id].errors" class="TextError">
+                                <div *ngIf="controlFields[field.Id].errors!['required']">{{field.Name}} is required</div>
+                                <div *ngIf="controlFields[field.Id].errors!['pattern'] && field.DataType == 1">{{field.Name}} can only be a numerical value.</div>
+                                <div *ngIf="controlFields[field.Id].errors!['pattern'] && field.DataType == 2">{{field.Name}} can only be a numerical value with up to 2 decimals.</div>
+                            </div>
+                        </mat-form-field>
+                    </div>
+                    <mat-divider class="ClearLeft" />
+                </ng-container>
+            </mat-tab>
             <mat-tab label="Description">
                 <div class="WrapperPadding20-8-0-8">
                     <mat-form-field>
