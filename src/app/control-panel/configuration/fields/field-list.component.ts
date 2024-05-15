@@ -32,7 +32,7 @@ export class ControlPanelConfigurationFieldListComponent implements OnDestroy, O
   environment = Environment;
   constants = Constants;
   dataSource = new MatTableDataSource<Field>;
-  displayedColumns: string[] = ['Name', 'Shop', 'Costs', 'ActionButtons'];
+  displayedColumns: string[] = ['Name', 'Shop', 'Entity', 'Type', 'DataType', 'ActionButtons'];
   sortDirection: string | null = 'asc';
   finishedLoading: boolean = false;
 

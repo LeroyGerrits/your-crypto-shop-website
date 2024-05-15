@@ -54,8 +54,8 @@
                 <mat-form-field>
                     <mat-label>Entity</mat-label>
                     <mat-select [formControl]="controlEntity" [ngClass]="{ 'is-invalid': controlEntity.errors }">
-                        <mat-option *ngFor="let type of fieldEntities | keyvalue;" [value]="type.key">
-                            {{type.value}}
+                        <mat-option *ngFor="let entity of fieldEntities | keyvalue;" [value]="entity.key">
+                            {{entity.value}}
                         </mat-option>
                     </mat-select>
                 </mat-form-field>
@@ -107,8 +107,8 @@
                 <mat-form-field>
                     <mat-label>Data type</mat-label>
                     <mat-select [formControl]="controlDataType" [ngClass]="{ 'is-invalid': controlDataType.errors }">
-                        <mat-option *ngFor="let type of fieldDataTypes | keyvalue;" [value]="type.key">
-                            {{type.value}}
+                        <mat-option *ngFor="let dataType of fieldDataTypes | keyvalue;" [value]="dataType.key">
+                            {{dataType.value}}
                         </mat-option>
                     </mat-select>
                 </mat-form-field>
@@ -133,13 +133,13 @@
                     <mat-form-field class="example-chip-list">
                         <mat-label>Enumerations</mat-label>
                         <mat-chip-grid #chipGrid aria-label="Manage enumerations">
-                            <mat-chip-row *ngFor="let enumeration of enumerations; track enumeration" [aria-description]="'press enter to edit ' + enumeration" [editable]="true" (removed)="removeEnumeration(enumeration)" (edited)="editEnumeration(enumeration, $event)">
+                            <mat-chip-row *ngFor="let enumeration of this.enumerations; " [aria-description]="'press enter to edit ' + enumeration" [editable]="true" (removed)="removeEnumeration(enumeration)" (edited)="editEnumeration(enumeration, $event)">
                                 {{enumeration}}
                                 <button matChipRemove [attr.aria-label]="'remove ' + enumeration">
                                     <mat-icon>cancel</mat-icon>
                                 </button>
                             </mat-chip-row>
-                            <input placeholder="New value..." [matChipInputFor]="chipGrid" [matChipInputSeparatorKeyCodes]="separatorKeysCodes" [matChipInputAddOnBlur]="true" (matChipInputTokenEnd)="addEnumeration($event)" />
+                            <input placeholder="New enumeration..." [matChipInputFor]="chipGrid" [matChipInputSeparatorKeyCodes]="separatorKeysCodes" [matChipInputAddOnBlur]="true" (matChipInputTokenEnd)="addEnumeration($event)" />
                         </mat-chip-grid>
                     </mat-form-field>
                 </div>

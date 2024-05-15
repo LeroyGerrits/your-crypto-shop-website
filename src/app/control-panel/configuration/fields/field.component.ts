@@ -26,8 +26,12 @@ export class ControlPanelConfigurationFieldComponent implements OnInit, OnDestro
   fieldEntities = Object.keys(FieldEntity).filter(p => isNaN(p as any));
   fieldTypes = Object.keys(FieldType).filter(p => isNaN(p as any));
 
+  fieldDataTypeType: typeof FieldDataType = FieldDataType;
+  fieldEntityType: typeof FieldEntity = FieldEntity;
+  fieldTypeType: typeof FieldType = FieldType;
+
   readonly separatorKeysCodes = [ENTER, COMMA] as const;
-  enumerations: string[] = ['Lemon', 'Lime', 'Apple'];
+  enumerations: string[] = [];
 
   public environment = Environment;
   public snackBarRef: MatSnackBarRef<TextOnlySnackBar> | undefined;
@@ -44,7 +48,7 @@ export class ControlPanelConfigurationFieldComponent implements OnInit, OnDestro
   public controlDataType = new FormControl('0', Validators.required);
   public controlEnumerations = new FormControl('');
   public controlSortOrder = new FormControl('', Validators.pattern(Constants.REGEX_PATTERN_NUMBER));
-  public controlVisible = new FormControl('', Validators.required);
+  public controlVisible = new FormControl(true, Validators.required);
 
   public field: Field = new Field();
   public shops: Shop[] | undefined;
@@ -89,6 +93,15 @@ export class ControlPanelConfigurationFieldComponent implements OnInit, OnDestro
     this.pageTitle = field.Name;
     this.controlName.setValue(field.Name);
     this.controlShop.setValue(field.Shop.Id);
+    this.controlEntity.setValue(this.fieldEntityType[field.Entity].toString());
+    this.controlType.setValue(this.fieldTypeType[field.Type].toString());
+    this.controlUserDefinedMandatory.setValue(field.UserDefinedMandatory);
+    this.controlDataType.setValue(this.fieldDataTypeType[field.DataType].toString());
+
+    if (field.Enumerations)
+      this.enumerations = field.Enumerations;
+
+    this.controlVisible.setValue(field.Visible);
   }
 
   addEnumeration(event: MatChipInputEvent): void {
@@ -98,7 +111,6 @@ export class ControlPanelConfigurationFieldComponent implements OnInit, OnDestro
       this.enumerations.push(value);
     }
 
-    // Clear the input value
     event.chipInput!.clear();
   }
 
@@ -107,20 +119,17 @@ export class ControlPanelConfigurationFieldComponent implements OnInit, OnDestro
 
     if (index >= 0) {
       this.enumerations.splice(index, 1);
-      //this.announcer.announce(`Removed ${fruit}`);
     }
   }
 
   editEnumeration(enumeration: string, event: MatChipEditedEvent) {
     const value = event.value.trim();
 
-    // Remove fruit if it no longer has a name
     if (!value) {
       this.removeEnumeration(enumeration);
       return;
     }
 
-    // Edit existing fruit
     const index = this.enumerations.indexOf(enumeration);
     if (index >= 0) {
       this.enumerations[index] = value;
@@ -142,6 +151,13 @@ export class ControlPanelConfigurationFieldComponent implements OnInit, OnDestro
     var selectedShop = this.shops?.find(x => x.Id == this.controlShop.value);
     if (selectedShop)
       fieldToUpdate.Shop = selectedShop;
+
+    fieldToUpdate.Entity = parseInt(this.controlEntity.value!);
+    fieldToUpdate.Type = parseInt(this.controlType.value!);
+    fieldToUpdate.UserDefinedMandatory = this.controlUserDefinedMandatory.value!;
+    fieldToUpdate.DataType = parseInt(this.controlDataType.value!);
+    fieldToUpdate.Enumerations = this.enumerations;
+    fieldToUpdate.Visible = this.controlVisible.value!;
 
     if (this.queryStringFieldId && this.queryStringFieldId != 'new') {
       this.fieldService.update(fieldToUpdate).subscribe({
