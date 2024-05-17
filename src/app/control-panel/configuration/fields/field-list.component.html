@@ -42,35 +42,35 @@
     </mat-accordion>
 </div>
 <div class="WrapperPadding20-8">
-    <table mat-table matSort [dataSource]="this.dataSource" (matSortChange)="onSortChange($event)">
+    <mat-table matSort [dataSource]="this.dataSource" (matSortChange)="onSortChange($event)">
         <ng-container matColumnDef="Name">
-            <th mat-header-cell mat-sort-header *matHeaderCellDef>Name</th>
-            <td mat-cell *matCellDef="let element">{{element.Name}}</td>
+            <mat-header-cell mat-sort-header *matHeaderCellDef>Name</mat-header-cell>
+            <mat-cell *matCellDef="let element">{{element.Name}}</mat-cell>
         </ng-container>
 
         <ng-container matColumnDef="Shop">
-            <th mat-header-cell mat-sort-header *matHeaderCellDef>Shop</th>
-            <td mat-cell *matCellDef="let element">{{element.Shop.Name}}</td>
+            <mat-header-cell mat-sort-header *matHeaderCellDef>Shop</mat-header-cell>
+            <mat-cell *matCellDef="let element">{{element.Shop.Name}}</mat-cell>
         </ng-container>
 
         <ng-container matColumnDef="Entity">
-            <th mat-header-cell mat-sort-header *matHeaderCellDef>Entity</th>
-            <td mat-cell *matCellDef="let element">{{element.Entity}}</td>
+            <mat-header-cell mat-sort-header *matHeaderCellDef>Entity</mat-header-cell>
+            <mat-cell *matCellDef="let element">{{element.Entity}}</mat-cell>
         </ng-container>
 
         <ng-container matColumnDef="Type">
-            <th mat-header-cell mat-sort-header *matHeaderCellDef>Type</th>
-            <td mat-cell *matCellDef="let element">{{element.Type}}</td>
+            <mat-header-cell mat-sort-header *matHeaderCellDef>Type</mat-header-cell>
+            <mat-cell *matCellDef="let element">{{element.Type}}</mat-cell>
         </ng-container>
 
         <ng-container matColumnDef="DataType">
-            <th mat-header-cell mat-sort-header *matHeaderCellDef>Data type</th>
-            <td mat-cell *matCellDef="let element">{{element.DataType}}</td>
+            <mat-header-cell mat-sort-header *matHeaderCellDef>Data type</mat-header-cell>
+            <mat-cell *matCellDef="let element">{{element.DataType}}</mat-cell>
         </ng-container>
 
         <ng-container matColumnDef="ActionButtons">
-            <th mat-header-cell *matHeaderCellDef></th>
-            <td mat-cell *matCellDef="let element">
+            <mat-header-cell *matHeaderCellDef></mat-header-cell>
+            <mat-cell *matCellDef="let element">
                 <button mat-icon-button [matMenuTriggerFor]="menu">
                     <mat-icon color="primary">more_horiz</mat-icon>
                 </button>
@@ -82,18 +82,18 @@
                         <mat-icon color="warn">delete</mat-icon> <span>Delete</span>
                     </button>
                 </mat-menu>
-            </td>
+            </mat-cell>
         </ng-container>
 
-        <tr mat-header-row *matHeaderRowDef="this.displayedColumns"></tr>
-        <tr mat-row *matRowDef="let row; columns: this.displayedColumns;" (dblclick)="editElement(row)"></tr>
-        <tr class="mat-row" *matNoDataRow>
+        <mat-header-row *matHeaderRowDef="this.displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: this.displayedColumns;" (dblclick)="editElement(row)"></mat-row>
+        <mat-row *matNoDataRow>
             <td class="mat-cell NoDataCell" [colSpan]="this.displayedColumns.length">
                 <span *ngIf="this.controlFilterName.value || this.controlFilterShop.value">{{constants.MESSAGE_NO_RECORDS_FOUND}}</span>
                 <span *ngIf="!this.controlFilterName.value && !this.controlFilterShop.value">You have not yet created a field.</span>
             </td>
-        </tr>
-    </table>
+        </mat-row>
+    </mat-table>
 
     <mat-paginator [pageSizeOptions]="[25, 50, 100]" showFirstLastButtons />
 </div>

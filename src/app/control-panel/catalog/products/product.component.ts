@@ -104,6 +104,7 @@ export class ControlPanelCatalogProductComponent implements OnInit, OnDestroy {
     // Fetch static fields for products
     const getFieldsParameters: GetFieldsParameters = {
       Entity: FieldEntity.Product,
+      ShopId: this.queryStringShopId ?? undefined,
       Type: FieldType.Static
     };
 
