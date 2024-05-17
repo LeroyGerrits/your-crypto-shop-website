@@ -16,6 +16,7 @@ import { GetCategoriesParameters } from 'src/app/shared/models/parameters/GetCat
 import { GetFieldsParameters } from 'src/app/shared/models/parameters/GetFieldsParameters.model';
 import { GetProductResponse } from 'src/app/shared/models/response/GetProductResponse.model';
 import { IDictionaryFormControl } from 'src/app/shared/interfaces/idictionary-formcontrol.interface';
+import { IDictionaryString } from 'src/app/shared/interfaces/idictionary-string.interface';
 import { MatCheckboxChange } from '@angular/material/checkbox';
 import { MatTreeNestedDataSource } from '@angular/material/tree';
 import { MutateProductRequest } from 'src/app/shared/models/request/MutateProductRequest.model';
@@ -32,6 +33,8 @@ import { ShopService } from 'src/app/shared/services/Shop.service';
 })
 
 export class ControlPanelCatalogProductComponent implements OnInit, OnDestroy {
+  fieldDataTypes = Object.keys(FieldDataType).filter(p => isNaN(p as any));
+
   public treeControl = new NestedTreeControl<Category>(category => category.Children);
   public dataSourceCategories = new MatTreeNestedDataSource<Category>();
 
@@ -61,7 +64,7 @@ export class ControlPanelCatalogProductComponent implements OnInit, OnDestroy {
   public shops: Shop[] | undefined;
   public fields: Field[] | undefined;
 
-  public hasFieldErrors: boolean = false;
+  public formErrorFields: boolean = false;
 
   constructor(
     private categoryService: CategoryService,
@@ -111,13 +114,13 @@ export class ControlPanelCatalogProductComponent implements OnInit, OnDestroy {
     this.fieldService.getList(getFieldsParameters).subscribe(fields => {
       this.fields = fields;
 
-      fields.forEach(field => {
+      this.fields.forEach(field => {
         let controlField = new FormControl('');
 
-        if (field.DataType == FieldDataType.Number)
+        if (field.DataType.toString() == this.fieldDataTypes[FieldDataType.Number].toString())
           controlField.addValidators(Validators.pattern(Constants.REGEX_PATTERN_NUMBER));
 
-        if (field.DataType == FieldDataType.Decimal)
+        if (field.DataType.toString() == this.fieldDataTypes[FieldDataType.Decimal].toString())
           controlField.addValidators(Validators.pattern(Constants.REGEX_PATTERN_DECIMAL_2));
 
         this.controlFields[field.Id] = controlField;
@@ -134,8 +137,17 @@ export class ControlPanelCatalogProductComponent implements OnInit, OnDestroy {
     this.categoryService.getList(getCategoriesParameters).subscribe(categories => {
       // Fetch products info after categories were fetched
       if (this.queryStringProductId && this.queryStringProductId != 'new') {
-        this.productService.getById(this.queryStringProductId).subscribe(x => {
-          this.onRetrieveProductData(x);
+        this.productService.getById(this.queryStringProductId).subscribe(product => {
+          this.onRetrieveProductData(product);
+
+          // Iterate through fields and set FieldData, if applicable
+          if (product.FieldData) {
+            this.fields?.forEach(field => {
+              if (this.controlFields[field.Id] && product.FieldData![field.Id]) {
+                this.controlFields[field.Id].setValue(product.FieldData![field.Id]);
+              }
+            });
+          }
 
           // Set tree datasource after we've retrieved the checked category IDs
           this.categories = categories;
@@ -180,7 +192,19 @@ export class ControlPanelCatalogProductComponent implements OnInit, OnDestroy {
   onSubmit() {
     this.formSubmitted = true;
 
-    if (this.form.invalid) {
+    this.formErrorFields = false;
+
+    const dictFieldData: IDictionaryString = {};
+
+    for (let key in this.controlFields) {
+      if (this.controlFields[key].errors)
+        this.formErrorFields = true;
+
+      if (this.controlFields[key].value)
+        dictFieldData[key] = this.controlFields[key].value;
+    }
+
+    if (this.form.invalid || this.formErrorFields) {
       return;
     }
 
@@ -213,7 +237,8 @@ export class ControlPanelCatalogProductComponent implements OnInit, OnDestroy {
 
     const request: MutateProductRequest = {
       Product: productToUpdate,
-      CheckedCategories: checkedCategories
+      CheckedCategories: checkedCategories,
+      FieldData: dictFieldData
     };
 
     if (this.queryStringProductId && this.queryStringProductId != 'new') {

@@ -125,51 +125,45 @@
                     </div>
                 </div>
             </mat-tab>
-            <mat-tab *ngIf="this.fields">
+            <mat-tab *ngIf="this.fields && this.fields.length > 0">
                 <ng-template mat-tab-label>
-                    <mat-icon color="warn" class="TabWarnIcon" *ngIf="this.formSubmitted && this.hasFieldErrors">error_outline</mat-icon>
+                    <mat-icon color="warn" class="TabWarnIcon" *ngIf="this.formSubmitted && this.formErrorFields">error_outline</mat-icon>
                     Fields
                 </ng-template>
                 <ng-container *ngFor="let field of this.fields">
                     <div class="WrapperPadding20-8-0-8">
-                        <ng-container [ngSwitch]="field.DataType">
-                            <ng-container *ngSwitchCase="field.DataType == 1 || field.DataType == 2">
-                                <mat-form-field>
-                                    <mat-label>{{field.Name}}</mat-label>
-                                    <input matInput [formControl]="controlFields[field.Id]" maxlength="255" [ngClass]="{ 'is-invalid': formSubmitted && controlFields[field.Id].errors }" />
-                                </mat-form-field>
-                            </ng-container>
-                            <ng-container *ngSwitchCase="'Date'">
-                                <mat-form-field>
-                                    <mat-label>{{field.Name}}</mat-label>
-                                    <input matInput [formControl]="controlFields[field.Id]" [matDatepicker]="pickerField" />
-                                    <mat-datepicker-toggle matIconSuffix [for]="pickerField"></mat-datepicker-toggle>
-                                    <mat-datepicker #pickerField></mat-datepicker>
-                                </mat-form-field>
-                            </ng-container>
-                            <ng-container *ngSwitchCase="'Enumeration'">
-                                <mat-form-field>
-                                    <mat-label>{{field.Name}}</mat-label>
-                                    <mat-select [formControl]="controlFields[field.Id]">
-                                        <mat-option />
-                                        <mat-option *ngFor="let enumeration of field.Enumerations" [value]="enumeration">
-                                            {{enumeration}}
-                                        </mat-option>
-                                    </mat-select>
-                                </mat-form-field>
-                            </ng-container>
-                            <ng-container *ngSwitchDefault>
-                                <mat-form-field>
-                                    <mat-label>{{field.Name}}</mat-label>
-                                    <input matInput [formControl]="controlFields[field.Id]" maxlength="255" [ngClass]="{ 'is-invalid': formSubmitted && controlFields[field.Id].errors }" />
-                                </mat-form-field>
-                            </ng-container>
-                        </ng-container>
-                        <div *ngIf="formSubmitted && controlFields[field.Id].errors" class="TextError">
-                            <div *ngIf="controlFields[field.Id].errors!['required']">{{field.Name}} is required</div>
-                            <div *ngIf="controlFields[field.Id].errors!['pattern'] && field.DataType == 1">{{field.Name}} can only be a numerical value.</div>
-                            <div *ngIf="controlFields[field.Id].errors!['pattern'] && field.DataType == 2">{{field.Name}} can only be a numerical value with up to 2 decimals.</div>
-                        </div>
+                        @switch (field.DataType.toString()) {
+                        @case ('Date') {
+                        <mat-form-field>
+                            <mat-label>{{field.Name}}</mat-label>
+                            <input matInput [formControl]="controlFields[field.Id]" [matDatepicker]="pickerField" />
+                            <mat-datepicker-toggle matIconSuffix [for]="pickerField"></mat-datepicker-toggle>
+                            <mat-datepicker #pickerField></mat-datepicker>
+                        </mat-form-field>
+                        }
+                        @case ('Enumeration') {
+                        <mat-form-field>
+                            <mat-label>{{field.Name}}</mat-label>
+                            <mat-select [formControl]="controlFields[field.Id]">
+                                <mat-option />
+                                <mat-option *ngFor="let enumeration of field.Enumerations" [value]="enumeration">
+                                    {{enumeration}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                        }
+                        @default {
+                        <mat-form-field>
+                            <mat-label>{{field.Name}}</mat-label>
+                            <input matInput [formControl]="controlFields[field.Id]" maxlength="255" [ngClass]="{ 'is-invalid': formSubmitted && controlFields[field.Id].errors }" />
+                            <div *ngIf="formSubmitted && controlFields[field.Id].errors" class="TextError">
+                                <div *ngIf="controlFields[field.Id].errors!['required']">{{field.Name}} is required</div>
+                                <div *ngIf="controlFields[field.Id].errors!['pattern'] && field.DataType.toString() == 'Number'">{{field.Name}} can only be a numerical value.</div>
+                                <div *ngIf="controlFields[field.Id].errors!['pattern'] && field.DataType.toString() == 'Decimal'">{{field.Name}} can only be a numerical value with up to 2 decimals.</div>
+                            </div>
+                        </mat-form-field>
+                        }
+                        }
                     </div>
                     <mat-divider class="ClearLeft" />
                 </ng-container>
