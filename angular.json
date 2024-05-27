@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "www-dgbcommerce-com": {
+    "your-crypto-shop-website": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -20,7 +20,7 @@
             "allowedCommonJsDependencies": [
               "qrcode"
             ],
-            "outputPath": "dist/www-dgbcommerce-com",
+            "outputPath": "dist/your-crypto-shop-website",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": [
@@ -75,10 +75,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "www-dgbcommerce-com:build:production"
+              "buildTarget": "your-crypto-shop-website:build:production"
             },
             "development": {
-              "buildTarget": "www-dgbcommerce-com:build:development"
+              "buildTarget": "your-crypto-shop-website:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -86,7 +86,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "buildTarget": "www-dgbcommerce-com:build"
+            "buildTarget": "your-crypto-shop-website:build"
           }
         },
         "test": {
