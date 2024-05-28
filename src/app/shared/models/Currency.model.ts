@@ -1,5 +1,9 @@
+import { CurrencyType } from "../enums/CurrencyType.enum";
+
 export class Currency {
     Id!: string;
-    Name!: string;
-    Symbol!: string;
+    Type!: CurrencyType;
+    Symbol?: string;
+    Code!: string;
+    Name!: string;    
 }
