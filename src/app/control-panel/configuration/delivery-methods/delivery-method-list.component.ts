@@ -7,15 +7,15 @@ import { MatSort, Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { debounceTime, distinctUntilChanged } from 'rxjs';
-import { Constants } from 'src/app/shared/Constants';
+import { Constants } from 'src/app/shared/-constants';
 import { DialogDeleteComponent } from 'src/app/shared/dialogs/delete/dialog.delete.component';
 import { Environment } from 'src/app/shared/environments/Environment';
-import { DeliveryMethod } from 'src/app/shared/models/DeliveryMethod.model';
-import { MutationResult } from 'src/app/shared/models/MutationResult';
-import { Shop } from 'src/app/shared/models/Shop.model';
+import { DeliveryMethod } from 'src/app/shared/models/delivery-method.model';
+import { MutationResult } from 'src/app/shared/models/mutation-result.model';
+import { Shop } from 'src/app/shared/models/-shop.model';
 import { GetDeliveryMethodsParameters } from 'src/app/shared/models/parameters/GetDeliveryMethodsParameters.model';
-import { DeliveryMethodService } from 'src/app/shared/services/DeliveryMethod.service';
-import { ShopService } from 'src/app/shared/services/Shop.service';
+import { DeliveryMethodService } from 'src/app/shared/services/delivery-method.service';
+import { ShopService } from 'src/app/shared/services/-shop.service';
 
 @Component({
   selector: 'control-panel-configuration-delivery-method-list',

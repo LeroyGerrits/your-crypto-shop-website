@@ -1,6 +1,6 @@
-import { AuthenticationService } from 'src/app/shared/services/Authentication.service';
+import { AuthenticationService } from 'src/app/shared/services/-authentication.service';
 import { Component } from '@angular/core';
-import { Merchant } from 'src/app/shared/models/Merchant.model';
+import { Merchant } from 'src/app/shared/models/-merchant.model';
 
 @Component({
     selector: 'account-settings',

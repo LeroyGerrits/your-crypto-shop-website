@@ -7,15 +7,15 @@ import { MatSort, Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { debounceTime, distinctUntilChanged } from 'rxjs';
-import { Constants } from 'src/app/shared/Constants';
-import { OrderStatus } from 'src/app/shared/enums/OrderStatus.enum';
+import { Constants } from 'src/app/shared/-constants';
+import { OrderStatus } from 'src/app/shared/enums/order-status.enum';
 import { Environment } from 'src/app/shared/environments/Environment';
-import { MutationResult } from 'src/app/shared/models/MutationResult';
-import { Order } from 'src/app/shared/models/Order.model';
-import { Shop } from 'src/app/shared/models/Shop.model';
+import { MutationResult } from 'src/app/shared/models/mutation-result.model';
+import { Order } from 'src/app/shared/models/-order.model';
+import { Shop } from 'src/app/shared/models/-shop.model';
 import { GetOrdersParameters } from 'src/app/shared/models/parameters/GetOrdersParameters.model';
-import { OrderService } from 'src/app/shared/services/Order.service';
-import { ShopService } from 'src/app/shared/services/Shop.service';
+import { OrderService } from 'src/app/shared/services/-order.service';
+import { ShopService } from 'src/app/shared/services/-shop.service';
 
 @Component({
   templateUrl: './order-list.component.html',

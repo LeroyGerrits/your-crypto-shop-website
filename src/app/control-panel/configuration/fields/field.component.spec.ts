@@ -11,26 +11,33 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterTestingModule } from '@angular/router/testing';
-import { MutationResult } from 'src/app/shared/models/MutationResult';
-import { DeliveryMethodService } from 'src/app/shared/services/DeliveryMethod.service';
-import { ShopService } from 'src/app/shared/services/Shop.service';
+import { MutationResult } from 'src/app/shared/models/mutation-result.model';
+import { DeliveryMethodService } from 'src/app/shared/services/delivery-method.service';
+import { ShopService } from 'src/app/shared/services/-shop.service';
 import { TestDataDeliveryMethods } from 'src/assets/test-data/DeliveryMethods';
 import { TestDataShops } from 'src/assets/test-data/Shops';
-import { ControlPanelConfigurationDeliveryMethodListComponent } from './field-list.component';
-import { ControlPanelConfigurationDeliveryMethodComponent } from './delivery-method.component';
 
-describe('ControlPanelConfigurationDeliveryMethodComponent', () => {
-  let component: ControlPanelConfigurationDeliveryMethodComponent;
-  let fixture: ComponentFixture<ControlPanelConfigurationDeliveryMethodComponent>;
+import { GetDeliveryMethodResponse } from 'src/app/shared/models/response/GetDeliveryMethodResponse.model';
+import { ControlPanelConfigurationFieldComponent } from './field.component';
+import { TestDataFields } from 'src/assets/test-data/Fields';
+
+describe('ControlPanelConfigurationFieldComponent', () => {
+  let component: ControlPanelConfigurationFieldComponent;
+  let fixture: ComponentFixture<ControlPanelConfigurationFieldComponent>;
 
   let deliveryMethodServiceSpy: jasmine.SpyObj<DeliveryMethodService>;
   let matSnackBarSpy: jasmine.SpyObj<MatSnackBar>;
   let shopServiceSpy: jasmine.SpyObj<ShopService>;
   let mutationResult: MutationResult = <MutationResult>{ ErrorCode: 0, Identity: '', Message: '' };
 
+  const getDeliveryMethodResponse: GetDeliveryMethodResponse = {
+    DeliveryMethod: TestDataDeliveryMethods[0],
+    CostsPerCountry: {}
+  };
+
   beforeEach(() => {
     deliveryMethodServiceSpy = jasmine.createSpyObj('DeliveryMethodService', ['getById', 'create', 'update']);
-    deliveryMethodServiceSpy.getById.and.returnValue(of(TestDataDeliveryMethods[0]));
+    deliveryMethodServiceSpy.getById.and.returnValue(of(getDeliveryMethodResponse));
     deliveryMethodServiceSpy.create.and.returnValue(of(mutationResult));
     deliveryMethodServiceSpy.update.and.returnValue(of(mutationResult));
 
@@ -40,9 +47,9 @@ describe('ControlPanelConfigurationDeliveryMethodComponent', () => {
     shopServiceSpy.getList.and.returnValue(of(TestDataShops));
 
     TestBed.configureTestingModule({
-      declarations: [ControlPanelConfigurationDeliveryMethodComponent],
+      declarations: [ControlPanelConfigurationFieldComponent],
       imports: [BrowserAnimationsModule, MatDialogModule, MatDividerModule, MatFormFieldModule, MatInputModule, MatSelectModule, ReactiveFormsModule, RouterLink, RouterTestingModule.withRoutes(
-        [{ path: 'control-panel/configuration/delivery-methods', component: ControlPanelConfigurationDeliveryMethodListComponent }]
+        [{ path: 'control-panel/configuration/delivery-methods', component: ControlPanelConfigurationFieldComponent }]
       )],
       providers: [
         { provide: ActivatedRoute, useValue: { snapshot: { paramMap: convertToParamMap({ deliveryMethodId: TestDataDeliveryMethods[0].Id }) } } },
@@ -52,13 +59,13 @@ describe('ControlPanelConfigurationDeliveryMethodComponent', () => {
         Router
       ]
     });
-    fixture = TestBed.createComponent(ControlPanelConfigurationDeliveryMethodComponent);
+    fixture = TestBed.createComponent(ControlPanelConfigurationFieldComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
 
   it('should set page title on data retrieval', () => {
-    component.onRetrieveData(TestDataDeliveryMethods[0]);
+    component.onRetrieveFieldData(TestDataFields[0]);
     expect(component.pageTitle).toBe(TestDataDeliveryMethods[0].Name);
   });
 
@@ -70,19 +77,17 @@ describe('ControlPanelConfigurationDeliveryMethodComponent', () => {
   });
 
   it('should send a call to the delivery method service when creating a new delivery method', () => {
-    component.queryStringDeliveryMethodId = '';
+    component.queryStringFieldId = '';
     component.controlName.setValue(TestDataDeliveryMethods[0].Name);
     component.controlShop.setValue(TestDataShops[0].Id);
-    component.controlCosts.setValue(TestDataDeliveryMethods[0].Costs!.toString());
     component.onSubmit();
     expect(component.formLoading).toBeFalse();
   });
 
   it('should send a call to the delivery method service when updating an existing delivery method', () => {
-    component.queryStringDeliveryMethodId = TestDataDeliveryMethods[0].Id;
+    component.queryStringFieldId = TestDataDeliveryMethods[0].Id;
     component.controlName.setValue(TestDataDeliveryMethods[0].Name);
     component.controlShop.setValue(TestDataShops[0].Id);
-    component.controlCosts.setValue(TestDataDeliveryMethods[0].Costs!.toString());
     component.onSubmit();
     expect(component.formLoading).toBeFalse();
   });
@@ -122,9 +127,8 @@ describe('ControlPanelConfigurationDeliveryMethodComponent', () => {
   it('should trigger error handling when sending a call to the delivery method service when creating a new delivery method and the request fails', () => {
     deliveryMethodServiceSpy.create.and.returnValue(throwError(() => new Error('ERROR')));
 
-    component.queryStringDeliveryMethodId = '';
+    component.queryStringFieldId = '';
     component.controlName.setValue(TestDataDeliveryMethods[0].Name);
-    component.controlCosts.setValue(TestDataDeliveryMethods[0].Costs!.toString());
     component.onSubmit();
     expect(component.formLoading).toBeFalse();
   });
@@ -132,9 +136,8 @@ describe('ControlPanelConfigurationDeliveryMethodComponent', () => {
   it('should trigger error handling when sending a call to the delivery method service when updating an delivery method and the request fails', () => {
     deliveryMethodServiceSpy.update.and.returnValue(throwError(() => new Error('ERROR')));
 
-    component.queryStringDeliveryMethodId = TestDataShops[0].Id;
+    component.queryStringFieldId = TestDataShops[0].Id;
     component.controlName.setValue(TestDataDeliveryMethods[0].Name);
-    component.controlCosts.setValue(TestDataDeliveryMethods[0].Costs!.toString());
     component.onSubmit();
     expect(component.formLoading).toBeFalse();
   });

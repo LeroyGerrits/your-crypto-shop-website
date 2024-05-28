@@ -1,5 +1,5 @@
-import { Gender } from 'src/app/shared/enums/Gender.enum';
-import { Merchant } from 'src/app/shared/models/Merchant.model';
+import { Gender } from 'src/app/shared/enums/gender.enum';
+import { Merchant } from 'src/app/shared/models/-merchant.model';
 
 export const TestDataMerchants: Merchant[] = [
     {

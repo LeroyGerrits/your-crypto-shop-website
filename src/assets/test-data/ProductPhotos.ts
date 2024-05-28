@@ -1,4 +1,4 @@
-import { ProductPhoto } from 'src/app/shared/models/ProductPhoto.model';
+import { ProductPhoto } from 'src/app/shared/models/product-photo.model';
 
 export const TestDataProductPhotos: ProductPhoto[] = [
     {

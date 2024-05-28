@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 
-import { Constants } from 'src/app/shared/Constants';
+import { Constants } from 'src/app/shared/-constants';
 
 @Component({
   selector: 'dialog-donate',

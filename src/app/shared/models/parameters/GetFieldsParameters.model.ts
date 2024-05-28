@@ -1,6 +1,6 @@
-import { FieldDataType } from "../../enums/FieldDataType.enum";
-import { FieldEntity } from "../../enums/FieldEntity.enum";
-import { FieldType } from "../../enums/FieldType.enum";
+import { FieldDataType } from "../../enums/field-data-type.enum";
+import { FieldEntity } from "../../enums/field-entity.enum";
+import { FieldType } from "../../enums/field-type.enum";
 
 export class GetFieldsParameters {
     Name?: string;

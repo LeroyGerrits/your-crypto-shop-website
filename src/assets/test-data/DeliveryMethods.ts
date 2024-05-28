@@ -1,4 +1,4 @@
-import { DeliveryMethod } from 'src/app/shared/models/DeliveryMethod.model';
+import { DeliveryMethod } from 'src/app/shared/models/delivery-method.model';
 import { TestDataShops } from './Shops';
 
 export const TestDataDeliveryMethods: DeliveryMethod[] = [

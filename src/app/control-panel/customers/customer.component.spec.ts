@@ -15,11 +15,11 @@ import { MatTreeModule } from '@angular/material/tree';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterTestingModule } from '@angular/router/testing';
 import { of, throwError } from 'rxjs';
-import { MutationResult } from 'src/app/shared/models/MutationResult';
-import { CategoryService } from 'src/app/shared/services/Category.service';
-import { CountryService } from 'src/app/shared/services/Country.service';
-import { CustomerService } from 'src/app/shared/services/Customer.service';
-import { ShopService } from 'src/app/shared/services/Shop.service';
+import { MutationResult } from 'src/app/shared/models/mutation-result.model';
+import { CategoryService } from 'src/app/shared/services/-category.service';
+import { CountryService } from 'src/app/shared/services/-country.service';
+import { CustomerService } from 'src/app/shared/services/-customer.service';
+import { ShopService } from 'src/app/shared/services/-shop.service';
 import { TestDataCategories } from 'src/assets/test-data/Categories';
 import { TestDataCountries } from 'src/assets/test-data/Countries';
 import { TestDataCustomers } from 'src/assets/test-data/Customers';
@@ -27,7 +27,7 @@ import { TestDataShops } from 'src/assets/test-data/Shops';
 import { ControlPanelCustomerListComponent } from './customer-list.component';
 import { ControlPanelCustomerComponent } from './customer.component';
 import { TestDataAddresses } from 'src/assets/test-data/Addresses';
-import { Gender } from 'src/app/shared/enums/Gender.enum';
+import { Gender } from 'src/app/shared/enums/gender.enum';
 
 describe('ControlPanelCustomerComponent', () => {
   let component: ControlPanelCustomerComponent;

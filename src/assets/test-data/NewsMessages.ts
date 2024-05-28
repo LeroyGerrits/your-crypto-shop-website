@@ -1,4 +1,4 @@
-import { NewsMessage } from 'src/app/shared/models/NewsMessage.model';
+import { NewsMessage } from 'src/app/shared/models/news-message.model';
 
 export const TestDataNewsMessages: NewsMessage[] = [
     {

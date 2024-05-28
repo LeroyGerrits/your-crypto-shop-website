@@ -1,4 +1,4 @@
-import { Page } from "../Page.model";
+import { Page } from "../-page.model";
 
 export class GetPageResponse {
     Page!: Page;

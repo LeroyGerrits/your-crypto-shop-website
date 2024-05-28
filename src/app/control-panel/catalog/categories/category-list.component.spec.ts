@@ -4,9 +4,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { of, throwError } from 'rxjs';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { CategoryService } from 'src/app/shared/services/Category.service';
+import { CategoryService } from 'src/app/shared/services/-category.service';
 import { ControlPanelCatalogCategoryListComponent } from './category-list.component';
-import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialog } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -15,11 +15,12 @@ import { MatRadioModule } from '@angular/material/radio';
 import { MatSelectModule } from '@angular/material/select';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatTreeModule } from '@angular/material/tree';
-import { MutationResult } from 'src/app/shared/models/MutationResult';
+import { MutationResult } from 'src/app/shared/models/mutation-result.model';
 import { RouterTestingModule } from '@angular/router/testing';
-import { ShopService } from 'src/app/shared/services/Shop.service';
+import { ShopService } from 'src/app/shared/services/-shop.service';
 import { TestDataCategories } from 'src/assets/test-data/Categories';
 import { TestDataShops } from 'src/assets/test-data/Shops';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 describe('ControlPanelCatalogCategoryListComponent', () => {
   let component: ControlPanelCatalogCategoryListComponent;
@@ -54,18 +55,18 @@ describe('ControlPanelCatalogCategoryListComponent', () => {
     shopServiceSpy.getList.and.returnValue(of(TestDataShops));
 
     TestBed.configureTestingModule({
-      declarations: [ControlPanelCatalogCategoryListComponent],
-      imports: [BrowserAnimationsModule, FormsModule, HttpClientTestingModule, MatButtonModule, MatFormFieldModule, MatIconModule, MatRadioModule, MatSelectModule, MatTreeModule, ReactiveFormsModule, RouterLink, RouterLink, RouterTestingModule.withRoutes(
-        [{ path: 'control-panel/catalog/categories', component: ControlPanelCatalogCategoryListComponent }]
-      )],
-      providers: [
+    declarations: [ControlPanelCatalogCategoryListComponent],
+    imports: [BrowserAnimationsModule, FormsModule, MatButtonModule, MatFormFieldModule, MatIconModule, MatRadioModule, MatSelectModule, MatTreeModule, ReactiveFormsModule, RouterLink, RouterLink, RouterTestingModule.withRoutes([{ path: 'control-panel/catalog/categories', component: ControlPanelCatalogCategoryListComponent }])],
+    providers: [
         { provide: ActivatedRoute, useValue: { snapshot: { data: {} } } },
         { provide: MatDialog, useValue: matDialogSpy },
         { provide: ShopService, useValue: shopServiceSpy },
         { provide: CategoryService, useValue: categoryServiceSpy },
-        { provide: MatSnackBar, useValue: matSnackBarSpy }
-      ]
-    });
+        { provide: MatSnackBar, useValue: matSnackBarSpy },
+        provideHttpClient(withInterceptorsFromDi()),
+        provideHttpClientTesting()
+    ]
+});
     fixture = TestBed.createComponent(ControlPanelCatalogCategoryListComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

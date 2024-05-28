@@ -1,4 +1,5 @@
-import { Shop } from 'src/app/shared/models/Shop.model';
+import { Shop } from 'src/app/shared/models/-shop.model';
+import { ShopOrderMethod } from 'src/app/shared/enums/shop-order-method.enum';
 import { TestDataCategories } from './Categories';
 import { TestDataCountries } from './Countries';
 
@@ -13,7 +14,9 @@ export const TestDataShops: Shop[] = [
             Id: '00000000-0000-0000-0000-000000000001',
             Name: 'Clothes'
         },
-        Featured: true
+        Featured: true,
+        OrderMethod: ShopOrderMethod.Automated,
+        RequireAddresses: true
     },
     {
         Id: '00000000-0000-0000-0000-000000000002',
@@ -25,6 +28,8 @@ export const TestDataShops: Shop[] = [
             Id: '00000000-0000-0000-0000-000000000001',
             Name: 'Clothes'
         },
-        Featured: false
+        Featured: false,
+        OrderMethod: ShopOrderMethod.Automated,
+        RequireAddresses: true
     }
 ];

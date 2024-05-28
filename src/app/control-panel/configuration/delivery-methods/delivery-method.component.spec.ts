@@ -11,13 +11,14 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterTestingModule } from '@angular/router/testing';
-import { MutationResult } from 'src/app/shared/models/MutationResult';
-import { DeliveryMethodService } from 'src/app/shared/services/DeliveryMethod.service';
-import { ShopService } from 'src/app/shared/services/Shop.service';
+import { MutationResult } from 'src/app/shared/models/mutation-result.model';
+import { DeliveryMethodService } from 'src/app/shared/services/delivery-method.service';
+import { ShopService } from 'src/app/shared/services/-shop.service';
 import { TestDataDeliveryMethods } from 'src/assets/test-data/DeliveryMethods';
 import { TestDataShops } from 'src/assets/test-data/Shops';
 import { ControlPanelConfigurationDeliveryMethodListComponent } from './delivery-method-list.component';
 import { ControlPanelConfigurationDeliveryMethodComponent } from './delivery-method.component';
+import { MutateDeliveryMethodRequest } from 'src/app/shared/models/request/MutateDeliveryMethodRequest.model';
 
 describe('ControlPanelConfigurationDeliveryMethodComponent', () => {
   let component: ControlPanelConfigurationDeliveryMethodComponent;
@@ -28,9 +29,14 @@ describe('ControlPanelConfigurationDeliveryMethodComponent', () => {
   let shopServiceSpy: jasmine.SpyObj<ShopService>;
   let mutationResult: MutationResult = <MutationResult>{ ErrorCode: 0, Identity: '', Message: '' };
 
+  const mutateDeliveryMethodRequest: MutateDeliveryMethodRequest = {
+    DeliveryMethod: TestDataDeliveryMethods[0],
+    CostsPerCountry: {}
+};
+
   beforeEach(() => {
     deliveryMethodServiceSpy = jasmine.createSpyObj('DeliveryMethodService', ['getById', 'create', 'update']);
-    deliveryMethodServiceSpy.getById.and.returnValue(of(TestDataDeliveryMethods[0]));
+    deliveryMethodServiceSpy.getById.and.returnValue(of(mutateDeliveryMethodRequest));
     deliveryMethodServiceSpy.create.and.returnValue(of(mutationResult));
     deliveryMethodServiceSpy.update.and.returnValue(of(mutationResult));
 
@@ -58,7 +64,7 @@ describe('ControlPanelConfigurationDeliveryMethodComponent', () => {
   });
 
   it('should set page title on data retrieval', () => {
-    component.onRetrieveData(TestDataDeliveryMethods[0]);
+    component.onRetrieveDeliveryMethodData(mutateDeliveryMethodRequest);
     expect(component.pageTitle).toBe(TestDataDeliveryMethods[0].Name);
   });
 

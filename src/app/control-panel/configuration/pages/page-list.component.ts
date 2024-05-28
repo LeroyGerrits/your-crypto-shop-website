@@ -7,16 +7,16 @@ import { MatSort, Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { debounceTime, distinctUntilChanged } from 'rxjs';
-import { Constants } from 'src/app/shared/Constants';
+import { Constants } from 'src/app/shared/-constants';
 import { DialogDeleteComponent } from 'src/app/shared/dialogs/delete/dialog.delete.component';
 import { Environment } from 'src/app/shared/environments/Environment';
-import { MutationResult } from 'src/app/shared/models/MutationResult';
-import { Page } from 'src/app/shared/models/Page.model';
-import { Shop } from 'src/app/shared/models/Shop.model';
+import { MutationResult } from 'src/app/shared/models/mutation-result.model';
+import { Page } from 'src/app/shared/models/-page.model';
+import { Shop } from 'src/app/shared/models/-shop.model';
 import { GetPagesParameters } from 'src/app/shared/models/parameters/GetPagesParameters.model';
-import { BooleanConvertPipe } from 'src/app/shared/pipes/BooleanConvert.pipe';
-import { PageService } from 'src/app/shared/services/Page.service';
-import { ShopService } from 'src/app/shared/services/Shop.service';
+import { BooleanConvertPipe } from 'src/app/shared/pipes/boolean-convert.pipe';
+import { PageService } from 'src/app/shared/services/-page.service';
+import { ShopService } from 'src/app/shared/services/-shop.service';
 
 @Component({
   selector: 'control-panel-configuration-page-list',

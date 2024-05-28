@@ -3,7 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { MatSnackBar, MatSnackBarRef, TextOnlySnackBar } from '@angular/material/snack-bar';
 
-import { AuthenticationService } from 'src/app/shared/services/Authentication.service';
+import { AuthenticationService } from 'src/app/shared/services/-authentication.service';
 import { DialogForgotPasswordComponent } from '../forgot-password/dialog.forgot-password.component';
 import { Router } from '@angular/router';
 import { first } from 'rxjs/operators';

@@ -1,4 +1,4 @@
-import { ShopCategory } from 'src/app/shared/models/ShopCategory.model';
+import { ShopCategory } from 'src/app/shared/models/shop-category.model';
 
 export const TestDataShopCategories: ShopCategory[] = [
     {

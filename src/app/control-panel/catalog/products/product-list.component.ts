@@ -7,21 +7,21 @@ import { MatSort, Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { debounceTime, distinctUntilChanged } from 'rxjs';
-import { Constants } from 'src/app/shared/Constants';
+import { Constants } from 'src/app/shared/-constants';
 import { DialogConfirmComponent } from 'src/app/shared/dialogs/confirm/dialog.confirm.component';
 import { DialogDeleteComponent } from 'src/app/shared/dialogs/delete/dialog.delete.component';
 import { Environment } from 'src/app/shared/environments/Environment';
-import { Category } from 'src/app/shared/models/Category.model';
-import { Merchant } from 'src/app/shared/models/Merchant.model';
-import { MutationResult } from 'src/app/shared/models/MutationResult';
-import { Product } from 'src/app/shared/models/Product.model';
-import { Shop } from 'src/app/shared/models/Shop.model';
+import { Category } from 'src/app/shared/models/-category.model';
+import { Merchant } from 'src/app/shared/models/-merchant.model';
+import { MutationResult } from 'src/app/shared/models/mutation-result.model';
+import { Product } from 'src/app/shared/models/-product.model';
+import { Shop } from 'src/app/shared/models/-shop.model';
 import { GetProductsParameters } from 'src/app/shared/models/parameters/GetProductsParameters.model';
-import { BooleanConvertPipe } from 'src/app/shared/pipes/BooleanConvert.pipe';
-import { AuthenticationService } from 'src/app/shared/services/Authentication.service';
-import { CategoryService } from 'src/app/shared/services/Category.service';
-import { ProductService } from 'src/app/shared/services/Product.service';
-import { ShopService } from 'src/app/shared/services/Shop.service';
+import { BooleanConvertPipe } from 'src/app/shared/pipes/boolean-convert.pipe';
+import { AuthenticationService } from 'src/app/shared/services/-authentication.service';
+import { CategoryService } from 'src/app/shared/services/-category.service';
+import { ProductService } from 'src/app/shared/services/-product.service';
+import { ShopService } from 'src/app/shared/services/-shop.service';
 
 @Component({
   selector: 'control-panel-catalog-product-list',

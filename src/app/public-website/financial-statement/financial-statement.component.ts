@@ -4,14 +4,14 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort, Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { debounceTime, distinctUntilChanged } from 'rxjs';
-import { Constants } from 'src/app/shared/Constants';
-import { FinancialStatementTransactionType } from 'src/app/shared/enums/FinancialStatementTransactionType.enum';
-import { Recurrance } from 'src/app/shared/enums/Recurrance.enum';
-import { Currency } from 'src/app/shared/models/Currency.model';
-import { FinancialStatementTransaction } from 'src/app/shared/models/FinancialStatementTransaction.model';
+import { Constants } from 'src/app/shared/-constants';
+import { FinancialStatementTransactionType } from 'src/app/shared/enums/financial-statement-transaction-type.enum';
+import { Recurrance } from 'src/app/shared/enums/recurrance.enum';
+import { Currency } from 'src/app/shared/models/-currency.model';
+import { FinancialStatementTransaction } from 'src/app/shared/models/financial-statement-transaction.model';
 import { GetFinancialStatementTransactionsParameters } from 'src/app/shared/models/parameters/GetFinancialStatementTransactionsParameters.model';
-import { CurrencyService } from 'src/app/shared/services/Currency.service';
-import { FinancialStatementTransactionService } from 'src/app/shared/services/FinancialStatementTransaction.service';
+import { CurrencyService } from 'src/app/shared/services/-currency.service';
+import { FinancialStatementTransactionService } from 'src/app/shared/services/financial-statement-transaction.service';
 
 @Component({
   selector: 'public-website-financial-statement',

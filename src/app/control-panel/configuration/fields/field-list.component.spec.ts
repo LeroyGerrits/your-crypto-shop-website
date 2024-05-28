@@ -14,16 +14,17 @@ import { Sort } from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterTestingModule } from '@angular/router/testing';
-import { MutationResult } from 'src/app/shared/models/MutationResult';
-import { DeliveryMethodService } from 'src/app/shared/services/DeliveryMethod.service';
-import { ShopService } from 'src/app/shared/services/Shop.service';
+import { MutationResult } from 'src/app/shared/models/mutation-result.model';
+import { DeliveryMethodService } from 'src/app/shared/services/delivery-method.service';
+import { ShopService } from 'src/app/shared/services/-shop.service';
 import { TestDataDeliveryMethods } from 'src/assets/test-data/DeliveryMethods';
 import { TestDataShops } from 'src/assets/test-data/Shops';
-import { ControlPanelConfigurationDeliveryMethodListComponent } from './field-list.component';
+import { ControlPanelConfigurationFieldListComponent } from './field-list.component';
+import { TestDataFields } from 'src/assets/test-data/Fields';
 
-describe('ControlPanelConfigurationDeliveryMethodListComponent', () => {
-  let component: ControlPanelConfigurationDeliveryMethodListComponent;
-  let fixture: ComponentFixture<ControlPanelConfigurationDeliveryMethodListComponent>;
+describe('ControlPanelConfigurationFieldListComponent', () => {
+  let component: ControlPanelConfigurationFieldListComponent;
+  let fixture: ComponentFixture<ControlPanelConfigurationFieldListComponent>;
 
   let matDialogRefSpy: any;
   let matDialogSpy: jasmine.SpyObj<MatDialog>
@@ -51,9 +52,9 @@ describe('ControlPanelConfigurationDeliveryMethodListComponent', () => {
     shopServiceSpy.getList.and.returnValue(of(TestDataShops));
 
     TestBed.configureTestingModule({
-      declarations: [ControlPanelConfigurationDeliveryMethodListComponent],
+      declarations: [ControlPanelConfigurationFieldListComponent],
       imports: [BrowserAnimationsModule, MatIconModule, MatFormFieldModule, MatInputModule, MatPaginatorModule, MatSelectModule, MatTableModule, ReactiveFormsModule, RouterLink, RouterTestingModule.withRoutes(
-        [{ path: 'control-panel/configuration/delivery-methods', component: ControlPanelConfigurationDeliveryMethodListComponent }]
+        [{ path: 'control-panel/configuration/delivery-methods', component: ControlPanelConfigurationFieldListComponent }]
       )],
       providers: [
         { provide: ActivatedRoute, useValue: { snapshot: { data: {} } } },
@@ -61,29 +62,29 @@ describe('ControlPanelConfigurationDeliveryMethodListComponent', () => {
         { provide: ShopService, useValue: shopServiceSpy },
         { provide: DeliveryMethodService, useValue: deliveryMethodServiceSpy },
         { provide: MatSnackBar, useValue: matSnackBarSpy },
-        ControlPanelConfigurationDeliveryMethodListComponent,
+        ControlPanelConfigurationFieldListComponent,
         Router
       ]
     });
-    fixture = TestBed.createComponent(ControlPanelConfigurationDeliveryMethodListComponent);
+    fixture = TestBed.createComponent(ControlPanelConfigurationFieldListComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
 
   it('should filter delivery methods list when name filter gets used', fakeAsync(() => {
-    const componentStub: ControlPanelConfigurationDeliveryMethodListComponent = TestBed.inject(ControlPanelConfigurationDeliveryMethodListComponent);
-    spyOn(componentStub, 'filterDeliveryMethods');
+    const componentStub: ControlPanelConfigurationFieldListComponent = TestBed.inject(ControlPanelConfigurationFieldListComponent);
+    spyOn(componentStub, 'filterFields');
     componentStub.controlFilterName.setValue('test');
     tick(1000);
-    expect(componentStub.filterDeliveryMethods).toHaveBeenCalled();
+    expect(componentStub.filterFields).toHaveBeenCalled();
   }));
 
   it('should filter delivery methods list when shop filter gets used', fakeAsync(() => {
-    const componentStub: ControlPanelConfigurationDeliveryMethodListComponent = TestBed.inject(ControlPanelConfigurationDeliveryMethodListComponent);
-    spyOn(componentStub, 'filterDeliveryMethods');
+    const componentStub: ControlPanelConfigurationFieldListComponent = TestBed.inject(ControlPanelConfigurationFieldListComponent);
+    spyOn(componentStub, 'filterFields');
     componentStub.controlFilterShop.setValue('test');
     tick(1000);
-    expect(componentStub.filterDeliveryMethods).toHaveBeenCalled();
+    expect(componentStub.filterFields).toHaveBeenCalled();
   }));
 
   it('should edit the sortState when a sort direction is supplied', () => {
@@ -108,22 +109,22 @@ describe('ControlPanelConfigurationDeliveryMethodListComponent', () => {
     const routerstub: Router = TestBed.inject(Router);
     spyOn(routerstub, 'navigate');
 
-    component.editElement(TestDataDeliveryMethods[0]);
+    component.editElement(TestDataFields[0]);
     expect(routerstub.navigate).toHaveBeenCalledWith(['/control-panel/configuration/delivery-methods/' + TestDataDeliveryMethods[0].Id]);
   });
 
   it('should show a dialog when delete icon is clicked', () => {
-    component.deleteElement(TestDataDeliveryMethods[0]);
+    component.deleteElement(TestDataFields[0]);
     expect(matDialogSpy.open).toHaveBeenCalled();
   });
 
   it('should reload when handling submit result and no error code is applicable', () => {
-    const componentStub: ControlPanelConfigurationDeliveryMethodListComponent = TestBed.inject(ControlPanelConfigurationDeliveryMethodListComponent);
-    spyOn(componentStub, 'filterDeliveryMethods');
+    const componentStub: ControlPanelConfigurationFieldListComponent = TestBed.inject(ControlPanelConfigurationFieldListComponent);
+    spyOn(componentStub, 'filterFields');
 
     const mutationResult = <MutationResult>{ Constraint: '', ErrorCode: 0, Identity: '', Message: '', Success: true };
     componentStub.handleOnSubmitResult(mutationResult);
-    expect(componentStub.filterDeliveryMethods).toHaveBeenCalled();
+    expect(componentStub.filterFields).toHaveBeenCalled();
   });
 
   it('should show an error when handling submit result and an error code is applicable', () => {
@@ -139,7 +140,7 @@ describe('ControlPanelConfigurationDeliveryMethodListComponent', () => {
 
   it('should trigger error handling when sending a call to the delivery method service when deleting a delivery method and the request fails', () => {
     deliveryMethodServiceSpy.delete.and.returnValue(throwError(() => new Error('ERROR')));
-    component.deleteElement(TestDataDeliveryMethods[0]);
+    component.deleteElement(TestDataFields[0]);
     expect(component).toBeTruthy();
   });
 });

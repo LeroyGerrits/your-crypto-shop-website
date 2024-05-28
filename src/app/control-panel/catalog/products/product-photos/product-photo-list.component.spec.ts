@@ -2,7 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ActivatedRoute, Router, RouterLink, convertToParamMap } from '@angular/router';
 import { of, throwError } from 'rxjs';
 
-import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -15,15 +15,16 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatTableModule } from '@angular/material/table';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterTestingModule } from '@angular/router/testing';
-import { MutationResult } from 'src/app/shared/models/MutationResult';
+import { MutationResult } from 'src/app/shared/models/mutation-result.model';
 import { GetProductResponse } from 'src/app/shared/models/response/GetProductResponse.model';
 import { FileUploadProgress } from 'src/app/shared/models/system/FileUploadProgress.model';
-import { FileSizePipe } from 'src/app/shared/pipes/FileSize.pipe';
-import { ProductService } from 'src/app/shared/services/Product.service';
-import { ProductPhotoService } from 'src/app/shared/services/ProductPhoto.service';
+import { FileSizePipe } from 'src/app/shared/pipes/file-size.pipe';
+import { ProductService } from 'src/app/shared/services/-product.service';
+import { ProductPhotoService } from 'src/app/shared/services/product-photo.service';
 import { TestDataProductPhotos } from 'src/assets/test-data/ProductPhotos';
 import { TestDataProducts } from 'src/assets/test-data/Products';
 import { ControlPanelCatalogProductPhotoListComponent } from './product-photo-list.component';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 interface MockFile {
   name: string;
@@ -87,11 +88,9 @@ describe('ControlPanelCatalogProductPhotoListComponent', () => {
     productPhotoServiceSpy.upload.and.returnValue(of());
 
     TestBed.configureTestingModule({
-      declarations: [ControlPanelCatalogProductPhotoListComponent, FileSizePipe],
-      imports: [BrowserAnimationsModule, HttpClientTestingModule, MatIconModule, MatFormFieldModule, MatInputModule, MatMenuModule, MatPaginatorModule, MatSelectModule, MatTableModule, ReactiveFormsModule, RouterLink, RouterTestingModule.withRoutes(
-        [{ path: 'control-panel/catalog/products', component: ControlPanelCatalogProductPhotoListComponent }]
-      )],
-      providers: [
+    declarations: [ControlPanelCatalogProductPhotoListComponent, FileSizePipe],
+    imports: [BrowserAnimationsModule, MatIconModule, MatFormFieldModule, MatInputModule, MatMenuModule, MatPaginatorModule, MatSelectModule, MatTableModule, ReactiveFormsModule, RouterLink, RouterTestingModule.withRoutes([{ path: 'control-panel/catalog/products', component: ControlPanelCatalogProductPhotoListComponent }])],
+    providers: [
         { provide: ActivatedRoute, useValue: { snapshot: { data: {} } } },
         { provide: ActivatedRoute, useValue: { snapshot: { paramMap: convertToParamMap({ productId: TestDataProducts[0].Id, shopId: TestDataProducts[0].ShopId }) } } },
         { provide: MatDialog, useValue: matDialogSpy },
@@ -100,9 +99,11 @@ describe('ControlPanelCatalogProductPhotoListComponent', () => {
         { provide: MatSnackBar, useValue: matSnackBarSpy },
         ControlPanelCatalogProductPhotoListComponent,
         FileSizePipe,
-        Router
-      ]
-    });
+        Router,
+        provideHttpClient(withInterceptorsFromDi()),
+        provideHttpClientTesting()
+    ]
+});
     fixture = TestBed.createComponent(ControlPanelCatalogProductPhotoListComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

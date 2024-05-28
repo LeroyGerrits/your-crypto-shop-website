@@ -1,4 +1,4 @@
-import { MerchantPasswordResetLink } from 'src/app/shared/models/MerchantPasswordResetLink.model';
+import { MerchantPasswordResetLink } from 'src/app/shared/models/merchant-password-reset-link.model';
 import { TestDataMerchants } from './Merchants';
 
 export const TestDataMerchantPasswordResetLinks: MerchantPasswordResetLink[] = [

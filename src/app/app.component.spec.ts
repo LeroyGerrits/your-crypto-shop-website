@@ -2,12 +2,13 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 
 import { AppComponent } from './app.component';
-import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { RouterTestingModule } from '@angular/router/testing';
 import { of } from 'rxjs';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 describe('AppComponent', () => {
   let component: AppComponent;
@@ -25,12 +26,14 @@ describe('AppComponent', () => {
     matDialogSpy.open.and.returnValue(matDialogRefSpy);
 
     TestBed.configureTestingModule({
-      declarations: [AppComponent],
-      imports: [HttpClientTestingModule, MatDialogModule, MatIconModule, MatMenuModule, MatToolbarModule, RouterTestingModule],
-      providers: [
-        { provide: MatDialog, useValue: matDialogSpy }
-      ]
-    });
+    declarations: [AppComponent],
+    imports: [MatDialogModule, MatIconModule, MatMenuModule, MatToolbarModule, RouterTestingModule],
+    providers: [
+        { provide: MatDialog, useValue: matDialogSpy },
+        provideHttpClient(withInterceptorsFromDi()),
+        provideHttpClientTesting()
+    ]
+});
     fixture = TestBed.createComponent(AppComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

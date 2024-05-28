@@ -1,19 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MAT_DIALOG_DATA, MatDialog, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { of, throwError } from 'rxjs';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 import { AccountComponent } from 'src/app/account/account.component';
-import { AuthenticationService } from 'src/app/shared/services/Authentication.service';
+import { AuthenticationService } from 'src/app/shared/services/-authentication.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DialogForgotPasswordComponent } from '../forgot-password/dialog.forgot-password.component';
 import { DialogLoginComponent } from './dialog.login.component';
-import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { MerchantService } from '../../services/Merchant.service';
+import { MerchantService } from '../../services/-merchant.service';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RouterTestingModule } from '@angular/router/testing';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
 
 describe('DialogLoginComponent', () => {
   let component: DialogLoginComponent;
@@ -40,19 +41,19 @@ describe('DialogLoginComponent', () => {
     authenticationServiceSpy.login.and.returnValue(of(() => { }));
 
     TestBed.configureTestingModule({
-      declarations: [DialogLoginComponent],
-      imports: [BrowserAnimationsModule, HttpClientTestingModule, MatDialogModule, MatFormFieldModule, MatInputModule, ReactiveFormsModule, RouterTestingModule.withRoutes(
-        [{ path: 'control-panel', component: AccountComponent }]
-      )],
-      providers: [
+    declarations: [DialogLoginComponent],
+    imports: [BrowserAnimationsModule, MatDialogModule, MatFormFieldModule, MatInputModule, ReactiveFormsModule, RouterTestingModule.withRoutes([{ path: 'control-panel', component: AccountComponent }])],
+    providers: [
         { provide: MatDialog, useValue: matDialogSpy },
         { provide: MatDialogRef, useValue: matDialogRefSpy },
         { provide: MAT_DIALOG_DATA, useValue: [] },
         { provide: AuthenticationService, useValue: authenticationServiceSpy },
         { provide: MatSnackBar, useValue: matSnackBarSpy },
-        MerchantService
-      ]
-    });
+        MerchantService,
+        provideHttpClient(withInterceptorsFromDi()),
+        provideHttpClientTesting()
+    ]
+});
     fixture = TestBed.createComponent(DialogLoginComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

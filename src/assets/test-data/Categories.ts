@@ -1,4 +1,4 @@
-import { Category } from 'src/app/shared/models/Category.model';
+import { Category } from 'src/app/shared/models/-category.model';
 import { TestDataShops } from './Shops';
 
 export const TestDataCategories: Category[] = [

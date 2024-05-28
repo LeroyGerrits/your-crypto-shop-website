@@ -3,18 +3,18 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar, MatSnackBarRef, TextOnlySnackBar } from '@angular/material/snack-bar';
 
-import { Constants } from 'src/app/shared/Constants';
+import { Constants } from 'src/app/shared/-constants';
 import { Environment } from 'src/app/shared/environments/Environment';
 import { GetPageResponse } from 'src/app/shared/models/response/GetPageResponse.model';
 import { MatCheckboxChange } from '@angular/material/checkbox';
 import { MutatePageRequest } from 'src/app/shared/models/request/MutatePageRequest.model';
-import { MutationResult } from 'src/app/shared/models/MutationResult';
-import { Page } from 'src/app/shared/models/Page.model';
-import { PageCategory } from 'src/app/shared/models/PageCategory.model';
-import { PageCategoryService } from 'src/app/shared/services/PageCategory.service';
-import { PageService } from 'src/app/shared/services/Page.service';
-import { Shop } from 'src/app/shared/models/Shop.model';
-import { ShopService } from 'src/app/shared/services/Shop.service';
+import { MutationResult } from 'src/app/shared/models/mutation-result.model';
+import { Page } from 'src/app/shared/models/-page.model';
+import { PageCategory } from 'src/app/shared/models/page-category.model';
+import { PageCategoryService } from 'src/app/shared/services/page-category.service';
+import { PageService } from 'src/app/shared/services/-page.service';
+import { Shop } from 'src/app/shared/models/-shop.model';
+import { ShopService } from 'src/app/shared/services/-shop.service';
 
 @Component({
   selector: 'control-panel-catalog-page',

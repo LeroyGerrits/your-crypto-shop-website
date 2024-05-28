@@ -7,13 +7,13 @@ import { MatSort, Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { debounceTime, distinctUntilChanged } from 'rxjs';
-import { Constants } from 'src/app/shared/Constants';
+import { Constants } from 'src/app/shared/-constants';
 import { DialogDeleteComponent } from 'src/app/shared/dialogs/delete/dialog.delete.component';
 import { Environment } from 'src/app/shared/environments/Environment';
-import { DigiByteWallet } from 'src/app/shared/models/DigiByteWallet.model';
-import { MutationResult } from 'src/app/shared/models/MutationResult';
+import { DigiByteWallet } from 'src/app/shared/models/digibyte-wallet.model';
+import { MutationResult } from 'src/app/shared/models/mutation-result.model';
 import { GetDigiByteWalletsParameters } from 'src/app/shared/models/parameters/GetDigiByteWalletsParameters.model';
-import { DigiByteWalletService } from 'src/app/shared/services/DigiByteWallet.service';
+import { DigiByteWalletService } from 'src/app/shared/services/digibyte-wallet.service';
 
 @Component({
   selector: 'control-panel-configuration-digibyte-wallet-list',

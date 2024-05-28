@@ -1,14 +1,19 @@
-import { Currency } from 'src/app/shared/models/Currency.model';
+import { Currency } from 'src/app/shared/models/-currency.model';
+import { CurrencyType } from 'src/app/shared/enums/CurrencyType.enum';
 
 export const TestDataCurrencies: Currency[] = [
     {
         Id: '00000000-0000-0000-0000-000000000001',
-        Name: 'Euro',
-        Symbol: '€'
+        Type: CurrencyType.Fiat,
+        Symbol: '€',
+        Code: 'EUR',
+        Name: 'Euro'
     },
     {
         Id: '00000000-0000-0000-0000-000000000002',
-        Name: 'Dollar',
-        Symbol: '$'
+        Type: CurrencyType.Fiat,
+        Symbol: '$',
+        Code: 'USD',
+        Name: 'Dollar'
     }
 ];

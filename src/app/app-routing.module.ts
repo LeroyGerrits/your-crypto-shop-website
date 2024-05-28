@@ -3,7 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { AccountChangePasswordComponent } from './account/change-password/change-password.component';
 import { AccountComponent } from './account/account.component';
 import { AccountSettingsComponent } from './account/settings/settings.component';
-import { Constants } from './shared/Constants';
+import { Constants } from './shared/-constants';
 import { ControlPanelCatalogCategoryComponent } from './control-panel/catalog/categories/category.component';
 import { ControlPanelCatalogCategoryListComponent } from './control-panel/catalog/categories/category-list.component';
 import { ControlPanelCatalogProductComponent } from './control-panel/catalog/products/product.component';

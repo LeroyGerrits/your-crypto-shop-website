@@ -1,11 +1,11 @@
 import { ActivatedRoute, Router } from '@angular/router';
 import { ComponentFixture, TestBed, fakeAsync, tick } from '@angular/core/testing';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { CurrencyService } from 'src/app/shared/services/Currency.service';
+import { CurrencyService } from 'src/app/shared/services/-currency.service';
 import { DatePipe } from '@angular/common';
-import { FinancialStatementTransactionService } from 'src/app/shared/services/FinancialStatementTransaction.service';
-import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { FinancialStatementTransactionService } from 'src/app/shared/services/financial-statement-transaction.service';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatInputModule } from '@angular/material/input';
 import { MatNativeDateModule } from '@angular/material/core';
@@ -20,6 +20,7 @@ import { Sort } from '@angular/material/sort';
 import { TestDataCurrencies } from 'src/assets/test-data/Currencies';
 import { TestDataFinancialStatementTransactions } from 'src/assets/test-data/FinancialStatementTransactions';
 import { of } from 'rxjs';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
 
 describe('PublicWebsiteFinancialStatementComponent', () => {
   let component: PublicWebsiteFinancialStatementComponent;
@@ -40,16 +41,18 @@ describe('PublicWebsiteFinancialStatementComponent', () => {
     currencyServiceSpy.getList.and.returnValue(of(TestDataCurrencies));
 
     TestBed.configureTestingModule({
-      declarations: [PublicWebsiteFinancialStatementComponent],
-      imports: [BrowserAnimationsModule, HttpClientTestingModule, MatDatepickerModule, MatInputModule, MatNativeDateModule, MatPaginatorModule, MatSelectModule, MatTableModule, QRCodeModule, ReactiveFormsModule, RouterTestingModule],
-      providers: [
+    declarations: [PublicWebsiteFinancialStatementComponent],
+    imports: [BrowserAnimationsModule, MatDatepickerModule, MatInputModule, MatNativeDateModule, MatPaginatorModule, MatSelectModule, MatTableModule, QRCodeModule, ReactiveFormsModule, RouterTestingModule],
+    providers: [
         { provide: ActivatedRoute, useValue: fakeActivatedRoute },
         { provide: CurrencyService, useValue: currencyServiceSpy },
         { provide: FinancialStatementTransactionService, useValue: financialStatementTransactionServiceSpy },
         PublicWebsiteFinancialStatementComponent,
-        DatePipe
-      ]
-    });
+        DatePipe,
+        provideHttpClient(withInterceptorsFromDi()),
+        provideHttpClientTesting()
+    ]
+});
     fixture = TestBed.createComponent(PublicWebsiteFinancialStatementComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

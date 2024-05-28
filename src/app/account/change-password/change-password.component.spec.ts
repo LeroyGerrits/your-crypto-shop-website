@@ -1,16 +1,17 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 
-import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { of, throwError } from 'rxjs';
-import { MutationResult } from 'src/app/shared/models/MutationResult';
-import { MerchantService } from 'src/app/shared/services/Merchant.service';
+import { MutationResult } from 'src/app/shared/models/mutation-result.model';
+import { MerchantService } from 'src/app/shared/services/-merchant.service';
 import { AccountChangePasswordComponent } from './change-password.component';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 describe('AccountChangePasswordComponent', () => {
   let component: AccountChangePasswordComponent;
@@ -32,14 +33,16 @@ describe('AccountChangePasswordComponent', () => {
     merchantServiceSpy.changePassword.and.returnValue(of(mutationResult));
 
     TestBed.configureTestingModule({
-      declarations: [AccountChangePasswordComponent],
-      imports: [BrowserAnimationsModule, HttpClientTestingModule, MatFormFieldModule, MatInputModule, ReactiveFormsModule, RouterLink],
-      providers: [
+    declarations: [AccountChangePasswordComponent],
+    imports: [BrowserAnimationsModule, MatFormFieldModule, MatInputModule, ReactiveFormsModule, RouterLink],
+    providers: [
         { provide: ActivatedRoute, useValue: fakeActivatedRoute },
         { provide: MatSnackBar, useValue: matSnackBarSpy },
         { provide: MerchantService, useValue: merchantServiceSpy },
-      ]
-    });
+        provideHttpClient(withInterceptorsFromDi()),
+        provideHttpClientTesting(),
+    ]
+});
     fixture = TestBed.createComponent(AccountChangePasswordComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

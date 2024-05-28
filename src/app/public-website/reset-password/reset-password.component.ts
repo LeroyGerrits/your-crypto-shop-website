@@ -3,11 +3,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar, MatSnackBarRef, TextOnlySnackBar } from '@angular/material/snack-bar';
 
-import { Merchant } from 'src/app/shared/models/Merchant.model';
-import { MerchantPasswordResetLink } from 'src/app/shared/models/MerchantPasswordResetLink.model';
-import { MerchantPasswordResetLinkService } from 'src/app/shared/services/MerchantPasswordResetLink.service';
-import { MerchantService } from 'src/app/shared/services/Merchant.service';
-import { MutationResult } from 'src/app/shared/models/MutationResult';
+import { MerchantPasswordResetLink } from 'src/app/shared/models/merchant-password-reset-link.model';
+import { MerchantPasswordResetLinkService } from 'src/app/shared/services/merchant-password-reset-link.service';
+import { MutationResult } from 'src/app/shared/models/mutation-result.model';
 
 @Component({
   selector: 'public-website-reset-password',

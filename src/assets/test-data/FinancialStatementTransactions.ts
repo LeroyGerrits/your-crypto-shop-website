@@ -1,4 +1,4 @@
-import { FinancialStatementTransaction } from 'src/app/shared/models/FinancialStatementTransaction.model';
+import { FinancialStatementTransaction } from 'src/app/shared/models/financial-statement-transaction.model';
 import { TestDataCurrencies } from './Currencies';
 
 export const TestDataFinancialStatementTransactions: FinancialStatementTransaction[] = [

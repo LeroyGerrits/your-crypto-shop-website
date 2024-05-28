@@ -13,8 +13,8 @@ import { MatTableModule } from '@angular/material/table';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterTestingModule } from '@angular/router/testing';
 import { of, throwError } from 'rxjs';
-import { MutationResult } from 'src/app/shared/models/MutationResult';
-import { DigiByteWalletService } from 'src/app/shared/services/DigiByteWallet.service';
+import { MutationResult } from 'src/app/shared/models/mutation-result.model';
+import { DigiByteWalletService } from 'src/app/shared/services/digibyte-wallet.service';
 import { TestDataDigiByteWallets } from 'src/assets/test-data/DigiByteWallets';
 import { ControlPanelConfigurationDigiByteWalletListComponent } from './digibyte-wallet-list.component';
 

@@ -5,13 +5,13 @@ import { MatSort, Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { debounceTime, distinctUntilChanged } from 'rxjs';
 import { Environment } from 'src/app/shared/environments/Environment';
-import { Country } from 'src/app/shared/models/Country.model';
-import { ShopCategory } from 'src/app/shared/models/ShopCategory.model';
+import { Country } from 'src/app/shared/models/-country.model';
+import { ShopCategory } from 'src/app/shared/models/shop-category.model';
 import { GetShopsParameters } from 'src/app/shared/models/parameters/GetShopsParameters.model';
 import { PublicShop } from 'src/app/shared/models/viewmodels/PublicShop.model';
-import { CountryService } from 'src/app/shared/services/Country.service';
-import { ShopService } from 'src/app/shared/services/Shop.service';
-import { ShopCategoryService } from 'src/app/shared/services/ShopCategory.service';
+import { CountryService } from 'src/app/shared/services/-country.service';
+import { ShopService } from 'src/app/shared/services/-shop.service';
+import { ShopCategoryService } from 'src/app/shared/services/shop-category.service';
 
 @Component({
   selector: 'public-website-shop-list',

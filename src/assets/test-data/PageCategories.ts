@@ -1,4 +1,4 @@
-import { PageCategory } from 'src/app/shared/models/PageCategory.model';
+import { PageCategory } from 'src/app/shared/models/page-category.model';
 
 export const TestDataPageCategories: PageCategory[] = [
     {

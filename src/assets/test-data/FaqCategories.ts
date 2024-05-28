@@ -1,4 +1,4 @@
-import { FaqCategory } from 'src/app/shared/models/FaqCategory.model';
+import { FaqCategory } from 'src/app/shared/models/faq-category.model';
 
 export const TestDataFaqCategories: FaqCategory[] = [
     {

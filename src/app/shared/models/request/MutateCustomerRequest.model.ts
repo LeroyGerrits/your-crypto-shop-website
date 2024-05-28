@@ -1,5 +1,5 @@
-import { Country } from "../Country.model";
-import { Customer } from "../Customer.model";
+import { Country } from "../-country.model";
+import { Customer } from "../-customer.model";
 
 export class MutateCustomerRequest {
     Customer!: Customer;

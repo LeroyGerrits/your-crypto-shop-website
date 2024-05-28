@@ -7,15 +7,15 @@ import { MatSort, Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { debounceTime, distinctUntilChanged } from 'rxjs';
-import { Constants } from 'src/app/shared/Constants';
+import { Constants } from 'src/app/shared/-constants';
 import { DialogDeleteComponent } from 'src/app/shared/dialogs/delete/dialog.delete.component';
 import { Environment } from 'src/app/shared/environments/Environment';
-import { Customer } from 'src/app/shared/models/Customer.model';
-import { MutationResult } from 'src/app/shared/models/MutationResult';
-import { Shop } from 'src/app/shared/models/Shop.model';
+import { Customer } from 'src/app/shared/models/-customer.model';
+import { MutationResult } from 'src/app/shared/models/mutation-result.model';
+import { Shop } from 'src/app/shared/models/-shop.model';
 import { GetCustomersParameters } from 'src/app/shared/models/parameters/GetCustomersParameters.model';
-import { CustomerService } from 'src/app/shared/services/Customer.service';
-import { ShopService } from 'src/app/shared/services/Shop.service';
+import { CustomerService } from 'src/app/shared/services/-customer.service';
+import { ShopService } from 'src/app/shared/services/-shop.service';
 
 @Component({
   selector: 'control-panel-customer-list',

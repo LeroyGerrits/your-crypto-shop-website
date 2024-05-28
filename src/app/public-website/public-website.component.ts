@@ -3,9 +3,9 @@ import { NavigationEnd, Router } from '@angular/router';
 
 import { DialogSignUpComponent } from '../shared/dialogs/signup/dialog.signup.component';
 import { MatDialog } from '@angular/material/dialog';
-import { ShopService } from '../shared/services/Shop.service';
-import { GeneralService } from '../shared/services/General.service';
-import { Stats } from '../shared/models/Stats.model';
+import { ShopService } from '../shared/services/-shop.service';
+import { GeneralService } from '../shared/services/-general.service';
+import { Stats } from '../shared/models/-stats.model';
 import { PublicShop } from '../shared/models/viewmodels/PublicShop.model';
 
 @Component({

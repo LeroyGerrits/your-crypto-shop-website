@@ -4,20 +4,20 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar, MatSnackBarRef, TextOnlySnackBar } from '@angular/material/snack-bar';
 import { debounceTime, distinctUntilChanged } from 'rxjs';
 
-import { AuthenticationService } from 'src/app/shared/services/Authentication.service';
-import { Constants } from 'src/app/shared/Constants';
-import { Country } from 'src/app/shared/models/Country.model';
-import { CountryService } from 'src/app/shared/services/Country.service';
-import { DigiByteWallet } from 'src/app/shared/models/DigiByteWallet.model';
-import { DigiByteWalletService } from 'src/app/shared/services/DigiByteWallet.service';
+import { AuthenticationService } from 'src/app/shared/services/-authentication.service';
+import { Constants } from 'src/app/shared/-constants';
+import { Country } from 'src/app/shared/models/-country.model';
+import { CountryService } from 'src/app/shared/services/-country.service';
+import { DigiByteWallet } from 'src/app/shared/models/digibyte-wallet.model';
+import { DigiByteWalletService } from 'src/app/shared/services/digibyte-wallet.service';
 import { Environment } from 'src/app/shared/environments/Environment';
-import { Merchant } from 'src/app/shared/models/Merchant.model';
-import { MutationResult } from 'src/app/shared/models/MutationResult';
-import { Shop } from 'src/app/shared/models/Shop.model';
-import { ShopCategory } from 'src/app/shared/models/ShopCategory.model';
-import { ShopCategoryService } from 'src/app/shared/services/ShopCategory.service';
-import { ShopOrderMethod } from 'src/app/shared/enums/ShopOrderMethod.enum';
-import { ShopService } from 'src/app/shared/services/Shop.service';
+import { Merchant } from 'src/app/shared/models/-merchant.model';
+import { MutationResult } from 'src/app/shared/models/mutation-result.model';
+import { Shop } from 'src/app/shared/models/-shop.model';
+import { ShopCategory } from 'src/app/shared/models/shop-category.model';
+import { ShopCategoryService } from 'src/app/shared/services/shop-category.service';
+import { ShopOrderMethod } from 'src/app/shared/enums/shop-order-method.enum';
+import { ShopService } from 'src/app/shared/services/-shop.service';
 
 @Component({
   selector: 'control-panel-configuration-shop',

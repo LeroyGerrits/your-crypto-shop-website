@@ -3,17 +3,17 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar, MatSnackBarRef, TextOnlySnackBar } from '@angular/material/snack-bar';
 
-import { Country } from 'src/app/shared/models/Country.model';
-import { CountryService } from 'src/app/shared/services/Country.service';
-import { Customer } from 'src/app/shared/models/Customer.model';
-import { CustomerService } from 'src/app/shared/services/Customer.service';
+import { Country } from 'src/app/shared/models/-country.model';
+import { CountryService } from 'src/app/shared/services/-country.service';
+import { Customer } from 'src/app/shared/models/-customer.model';
+import { CustomerService } from 'src/app/shared/services/-customer.service';
 import { Environment } from 'src/app/shared/environments/Environment';
-import { Gender } from 'src/app/shared/enums/Gender.enum';
+import { Gender } from 'src/app/shared/enums/gender.enum';
 import { GetCategoriesParameters } from 'src/app/shared/models/parameters/GetCategoriesParameters.model';
 import { MutateCustomerRequest } from 'src/app/shared/models/request/MutateCustomerRequest.model';
-import { MutationResult } from 'src/app/shared/models/MutationResult';
-import { Shop } from 'src/app/shared/models/Shop.model';
-import { ShopService } from 'src/app/shared/services/Shop.service';
+import { MutationResult } from 'src/app/shared/models/mutation-result.model';
+import { Shop } from 'src/app/shared/models/-shop.model';
+import { ShopService } from 'src/app/shared/services/-shop.service';
 
 @Component({
   selector: 'control-panel-customer',

@@ -8,9 +8,9 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MutationResult } from 'src/app/shared/models/MutationResult';
-import { ProductPhoto } from 'src/app/shared/models/ProductPhoto.model';
-import { ProductPhotoService } from 'src/app/shared/services/ProductPhoto.service';
+import { MutationResult } from 'src/app/shared/models/mutation-result.model';
+import { ProductPhoto } from 'src/app/shared/models/product-photo.model';
+import { ProductPhotoService } from 'src/app/shared/services/product-photo.service';
 import { TestDataProductPhotos } from 'src/assets/test-data/ProductPhotos';
 import { ControlPanelCatalogProductPhotoComponent } from './product-photo.component';
 

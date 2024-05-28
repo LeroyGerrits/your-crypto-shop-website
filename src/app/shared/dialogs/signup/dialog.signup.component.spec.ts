@@ -10,8 +10,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { Router } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
 import { PublicWebsiteMessageComponent } from 'src/app/public-website/message/message.component';
-import { MutationResult } from '../../models/MutationResult';
-import { MerchantService } from '../../services/Merchant.service';
+import { MutationResult } from '../../models/mutation-result.model';
+import { MerchantService } from '../../services/-merchant.service';
 import { DialogSignUpComponent } from './dialog.signup.component';
 import { MatSnackBar } from '@angular/material/snack-bar';
 

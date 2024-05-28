@@ -1,14 +1,15 @@
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
-import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { MatCardModule } from '@angular/material/card';
 import { MatGridListModule } from '@angular/material/grid-list';
-import { NewsMessageService } from 'src/app/shared/services/NewsMessage.service';
+import { NewsMessageService } from 'src/app/shared/services/news-message.service';
 import { PublicWebsiteNewsListComponent } from './news-list.component';
 import { SearchEngineFriendlyStringPipe } from 'src/app/shared/pipes/SearchEngineFriendlyString.pipe';
 import { TestDataNewsMessages } from 'src/assets/test-data/NewsMessages';
 import { of } from 'rxjs';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
 
 describe('PublicWebsiteNewsListComponent', () => {
   let component: PublicWebsiteNewsListComponent;
@@ -21,13 +22,15 @@ describe('PublicWebsiteNewsListComponent', () => {
     newsMessageServiceSpy.getList.and.returnValue(of(TestDataNewsMessages));
 
     TestBed.configureTestingModule({
-      declarations: [PublicWebsiteNewsListComponent, SearchEngineFriendlyStringPipe],
-      imports: [HttpClientTestingModule, MatGridListModule, MatCardModule, RouterLink],
-      providers: [
+    declarations: [PublicWebsiteNewsListComponent, SearchEngineFriendlyStringPipe],
+    imports: [MatGridListModule, MatCardModule, RouterLink],
+    providers: [
         { provide: ActivatedRoute, useValue: { snapshot: { paramMap: { get: () => 0, }, }, } },
-        { provide: NewsMessageService, useValue: newsMessageServiceSpy }
-      ]
-    });
+        { provide: NewsMessageService, useValue: newsMessageServiceSpy },
+        provideHttpClient(withInterceptorsFromDi()),
+        provideHttpClientTesting()
+    ]
+});
     fixture = TestBed.createComponent(PublicWebsiteNewsListComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

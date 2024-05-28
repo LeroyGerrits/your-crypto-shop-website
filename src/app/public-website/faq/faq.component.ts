@@ -2,9 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { Meta, Title } from '@angular/platform-browser';
 
 import { ActivatedRoute } from '@angular/router';
-import { Constants } from 'src/app/shared/Constants';
-import { Faq } from 'src/app/shared/models/Faq.model';
-import { FaqService } from 'src/app/shared/services/Faq.service';
+import { Constants } from 'src/app/shared/-constants';
+import { Faq } from 'src/app/shared/models/-faq.model';
+import { FaqService } from 'src/app/shared/services/-faq.service';
 
 @Component({
   selector: 'public-website-faq',

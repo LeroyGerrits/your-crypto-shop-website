@@ -1,4 +1,4 @@
-import { Product } from 'src/app/shared/models/Product.model';
+import { Product } from 'src/app/shared/models/-product.model';
 import { TestDataShops } from './Shops';
 
 export const TestDataProducts: Product[] = [

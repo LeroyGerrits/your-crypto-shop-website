@@ -1,5 +1,5 @@
-import { Customer } from 'src/app/shared/models/Customer.model';
-import { Gender } from 'src/app/shared/enums/Gender.enum';
+import { Customer } from 'src/app/shared/models/-customer.model';
+import { Gender } from 'src/app/shared/enums/gender.enum';
 import { TestDataAddresses } from './Addresses';
 import { TestDataShops } from './Shops';
 

@@ -1,4 +1,4 @@
-import { OrderStatus } from "../../enums/OrderStatus.enum";
+import { OrderStatus } from "../../enums/order-status.enum";
 
 export class GetOrdersParameters {
     ShopId?: string;

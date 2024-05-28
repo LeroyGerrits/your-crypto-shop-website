@@ -1,10 +1,10 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription, debounceTime, distinctUntilChanged } from 'rxjs';
 
-import { Faq } from 'src/app/shared/models/Faq.model';
-import { FaqCategory } from 'src/app/shared/models/FaqCategory.model';
-import { FaqCategoryService } from 'src/app/shared/services/FaqCategory.service';
-import { FaqService } from 'src/app/shared/services/Faq.service';
+import { Faq } from 'src/app/shared/models/-faq.model';
+import { FaqCategory } from 'src/app/shared/models/faq-category.model';
+import { FaqCategoryService } from 'src/app/shared/services/faq-category.service';
+import { FaqService } from 'src/app/shared/services/-faq.service';
 import { FormControl } from '@angular/forms';
 
 @Component({

@@ -3,12 +3,12 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar, MatSnackBarRef, TextOnlySnackBar } from '@angular/material/snack-bar';
 
-import { AuthenticationService } from 'src/app/shared/services/Authentication.service';
-import { DigiByteWallet } from 'src/app/shared/models/DigiByteWallet.model';
-import { DigiByteWalletService } from 'src/app/shared/services/DigiByteWallet.service';
+import { AuthenticationService } from 'src/app/shared/services/-authentication.service';
+import { DigiByteWallet } from 'src/app/shared/models/digibyte-wallet.model';
+import { DigiByteWalletService } from 'src/app/shared/services/digibyte-wallet.service';
 import { Environment } from 'src/app/shared/environments/Environment';
-import { Merchant } from 'src/app/shared/models/Merchant.model';
-import { MutationResult } from 'src/app/shared/models/MutationResult';
+import { Merchant } from 'src/app/shared/models/-merchant.model';
+import { MutationResult } from 'src/app/shared/models/mutation-result.model';
 
 @Component({
   selector: 'control-panel-configuration-digibyte-wallet',

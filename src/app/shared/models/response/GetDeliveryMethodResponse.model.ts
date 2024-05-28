@@ -1,4 +1,4 @@
-import { DeliveryMethod } from "../DeliveryMethod.model";
+import { DeliveryMethod } from "../delivery-method.model";
 import { IDictionaryNumber } from "../../interfaces/idictionary-number.interface";
 
 export class GetDeliveryMethodResponse {

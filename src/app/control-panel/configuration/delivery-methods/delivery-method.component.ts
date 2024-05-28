@@ -3,19 +3,19 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar, MatSnackBarRef, TextOnlySnackBar } from '@angular/material/snack-bar';
 
-import { Constants } from 'src/app/shared/Constants';
-import { Country } from 'src/app/shared/models/Country.model';
-import { CountryService } from 'src/app/shared/services/Country.service';
-import { DeliveryMethod } from 'src/app/shared/models/DeliveryMethod.model';
-import { DeliveryMethodService } from 'src/app/shared/services/DeliveryMethod.service';
+import { Constants } from 'src/app/shared/-constants';
+import { Country } from 'src/app/shared/models/-country.model';
+import { CountryService } from 'src/app/shared/services/-country.service';
+import { DeliveryMethod } from 'src/app/shared/models/delivery-method.model';
+import { DeliveryMethodService } from 'src/app/shared/services/delivery-method.service';
 import { Environment } from 'src/app/shared/environments/Environment';
 import { GetDeliveryMethodResponse } from 'src/app/shared/models/response/GetDeliveryMethodResponse.model';
 import { IDictionaryFormControl } from 'src/app/shared/interfaces/idictionary-formcontrol.interface';
 import { IDictionaryNumber } from 'src/app/shared/interfaces/idictionary-number.interface';
 import { MutateDeliveryMethodRequest } from 'src/app/shared/models/request/MutateDeliveryMethodRequest.model';
-import { MutationResult } from 'src/app/shared/models/MutationResult';
-import { Shop } from 'src/app/shared/models/Shop.model';
-import { ShopService } from 'src/app/shared/services/Shop.service';
+import { MutationResult } from 'src/app/shared/models/mutation-result.model';
+import { Shop } from 'src/app/shared/models/-shop.model';
+import { ShopService } from 'src/app/shared/services/-shop.service';
 
 @Component({
   selector: 'control-panel-configuration-delivery-method',

@@ -7,17 +7,17 @@ import { MatSort, Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { debounceTime, distinctUntilChanged } from 'rxjs';
-import { Constants } from 'src/app/shared/Constants';
+import { Constants } from 'src/app/shared/-constants';
 import { DialogDeleteComponent } from 'src/app/shared/dialogs/delete/dialog.delete.component';
 import { Environment } from 'src/app/shared/environments/Environment';
-import { Country } from 'src/app/shared/models/Country.model';
-import { MutationResult } from 'src/app/shared/models/MutationResult';
-import { Shop } from 'src/app/shared/models/Shop.model';
-import { ShopCategory } from 'src/app/shared/models/ShopCategory.model';
+import { Country } from 'src/app/shared/models/-country.model';
+import { MutationResult } from 'src/app/shared/models/mutation-result.model';
+import { Shop } from 'src/app/shared/models/-shop.model';
+import { ShopCategory } from 'src/app/shared/models/shop-category.model';
 import { GetShopsParameters } from 'src/app/shared/models/parameters/GetShopsParameters.model';
-import { CountryService } from 'src/app/shared/services/Country.service';
-import { ShopService } from 'src/app/shared/services/Shop.service';
-import { ShopCategoryService } from 'src/app/shared/services/ShopCategory.service';
+import { CountryService } from 'src/app/shared/services/-country.service';
+import { ShopService } from 'src/app/shared/services/-shop.service';
+import { ShopCategoryService } from 'src/app/shared/services/shop-category.service';
 
 @Component({
   selector: 'control-panel-configuration-shop-list',

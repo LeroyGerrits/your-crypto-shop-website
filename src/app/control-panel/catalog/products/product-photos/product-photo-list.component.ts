@@ -2,22 +2,22 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { HttpErrorResponse, HttpEventType } from '@angular/common/http';
 import { MatSnackBar, MatSnackBarRef, TextOnlySnackBar } from '@angular/material/snack-bar';
 
-import { AuthenticationService } from 'src/app/shared/services/Authentication.service';
+import { AuthenticationService } from 'src/app/shared/services/-authentication.service';
 import { Component } from '@angular/core';
-import { Constants } from 'src/app/shared/Constants';
+import { Constants } from 'src/app/shared/-constants';
 import { ControlPanelCatalogProductPhotoComponent } from './product-photo.component';
 import { DialogDeleteComponent } from 'src/app/shared/dialogs/delete/dialog.delete.component';
 import { Environment } from 'src/app/shared/environments/Environment';
-import { FileSizePipe } from 'src/app/shared/pipes/FileSize.pipe';
+import { FileSizePipe } from 'src/app/shared/pipes/file-size.pipe';
 import { FileUploadProgress } from 'src/app/shared/models/system/FileUploadProgress.model';
 import { GetProductPhotosParameters } from 'src/app/shared/models/parameters/GetProductPhotosParameters.model';
 import { MatDialog } from '@angular/material/dialog';
-import { Merchant } from 'src/app/shared/models/Merchant.model';
-import { MutationResult } from 'src/app/shared/models/MutationResult';
-import { Product } from 'src/app/shared/models/Product.model';
-import { ProductPhoto } from 'src/app/shared/models/ProductPhoto.model';
-import { ProductPhotoService } from 'src/app/shared/services/ProductPhoto.service';
-import { ProductService } from 'src/app/shared/services/Product.service';
+import { Merchant } from 'src/app/shared/models/-merchant.model';
+import { MutationResult } from 'src/app/shared/models/mutation-result.model';
+import { Product } from 'src/app/shared/models/-product.model';
+import { ProductPhoto } from 'src/app/shared/models/product-photo.model';
+import { ProductPhotoService } from 'src/app/shared/services/product-photo.service';
+import { ProductService } from 'src/app/shared/services/-product.service';
 
 @Component({
   selector: 'control-panel-catalog-product-photo-list',

@@ -1,16 +1,16 @@
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 import { AccountChangePasswordComponent } from './account/change-password/change-password.component';
 import { AccountComponent } from './account/account.component';
 import { AccountSettingsComponent } from './account/settings/settings.component';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
-import { AuthenticationService } from './shared/services/Authentication.service';
-import { BooleanConvertPipe } from './shared/pipes/BooleanConvert.pipe';
+import { AuthenticationService } from './shared/services/-authentication.service';
+import { BooleanConvertPipe } from './shared/pipes/boolean-convert.pipe';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BrowserModule } from '@angular/platform-browser';
-import { CategoryService } from './shared/services/Category.service';
+import { CategoryService } from './shared/services/-category.service';
 import { ControlPanelCatalogCategoryComponent } from './control-panel/catalog/categories/category.component';
 import { ControlPanelCatalogCategoryListComponent } from './control-panel/catalog/categories/category-list.component';
 import { ControlPanelCatalogProductComponent } from './control-panel/catalog/products/product.component';
@@ -33,11 +33,11 @@ import { ControlPanelCustomerListComponent } from './control-panel/customers/cus
 import { ControlPanelDashboardComponent } from './control-panel/dashboard/dashboard.component';
 import { ControlPanelSalesOrderComponent } from './control-panel/sales/orders/order.component';
 import { ControlPanelSalesOrderListComponent } from './control-panel/sales/orders/order-list.component';
-import { CountryService } from './shared/services/Country.service';
-import { CurrencyService } from './shared/services/Currency.service';
-import { CustomerService } from './shared/services/Customer.service';
+import { CountryService } from './shared/services/-country.service';
+import { CurrencyService } from './shared/services/-currency.service';
+import { CustomerService } from './shared/services/-customer.service';
 import { DatePipe } from '@angular/common';
-import { DeliveryMethodService } from './shared/services/DeliveryMethod.service';
+import { DeliveryMethodService } from './shared/services/delivery-method.service';
 import { DialogConfirmComponent } from './shared/dialogs/confirm/dialog.confirm.component';
 import { DialogDeleteComponent } from './shared/dialogs/delete/dialog.delete.component';
 import { DialogDonateComponent } from './shared/dialogs/donate/dialog.donate.component';
@@ -46,17 +46,17 @@ import { DialogForgotPasswordComponent } from './shared/dialogs/forgot-password/
 import { DialogLoginComponent } from './shared/dialogs/login/dialog.login.component';
 import { DialogLogoutComponent } from './shared/dialogs/logout/dialog.logout.component';
 import { DialogSignUpComponent } from './shared/dialogs/signup/dialog.signup.component';
-import { DigiByteNodeService } from './shared/services/DigiByteNode.service';
-import { DigiByteWalletService } from './shared/services/DigiByteWallet.service';
+import { DigiByteNodeService } from './shared/services/digibyte-node.service';
+import { DigiByteWalletService } from './shared/services/digibyte-wallet.service';
 import { ErrorInterceptor } from './shared/interceptors/error.interceptor';
-import { FaqCategoryService } from './shared/services/FaqCategory.service';
-import { FaqService } from './shared/services/Faq.service';
-import { FieldService } from './shared/services/Field.service';
-import { FieldTypePipe } from './shared/pipes/fieldType.pipe';
-import { FileSizePipe } from './shared/pipes/FileSize.pipe';
-import { FinancialStatementTransactionService } from './shared/services/FinancialStatementTransaction.service';
-import { GeneralService } from './shared/services/General.service';
-import { HashRatePipe } from './shared/pipes/HashRate.pipe';
+import { FaqCategoryService } from './shared/services/faq-category.service';
+import { FaqService } from './shared/services/-faq.service';
+import { FieldService } from './shared/services/-field.service';
+import { FieldTypePipe } from './shared/pipes/field-type.pipe';
+import { FileSizePipe } from './shared/pipes/file-size.pipe';
+import { FinancialStatementTransactionService } from './shared/services/financial-statement-transaction.service';
+import { GeneralService } from './shared/services/-general.service';
+import { HashRatePipe } from './shared/pipes/hash-rate.pipe';
 import { JwtInterceptor } from './shared/interceptors/jwt.interceptor';
 import { MatBadgeModule } from '@angular/material/badge';
 import { MatButtonModule } from '@angular/material/button';
@@ -87,15 +87,15 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatTreeModule } from '@angular/material/tree';
 import { MerchantLinkComponent } from './shared/components/merchant-link/merchant-link.component';
-import { MerchantPasswordResetLinkService } from './shared/services/MerchantPasswordResetLink.service';
-import { MerchantService } from './shared/services/Merchant.service';
-import { NewsMessageService } from './shared/services/NewsMessage.service';
+import { MerchantPasswordResetLinkService } from './shared/services/merchant-password-reset-link.service';
+import { MerchantService } from './shared/services/-merchant.service';
+import { NewsMessageService } from './shared/services/news-message.service';
 import { NgModule } from '@angular/core';
-import { OrderService } from './shared/services/Order.service';
-import { PageCategoryService } from './shared/services/PageCategory.service';
-import { PageService } from './shared/services/Page.service';
-import { ProductPhotoService } from './shared/services/ProductPhoto.service';
-import { ProductService } from './shared/services/Product.service';
+import { OrderService } from './shared/services/-order.service';
+import { PageCategoryService } from './shared/services/page-category.service';
+import { PageService } from './shared/services/-page.service';
+import { ProductPhotoService } from './shared/services/product-photo.service';
+import { ProductService } from './shared/services/-product.service';
 import { PublicWebsiteAboutComponent } from './public-website/about/about.component';
 import { PublicWebsiteAccountActivateComponent } from './public-website/account-activate/account-activate.component';
 import { PublicWebsiteComponent } from './public-website/public-website.component';
@@ -110,136 +110,136 @@ import { PublicWebsiteResetPasswordComponent } from './public-website/reset-pass
 import { PublicWebsiteShopListComponent } from './public-website/shops/shop-list.component';
 import { QRCodeModule } from 'angularx-qrcode';
 import { RouterModule } from '@angular/router';
-import { SearchEngineFriendlyStringPipe } from './shared/pipes/SearchEngineFriendlyString.pipe';
-import { ShopCategoryService } from './shared/services/ShopCategory.service';
-import { ShopService } from './shared/services/Shop.service';
-import { StripHtmlPipe } from './shared/pipes/StripHtml.pipe';
+import { SearchEngineFriendlyStringPipe } from './shared/pipes/search-engine-friendly-string.pipe';
+import { ShopCategoryService } from './shared/services/shop-category.service';
+import { ShopService } from './shared/services/-shop.service';
+import { StripHtmlPipe } from './shared/pipes/strip-html.pipe';
 
 @NgModule({
-  declarations: [
-    AccountComponent,
-    AccountChangePasswordComponent,
-    AccountSettingsComponent,
-    AppComponent,
-    ControlPanelComponent,
-    ControlPanelCatalogCategoryListComponent,
-    ControlPanelCatalogCategoryComponent,
-    ControlPanelCatalogProductComponent,
-    ControlPanelCatalogProductListComponent,
-    ControlPanelCatalogProductPhotoListComponent,
-    ControlPanelCatalogProductPhotoComponent,
-    ControlPanelConfigurationDeliveryMethodListComponent,
-    ControlPanelConfigurationDeliveryMethodComponent,
-    ControlPanelConfigurationDigiByteWalletListComponent,
-    ControlPanelConfigurationDigiByteWalletComponent,
-    ControlPanelConfigurationFieldListComponent,
-    ControlPanelConfigurationFieldComponent,
-    ControlPanelConfigurationPageListComponent,
-    ControlPanelConfigurationPageComponent,
-    ControlPanelConfigurationShopListComponent,
-    ControlPanelConfigurationShopComponent,
-    ControlPanelCustomerListComponent,
-    ControlPanelCustomerComponent,
-    ControlPanelDashboardComponent,
-    ControlPanelSalesOrderListComponent,
-    ControlPanelSalesOrderComponent,
-    DialogConfirmComponent,
-    DialogDeleteComponent,
-    DialogDonateComponent,
-    DialogEditOrderItemComponent,
-    DialogForgotPasswordComponent,
-    DialogLoginComponent,
-    DialogLogoutComponent,
-    DialogSignUpComponent,
-    FileSizePipe,
-    FieldTypePipe,
-    HashRatePipe,
-    MerchantLinkComponent,
-    PublicWebsiteComponent,
-    PublicWebsiteAccountActivateComponent,
-    PublicWebsiteAboutComponent,
-    PublicWebsiteFaqComponent,
-    PublicWebsiteFaqListComponent,
-    PublicWebsiteIndexComponent,
-    PublicWebsiteFinancialStatementComponent,
-    PublicWebsiteNewsComponent,
-    PublicWebsiteNewsListComponent,
-    PublicWebsiteNodeStatusComponent,
-    PublicWebsiteShopListComponent,
-    PublicWebsiteResetPasswordComponent,
-    SearchEngineFriendlyStringPipe
-  ],
-  imports: [
-    AppRoutingModule,
-    BrowserAnimationsModule,
-    BrowserModule,
-    HttpClientModule,
-    MatBadgeModule,
-    MatButtonModule,
-    MatCardModule,
-    MatCheckboxModule,
-    MatChipsModule,
-    MatDatepickerModule,
-    MatDialogModule,
-    MatDividerModule,
-    MatExpansionModule,
-    MatFormFieldModule,
-    MatGridListModule,
-    MatIconModule,
-    MatInputModule,
-    MatListModule,
-    MatMenuModule,
-    MatNativeDateModule,
-    MatPaginatorModule,
-    MatProgressSpinnerModule,
-    MatRadioModule,
-    MatSelectModule,
-    MatSlideToggleModule,
-    MatSnackBarModule,
-    MatSortModule,
-    MatTableModule,
-    MatTabsModule,
-    MatToolbarModule,
-    MatTooltipModule,
-    MatTreeModule,
-    QRCodeModule,
-    ReactiveFormsModule,
-    RouterModule,
-    FormsModule
-  ],
-  providers: [
-    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
-    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
-    AuthenticationService,
-    BooleanConvertPipe,
-    CategoryService,
-    CountryService,
-    CurrencyService,
-    CustomerService,
-    DatePipe,
-    DeliveryMethodService,
-    DigiByteNodeService,
-    DigiByteWalletService,
-    FaqService,
-    FaqCategoryService,
-    FieldService,
-    FileSizePipe,
-    FieldTypePipe,
-    FinancialStatementTransactionService,
-    GeneralService,
-    HashRatePipe,
-    MerchantService,
-    MerchantPasswordResetLinkService,
-    NewsMessageService,
-    OrderService,
-    PageService,
-    PageCategoryService,
-    ProductService,
-    ProductPhotoService,
-    ShopService,
-    ShopCategoryService,
-    StripHtmlPipe
-  ],
-  bootstrap: [AppComponent]
+    declarations: [
+        AccountComponent,
+        AccountChangePasswordComponent,
+        AccountSettingsComponent,
+        AppComponent,
+        ControlPanelComponent,
+        ControlPanelCatalogCategoryListComponent,
+        ControlPanelCatalogCategoryComponent,
+        ControlPanelCatalogProductComponent,
+        ControlPanelCatalogProductListComponent,
+        ControlPanelCatalogProductPhotoListComponent,
+        ControlPanelCatalogProductPhotoComponent,
+        ControlPanelConfigurationDeliveryMethodListComponent,
+        ControlPanelConfigurationDeliveryMethodComponent,
+        ControlPanelConfigurationDigiByteWalletListComponent,
+        ControlPanelConfigurationDigiByteWalletComponent,
+        ControlPanelConfigurationFieldListComponent,
+        ControlPanelConfigurationFieldComponent,
+        ControlPanelConfigurationPageListComponent,
+        ControlPanelConfigurationPageComponent,
+        ControlPanelConfigurationShopListComponent,
+        ControlPanelConfigurationShopComponent,
+        ControlPanelCustomerListComponent,
+        ControlPanelCustomerComponent,
+        ControlPanelDashboardComponent,
+        ControlPanelSalesOrderListComponent,
+        ControlPanelSalesOrderComponent,
+        DialogConfirmComponent,
+        DialogDeleteComponent,
+        DialogDonateComponent,
+        DialogEditOrderItemComponent,
+        DialogForgotPasswordComponent,
+        DialogLoginComponent,
+        DialogLogoutComponent,
+        DialogSignUpComponent,
+        FileSizePipe,
+        FieldTypePipe,
+        HashRatePipe,
+        MerchantLinkComponent,
+        PublicWebsiteComponent,
+        PublicWebsiteAccountActivateComponent,
+        PublicWebsiteAboutComponent,
+        PublicWebsiteFaqComponent,
+        PublicWebsiteFaqListComponent,
+        PublicWebsiteIndexComponent,
+        PublicWebsiteFinancialStatementComponent,
+        PublicWebsiteNewsComponent,
+        PublicWebsiteNewsListComponent,
+        PublicWebsiteNodeStatusComponent,
+        PublicWebsiteShopListComponent,
+        PublicWebsiteResetPasswordComponent,
+        SearchEngineFriendlyStringPipe
+    ],
+    imports: [
+        AppRoutingModule,
+        BrowserAnimationsModule,
+        BrowserModule,
+        MatBadgeModule,
+        MatButtonModule,
+        MatCardModule,
+        MatCheckboxModule,
+        MatChipsModule,
+        MatDatepickerModule,
+        MatDialogModule,
+        MatDividerModule,
+        MatExpansionModule,
+        MatFormFieldModule,
+        MatGridListModule,
+        MatIconModule,
+        MatInputModule,
+        MatListModule,
+        MatMenuModule,
+        MatNativeDateModule,
+        MatPaginatorModule,
+        MatProgressSpinnerModule,
+        MatRadioModule,
+        MatSelectModule,
+        MatSlideToggleModule,
+        MatSnackBarModule,
+        MatSortModule,
+        MatTableModule,
+        MatTabsModule,
+        MatToolbarModule,
+        MatTooltipModule,
+        MatTreeModule,
+        QRCodeModule,
+        ReactiveFormsModule,
+        RouterModule,
+        FormsModule
+    ],
+    providers: [
+        { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+        { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+        AuthenticationService,
+        BooleanConvertPipe,
+        CategoryService,
+        CountryService,
+        CurrencyService,
+        CustomerService,
+        DatePipe,
+        DeliveryMethodService,
+        DigiByteNodeService,
+        DigiByteWalletService,
+        FaqService,
+        FaqCategoryService,
+        FieldService,
+        FileSizePipe,
+        FieldTypePipe,
+        FinancialStatementTransactionService,
+        GeneralService,
+        HashRatePipe,
+        MerchantService,
+        MerchantPasswordResetLinkService,
+        NewsMessageService,
+        OrderService,
+        PageService,
+        PageCategoryService,
+        ProductService,
+        ProductPhotoService,
+        ShopService,
+        ShopCategoryService,
+        StripHtmlPipe,
+        provideHttpClient(withInterceptorsFromDi())
+    ],
+    bootstrap: [AppComponent]
 })
 export class AppModule { }

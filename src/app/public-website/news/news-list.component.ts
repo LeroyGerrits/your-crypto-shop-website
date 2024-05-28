@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
-import { NewsMessage } from 'src/app/shared/models/NewsMessage.model';
-import { NewsMessageService } from 'src/app/shared/services/NewsMessage.service';
+import { NewsMessage } from 'src/app/shared/models/news-message.model';
+import { NewsMessageService } from 'src/app/shared/services/news-message.service';
 
 @Component({
   selector: 'public-website-news-list',

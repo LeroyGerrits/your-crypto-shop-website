@@ -3,9 +3,9 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { Component, Inject, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { MatSnackBar, MatSnackBarRef, TextOnlySnackBar } from '@angular/material/snack-bar';
-import { MutationResult } from 'src/app/shared/models/MutationResult';
-import { ProductPhoto } from 'src/app/shared/models/ProductPhoto.model';
-import { ProductPhotoService } from 'src/app/shared/services/ProductPhoto.service';
+import { MutationResult } from 'src/app/shared/models/mutation-result.model';
+import { ProductPhoto } from 'src/app/shared/models/product-photo.model';
+import { ProductPhotoService } from 'src/app/shared/services/product-photo.service';
 
 export interface DialogData {
     productPhotoToEdit: ProductPhoto | null;

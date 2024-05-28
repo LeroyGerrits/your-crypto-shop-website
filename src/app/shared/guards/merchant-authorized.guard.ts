@@ -1,7 +1,7 @@
 import { ActivatedRouteSnapshot, CanActivateFn, Router, RouterStateSnapshot } from '@angular/router';
 import { Injectable, inject } from '@angular/core';
 
-import { AuthenticationService } from 'src/app/shared/services/Authentication.service';
+import { AuthenticationService } from 'src/app/shared/services/-authentication.service';
 
 @Injectable({ providedIn: 'root' })
 class MerchantAuthorizedGuardService {

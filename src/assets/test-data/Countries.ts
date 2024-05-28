@@ -1,4 +1,4 @@
-import { Country } from 'src/app/shared/models/Country.model';
+import { Country } from 'src/app/shared/models/-country.model';
 
 export const TestDataCountries: Country[] = [
     {
