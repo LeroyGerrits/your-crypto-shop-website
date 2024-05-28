@@ -22,6 +22,7 @@ import { ShopCategoryService } from 'src/app/shared/services/shop-category.servi
 import { TestDataCountries } from 'src/assets/test-data/Countries';
 import { TestDataShopCategories } from 'src/assets/test-data/ShopCategories';
 import { MatSelectModule } from '@angular/material/select';
+import { MatExpansionModule } from '@angular/material/expansion';
 
 describe('ControlPanelConfigurationShopListComponent', () => {
   let component: ControlPanelConfigurationShopListComponent;
@@ -58,7 +59,7 @@ describe('ControlPanelConfigurationShopListComponent', () => {
 
     TestBed.configureTestingModule({
       declarations: [ControlPanelConfigurationShopListComponent],
-      imports: [BrowserAnimationsModule, MatIconModule, MatFormFieldModule, MatInputModule, MatPaginatorModule, MatSelectModule, MatTableModule, ReactiveFormsModule, RouterLink, RouterTestingModule.withRoutes(
+      imports: [BrowserAnimationsModule, MatExpansionModule, MatIconModule, MatFormFieldModule, MatInputModule, MatPaginatorModule, MatSelectModule, MatTableModule, ReactiveFormsModule, RouterLink, RouterTestingModule.withRoutes(
         [{ path: 'control-panel/configuration/shops', component: ControlPanelConfigurationShopListComponent }]
       )],
       providers: [

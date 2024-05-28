@@ -17,6 +17,7 @@ import { MutationResult } from 'src/app/shared/models/mutation-result.model';
 import { DigiByteWalletService } from 'src/app/shared/services/digibyte-wallet.service';
 import { TestDataDigiByteWallets } from 'src/assets/test-data/DigiByteWallets';
 import { ControlPanelConfigurationDigiByteWalletListComponent } from './digibyte-wallet-list.component';
+import { MatExpansionModule } from '@angular/material/expansion';
 
 describe('ControlPanelConfigurationDigiByteWalletListComponent', () => {
   let component: ControlPanelConfigurationDigiByteWalletListComponent;
@@ -45,7 +46,7 @@ describe('ControlPanelConfigurationDigiByteWalletListComponent', () => {
 
     TestBed.configureTestingModule({
       declarations: [ControlPanelConfigurationDigiByteWalletListComponent],
-      imports: [BrowserAnimationsModule, MatIconModule, MatFormFieldModule, MatInputModule, MatPaginatorModule, MatTableModule, ReactiveFormsModule, RouterLink, RouterTestingModule.withRoutes(
+      imports: [BrowserAnimationsModule, MatExpansionModule, MatIconModule, MatFormFieldModule, MatInputModule, MatPaginatorModule, MatTableModule, ReactiveFormsModule, RouterLink, RouterTestingModule.withRoutes(
         [{ path: 'control-panel/configuration/digibyte-wallets', component: ControlPanelConfigurationDigiByteWalletListComponent }]
       )],
       providers: [

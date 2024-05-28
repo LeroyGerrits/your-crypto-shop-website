@@ -20,6 +20,7 @@ import { ShopService } from 'src/app/shared/services/-shop.service';
 import { TestDataDeliveryMethods } from 'src/assets/test-data/DeliveryMethods';
 import { TestDataShops } from 'src/assets/test-data/Shops';
 import { ControlPanelConfigurationDeliveryMethodListComponent } from './delivery-method-list.component';
+import { MatExpansionModule } from '@angular/material/expansion';
 
 describe('ControlPanelConfigurationDeliveryMethodListComponent', () => {
   let component: ControlPanelConfigurationDeliveryMethodListComponent;
@@ -52,7 +53,7 @@ describe('ControlPanelConfigurationDeliveryMethodListComponent', () => {
 
     TestBed.configureTestingModule({
       declarations: [ControlPanelConfigurationDeliveryMethodListComponent],
-      imports: [BrowserAnimationsModule, MatIconModule, MatFormFieldModule, MatInputModule, MatPaginatorModule, MatSelectModule, MatTableModule, ReactiveFormsModule, RouterLink, RouterTestingModule.withRoutes(
+      imports: [BrowserAnimationsModule, MatExpansionModule, MatIconModule, MatFormFieldModule, MatInputModule, MatPaginatorModule, MatSelectModule, MatTableModule, ReactiveFormsModule, RouterLink, RouterTestingModule.withRoutes(
         [{ path: 'control-panel/configuration/delivery-methods', component: ControlPanelConfigurationDeliveryMethodListComponent }]
       )],
       providers: [

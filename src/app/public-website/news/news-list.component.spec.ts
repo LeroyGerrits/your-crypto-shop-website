@@ -6,7 +6,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { NewsMessageService } from 'src/app/shared/services/news-message.service';
 import { PublicWebsiteNewsListComponent } from './news-list.component';
-import { SearchEngineFriendlyStringPipe } from 'src/app/shared/pipes/SearchEngineFriendlyString.pipe';
+import { SearchEngineFriendlyStringPipe } from 'src/app/shared/pipes/search-engine-friendly-string.pipe';
 import { TestDataNewsMessages } from 'src/assets/test-data/NewsMessages';
 import { of } from 'rxjs';
 import { provideHttpClientTesting } from '@angular/common/http/testing';

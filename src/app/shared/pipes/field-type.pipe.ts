@@ -11,7 +11,7 @@ export class FieldTypePipe implements PipeTransform {
             case FieldType.CustomerDefined.toString():
                 return 'Customer defined';
             default:
-                return fieldType.toString();
+                return 'Static';
         }
     }
 }

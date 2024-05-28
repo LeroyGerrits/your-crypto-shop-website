@@ -21,6 +21,8 @@ import { TestDataDeliveryMethods } from 'src/assets/test-data/DeliveryMethods';
 import { TestDataShops } from 'src/assets/test-data/Shops';
 import { ControlPanelConfigurationFieldListComponent } from './field-list.component';
 import { TestDataFields } from 'src/assets/test-data/Fields';
+import { FieldService } from 'src/app/shared/services/-field.service';
+import { MatExpansionModule } from '@angular/material/expansion';
 
 describe('ControlPanelConfigurationFieldListComponent', () => {
   let component: ControlPanelConfigurationFieldListComponent;
@@ -30,7 +32,7 @@ describe('ControlPanelConfigurationFieldListComponent', () => {
   let matDialogSpy: jasmine.SpyObj<MatDialog>
   let matSnackBarSpy: jasmine.SpyObj<MatSnackBar>;
 
-  let deliveryMethodServiceSpy: jasmine.SpyObj<DeliveryMethodService>;
+  let fieldServiceSpy: jasmine.SpyObj<FieldService>;
   let shopServiceSpy: jasmine.SpyObj<ShopService>;
   let mutationResult: MutationResult = <MutationResult>{ ErrorCode: 0, Identity: '', Message: '' };
 
@@ -44,24 +46,24 @@ describe('ControlPanelConfigurationFieldListComponent', () => {
 
     matSnackBarSpy = jasmine.createSpyObj('MatSnackBar', ['open']);
 
-    deliveryMethodServiceSpy = jasmine.createSpyObj('DeliveryMethodService', ['getList', 'delete']);
-    deliveryMethodServiceSpy.getList.and.returnValue(of(TestDataDeliveryMethods));
-    deliveryMethodServiceSpy.delete.and.returnValue(of(mutationResult));
+    fieldServiceSpy = jasmine.createSpyObj('FieldService', ['getList', 'delete']);
+    fieldServiceSpy.getList.and.returnValue(of(TestDataFields));
+    fieldServiceSpy.delete.and.returnValue(of(mutationResult));
 
     shopServiceSpy = jasmine.createSpyObj('ShopService', ['getList']);
     shopServiceSpy.getList.and.returnValue(of(TestDataShops));
 
     TestBed.configureTestingModule({
       declarations: [ControlPanelConfigurationFieldListComponent],
-      imports: [BrowserAnimationsModule, MatIconModule, MatFormFieldModule, MatInputModule, MatPaginatorModule, MatSelectModule, MatTableModule, ReactiveFormsModule, RouterLink, RouterTestingModule.withRoutes(
-        [{ path: 'control-panel/configuration/delivery-methods', component: ControlPanelConfigurationFieldListComponent }]
+      imports: [BrowserAnimationsModule, MatExpansionModule, MatIconModule, MatFormFieldModule, MatInputModule, MatPaginatorModule, MatSelectModule, MatTableModule, ReactiveFormsModule, RouterLink, RouterTestingModule.withRoutes(
+        [{ path: 'control-panel/configuration/fields', component: ControlPanelConfigurationFieldListComponent }]
       )],
       providers: [
         { provide: ActivatedRoute, useValue: { snapshot: { data: {} } } },
+        { provide: FieldService, useValue: fieldServiceSpy },
         { provide: MatDialog, useValue: matDialogSpy },
-        { provide: ShopService, useValue: shopServiceSpy },
-        { provide: DeliveryMethodService, useValue: deliveryMethodServiceSpy },
         { provide: MatSnackBar, useValue: matSnackBarSpy },
+        { provide: ShopService, useValue: shopServiceSpy },                
         ControlPanelConfigurationFieldListComponent,
         Router
       ]
@@ -110,7 +112,7 @@ describe('ControlPanelConfigurationFieldListComponent', () => {
     spyOn(routerstub, 'navigate');
 
     component.editElement(TestDataFields[0]);
-    expect(routerstub.navigate).toHaveBeenCalledWith(['/control-panel/configuration/delivery-methods/' + TestDataDeliveryMethods[0].Id]);
+    expect(routerstub.navigate).toHaveBeenCalledWith(['/control-panel/configuration/fields/' + TestDataDeliveryMethods[0].Id]);
   });
 
   it('should show a dialog when delete icon is clicked', () => {
@@ -139,7 +141,7 @@ describe('ControlPanelConfigurationFieldListComponent', () => {
   });
 
   it('should trigger error handling when sending a call to the delivery method service when deleting a delivery method and the request fails', () => {
-    deliveryMethodServiceSpy.delete.and.returnValue(throwError(() => new Error('ERROR')));
+    fieldServiceSpy.delete.and.returnValue(throwError(() => new Error('ERROR')));
     component.deleteElement(TestDataFields[0]);
     expect(component).toBeTruthy();
   });

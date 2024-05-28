@@ -25,12 +25,16 @@ import { TestDataCountries } from 'src/assets/test-data/Countries';
 import { ShopCategoryService } from 'src/app/shared/services/shop-category.service';
 import { TestDataShopCategories } from 'src/assets/test-data/ShopCategories';
 import { MatSelectModule } from '@angular/material/select';
+import { DigiByteWalletService } from 'src/app/shared/services/digibyte-wallet.service';
+import { TestDataDigiByteWallets } from 'src/assets/test-data/DigiByteWallets';
+import { MatRadioModule } from '@angular/material/radio';
 
 describe('ControlPanelConfigurationShopComponent', () => {
   let component: ControlPanelConfigurationShopComponent;
   let fixture: ComponentFixture<ControlPanelConfigurationShopComponent>;
 
   let countryServiceSpy: jasmine.SpyObj<CountryService>;
+  let digiByteWalletServiceSpy: jasmine.SpyObj<DigiByteWalletService>;
   let shopServiceSpy: jasmine.SpyObj<ShopService>;
   let shopCategoryServiceSpy: jasmine.SpyObj<ShopCategoryService>;
   let matSnackBarSpy: jasmine.SpyObj<MatSnackBar>;
@@ -40,8 +44,11 @@ describe('ControlPanelConfigurationShopComponent', () => {
     countryServiceSpy = jasmine.createSpyObj('CountryService', ['getList']);
     countryServiceSpy.getList.and.returnValue(of(TestDataCountries));
 
+    digiByteWalletServiceSpy = jasmine.createSpyObj('DigiByteWalletService', ['getList']);
+    digiByteWalletServiceSpy.getList.and.returnValue(of(TestDataDigiByteWallets));
+
     shopCategoryServiceSpy = jasmine.createSpyObj('ShopCategoryService', ['getList']);
-    shopCategoryServiceSpy.getList.and.returnValue(of(TestDataShopCategories));
+    shopCategoryServiceSpy.getList.and.returnValue(of(TestDataShopCategories));    
 
     shopServiceSpy = jasmine.createSpyObj('ShopService', ['create', 'getById', 'subdomainAvailable', 'update']);
     shopServiceSpy.create.and.returnValue(of(mutationResult));
@@ -53,12 +60,13 @@ describe('ControlPanelConfigurationShopComponent', () => {
 
     TestBed.configureTestingModule({
       declarations: [ControlPanelConfigurationShopComponent],
-      imports: [BrowserAnimationsModule, MatDialogModule, MatDividerModule, MatFormFieldModule, MatIconModule, MatInputModule, MatSelectModule, MatTooltipModule, ReactiveFormsModule, RouterLink, RouterTestingModule.withRoutes(
+      imports: [BrowserAnimationsModule, MatDialogModule, MatDividerModule, MatFormFieldModule, MatIconModule, MatInputModule, MatRadioModule, MatSelectModule, MatTooltipModule, ReactiveFormsModule, RouterLink, RouterTestingModule.withRoutes(
         [{ path: 'control-panel/configuration/shops', component: ControlPanelConfigurationShopListComponent }]
       )],
       providers: [
         { provide: ActivatedRoute, useValue: { snapshot: { paramMap: convertToParamMap({ shopId: TestDataShops[0].Id }) } } },
         { provide: CountryService, useValue: countryServiceSpy },
+        { provide: DigiByteWalletService, useValue: digiByteWalletServiceSpy },
         { provide: ShopService, useValue: shopServiceSpy },
         { provide: ShopCategoryService, useValue: shopCategoryServiceSpy },
         { provide: MatSnackBar, useValue: matSnackBarSpy },

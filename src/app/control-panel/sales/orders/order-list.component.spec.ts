@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ControlPanelSalesOrderListComponent } from './order-list.component';
+import { DatePipe } from '@angular/common';
 
 describe('ControlPanelSalesOrderListComponent', () => {
   let component: ControlPanelSalesOrderListComponent;
@@ -8,7 +9,7 @@ describe('ControlPanelSalesOrderListComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [ControlPanelSalesOrderListComponent]
+      declarations: [ControlPanelSalesOrderListComponent, DatePipe]
     });
     fixture = TestBed.createComponent(ControlPanelSalesOrderListComponent);
     component = fixture.componentInstance;

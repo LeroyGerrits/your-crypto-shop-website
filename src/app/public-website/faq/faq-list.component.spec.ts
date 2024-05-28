@@ -8,7 +8,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { PublicWebsiteFaqListComponent } from './faq-list.component';
 import { ReactiveFormsModule } from '@angular/forms';
-import { SearchEngineFriendlyStringPipe } from 'src/app/shared/pipes/SearchEngineFriendlyString.pipe';
+import { SearchEngineFriendlyStringPipe } from 'src/app/shared/pipes/search-engine-friendly-string.pipe';
 import { TestDataFaqCategories } from 'src/assets/test-data/FaqCategories';
 import { TestDataFaqs } from 'src/assets/test-data/Faqs';
 import { of } from 'rxjs';

@@ -23,6 +23,7 @@ import { TestDataShops } from 'src/assets/test-data/Shops';
 import { Sort } from '@angular/material/sort';
 import { Shop } from 'src/app/shared/models/-shop.model';
 import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+import { MatExpansionModule } from '@angular/material/expansion';
 
 describe('ControlPanelCustomerListComponent', () => {
   let component: ControlPanelCustomerListComponent;
@@ -55,7 +56,7 @@ describe('ControlPanelCustomerListComponent', () => {
 
     TestBed.configureTestingModule({
     declarations: [ControlPanelCustomerListComponent],
-    imports: [BrowserAnimationsModule, MatIconModule, MatFormFieldModule, MatInputModule, MatPaginatorModule, MatSelectModule, MatTableModule, ReactiveFormsModule, RouterLink, RouterTestingModule.withRoutes([{ path: 'control-panel/customers', component: ControlPanelCustomerListComponent }])],
+    imports: [BrowserAnimationsModule, MatExpansionModule, MatIconModule, MatFormFieldModule, MatInputModule, MatPaginatorModule, MatSelectModule, MatTableModule, ReactiveFormsModule, RouterLink, RouterTestingModule.withRoutes([{ path: 'control-panel/customers', component: ControlPanelCustomerListComponent }])],
     providers: [
         { provide: ActivatedRoute, useValue: { snapshot: { data: {} } } },
         { provide: MatDialog, useValue: matDialogSpy },

@@ -21,6 +21,7 @@ import { ShopService } from 'src/app/shared/services/-shop.service';
 import { TestDataPages } from 'src/assets/test-data/Pages';
 import { TestDataShops } from 'src/assets/test-data/Shops';
 import { ControlPanelConfigurationPageListComponent } from './page-list.component';
+import { MatExpansionModule } from '@angular/material/expansion';
 
 describe('ControlPanelConfigurationPageListComponent', () => {
   let component: ControlPanelConfigurationPageListComponent;
@@ -53,7 +54,7 @@ describe('ControlPanelConfigurationPageListComponent', () => {
 
     TestBed.configureTestingModule({
       declarations: [ControlPanelConfigurationPageListComponent],
-      imports: [BrowserAnimationsModule, MatIconModule, MatFormFieldModule, MatInputModule, MatPaginatorModule, MatSelectModule, MatTableModule, ReactiveFormsModule, RouterLink, RouterTestingModule.withRoutes(
+      imports: [BrowserAnimationsModule, MatExpansionModule, MatIconModule, MatFormFieldModule, MatInputModule, MatPaginatorModule, MatSelectModule, MatTableModule, ReactiveFormsModule, RouterLink, RouterTestingModule.withRoutes(
         [{ path: 'control-panel/configuration/pages', component: ControlPanelConfigurationPageListComponent }]
       )],
       providers: [

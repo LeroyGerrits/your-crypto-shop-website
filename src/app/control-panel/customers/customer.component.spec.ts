@@ -26,7 +26,7 @@ import { TestDataCustomers } from 'src/assets/test-data/Customers';
 import { TestDataShops } from 'src/assets/test-data/Shops';
 import { ControlPanelCustomerListComponent } from './customer-list.component';
 import { ControlPanelCustomerComponent } from './customer.component';
-import { TestDataAddresses } from 'src/assets/test-data/Addresses';
+import { TestDataAddresses } from 'src/assets/test-data/-addresses';
 import { Gender } from 'src/app/shared/enums/gender.enum';
 
 describe('ControlPanelCustomerComponent', () => {

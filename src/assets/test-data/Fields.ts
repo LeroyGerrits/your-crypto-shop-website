@@ -13,6 +13,7 @@ export const TestDataFields: Field[] = [
         Type: FieldType.Static,
         DataType: FieldDataType.Text,
         UserDefinedMandatory: false,
+        Enumerations: ['one', 'two', 'three'],
         Visible: true
     },
     {

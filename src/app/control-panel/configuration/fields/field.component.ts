@@ -46,7 +46,6 @@ export class ControlPanelConfigurationFieldComponent implements OnInit, OnDestro
   public controlType = new FormControl('0', Validators.required);
   public controlUserDefinedMandatory = new FormControl(false, Validators.required);
   public controlDataType = new FormControl('0', Validators.required);
-  public controlEnumerations = new FormControl('');
   public controlSortOrder = new FormControl('', Validators.pattern(Constants.REGEX_PATTERN_NUMBER));
   public controlVisible = new FormControl(true, Validators.required);
 
@@ -68,7 +67,6 @@ export class ControlPanelConfigurationFieldComponent implements OnInit, OnDestro
       this.controlType,
       this.controlUserDefinedMandatory,
       this.controlDataType,
-      this.controlEnumerations,
       this.controlSortOrder,
       this.controlVisible
     ]);

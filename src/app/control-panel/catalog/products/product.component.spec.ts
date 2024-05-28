@@ -24,6 +24,10 @@ import { TestDataCategories } from 'src/assets/test-data/Categories';
 import { MatTreeModule } from '@angular/material/tree';
 import { GetProductResponse } from 'src/app/shared/models/response/GetProductResponse.model';
 import { MatCheckboxChange, MatCheckboxModule } from '@angular/material/checkbox';
+import { FieldService } from 'src/app/shared/services/-field.service';
+import { TestDataFields } from 'src/assets/test-data/Fields';
+import { DigiByteWalletService } from 'src/app/shared/services/digibyte-wallet.service';
+import { TestDataDigiByteWallets } from 'src/assets/test-data/DigiByteWallets';
 
 describe('ControlPanelCatalogProductComponent', () => {
   let component: ControlPanelCatalogProductComponent;
@@ -32,6 +36,8 @@ describe('ControlPanelCatalogProductComponent', () => {
   let matSnackBarSpy: jasmine.SpyObj<MatSnackBar>;
 
   let categoryServiceSpy: jasmine.SpyObj<CategoryService>;
+  let digiByteWalletServiceSpy: jasmine.SpyObj<DigiByteWalletService>;
+  let fieldServiceSpy: jasmine.SpyObj<FieldService>;
   let productServiceSpy: jasmine.SpyObj<ProductService>;
   let shopServiceSpy: jasmine.SpyObj<ShopService>;
   let mutationResult: MutationResult = <MutationResult>{ ErrorCode: 0, Identity: '', Message: '' };
@@ -39,6 +45,12 @@ describe('ControlPanelCatalogProductComponent', () => {
   beforeEach(() => {
     categoryServiceSpy = jasmine.createSpyObj('CategoryService', ['getList']);
     categoryServiceSpy.getList.and.returnValue(of(TestDataCategories));
+
+    digiByteWalletServiceSpy = jasmine.createSpyObj('DigiByteWalletService', ['getList']);
+    digiByteWalletServiceSpy.getList.and.returnValue(of(TestDataDigiByteWallets));
+
+    fieldServiceSpy = jasmine.createSpyObj('FieldService', ['getList']);
+    fieldServiceSpy.getList.and.returnValue(of(TestDataFields));
 
     productServiceSpy = jasmine.createSpyObj('ProductService', ['getById', 'create', 'update']);
     productServiceSpy.getById.and.returnValue(of(<GetProductResponse>{ Product: TestDataProducts[0], CategoryIds: [TestDataCategories[0].Id] }));
@@ -58,6 +70,8 @@ describe('ControlPanelCatalogProductComponent', () => {
       providers: [
         { provide: ActivatedRoute, useValue: { snapshot: { paramMap: convertToParamMap({ productId: TestDataProducts[0].Id, shopId: TestDataProducts[0].ShopId }) } } },
         { provide: CategoryService, useValue: categoryServiceSpy },
+        { provide: DigiByteWalletService, useValue: digiByteWalletServiceSpy },
+        { provide: FieldService, useValue: fieldServiceSpy },
         { provide: MatSnackBar, useValue: matSnackBarSpy },
         { provide: ProductService, useValue: productServiceSpy },
         { provide: ShopService, useValue: shopServiceSpy }
@@ -137,13 +151,16 @@ describe('ControlPanelCatalogProductComponentWithErrors', () => {
   let matSnackBarSpy: jasmine.SpyObj<MatSnackBar>;
 
   let categoryServiceSpy: jasmine.SpyObj<CategoryService>;
+  let fieldServiceSpy: jasmine.SpyObj<FieldService>;
   let productServiceSpy: jasmine.SpyObj<ProductService>;
   let shopServiceSpy: jasmine.SpyObj<ShopService>;
-  let mutationResult: MutationResult = <MutationResult>{ ErrorCode: 0, Identity: '', Message: '' };
-
+  
   beforeEach(() => {
     categoryServiceSpy = jasmine.createSpyObj('CategoryService', ['getList']);
     categoryServiceSpy.getList.and.returnValue(of(TestDataCategories));
+
+    fieldServiceSpy = jasmine.createSpyObj('FieldService', ['getList']);
+    fieldServiceSpy.getList.and.returnValue(of(TestDataFields));
 
     productServiceSpy = jasmine.createSpyObj('ProductService', ['getById', 'create', 'update']);
     productServiceSpy.getById.and.returnValue(of(<GetProductResponse>{ Product: TestDataProducts[0], CategoryIds: [''] }));
@@ -163,6 +180,7 @@ describe('ControlPanelCatalogProductComponentWithErrors', () => {
       providers: [
         { provide: ActivatedRoute, useValue: { snapshot: { paramMap: convertToParamMap({ productId: 'new', shopId: TestDataProducts[0].ShopId }) } } },
         { provide: CategoryService, useValue: categoryServiceSpy },
+        { provide: FieldService, useValue: fieldServiceSpy },
         { provide: MatSnackBar, useValue: matSnackBarSpy },
         { provide: ProductService, useValue: productServiceSpy },
         { provide: ShopService, useValue: shopServiceSpy }

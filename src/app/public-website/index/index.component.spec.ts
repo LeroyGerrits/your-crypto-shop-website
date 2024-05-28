@@ -2,6 +2,7 @@ import { ActivatedRoute, RouterLink } from '@angular/router';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { MatDialog } from '@angular/material/dialog';
+import { MatDividerModule } from '@angular/material/divider';
 import { PublicWebsiteIndexComponent } from './index.component';
 import { QRCodeModule } from 'angularx-qrcode';
 import { of } from 'rxjs';
@@ -27,7 +28,7 @@ describe('PublicWebsiteIndexComponent', () => {
 
     TestBed.configureTestingModule({
       declarations: [PublicWebsiteIndexComponent],
-      imports: [RouterLink, QRCodeModule],
+      imports: [RouterLink, MatDividerModule, QRCodeModule],
       providers: [
         { provide: ActivatedRoute, useValue: fakeActivatedRoute },
         { provide: MatDialog, useValue: matDialogSpy }

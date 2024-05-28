@@ -7,6 +7,8 @@ import { CurrencyService } from 'src/app/shared/services/-currency.service';
 import { DatePipe } from '@angular/common';
 import { FinancialStatementTransactionService } from 'src/app/shared/services/financial-statement-transaction.service';
 import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatPaginatorModule } from '@angular/material/paginator';
@@ -42,7 +44,7 @@ describe('PublicWebsiteFinancialStatementComponent', () => {
 
     TestBed.configureTestingModule({
     declarations: [PublicWebsiteFinancialStatementComponent],
-    imports: [BrowserAnimationsModule, MatDatepickerModule, MatInputModule, MatNativeDateModule, MatPaginatorModule, MatSelectModule, MatTableModule, QRCodeModule, ReactiveFormsModule, RouterTestingModule],
+    imports: [BrowserAnimationsModule, MatDatepickerModule, MatExpansionModule, MatIconModule, MatInputModule, MatNativeDateModule, MatPaginatorModule, MatSelectModule, MatTableModule, QRCodeModule, ReactiveFormsModule, RouterTestingModule],
     providers: [
         { provide: ActivatedRoute, useValue: fakeActivatedRoute },
         { provide: CurrencyService, useValue: currencyServiceSpy },

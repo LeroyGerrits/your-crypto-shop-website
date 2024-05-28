@@ -19,11 +19,15 @@ import { TestDataShops } from 'src/assets/test-data/Shops';
 import { ControlPanelConfigurationDeliveryMethodListComponent } from './delivery-method-list.component';
 import { ControlPanelConfigurationDeliveryMethodComponent } from './delivery-method.component';
 import { MutateDeliveryMethodRequest } from 'src/app/shared/models/request/MutateDeliveryMethodRequest.model';
+import { CountryService } from 'src/app/shared/services/-country.service';
+import { TestDataCountries } from 'src/assets/test-data/Countries';
+import { MatTabsModule } from '@angular/material/tabs';
 
 describe('ControlPanelConfigurationDeliveryMethodComponent', () => {
   let component: ControlPanelConfigurationDeliveryMethodComponent;
   let fixture: ComponentFixture<ControlPanelConfigurationDeliveryMethodComponent>;
 
+  let countryServiceSpy: jasmine.SpyObj<CountryService>;
   let deliveryMethodServiceSpy: jasmine.SpyObj<DeliveryMethodService>;
   let matSnackBarSpy: jasmine.SpyObj<MatSnackBar>;
   let shopServiceSpy: jasmine.SpyObj<ShopService>;
@@ -32,9 +36,12 @@ describe('ControlPanelConfigurationDeliveryMethodComponent', () => {
   const mutateDeliveryMethodRequest: MutateDeliveryMethodRequest = {
     DeliveryMethod: TestDataDeliveryMethods[0],
     CostsPerCountry: {}
-};
+  };
 
   beforeEach(() => {
+    countryServiceSpy = jasmine.createSpyObj('CountryService', ['getList']);
+    countryServiceSpy.getList.and.returnValue(of(TestDataCountries));
+
     deliveryMethodServiceSpy = jasmine.createSpyObj('DeliveryMethodService', ['getById', 'create', 'update']);
     deliveryMethodServiceSpy.getById.and.returnValue(of(mutateDeliveryMethodRequest));
     deliveryMethodServiceSpy.create.and.returnValue(of(mutationResult));
@@ -47,14 +54,15 @@ describe('ControlPanelConfigurationDeliveryMethodComponent', () => {
 
     TestBed.configureTestingModule({
       declarations: [ControlPanelConfigurationDeliveryMethodComponent],
-      imports: [BrowserAnimationsModule, MatDialogModule, MatDividerModule, MatFormFieldModule, MatInputModule, MatSelectModule, ReactiveFormsModule, RouterLink, RouterTestingModule.withRoutes(
+      imports: [BrowserAnimationsModule, MatDialogModule, MatDividerModule, MatFormFieldModule, MatInputModule, MatSelectModule, MatTabsModule, ReactiveFormsModule, RouterLink, RouterTestingModule.withRoutes(
         [{ path: 'control-panel/configuration/delivery-methods', component: ControlPanelConfigurationDeliveryMethodListComponent }]
       )],
       providers: [
         { provide: ActivatedRoute, useValue: { snapshot: { paramMap: convertToParamMap({ deliveryMethodId: TestDataDeliveryMethods[0].Id }) } } },
-        { provide: ShopService, useValue: shopServiceSpy },
+        { provide: CountryService, useValue: countryServiceSpy },
         { provide: DeliveryMethodService, useValue: deliveryMethodServiceSpy },
         { provide: MatSnackBar, useValue: matSnackBarSpy },
+        { provide: ShopService, useValue: shopServiceSpy },
         Router
       ]
     });

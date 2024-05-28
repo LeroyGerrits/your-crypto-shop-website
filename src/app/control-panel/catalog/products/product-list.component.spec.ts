@@ -25,6 +25,7 @@ import { TestDataShops } from 'src/assets/test-data/Shops';
 import { ControlPanelCatalogProductListComponent } from './product-list.component';
 import { BooleanConvertPipe } from 'src/app/shared/pipes/boolean-convert.pipe';
 import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+import { MatExpansionModule } from '@angular/material/expansion';
 
 describe('ControlPanelCatalogProductListComponent', () => {
   let component: ControlPanelCatalogProductListComponent;
@@ -61,7 +62,7 @@ describe('ControlPanelCatalogProductListComponent', () => {
 
     TestBed.configureTestingModule({
     declarations: [ControlPanelCatalogProductListComponent],
-    imports: [BrowserAnimationsModule, MatIconModule, MatFormFieldModule, MatInputModule, MatPaginatorModule, MatSelectModule, MatTableModule, ReactiveFormsModule, RouterLink, RouterTestingModule.withRoutes([{ path: 'control-panel/catalog/products', component: ControlPanelCatalogProductListComponent }])],
+    imports: [BrowserAnimationsModule, MatExpansionModule, MatIconModule, MatFormFieldModule, MatInputModule, MatPaginatorModule, MatSelectModule, MatTableModule, ReactiveFormsModule, RouterLink, RouterTestingModule.withRoutes([{ path: 'control-panel/catalog/products', component: ControlPanelCatalogProductListComponent }])],
     providers: [
         { provide: ActivatedRoute, useValue: { snapshot: { data: {} } } },
         { provide: CategoryService, useValue: categoryServiceSpy },
