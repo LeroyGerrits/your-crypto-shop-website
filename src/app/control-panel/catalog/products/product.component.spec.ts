@@ -26,8 +26,8 @@ import { GetProductResponse } from 'src/app/shared/models/response/GetProductRes
 import { MatCheckboxChange, MatCheckboxModule } from '@angular/material/checkbox';
 import { FieldService } from 'src/app/shared/services/-field.service';
 import { TestDataFields } from 'src/assets/test-data/Fields';
-import { DigiByteWalletService } from 'src/app/shared/services/digibyte-wallet.service';
-import { TestDataDigiByteWallets } from 'src/assets/test-data/DigiByteWallets';
+import { CryptoWalletService } from 'src/app/shared/services/crypto-wallet.service';
+import { TestDataCryptoWallets } from 'src/assets/test-data/CryptoWallets';
 
 describe('ControlPanelCatalogProductComponent', () => {
   let component: ControlPanelCatalogProductComponent;
@@ -36,7 +36,7 @@ describe('ControlPanelCatalogProductComponent', () => {
   let matSnackBarSpy: jasmine.SpyObj<MatSnackBar>;
 
   let categoryServiceSpy: jasmine.SpyObj<CategoryService>;
-  let digiByteWalletServiceSpy: jasmine.SpyObj<DigiByteWalletService>;
+  let cryptoWalletServiceSpy: jasmine.SpyObj<CryptoWalletService>;
   let fieldServiceSpy: jasmine.SpyObj<FieldService>;
   let productServiceSpy: jasmine.SpyObj<ProductService>;
   let shopServiceSpy: jasmine.SpyObj<ShopService>;
@@ -46,8 +46,8 @@ describe('ControlPanelCatalogProductComponent', () => {
     categoryServiceSpy = jasmine.createSpyObj('CategoryService', ['getList']);
     categoryServiceSpy.getList.and.returnValue(of(TestDataCategories));
 
-    digiByteWalletServiceSpy = jasmine.createSpyObj('DigiByteWalletService', ['getList']);
-    digiByteWalletServiceSpy.getList.and.returnValue(of(TestDataDigiByteWallets));
+    cryptoWalletServiceSpy = jasmine.createSpyObj('CryptoWalletService', ['getList']);
+    cryptoWalletServiceSpy.getList.and.returnValue(of(TestDataCryptoWallets));
 
     fieldServiceSpy = jasmine.createSpyObj('FieldService', ['getList']);
     fieldServiceSpy.getList.and.returnValue(of(TestDataFields));
@@ -70,7 +70,7 @@ describe('ControlPanelCatalogProductComponent', () => {
       providers: [
         { provide: ActivatedRoute, useValue: { snapshot: { paramMap: convertToParamMap({ productId: TestDataProducts[0].Id, shopId: TestDataProducts[0].ShopId }) } } },
         { provide: CategoryService, useValue: categoryServiceSpy },
-        { provide: DigiByteWalletService, useValue: digiByteWalletServiceSpy },
+        { provide: CryptoWalletService, useValue: cryptoWalletServiceSpy },
         { provide: FieldService, useValue: fieldServiceSpy },
         { provide: MatSnackBar, useValue: matSnackBarSpy },
         { provide: ProductService, useValue: productServiceSpy },

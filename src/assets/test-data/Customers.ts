@@ -7,8 +7,8 @@ export const TestDataCustomers: Customer[] = [
     {
         Id: '00000000-0000-0000-0000-000000000001',
         ShopId: TestDataShops[0].Id,
-        EmailAddress: 'customer@dgbcommerce.com',
-        Username: 'DGB Commerce',
+        EmailAddress: 'customer@yourcrypto.shop',
+        Username: 'Your Crypto Shop',
         Gender: Gender.Male,
         FirstName: 'Test',
         LastName: 'Test',
@@ -17,8 +17,8 @@ export const TestDataCustomers: Customer[] = [
     }, {
         Id: '00000000-0000-0000-0000-000000000002',
         ShopId: TestDataShops[0].Id,
-        EmailAddress: 'customer@dgbcommerce.com',
-        Username: 'DGB Commerce',
+        EmailAddress: 'customer@yourcrypto.shop',
+        Username: 'Your Crypto Shop',
         Gender: Gender.Female,
         FirstName: 'Test',
         LastName: 'Test',

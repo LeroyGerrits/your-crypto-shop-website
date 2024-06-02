@@ -4,23 +4,23 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar, MatSnackBarRef, TextOnlySnackBar } from '@angular/material/snack-bar';
 
 import { AuthenticationService } from 'src/app/shared/services/-authentication.service';
-import { DigiByteWallet } from 'src/app/shared/models/digibyte-wallet.model';
-import { DigiByteWalletService } from 'src/app/shared/services/digibyte-wallet.service';
+import { CryptoWallet } from 'src/app/shared/models/crypto-wallet.model';
+import { CryptoWalletService } from 'src/app/shared/services/crypto-wallet.service';
 import { Environment } from 'src/app/shared/environments/Environment';
 import { Merchant } from 'src/app/shared/models/-merchant.model';
 import { MutationResult } from 'src/app/shared/models/mutation-result.model';
 
 @Component({
-  selector: 'control-panel-configuration-digibyte-wallet',
-  templateUrl: './digibyte-wallet.component.html'
+  selector: 'control-panel-configuration-crypto-wallet',
+  templateUrl: './crypto-wallet.component.html'
 })
 
-export class ControlPanelConfigurationDigiByteWalletComponent implements OnInit, OnDestroy {
+export class ControlPanelConfigurationCryptoWalletComponent implements OnInit, OnDestroy {
   public activeMerchant?: Merchant | null;
 
   public environment = Environment;
   public snackBarRef: MatSnackBarRef<TextOnlySnackBar> | undefined;
-  public queryStringDigiByteWalletId: string | null = '';
+  public queryStringCryptoWalletId: string | null = '';
 
   public form!: FormGroup;
   public formLoading = false;
@@ -28,12 +28,12 @@ export class ControlPanelConfigurationDigiByteWalletComponent implements OnInit,
   public controlName = new FormControl('', Validators.required);
   public controlAddress = new FormControl('', Validators.required);
 
-  public pageTitle = 'Assign new DigiByte wallet'
-  public digibyteWallet: DigiByteWallet = new DigiByteWallet();
+  public pageTitle = 'Assign new crypto wallet'
+  public cryptoWallet: CryptoWallet = new CryptoWallet();
 
   constructor(
     private authenticationService: AuthenticationService,
-    private digibyteWalletService: DigiByteWalletService,
+    private cryptoWalletService: CryptoWalletService,
     private route: ActivatedRoute,
     private router: Router,
     private snackBar: MatSnackBar
@@ -47,10 +47,10 @@ export class ControlPanelConfigurationDigiByteWalletComponent implements OnInit,
   }
 
   ngOnInit() {
-    this.queryStringDigiByteWalletId = this.route.snapshot.paramMap.get('digiByteWalletId');
+    this.queryStringCryptoWalletId = this.route.snapshot.paramMap.get('cryptoWalletId');
 
-    if (this.queryStringDigiByteWalletId && this.queryStringDigiByteWalletId != 'new') {
-      this.digibyteWalletService.getById(this.queryStringDigiByteWalletId).subscribe(x => { this.onRetrieveData(x); });
+    if (this.queryStringCryptoWalletId && this.queryStringCryptoWalletId != 'new') {
+      this.cryptoWalletService.getById(this.queryStringCryptoWalletId).subscribe(x => { this.onRetrieveData(x); });
     }
   }
 
@@ -58,11 +58,11 @@ export class ControlPanelConfigurationDigiByteWalletComponent implements OnInit,
     this.snackBarRef?.dismiss();
   }
 
-  onRetrieveData(digibyteWallet: DigiByteWallet) {
-    this.digibyteWallet = digibyteWallet;
-    this.pageTitle = digibyteWallet.Name;
-    this.controlName.setValue(digibyteWallet.Name);
-    this.controlAddress.setValue(digibyteWallet.Address);
+  onRetrieveData(cryptoWallet: CryptoWallet) {
+    this.cryptoWallet = cryptoWallet;
+    this.pageTitle = cryptoWallet.Name;
+    this.controlName.setValue(cryptoWallet.Name);
+    this.controlAddress.setValue(cryptoWallet.Address);
   }
 
   onSubmit() {
@@ -74,22 +74,22 @@ export class ControlPanelConfigurationDigiByteWalletComponent implements OnInit,
 
     this.formLoading = true;
 
-    const digibyteWalletToUpdate: DigiByteWallet = Object.assign({}, this.digibyteWallet);
+    const cryptoWalletToUpdate: CryptoWallet = Object.assign({}, this.cryptoWallet);
 
     if (this.activeMerchant)
-      digibyteWalletToUpdate.MerchantId = this.activeMerchant!.Id!;
+      cryptoWalletToUpdate.MerchantId = this.activeMerchant!.Id!;
 
-    digibyteWalletToUpdate.Name = this.controlName.value!;
-    digibyteWalletToUpdate.Address = this.controlAddress.value!;
+    cryptoWalletToUpdate.Name = this.controlName.value!;
+    cryptoWalletToUpdate.Address = this.controlAddress.value!;
 
-    if (this.queryStringDigiByteWalletId && this.queryStringDigiByteWalletId != 'new') {
-      this.digibyteWalletService.update(digibyteWalletToUpdate).subscribe({
+    if (this.queryStringCryptoWalletId && this.queryStringCryptoWalletId != 'new') {
+      this.cryptoWalletService.update(cryptoWalletToUpdate).subscribe({
         next: result => this.handleOnSubmitResult(result),
         error: error => this.handleOnSubmitError(error),
         complete: () => this.formLoading = false
       });
     } else {
-      this.digibyteWalletService.create(digibyteWalletToUpdate).subscribe({
+      this.cryptoWalletService.create(cryptoWalletToUpdate).subscribe({
         next: result => this.handleOnSubmitResult(result),
         error: error => this.handleOnSubmitError(error),
         complete: () => this.formLoading = false
@@ -99,12 +99,12 @@ export class ControlPanelConfigurationDigiByteWalletComponent implements OnInit,
 
   handleOnSubmitResult(result: MutationResult) {
     if (result.Success) {
-      this.router.navigate(['/control-panel/configuration/digibyte-wallets']);
+      this.router.navigate(['/control-panel/configuration/crypto-wallets']);
     } else {
-      if (result.Constraint == 'UNIQUE_DigiByteWallet_Name') {
-        this.snackBarRef = this.snackBar.open('A digibyte wallet with this name already exists.', 'Close', { panelClass: ['error-snackbar'] });
-      } else if (result.Constraint == 'UNIQUE_DigiByteWallet_Address') {
-        this.snackBarRef = this.snackBar.open('A digibyte wallet with this address has already been assigned.', 'Close', { panelClass: ['error-snackbar'] });
+      if (result.Constraint == 'UNIQUE_CryptoWallet_Name') {
+        this.snackBarRef = this.snackBar.open('A crypto wallet with this name already exists.', 'Close', { panelClass: ['error-snackbar'] });
+      } else if (result.Constraint == 'UNIQUE_CryptoWallet_Address') {
+        this.snackBarRef = this.snackBar.open('A crypto wallet with this address has already been assigned.', 'Close', { panelClass: ['error-snackbar'] });
       } else {
         this.snackBarRef = this.snackBar.open(result.Message, 'Close', { panelClass: ['error-snackbar'] });
       }

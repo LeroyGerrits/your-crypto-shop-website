@@ -10,18 +10,18 @@ import { debounceTime, distinctUntilChanged } from 'rxjs';
 import { Constants } from 'src/app/shared/-constants';
 import { DialogDeleteComponent } from 'src/app/shared/dialogs/delete/dialog.delete.component';
 import { Environment } from 'src/app/shared/environments/Environment';
-import { DigiByteWallet } from 'src/app/shared/models/digibyte-wallet.model';
+import { CryptoWallet } from 'src/app/shared/models/crypto-wallet.model';
 import { MutationResult } from 'src/app/shared/models/mutation-result.model';
-import { GetDigiByteWalletsParameters } from 'src/app/shared/models/parameters/GetDigiByteWalletsParameters.model';
-import { DigiByteWalletService } from 'src/app/shared/services/digibyte-wallet.service';
+import { GetCryptoWalletsParameters } from 'src/app/shared/models/parameters/GetCryptoWalletsParameters.model';
+import { CryptoWalletService } from 'src/app/shared/services/crypto-wallet.service';
 
 @Component({
-  selector: 'control-panel-configuration-digibyte-wallet-list',
-  templateUrl: './digibyte-wallet-list.component.html',
-  styleUrl: './digibyte-wallet-list.component.scss'
+  selector: 'control-panel-configuration-crypto-wallet-list',
+  templateUrl: './crypto-wallet-list.component.html',
+  styleUrl: './crypto-wallet-list.component.scss'
 })
 
-export class ControlPanelConfigurationDigiByteWalletListComponent implements OnDestroy, OnInit {
+export class ControlPanelConfigurationCryptoWalletListComponent implements OnDestroy, OnInit {
   @ViewChild(MatPaginator, { static: false }) paginator!: MatPaginator;
   @ViewChild(MatSort, { static: false }) sort!: MatSort;
 
@@ -29,7 +29,7 @@ export class ControlPanelConfigurationDigiByteWalletListComponent implements OnD
 
   environment = Environment;
   constants = Constants;
-  dataSource = new MatTableDataSource<DigiByteWallet>;
+  dataSource = new MatTableDataSource<CryptoWallet>;
   displayedColumns: string[] = ['Name', 'Address', 'ActionButtons'];
   sortDirection: string | null = 'asc';
 
@@ -39,7 +39,7 @@ export class ControlPanelConfigurationDigiByteWalletListComponent implements OnD
 
   constructor(
     public dialog: MatDialog,
-    private digibyteWalletService: DigiByteWalletService,
+    private cryptoWalletService: CryptoWalletService,
     private router: Router,
     private snackBar: MatSnackBar
   ) {
@@ -48,26 +48,26 @@ export class ControlPanelConfigurationDigiByteWalletListComponent implements OnD
       this.controlFilterAddress
     ]);
 
-    this.controlFilterName.valueChanges.pipe(debounceTime(1000), distinctUntilChanged()).subscribe(() => this.filterDigiByteWallets());
-    this.controlFilterAddress.valueChanges.pipe(debounceTime(1000), distinctUntilChanged()).subscribe(() => this.filterDigiByteWallets());
+    this.controlFilterName.valueChanges.pipe(debounceTime(1000), distinctUntilChanged()).subscribe(() => this.filterCryptoWallets());
+    this.controlFilterAddress.valueChanges.pipe(debounceTime(1000), distinctUntilChanged()).subscribe(() => this.filterCryptoWallets());
   }
 
   ngOnInit() {
-    this.filterDigiByteWallets();
+    this.filterCryptoWallets();
   }
 
   ngOnDestroy(): void {
     this.snackBarRef?.dismiss();
   }
 
-  filterDigiByteWallets() {
-    const parameters: GetDigiByteWalletsParameters = {
+  filterCryptoWallets() {
+    const parameters: GetCryptoWalletsParameters = {
       Name: this.controlFilterName.value!,
       Address: this.controlFilterAddress.value!
     };
 
-    this.digibyteWalletService.getList(parameters).subscribe(digibyteWallets => {
-      this.dataSource = new MatTableDataSource(digibyteWallets);
+    this.cryptoWalletService.getList(parameters).subscribe(cryptoWallets => {
+      this.dataSource = new MatTableDataSource(cryptoWallets);
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
     });
@@ -81,18 +81,18 @@ export class ControlPanelConfigurationDigiByteWalletListComponent implements OnD
     }
   }
 
-  editElement(element: DigiByteWallet) {
-    this.router.navigate([`/control-panel/configuration/digibyte-wallets/${element.Id}`]);
+  editElement(element: CryptoWallet) {
+    this.router.navigate([`/control-panel/configuration/crypto-wallets/${element.Id}`]);
   }
 
-  deleteElement(element: DigiByteWallet) {
+  deleteElement(element: CryptoWallet) {
     const dialogDelete = this.dialog.open(DialogDeleteComponent);
     const instance = dialogDelete.componentInstance;
-    instance.dialogMessage = `Are you sure you want to delete the assignment to DigiByte wallet '${element.Name}'?`;
+    instance.dialogMessage = `Are you sure you want to delete the assignment to crypto wallet '${element.Name}'?`;
 
     dialogDelete.afterClosed().subscribe(result => {
       if (result) {
-        this.digibyteWalletService.delete(element.Id).subscribe({
+        this.cryptoWalletService.delete(element.Id).subscribe({
           next: result => this.handleOnSubmitResult(result),
           error: error => this.handleOnSubmitError(error),
           complete: () => dialogDelete.close()
@@ -103,7 +103,7 @@ export class ControlPanelConfigurationDigiByteWalletListComponent implements OnD
 
   handleOnSubmitResult(result: MutationResult) {
     if (result.Success) {
-      this.filterDigiByteWallets();
+      this.filterCryptoWallets();
     } else {
       this.snackBarRef = this.snackBar.open(result.Message, 'Close', { panelClass: ['error-snackbar'] });
     }

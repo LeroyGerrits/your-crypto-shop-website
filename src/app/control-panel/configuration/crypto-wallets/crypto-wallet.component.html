@@ -1,5 +1,5 @@
 <div class="WrapperPadding20-8-0-8">
-    <h2><a [routerLink]="['/control-panel/configuration/digibyte-wallets']">DigiByte wallets</a> - {{this.pageTitle}} </h2>
+    <h2><a [routerLink]="['/control-panel/configuration/crypto-wallets']">Crypto wallets</a> - {{this.pageTitle}} </h2>
 </div>
 <form (ngSubmit)="onSubmit()">
     <div class="ColumnOneHalf">
@@ -15,7 +15,7 @@
     </div>
     <div class="ColumnOneHalf">
         <div class="WrapperPadding20-10-0-8">
-            <p>The name of your DigiByte wallet.</p>
+            <p>The name of your crypto wallet.</p>
         </div>
     </div>
     <mat-divider class="ClearLeft" />
@@ -32,12 +32,12 @@
     </div>
     <div class="ColumnOneHalf">
         <div class="WrapperPadding20-10-0-8">
-            <p>The address of your DigiByte wallet, can be either a legacy address (starting with capital D) or a bech32 address (starting with 'dgb1'). DGB Commerce will use this address to transfer any DigiByte to, should someone order and pay for products through one of your shops.</p>
+            <p>The address of your crypto wallet.</p>
         </div>
     </div>
     <mat-divider class="ClearLeft" />
     <div class="CenteredFormButtons">
-        <button mat-raised-button [disabled]="formLoading" type="button" [routerLink]="['/control-panel/configuration/digibyte-wallets']">Cancel</button>
+        <button mat-raised-button [disabled]="formLoading" type="button" [routerLink]="['/control-panel/configuration/crypto-wallets']">Cancel</button>
         <button mat-raised-button [disabled]="formLoading" type="submit" color="primary">
             <mat-icon *ngIf="formLoading">
                 <mat-spinner diameter="18" />

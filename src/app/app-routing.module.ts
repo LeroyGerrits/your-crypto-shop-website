@@ -10,10 +10,10 @@ import { ControlPanelCatalogProductComponent } from './control-panel/catalog/pro
 import { ControlPanelCatalogProductListComponent } from './control-panel/catalog/products/product-list.component';
 import { ControlPanelCatalogProductPhotoListComponent } from './control-panel/catalog/products/product-photos/product-photo-list.component';
 import { ControlPanelComponent } from './control-panel/control-panel.component';
+import { ControlPanelConfigurationCryptoWalletComponent } from './control-panel/configuration/crypto-wallets/crypto-wallet.component';
+import { ControlPanelConfigurationCryptoWalletListComponent } from './control-panel/configuration/crypto-wallets/crypto-wallet-list.component';
 import { ControlPanelConfigurationDeliveryMethodComponent } from './control-panel/configuration/delivery-methods/delivery-method.component';
 import { ControlPanelConfigurationDeliveryMethodListComponent } from './control-panel/configuration/delivery-methods/delivery-method-list.component';
-import { ControlPanelConfigurationDigiByteWalletComponent } from './control-panel/configuration/digibyte-wallets/digibyte-wallet.component';
-import { ControlPanelConfigurationDigiByteWalletListComponent } from './control-panel/configuration/digibyte-wallets/digibyte-wallet-list.component';
 import { ControlPanelConfigurationFieldComponent } from './control-panel/configuration/fields/field.component';
 import { ControlPanelConfigurationFieldListComponent } from './control-panel/configuration/fields/field-list.component';
 import { ControlPanelConfigurationPageComponent } from './control-panel/configuration/pages/page.component';
@@ -64,8 +64,8 @@ const routes: Routes = [
       { path: 'catalog/products/:productId/:shopId/photos', component: ControlPanelCatalogProductPhotoListComponent, title: `${Constants.TITLE_PREFIX} - Product photos` },
       { path: 'configuration/delivery-methods', component: ControlPanelConfigurationDeliveryMethodListComponent, title: `${Constants.TITLE_PREFIX} - Delivery methods` },
       { path: 'configuration/delivery-methods/:deliveryMethodId', component: ControlPanelConfigurationDeliveryMethodComponent, title: `${Constants.TITLE_PREFIX} - Delivery methods` },
-      { path: 'configuration/digibyte-wallets', component: ControlPanelConfigurationDigiByteWalletListComponent, title: `${Constants.TITLE_PREFIX} - DigiByte wallets` },
-      { path: 'configuration/digibyte-wallets/:digiByteWalletId', component: ControlPanelConfigurationDigiByteWalletComponent, title: `${Constants.TITLE_PREFIX} - DigiByte wallets` },
+      { path: 'configuration/crypto-wallets', component: ControlPanelConfigurationCryptoWalletListComponent, title: `${Constants.TITLE_PREFIX} - Crypto wallets` },
+      { path: 'configuration/crypto-wallets/:cryptoWalletId', component: ControlPanelConfigurationCryptoWalletComponent, title: `${Constants.TITLE_PREFIX} - Crypto wallets` },
       { path: 'configuration/fields', component: ControlPanelConfigurationFieldListComponent, title: `${Constants.TITLE_PREFIX} - Fields` },
       { path: 'configuration/fields/:fieldId', component: ControlPanelConfigurationFieldComponent, title: `${Constants.TITLE_PREFIX} - Fields` },
       { path: 'configuration/pages', component: ControlPanelConfigurationPageListComponent, title: `${Constants.TITLE_PREFIX} - Pages` },

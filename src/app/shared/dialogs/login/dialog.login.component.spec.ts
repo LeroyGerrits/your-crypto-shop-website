@@ -72,7 +72,7 @@ describe('DialogLoginComponent', () => {
   });
 
   it('should authenticate when a username and password are entered', () => {
-    component.controlEmailAddress.setValue('merchant@dgbcommerce.com');
+    component.controlEmailAddress.setValue('merchant@yourcrypto.shop');
     component.controlPassword.setValue('********');
     component.onSubmit();
     expect(authenticationServiceSpy.login).toHaveBeenCalled();
@@ -81,7 +81,7 @@ describe('DialogLoginComponent', () => {
   it('should trigger error handling when sending a call to the authentication service and the request fails', () => {
     authenticationServiceSpy.login.and.returnValue(throwError(() => new Error('ERROR')));
 
-    component.controlEmailAddress.setValue('merchant@dgbcommerce.com');
+    component.controlEmailAddress.setValue('merchant@yourcrypto.shop');
     component.controlPassword.setValue('********');
     component.onSubmit();
     expect(authenticationServiceSpy.login).toHaveBeenCalled();

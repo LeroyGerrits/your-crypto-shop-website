@@ -67,8 +67,8 @@ describe('DialogSignUpComponent', () => {
   });
 
   it('should create a new account when all the required fields are supplied', () => {
-    component.controlEmailAddress.setValue('merchant@dgbcommerce.com');
-    component.controlUsername.setValue('DGB Commerce');
+    component.controlEmailAddress.setValue('merchant@yourcrypto.shop');
+    component.controlUsername.setValue('Your Crypto Shop');
     component.controlLastName.setValue('Doe');
     component.controlGender.setValue('0');
     component.onSubmit();
@@ -105,8 +105,8 @@ describe('DialogSignUpComponent', () => {
   it('should trigger error handling when sending a call to the merchant service and the request fails', () => {
     merchantServiceSpy.create.and.returnValue(throwError(() => new Error('ERROR')));
 
-    component.controlEmailAddress.setValue('merchant@dgbcommerce.com');
-    component.controlUsername.setValue('DGB Commerce');
+    component.controlEmailAddress.setValue('merchant@yourcrypto.shop');
+    component.controlUsername.setValue('Your Crypto Shop');
     component.controlLastName.setValue('Doe');
     component.controlGender.setValue('0');
     component.onSubmit();

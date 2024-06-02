@@ -16,7 +16,7 @@ export abstract class Constants {
     static readonly REGEX_PATTERN_DECIMAL_2 = /^-?\d*[.,]?\d{0,2}$/;
     static readonly REGEX_PATTERN_DECIMAL_8 = /^-?\d*[.,]?\d{0,8}$/;
     static readonly REGEX_PATTERN_NUMBER = /^-?\d*$/;
-    static readonly TITLE_PREFIX: string = 'DGB Commerce';
+    static readonly TITLE_PREFIX: string = 'Your Crypto Shop';
     static readonly UPLOAD_MAXIMUM_FILE_SIZE: number = 1024 * 1024 * 2; // 2MB
     static readonly UPLOAD_ALLOWED_EXTENSIONS: string[] = ['bmp', 'gif', 'jpg', 'jpeg', 'png'];
 }

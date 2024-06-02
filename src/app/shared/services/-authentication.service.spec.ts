@@ -25,7 +25,7 @@ describe('AuthenticationService', () => {
     });
 
     it('should be able to log in', () => {
-        service.login('merchant@dgbcommerce.com', '********').subscribe();
+        service.login('merchant@yourcrypto.shop', '********').subscribe();
         const request = httpMock.expectOne(Environment.API_URL + '/Merchant/Authenticate');
         expect(request.request.method).toBe('POST');
     });

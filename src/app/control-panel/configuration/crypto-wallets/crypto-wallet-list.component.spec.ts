@@ -14,20 +14,20 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterTestingModule } from '@angular/router/testing';
 import { of, throwError } from 'rxjs';
 import { MutationResult } from 'src/app/shared/models/mutation-result.model';
-import { DigiByteWalletService } from 'src/app/shared/services/digibyte-wallet.service';
-import { TestDataDigiByteWallets } from 'src/assets/test-data/DigiByteWallets';
-import { ControlPanelConfigurationDigiByteWalletListComponent } from './digibyte-wallet-list.component';
+import { CryptoWalletService } from 'src/app/shared/services/crypto-wallet.service';
+import { TestDataCryptoWallets } from 'src/assets/test-data/CryptoWallets';
+import { ControlPanelConfigurationCryptoWalletListComponent } from './crypto-wallet-list.component';
 import { MatExpansionModule } from '@angular/material/expansion';
 
-describe('ControlPanelConfigurationDigiByteWalletListComponent', () => {
-  let component: ControlPanelConfigurationDigiByteWalletListComponent;
-  let fixture: ComponentFixture<ControlPanelConfigurationDigiByteWalletListComponent>;
+describe('ControlPanelConfigurationCryptoWalletListComponent', () => {
+  let component: ControlPanelConfigurationCryptoWalletListComponent;
+  let fixture: ComponentFixture<ControlPanelConfigurationCryptoWalletListComponent>;
 
   let matDialogRefSpy: any;
   let matDialogSpy: jasmine.SpyObj<MatDialog>
   let matSnackBarSpy: jasmine.SpyObj<MatSnackBar>;
 
-  let digiByteWalletServiceSpy: jasmine.SpyObj<DigiByteWalletService>;
+  let cryptoWalletServiceSpy: jasmine.SpyObj<CryptoWalletService>;
   let mutationResult: MutationResult = <MutationResult>{ ErrorCode: 0, Identity: '', Message: '' };
 
   beforeEach(() => {
@@ -40,43 +40,43 @@ describe('ControlPanelConfigurationDigiByteWalletListComponent', () => {
 
     matSnackBarSpy = jasmine.createSpyObj('MatSnackBar', ['open']);
 
-    digiByteWalletServiceSpy = jasmine.createSpyObj('DigiByteWalletService', ['getList', 'delete']);
-    digiByteWalletServiceSpy.getList.and.returnValue(of(TestDataDigiByteWallets));
-    digiByteWalletServiceSpy.delete.and.returnValue(of(mutationResult));
+    cryptoWalletServiceSpy = jasmine.createSpyObj('CryptoWalletService', ['getList', 'delete']);
+    cryptoWalletServiceSpy.getList.and.returnValue(of(TestDataCryptoWallets));
+    cryptoWalletServiceSpy.delete.and.returnValue(of(mutationResult));
 
     TestBed.configureTestingModule({
-      declarations: [ControlPanelConfigurationDigiByteWalletListComponent],
+      declarations: [ControlPanelConfigurationCryptoWalletListComponent],
       imports: [BrowserAnimationsModule, MatExpansionModule, MatIconModule, MatFormFieldModule, MatInputModule, MatPaginatorModule, MatTableModule, ReactiveFormsModule, RouterLink, RouterTestingModule.withRoutes(
-        [{ path: 'control-panel/configuration/digibyte-wallets', component: ControlPanelConfigurationDigiByteWalletListComponent }]
+        [{ path: 'control-panel/configuration/crypto-wallets', component: ControlPanelConfigurationCryptoWalletListComponent }]
       )],
       providers: [
         { provide: ActivatedRoute, useValue: { snapshot: { data: {} } } },
         { provide: MatDialog, useValue: matDialogSpy },
-        { provide: DigiByteWalletService, useValue: digiByteWalletServiceSpy },
+        { provide: CryptoWalletService, useValue: cryptoWalletServiceSpy },
         { provide: MatSnackBar, useValue: matSnackBarSpy },
-        ControlPanelConfigurationDigiByteWalletListComponent,
+        ControlPanelConfigurationCryptoWalletListComponent,
         Router
       ]
     });
-    fixture = TestBed.createComponent(ControlPanelConfigurationDigiByteWalletListComponent);
+    fixture = TestBed.createComponent(ControlPanelConfigurationCryptoWalletListComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
 
-  it('should filter digibyte wallets list when name filter gets used', fakeAsync(() => {
-    const componentStub: ControlPanelConfigurationDigiByteWalletListComponent = TestBed.inject(ControlPanelConfigurationDigiByteWalletListComponent);
-    spyOn(componentStub, 'filterDigiByteWallets');
+  it('should filter crypto wallets list when name filter gets used', fakeAsync(() => {
+    const componentStub: ControlPanelConfigurationCryptoWalletListComponent = TestBed.inject(ControlPanelConfigurationCryptoWalletListComponent);
+    spyOn(componentStub, 'filterCryptoWallets');
     componentStub.controlFilterName.setValue('test');
     tick(1000);
-    expect(componentStub.filterDigiByteWallets).toHaveBeenCalled();
+    expect(componentStub.filterCryptoWallets).toHaveBeenCalled();
   }));
 
-  it('should filter digibyte wallets list when shop filter gets used', fakeAsync(() => {
-    const componentStub: ControlPanelConfigurationDigiByteWalletListComponent = TestBed.inject(ControlPanelConfigurationDigiByteWalletListComponent);
-    spyOn(componentStub, 'filterDigiByteWallets');
+  it('should filter crypto wallets list when shop filter gets used', fakeAsync(() => {
+    const componentStub: ControlPanelConfigurationCryptoWalletListComponent = TestBed.inject(ControlPanelConfigurationCryptoWalletListComponent);
+    spyOn(componentStub, 'filterCryptoWallets');
     componentStub.controlFilterAddress.setValue('test');
     tick(1000);
-    expect(componentStub.filterDigiByteWallets).toHaveBeenCalled();
+    expect(componentStub.filterCryptoWallets).toHaveBeenCalled();
   }));
 
   it('should edit the sortState when a sort direction is supplied', () => {
@@ -101,22 +101,22 @@ describe('ControlPanelConfigurationDigiByteWalletListComponent', () => {
     const routerstub: Router = TestBed.inject(Router);
     spyOn(routerstub, 'navigate');
 
-    component.editElement(TestDataDigiByteWallets[0]);
-    expect(routerstub.navigate).toHaveBeenCalledWith(['/control-panel/configuration/digibyte-wallets/' + TestDataDigiByteWallets[0].Id]);
+    component.editElement(TestDataCryptoWallets[0]);
+    expect(routerstub.navigate).toHaveBeenCalledWith(['/control-panel/configuration/crypto-wallets/' + TestDataCryptoWallets[0].Id]);
   });
 
   it('should show a dialog when delete icon is clicked', () => {
-    component.deleteElement(TestDataDigiByteWallets[0]);
+    component.deleteElement(TestDataCryptoWallets[0]);
     expect(matDialogSpy.open).toHaveBeenCalled();
   });
 
   it('should reload when handling submit result and no error code is applicable', () => {
-    const componentStub: ControlPanelConfigurationDigiByteWalletListComponent = TestBed.inject(ControlPanelConfigurationDigiByteWalletListComponent);
-    spyOn(componentStub, 'filterDigiByteWallets');
+    const componentStub: ControlPanelConfigurationCryptoWalletListComponent = TestBed.inject(ControlPanelConfigurationCryptoWalletListComponent);
+    spyOn(componentStub, 'filterCryptoWallets');
 
     const mutationResult = <MutationResult>{ Constraint: '', ErrorCode: 0, Identity: '', Message: '', Success: true };
     componentStub.handleOnSubmitResult(mutationResult);
-    expect(componentStub.filterDigiByteWallets).toHaveBeenCalled();
+    expect(componentStub.filterCryptoWallets).toHaveBeenCalled();
   });
 
   it('should show an error when handling submit result and an error code is applicable', () => {
@@ -130,9 +130,9 @@ describe('ControlPanelConfigurationDigiByteWalletListComponent', () => {
     expect(matSnackBarSpy.open).toHaveBeenCalled();
   });
 
-  it('should trigger error handling when sending a call to the DigiByte wallet service when deleting a DigiByte wallet and the request fails', () => {
-    digiByteWalletServiceSpy.delete.and.returnValue(throwError(() => new Error('ERROR')));
-    component.deleteElement(TestDataDigiByteWallets[0]);
+  it('should trigger error handling when sending a call to the crypto wallet service when deleting a crypto wallet and the request fails', () => {
+    cryptoWalletServiceSpy.delete.and.returnValue(throwError(() => new Error('ERROR')));
+    component.deleteElement(TestDataCryptoWallets[0]);
     expect(component).toBeTruthy();
   });
 });

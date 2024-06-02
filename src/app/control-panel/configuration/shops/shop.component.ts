@@ -8,8 +8,8 @@ import { AuthenticationService } from 'src/app/shared/services/-authentication.s
 import { Constants } from 'src/app/shared/-constants';
 import { Country } from 'src/app/shared/models/-country.model';
 import { CountryService } from 'src/app/shared/services/-country.service';
-import { DigiByteWallet } from 'src/app/shared/models/digibyte-wallet.model';
-import { DigiByteWalletService } from 'src/app/shared/services/digibyte-wallet.service';
+import { CryptoWallet } from 'src/app/shared/models/crypto-wallet.model';
+import { CryptoWalletService } from 'src/app/shared/services/crypto-wallet.service';
 import { Environment } from 'src/app/shared/environments/Environment';
 import { Merchant } from 'src/app/shared/models/-merchant.model';
 import { MutationResult } from 'src/app/shared/models/mutation-result.model';
@@ -40,7 +40,7 @@ export class ControlPanelConfigurationShopComponent implements OnInit {
   public controlSubDomain = new FormControl('', [Validators.minLength(3), Validators.pattern(/^[a-zA-Z0-9]*$/)])
   public controlCountry = new FormControl('');
   public controlShopCategory = new FormControl('');
-  public controlDigiByteWallet = new FormControl('');
+  public controlCryptoWallet = new FormControl('');
   public controlOrderMethod = new FormControl('0', Validators.required);
   public controlRequireAddresses = new FormControl(true, Validators.required);
 
@@ -49,14 +49,14 @@ export class ControlPanelConfigurationShopComponent implements OnInit {
   public subDomainAvailable = false;
   public countries: Country[] | undefined;
   public shopCategories: ShopCategory[] | undefined;
-  public digiByteWallets: DigiByteWallet[] | undefined;
+  public cryptoWallets: CryptoWallet[] | undefined;
 
   public orderMethodType: typeof ShopOrderMethod = ShopOrderMethod;
 
   constructor(
     private authenticationService: AuthenticationService,
     private countryService: CountryService,
-    private digiByteWalletService: DigiByteWalletService,
+    private cryptoWalletService: CryptoWalletService,
     private route: ActivatedRoute,
     private router: Router,
     private snackBar: MatSnackBar,
@@ -70,7 +70,7 @@ export class ControlPanelConfigurationShopComponent implements OnInit {
       this.controlSubDomain,
       this.controlCountry,
       this.controlShopCategory,
-      this.controlDigiByteWallet,
+      this.controlCryptoWallet,
       this.controlOrderMethod,
       this.controlRequireAddresses
     ]);
@@ -87,7 +87,7 @@ export class ControlPanelConfigurationShopComponent implements OnInit {
 
     this.countryService.getList().subscribe(countries => this.countries = countries);
     this.shopCategoryService.getList().subscribe(shopCategories => this.shopCategories = shopCategories);
-    this.digiByteWalletService.getList().subscribe(digiByteWallets => this.digiByteWallets = digiByteWallets);
+    this.cryptoWalletService.getList().subscribe(cryptoWallets => this.cryptoWallets = cryptoWallets);
   }
 
   ngOnDestroy() {
@@ -111,7 +111,7 @@ export class ControlPanelConfigurationShopComponent implements OnInit {
       this.controlShopCategory.setValue(shop.Category.Id);
 
     if (shop.Wallet)
-      this.controlDigiByteWallet.setValue(shop.Wallet.Id);
+      this.controlCryptoWallet.setValue(shop.Wallet.Id);
 
     if (shop.OrderMethod.toString() == 'ManualActionRequired' || shop.OrderMethod.toString() == ShopOrderMethod.ManualActionRequired.toString()) {
       this.controlOrderMethod.setValue(this.orderMethodType.ManualActionRequired.toString());
@@ -167,9 +167,9 @@ export class ControlPanelConfigurationShopComponent implements OnInit {
     else
       shopToUpdate.Category = undefined;
 
-    var selectedDigiByteWallet = this.digiByteWallets?.find(x => x.Id == this.controlDigiByteWallet.value);
-    if (selectedDigiByteWallet)
-      shopToUpdate.Wallet = selectedDigiByteWallet;
+    var selectedCryptoWallet = this.cryptoWallets?.find(x => x.Id == this.controlCryptoWallet.value);
+    if (selectedCryptoWallet)
+      shopToUpdate.Wallet = selectedCryptoWallet;
     else
       shopToUpdate.Wallet = undefined;
 

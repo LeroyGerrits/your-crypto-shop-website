@@ -6,8 +6,8 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
 @Injectable()
-export class DigiByteNodeService {
-    private apiUrl = Environment.API_URL + '/DigiByteNode';
+export class CryptoNodeService {
+    private apiUrl = Environment.API_URL + '/CryptoNode';
 
     constructor(protected http: HttpClient) { }
 

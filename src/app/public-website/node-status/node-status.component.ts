@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { DigiByteNodeService } from 'src/app/shared/services/digibyte-node.service';
+import { CryptoNodeService } from 'src/app/shared/services/crypto-node.service';
 import { GetDifficultyResponse } from 'src/app/shared/models/parameters/GetDifficultyResponse.model';
 import { GetMiningInfoResponse } from 'src/app/shared/models/parameters/GetMiningInfoResponse.model';
 
@@ -15,12 +15,12 @@ export class PublicWebsiteNodeStatusComponent implements OnInit {
   nodeMiningInfo: GetMiningInfoResponse | undefined;
 
   constructor(
-    private digiByteNodeService: DigiByteNodeService
+    private cryptoNodeService: CryptoNodeService
   ) { }
 
   ngOnInit(): void {
-    this.digiByteNodeService.getDifficulty().subscribe(difficulty => this.nodeDifficulty = difficulty);
-    this.digiByteNodeService.getIpAddresses().subscribe(ipAddresses => this.nodeIpAddresses = ipAddresses);
-    this.digiByteNodeService.getMiningInfo().subscribe(miningInfo => this.nodeMiningInfo = miningInfo);
+    this.cryptoNodeService.getDifficulty().subscribe(difficulty => this.nodeDifficulty = difficulty);
+    this.cryptoNodeService.getIpAddresses().subscribe(ipAddresses => this.nodeIpAddresses = ipAddresses);
+    this.cryptoNodeService.getMiningInfo().subscribe(miningInfo => this.nodeMiningInfo = miningInfo);
   }
 }

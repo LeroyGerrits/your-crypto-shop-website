@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { DigiByteNodeService } from 'src/app/shared/services/digibyte-node.service';
+import { CryptoNodeService } from 'src/app/shared/services/crypto-node.service';
 import { GetDifficultyResponse } from 'src/app/shared/models/parameters/GetDifficultyResponse.model';
 import { GetMiningInfoResponse } from 'src/app/shared/models/parameters/GetMiningInfoResponse.model';
 import { HashRatePipe } from 'src/app/shared/pipes/hash-rate.pipe';
@@ -25,18 +25,18 @@ describe('PublicWebsiteNodeStatusComponent', () => {
     HashesPerSec: 123
   };
 
-  let digiByteNodeServiceSpy: jasmine.SpyObj<DigiByteNodeService>;
+  let cryptoNodeServiceSpy: jasmine.SpyObj<CryptoNodeService>;
 
   beforeEach(() => {
-    digiByteNodeServiceSpy = jasmine.createSpyObj('DigiByteNodeService', ['getDifficulty', 'getIpAddresses', 'getMiningInfo']);
-    digiByteNodeServiceSpy.getDifficulty.and.returnValue(of(difficulty));
-    digiByteNodeServiceSpy.getIpAddresses.and.returnValue(of(ipAddresses));
-    digiByteNodeServiceSpy.getMiningInfo.and.returnValue(of(miningInfo));
+    cryptoNodeServiceSpy = jasmine.createSpyObj('CryptoNodeService', ['getDifficulty', 'getIpAddresses', 'getMiningInfo']);
+    cryptoNodeServiceSpy.getDifficulty.and.returnValue(of(difficulty));
+    cryptoNodeServiceSpy.getIpAddresses.and.returnValue(of(ipAddresses));
+    cryptoNodeServiceSpy.getMiningInfo.and.returnValue(of(miningInfo));
 
     TestBed.configureTestingModule({
       declarations: [PublicWebsiteNodeStatusComponent, HashRatePipe],
       providers: [
-        { provide: DigiByteNodeService, useValue: digiByteNodeServiceSpy }
+        { provide: CryptoNodeService, useValue: cryptoNodeServiceSpy }
       ]
     });
     fixture = TestBed.createComponent(PublicWebsiteNodeStatusComponent);

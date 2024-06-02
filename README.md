@@ -1,5 +1,5 @@
-## DGB Commerce website
-DGB Commerce is an e-commerce platform by and for DigiByte users. Merchants can manage shops, categories and products and list/sell them for DigiByte prices. Consumers can shop and checkout by paying with DigiByte. This repository consists of the public website and the underlying control panel for merchants.
+## Your Crypto Shop website
+Your Crypto Shop is an e-commerce platform by and for crypto users. Merchants can manage shops, categories and products and list/sell them for crypto prices. Consumers can shop and checkout by paying with various crypto currencies. This repository consists of the public website and the underlying control panel for merchants.
 
 ## Development server
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`.

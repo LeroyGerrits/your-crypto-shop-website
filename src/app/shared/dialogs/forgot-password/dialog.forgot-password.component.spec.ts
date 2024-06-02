@@ -61,7 +61,7 @@ describe('DialogForgotPasswordComponent', () => {
   });
 
   it('should authenticate when a username and password are entered', () => {
-    component.controlEmailAddress.setValue('merchant@dgbcommerce.com');
+    component.controlEmailAddress.setValue('merchant@yourcrypto.shop');
     component.onSubmit();
     expect(merchantServiceSpy.forgotPassword).toHaveBeenCalled();
   });
@@ -69,7 +69,7 @@ describe('DialogForgotPasswordComponent', () => {
   it('should trigger error handling when sending a call to the merchant service and the request fails', () => {
     merchantServiceSpy.forgotPassword.and.returnValue(throwError(() => new Error('ERROR')));
 
-    component.controlEmailAddress.setValue('merchant@dgbcommerce.com');
+    component.controlEmailAddress.setValue('merchant@yourcrypto.shop');
     component.onSubmit();
     expect(merchantServiceSpy.forgotPassword).toHaveBeenCalled();
   });

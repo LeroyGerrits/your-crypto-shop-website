@@ -25,8 +25,8 @@ import { TestDataCountries } from 'src/assets/test-data/Countries';
 import { ShopCategoryService } from 'src/app/shared/services/shop-category.service';
 import { TestDataShopCategories } from 'src/assets/test-data/ShopCategories';
 import { MatSelectModule } from '@angular/material/select';
-import { DigiByteWalletService } from 'src/app/shared/services/digibyte-wallet.service';
-import { TestDataDigiByteWallets } from 'src/assets/test-data/DigiByteWallets';
+import { CryptoWalletService } from 'src/app/shared/services/crypto-wallet.service';
+import { TestDataCryptoWallets } from 'src/assets/test-data/CryptoWallets';
 import { MatRadioModule } from '@angular/material/radio';
 
 describe('ControlPanelConfigurationShopComponent', () => {
@@ -34,7 +34,7 @@ describe('ControlPanelConfigurationShopComponent', () => {
   let fixture: ComponentFixture<ControlPanelConfigurationShopComponent>;
 
   let countryServiceSpy: jasmine.SpyObj<CountryService>;
-  let digiByteWalletServiceSpy: jasmine.SpyObj<DigiByteWalletService>;
+  let cryptoWalletServiceSpy: jasmine.SpyObj<CryptoWalletService>;
   let shopServiceSpy: jasmine.SpyObj<ShopService>;
   let shopCategoryServiceSpy: jasmine.SpyObj<ShopCategoryService>;
   let matSnackBarSpy: jasmine.SpyObj<MatSnackBar>;
@@ -44,8 +44,8 @@ describe('ControlPanelConfigurationShopComponent', () => {
     countryServiceSpy = jasmine.createSpyObj('CountryService', ['getList']);
     countryServiceSpy.getList.and.returnValue(of(TestDataCountries));
 
-    digiByteWalletServiceSpy = jasmine.createSpyObj('DigiByteWalletService', ['getList']);
-    digiByteWalletServiceSpy.getList.and.returnValue(of(TestDataDigiByteWallets));
+    cryptoWalletServiceSpy = jasmine.createSpyObj('CryptoWalletService', ['getList']);
+    cryptoWalletServiceSpy.getList.and.returnValue(of(TestDataCryptoWallets));
 
     shopCategoryServiceSpy = jasmine.createSpyObj('ShopCategoryService', ['getList']);
     shopCategoryServiceSpy.getList.and.returnValue(of(TestDataShopCategories));    
@@ -66,7 +66,7 @@ describe('ControlPanelConfigurationShopComponent', () => {
       providers: [
         { provide: ActivatedRoute, useValue: { snapshot: { paramMap: convertToParamMap({ shopId: TestDataShops[0].Id }) } } },
         { provide: CountryService, useValue: countryServiceSpy },
-        { provide: DigiByteWalletService, useValue: digiByteWalletServiceSpy },
+        { provide: CryptoWalletService, useValue: cryptoWalletServiceSpy },
         { provide: ShopService, useValue: shopServiceSpy },
         { provide: ShopCategoryService, useValue: shopCategoryServiceSpy },
         { provide: MatSnackBar, useValue: matSnackBarSpy },

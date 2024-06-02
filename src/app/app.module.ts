@@ -18,10 +18,10 @@ import { ControlPanelCatalogProductListComponent } from './control-panel/catalog
 import { ControlPanelCatalogProductPhotoComponent } from './control-panel/catalog/products/product-photos/product-photo.component';
 import { ControlPanelCatalogProductPhotoListComponent } from './control-panel/catalog/products/product-photos/product-photo-list.component';
 import { ControlPanelComponent } from './control-panel/control-panel.component';
+import { ControlPanelConfigurationCryptoWalletComponent } from './control-panel/configuration/crypto-wallets/crypto-wallet.component';
+import { ControlPanelConfigurationCryptoWalletListComponent } from './control-panel/configuration/crypto-wallets/crypto-wallet-list.component';
 import { ControlPanelConfigurationDeliveryMethodComponent } from './control-panel/configuration/delivery-methods/delivery-method.component';
 import { ControlPanelConfigurationDeliveryMethodListComponent } from './control-panel/configuration/delivery-methods/delivery-method-list.component';
-import { ControlPanelConfigurationDigiByteWalletComponent } from './control-panel/configuration/digibyte-wallets/digibyte-wallet.component';
-import { ControlPanelConfigurationDigiByteWalletListComponent } from './control-panel/configuration/digibyte-wallets/digibyte-wallet-list.component';
 import { ControlPanelConfigurationFieldComponent } from './control-panel/configuration/fields/field.component';
 import { ControlPanelConfigurationFieldListComponent } from './control-panel/configuration/fields/field-list.component';
 import { ControlPanelConfigurationPageComponent } from './control-panel/configuration/pages/page.component';
@@ -34,6 +34,8 @@ import { ControlPanelDashboardComponent } from './control-panel/dashboard/dashbo
 import { ControlPanelSalesOrderComponent } from './control-panel/sales/orders/order.component';
 import { ControlPanelSalesOrderListComponent } from './control-panel/sales/orders/order-list.component';
 import { CountryService } from './shared/services/-country.service';
+import { CryptoNodeService } from './shared/services/crypto-node.service';
+import { CryptoWalletService } from './shared/services/crypto-wallet.service';
 import { CurrencyService } from './shared/services/-currency.service';
 import { CustomerService } from './shared/services/-customer.service';
 import { DatePipe } from '@angular/common';
@@ -46,8 +48,6 @@ import { DialogForgotPasswordComponent } from './shared/dialogs/forgot-password/
 import { DialogLoginComponent } from './shared/dialogs/login/dialog.login.component';
 import { DialogLogoutComponent } from './shared/dialogs/logout/dialog.logout.component';
 import { DialogSignUpComponent } from './shared/dialogs/signup/dialog.signup.component';
-import { DigiByteNodeService } from './shared/services/digibyte-node.service';
-import { DigiByteWalletService } from './shared/services/digibyte-wallet.service';
 import { ErrorInterceptor } from './shared/interceptors/error.interceptor';
 import { FaqCategoryService } from './shared/services/faq-category.service';
 import { FaqService } from './shared/services/-faq.service';
@@ -130,8 +130,8 @@ import { StripHtmlPipe } from './shared/pipes/strip-html.pipe';
         ControlPanelCatalogProductPhotoComponent,
         ControlPanelConfigurationDeliveryMethodListComponent,
         ControlPanelConfigurationDeliveryMethodComponent,
-        ControlPanelConfigurationDigiByteWalletListComponent,
-        ControlPanelConfigurationDigiByteWalletComponent,
+        ControlPanelConfigurationCryptoWalletListComponent,
+        ControlPanelConfigurationCryptoWalletComponent,
         ControlPanelConfigurationFieldListComponent,
         ControlPanelConfigurationFieldComponent,
         ControlPanelConfigurationPageListComponent,
@@ -217,8 +217,8 @@ import { StripHtmlPipe } from './shared/pipes/strip-html.pipe';
         CustomerService,
         DatePipe,
         DeliveryMethodService,
-        DigiByteNodeService,
-        DigiByteWalletService,
+        CryptoNodeService,
+        CryptoWalletService,
         FaqService,
         FaqCategoryService,
         FieldService,
