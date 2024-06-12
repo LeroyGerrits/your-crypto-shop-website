@@ -3,8 +3,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar, MatSnackBarRef, TextOnlySnackBar } from '@angular/material/snack-bar';
 
-import { Merchant } from 'src/app/shared/models/-merchant.model';
-import { MerchantService } from 'src/app/shared/services/-merchant.service';
+import { Merchant } from 'src/app/shared/models/merchant.model';
+import { MerchantService } from 'src/app/shared/services/merchant.service';
 import { MutationResult } from 'src/app/shared/models/mutation-result.model';
 
 @Component({

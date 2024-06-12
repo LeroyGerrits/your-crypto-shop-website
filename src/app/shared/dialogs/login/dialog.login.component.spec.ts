@@ -4,14 +4,14 @@ import { of, throwError } from 'rxjs';
 import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 import { AccountComponent } from 'src/app/account/account.component';
-import { AuthenticationService } from 'src/app/shared/services/-authentication.service';
+import { AuthenticationService } from 'src/app/shared/services/authentication.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DialogForgotPasswordComponent } from '../forgot-password/dialog.forgot-password.component';
 import { DialogLoginComponent } from './dialog.login.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { MerchantService } from '../../services/-merchant.service';
+import { MerchantService } from '../../services/merchant.service';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RouterTestingModule } from '@angular/router/testing';
 import { provideHttpClientTesting } from '@angular/common/http/testing';

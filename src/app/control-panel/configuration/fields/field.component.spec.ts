@@ -12,10 +12,10 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterTestingModule } from '@angular/router/testing';
 import { MutationResult } from 'src/app/shared/models/mutation-result.model';
-import { ShopService } from 'src/app/shared/services/-shop.service';
+import { ShopService } from 'src/app/shared/services/shop.service';
 import { TestDataShops } from 'src/assets/test-data/Shops';
 
-import { FieldService } from 'src/app/shared/services/-field.service';
+import { FieldService } from 'src/app/shared/services/field.service';
 import { TestDataFields } from 'src/assets/test-data/Fields';
 import { ControlPanelConfigurationFieldComponent } from './field.component';
 

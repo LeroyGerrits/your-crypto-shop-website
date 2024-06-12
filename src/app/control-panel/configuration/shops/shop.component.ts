@@ -4,20 +4,20 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar, MatSnackBarRef, TextOnlySnackBar } from '@angular/material/snack-bar';
 import { debounceTime, distinctUntilChanged } from 'rxjs';
 
-import { AuthenticationService } from 'src/app/shared/services/-authentication.service';
-import { Constants } from 'src/app/shared/-constants';
-import { Country } from 'src/app/shared/models/-country.model';
-import { CountryService } from 'src/app/shared/services/-country.service';
+import { AuthenticationService } from 'src/app/shared/services/authentication.service';
+import { Constants } from 'src/app/shared/constants';
+import { Country } from 'src/app/shared/models/country.model';
+import { CountryService } from 'src/app/shared/services/country.service';
 import { CryptoWallet } from 'src/app/shared/models/crypto-wallet.model';
 import { CryptoWalletService } from 'src/app/shared/services/crypto-wallet.service';
-import { Environment } from 'src/app/shared/environments/Environment';
-import { Merchant } from 'src/app/shared/models/-merchant.model';
+import { Environment } from 'src/app/shared/environments/-environment';
+import { Merchant } from 'src/app/shared/models/merchant.model';
 import { MutationResult } from 'src/app/shared/models/mutation-result.model';
-import { Shop } from 'src/app/shared/models/-shop.model';
+import { Shop } from 'src/app/shared/models/shop.model';
 import { ShopCategory } from 'src/app/shared/models/shop-category.model';
 import { ShopCategoryService } from 'src/app/shared/services/shop-category.service';
 import { ShopOrderMethod } from 'src/app/shared/enums/shop-order-method.enum';
-import { ShopService } from 'src/app/shared/services/-shop.service';
+import { ShopService } from 'src/app/shared/services/shop.service';
 
 @Component({
   selector: 'control-panel-configuration-shop',

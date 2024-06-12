@@ -2,7 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 import { ControlPanelDashboardComponent } from './dashboard.component';
-import { GeneralService } from 'src/app/shared/services/-general.service';
+import { GeneralService } from 'src/app/shared/services/general.service';
 import { Stats } from 'src/app/shared/models/-stats.model';
 import { of } from 'rxjs';
 import { provideHttpClientTesting } from '@angular/common/http/testing';

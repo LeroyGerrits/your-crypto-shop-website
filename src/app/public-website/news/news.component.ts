@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { ActivatedRoute } from '@angular/router';
-import { Constants } from 'src/app/shared/-constants';
+import { Constants } from 'src/app/shared/constants';
 import { NewsMessage } from 'src/app/shared/models/news-message.model';
 import { NewsMessageService } from 'src/app/shared/services/news-message.service';
 import { Title } from '@angular/platform-browser';

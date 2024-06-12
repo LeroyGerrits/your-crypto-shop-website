@@ -3,11 +3,11 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar, MatSnackBarRef, TextOnlySnackBar } from '@angular/material/snack-bar';
 
-import { AuthenticationService } from 'src/app/shared/services/-authentication.service';
+import { AuthenticationService } from 'src/app/shared/services/authentication.service';
 import { CryptoWallet } from 'src/app/shared/models/crypto-wallet.model';
 import { CryptoWalletService } from 'src/app/shared/services/crypto-wallet.service';
-import { Environment } from 'src/app/shared/environments/Environment';
-import { Merchant } from 'src/app/shared/models/-merchant.model';
+import { Environment } from 'src/app/shared/environments/-environment';
+import { Merchant } from 'src/app/shared/models/merchant.model';
 import { MutationResult } from 'src/app/shared/models/mutation-result.model';
 
 @Component({

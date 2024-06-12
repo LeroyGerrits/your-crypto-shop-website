@@ -2,7 +2,7 @@ import { ActivatedRoute, RouterLink, convertToParamMap } from '@angular/router';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
-import { FaqService } from 'src/app/shared/services/-faq.service';
+import { FaqService } from 'src/app/shared/services/faq.service';
 import { MatChipsModule } from '@angular/material/chips';
 import { PublicWebsiteFaqComponent } from './faq.component';
 import { TestDataFaqs } from 'src/assets/test-data/Faqs';

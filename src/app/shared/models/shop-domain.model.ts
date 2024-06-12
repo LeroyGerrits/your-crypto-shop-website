@@ -1,4 +1,4 @@
-import { Shop } from './-shop.model';
+import { Shop } from './shop.model';
 
 export class ShopDomain {
     Id!: string;    

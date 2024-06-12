@@ -2,7 +2,7 @@ import { ActivatedRoute, RouterLink, convertToParamMap } from '@angular/router';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
-import { MerchantService } from 'src/app/shared/services/-merchant.service';
+import { MerchantService } from 'src/app/shared/services/merchant.service';
 import { PublicWebsiteMerchantComponent } from './merchant.component';
 import { TestDataPublicMerchants } from 'src/assets/test-data/PublicMerchants';
 import { of } from 'rxjs';

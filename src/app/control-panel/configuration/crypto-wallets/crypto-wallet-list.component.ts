@@ -7,12 +7,12 @@ import { MatSort, Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { debounceTime, distinctUntilChanged } from 'rxjs';
-import { Constants } from 'src/app/shared/-constants';
+import { Constants } from 'src/app/shared/constants';
 import { DialogDeleteComponent } from 'src/app/shared/dialogs/delete/dialog.delete.component';
-import { Environment } from 'src/app/shared/environments/Environment';
+import { Environment } from 'src/app/shared/environments/-environment';
 import { CryptoWallet } from 'src/app/shared/models/crypto-wallet.model';
 import { MutationResult } from 'src/app/shared/models/mutation-result.model';
-import { GetCryptoWalletsParameters } from 'src/app/shared/models/parameters/GetCryptoWalletsParameters.model';
+import { GetCryptoWalletsParameters } from 'src/app/shared/models/parameters/get-crypto-wallets-parameters.model';
 import { CryptoWalletService } from 'src/app/shared/services/crypto-wallet.service';
 
 @Component({

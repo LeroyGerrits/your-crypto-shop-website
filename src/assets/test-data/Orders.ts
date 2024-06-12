@@ -1,4 +1,4 @@
-import { Order } from 'src/app/shared/models/-order.model';
+import { Order } from 'src/app/shared/models/order.model';
 import { OrderStatus } from 'src/app/shared/enums/order-status.enum';
 import { TestDataAddresses } from './-addresses';
 import { TestDataCustomers } from './Customers';

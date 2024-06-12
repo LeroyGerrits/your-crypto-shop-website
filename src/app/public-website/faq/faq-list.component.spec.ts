@@ -3,7 +3,7 @@ import { ComponentFixture, TestBed, fakeAsync, tick } from '@angular/core/testin
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FaqCategoryService } from 'src/app/shared/services/faq-category.service';
-import { FaqService } from 'src/app/shared/services/-faq.service';
+import { FaqService } from 'src/app/shared/services/faq.service';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { PublicWebsiteFaqListComponent } from './faq-list.component';

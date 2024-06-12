@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 
 import { ActivatedRoute } from '@angular/router';
-import { Constants } from 'src/app/shared/-constants';
-import { MerchantService } from 'src/app/shared/services/-merchant.service';
-import { PublicMerchant } from 'src/app/shared/models/viewmodels/PublicMerchant.model';
+import { Constants } from 'src/app/shared/constants';
+import { MerchantService } from 'src/app/shared/services/merchant.service';
+import { PublicMerchant } from 'src/app/shared/models/viewmodels/public-merchant.model';
 import { Title } from '@angular/platform-browser';
 
 @Component({

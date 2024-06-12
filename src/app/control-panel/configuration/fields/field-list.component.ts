@@ -7,15 +7,15 @@ import { MatSort, Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { debounceTime, distinctUntilChanged } from 'rxjs';
-import { Constants } from 'src/app/shared/-constants';
+import { Constants } from 'src/app/shared/constants';
 import { DialogDeleteComponent } from 'src/app/shared/dialogs/delete/dialog.delete.component';
-import { Environment } from 'src/app/shared/environments/Environment';
-import { Field } from 'src/app/shared/models/-field.model';
+import { Environment } from 'src/app/shared/environments/-environment';
+import { Field } from 'src/app/shared/models/field.model';
 import { MutationResult } from 'src/app/shared/models/mutation-result.model';
-import { Shop } from 'src/app/shared/models/-shop.model';
-import { GetFieldsParameters } from 'src/app/shared/models/parameters/GetFieldsParameters.model';
-import { FieldService } from 'src/app/shared/services/-field.service';
-import { ShopService } from 'src/app/shared/services/-shop.service';
+import { GetFieldsParameters } from 'src/app/shared/models/parameters/get-fields-parameters.model';
+import { Shop } from 'src/app/shared/models/shop.model';
+import { FieldService } from 'src/app/shared/services/field.service';
+import { ShopService } from 'src/app/shared/services/shop.service';
 
 @Component({
   selector: 'control-panel-configuration-field-list',

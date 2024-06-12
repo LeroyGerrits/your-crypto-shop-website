@@ -3,7 +3,7 @@ import { ComponentFixture, TestBed, fakeAsync, tick } from '@angular/core/testin
 import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { CurrencyService } from 'src/app/shared/services/-currency.service';
+import { CurrencyService } from 'src/app/shared/services/currency.service';
 import { DatePipe } from '@angular/common';
 import { FinancialStatementTransactionService } from 'src/app/shared/services/financial-statement-transaction.service';
 import { MatDatepickerModule } from '@angular/material/datepicker';

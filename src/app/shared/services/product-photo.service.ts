@@ -1,13 +1,12 @@
 import { HttpClient, HttpEvent, HttpParams } from '@angular/common/http';
 
-import { Environment } from 'src/app/shared/environments/Environment';
-import { GetProductPhotosParameters } from '../models/parameters/GetProductPhotosParameters.model';
+import { Environment } from 'src/app/shared/environments/-environment';
+import { GetProductPhotosParameters } from '../models/parameters/get-product-photos-parameters.model';
 import { Injectable } from '@angular/core';
-import { MutateProductRequest } from '../models/request/MutateProductRequest.model';
 import { MutationResult } from 'src/app/shared/models/mutation-result.model';
 import { Observable } from 'rxjs';
 import { ProductPhoto } from '../models/product-photo.model';
-import { ProductPhotoEditDescriptionRequest } from '../models/request/ProductPhotoEditDescriptionRequest.model';
+import { ProductPhotoEditDescriptionRequest } from '../models/request/product-photo-edit-description-request.model';
 
 @Injectable()
 export class ProductPhotoService {

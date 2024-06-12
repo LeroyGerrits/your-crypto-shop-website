@@ -1,10 +1,10 @@
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar, MatSnackBarRef, TextOnlySnackBar } from '@angular/material/snack-bar';
 
-import { AuthenticationService } from 'src/app/shared/services/-authentication.service';
+import { AuthenticationService } from 'src/app/shared/services/authentication.service';
 import { Component } from '@angular/core';
-import { Merchant } from 'src/app/shared/models/-merchant.model';
-import { MerchantService } from 'src/app/shared/services/-merchant.service';
+import { Merchant } from 'src/app/shared/models/merchant.model';
+import { MerchantService } from 'src/app/shared/services/merchant.service';
 import { MutationResult } from 'src/app/shared/models/mutation-result.model';
 import { Router } from '@angular/router';
 

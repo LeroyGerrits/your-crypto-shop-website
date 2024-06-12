@@ -2,10 +2,10 @@ import { CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from '@angular/core';
 import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
 import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
-import { Constants } from 'src/app/shared/-constants';
+import { Constants } from 'src/app/shared/constants';
 import { CryptoWalletService } from './crypto-wallet.service';
-import { Environment } from 'src/app/shared/environments/Environment';
-import { GetCryptoWalletsParameters } from '../models/parameters/GetCryptoWalletsParameters.model';
+import { Environment } from 'src/app/shared/environments/-environment';
+import { GetCryptoWalletsParameters } from '../models/parameters/get-crypto-wallets-parameters.model';
 import { TestBed } from '@angular/core/testing';
 import { TestDataCryptoWallets } from 'src/assets/test-data/CryptoWallets';
 

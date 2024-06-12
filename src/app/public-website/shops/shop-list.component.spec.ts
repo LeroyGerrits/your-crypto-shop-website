@@ -2,7 +2,7 @@ import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { ComponentFixture, TestBed, fakeAsync, tick } from '@angular/core/testing';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { CountryService } from 'src/app/shared/services/-country.service';
+import { CountryService } from 'src/app/shared/services/country.service';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
@@ -14,7 +14,7 @@ import { PublicWebsiteShopListComponent } from './shop-list.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RouterTestingModule } from '@angular/router/testing';
 import { ShopCategoryService } from 'src/app/shared/services/shop-category.service';
-import { ShopService } from 'src/app/shared/services/-shop.service';
+import { ShopService } from 'src/app/shared/services/shop.service';
 import { Sort } from '@angular/material/sort';
 import { TestDataCountries } from 'src/assets/test-data/Countries';
 import { TestDataPublicShops } from 'src/assets/test-data/PublicShops';

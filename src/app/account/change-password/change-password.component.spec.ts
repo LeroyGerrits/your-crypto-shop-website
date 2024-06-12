@@ -9,7 +9,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { of, throwError } from 'rxjs';
 import { MutationResult } from 'src/app/shared/models/mutation-result.model';
-import { MerchantService } from 'src/app/shared/services/-merchant.service';
+import { MerchantService } from 'src/app/shared/services/merchant.service';
 import { AccountChangePasswordComponent } from './change-password.component';
 import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 

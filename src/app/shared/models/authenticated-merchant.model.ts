@@ -1,4 +1,4 @@
-import { Merchant } from './-merchant.model';
+import { Merchant } from './merchant.model';
 
 export class AuthenticatedMerchant {
     Merchant?: Merchant;

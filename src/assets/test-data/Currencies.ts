@@ -1,4 +1,4 @@
-import { Currency } from 'src/app/shared/models/-currency.model';
+import { Currency } from 'src/app/shared/models/currency.model';
 import { CurrencyType } from 'src/app/shared/enums/currency-type.enum';
 
 export const TestDataCurrencies: Currency[] = [

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { ActivatedRoute } from '@angular/router';
-import { Constants } from 'src/app/shared/-constants';
+import { Constants } from 'src/app/shared/constants';
 import { Title } from '@angular/platform-browser';
 
 @Component({

@@ -1,6 +1,6 @@
-import { Environment } from 'src/app/shared/environments/Environment';
-import { GetDifficultyResponse } from '../models/parameters/GetDifficultyResponse.model';
-import { GetMiningInfoResponse } from '../models/parameters/GetMiningInfoResponse.model';
+import { Environment } from 'src/app/shared/environments/-environment';
+import { GetDifficultyResponse } from '../models/parameters/get-difficulty-response.model';
+import { GetMiningInfoResponse } from '../models/parameters/get-mining-info-response.model';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';

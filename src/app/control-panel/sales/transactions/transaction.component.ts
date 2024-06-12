@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Transaction } from 'src/app/shared/models/-transaction.model';
+import { Transaction } from 'src/app/shared/models/transaction.model';
 
 @Component({
   selector: 'control-panel-sales-transaction',

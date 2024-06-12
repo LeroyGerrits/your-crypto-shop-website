@@ -13,13 +13,13 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterTestingModule } from '@angular/router/testing';
 import { MutationResult } from 'src/app/shared/models/mutation-result.model';
 import { DeliveryMethodService } from 'src/app/shared/services/delivery-method.service';
-import { ShopService } from 'src/app/shared/services/-shop.service';
+import { ShopService } from 'src/app/shared/services/shop.service';
 import { TestDataDeliveryMethods } from 'src/assets/test-data/DeliveryMethods';
 import { TestDataShops } from 'src/assets/test-data/Shops';
 import { ControlPanelConfigurationDeliveryMethodListComponent } from './delivery-method-list.component';
 import { ControlPanelConfigurationDeliveryMethodComponent } from './delivery-method.component';
-import { MutateDeliveryMethodRequest } from 'src/app/shared/models/request/MutateDeliveryMethodRequest.model';
-import { CountryService } from 'src/app/shared/services/-country.service';
+import { MutateDeliveryMethodRequest } from 'src/app/shared/models/request/mutate-delivery-method-request.model';
+import { CountryService } from 'src/app/shared/services/country.service';
 import { TestDataCountries } from 'src/assets/test-data/Countries';
 import { MatTabsModule } from '@angular/material/tabs';
 

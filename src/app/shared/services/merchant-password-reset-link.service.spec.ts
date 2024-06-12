@@ -2,8 +2,8 @@ import { CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from '@angular/core';
 import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
 import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
-import { Constants } from 'src/app/shared/-constants';
-import { Environment } from 'src/app/shared/environments/Environment';
+import { Constants } from 'src/app/shared/constants';
+import { Environment } from 'src/app/shared/environments/-environment';
 import { MerchantPasswordResetLinkService } from './merchant-password-reset-link.service';
 import { TestBed } from '@angular/core/testing';
 import { TestDataMerchantPasswordResetLinks } from 'src/assets/test-data/MerchantPasswordResetLinks';

@@ -1,9 +1,9 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 
 import { DatePipe } from '@angular/common';
-import { Environment } from 'src/app/shared/environments/Environment';
+import { Environment } from 'src/app/shared/environments/-environment';
 import { FinancialStatementTransaction } from '../models/financial-statement-transaction.model';
-import { GetFinancialStatementTransactionsParameters } from '../models/parameters/GetFinancialStatementTransactionsParameters.model';
+import { GetFinancialStatementTransactionsParameters } from '../models/parameters/get-financial-statement-transactions-parameters.model';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 

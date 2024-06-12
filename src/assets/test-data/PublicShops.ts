@@ -1,4 +1,4 @@
-import { PublicShop } from 'src/app/shared/models/viewmodels/PublicShop.model';
+import { PublicShop } from 'src/app/shared/models/viewmodels/public-shop.model';
 
 export const TestDataPublicShops: PublicShop[] = [
     {

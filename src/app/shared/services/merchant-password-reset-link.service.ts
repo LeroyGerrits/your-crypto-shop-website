@@ -1,10 +1,10 @@
-import { Environment } from 'src/app/shared/environments/Environment';
+import { Environment } from 'src/app/shared/environments/-environment';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { MerchantPasswordResetLink } from '../models/merchant-password-reset-link.model';
 import { MutationResult } from '../models/mutation-result.model';
 import { Observable } from 'rxjs';
-import { ResetPasswordRequest } from '../models/request/ResetPasswordRequest.model';
+import { ResetPasswordRequest } from '../models/request/reset-password-request.model';
 
 @Injectable()
 export class MerchantPasswordResetLinkService {

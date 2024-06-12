@@ -2,8 +2,8 @@ import { CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from '@angular/core';
 import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
 import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
-import { Environment } from 'src/app/shared/environments/Environment';
-import { GetProductPhotosParameters } from '../models/parameters/GetProductPhotosParameters.model';
+import { Environment } from 'src/app/shared/environments/-environment';
+import { GetProductPhotosParameters } from '../models/parameters/get-product-photos-parameters.model';
 import { ProductPhotoService } from './product-photo.service';
 import { TestBed } from '@angular/core/testing';
 import { TestDataProductPhotos } from 'src/assets/test-data/ProductPhotos';

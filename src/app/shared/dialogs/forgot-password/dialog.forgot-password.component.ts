@@ -3,7 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar, MatSnackBarRef, TextOnlySnackBar } from '@angular/material/snack-bar';
 
 import { MatDialogRef } from '@angular/material/dialog';
-import { MerchantService } from '../../services/-merchant.service';
+import { MerchantService } from '../../services/merchant.service';
 import { Router } from '@angular/router';
 
 @Component({

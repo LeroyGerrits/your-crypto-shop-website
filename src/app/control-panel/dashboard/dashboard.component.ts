@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 
-import { AuthenticationService } from 'src/app/shared/services/-authentication.service';
+import { AuthenticationService } from 'src/app/shared/services/authentication.service';
 import { Chart, ChartItem } from 'chart.js/auto';
-import { Constants } from 'src/app/shared/-constants';
-import { Merchant } from 'src/app/shared/models/-merchant.model';
+import { Constants } from 'src/app/shared/constants';
+import { Merchant } from 'src/app/shared/models/merchant.model';
 import { IDictionaryNumber } from 'src/app/shared/interfaces/idictionary-number.interface';
-import { GeneralService } from 'src/app/shared/services/-general.service';
+import { GeneralService } from 'src/app/shared/services/general.service';
 
 @Component({
   selector: 'control-panel-dashboard',

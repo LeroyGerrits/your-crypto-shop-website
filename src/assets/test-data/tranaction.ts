@@ -1,4 +1,4 @@
-import { Transaction } from 'src/app/shared/models/-transaction.model';
+import { Transaction } from 'src/app/shared/models/transaction.model';
 
 export const TestDataTransactions: Transaction[] = [
     {

@@ -2,7 +2,7 @@ import { ComponentFixture, TestBed, fakeAsync, tick } from '@angular/core/testin
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ControlPanelCustomerListComponent } from './customer-list.component';
-import { CustomerService } from 'src/app/shared/services/-customer.service';
+import { CustomerService } from 'src/app/shared/services/customer.service';
 import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
@@ -13,7 +13,7 @@ import { MatTableModule } from '@angular/material/table';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
-import { ShopService } from 'src/app/shared/services/-shop.service';
+import { ShopService } from 'src/app/shared/services/shop.service';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MutationResult } from 'src/app/shared/models/mutation-result.model';
@@ -21,7 +21,7 @@ import { TestDataCustomers } from 'src/assets/test-data/Customers';
 import { of, throwError } from 'rxjs';
 import { TestDataShops } from 'src/assets/test-data/Shops';
 import { Sort } from '@angular/material/sort';
-import { Shop } from 'src/app/shared/models/-shop.model';
+import { Shop } from 'src/app/shared/models/shop.model';
 import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { MatExpansionModule } from '@angular/material/expansion';
 

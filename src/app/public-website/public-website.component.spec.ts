@@ -5,9 +5,9 @@ import { MatDialog } from '@angular/material/dialog';
 import { NavigationEnd } from '@angular/router';
 import { of } from 'rxjs';
 import { TestDataPublicShops } from 'src/assets/test-data/PublicShops';
-import { Stats } from '../shared/models/-stats.model';
-import { GeneralService } from '../shared/services/-general.service';
-import { ShopService } from '../shared/services/-shop.service';
+import { Stats } from '../shared/models/stats.model';
+import { GeneralService } from '../shared/services/general.service';
+import { ShopService } from '../shared/services/shop.service';
 import { PublicWebsiteComponent } from './public-website.component';
 
 describe('PublicWebsiteComponent', () => {

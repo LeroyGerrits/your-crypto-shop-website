@@ -5,16 +5,16 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatChipEditedEvent, MatChipInputEvent } from '@angular/material/chips';
 import { MatSnackBar, MatSnackBarRef, TextOnlySnackBar } from '@angular/material/snack-bar';
 
-import { Constants } from 'src/app/shared/-constants';
-import { Environment } from 'src/app/shared/environments/Environment';
-import { Field } from 'src/app/shared/models/-field.model';
+import { Constants } from 'src/app/shared/constants';
+import { Environment } from 'src/app/shared/environments/-environment';
+import { Field } from 'src/app/shared/models/field.model';
 import { FieldDataType } from 'src/app/shared/enums/field-data-type.enum';
 import { FieldEntity } from 'src/app/shared/enums/field-entity.enum';
-import { FieldService } from 'src/app/shared/services/-field.service';
+import { FieldService } from 'src/app/shared/services/field.service';
 import { FieldType } from 'src/app/shared/enums/field-type.enum';
 import { MutationResult } from 'src/app/shared/models/mutation-result.model';
-import { Shop } from 'src/app/shared/models/-shop.model';
-import { ShopService } from 'src/app/shared/services/-shop.service';
+import { Shop } from 'src/app/shared/models/shop.model';
+import { ShopService } from 'src/app/shared/services/shop.service';
 
 @Component({
   selector: 'control-panel-configuration-field',

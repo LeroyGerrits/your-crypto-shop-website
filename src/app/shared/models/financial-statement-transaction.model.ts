@@ -1,4 +1,4 @@
-import { Currency } from './-currency.model';
+import { Currency } from './currency.model';
 import { FinancialStatementTransactionType } from '../enums/financial-statement-transaction-type.enum';
 import { Recurrance } from '../enums/recurrance.enum';
 

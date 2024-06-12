@@ -2,10 +2,10 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar, MatSnackBarRef, TextOnlySnackBar } from '@angular/material/snack-bar';
 
 import { Component } from '@angular/core';
-import { Constants } from '../../-constants';
+import { Constants } from '../../constants';
 import { MatDialogRef } from '@angular/material/dialog';
-import { Merchant } from '../../models/-merchant.model';
-import { MerchantService } from '../../services/-merchant.service';
+import { Merchant } from '../../models/merchant.model';
+import { MerchantService } from '../../services/merchant.service';
 import { MutationResult } from '../../models/mutation-result.model';
 import { Router } from '@angular/router';
 

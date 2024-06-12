@@ -1,4 +1,4 @@
-import { Page } from 'src/app/shared/models/-page.model';
+import { Page } from 'src/app/shared/models/page.model';
 import { TestDataShops } from './Shops';
 
 export const TestDataPages: Page[] = [

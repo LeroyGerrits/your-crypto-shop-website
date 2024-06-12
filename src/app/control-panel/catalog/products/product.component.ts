@@ -3,29 +3,29 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar, MatSnackBarRef, TextOnlySnackBar } from '@angular/material/snack-bar';
 
-import { Category } from 'src/app/shared/models/-category.model';
-import { CategoryService } from 'src/app/shared/services/-category.service';
-import { Constants } from 'src/app/shared/-constants';
-import { Environment } from 'src/app/shared/environments/Environment';
-import { Field } from 'src/app/shared/models/-field.model';
+import { Category } from 'src/app/shared/models/category.model';
+import { CategoryService } from 'src/app/shared/services/category.service';
+import { Constants } from 'src/app/shared/constants';
+import { Environment } from 'src/app/shared/environments/-environment';
+import { Field } from 'src/app/shared/models/field.model';
 import { FieldDataType } from 'src/app/shared/enums/field-data-type.enum';
 import { FieldEntity } from 'src/app/shared/enums/field-entity.enum';
-import { FieldService } from 'src/app/shared/services/-field.service';
+import { FieldService } from 'src/app/shared/services/field.service';
 import { FieldType } from 'src/app/shared/enums/field-type.enum';
-import { GetCategoriesParameters } from 'src/app/shared/models/parameters/GetCategoriesParameters.model';
-import { GetFieldsParameters } from 'src/app/shared/models/parameters/GetFieldsParameters.model';
-import { GetProductResponse } from 'src/app/shared/models/response/GetProductResponse.model';
+import { GetCategoriesParameters } from 'src/app/shared/models/parameters/get-categories-parameters.model';
+import { GetFieldsParameters } from 'src/app/shared/models/parameters/get-fields-parameters.model';
+import { GetProductResponse } from 'src/app/shared/models/response/get-product-response.model';
 import { IDictionaryFormControl } from 'src/app/shared/interfaces/idictionary-formcontrol.interface';
 import { IDictionaryString } from 'src/app/shared/interfaces/idictionary-string.interface';
 import { MatCheckboxChange } from '@angular/material/checkbox';
 import { MatTreeNestedDataSource } from '@angular/material/tree';
-import { MutateProductRequest } from 'src/app/shared/models/request/MutateProductRequest.model';
+import { MutateProductRequest } from 'src/app/shared/models/request/mutate-product-request.model';
 import { MutationResult } from 'src/app/shared/models/mutation-result.model';
 import { NestedTreeControl } from '@angular/cdk/tree';
-import { Product } from 'src/app/shared/models/-product.model';
-import { ProductService } from 'src/app/shared/services/-product.service';
-import { Shop } from 'src/app/shared/models/-shop.model';
-import { ShopService } from 'src/app/shared/services/-shop.service';
+import { Product } from 'src/app/shared/models/product.model';
+import { ProductService } from 'src/app/shared/services/product.service';
+import { Shop } from 'src/app/shared/models/shop.model';
+import { ShopService } from 'src/app/shared/services/shop.service';
 
 @Component({
   selector: 'control-panel-catalog-product',

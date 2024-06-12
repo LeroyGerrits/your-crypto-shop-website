@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Constants } from 'src/app/shared/-constants';
+import { Constants } from 'src/app/shared/constants';
 import { DialogDonateComponent } from 'src/app/shared/dialogs/donate/dialog.donate.component';
 import { DialogSignUpComponent } from 'src/app/shared/dialogs/signup/dialog.signup.component';
 import { MatDialog } from '@angular/material/dialog';

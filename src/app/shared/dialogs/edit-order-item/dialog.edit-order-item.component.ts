@@ -1,15 +1,12 @@
 import { Component, Inject, Input, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { MatSnackBar, MatSnackBarRef, TextOnlySnackBar } from '@angular/material/snack-bar';
-
-import { Constants } from 'src/app/shared/-constants';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { MatSnackBar, MatSnackBarRef, TextOnlySnackBar } from '@angular/material/snack-bar';
+import { DialogData } from 'src/app/control-panel/catalog/categories/category.component';
+import { Constants } from 'src/app/shared/constants';
 import { MutationResult } from 'src/app/shared/models/mutation-result.model';
 import { OrderItem } from '../../models/order-item.model';
-import { OrderService } from '../../services/-order.service';
-import { ProductService } from '../../services/-product.service';
-import { Router } from '@angular/router';
-import { DialogData } from 'src/app/control-panel/catalog/categories/category.component';
+import { OrderService } from '../../services/order.service';
 
 @Component({
   templateUrl: 'dialog.edit-order-item.component.html',

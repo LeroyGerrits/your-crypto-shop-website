@@ -2,17 +2,17 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { MatSnackBar, MatSnackBarRef, TextOnlySnackBar } from '@angular/material/snack-bar';
 
-import { Category } from 'src/app/shared/models/-category.model';
-import { CategoryService } from 'src/app/shared/services/-category.service';
+import { Category } from 'src/app/shared/models/category.model';
+import { CategoryService } from 'src/app/shared/services/category.service';
 import { ControlPanelCatalogCategoryComponent } from './category.component';
 import { DialogDeleteComponent } from 'src/app/shared/dialogs/delete/dialog.delete.component';
-import { GetCategoriesParameters } from 'src/app/shared/models/parameters/GetCategoriesParameters.model';
+import { GetCategoriesParameters } from 'src/app/shared/models/parameters/get-categories-parameters.model';
 import { MatDialog } from '@angular/material/dialog';
 import { MatTreeNestedDataSource } from '@angular/material/tree';
 import { MutationResult } from 'src/app/shared/models/mutation-result.model';
 import { NestedTreeControl } from '@angular/cdk/tree';
-import { Shop } from 'src/app/shared/models/-shop.model';
-import { ShopService } from 'src/app/shared/services/-shop.service';
+import { Shop } from 'src/app/shared/models/shop.model';
+import { ShopService } from 'src/app/shared/services/shop.service';
 
 @Component({
   selector: 'control-panel-catalog-category-list',

@@ -3,10 +3,10 @@ import { NavigationEnd, Router } from '@angular/router';
 
 import { DialogSignUpComponent } from '../shared/dialogs/signup/dialog.signup.component';
 import { MatDialog } from '@angular/material/dialog';
-import { ShopService } from '../shared/services/-shop.service';
-import { GeneralService } from '../shared/services/-general.service';
-import { Stats } from '../shared/models/-stats.model';
-import { PublicShop } from '../shared/models/viewmodels/PublicShop.model';
+import { ShopService } from '../shared/services/shop.service';
+import { GeneralService } from '../shared/services/general.service';
+import { Stats } from '../shared/models/stats.model';
+import { PublicShop } from '../shared/models/viewmodels/public-shop.model';
 
 @Component({
   selector: 'public-website',

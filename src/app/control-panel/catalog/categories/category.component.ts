@@ -2,10 +2,10 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 import { Component, Inject, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { Category } from 'src/app/shared/models/-category.model';
+import { Category } from 'src/app/shared/models/category.model';
 import { MutationResult } from 'src/app/shared/models/mutation-result.model';
-import { Shop } from 'src/app/shared/models/-shop.model';
-import { CategoryService } from 'src/app/shared/services/-category.service';
+import { Shop } from 'src/app/shared/models/shop.model';
+import { CategoryService } from 'src/app/shared/services/category.service';
 import { MatSnackBar, MatSnackBarRef, TextOnlySnackBar } from '@angular/material/snack-bar';
 
 export interface DialogData {

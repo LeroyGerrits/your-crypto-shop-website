@@ -16,7 +16,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterTestingModule } from '@angular/router/testing';
 import { MutationResult } from 'src/app/shared/models/mutation-result.model';
 import { DeliveryMethodService } from 'src/app/shared/services/delivery-method.service';
-import { ShopService } from 'src/app/shared/services/-shop.service';
+import { ShopService } from 'src/app/shared/services/shop.service';
 import { TestDataDeliveryMethods } from 'src/assets/test-data/DeliveryMethods';
 import { TestDataShops } from 'src/assets/test-data/Shops';
 import { ControlPanelConfigurationDeliveryMethodListComponent } from './delivery-method-list.component';

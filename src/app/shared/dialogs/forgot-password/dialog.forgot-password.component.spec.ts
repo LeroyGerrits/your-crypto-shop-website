@@ -8,7 +8,7 @@ import { DialogForgotPasswordComponent } from './dialog.forgot-password.componen
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { MerchantService } from 'src/app/shared/services/-merchant.service';
+import { MerchantService } from 'src/app/shared/services/merchant.service';
 import { PublicWebsiteMessageComponent } from 'src/app/public-website/message/message.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RouterTestingModule } from '@angular/router/testing';

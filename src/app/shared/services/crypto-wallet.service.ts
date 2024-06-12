@@ -1,8 +1,8 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 
 import { CryptoWallet } from 'src/app/shared/models/crypto-wallet.model';
-import { Environment } from 'src/app/shared/environments/Environment';
-import { GetCryptoWalletsParameters } from '../models/parameters/GetCryptoWalletsParameters.model';
+import { Environment } from 'src/app/shared/environments/-environment';
+import { GetCryptoWalletsParameters } from '../models/parameters/get-crypto-wallets-parameters.model';
 import { Injectable } from '@angular/core';
 import { MutationResult } from 'src/app/shared/models/mutation-result.model';
 import { Observable } from 'rxjs';

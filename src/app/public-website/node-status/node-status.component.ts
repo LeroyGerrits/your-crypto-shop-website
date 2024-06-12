@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
 import { CryptoNodeService } from 'src/app/shared/services/crypto-node.service';
-import { GetDifficultyResponse } from 'src/app/shared/models/parameters/GetDifficultyResponse.model';
-import { GetMiningInfoResponse } from 'src/app/shared/models/parameters/GetMiningInfoResponse.model';
+import { GetDifficultyResponse } from 'src/app/shared/models/parameters/get-difficulty-response.model';
+import { GetMiningInfoResponse } from 'src/app/shared/models/parameters/get-mining-info-response.model';
 
 @Component({
   selector: 'public-website-node-status',

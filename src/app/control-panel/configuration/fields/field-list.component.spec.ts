@@ -16,12 +16,12 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterTestingModule } from '@angular/router/testing';
 import { MutationResult } from 'src/app/shared/models/mutation-result.model';
 import { DeliveryMethodService } from 'src/app/shared/services/delivery-method.service';
-import { ShopService } from 'src/app/shared/services/-shop.service';
+import { ShopService } from 'src/app/shared/services/shop.service';
 import { TestDataDeliveryMethods } from 'src/assets/test-data/DeliveryMethods';
 import { TestDataShops } from 'src/assets/test-data/Shops';
 import { ControlPanelConfigurationFieldListComponent } from './field-list.component';
 import { TestDataFields } from 'src/assets/test-data/Fields';
-import { FieldService } from 'src/app/shared/services/-field.service';
+import { FieldService } from 'src/app/shared/services/field.service';
 import { MatExpansionModule } from '@angular/material/expansion';
 
 describe('ControlPanelConfigurationFieldListComponent', () => {

@@ -4,14 +4,14 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort, Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { debounceTime, distinctUntilChanged } from 'rxjs';
-import { Environment } from 'src/app/shared/environments/Environment';
-import { Country } from 'src/app/shared/models/-country.model';
+import { Environment } from 'src/app/shared/environments/-environment';
+import { Country } from 'src/app/shared/models/country.model';
+import { GetShopsParameters } from 'src/app/shared/models/parameters/get-shops-parameters.model';
 import { ShopCategory } from 'src/app/shared/models/shop-category.model';
-import { GetShopsParameters } from 'src/app/shared/models/parameters/GetShopsParameters.model';
-import { PublicShop } from 'src/app/shared/models/viewmodels/PublicShop.model';
-import { CountryService } from 'src/app/shared/services/-country.service';
-import { ShopService } from 'src/app/shared/services/-shop.service';
+import { PublicShop } from 'src/app/shared/models/viewmodels/public-shop.model';
+import { CountryService } from 'src/app/shared/services/country.service';
 import { ShopCategoryService } from 'src/app/shared/services/shop-category.service';
+import { ShopService } from 'src/app/shared/services/shop.service';
 
 @Component({
   selector: 'public-website-shop-list',

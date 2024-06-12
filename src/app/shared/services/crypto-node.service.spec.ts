@@ -3,7 +3,7 @@ import { HttpTestingController, provideHttpClientTesting } from '@angular/common
 import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 import { CryptoNodeService } from './crypto-node.service';
-import { Environment } from 'src/app/shared/environments/Environment';
+import { Environment } from 'src/app/shared/environments/-environment';
 import { TestBed } from '@angular/core/testing';
 
 describe('CryptoNodeService', () => {

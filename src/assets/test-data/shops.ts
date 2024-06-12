@@ -1,4 +1,4 @@
-import { Shop } from 'src/app/shared/models/-shop.model';
+import { Shop } from 'src/app/shared/models/shop.model';
 import { ShopOrderMethod } from 'src/app/shared/enums/shop-order-method.enum';
 import { TestDataCategories } from './Categories';
 import { TestDataCountries } from './Countries';

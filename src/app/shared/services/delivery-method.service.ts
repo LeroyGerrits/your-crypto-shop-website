@@ -1,11 +1,11 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 
 import { DeliveryMethod } from 'src/app/shared/models/delivery-method.model';
-import { Environment } from 'src/app/shared/environments/Environment';
-import { GetDeliveryMethodResponse } from '../models/response/GetDeliveryMethodResponse.model';
-import { GetDeliveryMethodsParameters } from '../models/parameters/GetDeliveryMethodsParameters.model';
+import { Environment } from 'src/app/shared/environments/-environment';
+import { GetDeliveryMethodResponse } from '../models/response/get-delivery-method-response.model';
+import { GetDeliveryMethodsParameters } from '../models/parameters/get-delivery-methods-parameters.model';
 import { Injectable } from '@angular/core';
-import { MutateDeliveryMethodRequest } from '../models/request/MutateDeliveryMethodRequest.model';
+import { MutateDeliveryMethodRequest } from '../models/request/mutate-delivery-method-request.model';
 import { MutationResult } from 'src/app/shared/models/mutation-result.model';
 import { Observable } from 'rxjs';
 

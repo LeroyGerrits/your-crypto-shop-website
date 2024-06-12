@@ -9,7 +9,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterTestingModule } from '@angular/router/testing';
 import { MutationResult } from 'src/app/shared/models/mutation-result.model';
-import { MerchantService } from 'src/app/shared/services/-merchant.service';
+import { MerchantService } from 'src/app/shared/services/merchant.service';
 import { TestDataMerchants } from 'src/assets/test-data/Merchants';
 import { PublicWebsiteMessageComponent } from '../message/message.component';
 import { PublicWebsiteAccountActivateComponent } from './account-activate.component';

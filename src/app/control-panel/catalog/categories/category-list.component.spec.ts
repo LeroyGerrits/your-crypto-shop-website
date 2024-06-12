@@ -4,7 +4,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { of, throwError } from 'rxjs';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { CategoryService } from 'src/app/shared/services/-category.service';
+import { CategoryService } from 'src/app/shared/services/category.service';
 import { ControlPanelCatalogCategoryListComponent } from './category-list.component';
 import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { MatButtonModule } from '@angular/material/button';
@@ -17,7 +17,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatTreeModule } from '@angular/material/tree';
 import { MutationResult } from 'src/app/shared/models/mutation-result.model';
 import { RouterTestingModule } from '@angular/router/testing';
-import { ShopService } from 'src/app/shared/services/-shop.service';
+import { ShopService } from 'src/app/shared/services/shop.service';
 import { TestDataCategories } from 'src/assets/test-data/Categories';
 import { TestDataShops } from 'src/assets/test-data/Shops';
 import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
