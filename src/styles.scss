@@ -50,12 +50,12 @@
   --mat-menu-item-label-text-size: 14px;
   --mat-option-label-text-size: 14px;
   --font-main: 'open_sansregular', Helvetica, Tahoma !important;
-  --dark-blue-color: #3e59a3;
+  --dark-blue-color: #201060;
   --dark-gray-color: #202020;
   --font-color: #fff;
-  --light-blue-color: #2080e0;
-  --lighter-blue-color: #3090f0;
-  --lightest-blue-color: #3f9fff;
+  --light-blue-color: #a090e0;
+  --lighter-blue-color: #b0a0f0;
+  --lightest-blue-color: #bfafff;
   --light-gray-color: #404040;
   --error-color: #dc3545;
   --table-header-background-color: #303030;
@@ -64,24 +64,24 @@
 }
 
 $md-yourcryptoshoppalette-primary: (
-  50 : #e8ebf4,
-  100 : #c5cde3,
-  200 : #9facd1,
-  300 : #788bbf,
-  400 : #5b72b1,
-  500 : #3e59a3,
-  600 : #38519b,
-  700 : #304891,
-  800 : #283e88,
-  900 : #1b2e77,
-  A100 : #b2c0ff,
-  A200 : #7f96ff,
-  A400 : #4c6cff,
-  A700 : #3257ff,
+  50 : #e4e2ec,
+  100 : #bcb7cf,
+  200 : #9088b0,
+  300 : #635890,
+  400 : #413478,
+  500 : #201060,
+  600 : #1c0e58,
+  700 : #180c4e,
+  800 : #130944,
+  900 : #0b0533,
+  A100 : #786cff,
+  A200 : #4939ff,
+  A400 : #1a06ff,
+  A700 : #1300ec,
   contrast: (50 : #000000,
     100 : #000000,
     200 : #000000,
-    300 : #000000,
+    300 : #ffffff,
     400 : #ffffff,
     500 : #ffffff,
     600 : #ffffff,
@@ -89,7 +89,7 @@ $md-yourcryptoshoppalette-primary: (
     800 : #ffffff,
     900 : #ffffff,
     A100 : #000000,
-    A200 : #000000,
+    A200 : #ffffff,
     A400 : #ffffff,
     A700 : #ffffff,
   )
@@ -130,9 +130,7 @@ $md-yourcryptoshoppalette-accent: (
 $my-primary: mat.m2-define-palette($md-yourcryptoshoppalette-primary, 500);
 $my-accent: mat.m2-define-palette($md-yourcryptoshoppalette-accent, 500);
 
-$my-theme: mat.m2-define-dark-theme((color: (primary: $my-primary,
-        accent: $my-accent,
-      ),
+$my-theme: mat.m2-define-dark-theme((color: (primary: $my-primary, accent: $my-accent, ),
       typography: mat.m2-define-typography-config($font-family: 'open_sansregular'),
       density: 0));
 
