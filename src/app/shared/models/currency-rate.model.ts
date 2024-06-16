@@ -3,5 +3,6 @@ export class CurrencyRate {
     CurrencyFromId!: string;
     CurrencyToId!: string;
     Rate!: number;
+    InvertedRate!: number;
     Date!: Date;
 }

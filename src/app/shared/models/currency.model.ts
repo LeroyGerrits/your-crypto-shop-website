@@ -5,5 +5,6 @@ export class Currency {
     Type!: CurrencyType;
     Symbol?: string;
     Code!: string;
-    Name!: string;    
+    Name!: string;
+    Supported!: boolean;
 }

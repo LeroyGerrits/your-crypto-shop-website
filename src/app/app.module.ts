@@ -37,6 +37,7 @@ import { CountryService } from './shared/services/country.service';
 import { CryptoNodeService } from './shared/services/crypto-node.service';
 import { CryptoTagComponent } from './shared/components/crypto-tag/crypto-tag.component';
 import { CryptoWalletService } from './shared/services/crypto-wallet.service';
+import { CurrencyRateService } from './shared/services/currency-rate.service';
 import { CurrencyService } from './shared/services/currency.service';
 import { CustomerService } from './shared/services/customer.service';
 import { DatePipe } from '@angular/common';
@@ -61,6 +62,7 @@ import { HashRatePipe } from './shared/pipes/hash-rate.pipe';
 import { JwtInterceptor } from './shared/interceptors/jwt.interceptor';
 import { MatBadgeModule } from '@angular/material/badge';
 import { MatButtonModule } from '@angular/material/button';
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatCardModule } from '@angular/material/card';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatChipsModule } from '@angular/material/chips';
@@ -177,6 +179,7 @@ import { StripHtmlPipe } from './shared/pipes/strip-html.pipe';
         BrowserModule,
         MatBadgeModule,
         MatButtonModule,
+        MatButtonToggleModule,
         MatCardModule,
         MatCheckboxModule,
         MatChipsModule,
@@ -215,6 +218,7 @@ import { StripHtmlPipe } from './shared/pipes/strip-html.pipe';
         BooleanConvertPipe,
         CategoryService,
         CountryService,
+        CurrencyRateService,
         CurrencyService,
         CustomerService,
         DatePipe,

@@ -1,4 +1,5 @@
 export abstract class Constants {
+    static readonly CURRENCY_ID_USD: string = '342cadec-06bc-4e3a-8ccf-9991a2b5d21e';
     static readonly CURRENCY_SYMBOL: string = 'Ɗ';
     static readonly DATE_FORMAT: string = 'dd-MM-yyyy';
     static readonly DATE_TIME_FORMAT: string = 'dd-MM-yyyy HH:mm';

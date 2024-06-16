@@ -335,7 +335,12 @@ p img {
 
 #SupportedCoins {
   background-color: var(--dark-blue-color);
-  text-align:center;
+  text-align: center;
+}
+
+#SupportedCoins span.FiatRate {
+  display: block;
+  line-height: 2em;
 }
 
 #Body {
