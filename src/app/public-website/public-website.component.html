@@ -32,9 +32,9 @@
     <div class="CenteredContainer">
         <div class="ColumnOneSixth">
             <div class="WrapperPadding20-10-20-8">
-                <mat-form-field color="accent" subscriptSizing="dynamic">
+                <mat-form-field subscriptSizing="dynamic">
                     <mat-label>Display value in</mat-label>
-                    <mat-select [formControl]="controlSelectedCurrencyFiat">
+                    <mat-select [formControl]="controlSelectedCurrencyFiat" (selectionChange)="retrieveCurrencyRates()">
                         <mat-option *ngFor="let currency of this.currenciesSupportedFiat" [value]="currency.Id">{{currency.Code}}</mat-option>
                     </mat-select>
                 </mat-form-field>

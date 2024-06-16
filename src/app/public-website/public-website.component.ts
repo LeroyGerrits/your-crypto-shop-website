@@ -50,22 +50,7 @@ export class PublicWebsiteComponent implements OnInit {
     this.currencyService.getList().subscribe(currencies => {
       this.currencies = currencies;
 
-      var foundCurrency = this.currencies.find(x => x.Id == this.controlSelectedCurrencyFiat.value);
-      if (foundCurrency)
-        this.selectedCurrencyFiat = foundCurrency;
-
-      let currencyRateParameters = new GetCurrencyRatesParameters();
-      currencyRateParameters.CurrencyFromId = this.controlSelectedCurrencyFiat.value!;
-
-      this.currencyRateService.getList(currencyRateParameters).subscribe(currencyRates => {
-        this.currencyRates = currencyRates;
-
-        currencyRates.forEach(currencyRate => {
-          this.dictCurrencyRates[currencyRate.CurrencyToId] = currencyRate.InvertedRate;
-        });
-
-        console.log(this.dictCurrencyRates);
-      });
+      this.retrieveCurrencyRates();
 
       currencies.forEach(currency => {
         if (currency.Supported) {
@@ -82,6 +67,26 @@ export class PublicWebsiteComponent implements OnInit {
         this.showCallToAction = event.url == '/';
       }
     });
+  }
+
+  retrieveCurrencyRates() {
+    const selectedCurrencyFiatId = this.controlSelectedCurrencyFiat.value;
+    if (selectedCurrencyFiatId) {
+      var foundCurrency = this.currencies.find(x => x.Id == selectedCurrencyFiatId);
+      if (foundCurrency)
+        this.selectedCurrencyFiat = foundCurrency;
+
+      let currencyRateParameters = new GetCurrencyRatesParameters();
+      currencyRateParameters.CurrencyFromId = selectedCurrencyFiatId;
+
+      this.currencyRateService.getList(currencyRateParameters).subscribe(currencyRates => {
+        this.currencyRates = currencyRates;
+
+        currencyRates.forEach(currencyRate => {
+          this.dictCurrencyRates[currencyRate.CurrencyToId] = currencyRate.InvertedRate;
+        });
+      });
+    }
   }
 
   signUp() {
