@@ -3,4 +3,5 @@ export class GetCurrenciesParameters {
     Symbol?: string;
     Code?: string;
     Name?: string;
+    Supported?: boolean;
 }

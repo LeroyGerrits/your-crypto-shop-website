@@ -20,6 +20,7 @@ export class CurrencyService {
             if (parameters.Symbol) httpParams = httpParams.append('symbol', parameters.Symbol);
             if (parameters.Code) httpParams = httpParams.append('code', parameters.Code);
             if (parameters.Name) httpParams = httpParams.append('name', parameters.Name);
+            if (parameters.Supported != null) httpParams = httpParams.append('supported', parameters.Supported);
         }
 
         return this.http.get<Currency[]>(this.apiUrl, { params: httpParams });

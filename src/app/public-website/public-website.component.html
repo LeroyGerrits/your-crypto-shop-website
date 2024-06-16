@@ -2,7 +2,7 @@
     <div class="CenteredContainer">
         <div class="LogoAndNavigation">
             <a id="Logo" [routerLink]="['/']">
-                <img src="assets/images/Header Logo.png" width="46" height="64" alt="Your Crypto Shop" />
+                <img src="assets/images/Header Logo.png" width="54" height="64" alt="Your Crypto Shop" />
                 <span>Your Crypto Shop</span>
             </a>
             <ul>
@@ -22,12 +22,47 @@
                 <span class="Explanation">Give your customers a seamless shopping experience and a peer-to-peer checkout process using various crypto currencies.</span>
                 <div class="Buttons">
                     <button mat-button [routerLink]="['/about']">About Your Crypto Shop</button>
-                    <button mat-raised-button color="primary" (click)="signUp()">Sign up</button>
+                    <button mat-raised-button color="accent" (click)="signUp()">Sign up</button>
                 </div>
             </div>
         </div>
     </div>
 </header>
+<div id="SupportedCoins">
+    <div class="CenteredContainer">
+        <div class="ColumnOneSixth">
+            <div class="WrapperPadding20-10-20-8">
+                <strong>Supported coins</strong>
+            </div>
+        </div>
+        <div class="ColumnOneSixth">
+            <div class="WrapperPadding20-10-20-10">
+                <app-crypto-tag cryptoName="Bitcoin cash" cryptoCode="BCH" />                
+            </div>
+        </div>
+        <div class="ColumnOneSixth">
+            <div class="WrapperPadding20-10-20-10">
+                <app-crypto-tag cryptoName="Decred" cryptoCode="DCR" />                
+            </div>
+        </div>
+        <div class="ColumnOneSixth">
+            <div class="WrapperPadding20-10-20-10">
+                <app-crypto-tag cryptoName="Dogecoin" cryptoCode="DOGE" />
+            </div>
+        </div>
+        <div class="ColumnOneSixth">
+            <div class="WrapperPadding20-10-20-10">
+                <app-crypto-tag cryptoName="Litecoin" cryptoCode="LTC" />
+            </div>
+        </div>
+        <div class="ColumnOneSixth">
+            <div class="WrapperPadding20-8-20-10">
+                <app-crypto-tag cryptoName="Monero" cryptoCode="XMR" />
+            </div>
+        </div>
+        <div class="ClearLeft"></div>
+    </div>
+</div>
 <div id="Body">
     <div class="CenteredContainer">
         <router-outlet></router-outlet>

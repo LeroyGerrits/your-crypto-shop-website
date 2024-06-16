@@ -35,6 +35,7 @@ import { ControlPanelSalesOrderComponent } from './control-panel/sales/orders/or
 import { ControlPanelSalesOrderListComponent } from './control-panel/sales/orders/order-list.component';
 import { CountryService } from './shared/services/country.service';
 import { CryptoNodeService } from './shared/services/crypto-node.service';
+import { CryptoTagComponent } from './shared/components/crypto-tag/crypto-tag.component';
 import { CryptoWalletService } from './shared/services/crypto-wallet.service';
 import { CurrencyService } from './shared/services/currency.service';
 import { CustomerService } from './shared/services/customer.service';
@@ -143,6 +144,7 @@ import { StripHtmlPipe } from './shared/pipes/strip-html.pipe';
         ControlPanelDashboardComponent,
         ControlPanelSalesOrderListComponent,
         ControlPanelSalesOrderComponent,
+        CryptoTagComponent,
         DialogConfirmComponent,
         DialogDeleteComponent,
         DialogDonateComponent,
