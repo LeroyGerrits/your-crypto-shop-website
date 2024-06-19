@@ -9,11 +9,15 @@ import { Router } from '@angular/router';
 import { debounceTime, distinctUntilChanged } from 'rxjs';
 import { Constants } from 'src/app/shared/constants';
 import { DialogDeleteComponent } from 'src/app/shared/dialogs/delete/dialog.delete.component';
+import { CurrencyType } from 'src/app/shared/enums/currency-type.enum';
 import { Environment } from 'src/app/shared/environments/-environment';
 import { CryptoWallet } from 'src/app/shared/models/crypto-wallet.model';
+import { Currency } from 'src/app/shared/models/currency.model';
 import { MutationResult } from 'src/app/shared/models/mutation-result.model';
 import { GetCryptoWalletsParameters } from 'src/app/shared/models/parameters/get-crypto-wallets-parameters.model';
+import { GetCurrenciesParameters } from 'src/app/shared/models/parameters/get-currencies-parameters.model';
 import { CryptoWalletService } from 'src/app/shared/services/crypto-wallet.service';
+import { CurrencyService } from 'src/app/shared/services/currency.service';
 
 @Component({
   selector: 'control-panel-configuration-crypto-wallet-list',
@@ -30,16 +34,21 @@ export class ControlPanelConfigurationCryptoWalletListComponent implements OnDes
   environment = Environment;
   constants = Constants;
   dataSource = new MatTableDataSource<CryptoWallet>;
-  displayedColumns: string[] = ['Name', 'Address', 'ActionButtons'];
+  displayedColumns: string[] = ['Currency', 'Name', 'Address', 'ActionButtons'];
   sortDirection: string | null = 'asc';
 
   public form!: FormGroup;
-  public controlFilterName = new FormControl('');
   public controlFilterAddress = new FormControl('');
+  public controlFilterCurrency = new FormControl('');
+  public controlFilterName = new FormControl('');
+
+  public currencies: Currency[] = [];
+  public dictCurrencies: { [key: string]: Currency } = {};
 
   constructor(
     public dialog: MatDialog,
     private cryptoWalletService: CryptoWalletService,
+    private currencyService: CurrencyService,
     private router: Router,
     private snackBar: MatSnackBar
   ) {
@@ -48,11 +57,23 @@ export class ControlPanelConfigurationCryptoWalletListComponent implements OnDes
       this.controlFilterAddress
     ]);
 
+    this.controlFilterCurrency.valueChanges.pipe(debounceTime(1000), distinctUntilChanged()).subscribe(() => this.filterCryptoWallets());
     this.controlFilterName.valueChanges.pipe(debounceTime(1000), distinctUntilChanged()).subscribe(() => this.filterCryptoWallets());
     this.controlFilterAddress.valueChanges.pipe(debounceTime(1000), distinctUntilChanged()).subscribe(() => this.filterCryptoWallets());
   }
 
   ngOnInit() {
+    const parameters = new GetCurrenciesParameters();
+    parameters.Type = CurrencyType.Crypto;
+
+    this.currencyService.getList(parameters).subscribe(currencies => {
+      this.currencies = currencies;
+
+      currencies.forEach(x => {
+        this.dictCurrencies[x.Id] = x;
+      });
+    });
+
     this.filterCryptoWallets();
   }
 
@@ -62,8 +83,9 @@ export class ControlPanelConfigurationCryptoWalletListComponent implements OnDes
 
   filterCryptoWallets() {
     const parameters: GetCryptoWalletsParameters = {
-      Name: this.controlFilterName.value!,
-      Address: this.controlFilterAddress.value!
+      Address: this.controlFilterAddress.value!,
+      CurrencyId: this.controlFilterCurrency.value!,
+      Name: this.controlFilterName.value!      
     };
 
     this.cryptoWalletService.getList(parameters).subscribe(cryptoWallets => {

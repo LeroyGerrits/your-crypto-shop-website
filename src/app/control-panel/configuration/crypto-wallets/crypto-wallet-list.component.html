@@ -18,7 +18,20 @@
             </mat-expansion-panel-header>
             <div class="Column25Pct">
                 <div class="WrapperPadding0-10-0-0">
-                    <mat-form-field subscriptSizing="dynamic" color="primary">
+                    <mat-form-field subscriptSizing="dynamic">
+                        <mat-label>Currency</mat-label>
+                        <mat-select [formControl]="controlFilterCurrency">
+                            <mat-option />
+                            <mat-option *ngFor="let currency of this.currencies" [value]="currency.Id">
+                                <app-crypto-tag [cryptoName]="currency.Name" [cryptoCode]="currency.Code" />
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="Column25Pct">
+                <div class="WrapperPadding0-10-0-0">
+                    <mat-form-field subscriptSizing="dynamic">
                         <mat-label>Name</mat-label>
                         <input matInput [formControl]="controlFilterName" />
                     </mat-form-field>
@@ -37,16 +50,20 @@
 </div>
 <div class="WrapperPadding20-8">
     <table mat-table matSort [dataSource]="this.dataSource" (matSortChange)="onSortChange($event)">
+        <ng-container matColumnDef="Currency">
+            <th mat-header-cell mat-sort-header *matHeaderCellDef>Currency</th>
+            <td mat-cell *matCellDef="let element">
+                <app-crypto-tag *ngIf="this.dictCurrencies[element.CurrencyId]" [cryptoName]="this.dictCurrencies[element.CurrencyId].Name" [cryptoCode]="this.dictCurrencies[element.CurrencyId].Code" />
+            </td>
+        </ng-container>
         <ng-container matColumnDef="Name">
             <th mat-header-cell mat-sort-header *matHeaderCellDef>Name</th>
             <td mat-cell *matCellDef="let element">{{element.Name}}</td>
         </ng-container>
-
         <ng-container matColumnDef="Address">
             <th mat-header-cell mat-sort-header *matHeaderCellDef>Address</th>
             <td mat-cell *matCellDef="let element">{{element.Address}}</td>
         </ng-container>
-
         <ng-container matColumnDef="ActionButtons">
             <th mat-header-cell *matHeaderCellDef></th>
             <td mat-cell *matCellDef="let element">
@@ -68,8 +85,8 @@
         <tr mat-row *matRowDef="let row; columns: this.displayedColumns;" (dblclick)="editElement(row)"></tr>
         <tr class="mat-row" *matNoDataRow>
             <td class="mat-cell NoDataCell" [colSpan]="this.displayedColumns.length">
-                <span *ngIf="this.controlFilterName.value || this.controlFilterAddress.value">{{constants.MESSAGE_NO_RECORDS_FOUND}}</span>
-                <span *ngIf="!this.controlFilterName.value && !this.controlFilterAddress.value">You have not yet assigned a crypto wallet.</span>
+                <span *ngIf="this.controlFilterCurrency.value || this.controlFilterName.value || this.controlFilterAddress.value">{{constants.MESSAGE_NO_RECORDS_FOUND}}</span>
+                <span *ngIf="!this.controlFilterCurrency.value && !this.controlFilterName.value && !this.controlFilterAddress.value">You have not yet assigned a crypto wallet.</span>
             </td>
         </tr>
     </table>

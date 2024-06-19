@@ -25,6 +25,7 @@ export class CryptoWalletService {
         let httpParams = new HttpParams();
 
         if (parameters) {
+            if (parameters.CurrencyId) httpParams = httpParams.append('currencyId', parameters.CurrencyId);
             if (parameters.Name) httpParams = httpParams.append('name', parameters.Name);
             if (parameters.Address) httpParams = httpParams.append('address', parameters.Address);
         }
