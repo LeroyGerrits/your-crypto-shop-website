@@ -5,6 +5,25 @@
     <div class="ColumnOneHalf">
         <div class="WrapperPadding20-10-0-8">
             <mat-form-field>
+                <mat-label>Currency</mat-label>
+                <mat-select [formControl]="controlCurrency">
+                    <mat-option />
+                    <mat-option *ngFor="let currency of this.currencies" [value]="currency.Id">
+                        <app-crypto-tag [cryptoName]="currency.Name" [cryptoCode]="currency.Code" />
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+    </div>
+    <div class="ColumnOneHalf">
+        <div class="WrapperPadding20-10-0-8">
+            <p>The currency of your crypto wallet.</p>
+        </div>
+    </div>
+    <mat-divider class="ClearLeft" />
+    <div class="ColumnOneHalf">
+        <div class="WrapperPadding20-10-0-8">
+            <mat-form-field>
                 <mat-label>Name</mat-label>
                 <input matInput [formControl]="controlName" maxlength="255" [ngClass]="{ 'is-invalid': formSubmitted && controlName.errors }" />
                 <div *ngIf="formSubmitted && controlName.errors" class="TextError">
@@ -38,7 +57,7 @@
     <mat-divider class="ClearLeft" />
     <div class="CenteredFormButtons">
         <button mat-raised-button [disabled]="formLoading" type="button" [routerLink]="['/control-panel/configuration/crypto-wallets']">Cancel</button>
-        <button mat-raised-button [disabled]="formLoading" type="submit" color="primary">
+        <button mat-raised-button [disabled]="formLoading" type="submit" color="accent">
             <mat-icon *ngIf="formLoading">
                 <mat-spinner diameter="18" />
             </mat-icon>

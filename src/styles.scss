@@ -63,34 +63,34 @@
 }
 
 $md-yourcryptoshoppalette-primary: (
-  50 : #e0e2e8,
-  100 : #b3b7c6,
-  200 : #8088a0,
-  300 : #4d5879,
-  400 : #26345d,
-  500 : #001040,
-  600 : #000e3a,
-  700 : #000c32,
-  800 : #00092a,
-  900 : #00051c,
-  A100 : #5a66ff,
-  A200 : #2737ff,
-  A400 : #0012f3,
-  A700 : #0010da,
+  50 : #e4f0fb,
+  100 : #bcd9f6,
+  200 : #90c0f0,
+  300 : #63a6e9,
+  400 : #4193e5,
+  500 : #2080e0,
+  600 : #1c78dc,
+  700 : #186dd8,
+  800 : #1363d3,
+  900 : #0b50cb,
+  A100 : #f6f9ff,
+  A200 : #c3d6ff,
+  A400 : #90b3ff,
+  A700 : #77a1ff,
   contrast: (50 : #000000,
     100 : #000000,
     200 : #000000,
-    300 : #ffffff,
-    400 : #ffffff,
+    300 : #000000,
+    400 : #000000,
     500 : #ffffff,
     600 : #ffffff,
     700 : #ffffff,
     800 : #ffffff,
     900 : #ffffff,
-    A100 : #ffffff,
-    A200 : #ffffff,
-    A400 : #ffffff,
-    A700 : #ffffff,
+    A100 : #000000,
+    A200 : #000000,
+    A400 : #000000,
+    A700 : #000000,
   )
 );
 
@@ -126,10 +126,43 @@ $md-yourcryptoshoppalette-accent: (
   )
 );
 
+$md-yourcryptoshoppalette-secondary: (
+  50 : #f9eee0,
+  100 : #f1d4b3,
+  200 : #e8b880,
+  300 : #de9b4d,
+  400 : #d78526,
+  500 : #0f0,
+  600 : #cb6800,
+  700 : #c45d00,
+  800 : #be5300,
+  900 : #b34100,
+  A100 : #ffe6dc,
+  A200 : #ffc2a9,
+  A400 : #ff9e76,
+  A700 : #ff8c5d,
+  contrast: (50 : #000000,
+    100 : #000000,
+    200 : #000000,
+    300 : #000000,
+    400 : #000000,
+    500 : #ffffff,
+    600 : #ffffff,
+    700 : #ffffff,
+    800 : #ffffff,
+    900 : #ffffff,
+    A100 : #000000,
+    A200 : #000000,
+    A400 : #000000,
+    A700 : #000000,
+  )
+);
+
 $my-primary: mat.m2-define-palette($md-yourcryptoshoppalette-primary, 500);
 $my-accent: mat.m2-define-palette($md-yourcryptoshoppalette-accent, 500);
+$my-secondary: mat.m2-define-palette($md-yourcryptoshoppalette-secondary, 500);
 
-$my-theme: mat.m2-define-dark-theme((color: (primary: $my-primary, accent: $my-accent, ),
+$my-theme: mat.m2-define-dark-theme((color: (primary: $my-primary, secondary: $my-secondary, accent: $my-accent ),
       typography: mat.m2-define-typography-config($font-family: 'open_sansregular'),
       density: 0));
 
@@ -191,7 +224,6 @@ header {
   background-image: url('assets/images/BodyBackground.jpg');
   background-position: top center;
   background-size: cover;
-  box-shadow: 0 0 3px #f00;
 }
 
 header div.LogoAndNavigation {

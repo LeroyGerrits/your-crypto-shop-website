@@ -6,7 +6,11 @@ import { MatSnackBar, MatSnackBarRef, TextOnlySnackBar } from '@angular/material
 import { AuthenticationService } from 'src/app/shared/services/authentication.service';
 import { CryptoWallet } from 'src/app/shared/models/crypto-wallet.model';
 import { CryptoWalletService } from 'src/app/shared/services/crypto-wallet.service';
+import { Currency } from 'src/app/shared/models/currency.model';
+import { CurrencyService } from 'src/app/shared/services/currency.service';
+import { CurrencyType } from 'src/app/shared/enums/currency-type.enum';
 import { Environment } from 'src/app/shared/environments/-environment';
+import { GetCurrenciesParameters } from 'src/app/shared/models/parameters/get-currencies-parameters.model';
 import { Merchant } from 'src/app/shared/models/merchant.model';
 import { MutationResult } from 'src/app/shared/models/mutation-result.model';
 
@@ -26,14 +30,17 @@ export class ControlPanelConfigurationCryptoWalletComponent implements OnInit, O
   public formLoading = false;
   public formSubmitted = false;
   public controlName = new FormControl('', Validators.required);
+  public controlCurrency = new FormControl('', Validators.required);
   public controlAddress = new FormControl('', Validators.required);
 
   public pageTitle = 'Assign new crypto wallet'
   public cryptoWallet: CryptoWallet = new CryptoWallet();
+  public currencies: Currency[] = [];
 
   constructor(
     private authenticationService: AuthenticationService,
     private cryptoWalletService: CryptoWalletService,
+    private currencyService: CurrencyService,
     private route: ActivatedRoute,
     private router: Router,
     private snackBar: MatSnackBar
@@ -49,9 +56,17 @@ export class ControlPanelConfigurationCryptoWalletComponent implements OnInit, O
   ngOnInit() {
     this.queryStringCryptoWalletId = this.route.snapshot.paramMap.get('cryptoWalletId');
 
-    if (this.queryStringCryptoWalletId && this.queryStringCryptoWalletId != 'new') {
-      this.cryptoWalletService.getById(this.queryStringCryptoWalletId).subscribe(x => { this.onRetrieveData(x); });
-    }
+    const parameters = new GetCurrenciesParameters();
+    parameters.Type = CurrencyType.Crypto;
+    parameters.Supported = true;
+
+    this.currencyService.getList(parameters).subscribe(currencies => {
+      this.currencies = currencies;
+
+      if (this.queryStringCryptoWalletId && this.queryStringCryptoWalletId != 'new') {
+        this.cryptoWalletService.getById(this.queryStringCryptoWalletId).subscribe(x => { this.onRetrieveData(x); });
+      }
+    });
   }
 
   ngOnDestroy() {
