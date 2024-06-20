@@ -2,7 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { CryptoNodeService } from 'src/app/shared/services/crypto-node.service';
 import { GetDifficultyResponse } from 'src/app/shared/models/parameters/get-difficulty-response.model';
-import { GetMiningInfoResponse } from 'src/app/shared/models/parameters/get-mining-info-response.model';
+import { GetMiningInfoResponse } from 'src/app/shared/models/response/get-mining-info-response.model';
 import { HashRatePipe } from 'src/app/shared/pipes/hash-rate.pipe';
 import { PublicWebsiteNodeStatusComponent } from './node-status.component';
 import { of } from 'rxjs';

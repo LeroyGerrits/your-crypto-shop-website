@@ -825,6 +825,10 @@ td.NoDataCell {
   letter-spacing: 0 !important;
 }
 
+.mat-mdc-dialog-actions {
+  justify-content: flex-end !important;
+}
+
 .mat-mdc-menu-content,
 .mat-mdc-menu-content .mat-mdc-menu-item .mat-mdc-menu-item-text {
   font-size: 14px;

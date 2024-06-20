@@ -8,6 +8,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { debounceTime, distinctUntilChanged } from 'rxjs';
 import { Constants } from 'src/app/shared/constants';
+import { DialogCreateCryptoWalletComponent } from 'src/app/shared/dialogs/create-crypto-wallet/dialog.create-crypto-wallet.component';
 import { DialogDeleteComponent } from 'src/app/shared/dialogs/delete/dialog.delete.component';
 import { CurrencyType } from 'src/app/shared/enums/currency-type.enum';
 import { Environment } from 'src/app/shared/environments/-environment';
@@ -85,13 +86,23 @@ export class ControlPanelConfigurationCryptoWalletListComponent implements OnDes
     const parameters: GetCryptoWalletsParameters = {
       Address: this.controlFilterAddress.value!,
       CurrencyId: this.controlFilterCurrency.value!,
-      Name: this.controlFilterName.value!      
+      Name: this.controlFilterName.value!
     };
 
     this.cryptoWalletService.getList(parameters).subscribe(cryptoWallets => {
       this.dataSource = new MatTableDataSource(cryptoWallets);
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
+    });
+  }
+
+  addCryptoWallet() {
+    const dialogCreateCryptoWallet = this.dialog.open(DialogCreateCryptoWalletComponent);
+
+    dialogCreateCryptoWallet.afterClosed().subscribe(result => {
+      if (result) {
+        this.filterCryptoWallets();
+      }
     });
   }
 

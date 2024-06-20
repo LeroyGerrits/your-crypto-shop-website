@@ -1,0 +1,42 @@
+<h2 mat-dialog-title>Assign new crypto wallet</h2>
+<form (ngSubmit)="onSubmit()">
+  <mat-dialog-content class="mat-typography">
+    <p>Assign an existing wallet address where Your Crypto Shop can send crypto to as soon as a customer completes a payment. Your Crypto Shop does not store merchants' funds.</p>
+
+    <mat-form-field>
+      <mat-label>Currency</mat-label>
+      <mat-select [formControl]="controlCurrency">
+        <mat-option />
+        <mat-option *ngFor="let currency of this.currencies" [value]="currency.Id">
+          <app-crypto-tag [cryptoName]="currency.Name" [cryptoCode]="currency.Code" />
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Name</mat-label>
+      <input matInput [formControl]="controlName" maxlength="255" [ngClass]="{ 'is-invalid': formSubmitted && controlName.errors }" />
+      <div *ngIf="formSubmitted && controlName.errors" class="TextError">
+        <div *ngIf="controlName.errors['required']">Name is required</div>
+      </div>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Address</mat-label>
+      <input matInput [formControl]="controlAddress" maxlength="255" [ngClass]="{ 'is-invalid': formSubmitted && controlAddress.errors }" />
+      <div *ngIf="formSubmitted && controlAddress.errors" class="TextError">
+        <div *ngIf="controlAddress.errors['required']">Address is required</div>
+      </div>
+    </mat-form-field>
+
+  </mat-dialog-content>
+  <mat-dialog-actions>
+    <button mat-raised-button type="button" color="disabled" mat-dialog-close>Cancel</button>
+    <button mat-raised-button type="submit" color="accent" [disabled]="this.formLoading || !constants.ENABLE_REGISTRATIONS">
+      <mat-icon *ngIf="this.formLoading">
+        <mat-spinner diameter="18" />
+      </mat-icon>
+      Save
+    </button>
+  </mat-dialog-actions>
+</form>

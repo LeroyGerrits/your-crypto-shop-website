@@ -1,11 +1,11 @@
 <div class="WrapperPadding20-8-0-8">
     <div class="FloatRight">
-        <button mat-raised-button color="accent" [routerLink]="['/control-panel/configuration/crypto-wallets/new']">
+        <button mat-raised-button color="accent" (click)="addCryptoWallet()">
             <mat-icon>add</mat-icon>
-            Assign new wallet
+            Assign new crypto wallet
         </button>
     </div>
-    <h2>Wallets</h2>
+    <h2>Crypto wallets</h2>
 </div>
 <div class="WrapperPadding20-8-0-8">
     <mat-accordion>
@@ -68,7 +68,7 @@
             <th mat-header-cell *matHeaderCellDef></th>
             <td mat-cell *matCellDef="let element">
                 <button mat-icon-button [matMenuTriggerFor]="menu">
-                    <mat-icon color="accent">more_horiz</mat-icon>
+                    <mat-icon color="primary">more_horiz</mat-icon>
                 </button>
                 <mat-menu #menu="matMenu">
                     <button mat-menu-item (click)="editElement(element)">

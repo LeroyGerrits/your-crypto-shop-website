@@ -48,6 +48,7 @@ export class ControlPanelConfigurationCryptoWalletComponent implements OnInit, O
     this.authenticationService.merchant.subscribe(x => this.activeMerchant = x?.Merchant);
 
     this.form = new FormGroup([
+      this.controlCurrency,
       this.controlName,
       this.controlAddress
     ]);
@@ -76,6 +77,7 @@ export class ControlPanelConfigurationCryptoWalletComponent implements OnInit, O
   onRetrieveData(cryptoWallet: CryptoWallet) {
     this.cryptoWallet = cryptoWallet;
     this.pageTitle = cryptoWallet.Name;
+    this.controlCurrency.setValue(cryptoWallet.CurrencyId);
     this.controlName.setValue(cryptoWallet.Name);
     this.controlAddress.setValue(cryptoWallet.Address);
   }
@@ -94,6 +96,7 @@ export class ControlPanelConfigurationCryptoWalletComponent implements OnInit, O
     if (this.activeMerchant)
       cryptoWalletToUpdate.MerchantId = this.activeMerchant!.Id!;
 
+    cryptoWalletToUpdate.CurrencyId = this.controlCurrency.value!;
     cryptoWalletToUpdate.Name = this.controlName.value!;
     cryptoWalletToUpdate.Address = this.controlAddress.value!;
 

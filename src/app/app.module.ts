@@ -43,6 +43,7 @@ import { CustomerService } from './shared/services/customer.service';
 import { DatePipe } from '@angular/common';
 import { DeliveryMethodService } from './shared/services/delivery-method.service';
 import { DialogConfirmComponent } from './shared/dialogs/confirm/dialog.confirm.component';
+import { DialogCreateCryptoWalletComponent } from './shared/dialogs/create-crypto-wallet/dialog.create-crypto-wallet.component';
 import { DialogDeleteComponent } from './shared/dialogs/delete/dialog.delete.component';
 import { DialogDonateComponent } from './shared/dialogs/donate/dialog.donate.component';
 import { DialogEditOrderItemComponent } from './shared/dialogs/edit-order-item/dialog.edit-order-item.component';
@@ -148,6 +149,7 @@ import { StripHtmlPipe } from './shared/pipes/strip-html.pipe';
         ControlPanelSalesOrderComponent,
         CryptoTagComponent,
         DialogConfirmComponent,
+        DialogCreateCryptoWalletComponent,
         DialogDeleteComponent,
         DialogDonateComponent,
         DialogEditOrderItemComponent,
