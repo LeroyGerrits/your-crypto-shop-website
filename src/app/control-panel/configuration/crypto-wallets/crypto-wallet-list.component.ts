@@ -98,7 +98,6 @@ export class ControlPanelConfigurationCryptoWalletListComponent implements OnDes
 
   addCryptoWallet() {
     const dialogCreateCryptoWallet = this.dialog.open(DialogCreateCryptoWalletComponent);
-
     dialogCreateCryptoWallet.afterClosed().subscribe(result => {
       if (result) {
         this.filterCryptoWallets();

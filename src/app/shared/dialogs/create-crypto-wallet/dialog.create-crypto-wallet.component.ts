@@ -65,13 +65,11 @@ export class DialogCreateCryptoWalletComponent implements OnInit {
             return;
         }
 
-        const cryptoWalletToCreate: CryptoWallet = {
-            Id: '',
-            MerchantId: this.activeMerchant!.Id!,
-            CurrencyId: this.controlCurrency.value!,
-            Name: this.controlName.value!,
-            Address: this.controlAddress.value!
-        };
+        const cryptoWalletToCreate: CryptoWallet = new CryptoWallet();
+        cryptoWalletToCreate.MerchantId = this.activeMerchant!.Id!;
+        cryptoWalletToCreate.CurrencyId = this.controlCurrency.value!;
+        cryptoWalletToCreate.Name = this.controlName.value!;
+        cryptoWalletToCreate.Address = this.controlAddress.value!;
 
         this.cryptoWalletService.create(cryptoWalletToCreate).subscribe({
             next: result => this.handleOnSubmitResult(result),
@@ -83,7 +81,7 @@ export class DialogCreateCryptoWalletComponent implements OnInit {
     handleOnSubmitResult(result: MutationResult) {
         if (result.Success) {
             if (this.dialogRefComponent)
-                this.dialogRefComponent.close();
+                this.dialogRefComponent.close(true);
         } else {
             if (result.Constraint == 'UNIQUE_CryptoWallet_Name') {
                 this.snackBarRef = this.snackBar.open('A crypto wallet with this name already exists.', 'Close', { panelClass: ['error-snackbar'] });
