@@ -1,6 +1,7 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 
 import { Currency } from 'src/app/shared/models/currency.model';
+import { CurrencyType } from '../enums/currency-type.enum';
 import { Environment } from 'src/app/shared/environments/-environment';
 import { GetCurrenciesParameters } from '../models/parameters/get-currencies-parameters.model';
 import { Injectable } from '@angular/core';
@@ -23,6 +24,26 @@ export class CurrencyService {
             if (parameters.Supported != null) httpParams = httpParams.append('supported', parameters.Supported);
         }
 
+        return this.http.get<Currency[]>(this.apiUrl, { params: httpParams });
+    }
+
+    getListCrypto(): Observable<Currency[]> {
+        let httpParams = new HttpParams();
+        httpParams = httpParams.append('type', CurrencyType.Crypto);
+        return this.http.get<Currency[]>(this.apiUrl, { params: httpParams });
+    }
+
+    getListSupportedCrypto(): Observable<Currency[]> {
+        let httpParams = new HttpParams();
+        httpParams = httpParams.append('type', CurrencyType.Crypto);
+        httpParams = httpParams.append('supported', true);
+        return this.http.get<Currency[]>(this.apiUrl, { params: httpParams });
+    }
+
+    getListSupportedFiat(): Observable<Currency[]> {
+        let httpParams = new HttpParams();
+        httpParams = httpParams.append('type', CurrencyType.Fiat);
+        httpParams = httpParams.append('supported', true);
         return this.http.get<Currency[]>(this.apiUrl, { params: httpParams });
     }
 

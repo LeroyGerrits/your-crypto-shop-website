@@ -10,13 +10,11 @@ import { debounceTime, distinctUntilChanged } from 'rxjs';
 import { Constants } from 'src/app/shared/constants';
 import { DialogCreateCryptoWalletComponent } from 'src/app/shared/dialogs/create-crypto-wallet/dialog.create-crypto-wallet.component';
 import { DialogDeleteComponent } from 'src/app/shared/dialogs/delete/dialog.delete.component';
-import { CurrencyType } from 'src/app/shared/enums/currency-type.enum';
 import { Environment } from 'src/app/shared/environments/-environment';
 import { CryptoWallet } from 'src/app/shared/models/crypto-wallet.model';
 import { Currency } from 'src/app/shared/models/currency.model';
 import { MutationResult } from 'src/app/shared/models/mutation-result.model';
 import { GetCryptoWalletsParameters } from 'src/app/shared/models/parameters/get-crypto-wallets-parameters.model';
-import { GetCurrenciesParameters } from 'src/app/shared/models/parameters/get-currencies-parameters.model';
 import { CryptoWalletService } from 'src/app/shared/services/crypto-wallet.service';
 import { CurrencyService } from 'src/app/shared/services/currency.service';
 
@@ -64,10 +62,7 @@ export class ControlPanelConfigurationCryptoWalletListComponent implements OnDes
   }
 
   ngOnInit() {
-    const parameters = new GetCurrenciesParameters();
-    parameters.Type = CurrencyType.Crypto;
-
-    this.currencyService.getList(parameters).subscribe(currencies => {
+    this.currencyService.getListCrypto().subscribe(currencies => {
       this.currencies = currencies;
 
       currencies.forEach(x => {

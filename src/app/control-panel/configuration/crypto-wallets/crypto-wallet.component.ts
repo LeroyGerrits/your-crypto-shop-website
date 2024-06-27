@@ -8,9 +8,7 @@ import { CryptoWallet } from 'src/app/shared/models/crypto-wallet.model';
 import { CryptoWalletService } from 'src/app/shared/services/crypto-wallet.service';
 import { Currency } from 'src/app/shared/models/currency.model';
 import { CurrencyService } from 'src/app/shared/services/currency.service';
-import { CurrencyType } from 'src/app/shared/enums/currency-type.enum';
 import { Environment } from 'src/app/shared/environments/-environment';
-import { GetCurrenciesParameters } from 'src/app/shared/models/parameters/get-currencies-parameters.model';
 import { Merchant } from 'src/app/shared/models/merchant.model';
 import { MutationResult } from 'src/app/shared/models/mutation-result.model';
 
@@ -57,11 +55,7 @@ export class ControlPanelConfigurationCryptoWalletComponent implements OnInit, O
   ngOnInit() {
     this.queryStringCryptoWalletId = this.route.snapshot.paramMap.get('cryptoWalletId');
 
-    const parameters = new GetCurrenciesParameters();
-    parameters.Type = CurrencyType.Crypto;
-    parameters.Supported = true;
-
-    this.currencyService.getList(parameters).subscribe(currencies => {
+    this.currencyService.getListSupportedCrypto().subscribe(currencies => {
       this.currencies = currencies;
 
       if (this.queryStringCryptoWalletId && this.queryStringCryptoWalletId != 'new') {

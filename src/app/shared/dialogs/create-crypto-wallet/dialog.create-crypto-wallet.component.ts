@@ -8,14 +8,12 @@ import { CryptoWallet } from '../../models/crypto-wallet.model';
 import { CryptoWalletService } from '../../services/crypto-wallet.service';
 import { Currency } from '../../models/currency.model';
 import { CurrencyService } from '../../services/currency.service';
-import { CurrencyType } from '../../enums/currency-type.enum';
-import { GetCurrenciesParameters } from '../../models/parameters/get-currencies-parameters.model';
 import { MatDialogRef } from '@angular/material/dialog';
 import { Merchant } from '../../models/merchant.model';
 import { MutationResult } from '../../models/mutation-result.model';
 
 @Component({
-    selector: 'dialog-create-crypto-wallet',
+    // selector: 'dialog-create-crypto-wallet',
     templateUrl: 'dialog.create-crypto-wallet.component.html'
 })
 export class DialogCreateCryptoWalletComponent implements OnInit {
@@ -51,11 +49,7 @@ export class DialogCreateCryptoWalletComponent implements OnInit {
 
     ngOnInit() {
         this.authenticationService.merchant.subscribe(x => this.activeMerchant = x?.Merchant);
-
-        const parameters = new GetCurrenciesParameters();
-        parameters.Type = CurrencyType.Crypto;
-        parameters.Supported = true;
-        this.currencyService.getList(parameters).subscribe(currencies => this.currencies = currencies);
+        this.currencyService.getListSupportedCrypto().subscribe(currencies => this.currencies = currencies);
     }
 
     onSubmit() {
