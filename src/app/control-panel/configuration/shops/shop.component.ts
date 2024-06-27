@@ -10,7 +10,10 @@ import { Country } from 'src/app/shared/models/country.model';
 import { CountryService } from 'src/app/shared/services/country.service';
 import { CryptoWallet } from 'src/app/shared/models/crypto-wallet.model';
 import { CryptoWalletService } from 'src/app/shared/services/crypto-wallet.service';
+import { Currency } from 'src/app/shared/models/currency.model';
+import { CurrencyService } from 'src/app/shared/services/currency.service';
 import { Environment } from 'src/app/shared/environments/-environment';
+import { IDictionaryFormControl } from 'src/app/shared/interfaces/idictionary-formcontrol.interface';
 import { Merchant } from 'src/app/shared/models/merchant.model';
 import { MutationResult } from 'src/app/shared/models/mutation-result.model';
 import { Shop } from 'src/app/shared/models/shop.model';
@@ -33,6 +36,7 @@ export class ControlPanelConfigurationShopComponent implements OnInit {
   public queryStringShopId: string | null = '';
 
   public form!: FormGroup;
+  public formErrorCryptoWallets = false;
   public formLoading = false;
   public formSubmitted = false;
 
@@ -40,9 +44,10 @@ export class ControlPanelConfigurationShopComponent implements OnInit {
   public controlSubDomain = new FormControl('', [Validators.minLength(3), Validators.pattern(/^[a-zA-Z0-9]*$/)])
   public controlCountry = new FormControl('');
   public controlShopCategory = new FormControl('');
-  public controlCryptoWallet = new FormControl('');
+  public controlCurrency = new FormControl('', Validators.required);
   public controlOrderMethod = new FormControl('0', Validators.required);
   public controlRequireAddresses = new FormControl(true, Validators.required);
+  public controlsCryptoWallet: IDictionaryFormControl = {};
 
   public pageTitle = 'Create new shop'
   public shop: Shop = new Shop();
@@ -50,13 +55,15 @@ export class ControlPanelConfigurationShopComponent implements OnInit {
   public countries: Country[] | undefined;
   public shopCategories: ShopCategory[] | undefined;
   public cryptoWallets: CryptoWallet[] | undefined;
+  public currenciesSupportedCrypto: Currency[] = [];
+  public currenciesSupportedFiat: Currency[] = [];
 
   public orderMethodType: typeof ShopOrderMethod = ShopOrderMethod;
 
   constructor(
     private authenticationService: AuthenticationService,
     private countryService: CountryService,
-    private cryptoWalletService: CryptoWalletService,
+    private currencyService: CurrencyService,
     private route: ActivatedRoute,
     private router: Router,
     private snackBar: MatSnackBar,
@@ -70,7 +77,7 @@ export class ControlPanelConfigurationShopComponent implements OnInit {
       this.controlSubDomain,
       this.controlCountry,
       this.controlShopCategory,
-      this.controlCryptoWallet,
+      this.controlCurrency,
       this.controlOrderMethod,
       this.controlRequireAddresses
     ]);
@@ -87,7 +94,15 @@ export class ControlPanelConfigurationShopComponent implements OnInit {
 
     this.countryService.getList().subscribe(countries => this.countries = countries);
     this.shopCategoryService.getList().subscribe(shopCategories => this.shopCategories = shopCategories);
-    this.cryptoWalletService.getList().subscribe(cryptoWallets => this.cryptoWallets = cryptoWallets);
+    this.currencyService.getList().subscribe(currencies => {
+      currencies.forEach(currency => {
+        this.controlsCryptoWallet[currency.Id] = new FormControl('');
+        if (currency.Supported) {
+          if (currency.Type.toString() == 'Crypto') this.currenciesSupportedCrypto.push(currency);
+          if (currency.Type.toString() == 'Fiat') this.currenciesSupportedFiat.push(currency);
+        }
+      })
+    });
   }
 
   ngOnDestroy() {
@@ -110,8 +125,8 @@ export class ControlPanelConfigurationShopComponent implements OnInit {
     if (shop.Category)
       this.controlShopCategory.setValue(shop.Category.Id);
 
-    if (shop.Wallet)
-      this.controlCryptoWallet.setValue(shop.Wallet.Id);
+    if (shop.Currency)
+      this.controlCurrency.setValue(shop.Currency.Id);
 
     if (shop.OrderMethod.toString() == 'ManualActionRequired' || shop.OrderMethod.toString() == ShopOrderMethod.ManualActionRequired.toString()) {
       this.controlOrderMethod.setValue(this.orderMethodType.ManualActionRequired.toString());
@@ -167,11 +182,11 @@ export class ControlPanelConfigurationShopComponent implements OnInit {
     else
       shopToUpdate.Category = undefined;
 
-    var selectedCryptoWallet = this.cryptoWallets?.find(x => x.Id == this.controlCryptoWallet.value);
-    if (selectedCryptoWallet)
-      shopToUpdate.Wallet = selectedCryptoWallet;
+    var selectedCurrency = this.currenciesSupportedFiat?.find(x => x.Id == this.controlCurrency.value);
+    if (selectedCurrency)
+      shopToUpdate.Currency = selectedCurrency;
     else
-      shopToUpdate.Wallet = undefined;
+      shopToUpdate.Currency = undefined;
 
     if (this.queryStringShopId && this.queryStringShopId != 'new') {
       this.shopService.update(shopToUpdate).subscribe({

@@ -1,134 +1,172 @@
-<div class="WrapperPadding20-8-0-8">
-    <h2><a [routerLink]="['/control-panel/configuration/shops']">Shops</a> - {{this.pageTitle}}</h2>
-</div>
 <form (ngSubmit)="onSubmit()">
-    <div class="ColumnOneHalf">
-        <div class="WrapperPadding20-10-0-8">
-            <mat-form-field>
-                <mat-label>Name</mat-label>
-                <input matInput [formControl]="controlName" maxlength="255" [ngClass]="{ 'is-invalid': formSubmitted && controlName.errors }" />
-                <div *ngIf="formSubmitted && controlName.errors" class="TextError">
-                    <div *ngIf="controlName.errors['required']">Name is required</div>
-                </div>
-            </mat-form-field>
+    <div class="WrapperPadding20-8">
+        <div class="FloatRight FormButtons">
+            <button mat-raised-button [disabled]="formLoading" type="button" [routerLink]="['/control-panel/configuration/shops']">Cancel</button>
+            <button mat-raised-button [disabled]="formLoading" type="submit" color="accent">
+                <mat-icon *ngIf="formLoading">
+                    <mat-spinner diameter="18" />
+                </mat-icon>
+                Save
+            </button>
         </div>
+        <h2><a [routerLink]="['/control-panel/configuration/shops']">Shops</a> - {{this.pageTitle}}</h2>
     </div>
-    <div class="ColumnOneHalf">
-        <div class="WrapperPadding20-10-0-8">
-            <p>The name of your shop and it's main point of recognition. Choose a short, unique and easy to remember name for your customers.</p>
-        </div>
-    </div>
-    <mat-divider class="ClearLeft" />
-    <div class="ColumnOneHalf">
-        <div class="WrapperPadding20-10-0-8">
-            <mat-form-field>
-                <mat-icon *ngIf="controlSubDomain.value && !controlSubDomain.errors" [ngClass]="{ 'SubDomainAvailabilityIcon':true,  'SubDomainAvailabilityIconColorGreen':this.subDomainAvailable,  'SubDomainAvailabilityIconColorRed':!this.subDomainAvailable }" [matTooltip]="this.subDomainAvailable ? 'Subdomain is available' : 'Subdomain is unavailable'">{{this.subDomainAvailable ? 'check_circle' : 'cancel'}}</mat-icon>
-                <mat-label>Subdomain ( https://subdomain.{{environment.WEBSITE_DOMAIN}})</mat-label>
-                <input matInput [formControl]="controlSubDomain" maxlength="100" [ngClass]="{ 'is-invalid': controlSubDomain.errors, 'TextTransformLowerCase': true }" />
-                <div *ngIf="formSubmitted && controlSubDomain.errors" class="TextError">
-                    <div *ngIf="controlSubDomain.errors['pattern']">Only alphanumerical characters are allowed</div>
-                    <div *ngIf="controlSubDomain.errors['minlength']">SubDomain needs to be at least 3 characters long
+    <div class="ClearRight">
+        <mat-tab-group animationDuration="0">
+            <mat-tab>
+                <ng-template mat-tab-label>
+                    <mat-icon color="warn" class="TabWarnIcon" *ngIf="this.formSubmitted && (controlName.errors || controlCurrency.errors || controlOrderMethod.errors)">error_outline</mat-icon>
+                    Shop
+                </ng-template>
+                <div class="ColumnOneHalf">
+                    <div class="WrapperPadding20-10-0-8">
+                        <mat-form-field>
+                            <mat-label>Name</mat-label>
+                            <input matInput [formControl]="controlName" maxlength="255" [ngClass]="{ 'is-invalid': formSubmitted && controlName.errors }" />
+                            <div *ngIf="formSubmitted && controlName.errors" class="TextError">
+                                <div *ngIf="controlName.errors['required']">Name is required</div>
+                            </div>
+                        </mat-form-field>
                     </div>
                 </div>
-            </mat-form-field>
-        </div>
-    </div>
-    <div class="ColumnOneHalf">
-        <div class="WrapperPadding20-10-0-8">
-            <p>The subdomain your shop will be accessible from and which will evaluate to <strong>https://<span class="TextDecorationUnderline">subdomain</span>.{{environment.WEBSITE_DOMAIN}}</strong>. If left empty, the ID of your shop will be used to format the address to your shop which is quite long and cryptic. Choose a short and easy to remember subdomain to make it easier for your customers to find your shop. A subdomain can only consist of alphanumeric characters.</p>
-        </div>
-    </div>
-    <mat-divider class="ClearLeft" />
-    <div class="ColumnOneHalf">
-        <div class="WrapperPadding20-10-0-8">
-            <mat-form-field>
-                <mat-label>Country</mat-label>
-                <mat-select [formControl]="controlCountry">
-                    <mat-option></mat-option>
-                    <mat-option *ngFor="let country of this.countries" [value]="country.Id">
-                        <img src="/assets/images/flags/{{country.Code.toLowerCase()}}.png" width="24" height="24" alt="{{country.Code}}" />{{country.Name}}
-                    </mat-option>
-                </mat-select>
-            </mat-form-field>
-        </div>
-    </div>
-    <div class="ColumnOneHalf">
-        <div class="WrapperPadding20-10-0-8">
-            <p>The country this shop operates from. This will be visible to website visitors and will be used to determine delivery method costs based on this and the customer's country.</p>
-        </div>
-    </div>
-    <mat-divider class="ClearLeft" />
-    <div class="ColumnOneHalf">
-        <div class="WrapperPadding20-10-0-8">
-            <mat-form-field>
-                <mat-label>Category</mat-label>
-                <mat-select [formControl]="controlShopCategory">
-                    <mat-option></mat-option>
-                    <mat-option *ngFor="let shopCategory of this.shopCategories" [value]="shopCategory.Id">
-                        {{shopCategory.Name}}
-                    </mat-option>
-                </mat-select>
-            </mat-form-field>
-        </div>
-    </div>
-    <div class="ColumnOneHalf">
-        <div class="WrapperPadding20-10-0-8">
-            <p>The category your shop fits in.</p>
-        </div>
-    </div>
-    <mat-divider class="ClearLeft" />
-    <div class="ColumnOneHalf">
-        <div class="WrapperPadding20-10-0-8">
-            <mat-form-field>
-                <mat-label>Crypto wallet</mat-label>
-                <mat-select [formControl]="controlCryptoWallet">
-                    <mat-option></mat-option>
-                    <mat-option *ngFor="let cryptoWallet of this.cryptoWallets" [value]="cryptoWallet.Id">
-                        {{cryptoWallet.Name}}
-                    </mat-option>
-                </mat-select>
-            </mat-form-field>
-        </div>
-    </div>
-    <div class="ColumnOneHalf">
-        <div class="WrapperPadding20-10-0-8">
-            <p>The crypto wallet transactions for your shop are sent to.</p>
-        </div>
-    </div>
-    <mat-divider class="ClearLeft" />
-    <div class="ColumnOneHalf">
-        <div class="WrapperPadding20-10-0-8 TextAlignRight">
-            <mat-radio-group aria-labelledby="gender" [formControl]="controlOrderMethod">
-                <mat-radio-button value="0" color="primary">Automated</mat-radio-button>
-                <mat-radio-button value="1" color="primary">Manual action required</mat-radio-button>
-            </mat-radio-group>
-        </div>
-    </div>
-    <div class="ColumnOneHalf">
-        <div class="WrapperPadding20-10-0-8">
-            <p>The order method of the shop.</p>
-            <p><strong>Automated:</strong> Customers are presented with a payment request immediately after checkout. This makes the ordering and checkout process more streamlined, but you have to make sure the prices of your products and delivery methods are set appropriately keeping possible international shipment in mind.</p>
-            <p><strong>Manual action required:</strong> Customers are presented with a confirmation message after checkout. Only when the order is manually reviewed and verified by you in the Control Panel, the customer will receive a link with a payment request.</p>
-        </div>
-    </div>
-    <mat-divider class="ClearLeft" />
-    <div class="ColumnOneHalf">
-        <div class="WrapperPadding10-10-0-8 TextAlignRight">
-            <mat-checkbox [formControl]="controlRequireAddresses" color="primary" />
-        </div>
-    </div>
-    <div class="ColumnOneHalf">
-        <div class="WrapperPadding20-10-0-8">
-            <p>Customers are required to fill in their address when placing an order in this shop. It is only recommended to turn this off if you're selling products or services that do not require physical shipping.</p>
-        </div>
-    </div>
-    <div class="CenteredFormButtons">
-        <button mat-raised-button [disabled]="formLoading" type="button" [routerLink]="['/control-panel/configuration/shops']">Cancel</button>
-        <button mat-raised-button [disabled]="formLoading" type="submit" color="accent">
-            <mat-icon *ngIf="formLoading">
-                <mat-spinner diameter="18" />
-            </mat-icon>
-            Save
-        </button>
+                <div class="ColumnOneHalf">
+                    <div class="WrapperPadding20-10-0-8">
+                        <p>The name of your shop and it's main point of recognition. Choose a short, unique and easy to remember name for your customers.</p>
+                    </div>
+                </div>
+                <mat-divider class="ClearLeft" />
+                <div class="ColumnOneHalf">
+                    <div class="WrapperPadding20-10-0-8">
+                        <mat-form-field>
+                            <mat-icon *ngIf="controlSubDomain.value && !controlSubDomain.errors" [ngClass]="{ 'SubDomainAvailabilityIcon':true,  'SubDomainAvailabilityIconColorGreen':this.subDomainAvailable,  'SubDomainAvailabilityIconColorRed':!this.subDomainAvailable }" [matTooltip]="this.subDomainAvailable ? 'Subdomain is available' : 'Subdomain is unavailable'">{{this.subDomainAvailable ? 'check_circle' : 'cancel'}}</mat-icon>
+                            <mat-label>Subdomain ( https://subdomain.{{environment.WEBSITE_DOMAIN}})</mat-label>
+                            <input matInput [formControl]="controlSubDomain" maxlength="100" [ngClass]="{ 'is-invalid': controlSubDomain.errors, 'TextTransformLowerCase': true }" />
+                            <div *ngIf="formSubmitted && controlSubDomain.errors" class="TextError">
+                                <div *ngIf="controlSubDomain.errors['pattern']">Only alphanumerical characters are allowed</div>
+                                <div *ngIf="controlSubDomain.errors['minlength']">SubDomain needs to be at least 3 characters long
+                                </div>
+                            </div>
+                        </mat-form-field>
+                    </div>
+                </div>
+                <div class="ColumnOneHalf">
+                    <div class="WrapperPadding20-10-0-8">
+                        <p>The subdomain your shop will be accessible from and which will evaluate to <strong>https://<span class="TextDecorationUnderline">subdomain</span>.{{environment.WEBSITE_DOMAIN}}</strong>. If left empty, the ID of your shop will be used to format the address to your shop which is quite long and cryptic. Choose a short and easy to remember subdomain to make it easier for your customers to find your shop. A subdomain can only consist of alphanumeric characters.</p>
+                    </div>
+                </div>
+                <mat-divider class="ClearLeft" />
+                <div class="ColumnOneHalf">
+                    <div class="WrapperPadding20-10-0-8">
+                        <mat-form-field>
+                            <mat-label>Country</mat-label>
+                            <mat-select [formControl]="controlCountry">
+                                <mat-option></mat-option>
+                                <mat-option *ngFor="let country of this.countries" [value]="country.Id">
+                                    <img src="/assets/images/flags/{{country.Code.toLowerCase()}}.png" width="24" height="24" alt="{{country.Code}}" />{{country.Name}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                </div>
+                <div class="ColumnOneHalf">
+                    <div class="WrapperPadding20-10-0-8">
+                        <p>The country this shop operates from. This will be visible to website visitors and will be used to determine delivery method costs based on this and the customer's country.</p>
+                    </div>
+                </div>
+                <mat-divider class="ClearLeft" />
+                <div class="ColumnOneHalf">
+                    <div class="WrapperPadding20-10-0-8">
+                        <mat-form-field>
+                            <mat-label>Category</mat-label>
+                            <mat-select [formControl]="controlShopCategory">
+                                <mat-option></mat-option>
+                                <mat-option *ngFor="let shopCategory of this.shopCategories" [value]="shopCategory.Id">
+                                    {{shopCategory.Name}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                </div>
+                <div class="ColumnOneHalf">
+                    <div class="WrapperPadding20-10-0-8">
+                        <p>The category your shop fits in.</p>
+                    </div>
+                </div>
+                <mat-divider class="ClearLeft" />
+                <div class="ColumnOneHalf">
+                    <div class="WrapperPadding20-10-0-8">
+                        <mat-form-field>
+                            <mat-label>Currency</mat-label>
+                            <mat-select [formControl]="controlCurrency">
+                                <mat-option />
+                                <mat-option *ngFor="let currency of this.currenciesSupportedFiat" [value]="currency.Id">
+                                    {{currency.Name}} ({{currency.Symbol}})
+                                </mat-option>
+                            </mat-select>
+                            <div *ngIf="formSubmitted && controlCurrency.errors" class="TextError">
+                                <div *ngIf="controlCurrency.errors['required']">Currency is required</div>
+                            </div>
+                        </mat-form-field>
+                    </div>
+                </div>
+                <div class="ColumnOneHalf">
+                    <div class="WrapperPadding20-10-0-8">
+                        <p>The main (fiat) currency prices of products and delivery methods linked to this shop will be entered in. All prices entered will eventually be converted to crypto prices automatically, depending on which crypto currencies you enable and which the customer chooses to display and check out with.</p>
+                    </div>
+                </div>
+                <mat-divider class="ClearLeft" />
+                <div class="ColumnOneHalf">
+                    <div class="WrapperPadding20-10-0-8 TextAlignRight">
+                        <mat-radio-group aria-labelledby="gender" [formControl]="controlOrderMethod">
+                            <mat-radio-button value="0" color="primary">Automated</mat-radio-button>
+                            <mat-radio-button value="1" color="primary">Manual action required</mat-radio-button>
+                        </mat-radio-group>
+                    </div>
+                </div>
+                <div class="ColumnOneHalf">
+                    <div class="WrapperPadding20-10-0-8">
+                        <p>The order method of the shop.</p>
+                        <p><strong>Automated:</strong> Customers are presented with a payment request immediately after checkout. This makes the ordering and checkout process more streamlined, but you have to make sure the prices of your products and delivery methods are set appropriately keeping possible international shipment in mind.</p>
+                        <p><strong>Manual action required:</strong> Customers are presented with a confirmation message after checkout. Only when the order is manually reviewed and verified by you in the Control Panel, the customer will receive a link with a payment request.</p>
+                    </div>
+                </div>
+                <mat-divider class="ClearLeft" />
+                <div class="ColumnOneHalf">
+                    <div class="WrapperPadding10-10-0-8 TextAlignRight">
+                        <mat-checkbox [formControl]="controlRequireAddresses" color="primary" />
+                    </div>
+                </div>
+                <div class="ColumnOneHalf">
+                    <div class="WrapperPadding20-10-0-8">
+                        <p>Customers are required to fill in their address when placing an order in this shop. It is only recommended to turn this off if you're selling products or services that do not require physical shipping.</p>
+                    </div>
+                </div>
+            </mat-tab>
+            <mat-tab>
+                <ng-template mat-tab-label>
+                    <mat-icon color="warn" class="TabWarnIcon" *ngIf="this.formSubmitted && this.formErrorCryptoWallets">error_outline</mat-icon>
+                    Crypto wallets
+                </ng-template>
+                <ng-container *ngFor="let currency of this.currenciesSupportedCrypto">
+                    <div class="ColumnOneHalf">
+                        <div class="WrapperPadding20-10-0-8">
+                            <mat-form-field>
+                                <mat-label>Costs for {{currency.Name}}</mat-label>
+                                <input matInput [formControl]="this.controlsCryptoWallet[currency.Id]" maxlength="20" placeholder="Example: 250.45" [ngClass]="{ 'is-invalid': formSubmitted && this.controlsCryptoWallet[currency.Id].errors }" />
+                                <div *ngIf="formSubmitted && this.controlsCryptoWallet[currency.Id].errors" class="TextError">
+                                    <div *ngIf="this.controlsCryptoWallet[currency.Id].errors!['pattern']">Costs can only be a numerical value with up to 2 decimals.</div>
+                                </div>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div class="ColumnOneHalf">
+                        <div class="WrapperPadding20-10-0-8">
+                            <p><app-crypto-tag [cryptoCode]="currency.Code" [cryptoName]="currency.Name" /></p>
+                        </div>
+                    </div>
+                    <mat-divider class="ClearLeft" />
+                </ng-container>
+            </mat-tab>
+        </mat-tab-group>
     </div>
 </form>

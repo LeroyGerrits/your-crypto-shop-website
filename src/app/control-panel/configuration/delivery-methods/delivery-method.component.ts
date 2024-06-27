@@ -42,6 +42,9 @@ export class ControlPanelConfigurationDeliveryMethodComponent implements OnInit,
   public shops: Shop[] | undefined;
   public pageTitle = 'Create new delivery method'
 
+  public selectedCurrencySymbol: string = '';
+  public selectedCurrencyName: string = '';
+
   constructor(
     private countryService: CountryService,
     private deliveryMethodService: DeliveryMethodService,
@@ -85,6 +88,14 @@ export class ControlPanelConfigurationDeliveryMethodComponent implements OnInit,
     this.snackBarRef?.dismiss();
   }
 
+  displayCurrency() {
+    var selectedShop = this.shops?.find(x => x.Id == this.controlShop.value);
+    if (selectedShop && selectedShop.Currency) {
+      this.selectedCurrencySymbol = selectedShop.Currency.Symbol!;
+      this.selectedCurrencyName = selectedShop.Currency.Name;
+    }
+  }
+
   onRetrieveDeliveryMethodData(response: GetDeliveryMethodResponse) {
     this.deliveryMethod = response.DeliveryMethod;
     this.pageTitle = response.DeliveryMethod.Name;
@@ -96,6 +107,8 @@ export class ControlPanelConfigurationDeliveryMethodComponent implements OnInit,
 
     if (response.CostsPerCountry)
       this.deliveryMethodCostsPerCountry = response.CostsPerCountry;
+
+    this.displayCurrency();
   }
 
   onSubmit() {

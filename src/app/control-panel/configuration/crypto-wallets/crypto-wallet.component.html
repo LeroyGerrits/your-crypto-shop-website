@@ -12,6 +12,9 @@
                         <app-crypto-tag [cryptoName]="currency.Name" [cryptoCode]="currency.Code" />
                     </mat-option>
                 </mat-select>
+                <div *ngIf="formSubmitted && controlCurrency.errors" class="TextError">
+                    <div *ngIf="controlCurrency.errors['required']">Currency is required</div>
+                </div>
             </mat-form-field>
         </div>
     </div>
