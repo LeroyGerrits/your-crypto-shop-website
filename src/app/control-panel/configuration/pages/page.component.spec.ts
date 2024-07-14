@@ -15,7 +15,7 @@ import { MutationResult } from 'src/app/shared/models/mutation-result.model';
 import { PageService } from 'src/app/shared/services/page.service';
 import { ShopService } from 'src/app/shared/services/shop.service';
 import { TestDataPages } from 'src/assets/test-data/Pages';
-import { TestDataShops } from 'src/assets/test-data/Shops';
+import { TestDataShops } from 'src/assets/test-data/-shops';
 import { ControlPanelConfigurationPageComponent } from './page.component';
 
 import { MatCheckboxChange, MatCheckboxModule } from '@angular/material/checkbox';

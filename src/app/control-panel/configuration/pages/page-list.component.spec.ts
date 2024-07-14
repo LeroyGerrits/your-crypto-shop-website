@@ -19,7 +19,7 @@ import { BooleanConvertPipe } from 'src/app/shared/pipes/boolean-convert.pipe';
 import { PageService } from 'src/app/shared/services/page.service';
 import { ShopService } from 'src/app/shared/services/shop.service';
 import { TestDataPages } from 'src/assets/test-data/Pages';
-import { TestDataShops } from 'src/assets/test-data/Shops';
+import { TestDataShops } from 'src/assets/test-data/-shops';
 import { ControlPanelConfigurationPageListComponent } from './page-list.component';
 import { MatExpansionModule } from '@angular/material/expansion';
 

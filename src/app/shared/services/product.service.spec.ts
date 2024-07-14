@@ -3,13 +3,13 @@ import { HttpTestingController, provideHttpClientTesting } from '@angular/common
 import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 import { Constants } from 'src/app/shared/constants';
-import { Environment } from 'src/app/shared/environments/-environment';
+import { Environment } from 'src/app/shared/environments/environment';
 import { GetProductsParameters } from '../models/parameters/get-products-parameters.model';
 import { MutateProductRequest } from '../models/request/mutate-product-request.model';
 import { ProductService } from './product.service';
 import { TestBed } from '@angular/core/testing';
 import { TestDataCategories } from 'src/assets/test-data/Categories';
-import { TestDataProducts } from 'src/assets/test-data/Products';
+import { TestDataProducts } from 'src/assets/test-data/-products';
 
 describe('ProductService', () => {
     let service: ProductService;

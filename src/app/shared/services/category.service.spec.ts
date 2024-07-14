@@ -4,7 +4,7 @@ import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http'
 
 import { CategoryService } from './category.service';
 import { Constants } from 'src/app/shared/constants';
-import { Environment } from 'src/app/shared/environments/-environment';
+import { Environment } from 'src/app/shared/environments/environment';
 import { GetCategoriesParameters } from '../models/parameters/get-categories-parameters.model';
 import { TestBed } from '@angular/core/testing';
 import { TestDataCategories } from 'src/assets/test-data/Categories';

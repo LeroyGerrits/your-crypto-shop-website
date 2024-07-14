@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
 import { debounceTime, distinctUntilChanged } from 'rxjs';
 import { Constants } from 'src/app/shared/constants';
 import { DialogDeleteComponent } from 'src/app/shared/dialogs/delete/dialog.delete.component';
-import { Environment } from 'src/app/shared/environments/-environment';
+import { Environment } from 'src/app/shared/environments/environment';
 import { DeliveryMethod } from 'src/app/shared/models/delivery-method.model';
 import { MutationResult } from 'src/app/shared/models/mutation-result.model';
 import { GetDeliveryMethodsParameters } from 'src/app/shared/models/parameters/get-delivery-methods-parameters.model';

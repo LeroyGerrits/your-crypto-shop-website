@@ -8,7 +8,7 @@ import { Country } from 'src/app/shared/models/country.model';
 import { CountryService } from 'src/app/shared/services/country.service';
 import { DeliveryMethod } from 'src/app/shared/models/delivery-method.model';
 import { DeliveryMethodService } from 'src/app/shared/services/delivery-method.service';
-import { Environment } from 'src/app/shared/environments/-environment';
+import { Environment } from 'src/app/shared/environments/environment';
 import { GetDeliveryMethodResponse } from 'src/app/shared/models/response/get-delivery-method-response.model';
 import { IDictionaryFormControl } from 'src/app/shared/interfaces/idictionary-formcontrol.interface';
 import { IDictionaryNumber } from 'src/app/shared/interfaces/idictionary-number.interface';

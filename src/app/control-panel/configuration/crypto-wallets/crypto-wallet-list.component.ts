@@ -10,7 +10,7 @@ import { debounceTime, distinctUntilChanged } from 'rxjs';
 import { Constants } from 'src/app/shared/constants';
 import { DialogCreateCryptoWalletComponent } from 'src/app/shared/dialogs/create-crypto-wallet/dialog.create-crypto-wallet.component';
 import { DialogDeleteComponent } from 'src/app/shared/dialogs/delete/dialog.delete.component';
-import { Environment } from 'src/app/shared/environments/-environment';
+import { Environment } from 'src/app/shared/environments/environment';
 import { CryptoWallet } from 'src/app/shared/models/crypto-wallet.model';
 import { Currency } from 'src/app/shared/models/currency.model';
 import { MutationResult } from 'src/app/shared/models/mutation-result.model';
@@ -61,7 +61,7 @@ export class ControlPanelConfigurationCryptoWalletListComponent implements OnDes
     this.controlFilterAddress.valueChanges.pipe(debounceTime(1000), distinctUntilChanged()).subscribe(() => this.filterCryptoWallets());
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.currencyService.getListCrypto().subscribe(currencies => {
       this.currencies = currencies;
 
@@ -77,7 +77,7 @@ export class ControlPanelConfigurationCryptoWalletListComponent implements OnDes
     this.snackBarRef?.dismiss();
   }
 
-  filterCryptoWallets() {
+  filterCryptoWallets(): void {
     const parameters: GetCryptoWalletsParameters = {
       Address: this.controlFilterAddress.value!,
       CurrencyId: this.controlFilterCurrency.value!,
@@ -91,7 +91,7 @@ export class ControlPanelConfigurationCryptoWalletListComponent implements OnDes
     });
   }
 
-  addCryptoWallet() {
+  addCryptoWallet(): void {
     const dialogCreateCryptoWallet = this.dialog.open(DialogCreateCryptoWalletComponent);
     dialogCreateCryptoWallet.afterClosed().subscribe(result => {
       if (result) {
@@ -100,7 +100,7 @@ export class ControlPanelConfigurationCryptoWalletListComponent implements OnDes
     });
   }
 
-  onSortChange(sortState: Sort) {
+  onSortChange(sortState: Sort): void {
     if (sortState.direction) {
       this.sortDirection = sortState.direction.toString();
     } else {
@@ -108,11 +108,11 @@ export class ControlPanelConfigurationCryptoWalletListComponent implements OnDes
     }
   }
 
-  editElement(element: CryptoWallet) {
+  editElement(element: CryptoWallet): void {
     this.router.navigate([`/control-panel/configuration/crypto-wallets/${element.Id}`]);
   }
 
-  deleteElement(element: CryptoWallet) {
+  deleteElement(element: CryptoWallet): void {
     const dialogDelete = this.dialog.open(DialogDeleteComponent);
     const instance = dialogDelete.componentInstance;
     instance.dialogMessage = `Are you sure you want to delete the assignment to crypto wallet '${element.Name}'?`;
@@ -128,7 +128,7 @@ export class ControlPanelConfigurationCryptoWalletListComponent implements OnDes
     });
   }
 
-  handleOnSubmitResult(result: MutationResult) {
+  handleOnSubmitResult(result: MutationResult): void {
     if (result.Success) {
       this.filterCryptoWallets();
     } else {
@@ -136,7 +136,7 @@ export class ControlPanelConfigurationCryptoWalletListComponent implements OnDes
     }
   }
 
-  handleOnSubmitError(error: string) {
+  handleOnSubmitError(error: string): void {
     this.snackBarRef = this.snackBar.open(error, 'Close', { panelClass: ['error-snackbar'] });
   }
 }

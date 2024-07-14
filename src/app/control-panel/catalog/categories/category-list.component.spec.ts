@@ -19,7 +19,7 @@ import { MutationResult } from 'src/app/shared/models/mutation-result.model';
 import { RouterTestingModule } from '@angular/router/testing';
 import { ShopService } from 'src/app/shared/services/shop.service';
 import { TestDataCategories } from 'src/assets/test-data/Categories';
-import { TestDataShops } from 'src/assets/test-data/Shops';
+import { TestDataShops } from 'src/assets/test-data/-shops';
 import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 describe('ControlPanelCatalogCategoryListComponent', () => {

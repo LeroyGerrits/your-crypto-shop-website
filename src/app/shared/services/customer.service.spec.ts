@@ -4,7 +4,7 @@ import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http'
 
 import { Constants } from '../constants';
 import { CustomerService } from './customer.service';
-import { Environment } from 'src/app/shared/environments/-environment';
+import { Environment } from 'src/app/shared/environments/environment';
 import { GetCustomersParameters } from '../models/parameters/get-customers-parameters.model';
 import { MutateCustomerRequest } from '../models/request/mutate-customer-request.model';
 import { TestBed } from '@angular/core/testing';

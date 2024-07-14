@@ -23,7 +23,7 @@ import { ShopService } from 'src/app/shared/services/shop.service';
 import { TestDataCategories } from 'src/assets/test-data/Categories';
 import { TestDataCountries } from 'src/assets/test-data/Countries';
 import { TestDataCustomers } from 'src/assets/test-data/Customers';
-import { TestDataShops } from 'src/assets/test-data/Shops';
+import { TestDataShops } from 'src/assets/test-data/-shops';
 import { ControlPanelCustomerListComponent } from './customer-list.component';
 import { ControlPanelCustomerComponent } from './customer.component';
 import { TestDataAddresses } from 'src/assets/test-data/-addresses';

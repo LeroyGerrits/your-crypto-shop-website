@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
 import { debounceTime, distinctUntilChanged } from 'rxjs';
 import { Constants } from 'src/app/shared/constants';
 import { DialogDeleteComponent } from 'src/app/shared/dialogs/delete/dialog.delete.component';
-import { Environment } from 'src/app/shared/environments/-environment';
+import { Environment } from 'src/app/shared/environments/environment';
 import { Customer } from 'src/app/shared/models/customer.model';
 import { MutationResult } from 'src/app/shared/models/mutation-result.model';
 import { Shop } from 'src/app/shared/models/shop.model';

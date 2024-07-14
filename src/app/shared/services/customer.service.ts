@@ -3,7 +3,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { ActivateAccountRequest } from '../models/request/activate-account-request.model';
 import { ChangePasswordRequest } from '../models/request/change-password-request.model';
 import { Customer } from 'src/app/shared/models/customer.model';
-import { Environment } from 'src/app/shared/environments/-environment';
+import { Environment } from 'src/app/shared/environments/environment';
 import { ForgotPasswordRequest } from '../models/request/forgot-password-request.model';
 import { GetCustomersParameters } from '../models/parameters/get-customers-parameters.model';
 import { Injectable } from '@angular/core';

@@ -1,6 +1,6 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 
-import { Environment } from 'src/app/shared/environments/-environment';
+import { Environment } from 'src/app/shared/environments/environment';
 import { Field } from 'src/app/shared/models/field.model';
 import { GetFieldsParameters } from '../models/parameters/get-fields-parameters.model';
 import { Injectable } from '@angular/core';

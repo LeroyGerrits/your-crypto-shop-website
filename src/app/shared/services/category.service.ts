@@ -1,7 +1,7 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 
 import { Category } from 'src/app/shared/models/category.model';
-import { Environment } from 'src/app/shared/environments/-environment';
+import { Environment } from 'src/app/shared/environments/environment';
 import { GetCategoriesParameters } from '../models/parameters/get-categories-parameters.model';
 import { Injectable } from '@angular/core';
 import { MutationResult } from 'src/app/shared/models/mutation-result.model';

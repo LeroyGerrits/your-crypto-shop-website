@@ -1,4 +1,4 @@
-import { Environment } from 'src/app/shared/environments/-environment';
+import { Environment } from 'src/app/shared/environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { IDictionaryNumber } from '../interfaces/idictionary-number.interface';
 import { Injectable } from '@angular/core';

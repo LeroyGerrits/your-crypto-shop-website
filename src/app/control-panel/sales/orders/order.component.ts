@@ -12,7 +12,7 @@ import { DialogConfirmComponent } from 'src/app/shared/dialogs/confirm/dialog.co
 import { DialogDeleteComponent } from 'src/app/shared/dialogs/delete/dialog.delete.component';
 import { DialogEditOrderItemComponent } from 'src/app/shared/dialogs/edit-order-item/dialog.edit-order-item.component';
 import { OrderStatus } from 'src/app/shared/enums/order-status.enum';
-import { Environment } from 'src/app/shared/environments/-environment';
+import { Environment } from 'src/app/shared/environments/environment';
 import { Order } from 'src/app/shared/models/order.model';
 import { MutationResult } from 'src/app/shared/models/mutation-result.model';
 import { OrderItem } from 'src/app/shared/models/order-item.model';

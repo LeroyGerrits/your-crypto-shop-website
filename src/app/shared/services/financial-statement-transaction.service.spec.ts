@@ -4,7 +4,7 @@ import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http'
 
 import { Constants } from 'src/app/shared/constants';
 import { DatePipe } from '@angular/common';
-import { Environment } from 'src/app/shared/environments/-environment';
+import { Environment } from 'src/app/shared/environments/environment';
 import { FinancialStatementTransactionService } from './financial-statement-transaction.service';
 import { GetFinancialStatementTransactionsParameters } from '../models/parameters/get-financial-statement-transactions-parameters.model';
 import { TestBed } from '@angular/core/testing';

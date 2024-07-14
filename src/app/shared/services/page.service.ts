@@ -1,6 +1,6 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 
-import { Environment } from 'src/app/shared/environments/-environment';
+import { Environment } from 'src/app/shared/environments/environment';
 import { GetPageResponse } from '../models/response/get-page-response.model';
 import { GetPagesParameters } from '../models/parameters/get-pages-parameters.model';
 import { Injectable } from '@angular/core';

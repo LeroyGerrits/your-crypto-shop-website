@@ -6,7 +6,7 @@ import { Component } from '@angular/core';
 import { Constants } from 'src/app/shared/constants';
 import { ControlPanelCatalogProductPhotoComponent } from './product-photo.component';
 import { DialogDeleteComponent } from 'src/app/shared/dialogs/delete/dialog.delete.component';
-import { Environment } from 'src/app/shared/environments/-environment';
+import { Environment } from 'src/app/shared/environments/environment';
 import { FileSizePipe } from 'src/app/shared/pipes/file-size.pipe';
 import { FileUploadProgress } from 'src/app/shared/models/system/file-upload-progress.model';
 import { GetProductPhotosParameters } from 'src/app/shared/models/parameters/get-product-photos-parameters.model';

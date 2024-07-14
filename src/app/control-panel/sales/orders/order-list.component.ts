@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
 import { debounceTime, distinctUntilChanged } from 'rxjs';
 import { Constants } from 'src/app/shared/constants';
 import { OrderStatus } from 'src/app/shared/enums/order-status.enum';
-import { Environment } from 'src/app/shared/environments/-environment';
+import { Environment } from 'src/app/shared/environments/environment';
 import { MutationResult } from 'src/app/shared/models/mutation-result.model';
 import { Order } from 'src/app/shared/models/order.model';
 import { GetOrdersParameters } from 'src/app/shared/models/parameters/get-orders-parameters.model';

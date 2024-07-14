@@ -1,7 +1,7 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 
 import { DeliveryMethod } from 'src/app/shared/models/delivery-method.model';
-import { Environment } from 'src/app/shared/environments/-environment';
+import { Environment } from 'src/app/shared/environments/environment';
 import { GetDeliveryMethodResponse } from '../models/response/get-delivery-method-response.model';
 import { GetDeliveryMethodsParameters } from '../models/parameters/get-delivery-methods-parameters.model';
 import { Injectable } from '@angular/core';

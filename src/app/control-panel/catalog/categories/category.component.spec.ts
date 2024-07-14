@@ -12,7 +12,7 @@ import { MutationResult } from 'src/app/shared/models/mutation-result.model';
 import { Shop } from 'src/app/shared/models/shop.model';
 import { CategoryService } from 'src/app/shared/services/category.service';
 import { TestDataCategories } from 'src/assets/test-data/Categories';
-import { TestDataShops } from 'src/assets/test-data/Shops';
+import { TestDataShops } from 'src/assets/test-data/-shops';
 import { ControlPanelCatalogCategoryComponent } from './category.component';
 import { MatSnackBar } from '@angular/material/snack-bar';
 

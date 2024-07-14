@@ -4,7 +4,7 @@ import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http'
 
 import { Constants } from 'src/app/shared/constants';
 import { CurrencyRateService } from './currency-rate.service';
-import { Environment } from 'src/app/shared/environments/-environment';
+import { Environment } from 'src/app/shared/environments/environment';
 import { TestBed } from '@angular/core/testing';
 
 describe('CurrencyRateService', () => {

@@ -6,7 +6,7 @@ import { MatChipEditedEvent, MatChipInputEvent } from '@angular/material/chips';
 import { MatSnackBar, MatSnackBarRef, TextOnlySnackBar } from '@angular/material/snack-bar';
 
 import { Constants } from 'src/app/shared/constants';
-import { Environment } from 'src/app/shared/environments/-environment';
+import { Environment } from 'src/app/shared/environments/environment';
 import { Field } from 'src/app/shared/models/field.model';
 import { FieldDataType } from 'src/app/shared/enums/field-data-type.enum';
 import { FieldEntity } from 'src/app/shared/enums/field-entity.enum';

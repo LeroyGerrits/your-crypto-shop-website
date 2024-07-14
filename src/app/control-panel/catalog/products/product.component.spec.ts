@@ -2,13 +2,13 @@ import { ActivatedRoute, Router, RouterLink, convertToParamMap } from '@angular/
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ControlPanelCatalogProductComponent } from './product.component';
-import { TestDataProducts } from 'src/assets/test-data/Products';
+import { TestDataProducts } from 'src/assets/test-data/-products';
 import { ProductService } from 'src/app/shared/services/product.service';
 import { ShopService } from 'src/app/shared/services/shop.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MutationResult } from 'src/app/shared/models/mutation-result.model';
 import { of, throwError } from 'rxjs';
-import { TestDataShops } from 'src/assets/test-data/Shops';
+import { TestDataShops } from 'src/assets/test-data/-shops';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatDividerModule } from '@angular/material/divider';

@@ -1,6 +1,6 @@
 import { ActivateAccountRequest } from '../models/request/activate-account-request.model';
 import { ChangePasswordRequest } from '../models/request/change-password-request.model';
-import { Environment } from 'src/app/shared/environments/-environment';
+import { Environment } from 'src/app/shared/environments/environment';
 import { ForgotPasswordRequest } from '../models/request/forgot-password-request.model';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';

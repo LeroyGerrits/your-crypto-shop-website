@@ -2,7 +2,7 @@ import { Field } from 'src/app/shared/models/field.model';
 import { FieldDataType } from 'src/app/shared/enums/field-data-type.enum';
 import { FieldEntity } from 'src/app/shared/enums/field-entity.enum';
 import { FieldType } from 'src/app/shared/enums/field-type.enum';
-import { TestDataShops } from './Shops';
+import { TestDataShops } from './-shops';
 
 export const TestDataFields: Field[] = [
     {

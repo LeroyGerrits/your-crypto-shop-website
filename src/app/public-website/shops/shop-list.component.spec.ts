@@ -17,8 +17,8 @@ import { ShopCategoryService } from 'src/app/shared/services/shop-category.servi
 import { ShopService } from 'src/app/shared/services/shop.service';
 import { Sort } from '@angular/material/sort';
 import { TestDataCountries } from 'src/assets/test-data/Countries';
-import { TestDataPublicShops } from 'src/assets/test-data/PublicShops';
-import { TestDataShopCategories } from 'src/assets/test-data/ShopCategories';
+import { TestDataPublicShops } from 'src/assets/test-data/public-shops';
+import { TestDataShopCategories } from 'src/assets/test-data/shop-categories';
 import { of } from 'rxjs';
 
 describe('PublicWebsiteShopListComponent', () => {

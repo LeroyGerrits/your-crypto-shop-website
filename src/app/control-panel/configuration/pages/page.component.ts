@@ -3,7 +3,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar, MatSnackBarRef, TextOnlySnackBar } from '@angular/material/snack-bar';
 
-import { Environment } from 'src/app/shared/environments/-environment';
+import { Environment } from 'src/app/shared/environments/environment';
 import { GetPageResponse } from 'src/app/shared/models/response/get-page-response.model';
 import { MatCheckboxChange } from '@angular/material/checkbox';
 import { MutatePageRequest } from 'src/app/shared/models/request/mutate-page-request.model';

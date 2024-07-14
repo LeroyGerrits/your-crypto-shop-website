@@ -15,12 +15,12 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterTestingModule } from '@angular/router/testing';
 import { MutationResult } from 'src/app/shared/models/mutation-result.model';
 import { ShopService } from 'src/app/shared/services/shop.service';
-import { TestDataShops } from 'src/assets/test-data/Shops';
+import { TestDataShops } from 'src/assets/test-data/-shops';
 import { ControlPanelConfigurationShopListComponent } from './shop-list.component';
 import { CountryService } from 'src/app/shared/services/country.service';
 import { ShopCategoryService } from 'src/app/shared/services/shop-category.service';
 import { TestDataCountries } from 'src/assets/test-data/Countries';
-import { TestDataShopCategories } from 'src/assets/test-data/ShopCategories';
+import { TestDataShopCategories } from 'src/assets/test-data/shop-categories';
 import { MatSelectModule } from '@angular/material/select';
 import { MatExpansionModule } from '@angular/material/expansion';
 

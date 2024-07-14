@@ -1,7 +1,7 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 
 import { DatePipe } from '@angular/common';
-import { Environment } from 'src/app/shared/environments/-environment';
+import { Environment } from 'src/app/shared/environments/environment';
 import { GetOrdersParameters } from '../models/parameters/get-orders-parameters.model';
 import { Injectable } from '@angular/core';
 import { MutationResult } from 'src/app/shared/models/mutation-result.model';

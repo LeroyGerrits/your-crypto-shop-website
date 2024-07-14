@@ -8,7 +8,7 @@ import { CryptoWallet } from 'src/app/shared/models/crypto-wallet.model';
 import { CryptoWalletService } from 'src/app/shared/services/crypto-wallet.service';
 import { Currency } from 'src/app/shared/models/currency.model';
 import { CurrencyService } from 'src/app/shared/services/currency.service';
-import { Environment } from 'src/app/shared/environments/-environment';
+import { Environment } from 'src/app/shared/environments/environment';
 import { Merchant } from 'src/app/shared/models/merchant.model';
 import { MutationResult } from 'src/app/shared/models/mutation-result.model';
 

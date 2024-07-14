@@ -3,7 +3,7 @@ import { HttpTestingController, provideHttpClientTesting } from '@angular/common
 import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 import { Constants } from 'src/app/shared/constants';
-import { Environment } from 'src/app/shared/environments/-environment';
+import { Environment } from 'src/app/shared/environments/environment';
 import { GetPagesParameters } from '../models/parameters/get-pages-parameters.model';
 import { MutatePageRequest } from '../models/request/mutate-page-request.model';
 import { PageService } from './page.service';

@@ -4,7 +4,7 @@ import { ActivatedRoute, Router, RouterLink, RouterLinkActive, RouterOutlet } fr
 import { MatDialog } from '@angular/material/dialog';
 import { NavigationEnd } from '@angular/router';
 import { of } from 'rxjs';
-import { TestDataPublicShops } from 'src/assets/test-data/PublicShops';
+import { TestDataPublicShops } from 'src/assets/test-data/public-shops';
 import { Stats } from '../shared/models/stats.model';
 import { GeneralService } from '../shared/services/general.service';
 import { ShopService } from '../shared/services/shop.service';

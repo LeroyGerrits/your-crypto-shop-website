@@ -3,13 +3,13 @@ import { HttpTestingController, provideHttpClientTesting } from '@angular/common
 import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 import { Constants } from 'src/app/shared/constants';
-import { Environment } from 'src/app/shared/environments/-environment';
+import { Environment } from 'src/app/shared/environments/environment';
 import { GetShopsParameters } from '../models/parameters/get-shops-parameters.model';
 import { ShopService } from './shop.service';
 import { TestBed } from '@angular/core/testing';
 import { TestDataCountries } from 'src/assets/test-data/Countries';
-import { TestDataShopCategories } from 'src/assets/test-data/ShopCategories';
-import { TestDataShops } from 'src/assets/test-data/Shops';
+import { TestDataShopCategories } from 'src/assets/test-data/shop-categories';
+import { TestDataShops } from 'src/assets/test-data/-shops';
 
 describe('ShopService', () => {
     let service: ShopService;

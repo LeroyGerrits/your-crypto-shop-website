@@ -4,13 +4,15 @@ import { Gender } from 'src/app/shared/enums/gender.enum';
 export const TestDataCryptoWallets: CryptoWallet[] = [
     {
         Id: '00000000-0000-0000-0000-000000000001',
-        MerchantId: '00000000-0000-0000-0000-000000000011',
+        CurrencyId: '00000000-0000-0000-0000-000000000011',
+        MerchantId: '00000000-0000-0000-0000-000000000111',
         Name: 'Test crypto wallet 1',
         Address: 'crypto123'
     },
     {
         Id: '00000000-0000-0000-0000-000000000002',
-        MerchantId: '00000000-0000-0000-0000-000000000012',
+        CurrencyId: '00000000-0000-0000-0000-000000000012',
+        MerchantId: '00000000-0000-0000-0000-000000000112',
         Name: 'Test crypto wallet 2',
         Address: 'crypto123'
     }

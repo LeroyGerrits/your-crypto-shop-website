@@ -4,7 +4,7 @@ import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http'
 
 import { MerchantService } from 'src/app/shared/services/merchant.service';
 import { PublicWebsiteMerchantComponent } from './merchant.component';
-import { TestDataPublicMerchants } from 'src/assets/test-data/PublicMerchants';
+import { TestDataPublicMerchants } from 'src/assets/test-data/public-merchants';
 import { of } from 'rxjs';
 import { provideHttpClientTesting } from '@angular/common/http/testing';
 

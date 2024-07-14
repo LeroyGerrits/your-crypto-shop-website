@@ -4,7 +4,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort, Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { debounceTime, distinctUntilChanged } from 'rxjs';
-import { Environment } from 'src/app/shared/environments/-environment';
+import { Environment } from 'src/app/shared/environments/environment';
 import { Country } from 'src/app/shared/models/country.model';
 import { GetShopsParameters } from 'src/app/shared/models/parameters/get-shops-parameters.model';
 import { ShopCategory } from 'src/app/shared/models/shop-category.model';

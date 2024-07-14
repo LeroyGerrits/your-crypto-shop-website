@@ -22,7 +22,7 @@ import { FileSizePipe } from 'src/app/shared/pipes/file-size.pipe';
 import { ProductService } from 'src/app/shared/services/product.service';
 import { ProductPhotoService } from 'src/app/shared/services/product-photo.service';
 import { TestDataProductPhotos } from 'src/assets/test-data/ProductPhotos';
-import { TestDataProducts } from 'src/assets/test-data/Products';
+import { TestDataProducts } from 'src/assets/test-data/-products';
 import { ControlPanelCatalogProductPhotoListComponent } from './product-photo-list.component';
 import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 

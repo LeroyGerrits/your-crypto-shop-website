@@ -19,7 +19,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { MutationResult } from 'src/app/shared/models/mutation-result.model';
 import { TestDataCustomers } from 'src/assets/test-data/Customers';
 import { of, throwError } from 'rxjs';
-import { TestDataShops } from 'src/assets/test-data/Shops';
+import { TestDataShops } from 'src/assets/test-data/-shops';
 import { Sort } from '@angular/material/sort';
 import { Shop } from 'src/app/shared/models/shop.model';
 import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';

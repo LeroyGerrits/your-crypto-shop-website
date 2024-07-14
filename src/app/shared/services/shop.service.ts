@@ -1,6 +1,6 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 
-import { Environment } from 'src/app/shared/environments/-environment';
+import { Environment } from 'src/app/shared/environments/environment';
 import { GetShopsParameters } from '../models/parameters/get-shops-parameters.model';
 import { Injectable } from '@angular/core';
 import { MutationResult } from 'src/app/shared/models/mutation-result.model';

@@ -2,7 +2,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 
 import { Currency } from 'src/app/shared/models/currency.model';
 import { CurrencyRate } from '../models/currency-rate.model';
-import { Environment } from 'src/app/shared/environments/-environment';
+import { Environment } from 'src/app/shared/environments/environment';
 import { GetCurrencyRatesParameters } from '../models/parameters/get-currency-rates-parameters.model';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';

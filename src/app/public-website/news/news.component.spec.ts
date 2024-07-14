@@ -4,7 +4,7 @@ import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http'
 
 import { NewsMessageService } from 'src/app/shared/services/news-message.service';
 import { PublicWebsiteNewsComponent } from './news.component';
-import { TestDataNewsMessages } from 'src/assets/test-data/NewsMessages';
+import { TestDataNewsMessages } from 'src/assets/test-data/news-messages';
 import { of } from 'rxjs';
 import { provideHttpClientTesting } from '@angular/common/http/testing';
 
