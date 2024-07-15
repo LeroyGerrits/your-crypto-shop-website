@@ -1,28 +1,26 @@
 import { ComponentFixture, TestBed, fakeAsync, tick } from '@angular/core/testing';
-import { ActivatedRoute, Router, RouterLink } from '@angular/router';
-import { of, throwError } from 'rxjs';
-
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
+import { MatExpansionModule } from '@angular/material/expansion';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatSelectModule } from '@angular/material/select';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Sort } from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { RouterTestingModule } from '@angular/router/testing';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
+import { of, throwError } from 'rxjs';
 import { MutationResult } from 'src/app/shared/models/mutation-result.model';
-import { ShopService } from 'src/app/shared/services/shop.service';
-import { TestDataShops } from 'src/assets/test-data/-shops';
-import { ControlPanelConfigurationShopListComponent } from './shop-list.component';
 import { CountryService } from 'src/app/shared/services/country.service';
 import { ShopCategoryService } from 'src/app/shared/services/shop-category.service';
-import { TestDataCountries } from 'src/assets/test-data/Countries';
+import { ShopService } from 'src/app/shared/services/shop.service';
+import { TestDataCountries } from 'src/assets/test-data/countries';
 import { TestDataShopCategories } from 'src/assets/test-data/shop-categories';
-import { MatSelectModule } from '@angular/material/select';
-import { MatExpansionModule } from '@angular/material/expansion';
+import { TestDataShops } from 'src/assets/test-data/shops';
+import { ControlPanelConfigurationShopListComponent } from './shop-list.component';
 
 describe('ControlPanelConfigurationShopListComponent', () => {
   let component: ControlPanelConfigurationShopListComponent;
@@ -59,9 +57,7 @@ describe('ControlPanelConfigurationShopListComponent', () => {
 
     TestBed.configureTestingModule({
       declarations: [ControlPanelConfigurationShopListComponent],
-      imports: [BrowserAnimationsModule, MatExpansionModule, MatIconModule, MatFormFieldModule, MatInputModule, MatPaginatorModule, MatSelectModule, MatTableModule, ReactiveFormsModule, RouterLink, RouterTestingModule.withRoutes(
-        [{ path: 'control-panel/configuration/shops', component: ControlPanelConfigurationShopListComponent }]
-      )],
+      imports: [BrowserAnimationsModule, MatExpansionModule, MatIconModule, MatFormFieldModule, MatInputModule, MatPaginatorModule, MatSelectModule, MatTableModule, ReactiveFormsModule, RouterLink],
       providers: [
         { provide: ActivatedRoute, useValue: { snapshot: { data: {} } } },
         { provide: CountryService, useValue: countryServiceSpy },

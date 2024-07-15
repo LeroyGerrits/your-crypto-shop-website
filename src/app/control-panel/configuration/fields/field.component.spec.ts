@@ -1,7 +1,4 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { ActivatedRoute, Router, RouterLink, convertToParamMap } from '@angular/router';
-import { of, throwError } from 'rxjs';
-
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatDividerModule } from '@angular/material/divider';
@@ -10,13 +7,13 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { RouterTestingModule } from '@angular/router/testing';
+import { ActivatedRoute, Router, RouterLink, convertToParamMap } from '@angular/router';
+import { of, throwError } from 'rxjs';
 import { MutationResult } from 'src/app/shared/models/mutation-result.model';
-import { ShopService } from 'src/app/shared/services/shop.service';
-import { TestDataShops } from 'src/assets/test-data/-shops';
-
 import { FieldService } from 'src/app/shared/services/field.service';
-import { TestDataFields } from 'src/assets/test-data/Fields';
+import { ShopService } from 'src/app/shared/services/shop.service';
+import { TestDataFields } from 'src/assets/test-data/fields';
+import { TestDataShops } from 'src/assets/test-data/shops';
 import { ControlPanelConfigurationFieldComponent } from './field.component';
 
 describe('ControlPanelConfigurationFieldComponent', () => {
@@ -41,9 +38,7 @@ describe('ControlPanelConfigurationFieldComponent', () => {
 
     TestBed.configureTestingModule({
       declarations: [ControlPanelConfigurationFieldComponent],
-      imports: [BrowserAnimationsModule, MatDialogModule, MatDividerModule, MatFormFieldModule, MatInputModule, MatSelectModule, ReactiveFormsModule, RouterLink, RouterTestingModule.withRoutes(
-        [{ path: 'control-panel/configuration/fields', component: ControlPanelConfigurationFieldComponent }]
-      )],
+      imports: [BrowserAnimationsModule, MatDialogModule, MatDividerModule, MatFormFieldModule, MatInputModule, MatSelectModule, ReactiveFormsModule, RouterLink],
       providers: [
         { provide: ActivatedRoute, useValue: { snapshot: { paramMap: convertToParamMap({ fieldId: TestDataFields[0].Id }) } } },
         { provide: ShopService, useValue: shopServiceSpy },

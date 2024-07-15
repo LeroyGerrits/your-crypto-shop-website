@@ -1,18 +1,15 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
-import { ActivatedRoute, Router, convertToParamMap } from '@angular/router';
-import { PublicWebsiteResetPasswordComponent } from './reset-password.component';
-import { RouterTestingModule } from '@angular/router/testing';
-import { MatSnackBar } from '@angular/material/snack-bar';
-import { MerchantPasswordResetLinkService } from 'src/app/shared/services/merchant-password-reset-link.service';
-import { MutationResult } from 'src/app/shared/models/mutation-result.model';
-import { of, throwError } from 'rxjs';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { ReactiveFormsModule } from '@angular/forms';
-import { PublicWebsiteMessageComponent } from '../message/message.component';
-import { TestDataMerchantPasswordResetLinks } from 'src/assets/test-data/MerchantPasswordResetLinks';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ActivatedRoute, Router, convertToParamMap } from '@angular/router';
+import { of, throwError } from 'rxjs';
+import { MutationResult } from 'src/app/shared/models/mutation-result.model';
+import { MerchantPasswordResetLinkService } from 'src/app/shared/services/merchant-password-reset-link.service';
+import { TestDataMerchantPasswordResetLinks } from 'src/assets/test-data/merchant-password-reset-links';
+import { PublicWebsiteResetPasswordComponent } from './reset-password.component';
 
 describe('PublicWebsiteResetPasswordComponent', () => {
   let component: PublicWebsiteResetPasswordComponent;
@@ -32,12 +29,7 @@ describe('PublicWebsiteResetPasswordComponent', () => {
 
     TestBed.configureTestingModule({
       declarations: [PublicWebsiteResetPasswordComponent],
-      imports: [BrowserAnimationsModule, MatFormFieldModule, MatInputModule, ReactiveFormsModule, RouterTestingModule.withRoutes(
-        [
-          { path: 'message/account-activated', component: PublicWebsiteMessageComponent },
-          { path: 'message/password-reset-link-already-used', component: PublicWebsiteMessageComponent }
-        ]
-      )],
+      imports: [BrowserAnimationsModule, MatFormFieldModule, MatInputModule, ReactiveFormsModule],
       providers: [
         { provide: ActivatedRoute, useValue: { snapshot: { paramMap: convertToParamMap({ id: TestDataMerchantPasswordResetLinks[0].Id, key: TestDataMerchantPasswordResetLinks[0].Key }) } } },
         { provide: MatSnackBar, useValue: matSnackBarSpy },

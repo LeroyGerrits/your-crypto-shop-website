@@ -1,31 +1,27 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { ActivatedRoute, Router, RouterLink, convertToParamMap } from '@angular/router';
-
 import { ReactiveFormsModule } from '@angular/forms';
+import { MatCheckboxChange, MatCheckboxModule } from '@angular/material/checkbox';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { RouterTestingModule } from '@angular/router/testing';
-import { of, throwError } from 'rxjs';
-import { MutationResult } from 'src/app/shared/models/mutation-result.model';
-import { PageService } from 'src/app/shared/services/page.service';
-import { ShopService } from 'src/app/shared/services/shop.service';
-import { TestDataPages } from 'src/assets/test-data/Pages';
-import { TestDataShops } from 'src/assets/test-data/-shops';
-import { ControlPanelConfigurationPageComponent } from './page.component';
-
-import { MatCheckboxChange, MatCheckboxModule } from '@angular/material/checkbox';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatTreeModule } from '@angular/material/tree';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ActivatedRoute, Router, RouterLink, convertToParamMap } from '@angular/router';
+import { of, throwError } from 'rxjs';
+import { MutationResult } from 'src/app/shared/models/mutation-result.model';
 import { GetPageResponse } from 'src/app/shared/models/response/get-page-response.model';
 import { PageCategoryService } from 'src/app/shared/services/page-category.service';
-import { TestDataCategories } from 'src/assets/test-data/Categories';
-import { TestDataPageCategories } from 'src/assets/test-data/PageCategories';
-import { ControlPanelConfigurationPageListComponent } from './page-list.component';
+import { PageService } from 'src/app/shared/services/page.service';
+import { ShopService } from 'src/app/shared/services/shop.service';
+import { TestDataCategories } from 'src/assets/test-data/categories';
+import { TestDataPageCategories } from 'src/assets/test-data/page-categories';
+import { TestDataPages } from 'src/assets/test-data/pages';
+import { TestDataShops } from 'src/assets/test-data/shops';
+import { ControlPanelConfigurationPageComponent } from './page.component';
 
 describe('ControlPanelConfigurationPageComponent', () => {
   let component: ControlPanelConfigurationPageComponent;
@@ -54,9 +50,7 @@ describe('ControlPanelConfigurationPageComponent', () => {
 
     TestBed.configureTestingModule({
       declarations: [ControlPanelConfigurationPageComponent],
-      imports: [BrowserAnimationsModule, MatCheckboxModule, MatDialogModule, MatDividerModule, MatFormFieldModule, MatInputModule, MatSelectModule, MatTabsModule, MatTreeModule, ReactiveFormsModule, RouterLink, RouterTestingModule.withRoutes(
-        [{ path: 'control-panel/configuration/pages', component: ControlPanelConfigurationPageListComponent }]
-      )],
+      imports: [BrowserAnimationsModule, MatCheckboxModule, MatDialogModule, MatDividerModule, MatFormFieldModule, MatInputModule, MatSelectModule, MatTabsModule, MatTreeModule, ReactiveFormsModule, RouterLink],
       providers: [
         { provide: ActivatedRoute, useValue: { snapshot: { paramMap: convertToParamMap({ pageId: TestDataPages[0].Id, shopId: TestDataPages[0].Shop.Id }) } } },
         { provide: MatSnackBar, useValue: matSnackBarSpy },
@@ -156,9 +150,7 @@ describe('ControlPanelConfigurationPageComponentWithErrors', () => {
 
     TestBed.configureTestingModule({
       declarations: [ControlPanelConfigurationPageComponent],
-      imports: [BrowserAnimationsModule, MatCheckboxModule, MatDialogModule, MatDividerModule, MatFormFieldModule, MatInputModule, MatSelectModule, MatTabsModule, MatTreeModule, ReactiveFormsModule, RouterLink, RouterTestingModule.withRoutes(
-        [{ path: 'control-panel/configuration/pages', component: ControlPanelConfigurationPageListComponent }]
-      )],
+      imports: [BrowserAnimationsModule, MatCheckboxModule, MatDialogModule, MatDividerModule, MatFormFieldModule, MatInputModule, MatSelectModule, MatTabsModule, MatTreeModule, ReactiveFormsModule, RouterLink],
       providers: [
         { provide: ActivatedRoute, useValue: { snapshot: { paramMap: convertToParamMap({ pageId: 'new', shopId: TestDataPages[0].Shop.Id }) } } },
         { provide: PageCategoryService, useValue: pageCategoryServiceSpy },

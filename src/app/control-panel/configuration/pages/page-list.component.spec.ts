@@ -1,9 +1,7 @@
 import { ComponentFixture, TestBed, fakeAsync, tick } from '@angular/core/testing';
-import { ActivatedRoute, Router, RouterLink } from '@angular/router';
-import { of, throwError } from 'rxjs';
-
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
+import { MatExpansionModule } from '@angular/material/expansion';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
@@ -13,15 +11,15 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { Sort } from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { RouterTestingModule } from '@angular/router/testing';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
+import { of, throwError } from 'rxjs';
 import { MutationResult } from 'src/app/shared/models/mutation-result.model';
 import { BooleanConvertPipe } from 'src/app/shared/pipes/boolean-convert.pipe';
 import { PageService } from 'src/app/shared/services/page.service';
 import { ShopService } from 'src/app/shared/services/shop.service';
-import { TestDataPages } from 'src/assets/test-data/Pages';
-import { TestDataShops } from 'src/assets/test-data/-shops';
+import { TestDataPages } from 'src/assets/test-data/pages';
+import { TestDataShops } from 'src/assets/test-data/shops';
 import { ControlPanelConfigurationPageListComponent } from './page-list.component';
-import { MatExpansionModule } from '@angular/material/expansion';
 
 describe('ControlPanelConfigurationPageListComponent', () => {
   let component: ControlPanelConfigurationPageListComponent;
@@ -54,9 +52,7 @@ describe('ControlPanelConfigurationPageListComponent', () => {
 
     TestBed.configureTestingModule({
       declarations: [ControlPanelConfigurationPageListComponent],
-      imports: [BrowserAnimationsModule, MatExpansionModule, MatIconModule, MatFormFieldModule, MatInputModule, MatPaginatorModule, MatSelectModule, MatTableModule, ReactiveFormsModule, RouterLink, RouterTestingModule.withRoutes(
-        [{ path: 'control-panel/configuration/pages', component: ControlPanelConfigurationPageListComponent }]
-      )],
+      imports: [BrowserAnimationsModule, MatExpansionModule, MatIconModule, MatFormFieldModule, MatInputModule, MatPaginatorModule, MatSelectModule, MatTableModule, ReactiveFormsModule, RouterLink],
       providers: [
         { provide: ActivatedRoute, useValue: { snapshot: { data: {} } } },
         { provide: MatDialog, useValue: matDialogSpy },

@@ -1,4 +1,4 @@
-import { PublicMerchant } from 'src/app/shared/models/viewmodels/PublicMerchant.model';
+import { PublicMerchant } from 'src/app/shared/models/viewmodels/public-merchant.model';
 
 export const TestDataPublicMerchants: PublicMerchant[] = [
     {

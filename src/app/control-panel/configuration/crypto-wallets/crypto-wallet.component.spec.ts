@@ -1,21 +1,18 @@
-import { ActivatedRoute, Router, RouterLink, convertToParamMap } from '@angular/router';
-import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { HttpClient, HttpHandler } from '@angular/common/http';
-import { of, throwError } from 'rxjs';
-
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { ControlPanelConfigurationCryptoWalletComponent } from './crypto-wallet.component';
-import { ControlPanelConfigurationCryptoWalletListComponent } from './crypto-wallet-list.component';
-import { CryptoWalletService } from 'src/app/shared/services/crypto-wallet.service';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ReactiveFormsModule } from '@angular/forms';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatDividerModule } from '@angular/material/divider';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ActivatedRoute, Router, RouterLink, convertToParamMap } from '@angular/router';
+import { of, throwError } from 'rxjs';
 import { MutationResult } from 'src/app/shared/models/mutation-result.model';
-import { ReactiveFormsModule } from '@angular/forms';
-import { RouterTestingModule } from '@angular/router/testing';
-import { TestDataCryptoWallets } from 'src/assets/test-data/CryptoWallets';
-import { MatDividerModule } from '@angular/material/divider';
+import { CryptoWalletService } from 'src/app/shared/services/crypto-wallet.service';
+import { TestDataCryptoWallets } from 'src/assets/test-data/crypto-wallets';
+import { ControlPanelConfigurationCryptoWalletComponent } from './crypto-wallet.component';
 
 describe('ControlPanelConfigurationCryptoWalletComponent', () => {
   let component: ControlPanelConfigurationCryptoWalletComponent;
@@ -34,9 +31,7 @@ describe('ControlPanelConfigurationCryptoWalletComponent', () => {
 
     TestBed.configureTestingModule({
       declarations: [ControlPanelConfigurationCryptoWalletComponent],
-      imports: [BrowserAnimationsModule, MatDialogModule, MatDividerModule, MatFormFieldModule, MatInputModule, ReactiveFormsModule, RouterLink, RouterTestingModule.withRoutes(
-        [{ path: 'control-panel/configuration/crypto-wallets', component: ControlPanelConfigurationCryptoWalletListComponent }]
-      )],
+      imports: [BrowserAnimationsModule, MatDialogModule, MatDividerModule, MatFormFieldModule, MatInputModule, ReactiveFormsModule, RouterLink],
       providers: [
         { provide: ActivatedRoute, useValue: { snapshot: { paramMap: convertToParamMap({ cryptoWalletId: TestDataCryptoWallets[0].Id }) } } },
         { provide: CryptoWalletService, useValue: cryptoWalletServiceSpy },

@@ -9,8 +9,8 @@ import { MatInputModule } from '@angular/material/input';
 import { PublicWebsiteFaqListComponent } from './faq-list.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { SearchEngineFriendlyStringPipe } from 'src/app/shared/pipes/search-engine-friendly-string.pipe';
-import { TestDataFaqCategories } from 'src/assets/test-data/FaqCategories';
-import { TestDataFaqs } from 'src/assets/test-data/Faqs';
+import { TestDataFaqCategories } from 'src/assets/test-data/faq-categories';
+import { TestDataFaqs } from 'src/assets/test-data/faqs';
 import { of } from 'rxjs';
 
 describe('PublicWebsiteFaqListComponent', () => {

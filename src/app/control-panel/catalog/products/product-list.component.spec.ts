@@ -1,10 +1,9 @@
-import { ComponentFixture, TestBed, fakeAsync, tick } from '@angular/core/testing';
-import { ActivatedRoute, Router, RouterLink } from '@angular/router';
-import { of, throwError } from 'rxjs';
-
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { provideHttpClientTesting } from '@angular/common/http/testing';
+import { ComponentFixture, TestBed, fakeAsync, tick } from '@angular/core/testing';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
+import { MatExpansionModule } from '@angular/material/expansion';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
@@ -14,18 +13,17 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { Sort } from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { RouterTestingModule } from '@angular/router/testing';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
+import { of, throwError } from 'rxjs';
 import { MutationResult } from 'src/app/shared/models/mutation-result.model';
+import { BooleanConvertPipe } from 'src/app/shared/pipes/boolean-convert.pipe';
 import { CategoryService } from 'src/app/shared/services/category.service';
 import { ProductService } from 'src/app/shared/services/product.service';
 import { ShopService } from 'src/app/shared/services/shop.service';
-import { TestDataCategories } from 'src/assets/test-data/Categories';
-import { TestDataProducts } from 'src/assets/test-data/-products';
-import { TestDataShops } from 'src/assets/test-data/-shops';
+import { TestDataCategories } from 'src/assets/test-data/categories';
+import { TestDataProducts } from 'src/assets/test-data/products';
+import { TestDataShops } from 'src/assets/test-data/shops';
 import { ControlPanelCatalogProductListComponent } from './product-list.component';
-import { BooleanConvertPipe } from 'src/app/shared/pipes/boolean-convert.pipe';
-import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
-import { MatExpansionModule } from '@angular/material/expansion';
 
 describe('ControlPanelCatalogProductListComponent', () => {
   let component: ControlPanelCatalogProductListComponent;
@@ -61,9 +59,9 @@ describe('ControlPanelCatalogProductListComponent', () => {
     shopServiceSpy.getList.and.returnValue(of(TestDataShops));
 
     TestBed.configureTestingModule({
-    declarations: [ControlPanelCatalogProductListComponent],
-    imports: [BrowserAnimationsModule, MatExpansionModule, MatIconModule, MatFormFieldModule, MatInputModule, MatPaginatorModule, MatSelectModule, MatTableModule, ReactiveFormsModule, RouterLink, RouterTestingModule.withRoutes([{ path: 'control-panel/catalog/products', component: ControlPanelCatalogProductListComponent }])],
-    providers: [
+      declarations: [ControlPanelCatalogProductListComponent],
+      imports: [BrowserAnimationsModule, MatExpansionModule, MatIconModule, MatFormFieldModule, MatInputModule, MatPaginatorModule, MatSelectModule, MatTableModule, ReactiveFormsModule, RouterLink],
+      providers: [
         { provide: ActivatedRoute, useValue: { snapshot: { data: {} } } },
         { provide: CategoryService, useValue: categoryServiceSpy },
         { provide: MatDialog, useValue: matDialogSpy },
@@ -75,8 +73,8 @@ describe('ControlPanelCatalogProductListComponent', () => {
         Router,
         provideHttpClient(withInterceptorsFromDi()),
         provideHttpClientTesting()
-    ]
-});
+      ]
+    });
     fixture = TestBed.createComponent(ControlPanelCatalogProductListComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

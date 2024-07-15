@@ -8,8 +8,8 @@ import { Environment } from 'src/app/shared/environments/environment';
 import { GetCustomersParameters } from '../models/parameters/get-customers-parameters.model';
 import { MutateCustomerRequest } from '../models/request/mutate-customer-request.model';
 import { TestBed } from '@angular/core/testing';
-import { TestDataCountries } from 'src/assets/test-data/Countries';
-import { TestDataCustomers } from 'src/assets/test-data/Customers';
+import { TestDataCountries } from 'src/assets/test-data/countries';
+import { TestDataCustomers } from 'src/assets/test-data/customers';
 
 describe('CustomerService', () => {
     let service: CustomerService;
@@ -17,10 +17,10 @@ describe('CustomerService', () => {
 
     beforeEach(() => {
         TestBed.configureTestingModule({
-    schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
-    imports: [],
-    providers: [CustomerService, provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
-});
+            schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
+            imports: [],
+            providers: [CustomerService, provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
+        });
         service = TestBed.inject(CustomerService);
         httpMock = TestBed.inject(HttpTestingController);
     });

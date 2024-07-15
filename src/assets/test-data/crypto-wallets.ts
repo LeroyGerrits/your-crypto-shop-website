@@ -1,5 +1,4 @@
 import { CryptoWallet } from 'src/app/shared/models/crypto-wallet.model';
-import { Gender } from 'src/app/shared/enums/gender.enum';
 
 export const TestDataCryptoWallets: CryptoWallet[] = [
     {

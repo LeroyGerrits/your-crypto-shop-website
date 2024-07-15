@@ -1,8 +1,7 @@
 import { ComponentFixture, TestBed, fakeAsync, tick } from '@angular/core/testing';
-import { ActivatedRoute, Router, RouterLink } from '@angular/router';
-
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
+import { MatExpansionModule } from '@angular/material/expansion';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
@@ -11,13 +10,12 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { Sort } from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { RouterTestingModule } from '@angular/router/testing';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { of, throwError } from 'rxjs';
 import { MutationResult } from 'src/app/shared/models/mutation-result.model';
 import { CryptoWalletService } from 'src/app/shared/services/crypto-wallet.service';
-import { TestDataCryptoWallets } from 'src/assets/test-data/CryptoWallets';
+import { TestDataCryptoWallets } from 'src/assets/test-data/crypto-wallets';
 import { ControlPanelConfigurationCryptoWalletListComponent } from './crypto-wallet-list.component';
-import { MatExpansionModule } from '@angular/material/expansion';
 
 describe('ControlPanelConfigurationCryptoWalletListComponent', () => {
   let component: ControlPanelConfigurationCryptoWalletListComponent;
@@ -46,9 +44,7 @@ describe('ControlPanelConfigurationCryptoWalletListComponent', () => {
 
     TestBed.configureTestingModule({
       declarations: [ControlPanelConfigurationCryptoWalletListComponent],
-      imports: [BrowserAnimationsModule, MatExpansionModule, MatIconModule, MatFormFieldModule, MatInputModule, MatPaginatorModule, MatTableModule, ReactiveFormsModule, RouterLink, RouterTestingModule.withRoutes(
-        [{ path: 'control-panel/configuration/crypto-wallets', component: ControlPanelConfigurationCryptoWalletListComponent }]
-      )],
+      imports: [BrowserAnimationsModule, MatExpansionModule, MatIconModule, MatFormFieldModule, MatInputModule, MatPaginatorModule, MatTableModule, ReactiveFormsModule, RouterLink],
       providers: [
         { provide: ActivatedRoute, useValue: { snapshot: { data: {} } } },
         { provide: MatDialog, useValue: matDialogSpy },

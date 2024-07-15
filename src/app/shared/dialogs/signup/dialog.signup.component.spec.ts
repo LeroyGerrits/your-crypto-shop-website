@@ -8,7 +8,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatRadioModule } from '@angular/material/radio';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { Router } from '@angular/router';
-import { RouterTestingModule } from '@angular/router/testing';
+
 import { PublicWebsiteMessageComponent } from 'src/app/public-website/message/message.component';
 import { MutationResult } from '../../models/mutation-result.model';
 import { MerchantService } from '../../services/merchant.service';
@@ -42,9 +42,7 @@ describe('DialogSignUpComponent', () => {
 
     TestBed.configureTestingModule({
       declarations: [DialogSignUpComponent],
-      imports: [BrowserAnimationsModule, MatDialogModule, MatFormFieldModule, MatInputModule, MatRadioModule, ReactiveFormsModule, RouterTestingModule.withRoutes(
-        [{ path: 'message/account-registered', component: PublicWebsiteMessageComponent }]
-      )],
+      imports: [BrowserAnimationsModule, MatDialogModule, MatFormFieldModule, MatInputModule, MatRadioModule, ReactiveFormsModule],
       providers: [
         { provide: MatDialogRef, useValue: matDialogRefSpy },
         { provide: MAT_DIALOG_DATA, useValue: [] },

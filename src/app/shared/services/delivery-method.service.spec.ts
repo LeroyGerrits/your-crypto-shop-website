@@ -3,13 +3,12 @@ import { HttpTestingController, provideHttpClientTesting } from '@angular/common
 import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 import { Constants } from 'src/app/shared/constants';
-import { DeliveryMethod } from '../models/delivery-method.model';
 import { DeliveryMethodService } from './delivery-method.service';
 import { Environment } from 'src/app/shared/environments/environment';
 import { GetDeliveryMethodsParameters } from '../models/parameters/get-delivery-methods-parameters.model';
 import { MutateDeliveryMethodRequest } from '../models/request/mutate-delivery-method-request.model';
 import { TestBed } from '@angular/core/testing';
-import { TestDataDeliveryMethods } from 'src/assets/test-data/DeliveryMethods';
+import { TestDataDeliveryMethods } from 'src/assets/test-data/delivery-methods';
 
 describe('DeliveryMethodService', () => {
     let service: DeliveryMethodService;

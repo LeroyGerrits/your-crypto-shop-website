@@ -11,7 +11,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MutationResult } from 'src/app/shared/models/mutation-result.model';
 import { ProductPhoto } from 'src/app/shared/models/product-photo.model';
 import { ProductPhotoService } from 'src/app/shared/services/product-photo.service';
-import { TestDataProductPhotos } from 'src/assets/test-data/ProductPhotos';
+import { TestDataProductPhotos } from 'src/assets/test-data/product-photos';
 import { ControlPanelCatalogProductPhotoComponent } from './product-photo.component';
 
 export interface DialogData {

@@ -1,6 +1,4 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { ActivatedRoute, Router, RouterLink, convertToParamMap } from '@angular/router';
-
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatDialogModule } from '@angular/material/dialog';
@@ -13,21 +11,20 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatTreeModule } from '@angular/material/tree';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { RouterTestingModule } from '@angular/router/testing';
+import { ActivatedRoute, Router, RouterLink, convertToParamMap } from '@angular/router';
 import { of, throwError } from 'rxjs';
+import { Gender } from 'src/app/shared/enums/gender.enum';
 import { MutationResult } from 'src/app/shared/models/mutation-result.model';
 import { CategoryService } from 'src/app/shared/services/category.service';
 import { CountryService } from 'src/app/shared/services/country.service';
 import { CustomerService } from 'src/app/shared/services/customer.service';
 import { ShopService } from 'src/app/shared/services/shop.service';
-import { TestDataCategories } from 'src/assets/test-data/Categories';
-import { TestDataCountries } from 'src/assets/test-data/Countries';
-import { TestDataCustomers } from 'src/assets/test-data/Customers';
-import { TestDataShops } from 'src/assets/test-data/-shops';
-import { ControlPanelCustomerListComponent } from './customer-list.component';
+import { TestDataAddresses } from 'src/assets/test-data/addresses';
+import { TestDataCategories } from 'src/assets/test-data/categories';
+import { TestDataCountries } from 'src/assets/test-data/countries';
+import { TestDataCustomers } from 'src/assets/test-data/customers';
+import { TestDataShops } from 'src/assets/test-data/shops';
 import { ControlPanelCustomerComponent } from './customer.component';
-import { TestDataAddresses } from 'src/assets/test-data/-addresses';
-import { Gender } from 'src/app/shared/enums/gender.enum';
 
 describe('ControlPanelCustomerComponent', () => {
   let component: ControlPanelCustomerComponent;
@@ -60,9 +57,7 @@ describe('ControlPanelCustomerComponent', () => {
 
     TestBed.configureTestingModule({
       declarations: [ControlPanelCustomerComponent],
-      imports: [BrowserAnimationsModule, MatCheckboxModule, MatDialogModule, MatDividerModule, MatFormFieldModule, MatInputModule, MatSelectModule, MatTabsModule, MatRadioModule, MatTreeModule, ReactiveFormsModule, RouterLink, RouterTestingModule.withRoutes(
-        [{ path: 'control-panel/customers', component: ControlPanelCustomerListComponent }]
-      )],
+      imports: [BrowserAnimationsModule, MatCheckboxModule, MatDialogModule, MatDividerModule, MatFormFieldModule, MatInputModule, MatSelectModule, MatTabsModule, MatRadioModule, MatTreeModule, ReactiveFormsModule, RouterLink],
       providers: [
         { provide: ActivatedRoute, useValue: { snapshot: { paramMap: convertToParamMap({ customerId: TestDataCustomers[0].Id, shopId: TestDataCustomers[0].ShopId }) } } },
         { provide: CategoryService, useValue: categoryServiceSpy },

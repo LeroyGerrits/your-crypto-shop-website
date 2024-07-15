@@ -1,29 +1,26 @@
-import { ComponentFixture, TestBed, fakeAsync, tick } from '@angular/core/testing';
-
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { ControlPanelCustomerListComponent } from './customer-list.component';
-import { CustomerService } from 'src/app/shared/services/customer.service';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { provideHttpClientTesting } from '@angular/common/http/testing';
+import { ComponentFixture, TestBed, fakeAsync, tick } from '@angular/core/testing';
+import { ReactiveFormsModule } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
+import { MatExpansionModule } from '@angular/material/expansion';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSelectModule } from '@angular/material/select';
-import { MatTableModule } from '@angular/material/table';
-import { ReactiveFormsModule } from '@angular/forms';
-import { ActivatedRoute, Router, RouterLink } from '@angular/router';
-import { RouterTestingModule } from '@angular/router/testing';
-import { ShopService } from 'src/app/shared/services/shop.service';
-import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { MutationResult } from 'src/app/shared/models/mutation-result.model';
-import { TestDataCustomers } from 'src/assets/test-data/Customers';
-import { of, throwError } from 'rxjs';
-import { TestDataShops } from 'src/assets/test-data/-shops';
 import { Sort } from '@angular/material/sort';
-import { Shop } from 'src/app/shared/models/shop.model';
-import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
-import { MatExpansionModule } from '@angular/material/expansion';
+import { MatTableModule } from '@angular/material/table';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
+import { of, throwError } from 'rxjs';
+import { MutationResult } from 'src/app/shared/models/mutation-result.model';
+import { CustomerService } from 'src/app/shared/services/customer.service';
+import { ShopService } from 'src/app/shared/services/shop.service';
+import { TestDataCustomers } from 'src/assets/test-data/customers';
+import { TestDataShops } from 'src/assets/test-data/shops';
+import { ControlPanelCustomerListComponent } from './customer-list.component';
 
 describe('ControlPanelCustomerListComponent', () => {
   let component: ControlPanelCustomerListComponent;
@@ -55,9 +52,9 @@ describe('ControlPanelCustomerListComponent', () => {
     shopServiceSpy.getList.and.returnValue(of(TestDataShops));
 
     TestBed.configureTestingModule({
-    declarations: [ControlPanelCustomerListComponent],
-    imports: [BrowserAnimationsModule, MatExpansionModule, MatIconModule, MatFormFieldModule, MatInputModule, MatPaginatorModule, MatSelectModule, MatTableModule, ReactiveFormsModule, RouterLink, RouterTestingModule.withRoutes([{ path: 'control-panel/customers', component: ControlPanelCustomerListComponent }])],
-    providers: [
+      declarations: [ControlPanelCustomerListComponent],
+      imports: [BrowserAnimationsModule, MatExpansionModule, MatIconModule, MatFormFieldModule, MatInputModule, MatPaginatorModule, MatSelectModule, MatTableModule, ReactiveFormsModule, RouterLink],
+      providers: [
         { provide: ActivatedRoute, useValue: { snapshot: { data: {} } } },
         { provide: MatDialog, useValue: matDialogSpy },
         { provide: ShopService, useValue: shopServiceSpy },
@@ -67,8 +64,8 @@ describe('ControlPanelCustomerListComponent', () => {
         Router,
         provideHttpClient(withInterceptorsFromDi()),
         provideHttpClientTesting()
-    ]
-});
+      ]
+    });
     fixture = TestBed.createComponent(ControlPanelCustomerListComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

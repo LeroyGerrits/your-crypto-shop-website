@@ -1,5 +1,5 @@
 import { Product } from 'src/app/shared/models/product.model';
-import { TestDataShops } from './-shops';
+import { TestDataShops } from './shops';
 
 export const TestDataProducts: Product[] = [
     {

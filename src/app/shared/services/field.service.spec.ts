@@ -7,7 +7,7 @@ import { Environment } from 'src/app/shared/environments/environment';
 import { FieldService } from './field.service';
 import { GetFieldsParameters } from '../models/parameters/get-fields-parameters.model';
 import { TestBed } from '@angular/core/testing';
-import { TestDataFields } from 'src/assets/test-data/Fields';
+import { TestDataFields } from 'src/assets/test-data/fields';
 
 describe('FieldService', () => {
     let service: FieldService;

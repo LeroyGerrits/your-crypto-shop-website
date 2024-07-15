@@ -6,7 +6,7 @@ import { Constants } from '../constants';
 import { Environment } from 'src/app/shared/environments/environment';
 import { MerchantService } from './merchant.service';
 import { TestBed } from '@angular/core/testing';
-import { TestDataMerchants } from 'src/assets/test-data/Merchants';
+import { TestDataMerchants } from 'src/assets/test-data/merchants';
 
 describe('MerchantService', () => {
     let service: MerchantService;
@@ -14,10 +14,10 @@ describe('MerchantService', () => {
 
     beforeEach(() => {
         TestBed.configureTestingModule({
-    schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
-    imports: [],
-    providers: [MerchantService, provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
-});
+            schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
+            imports: [],
+            providers: [MerchantService, provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
+        });
         service = TestBed.inject(MerchantService);
         httpMock = TestBed.inject(HttpTestingController);
     });

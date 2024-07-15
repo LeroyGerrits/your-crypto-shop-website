@@ -6,7 +6,7 @@ import { Constants } from 'src/app/shared/constants';
 import { Environment } from 'src/app/shared/environments/environment';
 import { MerchantPasswordResetLinkService } from './merchant-password-reset-link.service';
 import { TestBed } from '@angular/core/testing';
-import { TestDataMerchantPasswordResetLinks } from 'src/assets/test-data/MerchantPasswordResetLinks';
+import { TestDataMerchantPasswordResetLinks } from 'src/assets/test-data/merchant-password-reset-links';
 
 describe('MerchantPasswordResetLinkService', () => {
     let service: MerchantPasswordResetLinkService;
@@ -14,10 +14,10 @@ describe('MerchantPasswordResetLinkService', () => {
 
     beforeEach(() => {
         TestBed.configureTestingModule({
-    schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
-    imports: [],
-    providers: [MerchantPasswordResetLinkService, provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
-});
+            schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
+            imports: [],
+            providers: [MerchantPasswordResetLinkService, provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
+        });
         service = TestBed.inject(MerchantPasswordResetLinkService);
         httpMock = TestBed.inject(HttpTestingController);
     });

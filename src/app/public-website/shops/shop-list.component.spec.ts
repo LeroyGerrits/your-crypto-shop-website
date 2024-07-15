@@ -12,11 +12,10 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatTableModule } from '@angular/material/table';
 import { PublicWebsiteShopListComponent } from './shop-list.component';
 import { ReactiveFormsModule } from '@angular/forms';
-import { RouterTestingModule } from '@angular/router/testing';
 import { ShopCategoryService } from 'src/app/shared/services/shop-category.service';
 import { ShopService } from 'src/app/shared/services/shop.service';
 import { Sort } from '@angular/material/sort';
-import { TestDataCountries } from 'src/assets/test-data/Countries';
+import { TestDataCountries } from 'src/assets/test-data/countries';
 import { TestDataPublicShops } from 'src/assets/test-data/public-shops';
 import { TestDataShopCategories } from 'src/assets/test-data/shop-categories';
 import { of } from 'rxjs';
@@ -41,9 +40,7 @@ describe('PublicWebsiteShopListComponent', () => {
 
     TestBed.configureTestingModule({
       declarations: [PublicWebsiteShopListComponent],
-      imports: [BrowserAnimationsModule, MatExpansionModule, MatIconModule, MatFormFieldModule, MatInputModule, MatPaginatorModule, MatSelectModule, MatTableModule, ReactiveFormsModule, RouterLink, RouterTestingModule.withRoutes(
-        [{ path: 'shops', component: PublicWebsiteShopListComponent }]
-      )],
+      imports: [BrowserAnimationsModule, MatExpansionModule, MatIconModule, MatFormFieldModule, MatInputModule, MatPaginatorModule, MatSelectModule, MatTableModule, ReactiveFormsModule, RouterLink],
       providers: [
         { provide: ActivatedRoute, useValue: { snapshot: { data: {} } } },
         { provide: CountryService, useValue: countryServiceSpy },

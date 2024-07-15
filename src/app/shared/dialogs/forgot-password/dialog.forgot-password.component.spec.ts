@@ -11,7 +11,6 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { MerchantService } from 'src/app/shared/services/merchant.service';
 import { PublicWebsiteMessageComponent } from 'src/app/public-website/message/message.component';
 import { ReactiveFormsModule } from '@angular/forms';
-import { RouterTestingModule } from '@angular/router/testing';
 
 describe('DialogForgotPasswordComponent', () => {
   let component: DialogForgotPasswordComponent;
@@ -39,9 +38,7 @@ describe('DialogForgotPasswordComponent', () => {
 
     TestBed.configureTestingModule({
       declarations: [DialogForgotPasswordComponent],
-      imports: [BrowserAnimationsModule, MatDialogModule, MatFormFieldModule, MatInputModule, ReactiveFormsModule, RouterTestingModule.withRoutes(
-        [{ path: 'message/password-reset-link-sent', component: PublicWebsiteMessageComponent }]
-      )],
+      imports: [BrowserAnimationsModule, MatDialogModule, MatFormFieldModule, MatInputModule, ReactiveFormsModule],
       providers: [
         { provide: MatDialogRef, useValue: matDialogRefSpy },
         { provide: MAT_DIALOG_DATA, useValue: [] },

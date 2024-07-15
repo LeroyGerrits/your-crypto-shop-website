@@ -3,7 +3,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ControlPanelSalesOrderComponent } from './order.component';
 import { DatePipe } from '@angular/common';
 import { OrderService } from 'src/app/shared/services/order.service';
-import { TestDataOrders } from 'src/assets/test-data/-orders';
+import { TestDataOrders } from 'src/assets/test-data/orders';
 import { of } from 'rxjs';
 
 describe('ControlPanelSalesOrderComponent', () => {
@@ -18,7 +18,7 @@ describe('ControlPanelSalesOrderComponent', () => {
 
     TestBed.configureTestingModule({
       declarations: [ControlPanelSalesOrderComponent, DatePipe],
-      providers:[
+      providers: [
         { provide: OrderService, useValue: orderServiceSpy },
       ]
     });

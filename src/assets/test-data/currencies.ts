@@ -7,13 +7,15 @@ export const TestDataCurrencies: Currency[] = [
         Type: CurrencyType.Fiat,
         Symbol: '€',
         Code: 'EUR',
-        Name: 'Euro'
+        Name: 'Euro',
+        Supported: true
     },
     {
         Id: '00000000-0000-0000-0000-000000000002',
         Type: CurrencyType.Fiat,
         Symbol: '$',
         Code: 'USD',
-        Name: 'Dollar'
+        Name: 'Dollar',
+        Supported: true
     }
 ];

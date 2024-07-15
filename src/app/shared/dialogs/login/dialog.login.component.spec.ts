@@ -13,8 +13,8 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MerchantService } from '../../services/merchant.service';
 import { ReactiveFormsModule } from '@angular/forms';
-import { RouterTestingModule } from '@angular/router/testing';
 import { provideHttpClientTesting } from '@angular/common/http/testing';
+import { provideRouter } from '@angular/router';
 
 describe('DialogLoginComponent', () => {
   let component: DialogLoginComponent;
@@ -42,7 +42,7 @@ describe('DialogLoginComponent', () => {
 
     TestBed.configureTestingModule({
     declarations: [DialogLoginComponent],
-    imports: [BrowserAnimationsModule, MatDialogModule, MatFormFieldModule, MatInputModule, ReactiveFormsModule, RouterTestingModule.withRoutes([{ path: 'control-panel', component: AccountComponent }])],
+    imports: [BrowserAnimationsModule, MatDialogModule, MatFormFieldModule, MatInputModule, ReactiveFormsModule],
     providers: [
         { provide: MatDialog, useValue: matDialogSpy },
         { provide: MatDialogRef, useValue: matDialogRefSpy },

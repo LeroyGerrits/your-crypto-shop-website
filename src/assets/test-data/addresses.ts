@@ -1,4 +1,4 @@
-import { Address } from "src/app/shared/models/-address.model";
+import { Address } from "src/app/shared/models/address.model";
 
 export const TestDataAddresses: Address[] = [
     {

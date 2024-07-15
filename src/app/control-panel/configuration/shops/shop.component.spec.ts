@@ -1,39 +1,39 @@
 import { HttpClient, HttpHandler } from '@angular/common/http';
 import { ComponentFixture, TestBed, fakeAsync, tick } from '@angular/core/testing';
-import { ActivatedRoute, Router, RouterLink, convertToParamMap } from '@angular/router';
-import { of, throwError } from 'rxjs';
-
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
+import { MatRadioModule } from '@angular/material/radio';
+import { MatSelectModule } from '@angular/material/select';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { RouterTestingModule } from '@angular/router/testing';
+import { ActivatedRoute, Router, RouterLink, convertToParamMap } from '@angular/router';
+import { of, throwError } from 'rxjs';
 import { Constants } from 'src/app/shared/constants';
 import { MutationResult } from 'src/app/shared/models/mutation-result.model';
-import { ShopService } from 'src/app/shared/services/shop.service';
-import { TestDataMerchants } from 'src/assets/test-data/Merchants';
-import { TestDataShops } from 'src/assets/test-data/-shops';
-import { ControlPanelConfigurationShopListComponent } from './shop-list.component';
-import { ControlPanelConfigurationShopComponent } from './shop.component';
 import { CountryService } from 'src/app/shared/services/country.service';
-import { TestDataCountries } from 'src/assets/test-data/Countries';
-import { ShopCategoryService } from 'src/app/shared/services/shop-category.service';
-import { TestDataShopCategories } from 'src/assets/test-data/shop-categories';
-import { MatSelectModule } from '@angular/material/select';
 import { CryptoWalletService } from 'src/app/shared/services/crypto-wallet.service';
-import { TestDataCryptoWallets } from 'src/assets/test-data/CryptoWallets';
-import { MatRadioModule } from '@angular/material/radio';
+import { ShopCategoryService } from 'src/app/shared/services/shop-category.service';
+import { ShopService } from 'src/app/shared/services/shop.service';
+import { TestDataCountries } from 'src/assets/test-data/countries';
+import { TestDataCryptoWallets } from 'src/assets/test-data/crypto-wallets';
+import { TestDataMerchants } from 'src/assets/test-data/merchants';
+import { TestDataShopCategories } from 'src/assets/test-data/shop-categories';
+import { TestDataShops } from 'src/assets/test-data/shops';
+import { ControlPanelConfigurationShopComponent } from './shop.component';
+import { TestDataCurrencies } from 'src/assets/test-data/currencies';
+import { CurrencyService } from 'src/app/shared/services/currency.service';
 
 describe('ControlPanelConfigurationShopComponent', () => {
   let component: ControlPanelConfigurationShopComponent;
   let fixture: ComponentFixture<ControlPanelConfigurationShopComponent>;
 
   let countryServiceSpy: jasmine.SpyObj<CountryService>;
+  let currencyServiceSpy: jasmine.SpyObj<CurrencyService>;
   let cryptoWalletServiceSpy: jasmine.SpyObj<CryptoWalletService>;
   let shopServiceSpy: jasmine.SpyObj<ShopService>;
   let shopCategoryServiceSpy: jasmine.SpyObj<ShopCategoryService>;
@@ -44,11 +44,14 @@ describe('ControlPanelConfigurationShopComponent', () => {
     countryServiceSpy = jasmine.createSpyObj('CountryService', ['getList']);
     countryServiceSpy.getList.and.returnValue(of(TestDataCountries));
 
+    currencyServiceSpy = jasmine.createSpyObj('CurrencyService', ['getList']);
+    currencyServiceSpy.getList.and.returnValue(of(TestDataCurrencies));
+
     cryptoWalletServiceSpy = jasmine.createSpyObj('CryptoWalletService', ['getList']);
     cryptoWalletServiceSpy.getList.and.returnValue(of(TestDataCryptoWallets));
 
     shopCategoryServiceSpy = jasmine.createSpyObj('ShopCategoryService', ['getList']);
-    shopCategoryServiceSpy.getList.and.returnValue(of(TestDataShopCategories));    
+    shopCategoryServiceSpy.getList.and.returnValue(of(TestDataShopCategories));
 
     shopServiceSpy = jasmine.createSpyObj('ShopService', ['create', 'getById', 'subdomainAvailable', 'update']);
     shopServiceSpy.create.and.returnValue(of(mutationResult));
@@ -60,12 +63,11 @@ describe('ControlPanelConfigurationShopComponent', () => {
 
     TestBed.configureTestingModule({
       declarations: [ControlPanelConfigurationShopComponent],
-      imports: [BrowserAnimationsModule, MatDialogModule, MatDividerModule, MatFormFieldModule, MatIconModule, MatInputModule, MatRadioModule, MatSelectModule, MatTooltipModule, ReactiveFormsModule, RouterLink, RouterTestingModule.withRoutes(
-        [{ path: 'control-panel/configuration/shops', component: ControlPanelConfigurationShopListComponent }]
-      )],
+      imports: [BrowserAnimationsModule, MatDialogModule, MatDividerModule, MatFormFieldModule, MatIconModule, MatInputModule, MatRadioModule, MatSelectModule, MatTooltipModule, ReactiveFormsModule, RouterLink],
       providers: [
         { provide: ActivatedRoute, useValue: { snapshot: { paramMap: convertToParamMap({ shopId: TestDataShops[0].Id }) } } },
         { provide: CountryService, useValue: countryServiceSpy },
+        { provide: CurrencyService, useValue: currencyServiceSpy },
         { provide: CryptoWalletService, useValue: cryptoWalletServiceSpy },
         { provide: ShopService, useValue: shopServiceSpy },
         { provide: ShopCategoryService, useValue: shopCategoryServiceSpy },

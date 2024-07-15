@@ -1,7 +1,7 @@
 import { Customer } from 'src/app/shared/models/customer.model';
 import { Gender } from 'src/app/shared/enums/gender.enum';
 import { TestDataAddresses } from './addresses';
-import { TestDataShops } from './-shops';
+import { TestDataShops } from './shops';
 
 export const TestDataCustomers: Customer[] = [
     {

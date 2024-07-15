@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { MerchantLinkComponent } from './merchant-link.component';
-import { RouterTestingModule } from '@angular/router/testing';
+import { RouterLink } from '@angular/router';
 
 describe('MerchantLinkComponent', () => {
   let component: MerchantLinkComponent;
@@ -9,8 +9,8 @@ describe('MerchantLinkComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [RouterTestingModule],
-      declarations: [MerchantLinkComponent]
+      declarations: [MerchantLinkComponent],
+      imports: [RouterLink]
     });
     fixture = TestBed.createComponent(MerchantLinkComponent);
     component = fixture.componentInstance;

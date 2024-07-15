@@ -1,19 +1,16 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { MAT_DIALOG_DATA, MatDialog, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
-import { of, throwError } from 'rxjs';
-
 import { ReactiveFormsModule } from '@angular/forms';
+import { MAT_DIALOG_DATA, MatDialog, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatRadioModule } from '@angular/material/radio';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { Router } from '@angular/router';
-import { RouterTestingModule } from '@angular/router/testing';
-import { PublicWebsiteMessageComponent } from 'src/app/public-website/message/message.component';
+import { of, throwError } from 'rxjs';
 import { MutationResult } from '../../models/mutation-result.model';
 import { MerchantService } from '../../services/merchant.service';
 import { DialogCreateCryptoWalletComponent } from './dialog.create-crypto-wallet.component';
-import { MatSnackBar } from '@angular/material/snack-bar';
 
 describe('DialogCreateCryptoWalletComponent', () => {
   let component: DialogCreateCryptoWalletComponent;
@@ -42,9 +39,7 @@ describe('DialogCreateCryptoWalletComponent', () => {
 
     TestBed.configureTestingModule({
       declarations: [DialogCreateCryptoWalletComponent],
-      imports: [BrowserAnimationsModule, MatDialogModule, MatFormFieldModule, MatInputModule, MatRadioModule, ReactiveFormsModule, RouterTestingModule.withRoutes(
-        [{ path: 'message/account-registered', component: PublicWebsiteMessageComponent }]
-      )],
+      imports: [BrowserAnimationsModule, MatDialogModule, MatFormFieldModule, MatInputModule, MatRadioModule, ReactiveFormsModule],
       providers: [
         { provide: MatDialogRef, useValue: matDialogRefSpy },
         { provide: MAT_DIALOG_DATA, useValue: [] },

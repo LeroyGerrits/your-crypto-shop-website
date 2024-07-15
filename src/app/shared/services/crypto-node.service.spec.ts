@@ -30,21 +30,9 @@ describe('CryptoNodeService', () => {
         expect(request.request.method).toBe('GET');
     });
 
-    it('should be able to get difficulty', () => {
-        service.getDifficulty().subscribe();
-        const request = httpMock.expectOne(Environment.API_URL + '/CryptoNode/getdifficulty');
-        expect(request.request.method).toBe('GET');
-    });
-
     it('should be able to get IP addresses', () => {
         service.getIpAddresses().subscribe();
         const request = httpMock.expectOne(Environment.API_URL + '/CryptoNode/getipaddresses');
-        expect(request.request.method).toBe('GET');
-    });
-
-    it('should be able to get mining info', () => {
-        service.getMiningInfo().subscribe();
-        const request = httpMock.expectOne(Environment.API_URL + '/CryptoNode/getmininginfo');
         expect(request.request.method).toBe('GET');
     });
 });

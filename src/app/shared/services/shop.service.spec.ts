@@ -7,9 +7,9 @@ import { Environment } from 'src/app/shared/environments/environment';
 import { GetShopsParameters } from '../models/parameters/get-shops-parameters.model';
 import { ShopService } from './shop.service';
 import { TestBed } from '@angular/core/testing';
-import { TestDataCountries } from 'src/assets/test-data/Countries';
+import { TestDataCountries } from 'src/assets/test-data/countries';
 import { TestDataShopCategories } from 'src/assets/test-data/shop-categories';
-import { TestDataShops } from 'src/assets/test-data/-shops';
+import { TestDataShops } from 'src/assets/test-data/shops';
 
 describe('ShopService', () => {
     let service: ShopService;
@@ -17,10 +17,10 @@ describe('ShopService', () => {
 
     beforeEach(() => {
         TestBed.configureTestingModule({
-    schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
-    imports: [],
-    providers: [ShopService, provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
-});
+            schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
+            imports: [],
+            providers: [ShopService, provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
+        });
         service = TestBed.inject(ShopService);
         httpMock = TestBed.inject(HttpTestingController);
     });

@@ -1,17 +1,14 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { ActivatedRoute, Router, convertToParamMap } from '@angular/router';
-import { of, throwError } from 'rxjs';
-
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { RouterTestingModule } from '@angular/router/testing';
+import { ActivatedRoute, Router, convertToParamMap } from '@angular/router';
+import { of, throwError } from 'rxjs';
 import { MutationResult } from 'src/app/shared/models/mutation-result.model';
 import { MerchantService } from 'src/app/shared/services/merchant.service';
-import { TestDataMerchants } from 'src/assets/test-data/Merchants';
-import { PublicWebsiteMessageComponent } from '../message/message.component';
+import { TestDataMerchants } from 'src/assets/test-data/merchants';
 import { PublicWebsiteAccountActivateComponent } from './account-activate.component';
 
 describe('PublicWebsiteAccountActivateComponent', () => {
@@ -32,12 +29,7 @@ describe('PublicWebsiteAccountActivateComponent', () => {
 
     TestBed.configureTestingModule({
       declarations: [PublicWebsiteAccountActivateComponent],
-      imports: [BrowserAnimationsModule, MatFormFieldModule, MatInputModule, ReactiveFormsModule, RouterTestingModule.withRoutes(
-        [
-          { path: 'message/account-activated', component: PublicWebsiteMessageComponent },
-          { path: 'message/account-already-activated', component: PublicWebsiteMessageComponent }
-        ]
-      )],
+      imports: [BrowserAnimationsModule, MatFormFieldModule, MatInputModule, ReactiveFormsModule],
       providers: [
         { provide: ActivatedRoute, useValue: { snapshot: { paramMap: convertToParamMap({ merchantId: TestDataMerchants[0].Id, merchantPassword: 'PASSWORD' }) } } },
         { provide: MatSnackBar, useValue: matSnackBarSpy },

@@ -1,5 +1,5 @@
 import { Page } from 'src/app/shared/models/page.model';
-import { TestDataShops } from './-shops';
+import { TestDataShops } from './shops';
 
 export const TestDataPages: Page[] = [
     {

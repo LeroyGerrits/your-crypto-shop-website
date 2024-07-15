@@ -6,7 +6,7 @@ import { Environment } from 'src/app/shared/environments/environment';
 import { GetProductPhotosParameters } from '../models/parameters/get-product-photos-parameters.model';
 import { ProductPhotoService } from './product-photo.service';
 import { TestBed } from '@angular/core/testing';
-import { TestDataProductPhotos } from 'src/assets/test-data/ProductPhotos';
+import { TestDataProductPhotos } from 'src/assets/test-data/product-photos';
 
 describe('ProductPhotoService', () => {
     let service: ProductPhotoService;

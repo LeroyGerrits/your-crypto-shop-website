@@ -8,7 +8,7 @@ import { GetPagesParameters } from '../models/parameters/get-pages-parameters.mo
 import { MutatePageRequest } from '../models/request/mutate-page-request.model';
 import { PageService } from './page.service';
 import { TestBed } from '@angular/core/testing';
-import { TestDataPages } from 'src/assets/test-data/Pages';
+import { TestDataPages } from 'src/assets/test-data/pages';
 
 describe('PageService', () => {
     let service: PageService;

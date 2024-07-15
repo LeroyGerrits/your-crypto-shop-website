@@ -17,10 +17,9 @@ import { MatTableModule } from '@angular/material/table';
 import { PublicWebsiteFinancialStatementComponent } from './financial-statement.component';
 import { QRCodeModule } from 'angularx-qrcode';
 import { ReactiveFormsModule } from '@angular/forms';
-import { RouterTestingModule } from '@angular/router/testing';
 import { Sort } from '@angular/material/sort';
-import { TestDataCurrencies } from 'src/assets/test-data/Currencies';
-import { TestDataFinancialStatementTransactions } from 'src/assets/test-data/FinancialStatementTransactions';
+import { TestDataCurrencies } from 'src/assets/test-data/currencies';
+import { TestDataFinancialStatementTransactions } from 'src/assets/test-data/financial-statement-transactions';
 import { of } from 'rxjs';
 import { provideHttpClientTesting } from '@angular/common/http/testing';
 
@@ -43,9 +42,9 @@ describe('PublicWebsiteFinancialStatementComponent', () => {
     currencyServiceSpy.getList.and.returnValue(of(TestDataCurrencies));
 
     TestBed.configureTestingModule({
-    declarations: [PublicWebsiteFinancialStatementComponent],
-    imports: [BrowserAnimationsModule, MatDatepickerModule, MatExpansionModule, MatIconModule, MatInputModule, MatNativeDateModule, MatPaginatorModule, MatSelectModule, MatTableModule, QRCodeModule, ReactiveFormsModule, RouterTestingModule],
-    providers: [
+      declarations: [PublicWebsiteFinancialStatementComponent],
+      imports: [BrowserAnimationsModule, MatDatepickerModule, MatExpansionModule, MatIconModule, MatInputModule, MatNativeDateModule, MatPaginatorModule, MatSelectModule, MatTableModule, QRCodeModule, ReactiveFormsModule],
+      providers: [
         { provide: ActivatedRoute, useValue: fakeActivatedRoute },
         { provide: CurrencyService, useValue: currencyServiceSpy },
         { provide: FinancialStatementTransactionService, useValue: financialStatementTransactionServiceSpy },
@@ -53,8 +52,8 @@ describe('PublicWebsiteFinancialStatementComponent', () => {
         DatePipe,
         provideHttpClient(withInterceptorsFromDi()),
         provideHttpClientTesting()
-    ]
-});
+      ]
+    });
     fixture = TestBed.createComponent(PublicWebsiteFinancialStatementComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

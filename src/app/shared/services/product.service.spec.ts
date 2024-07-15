@@ -8,8 +8,8 @@ import { GetProductsParameters } from '../models/parameters/get-products-paramet
 import { MutateProductRequest } from '../models/request/mutate-product-request.model';
 import { ProductService } from './product.service';
 import { TestBed } from '@angular/core/testing';
-import { TestDataCategories } from 'src/assets/test-data/Categories';
-import { TestDataProducts } from 'src/assets/test-data/-products';
+import { TestDataCategories } from 'src/assets/test-data/categories';
+import { TestDataProducts } from 'src/assets/test-data/products';
 
 describe('ProductService', () => {
     let service: ProductService;

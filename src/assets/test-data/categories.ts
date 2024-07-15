@@ -1,5 +1,5 @@
 import { Category } from 'src/app/shared/models/category.model';
-import { TestDataShops } from './-shops';
+import { TestDataShops } from './shops';
 
 export const TestDataCategories: Category[] = [
     {

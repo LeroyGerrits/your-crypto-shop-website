@@ -1,9 +1,9 @@
 import { Order } from 'src/app/shared/models/order.model';
 import { OrderStatus } from 'src/app/shared/enums/order-status.enum';
 import { TestDataAddresses } from './addresses';
-import { TestDataCustomers } from './Customers';
+import { TestDataCustomers } from './customers';
 import { TestDataOrderItems } from './order-items';
-import { TestDataShops } from './-shops';
+import { TestDataShops } from './shops';
 import { TestDataTransactions } from './tranactions';
 
 export const TestDataOrders: Order[] = [

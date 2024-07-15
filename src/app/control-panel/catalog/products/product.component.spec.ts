@@ -1,33 +1,30 @@
-import { ActivatedRoute, Router, RouterLink, convertToParamMap } from '@angular/router';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
-import { ControlPanelCatalogProductComponent } from './product.component';
-import { TestDataProducts } from 'src/assets/test-data/-products';
-import { ProductService } from 'src/app/shared/services/product.service';
-import { ShopService } from 'src/app/shared/services/shop.service';
-import { MatSnackBar } from '@angular/material/snack-bar';
-import { MutationResult } from 'src/app/shared/models/mutation-result.model';
-import { of, throwError } from 'rxjs';
-import { TestDataShops } from 'src/assets/test-data/-shops';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ReactiveFormsModule } from '@angular/forms';
+import { MatCheckboxChange, MatCheckboxModule } from '@angular/material/checkbox';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
-import { ReactiveFormsModule } from '@angular/forms';
-import { RouterTestingModule } from '@angular/router/testing';
-import { ControlPanelCatalogProductListComponent } from './product-list.component';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatTabsModule } from '@angular/material/tabs';
-import { CategoryService } from 'src/app/shared/services/category.service';
-import { TestDataCategories } from 'src/assets/test-data/Categories';
 import { MatTreeModule } from '@angular/material/tree';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ActivatedRoute, Router, RouterLink, convertToParamMap } from '@angular/router';
+import { of, throwError } from 'rxjs';
+import { MutationResult } from 'src/app/shared/models/mutation-result.model';
 import { GetProductResponse } from 'src/app/shared/models/response/get-product-response.model';
-import { MatCheckboxChange, MatCheckboxModule } from '@angular/material/checkbox';
-import { FieldService } from 'src/app/shared/services/field.service';
-import { TestDataFields } from 'src/assets/test-data/Fields';
+import { CategoryService } from 'src/app/shared/services/category.service';
 import { CryptoWalletService } from 'src/app/shared/services/crypto-wallet.service';
-import { TestDataCryptoWallets } from 'src/assets/test-data/CryptoWallets';
+import { FieldService } from 'src/app/shared/services/field.service';
+import { ProductService } from 'src/app/shared/services/product.service';
+import { ShopService } from 'src/app/shared/services/shop.service';
+import { TestDataCategories } from 'src/assets/test-data/categories';
+import { TestDataCryptoWallets } from 'src/assets/test-data/crypto-wallets';
+import { TestDataFields } from 'src/assets/test-data/fields';
+import { TestDataProducts } from 'src/assets/test-data/products';
+import { TestDataShops } from 'src/assets/test-data/shops';
+import { ControlPanelCatalogProductComponent } from './product.component';
 
 describe('ControlPanelCatalogProductComponent', () => {
   let component: ControlPanelCatalogProductComponent;
@@ -64,9 +61,7 @@ describe('ControlPanelCatalogProductComponent', () => {
 
     TestBed.configureTestingModule({
       declarations: [ControlPanelCatalogProductComponent],
-      imports: [BrowserAnimationsModule, MatCheckboxModule, MatDialogModule, MatDividerModule, MatFormFieldModule, MatInputModule, MatSelectModule, MatTabsModule, MatTreeModule, ReactiveFormsModule, RouterLink, RouterTestingModule.withRoutes(
-        [{ path: 'control-panel/catalog/products', component: ControlPanelCatalogProductListComponent }]
-      )],
+      imports: [BrowserAnimationsModule, MatCheckboxModule, MatDialogModule, MatDividerModule, MatFormFieldModule, MatInputModule, MatSelectModule, MatTabsModule, MatTreeModule, ReactiveFormsModule, RouterLink],
       providers: [
         { provide: ActivatedRoute, useValue: { snapshot: { paramMap: convertToParamMap({ productId: TestDataProducts[0].Id, shopId: TestDataProducts[0].ShopId }) } } },
         { provide: CategoryService, useValue: categoryServiceSpy },
@@ -154,7 +149,7 @@ describe('ControlPanelCatalogProductComponentWithErrors', () => {
   let fieldServiceSpy: jasmine.SpyObj<FieldService>;
   let productServiceSpy: jasmine.SpyObj<ProductService>;
   let shopServiceSpy: jasmine.SpyObj<ShopService>;
-  
+
   beforeEach(() => {
     categoryServiceSpy = jasmine.createSpyObj('CategoryService', ['getList']);
     categoryServiceSpy.getList.and.returnValue(of(TestDataCategories));
@@ -174,9 +169,7 @@ describe('ControlPanelCatalogProductComponentWithErrors', () => {
 
     TestBed.configureTestingModule({
       declarations: [ControlPanelCatalogProductComponent],
-      imports: [BrowserAnimationsModule, MatCheckboxModule, MatDialogModule, MatDividerModule, MatFormFieldModule, MatInputModule, MatSelectModule, MatTabsModule, MatTreeModule, ReactiveFormsModule, RouterLink, RouterTestingModule.withRoutes(
-        [{ path: 'control-panel/catalog/products', component: ControlPanelCatalogProductListComponent }]
-      )],
+      imports: [BrowserAnimationsModule, MatCheckboxModule, MatDialogModule, MatDividerModule, MatFormFieldModule, MatInputModule, MatSelectModule, MatTabsModule, MatTreeModule, ReactiveFormsModule, RouterLink],
       providers: [
         { provide: ActivatedRoute, useValue: { snapshot: { paramMap: convertToParamMap({ productId: 'new', shopId: TestDataProducts[0].ShopId }) } } },
         { provide: CategoryService, useValue: categoryServiceSpy },

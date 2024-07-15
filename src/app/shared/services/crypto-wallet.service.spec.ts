@@ -7,7 +7,7 @@ import { CryptoWalletService } from './crypto-wallet.service';
 import { Environment } from 'src/app/shared/environments/environment';
 import { GetCryptoWalletsParameters } from '../models/parameters/get-crypto-wallets-parameters.model';
 import { TestBed } from '@angular/core/testing';
-import { TestDataCryptoWallets } from 'src/assets/test-data/CryptoWallets';
+import { TestDataCryptoWallets } from 'src/assets/test-data/crypto-wallets';
 
 describe('CryptoWalletService', () => {
     let service: CryptoWalletService;
