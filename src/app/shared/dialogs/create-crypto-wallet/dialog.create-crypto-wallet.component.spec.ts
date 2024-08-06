@@ -11,6 +11,7 @@ import { of, throwError } from 'rxjs';
 import { MutationResult } from '../../models/mutation-result.model';
 import { MerchantService } from '../../services/merchant.service';
 import { DialogCreateCryptoWalletComponent } from './dialog.create-crypto-wallet.component';
+import { HttpClient } from '@angular/common/http';
 
 describe('DialogCreateCryptoWalletComponent', () => {
   let component: DialogCreateCryptoWalletComponent;
@@ -39,7 +40,7 @@ describe('DialogCreateCryptoWalletComponent', () => {
 
     TestBed.configureTestingModule({
       declarations: [DialogCreateCryptoWalletComponent],
-      imports: [BrowserAnimationsModule, MatDialogModule, MatFormFieldModule, MatInputModule, MatRadioModule, ReactiveFormsModule],
+      imports: [BrowserAnimationsModule, HttpClient, MatDialogModule, MatFormFieldModule, MatInputModule, MatRadioModule, ReactiveFormsModule],
       providers: [
         { provide: MatDialogRef, useValue: matDialogRefSpy },
         { provide: MAT_DIALOG_DATA, useValue: [] },

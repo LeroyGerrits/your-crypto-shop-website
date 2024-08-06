@@ -14,7 +14,9 @@ import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { of, throwError } from 'rxjs';
 import { MutationResult } from 'src/app/shared/models/mutation-result.model';
 import { CryptoWalletService } from 'src/app/shared/services/crypto-wallet.service';
+import { CurrencyService } from 'src/app/shared/services/currency.service';
 import { TestDataCryptoWallets } from 'src/assets/test-data/crypto-wallets';
+import { TestDataCurrencies } from 'src/assets/test-data/currencies';
 import { ControlPanelConfigurationCryptoWalletListComponent } from './crypto-wallet-list.component';
 
 describe('ControlPanelConfigurationCryptoWalletListComponent', () => {
@@ -26,6 +28,7 @@ describe('ControlPanelConfigurationCryptoWalletListComponent', () => {
   let matSnackBarSpy: jasmine.SpyObj<MatSnackBar>;
 
   let cryptoWalletServiceSpy: jasmine.SpyObj<CryptoWalletService>;
+  let currencyServiceSpy: jasmine.SpyObj<CurrencyService>;
   let mutationResult: MutationResult = <MutationResult>{ ErrorCode: 0, Identity: '', Message: '' };
 
   beforeEach(() => {
@@ -42,6 +45,9 @@ describe('ControlPanelConfigurationCryptoWalletListComponent', () => {
     cryptoWalletServiceSpy.getList.and.returnValue(of(TestDataCryptoWallets));
     cryptoWalletServiceSpy.delete.and.returnValue(of(mutationResult));
 
+    currencyServiceSpy = jasmine.createSpyObj('CurrencyService', ['getList']);
+    currencyServiceSpy.getList.and.returnValue(of(TestDataCurrencies));
+
     TestBed.configureTestingModule({
       declarations: [ControlPanelConfigurationCryptoWalletListComponent],
       imports: [BrowserAnimationsModule, MatExpansionModule, MatIconModule, MatFormFieldModule, MatInputModule, MatPaginatorModule, MatTableModule, ReactiveFormsModule, RouterLink],
@@ -49,6 +55,7 @@ describe('ControlPanelConfigurationCryptoWalletListComponent', () => {
         { provide: ActivatedRoute, useValue: { snapshot: { data: {} } } },
         { provide: MatDialog, useValue: matDialogSpy },
         { provide: CryptoWalletService, useValue: cryptoWalletServiceSpy },
+        { provide: CurrencyService, useValue: currencyServiceSpy },
         { provide: MatSnackBar, useValue: matSnackBarSpy },
         ControlPanelConfigurationCryptoWalletListComponent,
         Router

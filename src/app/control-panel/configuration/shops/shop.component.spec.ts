@@ -27,6 +27,7 @@ import { TestDataShops } from 'src/assets/test-data/shops';
 import { ControlPanelConfigurationShopComponent } from './shop.component';
 import { TestDataCurrencies } from 'src/assets/test-data/currencies';
 import { CurrencyService } from 'src/app/shared/services/currency.service';
+import { MatTabsModule } from '@angular/material/tabs';
 
 describe('ControlPanelConfigurationShopComponent', () => {
   let component: ControlPanelConfigurationShopComponent;
@@ -63,7 +64,7 @@ describe('ControlPanelConfigurationShopComponent', () => {
 
     TestBed.configureTestingModule({
       declarations: [ControlPanelConfigurationShopComponent],
-      imports: [BrowserAnimationsModule, MatDialogModule, MatDividerModule, MatFormFieldModule, MatIconModule, MatInputModule, MatRadioModule, MatSelectModule, MatTooltipModule, ReactiveFormsModule, RouterLink],
+      imports: [BrowserAnimationsModule, MatDialogModule, MatDividerModule, MatFormFieldModule, MatIconModule, MatInputModule, MatRadioModule, MatSelectModule, MatTabsModule, MatTooltipModule, ReactiveFormsModule, RouterLink],
       providers: [
         { provide: ActivatedRoute, useValue: { snapshot: { paramMap: convertToParamMap({ shopId: TestDataShops[0].Id }) } } },
         { provide: CountryService, useValue: countryServiceSpy },
