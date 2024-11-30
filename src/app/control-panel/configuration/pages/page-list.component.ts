@@ -19,9 +19,10 @@ import { PageService } from 'src/app/shared/services/page.service';
 import { ShopService } from 'src/app/shared/services/shop.service';
 
 @Component({
-  selector: 'control-panel-configuration-page-list',
-  templateUrl: './page-list.component.html',
-  styleUrl: './page-list.component.scss'
+    selector: 'control-panel-configuration-page-list',
+    templateUrl: './page-list.component.html',
+    styleUrl: './page-list.component.scss',
+    standalone: false
 })
 
 export class ControlPanelConfigurationPageListComponent implements OnDestroy, OnInit {

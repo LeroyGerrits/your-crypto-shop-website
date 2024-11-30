@@ -14,7 +14,8 @@ export interface DialogData {
 @Component({
     selector: 'control-panel-catalog-product-photo',
     templateUrl: 'product-photo.component.html',
-    encapsulation: ViewEncapsulation.Emulated
+    encapsulation: ViewEncapsulation.Emulated,
+    standalone: false
 })
 export class ControlPanelCatalogProductPhotoComponent implements OnInit, OnDestroy {
     public snackBarRef: MatSnackBarRef<TextOnlySnackBar> | undefined;

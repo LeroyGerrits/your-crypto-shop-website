@@ -28,8 +28,9 @@ import { Shop } from 'src/app/shared/models/shop.model';
 import { ShopService } from 'src/app/shared/services/shop.service';
 
 @Component({
-  selector: 'control-panel-catalog-product',
-  templateUrl: './product.component.html'
+    selector: 'control-panel-catalog-product',
+    templateUrl: './product.component.html',
+    standalone: false
 })
 
 export class ControlPanelCatalogProductComponent implements OnInit, OnDestroy {

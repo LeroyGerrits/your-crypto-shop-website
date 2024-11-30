@@ -18,9 +18,10 @@ import { FieldService } from 'src/app/shared/services/field.service';
 import { ShopService } from 'src/app/shared/services/shop.service';
 
 @Component({
-  selector: 'control-panel-configuration-field-list',
-  templateUrl: './field-list.component.html',
-  styleUrl: './field-list.component.scss'
+    selector: 'control-panel-configuration-field-list',
+    templateUrl: './field-list.component.html',
+    styleUrl: './field-list.component.scss',
+    standalone: false
 })
 
 export class ControlPanelConfigurationFieldListComponent implements OnDestroy, OnInit {

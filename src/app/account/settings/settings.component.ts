@@ -4,7 +4,8 @@ import { Merchant } from 'src/app/shared/models/merchant.model';
 
 @Component({
     selector: 'account-settings',
-    templateUrl: './settings.component.html'
+    templateUrl: './settings.component.html',
+    standalone: false
 })
 
 export class AccountSettingsComponent {

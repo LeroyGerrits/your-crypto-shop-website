@@ -18,9 +18,10 @@ import { CustomerService } from 'src/app/shared/services/customer.service';
 import { ShopService } from 'src/app/shared/services/shop.service';
 
 @Component({
-  selector: 'control-panel-customer-list',
-  templateUrl: './customer-list.component.html',
-  styleUrl: './customer-list.component.scss'
+    selector: 'control-panel-customer-list',
+    templateUrl: './customer-list.component.html',
+    styleUrl: './customer-list.component.scss',
+    standalone: false
 })
 
 export class ControlPanelCustomerListComponent implements OnDestroy, OnInit {

@@ -20,9 +20,10 @@ import { ProductPhotoService } from 'src/app/shared/services/product-photo.servi
 import { ProductService } from 'src/app/shared/services/product.service';
 
 @Component({
-  selector: 'control-panel-catalog-product-photo-list',
-  templateUrl: './product-photo-list.component.html',
-  styleUrl: './product-photo-list.component.scss'
+    selector: 'control-panel-catalog-product-photo-list',
+    templateUrl: './product-photo-list.component.html',
+    styleUrl: './product-photo-list.component.scss',
+    standalone: false
 })
 
 export class ControlPanelCatalogProductPhotoListComponent {

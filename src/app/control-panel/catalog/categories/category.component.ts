@@ -17,7 +17,8 @@ export interface DialogData {
 @Component({
     selector: 'control-panel-catalog-category',
     templateUrl: 'category.component.html',
-    encapsulation: ViewEncapsulation.Emulated
+    encapsulation: ViewEncapsulation.Emulated,
+    standalone: false
 })
 export class ControlPanelCatalogCategoryComponent implements OnInit, OnDestroy {
     public snackBarRef: MatSnackBarRef<TextOnlySnackBar> | undefined;

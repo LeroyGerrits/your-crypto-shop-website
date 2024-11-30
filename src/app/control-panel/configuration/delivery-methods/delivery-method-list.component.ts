@@ -18,9 +18,10 @@ import { DeliveryMethodService } from 'src/app/shared/services/delivery-method.s
 import { ShopService } from 'src/app/shared/services/shop.service';
 
 @Component({
-  selector: 'control-panel-configuration-delivery-method-list',
-  templateUrl: './delivery-method-list.component.html',
-  styleUrl: './delivery-method-list.component.scss'
+    selector: 'control-panel-configuration-delivery-method-list',
+    templateUrl: './delivery-method-list.component.html',
+    styleUrl: './delivery-method-list.component.scss',
+    standalone: false
 })
 
 export class ControlPanelConfigurationDeliveryMethodListComponent implements OnDestroy, OnInit {

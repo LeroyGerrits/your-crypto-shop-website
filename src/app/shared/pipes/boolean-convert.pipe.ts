@@ -1,6 +1,9 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
-@Pipe({ name: 'BooleanConvert' })
+@Pipe({
+    name: 'BooleanConvert',
+    standalone: false
+})
 export class BooleanConvertPipe implements PipeTransform {
 
     constructor() { }

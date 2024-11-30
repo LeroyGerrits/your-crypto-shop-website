@@ -7,8 +7,9 @@ import { PublicMerchant } from 'src/app/shared/models/viewmodels/public-merchant
 import { Title } from '@angular/platform-browser';
 
 @Component({
-  selector: 'public-website-merchant',
-  templateUrl: './merchant.component.html'
+    selector: 'public-website-merchant',
+    templateUrl: './merchant.component.html',
+    standalone: false
 })
 export class PublicWebsiteMerchantComponent implements OnInit {
   public merchant: PublicMerchant | undefined;

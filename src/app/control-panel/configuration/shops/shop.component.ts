@@ -23,9 +23,10 @@ import { ShopOrderMethod } from 'src/app/shared/enums/shop-order-method.enum';
 import { ShopService } from 'src/app/shared/services/shop.service';
 
 @Component({
-  selector: 'control-panel-configuration-shop',
-  templateUrl: './shop.component.html',
-  styleUrl: './shop.component.scss'
+    selector: 'control-panel-configuration-shop',
+    templateUrl: './shop.component.html',
+    styleUrl: './shop.component.scss',
+    standalone: false
 })
 
 export class ControlPanelConfigurationShopComponent implements OnInit {

@@ -8,8 +8,9 @@ import { MerchantService } from 'src/app/shared/services/merchant.service';
 import { MutationResult } from 'src/app/shared/models/mutation-result.model';
 
 @Component({
-  selector: 'public-website-account-activate',
-  templateUrl: './account-activate.component.html'
+    selector: 'public-website-account-activate',
+    templateUrl: './account-activate.component.html',
+    standalone: false
 })
 
 export class PublicWebsiteAccountActivateComponent implements OnInit {

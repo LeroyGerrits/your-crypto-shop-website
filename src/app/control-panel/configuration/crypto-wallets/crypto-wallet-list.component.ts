@@ -19,9 +19,10 @@ import { CryptoWalletService } from 'src/app/shared/services/crypto-wallet.servi
 import { CurrencyService } from 'src/app/shared/services/currency.service';
 
 @Component({
-  selector: 'control-panel-configuration-crypto-wallet-list',
-  templateUrl: './crypto-wallet-list.component.html',
-  styleUrl: './crypto-wallet-list.component.scss'
+    selector: 'control-panel-configuration-crypto-wallet-list',
+    templateUrl: './crypto-wallet-list.component.html',
+    styleUrl: './crypto-wallet-list.component.scss',
+    standalone: false
 })
 
 export class ControlPanelConfigurationCryptoWalletListComponent implements OnDestroy, OnInit {

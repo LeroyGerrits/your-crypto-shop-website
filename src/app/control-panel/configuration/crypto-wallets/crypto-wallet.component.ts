@@ -13,8 +13,9 @@ import { Merchant } from 'src/app/shared/models/merchant.model';
 import { MutationResult } from 'src/app/shared/models/mutation-result.model';
 
 @Component({
-  selector: 'control-panel-configuration-crypto-wallet',
-  templateUrl: './crypto-wallet.component.html'
+    selector: 'control-panel-configuration-crypto-wallet',
+    templateUrl: './crypto-wallet.component.html',
+    standalone: false
 })
 
 export class ControlPanelConfigurationCryptoWalletComponent implements OnInit, OnDestroy {

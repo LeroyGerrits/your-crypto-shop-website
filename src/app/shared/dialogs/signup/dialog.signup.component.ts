@@ -11,7 +11,8 @@ import { Router } from '@angular/router';
 
 @Component({
     selector: 'dialog-signup',
-    templateUrl: 'dialog.signup.component.html'
+    templateUrl: 'dialog.signup.component.html',
+    standalone: false
 })
 export class DialogSignUpComponent {
     constants = Constants;

@@ -19,8 +19,9 @@ import { OrderItem } from 'src/app/shared/models/order-item.model';
 import { OrderService } from 'src/app/shared/services/order.service';
 
 @Component({
-  selector: 'control-panel-sales-order',
-  templateUrl: './order.component.html'
+    selector: 'control-panel-sales-order',
+    templateUrl: './order.component.html',
+    standalone: false
 })
 
 export class ControlPanelSalesOrderComponent {

@@ -8,8 +8,9 @@ import { MerchantPasswordResetLinkService } from 'src/app/shared/services/mercha
 import { MutationResult } from 'src/app/shared/models/mutation-result.model';
 
 @Component({
-  selector: 'public-website-reset-password',
-  templateUrl: './reset-password.component.html'
+    selector: 'public-website-reset-password',
+    templateUrl: './reset-password.component.html',
+    standalone: false
 })
 
 export class PublicWebsiteResetPasswordComponent implements OnInit {

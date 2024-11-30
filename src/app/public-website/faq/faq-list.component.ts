@@ -8,8 +8,9 @@ import { FaqService } from 'src/app/shared/services/faq.service';
 import { FormControl } from '@angular/forms';
 
 @Component({
-  selector: 'public-website-faq-list',
-  templateUrl: './faq-list.component.html'
+    selector: 'public-website-faq-list',
+    templateUrl: './faq-list.component.html',
+    standalone: false
 })
 export class PublicWebsiteFaqListComponent implements OnInit, OnDestroy {
   controlFilter = new FormControl('');

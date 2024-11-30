@@ -9,8 +9,9 @@ import { OrderItem } from '../../models/order-item.model';
 import { OrderService } from '../../services/order.service';
 
 @Component({
-  templateUrl: 'dialog.edit-order-item.component.html',
-  styleUrl: 'dialog.edit-order-item.component.scss'
+    templateUrl: 'dialog.edit-order-item.component.html',
+    styleUrl: 'dialog.edit-order-item.component.scss',
+    standalone: false
 })
 export class DialogEditOrderItemComponent implements OnInit {
   @Input() orderId!: string;

@@ -3,9 +3,10 @@ import { Component, OnInit } from '@angular/core';
 import { CryptoNodeService } from 'src/app/shared/services/crypto-node.service';
 
 @Component({
-  selector: 'public-website-node-status',
-  templateUrl: './node-status.component.html',
-  styleUrl: './node-status.component.scss'
+    selector: 'public-website-node-status',
+    templateUrl: './node-status.component.html',
+    styleUrl: './node-status.component.scss',
+    standalone: false
 })
 export class PublicWebsiteNodeStatusComponent implements OnInit {
   nodeIpAddresses: string[] | undefined;

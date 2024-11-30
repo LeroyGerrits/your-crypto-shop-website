@@ -14,7 +14,8 @@ import { MutationResult } from '../../models/mutation-result.model';
 
 @Component({
     // selector: 'dialog-create-crypto-wallet',
-    templateUrl: 'dialog.create-crypto-wallet.component.html'
+    templateUrl: 'dialog.create-crypto-wallet.component.html',
+    standalone: false
 })
 export class DialogCreateCryptoWalletComponent implements OnInit {
     public activeMerchant?: Merchant | null;

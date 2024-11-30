@@ -8,7 +8,8 @@ import { Router } from '@angular/router';
 
 @Component({
     selector: 'dialog-forgot-password',
-    templateUrl: 'dialog.forgot-password.component.html'
+    templateUrl: 'dialog.forgot-password.component.html',
+    standalone: false
 })
 export class DialogForgotPasswordComponent implements OnInit {
     controlEmailAddress = new FormControl('', [Validators.required, Validators.email]);

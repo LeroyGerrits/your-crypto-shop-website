@@ -18,8 +18,9 @@ import { OrderService } from 'src/app/shared/services/order.service';
 import { ShopService } from 'src/app/shared/services/shop.service';
 
 @Component({
-  templateUrl: './order-list.component.html',
-  styleUrl: './order-list.component.scss'
+    templateUrl: './order-list.component.html',
+    styleUrl: './order-list.component.scss',
+    standalone: false
 })
 
 export class ControlPanelSalesOrderListComponent implements OnDestroy, OnInit {

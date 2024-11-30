@@ -1,8 +1,9 @@
 import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-crypto-tag',
-  templateUrl: './crypto-tag.component.html'
+    selector: 'app-crypto-tag',
+    templateUrl: './crypto-tag.component.html',
+    standalone: false
 })
 export class CryptoTagComponent implements OnInit {
   @Input() cryptoCode!: string;

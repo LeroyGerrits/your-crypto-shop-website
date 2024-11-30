@@ -20,9 +20,10 @@ import { ShopService } from 'src/app/shared/services/shop.service';
 import { ShopCategoryService } from 'src/app/shared/services/shop-category.service';
 
 @Component({
-  selector: 'control-panel-configuration-shop-list',
-  templateUrl: './shop-list.component.html',
-  styleUrl: './shop-list.component.scss'
+    selector: 'control-panel-configuration-shop-list',
+    templateUrl: './shop-list.component.html',
+    styleUrl: './shop-list.component.scss',
+    standalone: false
 })
 
 export class ControlPanelConfigurationShopListComponent implements OnInit {

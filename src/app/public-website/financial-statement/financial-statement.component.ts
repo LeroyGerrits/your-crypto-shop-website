@@ -14,9 +14,10 @@ import { CurrencyService } from 'src/app/shared/services/currency.service';
 import { FinancialStatementTransactionService } from 'src/app/shared/services/financial-statement-transaction.service';
 
 @Component({
-  selector: 'public-website-financial-statement',
-  templateUrl: './financial-statement.component.html',
-  styleUrl: './financial-statement.component.scss'
+    selector: 'public-website-financial-statement',
+    templateUrl: './financial-statement.component.html',
+    styleUrl: './financial-statement.component.scss',
+    standalone: false
 })
 
 export class PublicWebsiteFinancialStatementComponent implements OnInit {

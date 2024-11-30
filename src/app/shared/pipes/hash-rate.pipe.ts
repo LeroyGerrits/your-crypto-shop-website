@@ -1,6 +1,9 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
-@Pipe({ name: 'HashRate' })
+@Pipe({
+    name: 'HashRate',
+    standalone: false
+})
 export class HashRatePipe implements PipeTransform {
 
     constructor() { }

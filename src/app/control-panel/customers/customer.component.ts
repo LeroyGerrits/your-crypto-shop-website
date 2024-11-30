@@ -16,8 +16,9 @@ import { Shop } from 'src/app/shared/models/shop.model';
 import { ShopService } from 'src/app/shared/services/shop.service';
 
 @Component({
-  selector: 'control-panel-customer',
-  templateUrl: './customer.component.html'
+    selector: 'control-panel-customer',
+    templateUrl: './customer.component.html',
+    standalone: false
 })
 
 export class ControlPanelCustomerComponent implements OnInit, OnDestroy {

@@ -5,9 +5,10 @@ import { DialogSignUpComponent } from 'src/app/shared/dialogs/signup/dialog.sign
 import { MatDialog } from '@angular/material/dialog';
 
 @Component({
-  selector: 'public-website-index',
-  templateUrl: './index.component.html',
-  styleUrl: './index.component.scss',
+    selector: 'public-website-index',
+    templateUrl: './index.component.html',
+    styleUrl: './index.component.scss',
+    standalone: false
 })
 export class PublicWebsiteIndexComponent {
   constants = Constants;

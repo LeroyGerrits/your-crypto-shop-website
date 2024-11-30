@@ -14,9 +14,10 @@ import { ShopCategoryService } from 'src/app/shared/services/shop-category.servi
 import { ShopService } from 'src/app/shared/services/shop.service';
 
 @Component({
-  selector: 'public-website-shop-list',
-  templateUrl: './shop-list.component.html',
-  styleUrl: './shop-list.component.scss'
+    selector: 'public-website-shop-list',
+    templateUrl: './shop-list.component.html',
+    styleUrl: './shop-list.component.scss',
+    standalone: false
 })
 
 export class PublicWebsiteShopListComponent implements OnInit {

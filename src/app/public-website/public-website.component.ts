@@ -17,8 +17,9 @@ import { IDictionaryNumber } from '../shared/interfaces/idictionary-number.inter
 import { GetCurrencyRatesParameters } from '../shared/models/parameters/get-currency-rates-parameters.model';
 
 @Component({
-  selector: 'public-website',
-  templateUrl: './public-website.component.html'
+    selector: 'public-website',
+    templateUrl: './public-website.component.html',
+    standalone: false
 })
 export class PublicWebsiteComponent implements OnInit {
   public controlSelectedCurrencyFiat = new FormControl(Constants.CURRENCY_ID_USD);

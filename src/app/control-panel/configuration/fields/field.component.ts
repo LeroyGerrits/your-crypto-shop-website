@@ -17,8 +17,9 @@ import { Shop } from 'src/app/shared/models/shop.model';
 import { ShopService } from 'src/app/shared/services/shop.service';
 
 @Component({
-  selector: 'control-panel-configuration-field',
-  templateUrl: './field.component.html'
+    selector: 'control-panel-configuration-field',
+    templateUrl: './field.component.html',
+    standalone: false
 })
 
 export class ControlPanelConfigurationFieldComponent implements OnInit, OnDestroy {

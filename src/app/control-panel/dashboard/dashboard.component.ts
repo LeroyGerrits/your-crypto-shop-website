@@ -8,8 +8,9 @@ import { IDictionaryNumber } from 'src/app/shared/interfaces/idictionary-number.
 import { GeneralService } from 'src/app/shared/services/general.service';
 
 @Component({
-  selector: 'control-panel-dashboard',
-  templateUrl: './dashboard.component.html'
+    selector: 'control-panel-dashboard',
+    templateUrl: './dashboard.component.html',
+    standalone: false
 })
 
 export class ControlPanelDashboardComponent implements OnInit {

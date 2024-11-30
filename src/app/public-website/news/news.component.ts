@@ -7,9 +7,10 @@ import { NewsMessageService } from 'src/app/shared/services/news-message.service
 import { Title } from '@angular/platform-browser';
 
 @Component({
-  selector: 'public-website-news',
-  templateUrl: './news.component.html',
-  styleUrl: './news.component.scss'
+    selector: 'public-website-news',
+    templateUrl: './news.component.html',
+    styleUrl: './news.component.scss',
+    standalone: false
 })
 
 export class PublicWebsiteNewsComponent implements OnInit {

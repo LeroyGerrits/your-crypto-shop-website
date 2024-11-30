@@ -3,8 +3,9 @@ import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-merchant-link',
-  templateUrl: './merchant-link.component.html'
+    selector: 'app-merchant-link',
+    templateUrl: './merchant-link.component.html',
+    standalone: false
 })
 export class MerchantLinkComponent implements OnInit {
   @Input() merchantId!: string;

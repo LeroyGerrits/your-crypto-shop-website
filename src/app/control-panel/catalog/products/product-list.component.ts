@@ -24,9 +24,10 @@ import { ProductService } from 'src/app/shared/services/product.service';
 import { ShopService } from 'src/app/shared/services/shop.service';
 
 @Component({
-  selector: 'control-panel-catalog-product-list',
-  templateUrl: './product-list.component.html',
-  styleUrl: './product-list.component.scss'
+    selector: 'control-panel-catalog-product-list',
+    templateUrl: './product-list.component.html',
+    styleUrl: './product-list.component.scss',
+    standalone: false
 })
 
 export class ControlPanelCatalogProductListComponent {

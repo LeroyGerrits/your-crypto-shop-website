@@ -5,8 +5,9 @@ import { Constants } from 'src/app/shared/constants';
 import { Title } from '@angular/platform-browser';
 
 @Component({
-  selector: 'public-website-message',
-  templateUrl: './message.component.html'
+    selector: 'public-website-message',
+    templateUrl: './message.component.html',
+    standalone: false
 })
 export class PublicWebsiteMessageComponent implements OnInit {
   public messageTitle: string = '';

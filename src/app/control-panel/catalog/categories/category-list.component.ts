@@ -15,9 +15,10 @@ import { Shop } from 'src/app/shared/models/shop.model';
 import { ShopService } from 'src/app/shared/services/shop.service';
 
 @Component({
-  selector: 'control-panel-catalog-category-list',
-  templateUrl: './category-list.component.html',
-  styleUrl: './category-list.component.scss'
+    selector: 'control-panel-catalog-category-list',
+    templateUrl: './category-list.component.html',
+    styleUrl: './category-list.component.scss',
+    standalone: false
 })
 export class ControlPanelCatalogCategoryListComponent implements OnInit, OnDestroy {
   public treeControl = new NestedTreeControl<Category>(category => category.Children);

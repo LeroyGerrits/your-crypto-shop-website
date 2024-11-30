@@ -10,7 +10,8 @@ import { first } from 'rxjs/operators';
 
 @Component({
     selector: 'dialog-login',
-    templateUrl: 'dialog.login.component.html'
+    templateUrl: 'dialog.login.component.html',
+    standalone: false
 })
 export class DialogLoginComponent implements OnInit {
     controlEmailAddress = new FormControl('', [Validators.required, Validators.email]);

@@ -7,8 +7,9 @@ import { Faq } from 'src/app/shared/models/faq.model';
 import { FaqService } from 'src/app/shared/services/faq.service';
 
 @Component({
-  selector: 'public-website-faq',
-  templateUrl: './faq.component.html'
+    selector: 'public-website-faq',
+    templateUrl: './faq.component.html',
+    standalone: false
 })
 export class PublicWebsiteFaqComponent implements OnInit {
   public faq: Faq | undefined;

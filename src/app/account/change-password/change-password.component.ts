@@ -10,7 +10,8 @@ import { Router } from '@angular/router';
 
 @Component({
     selector: 'account-change-password',
-    templateUrl: './change-password.component.html'
+    templateUrl: './change-password.component.html',
+    standalone: false
 })
 
 export class AccountChangePasswordComponent {

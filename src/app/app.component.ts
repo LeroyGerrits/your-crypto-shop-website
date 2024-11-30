@@ -7,8 +7,9 @@ import { MatDialog } from '@angular/material/dialog';
 import { Merchant } from './shared/models/merchant.model';
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html'
+    selector: 'app-root',
+    templateUrl: './app.component.html',
+    standalone: false
 })
 
 export class AppComponent {
