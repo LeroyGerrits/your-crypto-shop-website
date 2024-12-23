@@ -9,7 +9,8 @@ describe('ControlPanelSalesOrderListComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [ControlPanelSalesOrderListComponent, DatePipe]
+      declarations: [ControlPanelSalesOrderListComponent],
+      imports: [DatePipe]
     });
     fixture = TestBed.createComponent(ControlPanelSalesOrderListComponent);
     component = fixture.componentInstance;

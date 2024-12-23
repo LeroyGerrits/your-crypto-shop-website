@@ -18,6 +18,7 @@ import { CurrencyService } from 'src/app/shared/services/currency.service';
 import { TestDataCryptoWallets } from 'src/assets/test-data/crypto-wallets';
 import { TestDataCurrencies } from 'src/assets/test-data/currencies';
 import { ControlPanelConfigurationCryptoWalletListComponent } from './crypto-wallet-list.component';
+import { MatOptionModule } from '@angular/material/core';
 
 describe('ControlPanelConfigurationCryptoWalletListComponent', () => {
   let component: ControlPanelConfigurationCryptoWalletListComponent;
@@ -50,7 +51,7 @@ describe('ControlPanelConfigurationCryptoWalletListComponent', () => {
 
     TestBed.configureTestingModule({
       declarations: [ControlPanelConfigurationCryptoWalletListComponent],
-      imports: [BrowserAnimationsModule, MatExpansionModule, MatIconModule, MatFormFieldModule, MatInputModule, MatPaginatorModule, MatTableModule, ReactiveFormsModule, RouterLink],
+      imports: [BrowserAnimationsModule, MatExpansionModule, MatIconModule, MatFormFieldModule, MatInputModule, MatOptionModule, MatPaginatorModule, MatTableModule, ReactiveFormsModule, RouterLink],
       providers: [
         { provide: ActivatedRoute, useValue: { snapshot: { data: {} } } },
         { provide: MatDialog, useValue: matDialogSpy },

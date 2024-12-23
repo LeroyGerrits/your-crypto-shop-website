@@ -112,7 +112,7 @@ import { PublicWebsiteNewsListComponent } from './public-website/news/news-list.
 import { PublicWebsiteNodeStatusComponent } from './public-website/node-status/node-status.component';
 import { PublicWebsiteResetPasswordComponent } from './public-website/reset-password/reset-password.component';
 import { PublicWebsiteShopListComponent } from './public-website/shops/shop-list.component';
-import { QRCodeModule } from 'angularx-qrcode';
+import { QRCodeComponent } from 'angularx-qrcode';
 import { RouterModule } from '@angular/router';
 import { SearchEngineFriendlyStringPipe } from './shared/pipes/search-engine-friendly-string.pipe';
 import { ShopCategoryService } from './shared/services/shop-category.service';
@@ -208,7 +208,7 @@ import { StripHtmlPipe } from './shared/pipes/strip-html.pipe';
         MatToolbarModule,
         MatTooltipModule,
         MatTreeModule,
-        QRCodeModule,
+        QRCodeComponent,
         ReactiveFormsModule,
         RouterModule,
         FormsModule

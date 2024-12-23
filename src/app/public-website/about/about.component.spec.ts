@@ -2,7 +2,7 @@ import { ActivatedRoute, RouterLink } from '@angular/router';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { PublicWebsiteAboutComponent } from './about.component';
-import { QRCodeModule } from 'angularx-qrcode';
+import { QRCodeComponent } from 'angularx-qrcode';
 
 describe('PublicWebsiteAboutComponent', () => {
   let component: PublicWebsiteAboutComponent;
@@ -15,7 +15,7 @@ describe('PublicWebsiteAboutComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [PublicWebsiteAboutComponent],
-      imports: [RouterLink, QRCodeModule],
+      imports: [RouterLink, QRCodeComponent],
       providers: [
         { provide: ActivatedRoute, useValue: fakeActivatedRoute }
       ]
